@@ -1,0 +1,24 @@
+{
+    "search": [
+        {
+            "menu_key": "frontend-Main",
+            "menu_path": "More|Search",
+            "menu_order": 0,
+            "menu_url": "\/search,",
+            "menu_image": "",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 0
+        },
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "More|Search",
+            "menu_order": 0,
+            "menu_url": "admin\/settings,key=search",
+            "menu_image": "",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        }
+    ]
+}

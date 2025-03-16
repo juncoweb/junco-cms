@@ -1,0 +1,45 @@
+/* --- collection ---------------------------------------- */
+.input-collection {
+	position: relative;
+
+	.dropdown-menu {
+		width: 100%;
+
+		&>ul {
+			margin: 0;
+
+			&>li {
+				padding: .375rem .875rem;
+
+				&.active,
+				&:hover {
+					background-color: var(--regular-bg-color);
+				}
+
+				&~li {
+					border-top-width: $border-width;
+					border-top-style: $border-style;
+					border-top-color: var(--regular-border-color);
+				}
+
+				.dd {
+					color: var(--regular-subtle-font-color);
+					font-size: $small-font-size;
+				}
+			}
+		}
+	}
+
+	&-group {
+		margin-bottom: $border-width;
+		padding-bottom: $border-width;
+		border-bottom-width: $border-width;
+		border-bottom-style: dashed;
+		border-bottom-color: var(--regular-border-color);
+	}
+
+	.just-use {
+		text-align: center;
+		font-weight: bold;
+	}
+}

@@ -1,0 +1,50 @@
+{
+    "title": "Form",
+    "description": "",
+    "descriptions": [],
+    "groups": [
+        "Elements",
+        "Csrf"
+    ],
+    "rows": {
+        "btn_caption": {
+            "label": "Caption",
+            "type": "select-text",
+            "group": 0,
+            "ordering": 1,
+            "default_value": "responsive",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "highlight_create_button": {
+            "label": "Highlight create button",
+            "type": "boolean",
+            "group": 0,
+            "ordering": 2,
+            "default_value": true,
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "csrf_token_key": {
+            "label": "Key",
+            "type": "input-text",
+            "group": 1,
+            "ordering": 1,
+            "default_value": "x-csrf-token",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        }
+    }
+}

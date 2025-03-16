@@ -1,0 +1,108 @@
+/* --- portal -------------------------------------- */
+.portal-section {
+	overflow: hidden;
+}
+
+.portal-header {
+	text-align: center;
+	margin: 0 0 $spacing;
+}
+
+.portal-title {
+	text-transform: uppercase;
+}
+
+@each $name,
+$size in $heading-sizes {
+	#{$name}.portal-title {
+		font-size: $portal-heading-size * $size;
+	}
+}
+
+.portal-caption {
+	font-size: $large-font-size;
+}
+
+// colors
+@each $name,
+$contrast in ("default": "primary", "primary": "secondary", "secondary": "default") {
+	$class: ".portal-#{$name}";
+	$varName: "-#{$name}";
+
+	@if ($name =="default") {
+		$class: "";
+		$varName: "";
+	}
+
+	.portal-section#{$class} {
+		color: var(--regular#{$varName}-font-color);
+
+		a {
+			color: var(--regular#{$varName}-font-color);
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			color: var(--regular#{$varName}-heading-color);
+		}
+
+		.portal-light {
+			color: var(--regular#{$varName}-subtle-font-color);
+		}
+
+		.portal-contrast {
+			color: var(--solid-#{$contrast}-surface-color);
+		}
+
+		.portal-bg-contrast {
+			color: var(--solid-#{$contrast}-font-color);
+			background-color: var(--solid-#{$contrast}-bg-color);
+		}
+	}
+
+	.portal-section.portal-regular#{$class} {
+		background-color: var(--regular#{$varName}-bg-color);
+	}
+
+	.portal-section.portal-solid#{$class} {
+		color: var(--solid-#{$name}-font-color);
+		background-color: var(--solid-#{$name}-bg-color);
+
+		a {
+			color: var(--solid-#{$name}-font-color);
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			color: var(--solid-#{$name}-heading-color);
+		}
+
+		.portal-light {
+			color: var(--solid-#{$name}-subtle-font-color);
+		}
+
+		.portal-contrast {
+			color: var(--solid-#{$contrast}-surface-color);
+		}
+
+		.portal-bg-contrast {
+			color: var(--solid-#{$contrast}-font-color);
+			background-color: var(--solid-#{$contrast}-bg-color);
+		}
+	}
+}
+
+// media
+@media (min-width: $screen-x-large) {
+	.portal-reduced-margin {
+		margin-right: 20%;
+	}
+}

@@ -1,0 +1,126 @@
+{
+    "title": "Router",
+    "description": "",
+    "descriptions": [],
+    "groups": [
+        "General",
+        "Keys",
+        "Front",
+        "Middlewares"
+    ],
+    "rows": {
+        "use_rewrite": {
+            "label": "Rewrite URLs",
+            "type": "boolean",
+            "group": 0,
+            "ordering": 1,
+            "default_value": "",
+            "help": "Rewriting URLs not only gives clarity to your website, it also improves the ranking of search engines. Attention: check in advance the correct functioning of htaccess.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "access_points": {
+            "label": "Access points",
+            "type": "json",
+            "group": 0,
+            "ordering": 2,
+            "default_value": [
+                "admin",
+                "front",
+                "audit",
+                "my",
+                "api",
+                "console"
+            ],
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "route_key": {
+            "label": "Route key",
+            "type": "input-text",
+            "group": 1,
+            "ordering": 1,
+            "default_value": "goto",
+            "help": "The name of the variable storing the route to the resource.",
+            "history": [
+                "url_key"
+            ],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "format_key": {
+            "label": "Format",
+            "type": "input-text",
+            "group": 1,
+            "ordering": 4,
+            "default_value": "format",
+            "help": "The tasks return a response with an expected format.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "front_default_component": {
+            "label": "Default component",
+            "type": "select-text",
+            "group": 2,
+            "ordering": 1,
+            "default_value": "system",
+            "help": "This is for the case that a component is not defined.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "route_replaces": {
+            "label": "Replaces",
+            "type": "input-text",
+            "group": 2,
+            "ordering": 3,
+            "default_value": {
+                "component": {
+                    "contents": "blogs"
+                },
+                "task": []
+            },
+            "help": "Replace component and task name. Format: component:renamed{task:renamed}",
+            "history": [
+                "front_replace_url"
+            ],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "middlewares": {
+            "label": "List",
+            "type": "json",
+            "group": 3,
+            "ordering": 1,
+            "default_value": {
+                "admin": {
+                    "authentication": [
+                        "L_SYSTEM_ADMIN"
+                    ]
+                }
+            },
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        }
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "site": [
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "System|Site",
+            "menu_order": 1,
+            "menu_url": "admin\/settings,key=site",
+            "menu_image": "",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        }
+    ]
+}

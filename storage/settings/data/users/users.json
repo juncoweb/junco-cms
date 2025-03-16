@@ -1,0 +1,130 @@
+{
+    "title": "Users",
+    "description": "",
+    "groups": [
+        "General",
+        "Sign up",
+        "Log in",
+        "Password"
+    ],
+    "descriptions": [],
+    "rows": {
+        "default_ucid": {
+            "label": "Role",
+            "type": "select-integer",
+            "group": 1,
+            "ordering": 1,
+            "default_value": "0",
+            "help": "The role for new users who register. If left blank, users can not register.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "legal": {
+            "label": "URL to legal",
+            "type": "input-text",
+            "group": 1,
+            "ordering": 2,
+            "default_value": "",
+            "help": "Url builder pointing to the legal terms of registration. Format: \/component\/task,key=value,...",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "not_expire": {
+            "label": "Not expire",
+            "type": "boolean",
+            "group": 2,
+            "ordering": 1,
+            "default_value": 1,
+            "help": "Log in with \u00abRemember me\u00bb option.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "autologin": {
+            "label": "AutoLogin",
+            "type": "boolean",
+            "group": 2,
+            "ordering": 2,
+            "default_value": 0,
+            "help": "The AutoLogin send an email to the user when he try to sign in with an incorrect password.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "locks_level": {
+            "label": "Lock",
+            "type": "select-integer",
+            "group": 2,
+            "ordering": 3,
+            "default_value": 0,
+            "help": "In case of entering erroneous data, it will be blocked for increasing periods.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "password_min_length": {
+            "label": "Min. length",
+            "type": "input-integer",
+            "group": 3,
+            "ordering": 1,
+            "default_value": 6,
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "password_max_length": {
+            "label": "Max. length",
+            "type": "input-integer",
+            "group": 3,
+            "ordering": 2,
+            "default_value": 255,
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "password_level": {
+            "label": "Level",
+            "type": "select-integer",
+            "group": 3,
+            "ordering": 3,
+            "default_value": 0,
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "password_rehash": {
+            "label": "Rehash",
+            "type": "boolean",
+            "group": 3,
+            "ordering": 4,
+            "default_value": "",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

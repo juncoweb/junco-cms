@@ -1,0 +1,9 @@
+{
+    "key": "cache-admin.js",
+    "name": "cache-admin",
+    "type": "js",
+    "assets": "app\/cache\/js\/admin.cache.js",
+    "default_assets": "app\/cache\/js\/admin.cache.js",
+    "to_verify": 0,
+    "compile": 0
+}

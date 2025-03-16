@@ -1,0 +1,71 @@
+/* --- root ------------------------------------------- */
+:root,
+[data-theme=light] {
+
+	// regular-colors
+	@each $name,
+	$keys in $regular-light-colors {
+
+		@each $key,
+		$color in $keys {
+			$class: -#{$name};
+
+			@if ($name =="default") {
+				$class: "";
+			}
+
+			--regular#{$class}-#{$key}-color: #{$color};
+		}
+	}
+
+	// solid-colors
+	@each $name,
+	$keys in $solid-light-colors {
+
+		@each $key,
+		$color in $keys {
+			$class: -#{$name};
+
+			@if ($name =="default") {
+				$class: "";
+			}
+
+			--solid#{$class}-#{$key}-color: #{$color};
+		}
+	}
+}
+
+[data-theme=dark] {
+
+	// regular-colors
+	@each $name,
+	$keys in $regular-dark-colors {
+
+		@each $key,
+		$color in $keys {
+			$class: -#{$name};
+
+			@if ($name =="default") {
+				$class: "";
+			}
+
+			--regular#{$class}-#{$key}-color: #{$color};
+		}
+	}
+
+	// solid-colors
+	@each $name,
+	$keys in $solid-dark-colors {
+
+		@each $key,
+		$color in $keys {
+			$class: -#{$name};
+
+			@if ($name =="default") {
+				$class: "";
+			}
+
+			--solid#{$class}-#{$key}-color: #{$color};
+		}
+	}
+}

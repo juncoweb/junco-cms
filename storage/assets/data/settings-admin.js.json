@@ -1,0 +1,9 @@
+{
+    "key": "settings-admin.js",
+    "name": "settings-admin",
+    "type": "js",
+    "assets": "app\/settings\/js\/admin.settings.js",
+    "default_assets": "app\/settings\/js\/admin.settings.js",
+    "to_verify": 0,
+    "compile": 0
+}

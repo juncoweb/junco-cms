@@ -1,0 +1,14 @@
+{
+    "router": [
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "System|Router",
+            "menu_order": 20,
+            "menu_url": "admin\/settings,key=router",
+            "menu_image": "",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        }
+    ]
+}

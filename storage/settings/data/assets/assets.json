@@ -1,0 +1,130 @@
+{
+    "title": "Assets",
+    "description": "",
+    "descriptions": [],
+    "groups": [
+        "General",
+        "Assets",
+        "Themes",
+        "Minifier"
+    ],
+    "rows": {
+        "precompile": {
+            "label": "Precompile",
+            "type": "select-integer",
+            "group": 0,
+            "ordering": 1,
+            "default_value": 2,
+            "help": "For each style sheet, try to find and run the precompiler.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "version_control": {
+            "label": "Version control",
+            "type": "boolean",
+            "group": 0,
+            "ordering": 2,
+            "default_value": true,
+            "help": "When enabled, the build version will be verified. This is a way to warn browsers that they should update their cache.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "data_path": {
+            "label": "Path",
+            "type": "input-text",
+            "group": 1,
+            "ordering": 3,
+            "default_value": "assets\/data\/",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "minify_file": {
+            "label": "File",
+            "type": "input-text",
+            "group": 1,
+            "ordering": 4,
+            "default_value": "assets\/%s.min.%s",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "themes_path": {
+            "label": "Path",
+            "type": "input-text",
+            "group": 2,
+            "ordering": 1,
+            "default_value": "assets\/themes\/",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "minify": {
+            "label": "Minify",
+            "type": "boolean",
+            "group": 3,
+            "ordering": 1,
+            "default_value": true,
+            "help": "Default value. It is also used for the installation of updates.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "fixurl": {
+            "label": "Fix url",
+            "type": "select-integer",
+            "group": 3,
+            "ordering": 2,
+            "default_value": 0,
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "cssmin_plugin": {
+            "label": "Css",
+            "type": "plugin",
+            "group": 3,
+            "ordering": 3,
+            "default_value": "assets",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "jsmin_plugin": {
+            "label": "Js",
+            "type": "plugin",
+            "group": 3,
+            "ordering": 4,
+            "default_value": "assets",
+            "help": "If you use YUI compressor, you must download it and install it in the CGI folder.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

@@ -1,0 +1,21 @@
+/* --- reboot ------------------------------------------- */
+* {
+	box-sizing: border-box;
+	scrollbar-color: var(--regular-active-bg-color) var(--regular-bg-color);
+}
+
+::-webkit-scrollbar {
+	background-color: var(--regular-bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: var(--regular-active-bg-color);
+}
+
+[data-theme=dark] {
+
+	::-webkit-inner-spin-button,
+	::-webkit-calendar-picker-indicator {
+		filter: invert(1);
+	}
+}

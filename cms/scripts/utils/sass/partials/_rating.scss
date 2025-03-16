@@ -1,0 +1,81 @@
+/* --- rating ------------------------------- */
+.rating {
+	display: inline-block;
+
+	span {
+		margin: 0 .3em;
+	}
+
+	&.rating-pointer i {
+		cursor: pointer;
+	}
+
+	&.rating-large {
+		font-size: $large-font-size;
+	}
+
+	&.rating-small {
+		font-size: $small-font-size;
+	}
+
+	@each $name,
+	$color in $theme-colors {
+		$class: -#{$name};
+
+		@if ($name =="default") {
+			$class: "";
+		}
+
+		&.rating-#{$name} i {
+			color: var(--solid#{$class}-surface-color);
+		}
+	}
+}
+
+.rating-detail {
+	--bar-height: 4px;
+	max-width: 240px;
+
+	.rating-main {
+		display: flex;
+		align-items: center;
+	}
+
+	.rating-average {
+		font-size: 3rem;
+		margin-right: 15px;
+	}
+
+	ol {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+
+		li {
+			display: flex;
+			align-items: center;
+			white-space: nowrap;
+			gap: $spacing;
+
+			>div:first-child {
+				flex: auto;
+			}
+
+			i {
+				margin-left: 7px;
+			}
+		}
+	}
+
+	.measuring-bar {
+		background: var(--regular-bg-color);
+		height: var(--bar-height);
+		border-radius: 2px;
+		overflow: hidden;
+
+		div {
+			background: $yellow;
+			height: var(--bar-height);
+		}
+	}
+}

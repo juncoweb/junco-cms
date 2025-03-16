@@ -1,0 +1,9 @@
+{
+    "key": "language-admin.js",
+    "name": "language-admin",
+    "type": "js",
+    "assets": "app\/language\/js\/admin.language.js,\r\napp\/language\/js\/admin.domains.js,\r\napp\/language\/js\/admin.translations.js",
+    "default_assets": "app\/language\/js\/admin.language.js,\r\napp\/language\/js\/admin.domains.js,\r\napp\/language\/js\/admin.translations.js",
+    "to_verify": 0,
+    "compile": 0
+}

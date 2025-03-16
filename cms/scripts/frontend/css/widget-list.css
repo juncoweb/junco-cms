@@ -1,0 +1,45 @@
+.widget-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.widget-list a {
+  color: var(--regular-font-color);
+  text-decoration: none;
+}
+.widget-list a:hover {
+  color: var(--regular-primary-surface-color);
+}
+.widget-list li {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: var(--regular-border-color);
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.widget-list li > a {
+  padding: 0.5rem 1rem;
+  display: block;
+  transition: all ease 0.5s;
+}
+.widget-list li > a:hover {
+  padding-left: 1.5rem;
+}
+.widget-list li > a > i {
+  margin-right: 10px;
+}
+.widget-list li.selected > a {
+  text-decoration: underline;
+}
+.widget-list li > div {
+  padding: 0.5rem 1rem;
+}
+
+.widget-icon {
+  font-size: 1.25rem;
+}
+
+.widget-badge {
+  color: var(--regular-subtle-font-color);
+}

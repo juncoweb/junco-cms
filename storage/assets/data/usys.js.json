@@ -1,0 +1,5 @@
+{
+    "assets": "app\/usys\/js\/front.usys.js,\r\napp\/usys\/js\/front.activation.js,\r\napp\/usys\/js\/front.password.js,\r\napp\/usys\/js\/front.account.js,\r\n",
+    "default_assets": "app\/usys\/js\/front.usys.js,\r\napp\/usys\/js\/front.activation.js,\r\napp\/usys\/js\/front.password.js,\r\napp\/usys\/js\/front.account.js,\r\n",
+    "to_verify": 0
+}

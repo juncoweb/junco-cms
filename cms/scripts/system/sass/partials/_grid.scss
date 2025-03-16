@@ -1,0 +1,132 @@
+/* --- grid ---------------------------- */
+.grid {
+	display: grid;
+	gap: $spacing;
+
+	&-2 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	&-3 {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	&-4 {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	&-5 {
+		grid-template-columns: repeat(5, 1fr);
+	}
+
+	&-12 {
+		grid-template-columns: 1fr 2fr;
+	}
+
+	&-21 {
+		grid-template-columns: 2fr 1fr;
+	}
+
+	&-13 {
+		grid-template-columns: 1fr 3fr;
+	}
+
+	&-31 {
+		grid-template-columns: 3fr 1fr;
+	}
+
+	&-14 {
+		grid-template-columns: 1fr 4fr;
+	}
+
+	&-41 {
+		grid-template-columns: 4fr 1fr;
+	}
+
+	&-small-box {
+		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	}
+
+	&-medium-box {
+		grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+	}
+
+	&-large-box {
+		grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+	}
+}
+
+@each $size,
+$value in $spacers {
+	.gap-#{$size} {
+		gap: $value;
+	}
+}
+
+@media (max-width: $screen-large) {
+	.grid-responsive.grid {
+		&-4 {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		&-13 {
+			grid-template-columns: 1fr 2fr;
+		}
+
+		&-31 {
+			grid-template-columns: 2fr 1fr;
+		}
+	}
+}
+
+@media (max-width: $screen-medium) {
+	.grid-responsive.grid {
+
+		&-2,
+		&-3,
+		&-4,
+		&-5,
+		&-12,
+		&-21,
+		&-13,
+		&-31,
+		&-14,
+		&-41 {
+			grid-template-columns: 1fr;
+		}
+	}
+}
+
+/* --- container ----------------- */
+.container,
+.container-fluid {
+	width: 100%;
+	padding-right: $spacing;
+	padding-left: $spacing;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+@media (min-width: $screen-small) {
+	.container {
+		max-width: calc($screen-small - 2 * $spacing);
+	}
+}
+
+@media (min-width: $screen-medium) {
+	.container {
+		max-width: calc($screen-medium - 3 * $spacing);
+	}
+}
+
+@media (min-width: $screen-large) {
+	.container {
+		max-width: calc($screen-large - 2 * $spacing);
+	}
+}
+
+@media (min-width: $screen-x-large) {
+	.container {
+		max-width: calc($screen-x-large - 3 * $spacing);
+	}
+}

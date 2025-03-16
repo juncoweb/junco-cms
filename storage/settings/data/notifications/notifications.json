@@ -1,0 +1,25 @@
+{
+    "title": "Notifications",
+    "description": "",
+    "groups": [
+        "General"
+    ],
+    "descriptions": [],
+    "rows": {
+        "use_background": {
+            "label": "Background",
+            "type": "boolean",
+            "group": 0,
+            "ordering": 1,
+            "default_value": "",
+            "help": "Allows notifications to be processed in the background.",
+            "history": [
+                "use_queues"
+            ],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

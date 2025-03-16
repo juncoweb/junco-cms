@@ -1,0 +1,27 @@
+{
+    "title": "Sidebar",
+    "description": "",
+    "descriptions": [
+        "This sets up a widget that loads a menu. It can be used in a &quot;sidebar&quot; or a &quot;footer&quot;."
+    ],
+    "groups": [
+        "General"
+    ],
+    "rows": {
+        "key": {
+            "label": "Key",
+            "type": "input-text",
+            "group": 0,
+            "ordering": 0,
+            "default_value": "frontend-Main",
+            "help": "",
+            "history": [
+                "sidebar_key"
+            ],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

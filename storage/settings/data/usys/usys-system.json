@@ -1,0 +1,54 @@
+{
+    "title": "System",
+    "description": "",
+    "groups": [
+        "Permissions",
+        "Keys"
+    ],
+    "descriptions": [],
+    "rows": {
+        "permissions_q": {
+            "label": "Cache",
+            "type": "input-text",
+            "group": 0,
+            "ordering": 1,
+            "default_value": "",
+            "help": "The key to caching permissions.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "user_key": {
+            "label": "User",
+            "type": "input-text",
+            "group": 1,
+            "ordering": 1,
+            "default_value": "__user",
+            "help": "",
+            "history": {
+                "1": "system_user_key"
+            },
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "rm_key": {
+            "label": "Remember me",
+            "type": "input-text",
+            "group": 1,
+            "ordering": 2,
+            "default_value": "__rm",
+            "help": "",
+            "history": {
+                "1": "system_rm_key"
+            },
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

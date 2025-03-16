@@ -1,0 +1,9 @@
+{
+    "key": "frontend-sidebar.css",
+    "name": "frontend-sidebar",
+    "type": "css",
+    "assets": "cms\/plugins\/frontend\/widget\/sidebar\/css\/styles.css",
+    "default_assets": "cms\/plugins\/frontend\/widget\/sidebar\/css\/styles.css",
+    "to_verify": 0,
+    "compile": 0
+}

@@ -1,0 +1,19 @@
+.widget-post > div {
+  clear: both;
+  overflow: hidden;
+  margin-bottom: 25px;
+}
+.widget-post .post-thumb {
+  float: left;
+  margin-right: 1rem;
+}
+.widget-post .post-thumb img {
+  width: 85px;
+}
+.widget-post .post-title a {
+  text-decoration: none;
+}
+.widget-post .post-meta {
+  color: var(--regular-subtle-font-color);
+  font-size: 0.875rem;
+}

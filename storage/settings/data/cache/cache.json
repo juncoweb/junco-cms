@@ -1,0 +1,22 @@
+{
+    "title": "Cache",
+    "description": "",
+    "descriptions": [],
+    "groups": [
+        "General"
+    ],
+    "rows": {
+        "adapter": {
+            "label": "Adapter",
+            "type": "select-text",
+            "group": 0,
+            "ordering": 1,
+            "default_value": "file",
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

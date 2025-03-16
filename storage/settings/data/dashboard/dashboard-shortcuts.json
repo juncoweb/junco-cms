@@ -1,0 +1,34 @@
+{
+    "title": "Shortcuts",
+    "description": "",
+    "descriptions": [],
+    "groups": [
+        "General"
+    ],
+    "rows": {
+        "shortcuts_key": {
+            "label": "Key",
+            "type": "input-text",
+            "group": 0,
+            "ordering": 1,
+            "default_value": "dashboard",
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "shortcuts_allow_cache": {
+            "label": "Allow cache",
+            "type": "select-integer",
+            "group": 0,
+            "ordering": 2,
+            "default_value": -1,
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

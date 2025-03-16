@@ -1,0 +1,46 @@
+// --- frontend ---------------------------------------------
+$frontend-body-bg-color: var(--regular-surface-color) !default;
+$frontend-body-border-top: (2 * $font-size * $line-height) + 2rem !default;
+$frontend-border: 1px solid !default;
+
+// header
+$frontend-header-setcolor: "-info" !default;
+//
+$frontend-header-active-opacity: .85 !default;
+
+// top header
+$frontend-header-link-hover-color: var(--solid#{$frontend-header-setcolor}-active-font-color) !default; //?
+$frontend-top-header-border-color: var(--solid#{$frontend-header-setcolor}-border-color) !default;
+//
+$frontend-capital-color: null !default;
+$frontend-capital-bg-color: null !default;
+
+// logo
+$frontend-header-transition-duration: .3s !default;
+$frontend-header-logo-color: null !default;
+
+// footer
+$frontend-footer-setcolor: "" !default;
+$frontend-footer-color: var(--regular#{$frontend-footer-setcolor}-font-color) !default;
+$frontend-footer-bg-color: var(--regular#{$frontend-footer-setcolor}-bg-color) !default;
+$frontend-footer-border-color: var(--regular#{$frontend-footer-setcolor}-border-color) !default;
+//
+$frontend-copyright-setcolor: "" !default;
+$frontend-copyright-color: var(--regular#{$frontend-copyright-setcolor}-font-color) !default;
+$frontend-copyright-bg-color: var(--regular#{$frontend-copyright-setcolor}-bg-color) !default; // #E7E7E7 
+$frontend-copyright-border-color: var(--regular#{$frontend-copyright-setcolor}-border-color) !default;
+
+// --- navbar ---------------------------------------------
+$frontend-pull-btn-color: null !default;
+//
+$frontend-navbar-color: null !default;
+$frontend-navbar-hover-color: null !default; //?
+$frontend-navbar-hover-bg-color: null !default;
+$frontend-navbar-nested-color: null !default;
+$frontend-navbar-nested-hover-color: null !default;
+$frontend-navbar-nested-bg-color: null !default;
+
+$frontend-navbar-padding: 1rem 1rem !default;
+
+// --- widget ---------------------------------------------
+$widget-list-displacement: $spacing * .5 !default;

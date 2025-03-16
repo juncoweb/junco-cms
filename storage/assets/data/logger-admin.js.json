@@ -1,0 +1,9 @@
+{
+    "key": "logger-admin.js",
+    "name": "logger-admin",
+    "type": "js",
+    "assets": "app\/logger\/js\/admin.logger.js",
+    "default_assets": "app\/logger\/js\/admin.logger.js",
+    "to_verify": 0,
+    "compile": 0
+}

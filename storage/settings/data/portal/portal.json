@@ -1,0 +1,55 @@
+{
+    "title": "Portal",
+    "description": "",
+    "descriptions": [],
+    "groups": [
+        "Frontend",
+        "My space",
+        "Administration",
+        "Shortcuts"
+    ],
+    "rows": {
+        "options": {
+            "label": "Options",
+            "type": "json",
+            "group": 0,
+            "ordering": 1,
+            "default_value": {
+                "full_body": true,
+                "show_title": false,
+                "wrapped": 0,
+                "css": "assets\/portal.min.css",
+                "js": "assets\/portal.min.js"
+            },
+            "help": "The options are used to add resources or modify aspects of the template.",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "snippet": {
+            "label": "Snippet",
+            "type": "snippet",
+            "group": 0,
+            "ordering": 2,
+            "default_value": "default",
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "plugins": {
+            "label": "Plugins",
+            "type": "plugins",
+            "group": 0,
+            "ordering": 3,
+            "default_value": "",
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

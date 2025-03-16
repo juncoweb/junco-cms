@@ -1,0 +1,99 @@
+{
+    "title": "Usys",
+    "description": "",
+    "groups": [
+        "General",
+        "Log in",
+        "Multi-Factor Authentication",
+        "Account"
+    ],
+    "descriptions": [],
+    "rows": {
+        "options": {
+            "label": "Options",
+            "type": "json",
+            "group": 0,
+            "ordering": 3,
+            "default_value": {
+                "css": [
+                    "assets\/usys.min.css"
+                ],
+                "js": [
+                    "assets\/usys.min.js"
+                ]
+            },
+            "help": "The options are used to add resources or modify aspects of the template.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "login_options": {
+            "label": "Options",
+            "type": "json",
+            "group": 1,
+            "ordering": 1,
+            "default_value": {
+                "css": [
+                    "assets\/usys.min.css"
+                ],
+                "js": [
+                    "assets\/usys.min.js"
+                ]
+            },
+            "help": "The options are used to add resources or modify aspects of the template.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "login_plugins": {
+            "label": "Plugins",
+            "type": "plugins",
+            "group": 1,
+            "ordering": 2,
+            "default_value": "",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "mfa_url": {
+            "label": "Next",
+            "type": "select-text",
+            "group": 2,
+            "ordering": 1,
+            "default_value": "",
+            "help": "Url builder pointing to another authentication factor. Format: \/component\/task,key=value,...",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "account_options": {
+            "label": "Options",
+            "type": "json",
+            "group": 3,
+            "ordering": 1,
+            "default_value": {
+                "css": [
+                    "assets\/usys.min.css"
+                ],
+                "js": [
+                    "assets\/usys.min.js"
+                ]
+            },
+            "help": "The options are used to add resources or modify aspects of the template.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "database": [
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "System|Database",
+            "menu_order": 20,
+            "menu_url": "admin\/settings,key=database",
+            "menu_image": "",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        }
+    ]
+}

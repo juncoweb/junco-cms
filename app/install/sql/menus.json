@@ -1,0 +1,180 @@
+{
+    "TABLE": {
+        "menus": {
+            "Query": "CREATE TABLE IF NOT EXISTS `#__menus` (\n  `id` smallint unsigned NOT NULL AUTO_INCREMENT,\n  `extension_id` smallint unsigned NOT NULL,\n  `menu_key` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,\n  `menu_default_path` varchar(128) COLLATE utf8mb4_general_ci NOT NULL,\n  `menu_path` varchar(128) COLLATE utf8mb4_general_ci NOT NULL,\n  `menu_order` tinyint NOT NULL DEFAULT '0',\n  `menu_url` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,\n  `menu_image` varchar(128) COLLATE utf8mb4_general_ci NOT NULL,\n  `menu_hash` varchar(48) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `menu_params` text COLLATE utf8mb4_general_ci NOT NULL,\n  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  `is_distributed` tinyint(1) NOT NULL DEFAULT '0',\n  `status` tinyint(1) NOT NULL DEFAULT '0',\n  PRIMARY KEY (`id`),\n  KEY `menu_key` (`menu_key`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
+            "MysqlQuery": "CREATE TABLE IF NOT EXISTS `#__menus` (\n  `id` smallint unsigned NOT NULL AUTO_INCREMENT,\n  `extension_id` smallint unsigned NOT NULL,\n  `menu_key` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,\n  `menu_default_path` varchar(128) COLLATE utf8mb4_general_ci NOT NULL,\n  `menu_path` varchar(128) COLLATE utf8mb4_general_ci NOT NULL,\n  `menu_order` tinyint NOT NULL DEFAULT '0',\n  `menu_url` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,\n  `menu_image` varchar(128) COLLATE utf8mb4_general_ci NOT NULL,\n  `menu_hash` varchar(48) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `menu_params` text COLLATE utf8mb4_general_ci NOT NULL,\n  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  `is_distributed` tinyint(1) NOT NULL DEFAULT '0',\n  `status` tinyint(1) NOT NULL DEFAULT '0',\n  PRIMARY KEY (`id`),\n  KEY `menu_key` (`menu_key`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
+            "History": [],
+            "Fields": {
+                "id": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "smallint unsigned",
+                        "Collation": null,
+                        "Null": "NO",
+                        "Default": null,
+                        "Extra": "auto_increment",
+                        "Comment": ""
+                    }
+                },
+                "extension_id": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "smallint unsigned",
+                        "Collation": null,
+                        "Null": "NO",
+                        "Default": null,
+                        "Extra": "",
+                        "Comment": ""
+                    }
+                },
+                "menu_key": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "varchar(64)",
+                        "Collation": "utf8mb4_general_ci",
+                        "Null": "NO",
+                        "Default": null,
+                        "Extra": "",
+                        "Comment": ""
+                    }
+                },
+                "menu_default_path": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "varchar(128)",
+                        "Collation": "utf8mb4_general_ci",
+                        "Null": "NO",
+                        "Default": null,
+                        "Extra": "",
+                        "Comment": ""
+                    }
+                },
+                "menu_path": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "varchar(128)",
+                        "Collation": "utf8mb4_general_ci",
+                        "Null": "NO",
+                        "Default": null,
+                        "Extra": "",
+                        "Comment": ""
+                    }
+                },
+                "menu_order": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "tinyint",
+                        "Collation": null,
+                        "Null": "NO",
+                        "Default": "0",
+                        "Extra": "",
+                        "Comment": ""
+                    }
+                },
+                "menu_url": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "varchar(255)",
+                        "Collation": "utf8mb4_general_ci",
+                        "Null": "NO",
+                        "Default": null,
+                        "Extra": "",
+                        "Comment": ""
+                    }
+                },
+                "menu_image": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "varchar(128)",
+                        "Collation": "utf8mb4_general_ci",
+                        "Null": "NO",
+                        "Default": null,
+                        "Extra": "",
+                        "Comment": ""
+                    }
+                },
+                "menu_hash": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "varchar(48)",
+                        "Collation": "utf8mb4_general_ci",
+                        "Null": "NO",
+                        "Default": "",
+                        "Extra": "",
+                        "Comment": ""
+                    }
+                },
+                "menu_params": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "text",
+                        "Collation": "utf8mb4_general_ci",
+                        "Null": "NO",
+                        "Default": null,
+                        "Extra": "",
+                        "Comment": ""
+                    }
+                },
+                "created_at": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "datetime",
+                        "Collation": null,
+                        "Null": "NO",
+                        "Default": "CURRENT_TIMESTAMP",
+                        "Extra": "DEFAULT_GENERATED",
+                        "Comment": ""
+                    }
+                },
+                "updated_at": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "datetime",
+                        "Collation": null,
+                        "Null": "NO",
+                        "Default": "CURRENT_TIMESTAMP",
+                        "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+                        "Comment": ""
+                    }
+                },
+                "is_distributed": {
+                    "History": [
+                        "protected"
+                    ],
+                    "Describe": {
+                        "Type": "tinyint(1)",
+                        "Collation": null,
+                        "Null": "NO",
+                        "Default": "0",
+                        "Extra": "",
+                        "Comment": ""
+                    }
+                },
+                "status": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "tinyint(1)",
+                        "Collation": null,
+                        "Null": "NO",
+                        "Default": "0",
+                        "Extra": "",
+                        "Comment": ""
+                    }
+                }
+            },
+            "Indexes": {
+                "PRIMARY": {
+                    "Columns": [
+                        "id"
+                    ]
+                },
+                "menu_key": {
+                    "Columns": [
+                        "menu_key"
+                    ],
+                    "Type": "INDEX"
+                }
+            }
+        }
+    }
+}

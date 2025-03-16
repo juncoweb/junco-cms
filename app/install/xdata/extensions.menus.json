@@ -1,0 +1,64 @@
+{
+    "extensions": [
+        {
+            "menu_key": "backend-Default",
+            "menu_path": "Settings|Extensions",
+            "menu_order": 4,
+            "menu_url": "admin\/extensions,",
+            "menu_image": "",
+            "menu_hash": "extensions",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "backend-Default",
+            "menu_path": "Settings|Web Store",
+            "menu_order": 5,
+            "menu_url": "admin\/extensions.webstore,",
+            "menu_image": "",
+            "menu_hash": "extensions-webstore",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "backend-Default",
+            "menu_path": "Settings|Installer",
+            "menu_order": 6,
+            "menu_url": "admin\/extensions.installer,",
+            "menu_image": "",
+            "menu_hash": "extensions-installer",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "backend-Default",
+            "menu_path": "Settings|;",
+            "menu_order": 3,
+            "menu_url": "",
+            "menu_image": "",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "dashboard",
+            "menu_path": "Extensions",
+            "menu_order": 0,
+            "menu_url": "admin\/extensions,",
+            "menu_image": "fa-solid fa-puzzle-piece",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "Security|Extensions",
+            "menu_order": 0,
+            "menu_url": "admin\/settings,key=extensions",
+            "menu_image": "",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        }
+    ]
+}

@@ -1,0 +1,54 @@
+/* --- tooltip ------------------------------------------- */
+.tooltip {
+	color: $tooltip-color;
+	padding: 0 10px;
+	background-color: $tooltip-bg-color;
+	border-radius: $tooltip-border-radius;
+	position: absolute;
+	top: -2000px;
+	left: -2000px;
+	z-index: $zindex-tooltip;
+	visibility: hidden;
+	transition: opacity 300ms;
+	opacity: 0;
+
+	&:before {
+		content: "";
+		width: 0;
+		position: absolute;
+		bottom: -5px;
+		left: calc(50% - 5px);
+
+		border-width: 5px 5px 0;
+		border-style: solid;
+		border-color: $tooltip-bg-color transparent;
+		display: block;
+	}
+
+	&.bottom:before {
+		bottom: auto;
+		top: -5px;
+		border-width: 0px 5px 5px;
+	}
+
+	&.right:before {
+		bottom: calc(50% - 5px);
+		left: -5px;
+		border-width: 5px 5px 5px 0px;
+		border-color: transparent $tooltip-bg-color;
+	}
+
+	&.left:before {
+		bottom: calc(50% - 5px);
+		left: auto;
+		right: -5px;
+		border-width: 5px 0px 5px 5px;
+		border-color: transparent $tooltip-bg-color;
+	}
+
+	&.show {
+		visibility: visible;
+		display: block;
+		opacity: 1;
+	}
+}

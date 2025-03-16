@@ -1,0 +1,22 @@
+/* --- Icons --------------------------------------------------*/
+.mime-icon {
+  font-size: 1.125rem;
+}
+.mime-icon.fa-folder {
+  color: var(--regular-primary-surface-color);
+}
+.mime-icon.fa-php, .mime-icon.fa-solid.fa-file-code, .mime-icon.fa-file-pdf, .mime-icon.fa-file-powerpoint, .mime-icon.fa-file-csv {
+  color: #dc3540;
+}
+.mime-icon.fa-globe, .mime-icon.fa-file-word {
+  color: #067bcc;
+}
+.mime-icon.fa-file, .mime-icon.fa-file-lines, .mime-icon.fa-file-excel {
+  color: #34a745;
+}
+.mime-icon.fa-file-audio, .mime-icon.fa-file-image, .mime-icon.fa-file-video {
+  color: #fd7e24;
+}
+.mime-icon.fa-file-zipper {
+  color: #ffc134;
+}

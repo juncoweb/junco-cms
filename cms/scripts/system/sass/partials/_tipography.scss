@@ -1,0 +1,123 @@
+/* --- tipography ------------------------------------------- */
+body {
+	font-family: $font-family;
+	font-size: $font-size;
+	font-weight: normal;
+	line-height: $line-height;
+	color: var(--regular-font-color);
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+	margin: 0;
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+::placeholder {
+	color: currentColor;
+	opacity: .5;
+}
+
+// link
+a {
+	color: $link-color;
+	text-decoration: $link-decoration;
+
+	&:hover {
+		color: $link-hover-color;
+		text-decoration: $link-hover-decoration;
+	}
+
+	&:focus {
+		color: $link-hover-color;
+	}
+}
+
+// headers
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: var(--regular-heading-color);
+	font-weight: 300;
+	text-wrap: balance;
+	margin-top: 0;
+	margin-bottom: .5rem;
+}
+
+@each $name,
+$size in $heading-sizes {
+	#{$name} {
+		font-size: $size;
+	}
+}
+
+// others
+img {
+	border-style: none;
+}
+
+p {
+	margin-top: 0;
+	margin-bottom: 1rem;
+	text-wrap: pretty;
+}
+
+.font-small {
+	font-size: $small-font-size;
+}
+
+.font-large {
+	font-size: $large-font-size;
+}
+
+.normal {
+	font-weight: normal;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.italic {
+	font-style: italic;
+}
+
+// selection
+::selection {
+	color: $font-selection-color;
+	background: $font-selection-bg;
+}
+
+// code
+code,
+kbd,
+pre,
+samp {
+	font-family: $font-family-monospace;
+}
+
+code {
+	font-size: $code-font-size;
+	color: $code-color;
+	background: $code-bg;
+	padding: $code-padding;
+	border-radius: $medium-border-radius;
+}
+
+pre {
+	code {
+		padding: 0;
+		font-size: inherit;
+		color: inherit;
+		background-color: transparent;
+		border-radius: 0;
+	}
+}

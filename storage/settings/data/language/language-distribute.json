@@ -1,0 +1,33 @@
+{
+    "title": "Distribute",
+    "abstract": "",
+    "groups": [
+        "General"
+    ],
+    "rows": {
+        "distribute_token": {
+            "label": "Token",
+            "type": "input-text",
+            "group": 0,
+            "ordering": 1,
+            "default_value": "",
+            "help": "",
+            "autoload": 1,
+            "translate": false,
+            "reload_on_change": false,
+            "status": 1
+        },
+        "distribute_url": {
+            "label": "Url",
+            "type": "input-url",
+            "group": 0,
+            "ordering": 2,
+            "default_value": "https:\/\/www.juncoweb.com\/translations\/distribute?format=blank",
+            "help": "",
+            "autoload": 1,
+            "translate": false,
+            "reload_on_change": false,
+            "status": 0
+        }
+    }
+}

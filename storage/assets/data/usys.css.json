@@ -1,0 +1,9 @@
+{
+    "key": "usys.css",
+    "name": "usys",
+    "type": "css",
+    "assets": "app\/usys\/css\/front.usys.css",
+    "default_assets": "app\/usys\/css\/front.usys.css",
+    "to_verify": 0,
+    "compile": 0
+}

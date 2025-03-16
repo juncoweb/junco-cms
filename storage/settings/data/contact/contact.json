@@ -1,0 +1,69 @@
+{
+    "title": "Contact",
+    "description": "",
+    "groups": [
+        "Template",
+        "Security"
+    ],
+    "descriptions": [],
+    "rows": {
+        "options": {
+            "label": "Options",
+            "type": "json",
+            "group": 0,
+            "ordering": 2,
+            "default_value": {
+                "css": "cms\/scripts\/contact\/css\/contact.css",
+                "js": "cms\/scripts\/contact\/js\/contact.js",
+                "domready": "Contact()"
+            },
+            "help": "The options are used to add resources or modify aspects of the template.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "snippet": {
+            "label": "Snippet",
+            "type": "snippet",
+            "group": 0,
+            "ordering": 3,
+            "default_value": "default",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "captcha": {
+            "label": "Captcha",
+            "type": "plugin",
+            "group": 1,
+            "ordering": 1,
+            "default_value": "",
+            "help": "",
+            "history": [
+                "captcha_plugin"
+            ],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "floodcontrol": {
+            "label": "Flood control",
+            "type": "input-integer",
+            "group": 1,
+            "ordering": 2,
+            "default_value": "3",
+            "help": "Amount per hour.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

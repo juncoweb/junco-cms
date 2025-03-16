@@ -1,0 +1,100 @@
+{
+    "title": "Dashboard",
+    "description": "",
+    "descriptions": [],
+    "groups": [
+        "Administration",
+        "My space"
+    ],
+    "rows": {
+        "admin_options": {
+            "label": "Options",
+            "type": "json",
+            "group": 0,
+            "ordering": 1,
+            "default_value": {
+                "js": "assets\/dashboard-admin.min.js"
+            },
+            "help": "The options are used to add resources or modify aspects of the template.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "admin_snippet": {
+            "label": "Snippet",
+            "type": "snippet",
+            "group": 0,
+            "ordering": 2,
+            "default_value": "default",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "admin_plugins": {
+            "label": "Plugins",
+            "type": "plugins",
+            "group": 0,
+            "ordering": 3,
+            "default_value": [
+                "extensions",
+                "dashboard.shortcuts",
+                "users",
+                "contact"
+            ],
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "myspace_options": {
+            "label": "Options",
+            "type": "json",
+            "group": 1,
+            "ordering": 1,
+            "default_value": {
+                "load": "myspace",
+                "hash": "dashboard",
+                "js": "assets\/dashboard-admin.min.js"
+            },
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "myspace_snippet": {
+            "label": "Snippet",
+            "type": "snippet",
+            "group": 1,
+            "ordering": 2,
+            "default_value": "default",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "myspace_plugins": {
+            "label": "Plugins",
+            "type": "plugins",
+            "group": 1,
+            "ordering": 3,
+            "default_value": "",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

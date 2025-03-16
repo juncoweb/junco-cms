@@ -1,0 +1,133 @@
+{
+    "title": "Language",
+    "description": "",
+    "descriptions": [],
+    "groups": [
+        "General",
+        "System",
+        "Negotiate",
+        "Domains"
+    ],
+    "rows": {
+        "availables": {
+            "label": "Availables",
+            "type": "select-multiple-text",
+            "group": 0,
+            "ordering": 1,
+            "default_value": [
+                "es_AR",
+                "en_GB"
+            ],
+            "help": "Availables language list.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 1,
+            "status": 1
+        },
+        "type": {
+            "label": "Type",
+            "type": "select-integer",
+            "group": 0,
+            "ordering": 2,
+            "default_value": "0",
+            "help": "Available only if you select more than one language.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 1,
+            "status": 1
+        },
+        "use_gettext": {
+            "label": "Use gettext",
+            "type": "boolean",
+            "group": 1,
+            "ordering": 1,
+            "default_value": false,
+            "help": "Gettext is the native php library for translations.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "key": {
+            "label": "Key",
+            "type": "input-text",
+            "group": 1,
+            "ordering": 2,
+            "default_value": "lang",
+            "help": "The name of the variable that stores the selected language.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 1,
+            "status": 0
+        },
+        "locale": {
+            "label": "Locale",
+            "type": "input-text",
+            "group": 1,
+            "ordering": 3,
+            "default_value": "locale",
+            "help": "Path to the folder where translations are saved.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 1,
+            "status": 0
+        },
+        "codeset": {
+            "label": "Codeset",
+            "type": "input-text",
+            "group": 1,
+            "ordering": 4,
+            "default_value": "utf8",
+            "help": "This value may change depending on the server.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 1,
+            "status": 0
+        },
+        "negotiate": {
+            "label": "Negotiate",
+            "type": "json",
+            "group": 2,
+            "ordering": 1,
+            "default_value": "",
+            "help": "Try to find the best language for each user. The format is a simple array.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 1,
+            "status": 1
+        },
+        "normalize": {
+            "label": "Normalize",
+            "type": "json",
+            "group": 2,
+            "ordering": 2,
+            "default_value": "",
+            "help": "Converts the input language. The format is an associative array: {&quot;original&quot;:&quot;replacement&quot;}.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 1,
+            "status": 1
+        },
+        "default_domain": {
+            "label": "Default",
+            "type": "input-text",
+            "group": 3,
+            "ordering": 1,
+            "default_value": "default",
+            "help": "The domain is ultimately the name of the .po and .mo files that will store the translations.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 1,
+            "status": 0
+        }
+    }
+}

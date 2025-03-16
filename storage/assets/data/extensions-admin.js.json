@@ -1,0 +1,5 @@
+{
+    "assets": "# extensions\r\napp\/extensions\/js\/admin.extensions.js,\r\napp\/extensions\/js\/admin.changes.js,\r\napp\/extensions\/js\/admin.developers.js,\r\n\r\n# installer\r\napp\/extensions\/js\/admin.installer.js,\r\n\r\n# webstore\r\ncms\/scripts\/utils\/js\/rating.js,\r\napp\/extensions\/js\/admin.webstore.js,",
+    "default_assets": "# extensions\r\napp\/extensions\/js\/admin.extensions.js,\r\napp\/extensions\/js\/admin.changes.js,\r\napp\/extensions\/js\/admin.developers.js,\r\n\r\n# installer\r\napp\/extensions\/js\/admin.installer.js,\r\n\r\n# webstore\r\ncms\/scripts\/utils\/js\/rating.js,\r\napp\/extensions\/js\/admin.webstore.js,",
+    "to_verify": 0
+}

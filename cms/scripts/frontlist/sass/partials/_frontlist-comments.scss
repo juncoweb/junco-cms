@@ -1,0 +1,56 @@
+
+/* --- Frontlist Comments -------------------------------- */
+$frontlist-comments-secondary-color: var(--regular-subtle-font-color) !default;
+
+.fl-comments {
+	.list-row {
+		margin-bottom: $spacing;
+
+		&.response {
+			padding-left: $spacing;
+			border-left: 3px solid $frontlist-comments-secondary-color;
+		}
+	}
+
+	.header,
+	.message {
+		margin-bottom: $spacing * .3;
+	}
+
+	.author {
+		font-weight: bold;
+	}
+
+	.date {
+		color: $frontlist-comments-secondary-color;
+	}
+
+	.to {
+		color: $frontlist-comments-secondary-color;
+
+		&:hover {
+			color: $frontlist-comments-secondary-color;
+		}
+	}
+
+	.options {
+		font-size: $small-font-size;
+
+		a {
+			//color: var(--regular-font-color);
+			color: $frontlist-comments-secondary-color;
+			margin: 0 5px;
+			padding: 0 3px;
+
+			&:hover {
+				color: var(--regular-primary-surface-color);
+			}
+		}
+
+		.votes {
+			font-weight: bold;
+			display: inline;
+			margin-left: 5px;
+		}
+	}
+}

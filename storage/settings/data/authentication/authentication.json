@@ -1,0 +1,24 @@
+{
+    "title": "Authentication",
+    "description": "",
+    "groups": [
+        "General",
+        "Session"
+    ],
+    "descriptions": [],
+    "rows": {
+        "guards": {
+            "label": "Guards",
+            "type": "json",
+            "group": 0,
+            "ordering": 1,
+            "default_value": "",
+            "help": "Configure different guards than the default guards for an access point. Format:  {&quot;access_point&quot;:&quot;the\\\\guard\\\\class&quot;}",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        }
+    }
+}

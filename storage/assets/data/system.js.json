@@ -1,0 +1,9 @@
+{
+    "key": "system.js",
+    "name": "system",
+    "type": "js",
+    "assets": "assets\/system-basic.min.js,\r\nassets\/system-advanced.min.js\r\n\r\n# not necessary\r\n#app\/system\/js\/front.console.js",
+    "default_assets": "assets\/system-basic.min.js,\r\nassets\/system-advanced.min.js\r\n\r\n# not necessary\r\n#app\/system\/js\/front.console.js",
+    "to_verify": 0,
+    "compile": 0
+}

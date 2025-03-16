@@ -1,0 +1,33 @@
+
+/* --- contact-info ---------------------------------------- */
+.widget-contact {
+    .ci-icon {
+        color: $contact-icon-color;
+        font-size: $contact-icon-size;
+    }
+    .ci-links {
+        a {
+            color: $contact-links-color;
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            font-size: $contact-links-size;
+            margin: $contact-links-margin;
+            padding: $contact-links-padding;
+            height: $contact-links-height;
+            width: $contact-links-width;
+            background-color: $contact-links-bg-color;
+            border-radius: $contact-links-border-radius;
+
+            &:hover {
+                color: $contact-links-color;
+                background-color: $contact-links-bg-color-hover;
+            }
+
+            i {
+                line-height: $contact-links-height;
+            }
+        }
+    }
+}
+

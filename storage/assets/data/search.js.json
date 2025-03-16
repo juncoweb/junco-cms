@@ -1,0 +1,9 @@
+{
+    "key": "search.js",
+    "name": "search",
+    "type": "js",
+    "assets": "app\/search\/js\/front.search.js",
+    "default_assets": "app\/search\/js\/front.search.js",
+    "to_verify": 0,
+    "compile": 0
+}

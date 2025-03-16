@@ -1,0 +1,9 @@
+{
+    "key": "backend.css",
+    "name": "backend",
+    "type": "css",
+    "assets": "cms\/scripts\/backend\/css\/backend.css,\r\n\r\n#\r\ncms\/scripts\/notifications\/css\/notifications.css",
+    "default_assets": "cms\/scripts\/backend\/css\/backend.css,\r\n\r\n#\r\ncms\/scripts\/notifications\/css\/notifications.css",
+    "to_verify": 0,
+    "compile": 0
+}

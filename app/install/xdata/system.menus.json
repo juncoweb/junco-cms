@@ -1,0 +1,14 @@
+{
+    "system": [
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "System|System",
+            "menu_order": 2,
+            "menu_url": "admin\/settings,key=system",
+            "menu_image": "",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        }
+    ]
+}

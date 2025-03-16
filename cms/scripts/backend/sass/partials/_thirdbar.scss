@@ -1,0 +1,22 @@
+/* --- thirdbar ------------------------------------------------------ */
+.layout-thirdbar {
+	background-color: $backend-thirdbar-bg-color;
+	display: flex;
+}
+
+.widget-thirdbar {
+	@include navbar($color: $backend-thirdbar-font-color,
+		$hover-color: $backend-thirdbar-hover-color,
+		//$bg-color: $backend-thirdbar-bg-color,
+		$bg-hover-color: $backend-thirdbar-hover-bg-color,
+		$padding: $backend-thirdbar-padding);
+	@include navbar-nested($bg-color: $backend-thirdbar-nested-bg-color,
+		$separator-color: $backend-thirdbar-separator-color,
+		$box-shadow: $dropdown-box-shadow);
+	@include navbar-horizontal;
+	@include navbar-dropdown();
+
+	&.active>ul>li:hover>ul {
+		display: block !important;
+	}
+}

@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * @copyright (c) 2009-2025 by Junco CMS
+ * @author: Junco CMS (tm)
+ */
+
+use Junco\Mvc\Model;
+
+class FrontUsysAccountModel extends Model
+{
+	// vars
+	protected $db = null;
+
+	/**
+	 * Constructor
+	 */
+	public function __construct()
+	{
+		$this->db = db();
+	}
+
+	/**
+	 * Get
+	 */
+	public function getIndexData()
+	{
+		// query
+		$data = $this->db->safeFind("
+		SELECT
+		 id ,
+		 fullname ,
+		 username ,
+		 email
+		FROM `#__users`
+		WHERE id = ?", curuser()->id)->fetch();
+
+		return [
+			'values' => $data,
+			'options' => config('usys.account_options')
+		];
+	}
+}

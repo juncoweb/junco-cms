@@ -1,0 +1,85 @@
+/* --- upload handle --------------------------------- */
+$felem-file-wh: 5rem;
+
+.input-file {
+	color: var(--regular-disabled-font-color);
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
+
+	>div {
+		width: 100%;
+		height: $felem-file-wh;
+		flex-shrink: 0;
+		overflow: hidden;
+
+		>div {
+			overflow: hidden;
+		}
+	}
+
+	.input-field.uh-img {
+		padding: 0;
+
+		>div {
+			width: $felem-file-wh;
+
+			img {
+				max-width: 100%;
+				min-height: auto;
+			}
+		}
+	}
+
+	&.multiple>div {
+		width: $felem-file-wh;
+	}
+}
+
+.uh {
+	&-btn {
+		border-style: dashed !important;
+		text-align: center;
+	}
+
+	&-icon {
+		text-align: center;
+		font-size: 2rem;
+	}
+
+	&-proggress {
+		position: absolute;
+		bottom: 0;
+		height: 3px;
+		background-color: $primary-color;
+	}
+
+	&-title {
+		font-size: $small-font-size;
+		white-space: nowrap;
+	}
+
+	&-cross,
+	&-crop {
+		text-align: center;
+		position: absolute;
+		top: 4px;
+		right: 3px;
+		width: 1.5rem;
+		height: 1.5rem;
+		line-height: 1.5rem;
+		background-color: rgba(var(--solid-surface-rgb-color), .4);
+		border-radius: 50%;
+		cursor: pointer;
+	}
+
+	&-crop {
+		top: calc(1.5rem + 5px);
+	}
+
+	&-required {
+		color: var(--regular-secondary-font-color);
+		font-size: .9em;
+		clear: both;
+	}
+}

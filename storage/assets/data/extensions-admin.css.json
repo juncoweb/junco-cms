@@ -1,0 +1,9 @@
+{
+    "key": "extensions-admin.css",
+    "name": "extensions-admin",
+    "type": "css",
+    "assets": "cms\/scripts\/utils\/css\/rating.css,\r\napp\/extensions\/css\/admin.extensions.css",
+    "default_assets": "cms\/scripts\/utils\/css\/rating.css,\r\napp\/extensions\/css\/admin.extensions.css",
+    "to_verify": 0,
+    "compile": 0
+}

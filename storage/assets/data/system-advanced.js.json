@@ -1,0 +1,9 @@
+{
+    "key": "system-advanced.js",
+    "name": "system-advanced",
+    "type": "js",
+    "assets": "# components\r\ncms\/scripts\/form\/js\/elements\/collection.js,\r\ncms\/scripts\/form\/js\/elements\/crop-image.js,\r\ncms\/scripts\/form\/js\/elements\/date.js,\r\ncms\/scripts\/form\/js\/elements\/file.js,\r\ncms\/scripts\/form\/js\/elements\/suite.js,\r\n\r\n# views\r\ncms\/scripts\/backlist\/js\/backlist.js,\r\ncms\/scripts\/form\/js\/form-box.js,\r\ncms\/scripts\/form\/js\/form-row.js,\r\napp\/users\/js\/admin.userpicker.js",
+    "default_assets": "# components\r\ncms\/scripts\/form\/js\/elements\/collection.js,\r\ncms\/scripts\/form\/js\/elements\/crop-image.js,\r\ncms\/scripts\/form\/js\/elements\/date.js,\r\ncms\/scripts\/form\/js\/elements\/file.js,\r\ncms\/scripts\/form\/js\/elements\/suite.js,\r\n\r\n# views\r\ncms\/scripts\/backlist\/js\/backlist.js,\r\ncms\/scripts\/form\/js\/form-box.js,\r\ncms\/scripts\/form\/js\/form-row.js,\r\napp\/users\/js\/admin.userpicker.js",
+    "to_verify": 0,
+    "compile": 0
+}

@@ -1,0 +1,125 @@
+/* --- backList -------------------------------------------- */
+.backlist-box {
+	position: relative;
+	//max-width: $screen-x-large;
+	//min-height: 20rem;
+	margin-bottom: $spacing;
+}
+
+.backlist-slot {
+	overflow: hidden;
+	position: relative;
+}
+
+.backlist-wrapper {
+	.empty-list {
+		text-align: center;
+		padding: 0 $spacing;
+
+		p {
+			font-size: $large-font-size;
+			font-weight: bold;
+			color: var(--regular-subtle-font-color);
+			text-align: center;
+			margin: $spacing auto;
+			padding: $spacing;
+			border: $border-width $border-style var(--regular-border-color);
+			border-radius: $medium-border-radius;
+			display: inline-block;
+		}
+	}
+
+	.footer {
+		padding: $spacing (
+			$spacing * .5
+		);
+}
+}
+
+.kl-body {
+	font-size: $small-font-size;
+	color: var(--regular-subtle-font-color);
+
+	>div:nth-child(2) {
+		display: none;
+	}
+
+	&.expand>div {
+		display: none;
+
+		&:nth-child(2) {
+			display: block;
+		}
+	}
+
+	.kl-tg:before {
+		content: '. . .';
+	}
+}
+
+.kl-sort {
+
+	&,
+	&:hover {
+		color: var(--regular-font-color) !important;
+		border-bottom-width: $border-width dashed var(--regular-border-color);
+		text-decoration: none;
+	}
+}
+
+.kl-editable {
+	cursor: text;
+
+	input {
+		font-size: $small-font-size;
+	}
+}
+
+/* --- actions --- */
+.backlist-actions {
+	z-index: 1;
+	position: sticky;
+	border-radius: $medium-border-radius;
+	background-color: var(--regular-surface-color);
+
+	&.active {
+		border: $border-width $border-style var(--regular-border-color);
+		box-shadow: $template-box-shadow;
+	}
+
+	>div:first-child {
+		display: flex;
+		padding: $spacing * .5;
+
+		>div {
+			flex: auto;
+		}
+	}
+
+	.btn-create {
+		display: inline;
+
+		input {
+			width: 3rem;
+		}
+	}
+}
+
+/* --- filters --- */
+.backlist-filters {
+	text-align: right;
+	padding: $spacing * .5;
+	background: var(--regular-bg-color);
+
+	input.btn {
+		width: 140px;
+	}
+}
+
+
+/* --- pagination --- */
+.backlist-pagination .info {
+	text-wrap: nowrap;
+	margin: $spacing;
+	display: inline-block;
+}

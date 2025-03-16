@@ -1,0 +1,41 @@
+/* --- Frontlist ------------------------------- */
+.frontlist {
+  clear: left;
+  border-collapse: collapse;
+  width: 100%;
+}
+.frontlist > tbody > tr {
+  border-bottom: 1px solid var(--regular-border-color);
+}
+.frontlist > tbody > tr > td {
+  vertical-align: top;
+}
+.frontlist > tbody > tr > td.col-img {
+  width: 120px;
+  text-align: center;
+  padding-right: 10px;
+}
+.frontlist > tbody > tr > td.col-img img {
+  border: 0;
+  padding: 2px;
+}
+.frontlist > tbody > tr > td.col-bdy h3 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+.frontlist > tbody > tr > td.col-bdy h3 a {
+  color: var(--regular-font-color);
+  text-decoration: none;
+}
+.frontlist > tbody > tr > td.col-opt {
+  width: 20px;
+}
+.frontlist .fl-author,
+.frontlist .fl-date {
+  color: var(--regular-subtle-font-color);
+  font-size: 0.875rem;
+}
+.frontlist .fl-description {
+  color: var(--regular-subtle-font-color);
+  min-height: 30px;
+}

@@ -1,0 +1,499 @@
+{
+    "developer": {
+        "developer_name": "JuncoCms",
+        "project_url": "https:\/\/www.juncoweb.com",
+        "webstore_url": "https:\/\/www.juncoweb.com\/webstore\/%s"
+    },
+    "package_alias": "system",
+    "min_php_version": "8.2",
+    "max_php_version": "0",
+    "summary": {
+        "extension_version": "3.2, 5.4, 0.1, 3.4, 5.1, 1.1, 3.1, 1.2, 2.4, 2.5, 4.5, 2.8, 3.3, 2.6, 2.3, 4.1, 13.2",
+        "extension_credits": "Junco CMS (tm), https:\/\/uri.thephpleague.com, PHP-FIG, Leaf Corcoran, MIT",
+        "extension_license": "GPLv3, MIT, MIT License, Symfony Community (https:\/\/symfony.com\/contributors)",
+        "extension_require": "13.2"
+    },
+    "extensions": {
+        "archive": {
+            "extension_name": "Archive",
+            "extension_version": "3.2",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "l"
+        },
+        "assets": {
+            "extension_name": "Assets",
+            "extension_version": "5.4",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "alp",
+            "xdata": "assets,menus,settings"
+        },
+        "authentication": {
+            "extension_name": "Authentication",
+            "extension_version": "0.1",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "l",
+            "xdata": "settings"
+        },
+        "backend": {
+            "extension_name": "BackEnd",
+            "extension_version": "3.4",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "ajkp",
+            "xdata": "assets,menus,settings"
+        },
+        "backlist": {
+            "extension_name": "Backlist",
+            "extension_version": "5.1",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "jklp",
+            "xdata": "menus,settings"
+        },
+        "cache": {
+            "extension_name": "Cache",
+            "extension_version": "3.2",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "alp",
+            "xdata": "assets,menus,settings"
+        },
+        "config": {
+            "extension_name": "Config",
+            "extension_version": "1.1",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "l"
+        },
+        "contact": {
+            "extension_name": "Contact",
+            "extension_version": "3.1",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "ajklp",
+            "db_queries": "contact",
+            "xdata": "assets,menus,settings"
+        },
+        "container": {
+            "extension_name": "Container",
+            "extension_version": "1.1",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "lp",
+            "xdata": "settings"
+        },
+        "currency": {
+            "extension_name": "Currency",
+            "extension_version": "1.2",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "l"
+        },
+        "dashboard": {
+            "extension_name": "Dashboard",
+            "extension_version": "2.4",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "akp",
+            "xdata": "assets,menus,settings"
+        },
+        "database": {
+            "extension_name": "Database",
+            "extension_version": "5.1",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "lp",
+            "xdata": "menus,settings"
+        },
+        "date": {
+            "extension_name": "Date",
+            "extension_version": "3.1",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "l"
+        },
+        "debugger": {
+            "extension_name": "Debugger",
+            "extension_version": "2.5",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "l"
+        },
+        "email": {
+            "extension_name": "Email",
+            "extension_version": "2.4",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "aklp",
+            "xdata": "assets,menus,settings"
+        },
+        "extensions": {
+            "extension_name": "Extensions",
+            "extension_version": "4.5",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "alp",
+            "db_queries": "extensions,extensions_changes,extensions_developers,extensions_updates",
+            "xdata": "assets,menus,settings"
+        },
+        "filesystem": {
+            "extension_name": "Filesystem",
+            "extension_version": "0.1",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "jklp",
+            "xdata": "assets,settings"
+        },
+        "filter": {
+            "extension_name": "Filter",
+            "extension_version": "2.8",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "l"
+        },
+        "form": {
+            "extension_name": "Form",
+            "extension_version": "2.5",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "jklp",
+            "xdata": "menus,settings"
+        },
+        "frontlist": {
+            "extension_name": "Front List",
+            "extension_version": "3.3",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "jkl",
+            "xdata": "assets"
+        },
+        "frontend": {
+            "extension_name": "Frontend",
+            "extension_version": "2.5",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "jkp",
+            "xdata": "assets,menus,settings"
+        },
+        "http": {
+            "extension_name": "Http",
+            "extension_version": "1.1",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "l"
+        },
+        "install": {
+            "extension_name": "Install",
+            "extension_version": "1.2",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "ajkl",
+            "xdata": "settings"
+        },
+        "jobs": {
+            "extension_name": "Jobs",
+            "extension_version": "0.1",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "alp",
+            "db_queries": "jobs,jobs_failures",
+            "xdata": "assets,menus,settings"
+        },
+        "language": {
+            "extension_name": "Language",
+            "extension_version": "2.4",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "alp",
+            "xdata": "assets,menus,settings"
+        },
+        "league": {
+            "extension_name": "League",
+            "extension_version": "0.1",
+            "extension_credits": "https:\/\/uri.thephpleague.com",
+            "extension_license": "MIT",
+            "extension_abstract": "",
+            "components": "v"
+        },
+        "logger": {
+            "extension_name": "Logger",
+            "extension_version": "2.4",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "al",
+            "xdata": "assets,menus,settings"
+        },
+        "menus": {
+            "extension_name": "Menus",
+            "extension_version": "2.6",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "aklp",
+            "db_queries": "menus",
+            "xdata": "assets,menus"
+        },
+        "modal": {
+            "extension_name": "Modal",
+            "extension_version": "2.6",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "jklp"
+        },
+        "mvc": {
+            "extension_name": "MVC",
+            "extension_version": "0.1",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "l"
+        },
+        "nestedset": {
+            "extension_name": "Nestedset",
+            "extension_version": "2.3",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "l"
+        },
+        "notifications": {
+            "extension_name": "Notifications",
+            "extension_version": "0.1",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "ajlp",
+            "db_queries": "notifications",
+            "xdata": "assets,menus,settings,users"
+        },
+        "pagination": {
+            "extension_version": "4.1",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "kl"
+        },
+        "portal": {
+            "extension_name": "Portal",
+            "extension_version": "1.1",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "ajkp",
+            "xdata": "assets,menus,settings"
+        },
+        "profiler": {
+            "extension_name": "Profiler",
+            "extension_version": "1.1",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "ajl",
+            "xdata": "assets"
+        },
+        "psr": {
+            "extension_name": "PSR",
+            "extension_version": "1.1",
+            "extension_credits": "PHP-FIG",
+            "extension_license": "MIT",
+            "extension_abstract": "",
+            "components": "v"
+        },
+        "responder": {
+            "extension_name": "Responder",
+            "extension_version": "0.1",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "kl"
+        },
+        "router": {
+            "extension_name": "Router",
+            "extension_version": "4.5",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "jlp",
+            "xdata": "menus,settings"
+        },
+        "samples": {
+            "extension_name": "Samples",
+            "extension_version": "2.3",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "ajklp",
+            "xdata": "assets,menus"
+        },
+        "scssphp": {
+            "extension_name": "ScssPhp",
+            "extension_version": "1.1",
+            "extension_credits": "Leaf Corcoran",
+            "extension_license": "MIT License",
+            "extension_abstract": "ScssPhp is a compiler for SCSS written in PHP.",
+            "components": "lv"
+        },
+        "search": {
+            "extension_name": "Search",
+            "extension_version": "2.3",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "alp",
+            "xdata": "assets,menus,settings"
+        },
+        "session": {
+            "extension_name": "Session",
+            "extension_version": "1.1",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "lp",
+            "db_queries": "session",
+            "xdata": "menus,settings"
+        },
+        "settings": {
+            "extension_name": "Settings",
+            "extension_version": "2.8",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "alp",
+            "xdata": "assets,menus"
+        },
+        "showcase": {
+            "extension_name": "Showcase",
+            "extension_version": "1.1",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "jkl",
+            "xdata": "assets"
+        },
+        "site": {
+            "extension_name": "Site",
+            "extension_version": "2.3",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "p",
+            "xdata": "menus,settings"
+        },
+        "slideshow": {
+            "extension_name": "Slideshow",
+            "extension_version": "2.3",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "jk"
+        },
+        "symfony": {
+            "extension_name": "Symfony",
+            "extension_version": "0.1",
+            "extension_credits": "MIT",
+            "extension_license": "Symfony Community (https:\/\/symfony.com\/contributors)",
+            "extension_abstract": "",
+            "components": "v"
+        },
+        "system": {
+            "extension_name": "System",
+            "extension_version": "13.2",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "Package of extensions that form the core of the Junco system.",
+            "components": "ajlp",
+            "xdata": "assets,menus,settings,users"
+        },
+        "tabs": {
+            "extension_name": "Tabs",
+            "extension_version": "1.1",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "jkl"
+        },
+        "template": {
+            "extension_name": "Template",
+            "extension_version": "1.1",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "klp",
+            "xdata": "menus,settings"
+        },
+        "tiles": {
+            "extension_name": "Tiles",
+            "extension_version": "1.1",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "kl"
+        },
+        "users": {
+            "extension_name": "Users",
+            "extension_version": "0.1",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "alp",
+            "db_queries": "users,users_activities,users_activities_locks,users_activities_tokens,users_roles,users_roles_labels,users_roles_labels_map,users_roles_map",
+            "xdata": "assets,menus,settings"
+        },
+        "usys": {
+            "extension_name": "Usys",
+            "extension_version": "2.4",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "ajlp",
+            "db_queries": "usys_sessions",
+            "xdata": "assets,menus,settings"
+        },
+        "utils": {
+            "extension_name": "Utils",
+            "extension_version": "2.5",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "jklp"
+        },
+        "xjs": {
+            "extension_name": "XJs",
+            "extension_version": "2.3",
+            "extension_credits": "Junco CMS (tm)",
+            "extension_license": "GPLv3",
+            "extension_abstract": "",
+            "components": "jkl"
+        }
+    }
+}

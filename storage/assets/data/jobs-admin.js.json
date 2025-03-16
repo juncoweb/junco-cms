@@ -1,0 +1,5 @@
+{
+    "assets": "app\/jobs\/js\/admin.jobs.js,\r\napp\/jobs\/js\/admin.failures.js",
+    "default_assets": "app\/jobs\/js\/admin.jobs.js,\r\napp\/jobs\/js\/admin.failures.js",
+    "to_verify": 0
+}

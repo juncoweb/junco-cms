@@ -1,0 +1,41 @@
+{
+    "title": "Container",
+    "description": "",
+    "descriptions": [],
+    "groups": [
+        "Registers"
+    ],
+    "rows": {
+        "system_registers": {
+            "label": "System",
+            "type": "json",
+            "group": 0,
+            "ordering": 1,
+            "default_value": {
+                "MediaStorage": {
+                    "className": "\\Junco\\Filesystem\\MediaStorage",
+                    "shared": 1
+                }
+            },
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "user_registers": {
+            "label": "User",
+            "type": "json",
+            "group": 0,
+            "ordering": 2,
+            "default_value": "",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

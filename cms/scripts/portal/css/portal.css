@@ -1,0 +1,212 @@
+/* --- portal -------------------------------------- */
+.portal-section {
+  overflow: hidden;
+}
+
+.portal-header {
+  text-align: center;
+  margin: 0 0 1rem;
+}
+
+.portal-title {
+  text-transform: uppercase;
+}
+
+h1.portal-title {
+  font-size: 2.5rem;
+}
+
+h2.portal-title {
+  font-size: 2.1875rem;
+}
+
+h3.portal-title {
+  font-size: 1.875rem;
+}
+
+h4.portal-title {
+  font-size: 1.5625rem;
+}
+
+h5.portal-title {
+  font-size: 1.40625rem;
+}
+
+h6.portal-title {
+  font-size: 1.25rem;
+}
+
+.portal-caption {
+  font-size: 1.25rem;
+}
+
+.portal-section {
+  color: var(--regular-font-color);
+}
+.portal-section a {
+  color: var(--regular-font-color);
+}
+.portal-section h1,
+.portal-section h2,
+.portal-section h3,
+.portal-section h4,
+.portal-section h5,
+.portal-section h6 {
+  color: var(--regular-heading-color);
+}
+.portal-section .portal-light {
+  color: var(--regular-subtle-font-color);
+}
+.portal-section .portal-contrast {
+  color: var(--solid-primary-surface-color);
+}
+.portal-section .portal-bg-contrast {
+  color: var(--solid-primary-font-color);
+  background-color: var(--solid-primary-bg-color);
+}
+
+.portal-section.portal-regular {
+  background-color: var(--regular-bg-color);
+}
+
+.portal-section.portal-solid {
+  color: var(--solid-default-font-color);
+  background-color: var(--solid-default-bg-color);
+}
+.portal-section.portal-solid a {
+  color: var(--solid-default-font-color);
+}
+.portal-section.portal-solid h1,
+.portal-section.portal-solid h2,
+.portal-section.portal-solid h3,
+.portal-section.portal-solid h4,
+.portal-section.portal-solid h5,
+.portal-section.portal-solid h6 {
+  color: var(--solid-default-heading-color);
+}
+.portal-section.portal-solid .portal-light {
+  color: var(--solid-default-subtle-font-color);
+}
+.portal-section.portal-solid .portal-contrast {
+  color: var(--solid-primary-surface-color);
+}
+.portal-section.portal-solid .portal-bg-contrast {
+  color: var(--solid-primary-font-color);
+  background-color: var(--solid-primary-bg-color);
+}
+
+.portal-section.portal-primary {
+  color: var(--regular-primary-font-color);
+}
+.portal-section.portal-primary a {
+  color: var(--regular-primary-font-color);
+}
+.portal-section.portal-primary h1,
+.portal-section.portal-primary h2,
+.portal-section.portal-primary h3,
+.portal-section.portal-primary h4,
+.portal-section.portal-primary h5,
+.portal-section.portal-primary h6 {
+  color: var(--regular-primary-heading-color);
+}
+.portal-section.portal-primary .portal-light {
+  color: var(--regular-primary-subtle-font-color);
+}
+.portal-section.portal-primary .portal-contrast {
+  color: var(--solid-secondary-surface-color);
+}
+.portal-section.portal-primary .portal-bg-contrast {
+  color: var(--solid-secondary-font-color);
+  background-color: var(--solid-secondary-bg-color);
+}
+
+.portal-section.portal-regular.portal-primary {
+  background-color: var(--regular-primary-bg-color);
+}
+
+.portal-section.portal-solid.portal-primary {
+  color: var(--solid-primary-font-color);
+  background-color: var(--solid-primary-bg-color);
+}
+.portal-section.portal-solid.portal-primary a {
+  color: var(--solid-primary-font-color);
+}
+.portal-section.portal-solid.portal-primary h1,
+.portal-section.portal-solid.portal-primary h2,
+.portal-section.portal-solid.portal-primary h3,
+.portal-section.portal-solid.portal-primary h4,
+.portal-section.portal-solid.portal-primary h5,
+.portal-section.portal-solid.portal-primary h6 {
+  color: var(--solid-primary-heading-color);
+}
+.portal-section.portal-solid.portal-primary .portal-light {
+  color: var(--solid-primary-subtle-font-color);
+}
+.portal-section.portal-solid.portal-primary .portal-contrast {
+  color: var(--solid-secondary-surface-color);
+}
+.portal-section.portal-solid.portal-primary .portal-bg-contrast {
+  color: var(--solid-secondary-font-color);
+  background-color: var(--solid-secondary-bg-color);
+}
+
+.portal-section.portal-secondary {
+  color: var(--regular-secondary-font-color);
+}
+.portal-section.portal-secondary a {
+  color: var(--regular-secondary-font-color);
+}
+.portal-section.portal-secondary h1,
+.portal-section.portal-secondary h2,
+.portal-section.portal-secondary h3,
+.portal-section.portal-secondary h4,
+.portal-section.portal-secondary h5,
+.portal-section.portal-secondary h6 {
+  color: var(--regular-secondary-heading-color);
+}
+.portal-section.portal-secondary .portal-light {
+  color: var(--regular-secondary-subtle-font-color);
+}
+.portal-section.portal-secondary .portal-contrast {
+  color: var(--solid-default-surface-color);
+}
+.portal-section.portal-secondary .portal-bg-contrast {
+  color: var(--solid-default-font-color);
+  background-color: var(--solid-default-bg-color);
+}
+
+.portal-section.portal-regular.portal-secondary {
+  background-color: var(--regular-secondary-bg-color);
+}
+
+.portal-section.portal-solid.portal-secondary {
+  color: var(--solid-secondary-font-color);
+  background-color: var(--solid-secondary-bg-color);
+}
+.portal-section.portal-solid.portal-secondary a {
+  color: var(--solid-secondary-font-color);
+}
+.portal-section.portal-solid.portal-secondary h1,
+.portal-section.portal-solid.portal-secondary h2,
+.portal-section.portal-solid.portal-secondary h3,
+.portal-section.portal-solid.portal-secondary h4,
+.portal-section.portal-solid.portal-secondary h5,
+.portal-section.portal-solid.portal-secondary h6 {
+  color: var(--solid-secondary-heading-color);
+}
+.portal-section.portal-solid.portal-secondary .portal-light {
+  color: var(--solid-secondary-subtle-font-color);
+}
+.portal-section.portal-solid.portal-secondary .portal-contrast {
+  color: var(--solid-default-surface-color);
+}
+.portal-section.portal-solid.portal-secondary .portal-bg-contrast {
+  color: var(--solid-default-font-color);
+  background-color: var(--solid-default-bg-color);
+}
+
+@media (min-width: 1200px) {
+  .portal-reduced-margin {
+    margin-right: 20%;
+  }
+}

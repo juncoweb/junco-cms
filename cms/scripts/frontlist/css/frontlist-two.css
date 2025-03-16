@@ -1,0 +1,68 @@
+/* --- Frontlist Two -------------------------------- */
+.frontlist-two article {
+  display: inline-block;
+  width: 48.5%;
+  margin: 0 3% 3% 0;
+  vertical-align: top;
+}
+.frontlist-two article:before {
+  clear: both;
+}
+.frontlist-two article:nth-of-type(2n) {
+  margin-right: 0;
+}
+.frontlist-two article .fl-entry {
+  display: table;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--regular-bg-color);
+  width: 100%;
+}
+.frontlist-two article .fl-entry > div {
+  display: table-cell;
+  vertical-align: top;
+  padding: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.frontlist-two article .fl-entry h3 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+.frontlist-two article .fl-entry h3 a {
+  color: var(--regular-font-color);
+  text-decoration: none;
+}
+.frontlist-two article .fl-thumbnail {
+  width: 140px;
+}
+.frontlist-two article .fl-thumbnail ~ div {
+  padding-left: 0;
+}
+.frontlist-two article .fl-thumbnail img {
+  display: block;
+  width: 100%;
+}
+.frontlist-two article .fl-author, .frontlist-two article .fl-date {
+  color: var(--regular-subtle-font-color);
+  font-size: 0.875rem;
+}
+.frontlist-two article .fl-description {
+  color: var(--regular-subtle-font-color);
+  min-height: 30px;
+}
+.frontlist-two article .fl-button {
+  text-align: right;
+}
+.frontlist-two article .fl-footer {
+  margin-top: 2px;
+  background-color: var(--regular-bg-color);
+  padding: 10px;
+}
+
+@media only screen and (max-width: 990px) {
+  .frontlist-two article {
+    width: 100%;
+    margin-right: 0;
+  }
+}

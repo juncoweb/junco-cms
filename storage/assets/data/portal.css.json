@@ -1,0 +1,9 @@
+{
+    "key": "portal.css",
+    "name": "portal",
+    "type": "css",
+    "assets": "cms\/scripts\/portal\/css\/animate.css,\r\ncms\/scripts\/portal\/css\/portal.css,\r\n\r\n# widgets\r\nassets\/widgets-portal.min.css,\r\nassets\/contents-portal.min.css",
+    "default_assets": "cms\/scripts\/portal\/css\/animate.css,\r\ncms\/scripts\/portal\/css\/portal.css,\r\n\r\n# widgets\r\nassets\/widgets-portal.min.css,\r\nassets\/contents-portal.min.css",
+    "to_verify": 0,
+    "compile": 0
+}

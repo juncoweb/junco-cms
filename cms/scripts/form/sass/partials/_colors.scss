@@ -1,0 +1,225 @@
+/* --- colors ---------------------------------------------------------- */
+@each $name,
+$color in $theme-colors {
+	$class: -#{$name};
+
+	@if ($name =="default") {
+		$class: "";
+	}
+
+	.btn#{$class} {
+
+		.btn,
+		&.btn {
+			color: var(--regular#{$class}-font-color);
+			background-color: var(--regular#{$class}-bg-color);
+			border-color: var(--regular#{$class}-border-color);
+
+			&:hover:not(.disabled),
+			&:focus:not(.disabled) {
+				color: var(--regular#{$class}-font-color); // prevent link color
+				background-color: var(--regular#{$class}-active-bg-color);
+			}
+		}
+
+		.disabled,
+		&.disabled {
+			color: var(--regular#{$class}-disabled-font-color);
+			//background-color: var(--regular#{$class}-disabled-bg-color);
+		}
+
+		&.btn-outline {
+			color: var(--regular#{$class}-disabled-font-color);
+			background-color: transparent;
+		}
+
+		.btn.btn-solid,
+		&.btn-solid .btn,
+		&.btn.btn-solid {
+			color: var(--solid#{$class}-font-color);
+			background-color: var(--solid#{$class}-bg-color);
+			border-color: transparent;
+
+			&:hover:not(.disabled),
+			&:focus:not(.disabled) {
+				color: var(--solid#{$class}-font-color); // prevent link color
+				background-color: var(--solid#{$class}-active-bg-color);
+			}
+		}
+
+		.btn-solid.disabled,
+		&.btn-solid.disabled {
+			color: var(--solid#{$class}-disabled-font-color);
+			background-color: var(--solid#{$class}-disabled-bg-color);
+		}
+
+		&.btn.btn-solid.btn-outline {
+			color: var(--solid#{$class}-font-color); // prevent link color
+			background-color: var(--solid#{$class}-active-bg-color);
+
+			&:hover:not(.disabled),
+			&:focus:not(.disabled) {
+				color: var(--solid#{$class}-bg-color);
+				background-color: transparent;
+				border-color: var(--regular#{$class}-border-color);
+			}
+		}
+
+		.btn-press.checked {
+			background-color: var(--solid#{$class}-active-bg-color);
+		}
+	}
+}
+
+@each $name,
+$color in $theme-colors {
+	@if ($name =="default") {
+
+		// field
+		.input-field {
+			color: var(--regular-font-color);
+			border-color: var(--regular-border-color);
+			//background-color: var(--regular-surface-color);
+
+			&:hover {
+				border-color: var(--regular-active-border-color);
+			}
+
+			&:focus {
+				border-color: var(--regular-primary-border-color);
+			}
+		}
+
+		// toggle
+		.input-toggle {
+			color: var(--solid-font-color);
+
+			div {
+				background-color: var(--solid-disabled-bg-color);
+			}
+
+			input:checked~div {
+				background-color: var(--solid-bg-color);
+			}
+		}
+
+		// checkbox, radio
+		.input-checkbox,
+		.input-radio,
+		.input-toggle {
+			border-color: var(--regular-border-color);
+
+			&:checked {
+				border-color: var(--regular-primary-surface-color);
+				background-color: var(--regular-primary-surface-color);
+			}
+		}
+
+		// solid
+		// field
+		.input-solid.input-field,
+		.input-solid .input-field {
+			color: var(--solid-font-color);
+		}
+
+		// icon
+		.input-solid.input-icon,
+		.input-solid .input-icon {
+			color: var(--solid-font-color);
+		}
+	}
+
+	@else {
+		.input-#{$name} {
+
+			// field
+			&.input-field,
+			.input-field {
+				color: var(--regular-#{$name}-font-color);
+				border-color: var(--regular-#{$name}-border-color);
+				//background-color: var(--regular-#{$name}-surface-color);
+				background-color: transparent;
+
+				&:hover,
+				&:focus {
+					border-color: var(--regular-#{$name}-active-border-color);
+				}
+			}
+
+			// icon
+			&.input-icon,
+			.input-icon {
+				color: var(--regular-#{$name}-font-color);
+				border-color: var(--regular-#{$name}-border-color);
+			}
+
+			// toggle
+			&.input-toggle,
+			.input-toggle {
+				color: var(--solid-#{$name}-font-color);
+
+				div {
+					background-color: var(--solid-#{$name}-disabled-bg-color);
+				}
+
+				input:checked~div {
+					background-color: var(--solid-#{$name}-bg-color);
+				}
+			}
+
+			// checkbox, radio
+			&.input-checkbox,
+			.input-checkbox,
+			&.input-radio,
+			.input-radio,
+			&.input-toggle,
+			.input-toggle {
+				border-color: var(--regular-#{$name}-border-color);
+
+				&:checked {
+					background-color: var(--regular-#{$name}-border-color);
+				}
+			}
+
+			// solid
+			// field
+			&.input-solid.input-field,
+			&.input-solid .input-field {
+				color: var(--solid-#{$name}-font-color);
+				border-color: var(--solid-#{$name}-border-color);
+				//background-color: var(--solid-#{$name}-surface-color);
+
+				&:hover,
+				&:focus {
+					border-color: var(--solid-#{$name}-active-border-color);
+				}
+			}
+
+			// icon
+			&.input-solid.input-icon,
+			&.input-solid .input-icon {
+				color: var(--solid-#{$name}-font-color);
+				border-color: var(--solid-#{$name}-border-color);
+			}
+
+			// checkbox, radio
+			&.input-solid.input-checkbox,
+			&.input-solid .input-checkbox,
+			&.input-solid.input-radio,
+			&.input-solid .input-radio,
+			&.input-solid.input-toggle,
+			&.input-solid .input-toggle {
+				border-color: var(--solid-#{$name}-border-color);
+
+				&:checked {
+					background-color: var(--solid-#{$name}-border-color);
+				}
+			}
+		}
+	}
+}
+
+.outline-none.btn,
+.btn-group.outline-none .btn {
+	border-color: transparent;
+}

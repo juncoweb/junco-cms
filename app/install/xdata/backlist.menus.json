@@ -1,0 +1,14 @@
+{
+    "backlist": [
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "Templates|Backlist",
+            "menu_order": 10,
+            "menu_url": "admin\/settings,key=backlist",
+            "menu_image": "",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        }
+    ]
+}

@@ -1,0 +1,51 @@
+{
+    "TABLE": {
+        "session": {
+            "Query": "CREATE TABLE IF NOT EXISTS `#__session` (\n  `session_id` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,\n  `session_data` text COLLATE utf8mb4_general_ci NOT NULL,\n  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  PRIMARY KEY (`session_id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
+            "MysqlQuery": "CREATE TABLE IF NOT EXISTS `#__session` (\n  `session_id` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,\n  `session_data` text COLLATE utf8mb4_general_ci NOT NULL,\n  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  PRIMARY KEY (`session_id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
+            "History": [],
+            "Fields": {
+                "session_id": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "varchar(32)",
+                        "Collation": "utf8mb4_general_ci",
+                        "Null": "NO",
+                        "Default": null,
+                        "Extra": "",
+                        "Comment": ""
+                    }
+                },
+                "session_data": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "text",
+                        "Collation": "utf8mb4_general_ci",
+                        "Null": "NO",
+                        "Default": null,
+                        "Extra": "",
+                        "Comment": ""
+                    }
+                },
+                "created_at": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "datetime",
+                        "Collation": null,
+                        "Null": "NO",
+                        "Default": "CURRENT_TIMESTAMP",
+                        "Extra": "DEFAULT_GENERATED",
+                        "Comment": ""
+                    }
+                }
+            },
+            "Indexes": {
+                "PRIMARY": {
+                    "Columns": [
+                        "session_id"
+                    ]
+                }
+            }
+        }
+    }
+}

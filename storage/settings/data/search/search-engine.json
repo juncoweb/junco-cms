@@ -1,0 +1,46 @@
+{
+    "title": "Engine",
+    "description": "",
+    "groups": [
+        "General"
+    ],
+    "descriptions": [],
+    "rows": {
+        "min_chars": {
+            "label": "Min. chars",
+            "type": "input-integer",
+            "group": 0,
+            "ordering": 1,
+            "default_value": 3,
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "max_chars": {
+            "label": "Max. chars",
+            "type": "input-integer",
+            "group": 0,
+            "ordering": 2,
+            "default_value": "32",
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "search_plugins": {
+            "label": "Plugins",
+            "type": "plugins",
+            "group": 0,
+            "ordering": 3,
+            "default_value": "",
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

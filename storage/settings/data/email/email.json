@@ -1,0 +1,180 @@
+{
+    "title": "Mail",
+    "description": "",
+    "groups": [
+        "General",
+        "Encoding",
+        "Smtp"
+    ],
+    "descriptions": [],
+    "rows": {
+        "transport": {
+            "label": "Transport",
+            "type": "select-text",
+            "group": 0,
+            "ordering": 1,
+            "default_value": "mail",
+            "help": "The \u00abmail\u00bb option is given by default, but is less efficient than \u00absmtp\u00bb. For the \u00absmtp\u00bb option must complete the connection data.",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "no_reply": {
+            "label": "No reply",
+            "type": "input-email",
+            "group": 0,
+            "ordering": 2,
+            "default_value": "no-reply@example.com",
+            "help": "The email will be used for system activities.",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "x_mailer": {
+            "label": "X-Mailer",
+            "type": "input-text",
+            "group": 0,
+            "ordering": 10,
+            "default_value": "JuncoCMS",
+            "help": "\u00abX-mailer\u00bb is a line in the header of an email message showing the name of the software that sent the message.",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "snippet_color": {
+            "label": "Color",
+            "type": "input-color",
+            "group": 0,
+            "ordering": 11,
+            "default_value": "#009eff",
+            "help": "Here you can change the color of the snippet. Note: Please note that snippets will not necessarily use this option.",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "charset": {
+            "label": "Charset",
+            "type": "select-text",
+            "group": 1,
+            "ordering": 4,
+            "default_value": "utf-8",
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "header_encoding": {
+            "label": "Header encoding",
+            "type": "select-text",
+            "group": 1,
+            "ordering": 5,
+            "default_value": "Q",
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "message_encoding": {
+            "label": "Message encoding",
+            "type": "select-text",
+            "group": 1,
+            "ordering": 6,
+            "default_value": "quoted-printable",
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "smtp_secure": {
+            "label": "Secure mode",
+            "type": "select-text",
+            "group": 2,
+            "ordering": 1,
+            "default_value": "0",
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "smtp_host": {
+            "label": "Server",
+            "type": "input-text",
+            "group": 2,
+            "ordering": 2,
+            "default_value": "",
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "smtp_port": {
+            "label": "Port",
+            "type": "input-integer",
+            "group": 2,
+            "ordering": 3,
+            "default_value": 0,
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "smtp_timeout": {
+            "label": "Time out",
+            "type": "input-integer",
+            "group": 2,
+            "ordering": 4,
+            "default_value": 0,
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "smtp_auth": {
+            "label": "Authentification",
+            "type": "boolean",
+            "group": 2,
+            "ordering": 5,
+            "default_value": "",
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "smtp_user": {
+            "label": "User",
+            "type": "input-text",
+            "group": 2,
+            "ordering": 6,
+            "default_value": "",
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "smtp_pwd": {
+            "label": "Password",
+            "type": "input-password",
+            "group": 2,
+            "ordering": 7,
+            "default_value": "",
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        }
+    }
+}

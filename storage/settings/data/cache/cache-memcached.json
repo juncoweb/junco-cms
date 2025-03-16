@@ -1,0 +1,55 @@
+{
+    "title": "Memcached",
+    "description": "",
+    "groups": [
+        "General"
+    ],
+    "descriptions": [],
+    "rows": {
+        "id": {
+            "label": "Id",
+            "type": "input-text",
+            "group": 0,
+            "ordering": 1,
+            "default_value": "",
+            "help": "",
+            "history": [
+                "memcached_id"
+            ],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "host": {
+            "label": "Host",
+            "type": "input-text",
+            "group": 0,
+            "ordering": 2,
+            "default_value": "localhost",
+            "help": "",
+            "history": [
+                "memcached_host"
+            ],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "port": {
+            "label": "Port",
+            "type": "input-integer",
+            "group": 0,
+            "ordering": 3,
+            "default_value": 11211,
+            "help": "",
+            "history": [
+                "memcached_port"
+            ],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

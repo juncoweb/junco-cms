@@ -1,0 +1,9 @@
+{
+    "key": "language.js",
+    "name": "language",
+    "type": "js",
+    "assets": "app\/language\/js\/front.language.js",
+    "default_assets": "app\/language\/js\/front.language.js",
+    "to_verify": 0,
+    "compile": 0
+}

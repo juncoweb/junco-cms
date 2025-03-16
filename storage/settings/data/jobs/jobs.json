@@ -1,0 +1,23 @@
+{
+    "title": "Jobs",
+    "description": "",
+    "groups": [
+        "General"
+    ],
+    "descriptions": [],
+    "rows": {
+        "worker": {
+            "label": "Worker",
+            "type": "select-text",
+            "group": 0,
+            "ordering": 1,
+            "default_value": "",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

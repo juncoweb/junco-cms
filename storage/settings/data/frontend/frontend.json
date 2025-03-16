@@ -1,0 +1,253 @@
+{
+    "title": "Frontend",
+    "description": "",
+    "descriptions": [],
+    "groups": [
+        "General",
+        "Themes",
+        "Header",
+        "Plugins",
+        "Legal"
+    ],
+    "rows": {
+        "default_options": {
+            "label": "Default options",
+            "type": "json",
+            "group": 0,
+            "ordering": 1,
+            "default_value": {
+                "css": [
+                    {
+                        "rel": "stylesheet",
+                        "href": "https:\/\/use.fontawesome.com\/releases\/v6.2.1\/css\/all.css",
+                        "integrity": "sha384-twcuYPV86B3vvpwNhWJuaLdUSLF9+ttgM2A6M870UYXrOsxKfER2MKox5cirApyA",
+                        "crossorigin": "anonymous"
+                    },
+                    "assets\/system.min.css"
+                ],
+                "js": [
+                    "assets\/system-basic.min.js"
+                ]
+            },
+            "help": "The options are used to add resources or modify aspects of the template.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "alter_options": {
+            "label": "Alternative options",
+            "type": "json",
+            "group": 0,
+            "ordering": 2,
+            "default_value": {
+                "myspace": {
+                    "js": "assets\/system-advanced.min.js",
+                    "sidebar": [
+                        "frontend.myspace"
+                    ]
+                }
+            },
+            "help": "Alternative options are used to add on-demand options for the components. Format = {&quot;key&quot;: {options}}. Than, the components can call them by specifying the key {&quot;load&quot;:&quot;key&quot;}",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "theme": {
+            "label": "Default",
+            "type": "select-text",
+            "group": 1,
+            "ordering": 1,
+            "default_value": "",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "print_theme": {
+            "label": "Print",
+            "type": "select-text",
+            "group": 1,
+            "ordering": 2,
+            "default_value": "",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "logo_text": {
+            "label": "Text",
+            "type": "input-text",
+            "group": 2,
+            "ordering": 1,
+            "default_value": "",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "logo_img": {
+            "label": "Image",
+            "type": "input-text",
+            "group": 2,
+            "ordering": 1,
+            "default_value": "",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "header_fixed": {
+            "label": "Fixed",
+            "type": "boolean",
+            "group": 2,
+            "ordering": 3,
+            "default_value": true,
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "header_css": {
+            "label": "Css",
+            "type": "input-text",
+            "group": 2,
+            "ordering": 4,
+            "default_value": "header-regular",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "on_display": {
+            "label": "On display",
+            "type": "plugins",
+            "group": 3,
+            "ordering": 1,
+            "default_value": "",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "topbar": {
+            "label": "Topbar",
+            "type": "select-multiple-text",
+            "group": 3,
+            "ordering": 1,
+            "default_value": [
+                "login",
+                "theme",
+                "language",
+                "notifications",
+                "search",
+                "contact"
+            ],
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "navbar": {
+            "label": "Navbar",
+            "type": "plugin",
+            "group": 3,
+            "ordering": 3,
+            "default_value": "frontend.navbar",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "sidebar": {
+            "label": "Sidebar",
+            "type": "plugins",
+            "group": 3,
+            "ordering": 4,
+            "default_value": [
+                "search"
+            ],
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "footer": {
+            "label": "Footer",
+            "type": "plugins",
+            "group": 3,
+            "ordering": 5,
+            "default_value": [
+                "contact"
+            ],
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "terms_url": {
+            "label": "Terms",
+            "type": "input-text",
+            "group": 4,
+            "ordering": 1,
+            "default_value": "",
+            "help": "The url to the document.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "privacy_url": {
+            "label": "Privacy",
+            "type": "input-text",
+            "group": 4,
+            "ordering": 2,
+            "default_value": "",
+            "help": "The url to the document.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "cookie_consent": {
+            "label": "Consent",
+            "type": "boolean",
+            "group": 4,
+            "ordering": 3,
+            "default_value": "",
+            "help": "Enable the cookie consent form.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

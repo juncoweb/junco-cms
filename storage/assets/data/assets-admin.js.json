@@ -1,0 +1,5 @@
+{
+    "assets": "app\/assets\/js\/admin.assets.js,\r\napp\/assets\/js\/admin.themes.js,\r\napp\/assets\/js\/admin.variables.js",
+    "default_assets": "app\/assets\/js\/admin.assets.js,\r\napp\/assets\/js\/admin.themes.js,\r\napp\/assets\/js\/admin.variables.js",
+    "to_verify": 0
+}

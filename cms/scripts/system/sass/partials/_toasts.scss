@@ -1,0 +1,34 @@
+
+/* -------- toasts ------------------------------------------------- */
+.toast-container {
+	width: $toast-max-width;
+	position: fixed;
+	top: 10%;
+	right: 5%;
+	z-index: $zindex-toast;
+}
+
+.toast {
+	box-shadow: $dropdown-box-shadow;
+	border-radius: $medium-border-radius;
+	display: flex;
+
+	> div {
+		padding: .5rem .75rem;
+	}
+
+	&-body {
+		flex: auto;
+	}
+
+	&-close {
+		flex: none !important;
+
+		& i {
+			cursor: pointer;
+		}
+	}
+	& ~ .toast {
+		margin-top: $spacing;
+	}
+}

@@ -1,0 +1,84 @@
+{
+    "users": [
+        {
+            "menu_key": "dashboard",
+            "menu_path": "Users",
+            "menu_order": 0,
+            "menu_url": "admin\/users,",
+            "menu_image": "fa-solid fa-users",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "backend-Default",
+            "menu_path": "Users|Activities",
+            "menu_order": 4,
+            "menu_url": "admin\/users.activities,",
+            "menu_image": "",
+            "menu_hash": "users-activities",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "backend-Default",
+            "menu_path": "Users|Users",
+            "menu_order": 0,
+            "menu_url": "admin\/users,",
+            "menu_image": "",
+            "menu_hash": "users",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "backend-Default",
+            "menu_path": "Users|Labels",
+            "menu_order": 2,
+            "menu_url": "admin\/users.labels,",
+            "menu_image": "",
+            "menu_hash": "users-labels",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "backend-Default",
+            "menu_path": "Users|Roles",
+            "menu_order": 1,
+            "menu_url": "admin\/users.roles,",
+            "menu_image": "",
+            "menu_hash": "users-roles",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "backend-Default",
+            "menu_path": "Users|Permissions",
+            "menu_order": 3,
+            "menu_url": "admin\/users.permissions,",
+            "menu_image": "",
+            "menu_hash": "users-permissions",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "Users|Users",
+            "menu_order": 0,
+            "menu_url": "admin\/settings,key=users",
+            "menu_image": "",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "Users|Authentication",
+            "menu_order": 0,
+            "menu_url": "admin\/settings,key=authentication",
+            "menu_image": "",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        }
+    ]
+}

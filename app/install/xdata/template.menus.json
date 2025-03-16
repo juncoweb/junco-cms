@@ -1,0 +1,24 @@
+{
+    "template": [
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "Templates|Template",
+            "menu_order": 0,
+            "menu_url": "admin\/settings,key=template",
+            "menu_image": "",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "Templates|;",
+            "menu_order": 9,
+            "menu_url": "",
+            "menu_image": "",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        }
+    ]
+}

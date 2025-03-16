@@ -1,0 +1,9 @@
+{
+    "key": "frontend-print.css",
+    "name": "frontend-print",
+    "type": "css",
+    "assets": "cms\/scripts\/frontend\/css\/frontend-print.css",
+    "default_assets": "cms\/scripts\/frontend\/css\/frontend-print.css",
+    "to_verify": 0,
+    "compile": 0
+}

@@ -1,0 +1,24 @@
+
+/* --- Table --------------------------------- */
+.table-example {
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 20px;
+	width: 100%;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+
+.table-example tr {}
+
+.table-example tr td {
+	vertical-align: top;
+	padding: 0 5px 20px;
+}
+
+.table-example textarea {
+	width: 100%;
+}
+
+.table-example input {
+	margin: 2px;
+}

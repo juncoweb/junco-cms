@@ -1,0 +1,14 @@
+{
+    "usys": [
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "Users|Usys",
+            "menu_order": 0,
+            "menu_url": "admin\/settings,key=usys",
+            "menu_image": "",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        }
+    ]
+}

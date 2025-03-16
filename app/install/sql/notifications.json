@@ -1,0 +1,118 @@
+{
+    "TABLE": {
+        "notifications": {
+            "Query": "CREATE TABLE IF NOT EXISTS `#__notifications` (\n  `id` int NOT NULL AUTO_INCREMENT,\n  `user_id` int unsigned NOT NULL,\n  `notification_type` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `notification_id` int NOT NULL DEFAULT '0',\n  `notification_message` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,\n  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,\n  `read_at` datetime DEFAULT NULL,\n  PRIMARY KEY (`id`),\n  KEY `user_id` (`user_id`),\n  KEY `notification_type` (`notification_type`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
+            "MysqlQuery": "CREATE TABLE IF NOT EXISTS `#__notifications` (\n  `id` int NOT NULL AUTO_INCREMENT,\n  `user_id` int unsigned NOT NULL,\n  `notification_type` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `notification_id` int NOT NULL DEFAULT '0',\n  `notification_message` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,\n  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,\n  `read_at` datetime DEFAULT NULL,\n  PRIMARY KEY (`id`),\n  KEY `user_id` (`user_id`),\n  KEY `notification_type` (`notification_type`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
+            "History": [],
+            "Fields": {
+                "id": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "int",
+                        "Collation": null,
+                        "Null": "NO",
+                        "Default": null,
+                        "Extra": "auto_increment",
+                        "Comment": ""
+                    }
+                },
+                "user_id": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "int unsigned",
+                        "Collation": null,
+                        "Null": "NO",
+                        "Default": null,
+                        "Extra": "",
+                        "Comment": ""
+                    }
+                },
+                "notification_type": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "varchar(255)",
+                        "Collation": "utf8mb4_general_ci",
+                        "Null": "NO",
+                        "Default": "",
+                        "Extra": "",
+                        "Comment": ""
+                    }
+                },
+                "notification_id": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "int",
+                        "Collation": null,
+                        "Null": "NO",
+                        "Default": "0",
+                        "Extra": "",
+                        "Comment": ""
+                    }
+                },
+                "notification_message": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "text",
+                        "Collation": "utf8mb4_general_ci",
+                        "Null": "NO",
+                        "Default": null,
+                        "Extra": "",
+                        "Comment": ""
+                    }
+                },
+                "created_at": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "datetime",
+                        "Collation": null,
+                        "Null": "NO",
+                        "Default": "CURRENT_TIMESTAMP",
+                        "Extra": "DEFAULT_GENERATED",
+                        "Comment": ""
+                    }
+                },
+                "updated_at": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "datetime",
+                        "Collation": null,
+                        "Null": "YES",
+                        "Default": null,
+                        "Extra": "on update CURRENT_TIMESTAMP",
+                        "Comment": ""
+                    }
+                },
+                "read_at": {
+                    "History": [],
+                    "Describe": {
+                        "Type": "datetime",
+                        "Collation": null,
+                        "Null": "YES",
+                        "Default": null,
+                        "Extra": "",
+                        "Comment": ""
+                    }
+                }
+            },
+            "Indexes": {
+                "PRIMARY": {
+                    "Columns": [
+                        "id"
+                    ]
+                },
+                "user_id": {
+                    "Columns": [
+                        "user_id"
+                    ],
+                    "Type": "INDEX"
+                },
+                "notification_type": {
+                    "Columns": [
+                        "notification_type"
+                    ],
+                    "Type": "INDEX"
+                }
+            }
+        }
+    }
+}

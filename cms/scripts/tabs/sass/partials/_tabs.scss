@@ -1,0 +1,78 @@
+/* --- Tabs ----------------------------------------- */
+.tablist {
+	margin: 0 $spacing;
+	padding: 0;
+
+	li {
+		line-height: $line-height;
+		margin: 0;
+		padding: $tablist-padding;
+		list-style: none;
+		display: inline-block;
+		background-color: var(--regular-bg-color);
+		border-width: $border-width;
+		border-style: $border-style;
+		border-color: var(--regular-border-color);
+		border-radius: $medium-border-radius $medium-border-radius 0 0;
+		cursor: default;
+		
+		.on-small {
+			display: none;
+		}
+	}
+
+	li:focus {
+		border-color: var(--regular-active-border-color);
+	}
+
+	li~li {
+		margin-left: .125rem;
+	}
+
+	li:hover,
+	li.selected {
+		color: inherit;
+		background: var(--regular-disabled-bg-color);
+		border-color: var(--regular-active-border-color);
+		border-bottom-style: solid;
+		border-bottom-color: var(--regular-disabled-bg-color);
+		position: relative;
+	}
+}
+
+.tabpanel-group {
+	background: var(--regular-surface-color);
+	margin: -$border-width auto $spacing;
+	padding: ($spacing * 2) $spacing;
+	border-top-width: $border-width;
+	border-top-style: $border-style;
+	border-top-color: var(--regular-border-color);
+
+	&>div {
+		display: none;
+
+		&.selected {
+			display: block;
+		}
+	}
+}
+
+// sizes
+.tab-large {
+	&.tablist li {
+		font-size: $large-font-size;
+		padding: $tablist-large-padding;
+		border-radius: $large-border-radius $large-border-radius 0 0;
+	}
+}
+
+//
+@media only screen and (max-width: $screen-small) {
+	.tablist li:not(.selected) .on-small {
+		display: inline-block;
+	}
+
+	.tablist li:not(.selected) .on-large {
+		display: none;
+	}
+}

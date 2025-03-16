@@ -1,0 +1,43 @@
+{
+    "title": "Search",
+    "description": "",
+    "descriptions": [],
+    "groups": [
+        "General",
+        "Template",
+        "Engine"
+    ],
+    "rows": {
+        "engines_plugins": {
+            "label": "Enginers",
+            "type": "plugins",
+            "group": 0,
+            "ordering": 1,
+            "default_value": [
+                "search"
+            ],
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "options": {
+            "label": "Options",
+            "type": "json",
+            "group": 1,
+            "ordering": 3,
+            "default_value": {
+                "css": "assets\/search.min.css",
+                "js": "assets\/search.min.js"
+            },
+            "help": "The options are used to add resources or modify aspects of the template.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        }
+    }
+}

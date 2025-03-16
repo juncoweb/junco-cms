@@ -1,0 +1,17 @@
+/* -------- borders ------------------------------------------------- */
+.rounded {
+	border-radius: $medium-border-radius;
+}
+
+.rounded-small {
+	border-radius: $small-border-radius;
+}
+
+.rounded-large {
+	border-radius: $large-border-radius;
+}
+
+.rounded-full,
+.rounded-circle {
+	border-radius: 9999px;
+}

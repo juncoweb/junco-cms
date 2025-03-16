@@ -1,0 +1,10 @@
+// Progress circle -------------------------------------------
+// Based on https://codepen.io/felipefialho/pen/vGMJBN
+$progress-circle-size: 100px !default;
+$progress-circle-size-large: 150px !default;
+$progress-circle-size-small: 70px !default;
+
+$progress-circle-color: var(--regular-font-color) !default;
+$progress-circle-secondary-color: var(--regular-secondary-bg-color) !default;
+$progress-circle-bg-color: var(--regular-surface-color) !default;
+$progress-circle-border-size: 6% !default;

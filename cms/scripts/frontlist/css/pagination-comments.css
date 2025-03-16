@@ -1,0 +1,10 @@
+/* --- Pagination -------------------------------- */
+.fl-comments-pagination {
+  background: var(--regular-bg-color);
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+.fl-comments-pagination a,
+.fl-comments-pagination span {
+  padding: 0 0.5rem;
+}

@@ -1,0 +1,52 @@
+/* --- Frontlist ------------------------------- */
+.frontlist {
+	clear: left;
+	border-collapse: collapse;
+	width: 100%;
+
+	&>tbody>tr {
+		border-bottom: 1px solid $fronlist-border-color;
+
+		&>td {
+			vertical-align: top;
+
+			&.col-img {
+				width: 120px;
+				text-align: center;
+				padding-right: 10px;
+
+				img {
+					border: 0;
+					padding: 2px;
+				}
+			}
+
+			&.col-bdy {
+				h3 {
+					font-size: $large-font-size;
+					margin: 0;
+
+					a {
+						color: var(--regular-font-color);
+						text-decoration: none;
+					}
+				}
+			}
+
+			&.col-opt {
+				width: 20px;
+			}
+		}
+	}
+
+	.fl-author,
+	.fl-date {
+		color: $fronlist-desc-color;
+		font-size: $small-font-size;
+	}
+
+	.fl-description {
+		color: $fronlist-desc-color;
+		min-height: 30px;
+	}
+}

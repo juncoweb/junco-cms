@@ -1,0 +1,52 @@
+{
+    "title": "Updater",
+    "description": "",
+    "descriptions": [],
+    "groups": [
+        "General"
+    ],
+    "rows": {
+        "enabled": {
+            "label": "Enabled",
+            "type": "boolean",
+            "group": 0,
+            "ordering": 1,
+            "default_value": "",
+            "help": "Enables automatic check for updates.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "cron_expression": {
+            "label": "Cron",
+            "type": "input-text",
+            "group": 0,
+            "ordering": 2,
+            "default_value": "2 0 * * *",
+            "help": "A cron expression indicating the frequency of execution.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "update_gap": {
+            "label": "Gap",
+            "type": "select-integer",
+            "group": 0,
+            "ordering": 3,
+            "default_value": 30,
+            "help": "Waiting time for installation, after release of the update, expressed in days.",
+            "history": [
+                "automatic_update",
+                "automatic_update_gap"
+            ],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

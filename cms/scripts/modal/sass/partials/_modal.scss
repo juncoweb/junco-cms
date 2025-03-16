@@ -1,0 +1,120 @@
+/* --- modal ----------------------------------------- */
+.modal {
+	position: relative;
+	background-color: var(--regular-surface-color);
+	border-width: $border-width;
+	border-style: $border-style;
+	border-color: var(--regular-border-color);
+	border-radius: $medium-border-radius;
+	box-shadow: $modal-box-shadow;
+	animation-name: modal;
+	animation-duration: $modal-animation-duration;
+
+	&-small,
+	&-medium,
+	&-large,
+	&-x-large,
+	&-full {
+		position: absolute;
+		margin: 0 auto;
+		inset: 30px 0 auto;
+		z-index: $zindex-modal;
+	}
+
+	&-small {
+		max-width: $modal-small-width;
+	}
+
+	&-medium {
+		max-width: $modal-medium-width;
+	}
+
+	&-large {
+		max-width: $modal-large-width;
+	}
+
+	&-x-large {
+		max-width: $modal-x-large-width;
+	}
+
+	&-header {
+		padding: $spacing;
+		border-bottom-width: $border-width;
+		border-bottom-style: $border-style;
+		border-bottom-color: var(--regular-border-color);
+		display: flex;
+		gap: .5rem;
+
+		&,
+		& h3 {
+			font-size: map-get($heading-sizes, "h3");
+			margin: 0;
+		}
+
+		.modal-title {
+			flex: auto;
+		}
+	}
+
+	&-body {
+		padding: $spacing;
+		min-height: 3rem;
+		position: relative;
+	}
+
+	&-footer {
+		padding: $spacing;
+	}
+
+	&-footer .btn {
+		margin: 1px 2px;
+	}
+
+	&-overlay {
+		padding: $spacing * 2 $spacing;
+		position: fixed;
+		inset: 0;
+		overflow: auto;
+		z-index: $zindex-modal;
+		background: $modal-overlay-bg-color;
+
+		&>div {
+			position: static;
+		}
+	}
+
+	&-fixed {
+		overflow: hidden;
+	}
+}
+
+@keyframes modal {
+	from {
+		opacity: 0;
+		bottom: ($spacing * 2);
+	}
+
+	to {
+		opacity: 1;
+		bottom: 0px;
+	}
+}
+
+/* alert */
+.modal-alert {
+
+	.modal-body,
+	.modal-footer {
+		text-align: center;
+	}
+}
+
+/* default */
+.modal-default {
+	.modal-footer {
+		text-align: right;
+		border-top-width: $border-width;
+		border-top-style: $border-style;
+		border-top-color: var(--regular-border-color);
+	}
+}

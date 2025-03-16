@@ -1,0 +1,9 @@
+{
+    "key": "contact-admin.js",
+    "name": "contact-admin",
+    "type": "js",
+    "assets": "app\/contact\/js\/admin.contact.js",
+    "default_assets": "app\/contact\/js\/admin.contact.js",
+    "to_verify": 0,
+    "compile": 0
+}

@@ -1,0 +1,34 @@
+{
+    "title": "Redis",
+    "description": "",
+    "descriptions": [],
+    "groups": [
+        "General"
+    ],
+    "rows": {
+        "redis_host": {
+            "label": "Host",
+            "type": "input-text",
+            "group": 0,
+            "ordering": 1,
+            "default_value": "",
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "redis_port": {
+            "label": "Port",
+            "type": "input-integer",
+            "group": 0,
+            "ordering": 2,
+            "default_value": 0,
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

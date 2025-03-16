@@ -1,0 +1,9 @@
+{
+    "key": "menus-admin.js",
+    "name": "menus-admin",
+    "type": "js",
+    "assets": "app\/menus\/js\/admin.menus.js",
+    "default_assets": "app\/menus\/js\/admin.menus.js",
+    "to_verify": 0,
+    "compile": 0
+}

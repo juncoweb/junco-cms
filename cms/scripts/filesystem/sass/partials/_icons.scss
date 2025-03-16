@@ -1,0 +1,37 @@
+/* --- Icons --------------------------------------------------*/
+.mime-icon {
+	font-size: 1.125rem;
+
+	&.fa-folder {
+		color: var(--regular-primary-surface-color);
+	}
+
+	&.fa-php,
+	&.fa-solid.fa-file-code,
+	&.fa-file-pdf,
+	&.fa-file-powerpoint,
+	&.fa-file-csv {
+		color: map-get($colors, "red");
+	}
+
+	&.fa-globe,
+	&.fa-file-word {
+		color: map-get($colors, "blue");
+	}
+
+	&.fa-file,
+	&.fa-file-lines,
+	&.fa-file-excel {
+		color: map-get($colors, "green");
+	}
+
+	&.fa-file-audio,
+	&.fa-file-image,
+	&.fa-file-video {
+		color: map-get($colors, "orange");
+	}
+
+	&.fa-file-zipper {
+		color: map-get($colors, "yellow");
+	}
+}

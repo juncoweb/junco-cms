@@ -1,0 +1,96 @@
+/* --- date ------------------------------ */
+.fe-date {
+	line-height: normal;
+	text-align: center;
+	max-width: 250px;
+	background: var(--regular-surface-color);
+	border-width: $border-width;
+	border-style: $border-style;
+	border-color: var(--regular-border-color);
+	border-radius: $medium-border-radius;
+	box-shadow: $element-box-shadow;
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		table-layout: fixed;
+	}
+
+	th {
+		font-weight: bold;
+		padding: $date-cell-padding;
+	}
+
+	td {
+		padding: $date-cell-padding;
+		cursor: pointer;
+
+		&:hover {
+			color: var(--regular-active-font-color);
+			background: var(--regular-active-bg-color);
+		}
+	}
+
+	.header {
+		font-weight: bold;
+		border-bottom-width: $border-width;
+		border-bottom-style: $border-style;
+		border-bottom-color: var(--regular-border-color);
+	}
+
+	//
+	.ext {
+		color: var(--regular-disabled-font-color);
+	}
+
+	.today {
+		color: var(--regular-secondary-color-color) !important;
+	}
+
+	.selected {
+		background: var(--regular-active-bg-color);
+	}
+
+	.nav {
+		margin-top: 1px;
+		border-top-width: $border-width;
+		border-top-style: $border-style;
+		border-top-color: var(--regular-border-color);
+		cursor: pointer;
+
+		td {
+			padding: (1.4 * $date-cell-padding) 0;
+		}
+	}
+
+	.s-minutes td {
+		padding: (2 * $date-cell-padding) $date-cell-padding;
+	}
+
+	.s-months td,
+	.s-time td {
+		padding: (3 * $date-cell-padding) $date-cell-padding;
+	}
+
+	//.nav-up:after { content: '\25B2'; }
+	//.nav-down:after { content: '\25BC'; }
+
+	// toggle
+	.s-days,
+	.s-months,
+	.s-years,
+	.s-time,
+	.s-hours,
+	.s-minutes {
+		display: none;
+	}
+
+	&.x0 .s-days,
+	&.x1 .s-months,
+	&.x2 .s-years,
+	&.x3 .s-time,
+	&.x4 .s-hours,
+	&.x5 .s-minutes {
+		display: block;
+	}
+}

@@ -1,0 +1,24 @@
+{
+    "cache": [
+        {
+            "menu_key": "backend-Default",
+            "menu_path": "Tools|Cache",
+            "menu_order": 1,
+            "menu_url": "admin\/cache,",
+            "menu_image": "",
+            "menu_hash": "cache",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "System|Cache",
+            "menu_order": 20,
+            "menu_url": "admin\/settings,key=cache",
+            "menu_image": "",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        }
+    ]
+}

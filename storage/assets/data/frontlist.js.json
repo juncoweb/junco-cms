@@ -1,0 +1,9 @@
+{
+    "key": "frontlist.js",
+    "name": "frontlist",
+    "type": "js",
+    "assets": "cms\/scripts\/frontlist\/js\/frontlist.js",
+    "default_assets": "cms\/scripts\/frontlist\/js\/frontlist.js",
+    "to_verify": 0,
+    "compile": 0
+}

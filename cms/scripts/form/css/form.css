@@ -1,0 +1,96 @@
+/* --- form-group ----------------------------------------- */
+.form-wrapper {
+  max-width: 1200px;
+  margin-bottom: 2rem;
+}
+.form-wrapper > div {
+  max-width: 770px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-group ~ .form-group {
+  margin-top: 1rem;
+}
+.form-group > div ~ div {
+  margin-top: 0.5rem;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-button {
+  white-space: nowrap;
+}
+
+.form-help {
+  color: var(--regular-subtle-font-color);
+}
+
+.form-content {
+  display: flex;
+  gap: 1rem;
+}
+.form-content .form-ct {
+  flex: auto;
+}
+
+.form-header {
+  padding: 0.5rem 1rem;
+  display: flex;
+  gap: 0.5rem;
+  vertical-align: bottom;
+}
+.form-header > div {
+  align-self: center;
+}
+.form-header .fh-content {
+  flex: auto;
+}
+.form-header .fh-toggle a i {
+  color: var(--regular-font-color);
+  transition: all 0.2s linear;
+}
+
+.form-body {
+  border-top: 1px solid var(--regular-border-color);
+  padding: 1rem;
+  display: none;
+}
+
+div.form-fieldset.expanded .fh-toggle i {
+  transform: rotate(180deg);
+}
+div.form-fieldset.expanded .form-body {
+  display: block;
+}
+
+fieldset.form-fieldset {
+  margin: 0;
+  padding: 1rem;
+  background-color: var(--regular-surface-color);
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--regular-border-color);
+  border-radius: 0.375rem;
+  box-shadow: 0 2px 2px 0 rgba(var(--solid-surface-rgb-color), 0.075), 0 3px 1px -2px rgba(var(--solid-surface-rgb-color), 0.075), 0 1px 5px 0 rgba(var(--solid-surface-rgb-color), 0.075);
+}
+fieldset.form-fieldset > legend {
+  color: var(--regular-subtle-font-color);
+}
+
+.form-fieldset + .form-fieldset {
+  margin-top: 0.5rem;
+}
+
+.form-actions {
+  display: flex;
+  margin-bottom: 1rem;
+}
+.form-actions .form-col-1 {
+  flex: auto;
+}
+.form-actions .form-col-2 {
+  text-align: right;
+}

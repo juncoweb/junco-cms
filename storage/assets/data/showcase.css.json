@@ -1,0 +1,9 @@
+{
+    "key": "showcase.css",
+    "name": "showcase",
+    "type": "css",
+    "assets": "cms\/scripts\/showcase\/css\/showcase.css",
+    "default_assets": "cms\/scripts\/showcase\/css\/showcase.css",
+    "to_verify": 0,
+    "compile": 0
+}

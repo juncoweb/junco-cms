@@ -1,0 +1,9 @@
+{
+    "key": "portal.js",
+    "name": "portal",
+    "type": "js",
+    "assets": "cms\/scripts\/portal\/js\/scroll.js,\r\ncms\/scripts\/portal\/js\/background.js,\r\ncms\/scripts\/portal\/js\/counter.js",
+    "default_assets": "cms\/scripts\/portal\/js\/scroll.js,\r\ncms\/scripts\/portal\/js\/background.js,\r\ncms\/scripts\/portal\/js\/counter.js",
+    "to_verify": 0,
+    "compile": 0
+}

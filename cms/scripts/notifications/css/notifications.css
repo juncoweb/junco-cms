@@ -1,0 +1,7 @@
+/* --- notifications ----------------------------------------- */
+.notifications {
+  max-width: 990px;
+  background-color: var(--regular-surface-color);
+  padding: 1rem;
+  border-radius: 0.375rem;
+}

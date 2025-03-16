@@ -1,0 +1,89 @@
+{
+    "title": "Site Info",
+    "description": "",
+    "groups": [
+        "General",
+        "Url"
+    ],
+    "descriptions": [],
+    "rows": {
+        "name": {
+            "label": "Name",
+            "type": "input-text",
+            "group": 0,
+            "ordering": 1,
+            "default_value": "Junco CMS",
+            "help": "It is used to identify the website in all the necessary places. For example, the title of the email or the logo if it is not defined.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 1,
+            "status": 1
+        },
+        "author": {
+            "label": "Author",
+            "type": "input-text",
+            "group": 0,
+            "ordering": 2,
+            "default_value": "Junco CMS (tm)",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "email": {
+            "label": "Email",
+            "type": "input-email",
+            "group": 0,
+            "ordering": 5,
+            "default_value": "contact@example.com",
+            "help": "This will be used as the default email for the entire website.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "description": {
+            "label": "Description",
+            "type": "textarea",
+            "group": 0,
+            "ordering": 6,
+            "default_value": "Website built with the help of Junco CMS.",
+            "help": "Write a brief description of the purpose of the website.",
+            "history": [],
+            "autoload": 1,
+            "translate": 1,
+            "reload_on_change": 1,
+            "status": 1
+        },
+        "url": {
+            "label": "Full",
+            "type": "input-url",
+            "group": 1,
+            "ordering": 1,
+            "default_value": "",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "baseurl": {
+            "label": "Base",
+            "type": "input-text",
+            "group": 1,
+            "ordering": 2,
+            "default_value": "",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

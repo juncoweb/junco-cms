@@ -1,0 +1,5 @@
+{
+    "assets": "# users\r\napp\/users\/js\/admin.users.js,\r\n\r\n# roles\r\napp\/users\/js\/admin.roles.js,\r\napp\/users\/js\/admin.labels.js,\r\napp\/users\/js\/admin.permissions.js,\r\n\r\n# activities\r\napp\/users\/js\/admin.activities.js,\r\n\r\n# not necessary\r\n#app\/users\/js\/admin.userpicker.js",
+    "default_assets": "# users\r\napp\/users\/js\/admin.users.js,\r\n\r\n# roles\r\napp\/users\/js\/admin.roles.js,\r\napp\/users\/js\/admin.labels.js,\r\napp\/users\/js\/admin.permissions.js,\r\n\r\n# activities\r\napp\/users\/js\/admin.activities.js,\r\n\r\n# not necessary\r\n#app\/users\/js\/admin.userpicker.js",
+    "to_verify": 0
+}

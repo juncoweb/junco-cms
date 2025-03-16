@@ -1,0 +1,94 @@
+{
+    "backend": [
+        {
+            "menu_key": "backend-Default",
+            "menu_path": "Site spaces",
+            "menu_order": 20,
+            "menu_url": "",
+            "menu_image": "fa-solid fa-circle",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "backend-Default",
+            "menu_path": "Contents",
+            "menu_order": 50,
+            "menu_url": "",
+            "menu_image": "fa-solid fa-file",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "backend-Default",
+            "menu_path": "Media",
+            "menu_order": 60,
+            "menu_url": "",
+            "menu_image": "fa-solid fa-play",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "backend-Default",
+            "menu_path": "Tools",
+            "menu_order": 70,
+            "menu_url": "",
+            "menu_image": "fa-solid fa-wrench",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "backend-Default",
+            "menu_path": "Security",
+            "menu_order": 80,
+            "menu_url": "",
+            "menu_image": "fa-solid fa-lock",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "backend-Default",
+            "menu_path": "Settings",
+            "menu_order": 90,
+            "menu_url": "",
+            "menu_image": "fa-solid fa-gear",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "backend-Default",
+            "menu_path": "User spaces",
+            "menu_order": 30,
+            "menu_url": "",
+            "menu_image": "fa-regular fa-circle",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "Templates|Backend",
+            "menu_order": 1,
+            "menu_url": "admin\/settings,key=backend",
+            "menu_image": "",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "backend-Default",
+            "menu_path": "Users",
+            "menu_order": 10,
+            "menu_url": "",
+            "menu_image": "fa-solid fa-user",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        }
+    ]
+}

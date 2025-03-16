@@ -1,0 +1,50 @@
+{
+    "title": "Install",
+    "description": "",
+    "descriptions": [],
+    "groups": [
+        "License",
+        "Settings"
+    ],
+    "rows": {
+        "license": {
+            "label": "File",
+            "type": "input-text",
+            "group": 0,
+            "ordering": 1,
+            "default_value": "LICENSE",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "admininstrator_user_id": {
+            "label": "User",
+            "type": "input-integer",
+            "group": 1,
+            "ordering": 1,
+            "default_value": "1",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "administrator_role_id": {
+            "label": "Role",
+            "type": "input-integer",
+            "group": 1,
+            "ordering": 2,
+            "default_value": 1,
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

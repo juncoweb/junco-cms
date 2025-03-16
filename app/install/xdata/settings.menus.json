@@ -1,0 +1,114 @@
+{
+    "settings": [
+        {
+            "menu_key": "backend-Default",
+            "menu_path": "Settings|Settings",
+            "menu_order": 1,
+            "menu_url": "admin\/settings,",
+            "menu_image": "",
+            "menu_hash": "settings",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "System",
+            "menu_order": 2,
+            "menu_url": "",
+            "menu_image": "fa-solid fa-gear",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "Contents",
+            "menu_order": 6,
+            "menu_url": "",
+            "menu_image": "fa-solid fa-file",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "Users",
+            "menu_order": 1,
+            "menu_url": "",
+            "menu_image": "fa-solid fa-user",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "Site spaces",
+            "menu_order": 4,
+            "menu_url": "",
+            "menu_image": "fa-solid fa-circle",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "User spaces",
+            "menu_order": 5,
+            "menu_url": "",
+            "menu_image": "fa-regular fa-circle",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "Templates",
+            "menu_order": 3,
+            "menu_url": "",
+            "menu_image": "fa-solid fa-table-cells-large",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "Tools",
+            "menu_order": 8,
+            "menu_url": "",
+            "menu_image": "fa-solid fa-wrench",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "Security",
+            "menu_order": 9,
+            "menu_url": "",
+            "menu_image": "fa-solid fa-shield-blank",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "Media",
+            "menu_order": 7,
+            "menu_url": "",
+            "menu_image": "fa-solid fa-play",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "More",
+            "menu_order": 12,
+            "menu_url": "",
+            "menu_image": "fa-solid fa-circle-plus",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        }
+    ]
+}

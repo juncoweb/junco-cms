@@ -1,0 +1,312 @@
+/* -------- input ---------------------- */
+.input-field {
+	font-size: $font-size;
+	line-height: $line-height;
+	margin: 0;
+	padding: $felem-input-padding;
+	width: 100%;
+	border-width: $border-width;
+	border-style: $border-style;
+	border-radius: $medium-border-radius;
+	background-image: none;
+	background-color: var(--regular-surface-color);
+	box-sizing: border-box;
+	position: relative;
+	display: block;
+
+	&.input-inline {
+		display: inline-block;
+		width: auto;
+	}
+
+	&[type="file"] {
+		overflow: hidden;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+
+		&:not(:disabled):not([readonly]) {
+			cursor: pointer;
+		}
+	}
+
+	// File input buttons theming
+	&::file-selector-button {
+		color: inherit;
+		background-color: var(--regular-surface-color);
+		pointer-events: none;
+		border-color: inherit;
+		border-style: solid;
+		border-width: 0;
+		border-inline-end-width: $border-width;
+	}
+
+	&:-webkit-autofill,
+	&:-webkit-autofill:hover,
+	&:-webkit-autofill:focus,
+	&:-webkit-autofill:active {
+		-webkit-box-shadow: 0 0 0 30px var(--regular-surface-color) inset !important;
+		-webkit-text-fill-color: var(--regular-font-color) !important;
+	}
+}
+
+.input-label~.input-label {
+	margin-left: $spacing;
+}
+
+.input-block {
+
+	&.input-label,
+	& .input-label {
+		/* as usual checkbox & radio */
+		display: block;
+		margin-left: 0 !important;
+	}
+}
+
+select.input-field {
+	padding-right: 1.75rem;
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+	background-size: $font-size;
+	background-position: center right .75rem;
+	background-repeat: no-repeat;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+
+	&[size],
+	&[multiple] {
+		height: auto;
+	}
+}
+
+textarea.input-field {
+	overflow-y: auto;
+	resize: vertical;
+	height: 5rem;
+
+	&[control-felem="auto-grow"] {
+		height: auto;
+		resize: none;
+		word-break: break-word;
+		field-sizing: content;
+	}
+}
+
+.input-range {
+	padding: 0;
+	border: 0;
+	box-shadow: none;
+
+	&:focus {
+		border-color: 0;
+		outline: 0;
+		box-shadow: none;
+	}
+}
+
+.input-color {
+	padding: 0;
+	width: 3rem;
+	overflow: hidden;
+
+	&::-webkit-color-swatch {
+		border: 0;
+		transform: scale(2);
+	}
+
+	&::-moz-color-swatch {
+		border: 0;
+		margin: 0;
+	}
+}
+
+/* --- input group --------------------- */
+.input-group {
+	width: 100%;
+	margin: 0;
+	display: flex;
+	align-items: stretch;
+	position: relative;
+	border-collapse: separate;
+	border-spacing: 0;
+
+	.input-field {
+		flex: auto;
+		min-width: 0;
+		height: auto;
+	}
+
+	.btn {
+		display: flex;
+		align-items: center;
+		height: auto;
+	}
+
+	> :not(:first-child):not(:last-child) {
+		border-radius: 0;
+	}
+
+	> :last-child:not(:first-child) {
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+	}
+
+	> :first-child:not(:last-child) {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+}
+
+/* --- icon group ---------------------- */
+.input-icon-group {
+	width: 100%;
+	position: relative;
+	display: inline-block;
+
+	.input-field {
+		padding-right: 2rem;
+	}
+}
+
+.input-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2rem;
+	background: none;
+	border: none;
+	position: absolute;
+	inset: 0 auto 0;
+	outline: 0;
+	z-index: 2;
+
+	&:not(button) {
+		pointer-events: none;
+	}
+
+	&[type=submit] {
+		z-index: 1;
+	}
+}
+
+.input-field+.input-icon {
+	right: 0;
+	left: auto;
+}
+
+.input-icon+.input-field {
+	padding: $felem-input-padding;
+	padding-left: 2rem;
+}
+
+.input-field.input-auto {
+	width: auto;
+}
+
+/* --- checkbox & radio & toggle ------- */
+.input-checkbox,
+.input-radio,
+.input-toggle {
+	width: $felem-input-check-size;
+	height: $felem-input-check-size;
+	vertical-align: text-bottom;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	border-style: $border-style;
+	border-width: $border-width;
+	border-radius: 9999px;
+	appearance: none;
+}
+
+.input-checkbox {
+	border-radius: $small-border-radius;
+
+	&:checked {
+		background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m5 11 3 3 7-7'/%3e%3c/svg%3e");
+	}
+}
+
+.input-radio:checked {
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e");
+}
+
+.input-checkall {
+	border-bottom-width: $border-width;
+	border-bottom-style: $border-style;
+	border-bottom-color: var(--regular-border-color);
+	margin-bottom: .125 * $spacing;
+}
+
+.input-toggle {
+	width: $felem-input-check-size * 2;
+	transition: background-position 200ms;
+	background-position: left;
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2.5' fill='rgba%280, 0, 0, 0.3%29'/%3e%3c/svg%3e");
+
+	&:checked {
+		background-position: right;
+		background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2.5' fill='%23fff'/%3e%3c/svg%3e");
+	}
+}
+
+/* --- input sizes --------------------- */
+.input-large {
+
+	&.input-field,
+	.input-field {
+		font-size: $large-font-size;
+		padding: $felem-input-large-padding;
+		border-radius: $large-border-radius;
+	}
+
+	.input-checkbox {
+		border-radius: $large-border-radius;
+	}
+
+	// icon
+	.input-icon {
+		font-size: $large-font-size;
+		width: $large-font-size * 2;
+	}
+
+	&.input-icon-group .input-field {
+		padding-right: $large-font-size * 2;
+	}
+
+	&.input-icon-group .input-icon+.input-field {
+		padding: $felem-input-large-padding;
+		padding-left: $large-font-size * 2;
+	}
+}
+
+.input-small {
+
+	&.input-field,
+	.input-field {
+		font-size: $small-font-size;
+		padding: $felem-input-small-padding;
+		border-radius: $small-border-radius;
+	}
+
+	.input-checkbox {
+		border-radius: $small-border-radius;
+	}
+
+	// icon
+	.input-icon {
+		font-size: $small-font-size;
+		padding: $felem-input-small-padding;
+		width: $small-font-size * 2;
+	}
+
+	&.input-icon-group .input-field {
+		padding-right: $small-font-size * 2;
+	}
+
+	&.input-icon-group .input-icon+.input-field {
+		padding-right: $felem-input-small-padding;
+		padding-left: $small-font-size * 2;
+	}
+}

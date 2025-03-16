@@ -1,0 +1,63 @@
+{
+    "title": "Template",
+    "description": "",
+    "groups": [
+        "General",
+        "Default snippet"
+    ],
+    "descriptions": [],
+    "rows": {
+        "explain_assets": {
+            "label": "Explain",
+            "type": "boolean",
+            "group": 0,
+            "ordering": 1,
+            "default_value": false,
+            "help": "Replaces resource compilations with their sources.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "version_control": {
+            "label": "Version control",
+            "type": "json",
+            "group": 0,
+            "ordering": 2,
+            "default_value": "",
+            "help": "Do not modify these values.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "frontend_default_snippet": {
+            "label": "Frontend",
+            "type": "snippet",
+            "group": 1,
+            "ordering": 1,
+            "default_value": "frontend",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "backend_default_snippet": {
+            "label": "Backend",
+            "type": "snippet",
+            "group": 1,
+            "ordering": 2,
+            "default_value": "backend",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 1,
+            "status": 1
+        }
+    }
+}

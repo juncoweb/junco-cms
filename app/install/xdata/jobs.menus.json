@@ -1,0 +1,24 @@
+{
+    "jobs": [
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "System|Jobs",
+            "menu_order": 20,
+            "menu_url": "admin\/settings,key=jobs",
+            "menu_image": "",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        },
+        {
+            "menu_key": "backend-Default",
+            "menu_path": "Security|Jobs",
+            "menu_order": 0,
+            "menu_url": "admin\/jobs,",
+            "menu_image": "",
+            "menu_hash": "jobs-failures",
+            "menu_params": "",
+            "status": 1
+        }
+    ]
+}

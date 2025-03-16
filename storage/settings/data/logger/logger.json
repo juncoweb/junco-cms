@@ -1,0 +1,35 @@
+{
+    "title": "Logger",
+    "description": "",
+    "groups": [
+        "General",
+        "Report"
+    ],
+    "descriptions": [],
+    "rows": {
+        "log_file": {
+            "label": "File",
+            "type": "input-text",
+            "group": 0,
+            "ordering": 1,
+            "default_value": "error_log",
+            "help": "The name of the log file.",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "report_url": {
+            "label": "Url",
+            "type": "input-url",
+            "group": 1,
+            "ordering": 1,
+            "default_value": "https:\/\/www.juncoweb.com\/bugs\/report?format=blank",
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

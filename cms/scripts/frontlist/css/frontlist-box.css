@@ -1,0 +1,20 @@
+/* --- Frontlist box ------------------------------- */
+.frontlist-box .empty-list {
+  color: var(--regular-subtle-font-color);
+  font-size: 1.4em;
+  font-weight: bold;
+  text-align: center;
+  width: 140px;
+  margin: 20px auto;
+  padding: 5px 10px;
+  border: 1px solid var(--regular-subtle-font-color);
+  border-radius: 3px;
+}
+.frontlist-box .fl-pagination {
+  margin: 15px 0;
+  text-align: right;
+}
+
+.frontlist-actions {
+  margin-bottom: 1rem;
+}

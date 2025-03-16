@@ -1,0 +1,9 @@
+{
+    "key": "frontlist.css",
+    "name": "frontlist",
+    "type": "css",
+    "assets": "cms\/scripts\/frontlist\/css\/frontlist-box.css,\r\ncms\/scripts\/frontlist\/css\/frontlist-filters.css,\r\ncms\/scripts\/frontlist\/css\/frontlist-default.css,\r\ncms\/scripts\/frontlist\/css\/frontlist-two.css,\r\ncms\/scripts\/frontlist\/css\/frontlist-three.css",
+    "default_assets": "cms\/scripts\/frontlist\/css\/frontlist-box.css,\r\ncms\/scripts\/frontlist\/css\/frontlist-filters.css,\r\ncms\/scripts\/frontlist\/css\/frontlist-default.css,\r\ncms\/scripts\/frontlist\/css\/frontlist-two.css,\r\ncms\/scripts\/frontlist\/css\/frontlist-three.css",
+    "to_verify": 0,
+    "compile": 0
+}

@@ -1,0 +1,71 @@
+{
+    "title": "Session",
+    "description": "",
+    "groups": [
+        "General",
+        "Security"
+    ],
+    "descriptions": [],
+    "rows": {
+        "handler": {
+            "label": "Handler",
+            "type": "select-text",
+            "group": 0,
+            "ordering": 1,
+            "default_value": "",
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "expires": {
+            "label": "Expires",
+            "type": "input-integer",
+            "group": 1,
+            "ordering": 1,
+            "default_value": 0,
+            "help": "The session expires after a period of inactivity, defined in seconds. This is independent of the lifetime assigned to the cookie.",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "verify_ip": {
+            "label": "Verify IP",
+            "type": "boolean",
+            "group": 1,
+            "ordering": 2,
+            "default_value": "",
+            "help": "Additionally, verify the user&#039;s Ip address.",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "set_params": {
+            "label": "Set params",
+            "type": "boolean",
+            "group": 1,
+            "ordering": 3,
+            "default_value": 0,
+            "help": "Set the system values to the session cookie.",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "allow_safe_path": {
+            "label": "Safe path",
+            "type": "boolean",
+            "group": 1,
+            "ordering": 4,
+            "default_value": "",
+            "help": "Change the default path to a safer one.",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

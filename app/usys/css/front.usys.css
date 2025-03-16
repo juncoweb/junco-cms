@@ -1,0 +1,45 @@
+/* --- Usys --------------------------------------------- */
+.usys-wrapper {
+  margin: 3rem auto;
+  max-width: 700px;
+}
+.usys-modal {
+  margin: 1rem 2rem;
+}
+.usys-login {
+  max-width: 400px !important;
+}
+.usys-login .reset-pwd {
+  margin-left: 1rem;
+}
+.usys-login button {
+  width: 100%;
+}
+.usys-connect {
+  margin-top: 0.5rem;
+}
+.usys-connect a {
+  font-weight: bold;
+  color: #fff;
+  background: #009eff;
+  padding: 0.75rem 1rem;
+  display: block;
+  position: relative;
+  text-decoration: none;
+}
+.usys-connect a i {
+  margin-right: 1rem;
+}
+.usys-reset-act {
+  margin: 3rem auto;
+}
+.usys-reset-act #new-email {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.usys-reset-act #new-email span {
+  font-style: italic;
+  margin-right: 1rem;
+  padding: 0;
+}

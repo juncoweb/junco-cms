@@ -1,0 +1,22 @@
+{
+    "title": "Backlist",
+    "description": "",
+    "descriptions": [],
+    "groups": [
+        "General"
+    ],
+    "rows": {
+        "btn_caption": {
+            "label": "Caption",
+            "type": "select-text",
+            "group": 0,
+            "ordering": 1,
+            "default_value": "hidden",
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

@@ -1,0 +1,61 @@
+/* --- Usys --------------------------------------------- */
+.usys {
+	&-wrapper {
+		margin: ($spacing * 3) auto;
+		max-width: 700px;
+	}
+
+	&-modal {
+		margin: $spacing ($spacing * 2);
+	}
+
+	&-login {
+		max-width: 400px !important;
+
+		.reset-pwd {
+			margin-left: $spacing;
+		}
+
+		button {
+			width: 100%;
+		}
+	}
+
+	&-connect {
+		margin-top: $spacing * .5;
+
+		a {
+			font-weight: bold;
+			color: #fff;
+			background: $primary-color;
+			padding: ($spacing * .75) $spacing;
+			display: block;
+			position: relative;
+			text-decoration: none;
+
+			i {
+				margin-right: $spacing;
+			}
+		}
+	}
+
+	&-reset-act {
+		margin: ($spacing * 3) auto;
+
+		#new-email {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+
+			span {
+				font-style: italic;
+				margin-right: $spacing;
+				padding: 0;
+			}
+		}
+	}
+
+	//&-signup {}
+	//&-reset-pwd {}
+	//&-edit-pwd {}
+}

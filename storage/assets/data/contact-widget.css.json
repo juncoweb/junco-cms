@@ -1,0 +1,9 @@
+{
+    "key": "contact-widget.css",
+    "name": "contact-widget",
+    "type": "css",
+    "assets": "# widgets\r\ncms\/plugins\/contact\/widget\/default\/css\/styles.css,\r\n\r\n# portals\r\ncms\/plugins\/contact\/portal\/default\/css\/styles.css",
+    "default_assets": "# widgets\r\ncms\/plugins\/contact\/widget\/default\/css\/styles.css,\r\n\r\n# portals\r\ncms\/plugins\/contact\/portal\/default\/css\/styles.css",
+    "to_verify": 0,
+    "compile": 0
+}

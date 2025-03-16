@@ -1,0 +1,14 @@
+{
+    "samples": [
+        {
+            "menu_key": "backend-Default",
+            "menu_path": "Tools|Samples",
+            "menu_order": 0,
+            "menu_url": "admin\/samples,",
+            "menu_image": "",
+            "menu_hash": "samples",
+            "menu_params": "",
+            "status": 1
+        }
+    ]
+}

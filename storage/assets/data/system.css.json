@@ -1,0 +1,5 @@
+{
+    "assets": "cms\/scripts\/system\/css\/system.css,\r\n\r\n# components\r\ncms\/scripts\/form\/css\/elements-basic.css,\r\ncms\/scripts\/form\/css\/elements-advanced.css,\r\ncms\/scripts\/modal\/css\/modal.css,\r\ncms\/scripts\/tabs\/css\/tabs.css,\r\n\r\n# snippets\r\ncms\/scripts\/backlist\/css\/backlist.css,\r\ncms\/scripts\/form\/css\/form.css,\r\n\r\n# not necessary\r\n#app\/system\/css\/front.console.css",
+    "default_assets": "cms\/scripts\/system\/css\/system.css,\r\n\r\n# components\r\ncms\/scripts\/form\/css\/elements-basic.css,\r\ncms\/scripts\/form\/css\/elements-advanced.css,\r\ncms\/scripts\/modal\/css\/modal.css,\r\ncms\/scripts\/tabs\/css\/tabs.css,\r\n\r\n# snippets\r\ncms\/scripts\/backlist\/css\/backlist.css,\r\ncms\/scripts\/form\/css\/form.css,\r\n\r\n# not necessary\r\n#app\/system\/css\/front.console.css",
+    "to_verify": 0
+}

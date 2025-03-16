@@ -1,0 +1,14 @@
+{
+    "session": [
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "System|Session",
+            "menu_order": 20,
+            "menu_url": "admin\/settings,key=session",
+            "menu_image": "",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        }
+    ]
+}

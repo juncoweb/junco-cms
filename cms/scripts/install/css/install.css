@@ -1,0 +1,121 @@
+/* --- Global ------------------------- */
+:root {
+	--layout-padding: 15px;
+	--layout-primary-color: #009eff;
+	--layout-nav-btn-size: 40px;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	background: url(../img/bg.gif) repeat;
+	margin: 0;
+	overflow-y: scroll;
+}
+
+/* --- Layout ------------------------- */
+.minMax {
+	min-width: 400px;
+	max-width: 900px;
+	margin: 0 auto;
+	min-height: 100%;
+	height: 100%;
+}
+
+.wrapper {
+	background: #fff;
+	margin: 0 15px;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	border: 1px solid #eee;
+	border-top: 0;
+	border-bottom: 0;
+}
+
+.header {
+	font-size: 1.2em;
+	padding: var(--layout-padding);
+}
+
+.main {
+	padding: var(--layout-padding);
+}
+
+.footer {
+	text-align: center;
+	height: 40px;
+	margin: -40px var(--layout-padding) 0;
+}
+
+/* --- Content ------------------------- */
+.header span {
+	font-weight: bold;
+}
+
+.wizard {
+	font-size: .875em;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: flex;
+}
+
+.wizard li {
+	flex: auto;
+	border-bottom: 4px solid #ddd;
+}
+
+.wizard li.done {
+	border-bottom-color: var(--layout-primary-color);
+}
+
+@media (max-width: 800px) {
+	.wizard span {
+		position: absolute !important;
+		width: 1px !important;
+		height: 1px !important;
+		padding: 0 !important;
+		margin: -1px !important;
+		overflow: hidden !important;
+		clip: rect(0, 0, 0, 0) !important;
+		white-space: nowrap !important;
+		border: 0 !important;
+	}
+}
+
+.nav {
+	padding: var(--layout-padding);
+}
+
+.nav>div {
+	display: flex;
+}
+
+.nav>div>div:first-child {
+	flex: auto;
+}
+
+.install-loading {
+	background: rgba(255, 255, 255, .45);
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1000;
+}
+
+.install-loading div {
+	font-weight: bold;
+	background: url(../img/js-loading.gif) no-repeat 4px 5px;
+	padding: 5px 9px 4px 25px;
+}
+
+.relative {
+	position: relative;
+}

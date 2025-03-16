@@ -1,0 +1,82 @@
+{
+    "title": "Filesystem",
+    "description": "",
+    "descriptions": [],
+    "groups": [
+        "General",
+        "Images"
+    ],
+    "rows": {
+        "default_rename": {
+            "label": "Rename",
+            "type": "select-integer",
+            "group": 0,
+            "ordering": 1,
+            "default_value": "4",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "accept_images": {
+            "label": "Accept",
+            "type": "select-multiple-text",
+            "group": 1,
+            "ordering": 1,
+            "default_value": [
+                "jpg",
+                "jpeg",
+                "gif",
+                "png",
+                "webp"
+            ],
+            "help": "Note that here are the file extensions that the system can resize.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "jpeg_quality": {
+            "label": "Jpeg Quality",
+            "type": "select-integer",
+            "group": 1,
+            "ordering": 2,
+            "default_value": -1,
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "png_quality": {
+            "label": "Png Quality",
+            "type": "select-integer",
+            "group": 1,
+            "ordering": 3,
+            "default_value": -1,
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 0
+        },
+        "webp_quality": {
+            "label": "Webp Quality",
+            "type": "select-integer",
+            "group": 1,
+            "ordering": 4,
+            "default_value": -1,
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

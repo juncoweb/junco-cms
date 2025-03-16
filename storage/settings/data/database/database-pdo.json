@@ -1,0 +1,22 @@
+{
+    "title": "PDO",
+    "description": "",
+    "descriptions": [],
+    "groups": [
+        "General"
+    ],
+    "rows": {
+        "pdo_adapter": {
+            "label": "Adapter",
+            "type": "select-text",
+            "group": 0,
+            "ordering": 1,
+            "default_value": "mysql",
+            "help": "",
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        }
+    }
+}

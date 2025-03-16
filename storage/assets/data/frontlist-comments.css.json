@@ -1,0 +1,9 @@
+{
+    "key": "frontlist-comments.css",
+    "name": "frontlist-comments",
+    "type": "css",
+    "assets": "cms\/scripts\/frontlist\/css\/frontlist-comments.css,\r\ncms\/scripts\/frontlist\/css\/pagination-comments.css,",
+    "default_assets": "cms\/scripts\/frontlist\/css\/frontlist-comments.css,\r\ncms\/scripts\/frontlist\/css\/pagination-comments.css,",
+    "to_verify": 0,
+    "compile": 0
+}

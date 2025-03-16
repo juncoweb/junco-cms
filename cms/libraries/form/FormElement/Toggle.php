@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @copyright (c) 2009-2025 by Junco CMS
+ * @author: Junco CMS (tm)
+ */
+
+namespace Junco\Form\FormElement;
+
+class Toggle extends FormElement
+{
+	/**
+	 * Constructor
+	 *
+	 * @param string $name
+	 * @param string $value
+	 * @param array	 $attr
+	 */
+	public function __construct(
+		protected string $name,
+		string $value,
+		array  $attr = []
+	) {
+		$this->html = '<input' . $this->attr([
+			'type'	=> 'checkbox',
+			'name'	=> $name,
+			'id'	=> $name,
+			'value'	=> 1,
+			'class'	=> 'input-toggle'
+		], $attr) . ($value ? ' checked' : '') . '/>';
+	}
+
+	/**
+	 * Set
+	 * 
+	 * @param ?string $label
+	 * 
+	 * @return self
+	 */
+	public function setLabel(?string $label = ''): self
+	{
+		if ($label) {
+			$this->html = '<label class="input-label">' . $this->html . '<span class="ml-2">' . $label . '</span></label>';
+		} else {
+			$this->label = $label;
+		}
+
+		return $this;
+	}
+}

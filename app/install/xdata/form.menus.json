@@ -1,0 +1,14 @@
+{
+    "form": [
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "Templates|Form",
+            "menu_order": 10,
+            "menu_url": "admin\/settings,key=form",
+            "menu_image": "",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+// variables
+@import "../../../scripts/system/sass/partials/variables";
+@import "partials/variables";
+
+// partials
+@import "../../../scripts/system/sass/partials/utils/navbar";
+
+@import "partials/frontend-default";

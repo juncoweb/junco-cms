@@ -1,0 +1,33 @@
+//
+$bakend-topbar-font-size: $font-size * 1.5;
+
+$bakend-header-box-shadow: $template-box-shadow !default;
+$bakend-header-padding-y: .125rem;
+$bakend-header-height: calc($bakend-topbar-font-size * $line-height + (2 * $bakend-header-padding-y) + (2 * $border-width));
+$backend-footer-height: calc(2 * $spacing + $font-size * $line-height);
+
+// navbar
+$backend-navbar-width: $font-size * 16 !default;
+$backend-navbar-minimized-width: $font-size * 4.25 !default;
+$backend-navbar-minimizer-bg-color: var(--regular-active-bg-color) !default;
+
+//
+$backend-navbar-color: var(--regular-font-color) !default;
+$backend-navbar-hover-color: var(--regular-hover-font-color) !default;
+$backend-navbar-bg-color: var(--regular-bg-color) !default;
+$backend-navbar-bg-hover-color: var(--regular-active-bg-color) !default;
+
+$backend-navbar-nested-color: null !default; //
+$backend-navbar-nested-bg-color: var(--regular-disabled-bg-color) !default;
+$backend-navbar-nested-hover-bg-color: null !default; //var(--regular-bg-color)
+$backend-navbar-separator-color: var(--regular-border-color) !default;
+
+// thirdbar
+$backend-thirdbar-padding: (
+	$spacing * .75) $spacing !default;
+$backend-thirdbar-font-color: var(--regular-font-color) !default;
+$backend-thirdbar-separator-color: var(--regular-border-color) !default;
+$backend-thirdbar-hover-color: inherit !default;
+$backend-thirdbar-bg-color: var(--regular-surface-color) !default;
+$backend-thirdbar-hover-bg-color: var(--regular-active-border-color) !default;
+$backend-thirdbar-nested-bg-color: $backend-thirdbar-bg-color !default;

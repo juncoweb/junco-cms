@@ -1,0 +1,25 @@
+.widget-post {
+	>div {
+		clear: both;
+		overflow: hidden;
+		margin-bottom: 25px;
+	}
+
+	.post-thumb {
+		float: left;
+		margin-right: $spacing;
+
+		img {
+			width: 85px;
+		}
+	}
+
+	.post-title a {
+		text-decoration: none;
+	}
+
+	.post-meta {
+		color: var(--regular-subtle-font-color);
+		font-size: $small-font-size;
+	}
+}
