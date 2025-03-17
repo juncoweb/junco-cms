@@ -2,7 +2,7 @@
 	"name": "juncoweb/junco-cms",
 	"description": "Simple and fast CMS",
 	"homepage": "https://www.juncoweb.com/",
-	"license": "GPLv3",
+	"license": "GPL-3.0-or-later",
 	"type": "project",
 	"require": {
 		"psr/http-message": "^2.0",
