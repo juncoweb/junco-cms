@@ -69,7 +69,7 @@ class SettingsModel extends Model
 
 			// type
 			switch ($data['rows'][$k]['type']) {
-					// integer
+				// integer
 				case 'input-integer':
 				case 'select-integer':
 					$value = (int)$value;
@@ -81,24 +81,24 @@ class SettingsModel extends Model
 					}, $this->parseArray($value));
 					break;
 
-					// text
+				// text
 				case 'input-text':
 					if ($data['rows'][$k]['translate'] && $value) {
 						$translate[] = $value;
 					}
 					break;
 
-					// boolean
+				// boolean
 				case 'boolean':
 					$value = (bool)$value;
 					break;
 
-					// boolean
+				// boolean
 				case 'list':
 					$value = $this->parseArray($value);
 					break;
 
-					// json
+				// json
 				case 'json':
 					if ($value && is_string($value)) {
 						$value = json_decode($value, true);

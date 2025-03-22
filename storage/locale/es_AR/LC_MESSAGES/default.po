@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JuncoCMS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-05 12:12-0300\n"
-"PO-Revision-Date: 2025-02-05 12:15-0300\n"
+"POT-Creation-Date: 2025-03-22 08:55-0300\n"
+"PO-Revision-Date: 2025-03-22 08:56-0300\n"
 "Last-Translator: mpasciulla@hotmail.com\n"
 "Language-Team: contact@juncoweb.com\n"
 "Language: es_AR\n"
@@ -30,7 +30,7 @@ msgstr ""
 #: app/users/models/UsersRolesModel.php:80
 #: app/workshops/models/WorkshopsAttendancesValuesModel.php:86
 #: app/workshops/models/WorkshopsGroupsModel.php:93
-#: app/workshops/models/WorkshopsMastersModel.php:74
+#: app/workshops/models/WorkshopsMastersModel.php:56
 #: app/workshops/models/WorkshopsPapersModel.php:74
 #: cms/plugins/codemanager/generator/nested-set-tree-categories/src/app/__alias__/models/__ModelName__.php:121
 msgid "The record can not be deleted because it is being used."
@@ -51,8 +51,8 @@ msgstr "No hay ningún diseño seleccionado donde mostrar el comprobante."
 #: app/afip/models/admin/AdminAfipLayoutsModel.php:40
 #: app/afip/models/admin/AdminAfipOutletsModel.php:77
 #: app/afip/models/admin/AdminAfipTaxpayersModel.php:53
-#: app/assets/models/admin/AdminAssetsModel.php:95
-#: app/assets/models/admin/AdminAssetsThemesModel.php:85
+#: app/assets/models/admin/AdminAssetsModel.php:99
+#: app/assets/models/admin/AdminAssetsThemesModel.php:62
 #: app/balances/models/my/MyBalancesEntriesModel.php:134
 #: app/balances/models/my/MyBalancesLabelsModel.php:75
 #: app/balances/models/my/MyBalancesLayoutsModel.php:32
@@ -259,7 +259,7 @@ msgstr "Crear"
 #: app/afip/models/admin/AdminAfipOutletsModel.php:103
 #: app/afip/models/admin/AdminAfipTaxpayersModel.php:85
 #: app/afip/views/admin/vouchertypes/Edit.php:31
-#: app/assets/models/admin/AdminAssetsModel.php:121
+#: app/assets/models/admin/AdminAssetsModel.php:125
 #: app/assets/views/admin/variables/Edit.php:36
 #: app/balances/models/my/MyBalancesEntriesModel.php:164
 #: app/balances/models/my/MyBalancesLabelsModel.php:97
@@ -330,7 +330,8 @@ msgstr "Crear"
 #: app/extensions/models/admin/AdminExtensionsChangesModel.php:101
 #: app/extensions/models/admin/AdminExtensionsDevelopersModel.php:71
 #: app/extensions/models/admin/AdminExtensionsModel.php:171
-#: app/filemanager/views/admin/Index.php:22
+#: app/filemanager/views/admin/Index.php:26
+#: app/filemanager/views/admin/Index.php:48
 #: app/foodservices/models/audit/AuditFoodservicesModel.php:84
 #: app/forms/models/admin/AdminFormsMastersElementsModel.php:119
 #: app/forms/models/admin/AdminFormsMastersModel.php:93
@@ -498,8 +499,8 @@ msgstr "Diseños"
 #: app/tickets/views/admin/Index.php:13 app/tickets/views/audit/Info.php:46
 #: app/webstore/views/admin/Dashboard.php:14
 #: app/workshops/views/admin/Dashboard.php:17
-#: app/workshops/views/audit/enrollments/Show.php:60
-#: cms/plugins/form/sample/collection/sample.php:25
+#: app/workshops/views/audit/enrollments/Show.php:61
+#: cms/plugins/form/sample/collection/sample.php:48
 #: storage/settings/data/filemanager/translate.filemanager.php:1
 msgid "Main"
 msgstr "Principal"
@@ -535,8 +536,8 @@ msgstr "Servicios"
 #: app/contents/views/my/Form.php:37 app/docs/views/admin/SaveForm.php:24
 #: app/docs/views/admin/chapters/Form.php:32 app/email/views/admin/Index.php:22
 #: app/filemanager/views/admin/ConfirmSettings.php:17
-#: app/filemanager/views/admin/Index.php:31
-#: app/filemanager/views/admin/Index.php:32
+#: app/filemanager/views/admin/Index.php:38
+#: app/filemanager/views/admin/Index.php:59
 #: app/forms/views/admin/masters/SaveForm.php:36
 #: app/goods/views/audit/ConfirmExport.php:15
 #: app/groups/views/my/members/ConfirmExport.php:15
@@ -566,7 +567,7 @@ msgstr "Servicios"
 #: cms/plugins/widgets/portal/features/portal.load.php:33
 #: cms/snippets/install/template/default/snippet.php:34
 #: storage/settings/data/install/translate.install.php:2
-#: storage/translate/menus.backend.php:6 storage/translate/menus.settings.php:1
+#: storage/translate/menus.settings.php:1
 msgid "Settings"
 msgstr "Configuraciones"
 
@@ -776,6 +777,7 @@ msgstr "Para"
 #: app/extensions/views/admin/installer/ConfirmDelete.php:11
 #: app/filemanager/views/admin/ConfirmDelete.php:11
 #: app/filemanager/views/admin/Index.php:21
+#: app/filemanager/views/admin/Index.php:46
 #: app/foodservices/views/audit/ConfirmDelete.php:11
 #: app/foodservices/views/audit/Index.php:17
 #: app/forms/views/admin/elements/ConfirmDelete.php:11
@@ -1111,7 +1113,7 @@ msgstr "Eliminar"
 #: app/webstore/views/my/List.php:30
 #: app/webstore/views/my/keys/ConfirmSendmail.php:12
 #: app/webstore/views/my/keys/List.php:18 app/widgets/views/admin/List.php:18
-#: app/workshops/models/WorkshopsAttendancesExtractorModel.php:242
+#: app/workshops/models/WorkshopsAttendancesExtractorModel.php:254
 #: app/workshops/views/admin/List.php:18
 #: app/workshops/views/admin/attendances/List.php:18
 #: app/workshops/views/admin/attendances/SaveForm.php:14
@@ -1133,7 +1135,7 @@ msgstr "Eliminar"
 #: cms/plugins/codemanager/generator/roles/src/app/__alias__/views/__scope__/roles/List.php:11
 #: cms/plugins/codemanager/generator/subcomponent-crud/src/app/__alias__/views/__scope__/__SubcomponentName__/List.php:18
 #: cms/plugins/contact/portal/default/portal.load.php:22
-#: cms/plugins/form/sample/UploadHandle/sample.php:19
+#: cms/plugins/form/sample/UploadHandle/sample.php:24
 #: cms/plugins/xtools/sample/UploadHandle/sample.php:19
 #: cms/snippets/contact/master/default/snippet.php:31
 #: storage/settings/data/database/translate.database.php:11
@@ -1345,7 +1347,7 @@ msgstr "Código"
 #: cms/plugins/codemanager/generator/component-crud/src/app/__alias__/views/__scope__/SaveForm.php:26
 #: cms/plugins/codemanager/generator/nested-set-tree-categories/src/app/__alias__/views/__scope__/__SubcomponentName__/SaveForm.php:24
 #: cms/plugins/codemanager/generator/subcomponent-crud/src/app/__alias__/views/__scope__/__SubcomponentName__/SaveForm.php:26
-#: cms/plugins/form/sample/UploadHandle/sample.php:24
+#: cms/plugins/form/sample/UploadHandle/sample.php:29
 #: storage/settings/data/afip/translate.afip.php:5
 #: storage/settings/data/contents/translate.contents-files.php:7
 #: storage/settings/data/feed/translate.feed.php:4
@@ -1559,9 +1561,9 @@ msgstr "Vencimiento"
 #: app/workshops/models/my/MyWorkshopsAttendancesModel.php:60
 #: app/workshops/models/my/MyWorkshopsLessonsModel.php:133
 #: app/workshops/views/audit/attendances/Logs.php:21
-#: app/workshops/views/audit/enrollments/Show.php:27
-#: app/workshops/views/audit/enrollments/Show.php:31
-#: app/workshops/views/audit/enrollments/Show.php:49
+#: app/workshops/views/audit/enrollments/Show.php:28
+#: app/workshops/views/audit/enrollments/Show.php:32
+#: app/workshops/views/audit/enrollments/Show.php:50
 #: app/workshops/views/audit/forms/List.php:23
 #: app/workshops/views/audit/lessons/List.php:31
 #: app/workshops/views/audit/students/ExtractAttendances.php:75
@@ -1654,7 +1656,7 @@ msgstr "Terminó"
 #: app/webstore/views/admin/downloads/List.php:23
 #: app/webstore/views/my/keys/Show.php:13
 #: app/workshops/views/audit/attendances/Logs.php:11
-#: app/workshops/views/audit/enrollments/Show.php:38
+#: app/workshops/views/audit/enrollments/Show.php:39
 #: app/workshops/views/audit/lessons/List.php:20
 #: app/workshops/views/my/attendances/Logs.php:11
 #: app/workshops/views/my/groups/lessons/List.php:20
@@ -1728,7 +1730,7 @@ msgstr "Cliente"
 #: app/goods/views/audit/Show.php:10
 #: app/subscriptions/views/audit/payments/List.php:25
 #: app/subscriptions/views/my/List.php:28 app/tickets/views/audit/Info.php:8
-#: app/workshops/views/audit/enrollments/Show.php:26
+#: app/workshops/views/audit/enrollments/Show.php:27
 #: cms/plugins/mercadopago/invoices-gateways/default/invoices-gateways.button.php:51
 #, php-format
 msgid "#%d"
@@ -1740,26 +1742,26 @@ msgstr "#%d"
 #: app/codemanager/views/admin/configs/List.php:25
 #: app/jobs/views/admin/failures/List.php:25
 #: app/jobs/views/admin/failures/Show.php:14
-#: app/reviews/views/front/Load.php:10 cms/libraries/template/Template.php:413
+#: app/reviews/views/front/Load.php:10 cms/libraries/template/Template.php:414
 msgid "Error"
 msgstr "Error"
 
-#: app/assets/models/AssetsModel.php:75
-#: app/assets/models/AssetsThemesModel.php:29
+#: app/assets/models/AssetsModel.php:73
+#: app/assets/models/AssetsThemesModel.php:26
 #: app/docs/views/admin/chapters/Prepare.php:21
 #: app/menus/models/MenusModel.php:49
 #: app/webstore/models/WebstoreKeysModel.php:40
 msgid "Please, fill in the extension."
 msgstr "Por favor, complete la extensión."
 
-#: app/assets/models/AssetsModel.php:99 app/cache/models/CacheModel.php:60
+#: app/assets/models/AssetsModel.php:94 app/cache/models/CacheModel.php:60
 #: app/dbmanager/models/DbmanagerLogsModel.php:44
 #: app/extensions/models/ExtensionsInstallerModel.php:155
-#: app/filemanager/models/FilemanagerModel.php:380
-#: app/filemanager/models/FilemanagerModel.php:413
-#: app/filemanager/models/FilemanagerModel.php:444
-#: app/filemanager/models/FilemanagerModel.php:475
-#: app/filemanager/models/FilemanagerModel.php:512
+#: app/filemanager/models/FilemanagerModel.php:405
+#: app/filemanager/models/FilemanagerModel.php:438
+#: app/filemanager/models/FilemanagerModel.php:469
+#: app/filemanager/models/FilemanagerModel.php:500
+#: app/filemanager/models/FilemanagerModel.php:537
 #: app/install/models/InstallLanguageModel.php:24
 #: app/language/models/LanguageModel.php:49
 #: app/language/models/LanguageModel.php:109
@@ -1767,26 +1769,23 @@ msgstr "Por favor, complete la extensión."
 #: app/logger/models/LoggerModel.php:105
 #: app/newsletters/models/NewslettersSenderModel.php:187
 #: app/socials/models/SocialsModel.php:211
-#: cms/libraries/assets/AssetsBasic.php:284
-#: cms/libraries/extensions/Compiler/Compiler.php:445
-#: cms/libraries/extensions/Compiler/Compiler.php:458
+#: cms/libraries/assets/AssetsBasic.php:409
+#: cms/libraries/extensions/Compiler/Compiler.php:499
+#: cms/libraries/extensions/Compiler/Compiler.php:512
 #: cms/libraries/samples/Samples.php:98
 msgid "Error! the task has not been realized."
 msgstr "Error! la tarea no ha podido ser realizada."
 
-#: app/assets/models/AssetsThemesModel.php:39
+#: app/assets/models/AssetsThemesModel.php:36
+#: cms/libraries/assets/AssetsThemes.php:79
 msgid "The theme already exists."
 msgstr "El tema ya existe."
 
-#: app/assets/models/AssetsThemesModel.php:51
-msgid "Please, enter another name."
-msgstr "Por favor, introduzca otro nombre."
-
-#: app/assets/models/AssetsThemesModel.php:119
+#: app/assets/models/AssetsThemesModel.php:91
 msgid "The theme does not exist."
 msgstr "El tema no existe."
 
-#: app/assets/models/admin/AdminAssetsModel.php:66
+#: app/assets/models/admin/AdminAssetsModel.php:67
 #: app/bingos/views/my/credits/List.php:15
 #: app/bingos/views/my/winners/List.php:15 app/books/views/admin/List.php:15
 #: app/careers/models/front/FrontCareersModel.php:309
@@ -1820,8 +1819,8 @@ msgstr "El tema no existe."
 msgid "All"
 msgstr "Todo"
 
-#: app/assets/models/admin/AdminAssetsModel.php:163
-#: app/assets/models/admin/AdminAssetsThemesModel.php:156
+#: app/assets/models/admin/AdminAssetsModel.php:165
+#: app/assets/models/admin/AdminAssetsThemesModel.php:132
 #: app/assets/views/admin/themes/ConfirmSelect.php:27
 #: app/assets/views/admin/themes/Index.php:19
 #: app/assets/views/admin/themes/List.php:18
@@ -1873,7 +1872,7 @@ msgstr "Todo"
 #: cms/plugins/careers/persons-signup/default/persons-signup.attach.php:57
 #: cms/plugins/careers/settings/default/settings.load.php:18
 #: cms/plugins/codemanager/settings/default/settings.load.php:16
-#: cms/plugins/contents/settings/default/settings.load.php:35
+#: cms/plugins/contents/settings/default/settings.load.php:37
 #: cms/plugins/contents/settings/portal/settings.load.php:23
 #: cms/plugins/email/settings/default/settings.load.php:10
 #: cms/plugins/email/settings/default/settings.load.php:31
@@ -1885,7 +1884,7 @@ msgstr "Todo"
 #: cms/plugins/persons/settings/default/settings.load.php:25
 #: cms/plugins/policies/settings/default/settings.load.php:15
 #: cms/plugins/portfolios/settings/widgets/settings.load.php:26
-#: cms/plugins/router/settings/default/settings.load.php:15
+#: cms/plugins/router/settings/default/settings.load.php:17
 #: cms/plugins/smileys/settings/default/settings.load.php:14
 #: cms/plugins/static/settings/default/settings.load.php:16
 #: cms/plugins/tickets/settings/default/settings.load.php:15
@@ -1896,7 +1895,7 @@ msgstr "Todo"
 msgid "Select"
 msgstr "Seleccionar"
 
-#: app/assets/models/admin/AdminAssetsThemesModel.php:69
+#: app/assets/models/admin/AdminAssetsThemesModel.php:46
 #: app/assets/views/admin/themes/Index.php:14
 #: app/balances/views/my/entries/ConfirmCopy.php:20
 #: app/balances/views/my/entries/Index.php:18
@@ -1907,6 +1906,7 @@ msgstr "Seleccionar"
 #: app/extensions/views/admin/installer/ConfirmInstall.php:139
 #: app/filemanager/views/admin/ConfirmCopy.php:12
 #: app/filemanager/views/admin/Index.php:17
+#: app/filemanager/views/admin/Index.php:42
 #: app/forms/views/admin/elements/SaveForm.php:21
 #: app/groups/models/my/MyGroupsModel.php:106 app/groups/views/my/Index.php:15
 #: app/menus/models/admin/AdminMenusModel.php:161
@@ -2129,7 +2129,7 @@ msgstr "Archivo"
 #: app/dbmanager/views/admin/routines/List.php:19
 #: app/dbmanager/views/admin/structure/List.php:12
 #: app/filemanager/views/admin/ConfirmCompress.php:15
-#: app/filemanager/views/admin/List.php:38
+#: app/filemanager/views/admin/List.php:41
 #: app/forms/views/admin/elements/List.php:21
 #: app/forms/views/admin/masters/SaveForm.php:41
 #: app/goods/views/audit/ConfirmExport.php:12
@@ -2186,7 +2186,7 @@ msgstr "Actual"
 #: app/dbmanager/views/admin/structure/List.php:14
 #: app/dbmanager/views/admin/structure/SaveForm.php:115
 #: app/persons/views/admin/types/List.php:27
-#: cms/libraries/assets/AssetsHelper.php:16
+#: cms/libraries/assets/AssetsThemes.php:245
 #: cms/libraries/system/SystemHelper.php:54
 #: cms/plugins/session/settings/default/settings.load.php:10
 #: storage/settings/data/balances/translate.balances.php:17
@@ -2207,8 +2207,8 @@ msgstr "Actual"
 #: storage/settings/data/sales/translate.sales.php:17
 #: storage/settings/data/sellers/translate.sellers.php:18
 #: storage/settings/data/subscriptions/translate.subscriptions.php:17
-#: storage/settings/data/system/translate.system.php:19
-#: storage/settings/data/system/translate.system.php:45
+#: storage/settings/data/system/translate.system.php:18
+#: storage/settings/data/system/translate.system.php:42
 #: storage/settings/data/tickets/translate.tickets.php:5
 #: storage/settings/data/tinymce/translate.tinymce.php:5
 #: storage/settings/data/webstore/translate.webstore.php:24
@@ -2268,7 +2268,7 @@ msgstr ""
 
 #: app/assets/views/admin/themes/Index.php:27
 #: app/assets/views/admin/variables/Index.php:24
-#: cms/libraries/assets/ScssCompiler.php:115
+#: cms/libraries/assets/Compilation/ScssCompiler.php:109
 #: storage/settings/data/assets/translate.assets.php:3
 #: storage/settings/data/frontend/translate.frontend.php:2
 #: storage/translate/menus.assets.php:1
@@ -2277,7 +2277,7 @@ msgstr "Temas"
 
 #: app/balances/models/BalancesEntriesModel.php:86
 #: app/subscriptions/models/SubscriptionsModel.php:163
-#: cms/libraries/database/DatabaseImporter.php:40
+#: cms/libraries/database/DatabaseImporter.php:43
 msgid "The file is empty or could not be read."
 msgstr "El archivo está vacío o no se puede leer."
 
@@ -2521,10 +2521,10 @@ msgstr "Balances"
 #: app/subscriptions/views/admin/variations/SaveForm.php:34
 #: app/webstore/views/admin/addresses/Index.php:18
 #: app/webstore/views/admin/referers/Index.php:18
-#: cms/libraries/assets/UrlFixer.php:93
+#: cms/libraries/assets/Compilation/UrlFixer.php:97
 #: cms/libraries/forms/FormsExtractor.php:99
 #: cms/libraries/forms/FormsExtractor.php:104
-#: cms/plugins/contents/settings/default/settings.load.php:10
+#: cms/plugins/contents/settings/default/settings.load.php:12
 #: cms/plugins/contents/settings/portal/settings.load.php:11
 #: cms/plugins/dashboard/settings/shortcuts/settings.load.php:11
 #: storage/settings/data/workshops/translate.workshops.php:26
@@ -2642,8 +2642,8 @@ msgstr "Escritorio"
 #: app/careers/views/audit/studies/List.php:25
 #: app/codemanager/views/admin/Summary.php:9
 #: app/contact/views/admin/Index.php:13 app/contact/views/admin/List.php:20
-#: app/jobs/views/admin/Index.php:13 app/jobs/views/admin/List.php:20
-#: app/jobs/views/admin/failures/Index.php:18
+#: app/filemanager/views/admin/Index.php:25 app/jobs/views/admin/Index.php:13
+#: app/jobs/views/admin/List.php:20 app/jobs/views/admin/failures/Index.php:18
 #: app/jobs/views/admin/failures/List.php:20
 #: app/webstore/views/admin/addresses/List.php:29
 #: app/webstore/views/admin/downloads/List.php:36
@@ -2818,6 +2818,7 @@ msgstr "Bloquear"
 #: app/docs/views/admin/chapters/Index.php:16
 #: app/filemanager/views/admin/ConfirmMove.php:12
 #: app/filemanager/views/admin/Index.php:18
+#: app/filemanager/views/admin/Index.php:43
 #: app/products/views/admin/categories/ConfirmMove.php:38
 #: app/products/views/admin/categories/Index.php:16
 #: app/webstore/views/admin/categories/ConfirmMove.php:38
@@ -2859,7 +2860,7 @@ msgstr "Notas"
 #: cms/libraries/balances/BalancesExport.php:440
 #: cms/libraries/balances/BalancesExport.php:508
 #: cms/snippets/balances/frontlist/default/snippet.php:41
-#: storage/settings/data/system/translate.system.php:17
+#: storage/settings/data/system/translate.system.php:16
 msgid "Value"
 msgstr "Valor"
 
@@ -2955,7 +2956,7 @@ msgstr "Cuerpo"
 #: app/tickets/views/audit/Info.php:20
 #: app/workshops/views/admin/roles/SaveForm.php:16
 #: app/workshops/views/audit/enrollments/Create.php:11
-#: app/workshops/views/audit/enrollments/Show.php:26
+#: app/workshops/views/audit/enrollments/Show.php:27
 #: app/workshops/views/front/Enrollment.php:69
 #: cms/plugins/codemanager/generator/roles/src/app/__alias__/views/__scope__/roles/SaveForm.php:16
 msgid "Person"
@@ -3159,8 +3160,9 @@ msgstr "Tableros"
 #: app/careers/views/admin/Dashboard.php:19
 #: app/filemanager/views/admin/ConfirmPermissions.php:40
 #: app/filemanager/views/admin/ConfirmPermissions.php:58
-#: app/filemanager/views/admin/Details.php:18
+#: app/filemanager/views/admin/Details.php:17
 #: app/filemanager/views/admin/Index.php:19
+#: app/filemanager/views/admin/Index.php:44
 #: app/forms/views/admin/Dashboard.php:17 app/invoices/views/admin/Index.php:25
 #: app/persons/views/admin/Index.php:18
 #: app/products/views/admin/Dashboard.php:18
@@ -3255,8 +3257,8 @@ msgstr "Tema"
 #: app/tickets/views/audit/Info.php:40
 #: app/tickets/views/my/ConfirmStatus.php:12
 #: app/workshops/views/audit/attendances/Logs.php:13
-#: app/workshops/views/audit/enrollments/Show.php:23
-#: app/workshops/views/audit/enrollments/Show.php:40
+#: app/workshops/views/audit/enrollments/Show.php:24
+#: app/workshops/views/audit/enrollments/Show.php:41
 #: app/workshops/views/my/attendances/Logs.php:13
 #: cms/snippets/backlist/master/default/actions.php:129
 #: storage/settings/data/goods/translate.goods.php:4
@@ -3288,8 +3290,8 @@ msgstr "Trozo"
 #: app/bingos/views/my/layouts/SaveForm.php:93
 #: app/dbmanager/views/admin/export/Index.php:49
 #: app/dbmanager/views/admin/indexes/SaveForm.php:25
-#: app/filemanager/views/admin/Details.php:17
-#: app/filemanager/views/admin/List.php:37
+#: app/filemanager/views/admin/Details.php:16
+#: app/filemanager/views/admin/List.php:40
 msgid "Size"
 msgstr "Tamaño"
 
@@ -4086,7 +4088,7 @@ msgstr "Eliminado"
 #: app/webstore/views/admin/addresses/List.php:38
 #: app/webstore/views/admin/referers/List.php:26
 #: app/webstore/views/front/Details.php:19
-#: app/workshops/views/audit/enrollments/Show.php:27
+#: app/workshops/views/audit/enrollments/Show.php:28
 msgid "Created"
 msgstr "Creado"
 
@@ -4183,7 +4185,8 @@ msgstr "No hay una vista previa disponible."
 #: app/extensions/views/admin/installer/List.php:32
 #: app/extensions/views/admin/webstore/ConfirmDownload.php:24
 #: app/extensions/views/admin/webstore/List.php:25
-#: app/filemanager/views/admin/Index.php:15
+#: app/filemanager/views/admin/Index.php:31
+#: app/filemanager/views/admin/Index.php:53
 #: app/language/views/admin/translations/ConfirmDownload.php:10
 #: app/language/views/admin/translations/Index.php:11
 #: app/webstore/views/front/Details.php:12
@@ -4244,8 +4247,8 @@ msgstr "Nivel"
 #: app/webstore/views/admin/downloads/List.php:54
 #: app/webstore/views/admin/referers/List.php:51
 #: app/webstore/views/my/packages/List.php:23
-#: app/workshops/views/audit/enrollments/Show.php:27
-#: app/workshops/views/audit/enrollments/Show.php:31
+#: app/workshops/views/audit/enrollments/Show.php:28
+#: app/workshops/views/audit/enrollments/Show.php:32
 #: app/workshops/views/audit/lessons/List.php:32
 #: app/workshops/views/my/groups/lessons/List.php:32
 #: app/workshops/views/my/lessons/List.php:32
@@ -4272,10 +4275,11 @@ msgstr "Ip"
 
 #: app/bugs/views/admin/Show.php:18 app/email/views/admin/Debug.php:19
 #: app/settings/views/admin/Form.php:21
+#: storage/settings/data/container/translate.container.php:3
 #: storage/settings/data/extensions/translate.extensions.php:5
 #: storage/settings/data/extensions/translate.extensions.php:14
 #: storage/settings/data/language/translate.language.php:2
-#: storage/settings/data/system/translate.system.php:10
+#: storage/settings/data/system/translate.system.php:9
 #: storage/settings/data/usys/translate.usys-system.php:3
 #: storage/translate/menus.settings.php:2 storage/translate/menus.system.php:1
 msgid "System"
@@ -4323,7 +4327,7 @@ msgstr "Generado"
 #: app/careers/views/audit/enrollments/Show.php:31
 #: app/careers/views/audit/students/Show.php:23
 #: app/careers/views/audit/studies/Show.php:32
-#: app/workshops/views/audit/enrollments/Show.php:31
+#: app/workshops/views/audit/enrollments/Show.php:32
 msgid "Updated"
 msgstr "Actualizado"
 
@@ -4802,7 +4806,7 @@ msgstr "Comprobante"
 #: app/workshops/views/admin/calendars/SaveForm.php:42
 #: app/workshops/views/admin/groups/List.php:19
 #: app/workshops/views/admin/groups/SaveForm.php:16
-#: app/workshops/views/audit/enrollments/Show.php:22
+#: app/workshops/views/audit/enrollments/Show.php:23
 #: app/workshops/views/my/groups/List.php:20
 #: cms/plugins/careers/persons-signup/default/persons-signup.attach.php:68
 msgid "Calendar"
@@ -4952,7 +4956,6 @@ msgstr "Manual"
 #: app/newsletters/views/admin/ConfirmAutoCreate.php:52
 #: app/subscriptions/views/admin/variations/SaveForm.php:24
 #: app/subscriptions/views/admin/variations/SaveForm.php:25
-#: cms/libraries/assets/ScssCompiler.php:113
 #: cms/plugins/backend/widget/topbar/widget.load.php:19
 #: cms/snippets/frontend/template/default/snippet.php:170
 msgid "Auto"
@@ -5158,8 +5161,8 @@ msgstr "Carrera"
 #: app/subscriptions/views/audit/trajectories/Logs.php:13
 #: app/subscriptions/views/audit/variations/Logs.php:15
 #: app/workshops/views/audit/attendances/Logs.php:14
-#: app/workshops/views/audit/enrollments/Show.php:30
-#: app/workshops/views/audit/enrollments/Show.php:41
+#: app/workshops/views/audit/enrollments/Show.php:31
+#: app/workshops/views/audit/enrollments/Show.php:42
 #: app/workshops/views/my/attendances/Logs.php:14
 msgid "Notary"
 msgstr "Notario"
@@ -5175,15 +5178,15 @@ msgstr "Notario"
 #: app/codemanager/views/admin/libraries/Documentation.php:39
 #: app/codemanager/views/endpoint/Form.php:24
 #: app/email/views/admin/Message.php:21
-#: app/filemanager/views/admin/Details.php:22
-#: app/filemanager/views/admin/Index.php:23 app/goods/views/front/List.php:21
+#: app/filemanager/views/admin/Details.php:21
+#: app/filemanager/views/admin/Index.php:49 app/goods/views/front/List.php:21
 #: app/newsletters/views/admin/ConfirmAutoCreate.php:20
 #: app/newsletters/views/admin/SaveForm.php:22
 #: app/subscriptions/views/audit/subscribers/List.php:47
 #: app/subscriptions/views/audit/subscribers/List.php:48
 #: app/subscriptions/views/audit/trajectories/Index.php:24
-#: app/workshops/views/audit/enrollments/Show.php:26
-#: app/workshops/views/audit/enrollments/Show.php:30
+#: app/workshops/views/audit/enrollments/Show.php:27
+#: app/workshops/views/audit/enrollments/Show.php:31
 #: app/workshops/views/front/Enrollment.php:39
 #: app/workshops/views/front/Enrollment.php:84
 #: cms/plugins/afip/sample/layout/sample.php:15
@@ -5204,7 +5207,7 @@ msgstr "Vista"
 #: app/tickets/views/audit/Info.php:47
 #: app/workshops/views/audit/attendances/List.php:18
 #: app/workshops/views/audit/attendances/Logs.php:34
-#: app/workshops/views/audit/enrollments/Show.php:61
+#: app/workshops/views/audit/enrollments/Show.php:62
 #: app/workshops/views/my/attendances/Logs.php:34
 #: cms/plugins/dbmanager/widget/thirdbar/widget.load.php:19
 msgid "Logs"
@@ -5232,7 +5235,7 @@ msgstr "Registros"
 #: app/subscriptions/models/SubscriptionsSummaryModel.php:265
 #: app/subscriptions/views/audit/subscribers/ConfirmExport.php:23
 #: app/subscriptions/views/audit/subscribers/Export.php:22
-#: app/workshops/models/WorkshopsAttendancesExtractorModel.php:241
+#: app/workshops/models/WorkshopsAttendancesExtractorModel.php:253
 #: app/workshops/views/audit/enrollments/Voucher.php:13
 #: app/workshops/views/my/students/ConfirmExport.php:23
 #: app/workshops/views/my/students/Export.php:22
@@ -5262,7 +5265,7 @@ msgstr "Apellido"
 #: app/subscriptions/models/SubscriptionsSummaryModel.php:266
 #: app/subscriptions/views/audit/subscribers/ConfirmExport.php:24
 #: app/subscriptions/views/audit/subscribers/Export.php:25
-#: app/workshops/models/WorkshopsAttendancesExtractorModel.php:241
+#: app/workshops/models/WorkshopsAttendancesExtractorModel.php:253
 #: app/workshops/views/audit/enrollments/Voucher.php:14
 #: app/workshops/views/my/students/ConfirmExport.php:24
 #: app/workshops/views/my/students/Export.php:25
@@ -5948,7 +5951,7 @@ msgstr "Candidatos"
 #: app/webstore/views/admin/referers/Index.php:17
 #: cms/libraries/forms/FormsExtractor.php:99
 #: cms/libraries/forms/FormsExtractor.php:102
-#: cms/plugins/contents/settings/default/settings.load.php:10
+#: cms/plugins/contents/settings/default/settings.load.php:12
 #: cms/plugins/contents/settings/portal/settings.load.php:12
 #: cms/plugins/dashboard/settings/shortcuts/settings.load.php:12
 #: storage/settings/data/workshops/translate.workshops.php:27
@@ -5999,11 +6002,11 @@ msgstr "Firma"
 #: app/goods/models/audit/AuditGoodsModel.php:547
 #: app/goods/views/audit/List.php:38
 #: app/outdoors/models/audit/AuditOutdoorsParticipantsModel.php:413
-#: app/settings/models/admin/AdminSettingsFormModel.php:216
+#: app/settings/models/admin/AdminSettingsFormModel.php:217
 #: app/subscriptions/models/admin/AdminSubscriptionsTypesModel.php:142
 #: app/subscriptions/views/audit/trajectories/ConfirmSchedule.php:16
 #: app/workshops/views/admin/attendances/SaveForm.php:18
-#: cms/libraries/extensions/Installer/Unpackager.php:588
+#: cms/libraries/extensions/Installer/Unpackager.php:621
 #: cms/plugins/fontawesome/settings/default/settings.load.php:10
 #: cms/plugins/goods/settings/default/settings.load.php:15
 #: cms/plugins/goods/settings/default/settings.load.php:20
@@ -6312,7 +6315,7 @@ msgstr "Plugins"
 
 #: app/codemanager/models/admin/AdminCodemanagerSnippetsModel.php:24
 #: app/codemanager/views/admin/Index.php:20
-#: storage/settings/data/system/translate.system.php:9
+#: storage/settings/data/system/translate.system.php:8
 msgid "Snippets"
 msgstr "Fragmentos"
 
@@ -6765,6 +6768,7 @@ msgstr "Contacto"
 #: app/webstore/views/admin/developers/List.php:12
 #: app/webstore/views/admin/downloads/List.php:16
 #: app/webstore/views/admin/downloads/List.php:27
+#: storage/settings/data/container/translate.container.php:4
 #: storage/settings/data/database/translate.database.php:2
 #: storage/settings/data/email/translate.email.php:21
 #: storage/settings/data/install/translate.install.php:5
@@ -6780,7 +6784,7 @@ msgstr "La tarea ha sido realizada correctamente."
 
 #: app/contents/models/ContentsFilesModel.php:115
 #: app/docs/models/DocsFilesModel.php:115
-#: cms/libraries/extensions/XData/XData.php:188
+#: cms/libraries/extensions/XData/XData.php:186
 #: cms/libraries/filesystem/UploadedFileManager.php:407
 msgid "The file type is invalid."
 msgstr "El tipo de archivo no es válido."
@@ -6849,8 +6853,8 @@ msgstr "Por favor, cree la publicación antes de continuar."
 #: app/contents/models/my/MyContentsModel.php:172
 #: app/contents/models/my/MyContentsModel.php:184
 #: app/contents/models/my/MyContentsModel.php:188
-#: app/filemanager/models/FilemanagerModel.php:324
-#: app/filemanager/models/FilemanagerModel.php:552
+#: app/filemanager/models/FilemanagerModel.php:349
+#: app/filemanager/models/FilemanagerModel.php:577
 #: app/google/models/GoogleModel.php:142 app/persons/MyPersonsController.php:18
 #: cms/libraries/debugger/Debugger.php:71
 msgid "Access denied."
@@ -7092,7 +7096,8 @@ msgstr "Mis contenidos"
 #: app/docs/views/admin/files/Index.php:12
 #: app/filemanager/views/admin/ConfirmRename.php:18
 #: app/filemanager/views/admin/Index.php:20
-#: storage/settings/data/filesystem/translate.filesystem.php:7
+#: app/filemanager/views/admin/Index.php:45
+#: storage/settings/data/filesystem/translate.filesystem.php:4
 msgid "Rename"
 msgstr "Renombrar"
 
@@ -7124,8 +7129,8 @@ msgstr "Insertar"
 #: app/dbmanager/models/DbmanagerTablesModel.php:123
 #: app/dbmanager/models/DbmanagerTriggersModel.php:40
 #: app/debates/models/DebatesModel.php:323
-#: app/filemanager/models/FilemanagerModel.php:120
-#: app/filemanager/models/FilemanagerModel.php:434
+#: app/filemanager/models/FilemanagerModel.php:145
+#: app/filemanager/models/FilemanagerModel.php:459
 #: app/install/models/InstallSettingsModel.php:83
 #: app/install/models/InstallSettingsModel.php:94
 #: app/menus/models/MenusModel.php:55 app/persons/models/PersonsModel.php:792
@@ -7304,7 +7309,7 @@ msgstr "Local"
 #: app/dbmanager/views/admin/checks/Timezone.php:39
 #: cms/plugins/dbmanager/widget/thirdbar/widget.load.php:21
 #: storage/settings/data/database/translate.database.php:5
-#: storage/settings/data/system/translate.system.php:18
+#: storage/settings/data/system/translate.system.php:17
 msgid "Time zone"
 msgstr "Zona horaria"
 
@@ -7394,6 +7399,7 @@ msgstr "Sólo algunos"
 
 #: app/dbmanager/views/admin/export/Index.php:46
 #: app/webstore/views/admin/Dashboard.php:21
+#: storage/settings/data/container/translate.container.php:1
 msgid "Registers"
 msgstr "Registros"
 
@@ -7899,7 +7905,7 @@ msgid "The following extensions have updates available: %s"
 msgstr "Las siguientes extensiones tienen actualizaciones disponibles: %s"
 
 #: app/extensions/models/ExtensionsModel.php:50
-#: cms/libraries/extensions/Installer/Unpackager.php:260
+#: cms/libraries/extensions/Installer/Unpackager.php:271
 #, php-format
 msgid "The extension alias «%s» is invalid."
 msgstr "El alias de extensión «%s» no es válido."
@@ -7971,7 +7977,8 @@ msgstr "Formato"
 
 #: app/extensions/views/admin/ConfirmCompile.php:48
 #: app/filemanager/views/admin/ConfirmCompress.php:19
-#: app/filemanager/views/admin/Index.php:26
+#: app/filemanager/views/admin/Index.php:33
+#: app/filemanager/views/admin/Index.php:54
 msgid "Compress"
 msgstr "Comprimir"
 
@@ -8278,8 +8285,8 @@ msgid "Installer"
 msgstr "Instalador"
 
 #: app/extensions/views/admin/installer/ConfirmMaintenance.php:11
-#: cms/libraries/assets/ScssCompiler.php:114
-#: cms/libraries/assets/ScssCompiler.php:115
+#: cms/libraries/assets/Compilation/ScssCompiler.php:108
+#: cms/libraries/assets/Compilation/ScssCompiler.php:109
 #: storage/settings/data/dbmanager/translate.dbmanager.php:6
 #: storage/settings/data/newsletters/translate.newsletters.php:11
 #: storage/settings/data/products/translate.products.php:9
@@ -8419,55 +8426,56 @@ msgstr "Video explicativo"
 msgid "Feed"
 msgstr "Feed"
 
-#: app/filemanager/models/FilemanagerModel.php:197
-#: app/filemanager/models/FilemanagerModel.php:401
+#: app/filemanager/models/FilemanagerModel.php:222
+#: app/filemanager/models/FilemanagerModel.php:426
 msgid "Please, select at least one file."
 msgstr "Por favor, seleccione al menos un archivo."
 
-#: app/filemanager/models/FilemanagerModel.php:277
+#: app/filemanager/models/FilemanagerModel.php:302
 #, php-format
 msgid "Warning! Not enough permission to delete the file: %s"
 msgstr "Atención! No tiene suficiente permiso para eliminar el archivo: %s"
 
-#: app/filemanager/models/FilemanagerModel.php:282
+#: app/filemanager/models/FilemanagerModel.php:307
 #, php-format
 msgid "Warning! Not enough permission to delete the folder: %s"
 msgstr "Atención! No tiene suficiente permiso para eliminar la carpeta: %s"
 
-#: app/filemanager/models/FilemanagerModel.php:376
+#: app/filemanager/models/FilemanagerModel.php:401
 #: app/filemanager/views/admin/ConfirmEdit.php:9
 msgid "Not editable."
 msgstr "No editable."
 
-#: app/filemanager/models/FilemanagerModel.php:405
+#: app/filemanager/models/FilemanagerModel.php:430
 msgid "Please, select a different destination folder."
 msgstr "Por favor, selecciona una carpeta de destino diferente."
 
-#: app/filemanager/models/FilemanagerModel.php:438
+#: app/filemanager/models/FilemanagerModel.php:463
 msgid "The folder already exists."
 msgstr "La carpeta ya existe."
 
-#: app/filemanager/models/FilemanagerModel.php:463
-#: app/filemanager/models/FilemanagerModel.php:505
+#: app/filemanager/models/FilemanagerModel.php:488
+#: app/filemanager/models/FilemanagerModel.php:530
 msgid "Please, select at least one file or folder."
 msgstr "Por favor, selecciona al menos un archivo o carpeta."
 
-#: app/filemanager/models/FilemanagerModel.php:467
+#: app/filemanager/models/FilemanagerModel.php:492
 msgid "Please, complete the permissions."
 msgstr "Por favor, complete los permisos."
 
-#: app/filemanager/models/FilemanagerModel.php:501
+#: app/filemanager/models/FilemanagerModel.php:526
 msgid "Please, complete the new name."
 msgstr "Por favor, complete el nuevo nombre."
 
-#: app/filemanager/models/FilemanagerModel.php:707
+#: app/filemanager/models/FilemanagerModel.php:732
 #: app/filemanager/views/admin/ConfirmNewfolder.php:19
-#: app/filemanager/views/admin/Index.php:13
+#: app/filemanager/views/admin/Index.php:15
+#: app/filemanager/views/admin/Index.php:41
 msgid "New folder"
 msgstr "Nueva carpeta"
 
-#: app/filemanager/models/FilemanagerModel.php:844
-#: app/filemanager/views/admin/List.php:34 app/forms/views/my/Edit.php:73
+#: app/filemanager/models/FilemanagerModel.php:869
+#: app/filemanager/views/admin/List.php:37 app/forms/views/my/Edit.php:73
 #: app/invoices/views/audit/Info.php:11 app/invoices/views/audit/Info.php:28
 #: app/users/views/admin/activities/List.php:33
 #: app/videos/views/front/List.php:47 app/videos/views/front/Watch.php:14
@@ -8476,12 +8484,14 @@ msgid "Y-m-d H:i:s"
 msgstr "d-m-Y H:i:s"
 
 #: app/filemanager/views/admin/ConfirmClear.php:12
-#: app/filemanager/views/admin/Index.php:30
+#: app/filemanager/views/admin/Index.php:37
+#: app/filemanager/views/admin/Index.php:58
 msgid "Clear cache"
 msgstr "Borrar caché"
 
 #: app/filemanager/views/admin/ConfirmConvert.php:21
-#: app/filemanager/views/admin/Index.php:24
+#: app/filemanager/views/admin/Index.php:27
+#: app/filemanager/views/admin/Index.php:50
 msgid "Convert"
 msgstr "Convertir"
 
@@ -8513,7 +8523,8 @@ msgid "Editor"
 msgstr "Editor"
 
 #: app/filemanager/views/admin/ConfirmExtract.php:14
-#: app/filemanager/views/admin/Index.php:27
+#: app/filemanager/views/admin/Index.php:34
+#: app/filemanager/views/admin/Index.php:55
 #: app/invoices/views/audit/ConfirmExtract.php:54
 #: app/invoices/views/audit/Extract.php:115
 #: app/invoices/views/audit/Index.php:26
@@ -8530,9 +8541,10 @@ msgid "Read"
 msgstr "Leer"
 
 #: app/filemanager/views/admin/ConfirmPermissions.php:24
+#: app/filemanager/views/admin/Index.php:35
 #: app/settings/views/admin/Edit.php:19
 #: app/workshops/views/audit/enrollments/Create.php:10
-#: app/workshops/views/audit/enrollments/Show.php:19
+#: app/workshops/views/audit/enrollments/Show.php:20
 #: app/workshops/views/front/Enrollment.php:70
 #: app/workshops/views/my/students/ConfirmMove.php:12
 #: cms/plugins/workshops/outdoors-import/default/outdoors-import.get.php:38
@@ -8572,6 +8584,11 @@ msgstr "Opción"
 msgid "Stat"
 msgstr "Stadísticas"
 
+#: app/filemanager/views/admin/ConfirmSettings.php:18
+#: app/notifications/views/my/Show.php:9
+msgid "View all"
+msgstr "Ver todo"
+
 #: app/filemanager/views/admin/ConfirmUpload.php:17
 #: storage/settings/data/filemanager/translate.filemanager.php:16
 msgid "Nice name"
@@ -8584,12 +8601,7 @@ msgstr "Nombre aceptable"
 msgid "Upload"
 msgstr "Subir"
 
-#: app/filemanager/views/admin/Details.php:11
-#: storage/settings/data/filemanager/translate.filemanager.php:11
-msgid "Directory"
-msgstr "Directorio"
-
-#: app/filemanager/views/admin/Details.php:13
+#: app/filemanager/views/admin/Details.php:12
 #: app/geoip2/views/admin/Show.php:19 app/websites/views/admin/List.php:15
 #: app/websites/views/admin/List.php:22
 #: storage/settings/data/geoip2/translate.geoip2.php:6
@@ -8597,32 +8609,46 @@ msgstr "Directorio"
 msgid "Link"
 msgstr "Link"
 
-#: app/filemanager/views/admin/Details.php:19
-#: app/filemanager/views/admin/List.php:35
+#: app/filemanager/views/admin/Details.php:15
+#: storage/settings/data/filemanager/translate.filemanager.php:11
+msgid "Directory"
+msgstr "Directorio"
+
+#: app/filemanager/views/admin/Details.php:18
+#: app/filemanager/views/admin/List.php:38
 msgid "Modified"
 msgstr "Modificado"
 
-#: app/filemanager/views/admin/Details.php:25
+#: app/filemanager/views/admin/Details.php:24
 msgid "Width"
 msgstr "Ancho"
 
-#: app/filemanager/views/admin/Details.php:25
+#: app/filemanager/views/admin/Details.php:24
 msgid "Height"
 msgstr "Alto"
 
-#: app/filemanager/views/admin/Details.php:26
+#: app/filemanager/views/admin/Details.php:25
 msgid "Mime"
 msgstr "Mime"
 
-#: app/filemanager/views/admin/Details.php:29
+#: app/filemanager/views/admin/Details.php:28
 msgid "Resolution"
 msgstr "Resolución"
 
-#: app/filemanager/views/admin/Index.php:14
+#: app/filemanager/views/admin/Index.php:22
+msgid "Node"
+msgstr ""
+
+#: app/filemanager/views/admin/Index.php:28
+msgid "Content"
+msgstr "Contenido"
+
+#: app/filemanager/views/admin/Index.php:30
+#: app/filemanager/views/admin/Index.php:52
 msgid "Upload files"
 msgstr "Subir archivos"
 
-#: app/filemanager/views/admin/Index.php:51
+#: app/filemanager/views/admin/Index.php:80
 #: cms/plugins/filemanager/form-drop-options/default/form-drop-options.load.php:12
 #: storage/settings/data/filemanager/translate.filemanager.php:8
 #: storage/translate/menus.filemanager.php:1
@@ -8635,7 +8661,7 @@ msgstr "Administrador de archivos"
 msgid "The directory is not readable."
 msgstr "El directorio no se puede leer."
 
-#: app/filemanager/views/admin/List.php:36
+#: app/filemanager/views/admin/List.php:39
 msgid "Perms"
 msgstr "Permisos"
 
@@ -8929,7 +8955,7 @@ msgstr "Bien"
 #: app/goods/views/audit/SaveForm.php:15
 #: app/products/views/audit/SaveForm.php:37
 #: app/sales/views/audit/SaveForm.php:28 app/webstore/views/my/Form.php:27
-#: cms/plugins/form/sample/UploadHandle/sample.php:31
+#: cms/plugins/form/sample/UploadHandle/sample.php:36
 #: cms/plugins/xtools/sample/UploadHandle/sample.php:24
 #: cms/plugins/xtools/sample/UploadHandle/sample.php:31
 #: storage/settings/data/balances/translate.balances.php:4
@@ -9277,7 +9303,7 @@ msgstr "Por favor, complete la clave."
 #: app/invoices/models/InvoicesCredentialsModel.php:63
 #: app/invoices/models/InvoicesGatewaysModel.php:64
 #: app/reviews/models/ReviewsCredentialsModel.php:82
-#: cms/libraries/assets/AssetsStorage.php:22
+#: cms/libraries/assets/AssetsStorage.php:28
 msgid "The key already exists."
 msgstr "El clave ya existe."
 
@@ -9714,8 +9740,7 @@ msgstr "Fabricante"
 #: storage/settings/data/sellers/translate.sellers.php:28
 #: storage/settings/data/subscriptions/translate.subscriptions.php:23
 #: storage/settings/data/subscriptions/translate.subscriptions.php:27
-#: storage/settings/data/system/translate.system.php:28
-#: storage/settings/data/system/translate.system.php:36
+#: storage/settings/data/system/translate.system.php:27
 #: storage/settings/data/tickets/translate.tickets.php:7
 #: storage/settings/data/translations/translate.translations.php:10
 #: storage/settings/data/webstore/translate.webstore.php:23
@@ -10102,10 +10127,6 @@ msgstr "Otros."
 #: app/newsletters/views/front/unsubscribe/Index.php:20
 msgid "Write something else about your reasons."
 msgstr "Escriba algo más sobre sus razones."
-
-#: app/notifications/views/my/Show.php:9
-msgid "View all"
-msgstr "Ver todo"
 
 #: app/notifications/views/my/Show.php:24
 msgid "No notifications."
@@ -10609,7 +10630,6 @@ msgid "Help"
 msgstr "Ayuda"
 
 #: app/settings/views/admin/Edit.php:14
-#: storage/settings/data/system/translate.system.php:7
 msgid "Autoload"
 msgstr "Autocarga"
 
@@ -10755,7 +10775,7 @@ msgid "Socials"
 msgstr "Sociales"
 
 #: app/socials/views/admin/List.php:13 app/socials/views/admin/SaveForm.php:13
-#: storage/settings/data/system/translate.system.php:30
+#: storage/settings/data/system/translate.system.php:29
 msgid "Domain"
 msgstr "Dominio"
 
@@ -11214,7 +11234,7 @@ msgstr "La trayectoria actual será finalizada."
 #: app/subscriptions/views/audit/trajectories/List.php:11
 #: app/subscriptions/views/audit/variations/List.php:11
 #: storage/settings/data/dbmanager/translate.dbmanager.php:2
-#: storage/settings/data/system/translate.system.php:41
+#: storage/settings/data/system/translate.system.php:38
 msgid "Log"
 msgstr "Registro"
 
@@ -11790,7 +11810,7 @@ msgstr "¡Error! Falló la lectura del archivo comprimido."
 
 #: app/webstore/models/WebstoreStorageModel.php:313
 #: app/webstore/models/WebstoreStorageModel.php:317
-#: cms/libraries/extensions/Installer/Unpackager.php:270
+#: cms/libraries/extensions/Installer/Unpackager.php:281
 #, php-format
 msgid "The extension «%s» is outdated."
 msgstr "La extensión «%s» está desactualizada."
@@ -12018,6 +12038,10 @@ msgstr "Por favor, remueva todas las asistencias antes de continuar."
 msgid "There is already a lesson on the same schedule."
 msgstr "Ya hay una lección en el mismo horario."
 
+#: app/workshops/models/WorkshopsMastersModel.php:36
+msgid "The record cannot be modified because it is in use."
+msgstr "El registro no puede modificarse porque está en uso."
+
 #: app/workshops/models/audit/AuditWorkshopsLessonsModel.php:114
 #: app/workshops/models/my/MyWorkshopsLessonsModel.php:131
 #: app/workshops/views/audit/groups/List.php:18
@@ -12100,7 +12124,7 @@ msgstr "Peligroso"
 
 #: app/workshops/views/admin/groups/SaveForm.php:15
 #: app/workshops/views/audit/enrollments/List.php:25
-#: app/workshops/views/audit/enrollments/Show.php:18
+#: app/workshops/views/audit/enrollments/Show.php:19
 #: app/workshops/views/audit/groups/List.php:18
 #: app/workshops/views/audit/students/List.php:27
 #: app/workshops/views/my/List.php:18
@@ -12198,19 +12222,23 @@ msgstr "El archivo no pudo ser cerrado."
 msgid "The package could not be opened."
 msgstr "El paquete no pudo ser abierto."
 
-#: cms/libraries/assets/AssetsStorage.php:31
+#: cms/libraries/assets/AssetsStorage.php:36
 msgid "The developer can not replace the resources."
 msgstr "El desarrollador no pudo reemplazar recursos."
 
-#: cms/libraries/assets/ScssCompiler.php:112
+#: cms/libraries/assets/AssetsThemes.php:83
+msgid "Please, enter another name."
+msgstr "Por favor, introduzca otro nombre."
+
+#: cms/libraries/assets/Compilation/ScssCompiler.php:107
 msgid "Disable"
 msgstr "Deshabilitado"
 
-#: cms/libraries/assets/UrlFixer.php:94
+#: cms/libraries/assets/Compilation/UrlFixer.php:98
 msgid "Relative"
 msgstr "Relativo"
 
-#: cms/libraries/assets/UrlFixer.php:95
+#: cms/libraries/assets/Compilation/UrlFixer.php:99
 msgid "Absolute"
 msgstr "Absoluto"
 
@@ -12308,7 +12336,7 @@ msgid "Radio"
 msgstr "Radio"
 
 #: cms/libraries/codemanager/EndpointHelper.php:37
-#: cms/plugins/form/sample/collection/sample.php:36
+#: cms/plugins/form/sample/collection/sample.php:58
 msgid "Collection"
 msgstr "Colección"
 
@@ -12325,6 +12353,14 @@ msgstr "Mensajes"
 #, php-format
 msgid "You have a message from %s: %s"
 msgstr "Tienes un mensaje de %s: %s"
+
+#: cms/libraries/contents/ContentsHelper.php:49
+msgid "The permalink has a key that are not allowed."
+msgstr "El enlace permanente tiene una clave que no está permitida."
+
+#: cms/libraries/contents/ContentsHelper.php:63
+msgid "The permalink does not have an identifier."
+msgstr "El enlace permanente no tiene un identificador."
 
 #: cms/libraries/currency/Currency.php:20
 msgid "$.,00"
@@ -12602,79 +12638,74 @@ msgstr ""
 "Este mensaje se genera automáticamente por el sitio %s. Si usted no ha hecho "
 "ninguna petición en este sitio, por favor ignore el mismo. Contacto: %s"
 
-#: cms/libraries/extensions/Compiler/Compiler.php:171
+#: cms/libraries/extensions/Compiler/Compiler.php:192
 #, php-format
 msgid "In the extension «%s», the install value «%s» is empty."
 msgstr "En la extensión «%s», el valor de instalación «%s» está vacío."
 
-#: cms/libraries/extensions/Installer/Installer.php:134
+#: cms/libraries/extensions/Installer/Installer.php:128
 msgid "Please, select the extensions."
 msgstr "Por favor, seleccione la extensión."
 
-#: cms/libraries/extensions/Installer/Unpackager.php:150
-#: cms/libraries/extensions/Installer/Unpackager.php:153
-#: cms/libraries/extensions/Installer/Unpackager.php:156
-#: cms/libraries/extensions/Installer/Unpackager.php:185
-#: cms/libraries/extensions/Installer/Unpackager.php:188
-#: cms/libraries/extensions/Installer/Unpackager.php:191
-#: cms/libraries/extensions/Installer/Unpackager.php:206
-#: cms/libraries/extensions/Installer/Unpackager.php:209
-#: cms/libraries/extensions/Installer/Unpackager.php:212
-#: cms/libraries/extensions/Installer/Unpackager.php:215
-#: cms/libraries/extensions/Installer/Unpackager.php:257
-#: cms/libraries/extensions/Installer/Unpackager.php:263
-#: cms/libraries/extensions/Installer/Unpackager.php:266
+#: cms/libraries/extensions/Installer/Unpackager.php:160
+#: cms/libraries/extensions/Installer/Unpackager.php:163
+#: cms/libraries/extensions/Installer/Unpackager.php:166
+#: cms/libraries/extensions/Installer/Unpackager.php:197
+#: cms/libraries/extensions/Installer/Unpackager.php:217
+#: cms/libraries/extensions/Installer/Unpackager.php:268
+#: cms/libraries/extensions/Installer/Unpackager.php:274
 #: cms/libraries/extensions/Installer/Unpackager.php:277
-#: cms/libraries/extensions/Installer/Unpackager.php:280
-#: cms/libraries/extensions/Installer/Unpackager.php:283
+#: cms/libraries/extensions/Installer/Unpackager.php:288
+#: cms/libraries/extensions/Installer/Unpackager.php:291
+#: cms/libraries/extensions/Installer/Unpackager.php:294
 #, php-format
 msgid "The install value «%s» is empty."
 msgstr "El valor de instalación «%s» está vacío."
 
-#: cms/libraries/extensions/Installer/Unpackager.php:162
+#: cms/libraries/extensions/Installer/Unpackager.php:172
 #, php-format
 msgid "The extension requires a php version equal to or greater than «%s»"
 msgstr "La extensión requiere una versión php igual o mayor que «%s»"
 
-#: cms/libraries/extensions/Installer/Unpackager.php:168
+#: cms/libraries/extensions/Installer/Unpackager.php:178
 #, php-format
 msgid "The extension requires a php version lower than «%s»"
 msgstr "La extensión requiere una versión de php inferior a «%s»"
 
-#: cms/libraries/extensions/Installer/Unpackager.php:295
+#: cms/libraries/extensions/Installer/Unpackager.php:306
 #, php-format
 msgid "The extension «%s» requires the extension «%s»."
 msgstr "La extensión «%s» requiere la extensión «%s»."
 
-#: cms/libraries/extensions/Installer/Unpackager.php:301
+#: cms/libraries/extensions/Installer/Unpackager.php:312
 #, php-format
 msgid "The extension «%s» requires the extension «%s» in a version «%s»."
 msgstr "La extensión «%s» requiere la extensión «%s» en una versión «%s»."
 
-#: cms/libraries/extensions/Installer/Unpackager.php:308
+#: cms/libraries/extensions/Installer/Unpackager.php:319
 #, php-format
 msgid ""
 "The extension «%s» requires the extension «%s» in a version «%s» or higher."
 msgstr ""
 "La extensión «%s» requiere la extensión «%s» en una versión «%s» o superior."
 
-#: cms/libraries/extensions/Installer/Unpackager.php:321
-#: cms/libraries/extensions/Installer/Unpackager.php:323
-#: cms/libraries/extensions/Installer/Unpackager.php:345
+#: cms/libraries/extensions/Installer/Unpackager.php:332
+#: cms/libraries/extensions/Installer/Unpackager.php:334
+#: cms/libraries/extensions/Installer/Unpackager.php:358
 #, php-format
 msgid "Falied open file «%s»."
 msgstr "Error al abrir el archivo: «%s»."
 
-#: cms/libraries/extensions/Installer/Unpackager.php:406
+#: cms/libraries/extensions/Installer/Unpackager.php:423
 msgid "The developer data has modified."
 msgstr "La información del desarrollador ha sido modificada."
 
-#: cms/libraries/extensions/Installer/Unpackager.php:421
+#: cms/libraries/extensions/Installer/Unpackager.php:438
 #, php-format
 msgid "The «%s» extension developer doesn't match the registered."
 msgstr "El desarrollador de la extensión «%s» no coincide con el registrado."
 
-#: cms/libraries/extensions/Installer/Unpackager.php:473
+#: cms/libraries/extensions/Installer/Unpackager.php:490
 #, php-format
 msgid ""
 "This will be a major update, please make sure you have the updates for the "
@@ -12683,7 +12714,7 @@ msgstr ""
 "Esta será una actualización mayor, por favor asegúrese de tener las "
 "actualizaciones para las siguientes extensiones: %s"
 
-#: cms/libraries/extensions/Installer/Unpackager.php:587
+#: cms/libraries/extensions/Installer/Unpackager.php:620
 msgid "Drop nonexistent columns"
 msgstr "Eliminar columnas inexistentes"
 
@@ -12700,21 +12731,24 @@ msgstr "La clave es requerida."
 msgid "The key is invalid."
 msgstr "La clave no es válido."
 
-#: cms/libraries/extensions/XData/MalformedDataException.php:41
+#: cms/libraries/extensions/XData/MalformedDataException.php:42
 msgid "The extensions manager has thrown an error."
 msgstr "El administrador de extensiones ha lanzado un error."
 
-#: cms/libraries/extensions/XData/XData.php:96
+#: cms/libraries/extensions/XData/XData.php:92
 #: cms/libraries/filesystem/UploadedFileManager.php:84
 #: cms/libraries/filesystem/UploadedFileManager.php:357
 msgid "Please select a file from your computer."
 msgstr "Por favor, seleccione un archivo de su computadora."
 
-#: cms/libraries/filesystem/ImageResizer.php:195
-#: cms/libraries/filesystem/ImageResizer.php:223
-#: cms/libraries/filesystem/ImageResizer.php:230
-#: cms/libraries/filesystem/ImageResizer.php:255
-#: cms/libraries/filesystem/ImageResizer.php:274
+#: cms/libraries/filesystem/ImageResizer.php:54
+#: cms/libraries/filesystem/ImageResizer.php:60
+#: cms/libraries/filesystem/ImageResizer.php:69
+#: cms/libraries/filesystem/ImageResizer.php:78
+#: cms/libraries/filesystem/ImageResizer.php:84
+#: cms/libraries/filesystem/ImageResizer.php:90
+#: cms/libraries/filesystem/ImageResizer.php:107
+#: cms/libraries/filesystem/ImageResizer.php:111
 #, php-format
 msgid "Error %s! failed resizing the image."
 msgstr "Error %s! ha fallado la redimensión de la imagen."
@@ -12828,7 +12862,7 @@ msgid "The type \"%s\" has no default value."
 msgstr "El tipo \"%s\" no tiene valor por defecto."
 
 #: cms/libraries/profiler/Profiler.php:112
-#: storage/settings/data/system/translate.system.php:13
+#: storage/settings/data/system/translate.system.php:12
 msgid "Profiler"
 msgstr "Perfilador"
 
@@ -12846,20 +12880,20 @@ msgstr "Enrutador"
 msgid "DB"
 msgstr "Base de datos"
 
-#: cms/libraries/settings/Settings.php:87
+#: cms/libraries/settings/Settings.php:119
 msgid "The specified file for saving the data was not found."
 msgstr "No se ha encontrado el archivo especificado para guardar los datos."
 
-#: cms/libraries/settings/Settings.php:90
+#: cms/libraries/settings/Settings.php:123
 msgid "The specified file for saving the settings has not been found."
 msgstr ""
 "No se ha encontrado el archivo especificado para guardar la configuración."
 
-#: cms/libraries/settings/Settings.php:485
+#: cms/libraries/settings/Settings.php:401
 msgid "The plugin is adding keys, so it is ignored."
 msgstr "El plugin está agregando claves, por lo que se ignora."
 
-#: cms/libraries/settings/Settings.php:626
+#: cms/libraries/settings/Settings.php:508
 msgid "An error occurred while trying to write the settings."
 msgstr "Se ha producido un error al intentar escribir los ajustes."
 
@@ -12902,7 +12936,7 @@ msgstr "Hay una trayectoria activa. Debes cerrarla para continuar."
 msgid "There are debts, you must pay them off before continuing."
 msgstr "Hay deudas, debes pagarlas antes de continuar."
 
-#: cms/libraries/template/Template.php:413
+#: cms/libraries/template/Template.php:414
 #, php-format
 msgid "%d. That’s an error."
 msgstr "%d. Esto es un error."
@@ -13199,29 +13233,21 @@ msgstr "Disminuir el tamaño del texto"
 msgid "Printable version"
 msgstr "Versión para imprimir"
 
-#: cms/plugins/contents/settings/default/settings.load.php:10
+#: cms/plugins/contents/settings/default/settings.load.php:12
 msgid "Only dynamic contents"
 msgstr "Sólo contenido dinámico"
 
-#: cms/plugins/contents/settings/default/settings.load.php:13
+#: cms/plugins/contents/settings/default/settings.load.php:15
 msgid "Only one"
 msgstr "Sólo uno"
 
-#: cms/plugins/contents/settings/default/settings.load.php:13
+#: cms/plugins/contents/settings/default/settings.load.php:15
 msgid "Several"
 msgstr "Varios"
 
-#: cms/plugins/contents/settings/default/settings.load.php:24
+#: cms/plugins/contents/settings/default/settings.load.php:26
 msgid "Please, install the \"inserts\" extension."
 msgstr "Por favor, instale la extensión \"inserts\"."
-
-#: cms/plugins/contents/settings/default/settings.update.php:17
-msgid "The permalink has a key that are not allowed."
-msgstr "El enlace permanente tiene una clave que no está permitida."
-
-#: cms/plugins/contents/settings/default/settings.update.php:31
-msgid "The permalink does not have an identifier."
-msgstr "El enlace permanente no tiene un identificador."
 
 #: cms/plugins/contents/settings/files/settings.load.php:13
 #, php-format
@@ -13271,7 +13297,7 @@ msgstr "Conéctate con tu Facebook"
 msgid "Root"
 msgstr "Raíz"
 
-#: cms/plugins/form/sample/UploadHandle/sample.php:41
+#: cms/plugins/form/sample/UploadHandle/sample.php:45
 msgid "Upload file"
 msgstr "Subir archivo"
 
@@ -13413,6 +13439,10 @@ msgstr "Ascendiendo"
 #: cms/plugins/portfolios/settings/widgets/settings.load.php:31
 msgid "Descending"
 msgstr "Descendiendo"
+
+#: cms/plugins/router/settings/default/settings.update.php:16
+msgid "The access points have produced an error."
+msgstr "Los puntos de acceso han producido un error."
 
 #: cms/plugins/search/search_engine/default/search_engine.load.php:73
 msgid "Please enter the text to start the search."
@@ -14549,6 +14579,10 @@ msgstr "Control de derrames"
 msgid "Amount per hour."
 msgstr "Cantidad por hora."
 
+#: storage/settings/data/container/translate.container.php:2
+msgid "Container"
+msgstr "Contenedor"
+
 #: storage/settings/data/contents/translate.contents-files.php:4
 #: storage/settings/data/webstore/translate.webstore.php:46
 msgid "Max. size"
@@ -14577,7 +14611,7 @@ msgstr "Empresa"
 #: storage/settings/data/contents/translate.contents-portal.php:8
 #: storage/settings/data/dashboard/translate.dashboard-shortcuts.php:4
 #: storage/settings/data/smileys/translate.smileys.php:5
-#: storage/settings/data/system/translate.system.php:20
+#: storage/settings/data/system/translate.system.php:19
 msgid "Allow cache"
 msgstr "Permitir caché"
 
@@ -14866,7 +14900,7 @@ msgstr ""
 "actualización, expresado en días."
 
 #: storage/settings/data/extensions/translate.extensions.php:3
-#: storage/settings/data/system/translate.system.php:8
+#: storage/settings/data/system/translate.system.php:7
 msgid "Paths"
 msgstr "Rutas"
 
@@ -14971,10 +15005,6 @@ msgid "Highlighting"
 msgstr "Highlighting"
 
 #: storage/settings/data/filesystem/translate.filesystem.php:3
-msgid "Resize"
-msgstr "Redimensión"
-
-#: storage/settings/data/filesystem/translate.filesystem.php:4
 msgid "Filesystem"
 msgstr "Sistema de archivos"
 
@@ -14984,13 +15014,17 @@ msgstr ""
 "Tenga en cuenta que aquí están las extensiones de archivo que el sistema "
 "puede cambiar de tamaño."
 
+#: storage/settings/data/filesystem/translate.filesystem.php:7
+msgid "Jpeg Quality"
+msgstr "Calidad Jpeg"
+
 #: storage/settings/data/filesystem/translate.filesystem.php:8
-msgid "Quality jpeg"
-msgstr "Calidad jpeg"
+msgid "Png Quality"
+msgstr "Calidad Png"
 
 #: storage/settings/data/filesystem/translate.filesystem.php:9
-msgid "Quality png"
-msgstr "Calidad png"
+msgid "Webp Quality"
+msgstr "Calidad Webp"
 
 #: storage/settings/data/fontawesome/translate.fontawesome.php:3
 #: storage/translate/menus.fontawesome.php:1
@@ -15272,7 +15306,7 @@ msgid "Use modal instead of redirecting to the MercadoPago website."
 msgstr "Utilice modal en lugar de redirigir al sitio web de MercadoPago."
 
 #: storage/settings/data/mercadopago/translate.mercadopago.php:9
-#: storage/settings/data/system/translate.system.php:26
+#: storage/settings/data/system/translate.system.php:25
 #: storage/settings/data/tokens/translate.tokens.php:3
 #: storage/settings/data/users/translate.users-activities.php:5
 msgid "Lifetime"
@@ -15676,62 +15710,62 @@ msgstr "Habilita la opción de eliminar permanentemente un suscriptor."
 msgid "Cookies"
 msgstr "Galletas"
 
-#: storage/settings/data/system/translate.system.php:11
+#: storage/settings/data/system/translate.system.php:10
 msgid "Developer mode"
 msgstr "Modo desarrollador"
 
-#: storage/settings/data/system/translate.system.php:12
+#: storage/settings/data/system/translate.system.php:11
 msgid ""
 "With this option, some extensions offer additional tools for developers."
 msgstr ""
 "Con esta opción, algunas extensiones ofrecen herramientas adicionales para "
 "desarrolladores."
 
-#: storage/settings/data/system/translate.system.php:14
+#: storage/settings/data/system/translate.system.php:13
 msgid "Profiler is a fundamental tool for developers."
 msgstr "El perfilador es una herramienta fundamental para los desarrolladores."
 
-#: storage/settings/data/system/translate.system.php:15
+#: storage/settings/data/system/translate.system.php:14
 msgid "Handle errors"
 msgstr "Manejar errores"
 
-#: storage/settings/data/system/translate.system.php:16
+#: storage/settings/data/system/translate.system.php:15
 msgid ""
 "If enabled, errors are recorded instead of being displayed on the screen."
 msgstr ""
 "Si está habilitado, los errores se registran en lugar de mostrarse en la "
 "pantalla."
 
-#: storage/settings/data/system/translate.system.php:21
+#: storage/settings/data/system/translate.system.php:20
 msgid "Globally manages cache usage."
 msgstr "Gestiona globalmente el uso de la caché."
 
-#: storage/settings/data/system/translate.system.php:22
+#: storage/settings/data/system/translate.system.php:21
 msgid "Short ttl"
 msgstr "TTL corta"
 
-#: storage/settings/data/system/translate.system.php:23
+#: storage/settings/data/system/translate.system.php:22
 msgid "Short cache lifetime."
 msgstr "Vida útil de la caché corta."
 
-#: storage/settings/data/system/translate.system.php:24
+#: storage/settings/data/system/translate.system.php:23
 msgid "Long tll"
 msgstr "TTL largo"
 
-#: storage/settings/data/system/translate.system.php:25
+#: storage/settings/data/system/translate.system.php:24
 msgid "Long cache lifetime."
 msgstr "Vida útil de la caché larga."
 
-#: storage/settings/data/system/translate.system.php:27
+#: storage/settings/data/system/translate.system.php:26
 msgid "Lifetime of the session cookie, defined in seconds."
 msgstr "Duración de la cookie de sesión, definida en segundos."
 
-#: storage/settings/data/system/translate.system.php:29
+#: storage/settings/data/system/translate.system.php:28
 msgid "Specifies path to set in the session cookie. Defaults to /."
 msgstr ""
 "Especifica la ruta a establecer en la cookie de sesión. Por defecto es /."
 
-#: storage/settings/data/system/translate.system.php:31
+#: storage/settings/data/system/translate.system.php:30
 msgid ""
 "Specifies the domain to set in the session cookie. Default is none at all "
 "meaning the host name of the server which generated the cookie according to "
@@ -15741,20 +15775,20 @@ msgstr ""
 "ninguno, significando el nombre de host del servidor que generó la cookie "
 "según la especificación de cookies."
 
-#: storage/settings/data/system/translate.system.php:32
+#: storage/settings/data/system/translate.system.php:31
 msgid "Secure"
 msgstr "Seguro"
 
-#: storage/settings/data/system/translate.system.php:33
+#: storage/settings/data/system/translate.system.php:32
 msgid "Specifies whether cookies should only be sent over secure connections."
 msgstr ""
 "Especifica si las cookies deberían enviarse sólo sobre conexiones seguras."
 
-#: storage/settings/data/system/translate.system.php:34
+#: storage/settings/data/system/translate.system.php:33
 msgid "Http only"
 msgstr "Sólo http"
 
-#: storage/settings/data/system/translate.system.php:35
+#: storage/settings/data/system/translate.system.php:34
 msgid ""
 "Marks the cookie as accessible only through the HTTP protocol. This means "
 "that the cookie won't be accessible by scripting languages, such as "
@@ -15764,32 +15798,24 @@ msgstr ""
 "significa que la cookie no será accesible por lenguajes de script, tales "
 "como JavaScript."
 
-#: storage/settings/data/system/translate.system.php:37
-msgid ""
-"Path to the system autoload. This is useful for the developer to modify or "
-"compile the system."
-msgstr ""
-"Ruta de acceso a la carga automática del sistema. Esto es útil para que el "
-"desarrollador modifique o compile el sistema."
-
-#: storage/settings/data/system/translate.system.php:38
+#: storage/settings/data/system/translate.system.php:35
 msgid "MkDir mode"
 msgstr "MkDir mode"
 
-#: storage/settings/data/system/translate.system.php:39
+#: storage/settings/data/system/translate.system.php:36
 msgid "CGI"
 msgstr "CGI"
 
-#: storage/settings/data/system/translate.system.php:40
+#: storage/settings/data/system/translate.system.php:37
 msgid "The base path should be SYSTEM_ABSPATH."
 msgstr "La ruta base debe ser SYSTEM_ABSPATH."
 
-#: storage/settings/data/system/translate.system.php:42
-#: storage/settings/data/system/translate.system.php:44
+#: storage/settings/data/system/translate.system.php:39
+#: storage/settings/data/system/translate.system.php:41
 msgid "The base path should be SYSTEM_STORAGE."
 msgstr "La ruta base debe ser SYSTEM_STORAGE."
 
-#: storage/settings/data/system/translate.system.php:43
+#: storage/settings/data/system/translate.system.php:40
 msgid "Temporal"
 msgstr "Temporal"
 
@@ -16047,6 +16073,10 @@ msgstr "Espacios del sitio"
 msgid "Media"
 msgstr "Media"
 
+#: storage/translate/menus.backend.php:6
+msgid "Personalization"
+msgstr "Personalización"
+
 #: storage/translate/menus.backend.php:7 storage/translate/menus.settings.php:6
 msgid "User spaces"
 msgstr "Espacios del usuario"
@@ -16094,7 +16124,8 @@ msgstr "Mis videos"
 #: storage/translate/users-labels.php:13 storage/translate/users-labels.php:16
 #: storage/translate/users-labels.php:17 storage/translate/users-labels.php:22
 #: storage/translate/users-labels.php:26 storage/translate/users-labels.php:27
-#: storage/translate/users-labels.php:28 storage/translate/usys-labels.php:1
+#: storage/translate/users-labels.php:28 storage/translate/users-labels.php:29
+#: storage/translate/users-labels.php:30 storage/translate/usys-labels.php:1
 #: storage/translate/usys-labels.php:2 storage/translate/usys-labels.php:3
 #: storage/translate/usys-labels.php:5 storage/translate/usys-labels.php:6
 #: storage/translate/usys-labels.php:8 storage/translate/usys-labels.php:11
@@ -16141,7 +16172,7 @@ msgid "It allows to find, view and add the persons."
 msgstr "Permite buscar, ver y agregar las tarjetas."
 
 #: storage/translate/users-labels.php:20 storage/translate/users-labels.php:21
-#: storage/translate/users-labels.php:29 storage/translate/usys-labels.php:15
+#: storage/translate/users-labels.php:31 storage/translate/usys-labels.php:15
 #: storage/translate/usys-labels.php:16 storage/translate/usys-labels.php:24
 msgid "It allows access to the audit."
 msgstr "Permite el acceso a la auditoría."
@@ -16157,6 +16188,22 @@ msgstr "Permite gestionar la lista de suscriptores."
 #: storage/translate/users-labels.php:25 storage/translate/usys-labels.php:20
 msgid "It allows to collect, issue and cancel fees."
 msgstr "Permite cobrar, emitir y anular aranceles."
+
+#~ msgid "Customisations"
+#~ msgstr "Personalizaciones"
+
+#~ msgid "Resize"
+#~ msgstr "Redimensión"
+
+#~ msgid "Quality jpeg"
+#~ msgstr "Calidad jpeg"
+
+#~ msgid ""
+#~ "Path to the system autoload. This is useful for the developer to modify "
+#~ "or compile the system."
+#~ msgstr ""
+#~ "Ruta de acceso a la carga automática del sistema. Esto es útil para que "
+#~ "el desarrollador modifique o compile el sistema."
 
 #~ msgid "may"
 #~ msgstr "May"

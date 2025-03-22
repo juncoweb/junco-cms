@@ -52,7 +52,7 @@
         },
         {
             "menu_key": "backend-Default",
-            "menu_path": "Settings",
+            "menu_path": "Personalization",
             "menu_order": 90,
             "menu_url": "",
             "menu_image": "fa-solid fa-gear",

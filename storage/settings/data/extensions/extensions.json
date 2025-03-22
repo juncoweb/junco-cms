@@ -133,7 +133,7 @@
             "type": "textarea",
             "group": 4,
             "ordering": 2,
-            "default_value": "bootstrap.php,\r\nfavicon.ico,\r\nhtaccess,\r\nassets\/index.html,\r\ncms\/index.html,\r\ncms\/libraries\/.htaccess,\r\ncms\/plugins\/index.html,\r\ncms\/scripts\/index.html,\r\ncms\/snippets\/.htaccess,\r\napp\/index.html,\r\nmedia\/index.html,\r\nstorage\/.htaccess,\r\nstorage\/locale\/,\r\nstorage\/etc\/users-labels.php,\r\nvendor\/.htaccess",
+            "default_value": "bootstrap.php,\r\nfavicon.ico,\r\nhtaccess,\r\nassets\/index.html,\r\ncms\/index.html,\r\ncms\/libraries\/.htaccess,\r\ncms\/plugins\/.htaccess,\r\ncms\/scripts\/index.html,\r\ncms\/snippets\/.htaccess,\r\napp\/index.html,\r\nmedia\/index.html,\r\nstorage\/.htaccess,\r\nstorage\/locale\/,\r\nstorage\/etc\/users-labels.php,\r\nvendor\/.htaccess",
             "help": "",
             "history": [],
             "autoload": 1,

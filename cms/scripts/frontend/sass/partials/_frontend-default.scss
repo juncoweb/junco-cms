@@ -473,12 +473,15 @@ $color in $theme-colors {
 
 /* navbar-mobile */
 .navbar-mobile {
-	font-size: 1.2em;
-	margin-top: 20px;
+	font-size: $large-font-size;
+	margin-top: $spacing * 2;
 
-	@include navbar($padding: 7px 14px 7px 32px);
+	@include navbar($color: var(--solid-font-color),
+		$hover-color: var(--solid-primary-surface-color),
+		$bg-hover-color: var(--solid-disabled-bg-color),
+		$padding: ($spacing * .5) $spacing);
 	@include navbar-nested($padding: 7px 14px 7px 42px,
-		$bg-color: rgba(255, 255, 255, .2));
+		$bg-color: var(--regular-disabled-bg-color));
 	@include navbar-dropdown($position: relative,
 		$width: null);
 	@include navbar-hover-dropdown;

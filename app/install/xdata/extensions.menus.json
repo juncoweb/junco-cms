@@ -2,7 +2,7 @@
     "extensions": [
         {
             "menu_key": "backend-Default",
-            "menu_path": "Settings|Extensions",
+            "menu_path": "Personalization|Extensions",
             "menu_order": 4,
             "menu_url": "admin\/extensions,",
             "menu_image": "",
@@ -12,7 +12,7 @@
         },
         {
             "menu_key": "backend-Default",
-            "menu_path": "Settings|Web Store",
+            "menu_path": "Personalization|Web Store",
             "menu_order": 5,
             "menu_url": "admin\/extensions.webstore,",
             "menu_image": "",
@@ -22,7 +22,7 @@
         },
         {
             "menu_key": "backend-Default",
-            "menu_path": "Settings|Installer",
+            "menu_path": "Personalization|Installer",
             "menu_order": 6,
             "menu_url": "admin\/extensions.installer,",
             "menu_image": "",
@@ -32,7 +32,7 @@
         },
         {
             "menu_key": "backend-Default",
-            "menu_path": "Settings|;",
+            "menu_path": "Personalization|;",
             "menu_order": 3,
             "menu_url": "",
             "menu_image": "",

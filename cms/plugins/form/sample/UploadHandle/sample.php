@@ -7,6 +7,11 @@
 
 defined('IS_TEST') or die;
 
+$domready = "
+var _Form = JsForm().request(JsUrl('admin/sa/request'), function(message) {
+	_Form.notify(message)
+});
+";
 // form
 $form = Form::get();
 
@@ -34,8 +39,7 @@ $html = $form->render();
 // template
 $tpl = Template::get();
 $tpl->options([
-	'js' => 'cms/plugins/form/sample/UploadHandle/scripts.js',
-	'domready' => 'load()',
+	'domready' => $domready,
 	'thirdbar' => 'form.thirdbar'
 ]);
 $tpl->title(_t('Upload file'));

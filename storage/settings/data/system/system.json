@@ -8,7 +8,6 @@
         "Editor",
         "Cache",
         "Cookies",
-        "Autoload",
         "Paths",
         "Snippets"
     ],
@@ -196,23 +195,10 @@
             "reload_on_change": 0,
             "status": 0
         },
-        "autoload": {
-            "label": "Path",
-            "type": "input-text",
-            "group": 6,
-            "ordering": 1,
-            "default_value": "cms\/libraries\/system\/autoload.php",
-            "help": "Path to the system autoload. This is useful for the developer to modify or compile the system.",
-            "history": [],
-            "autoload": 1,
-            "translate": 0,
-            "reload_on_change": 0,
-            "status": 0
-        },
         "mkdir_mode": {
             "label": "MkDir mode",
             "type": "input-text",
-            "group": 7,
+            "group": 6,
             "ordering": 1,
             "default_value": 493,
             "help": "",
@@ -225,7 +211,7 @@
         "cgi_bin": {
             "label": "CGI",
             "type": "input-text",
-            "group": 7,
+            "group": 6,
             "ordering": 2,
             "default_value": "cgi-bin\/",
             "help": "The base path should be SYSTEM_ABSPATH.",
@@ -238,7 +224,7 @@
         "log_path": {
             "label": "Log",
             "type": "input-text",
-            "group": 7,
+            "group": 6,
             "ordering": 3,
             "default_value": "logs\/",
             "help": "The base path should be SYSTEM_STORAGE.",
@@ -251,7 +237,7 @@
         "tmp_path": {
             "label": "Temporal",
             "type": "input-text",
-            "group": 7,
+            "group": 6,
             "ordering": 4,
             "default_value": "tmp\/",
             "help": "The base path should be SYSTEM_STORAGE.",
@@ -264,7 +250,7 @@
         "default_snippets": {
             "label": "Default",
             "type": "json",
-            "group": 8,
+            "group": 7,
             "ordering": 1,
             "default_value": {
                 "pagination": {

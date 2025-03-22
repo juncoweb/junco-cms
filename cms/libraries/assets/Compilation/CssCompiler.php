@@ -106,11 +106,11 @@ class CssCompiler
 	 */
 	protected function getScssFiles(array &$rows): void
 	{
-		foreach ($rows as $row) {
+		foreach ($rows as $i => $row) {
 			$scssFile = $this->getScssFileFromCss($row['css']);
 
 			if ($scssFile) {
-				$cssFiles['scss'] = $scssFile;
+				$rows[$i]['scss'] = $scssFile;
 			}
 		}
 	}

@@ -6,7 +6,7 @@
 }
 
 .pull-navbar {
-  background: #535251;
+  background: var(--solid-bg-color);
   position: fixed;
   top: 0;
   left: 0;
@@ -16,7 +16,6 @@
   z-index: 2001;
   zoom: 1;
   overflow-y: auto;
-  -webkit-transition: transform 0.2s ease-out;
   transition: transform 0.2s ease-out;
 }
 

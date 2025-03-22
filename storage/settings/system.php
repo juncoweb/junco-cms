@@ -44,11 +44,6 @@ return [
 	'cookie_httponly' => 0,
 
 	/**
-	 * Autoload
-	 */
-	'autoload' => 'cms/libraries/system/autoload.php',
-
-	/**
 	 * Paths
 	 */
 	'mkdir_mode' => 493,

@@ -12,7 +12,7 @@
         },
         {
             "menu_key": "backend-Default",
-            "menu_path": "Settings|Language",
+            "menu_path": "Personalization|Language",
             "menu_order": 2,
             "menu_url": "admin\/language,",
             "menu_image": "",

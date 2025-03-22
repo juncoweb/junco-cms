@@ -26,12 +26,21 @@ $form->input('date_3', ['type' => 'date'])->setLabel('Date (System)');
 $form->addRow(['label' => 'Inline', 'content' => '<div id="date-test"></div>']);
 
 $html = $form->render();
+$domready = "
+	JsFelem.load('#content');
+	FeDate(null, {
+		'inject': document.querySelector('#date-test'),
+		'setDrop': false,
+		'onSelect': function (date) {
+			alert(date);
+		}
+	});";
 
 // template
 $tpl = Template::get();
 $tpl->options([
 	'js' => 'cms/plugins/form/sample/date/scripts.js,cms/scripts/form/js/date.js',
-	'domready' => 'Test()',
+	'domready' => $domready,
 	'thirdbar' => 'form.thirdbar'
 ]);
 $tpl->title('Date');

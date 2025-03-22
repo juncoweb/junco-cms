@@ -28,7 +28,7 @@ var AssetsVariables = (function () {
 			},
 		},
 	};
-	
+
 	return {
 		List: function (key) {
 			_backlist = Backlist()

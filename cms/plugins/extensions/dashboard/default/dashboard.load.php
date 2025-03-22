@@ -10,7 +10,7 @@ return function (&$dashboard) {
 	$html = $cache->get('extensions-updates#');
 
 	if (!$html) {
-		app('assets')->js('cms/plugins/extensions/dashboard/default/js/scripts.js');
+		app('assets')->js('assets/extensions-dashboard.min.js');
 		$html = '<div id="extensions-updates">'
 			. '<form>'
 			.  '<input type="hidden" name="option" value="1">'

@@ -4,7 +4,7 @@ var JsConsole = (function () {
 
 	function now() {
 		var date = new Date();
-		
+
 		date = [date.getHours(), date.getMinutes(), date.getSeconds()];
 		for (var i in [0, 1, 2]) {
 			if (date[i] < 10) {

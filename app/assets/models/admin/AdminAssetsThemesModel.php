@@ -76,7 +76,7 @@ class AdminAssetsThemesModel extends Model
 
 		return [
 			'fixurl_options' => UrlFixer::getOptions(),
-			'values' => $this->data['id'] + [
+			'values' => $this->data + [
 				'minify' => $config['assets.minify'],
 				'fixurl' => $config['assets.fixurl'],
 			]

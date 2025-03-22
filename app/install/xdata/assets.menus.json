@@ -2,7 +2,7 @@
     "assets": [
         {
             "menu_key": "backend-Default",
-            "menu_path": "Settings|Assets|Themes",
+            "menu_path": "Personalization|Assets|Themes",
             "menu_order": 2,
             "menu_url": "admin\/assets.themes,",
             "menu_image": "",
@@ -22,7 +22,7 @@
         },
         {
             "menu_key": "backend-Default",
-            "menu_path": "Settings|Assets",
+            "menu_path": "Personalization|Assets",
             "menu_order": 2,
             "menu_url": "admin\/assets,",
             "menu_image": "",

@@ -67,7 +67,7 @@ class ScssCompiler
 		$content = $this->compiler->compileString($content)->getCss();
 
 		if ($cssFile) {
-			$this->putContent($this->abspath . $cssFile, $content);
+			$this->putContent($cssFile, $content);
 		}
 
 		return $content;

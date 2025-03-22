@@ -2,7 +2,7 @@
     "settings": [
         {
             "menu_key": "backend-Default",
-            "menu_path": "Settings|Settings",
+            "menu_path": "Personalization|Settings",
             "menu_order": 1,
             "menu_url": "admin\/settings,",
             "menu_image": "",

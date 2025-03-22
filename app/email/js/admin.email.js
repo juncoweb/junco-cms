@@ -34,7 +34,7 @@ var Email = (function () {
 				document.querySelector('#email-debug').innerHTML = json.debug;
 				t.select(1);
 			});
-			
+
 		}
 	};
 })();

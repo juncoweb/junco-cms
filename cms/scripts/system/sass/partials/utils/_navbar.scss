@@ -215,7 +215,7 @@
 
 // pull-navbar
 .pull-navbar {
-	background: #535251;
+	background: var(--solid-bg-color);
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -225,8 +225,6 @@
 	z-index: $zindex-pullnav + 1;
 	zoom: 1;
 	overflow-y: auto;
-
-	-webkit-transition: transform .2s ease-out;
 	transition: transform .2s ease-out;
 }
 

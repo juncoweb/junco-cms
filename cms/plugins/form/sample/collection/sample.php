@@ -8,7 +8,30 @@
 defined('IS_TEST') or die;
 
 $curuser = curuser();
-
+$domready = "
+	/*JsFelem.implement({
+		'test': function(el) {
+			JsCollection(el, {
+				url: JsUrl('admin/usys.users/json'),
+			});
+		},
+	});
+	*/
+	JsCollection(document.querySelectorAll('[control-felem=test]'), {
+		justUse: 1,
+		url: JsUrl('admin/usys.users/json'),
+	});
+	JsCollection(document.querySelectorAll('[control-felem=userpicker]'), {
+		justUse: 1,
+		url: JsUrl('admin/usys.users/json'),
+	});
+	JsCollection(document.querySelectorAll('[control-felem=xuserpicker]'), {
+		justUse: 1,
+		url: JsUrl('admin/usys.users/json'),
+	});
+	//JsFelem.load(document);
+	//JsForm().request();
+";
 // form
 $form = Form::get();
 $form->setValues([
@@ -29,8 +52,7 @@ $html = $fbox->render();
 // template
 $tpl = Template::get();
 $tpl->options([
-	'js' => 'cms/plugins/form/sample/collection/scripts.js',
-	'domready' => 'AdTest.load()',
+	'domready' => $domready,
 	'thirdbar' => 'form.thirdbar'
 ]);
 $tpl->title(_t('Collection'));

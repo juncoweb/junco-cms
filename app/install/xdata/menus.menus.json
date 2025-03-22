@@ -2,7 +2,7 @@
     "menus": [
         {
             "menu_key": "backend-Default",
-            "menu_path": "Settings|Menus",
+            "menu_path": "Personalization|Menus",
             "menu_order": 2,
             "menu_url": "admin\/menus,",
             "menu_image": "",

@@ -6,7 +6,7 @@
 }
 
 .pull-navbar {
-  background: #535251;
+  background: var(--solid-bg-color);
   position: fixed;
   top: 0;
   left: 0;
@@ -16,7 +16,6 @@
   z-index: 2001;
   zoom: 1;
   overflow-y: auto;
-  -webkit-transition: transform 0.2s ease-out;
   transition: transform 0.2s ease-out;
 }
 
@@ -869,8 +868,8 @@ body.full-body {
 
 /* navbar-mobile */
 .navbar-mobile {
-  font-size: 1.2em;
-  margin-top: 20px;
+  font-size: 1.25rem;
+  margin-top: 2rem;
 }
 .navbar-mobile ul,
 .navbar-mobile li {
@@ -879,22 +878,35 @@ body.full-body {
   list-style: none;
 }
 .navbar-mobile a {
+  color: var(--solid-font-color);
   text-decoration: none;
-  padding: 7px 14px 7px 32px;
+  padding: 0.5rem 1rem;
   display: block;
   white-space: nowrap;
 }
 .navbar-mobile a:hover {
+  color: var(--solid-primary-surface-color);
   text-decoration: none;
+}
+.navbar-mobile > ul > li a:focus,
+.navbar-mobile > ul > li a:hover {
+  background-color: var(--solid-disabled-bg-color);
 }
 .navbar-mobile > ul > li > a span {
   margin-left: 10px;
+}
+.navbar-mobile > ul > li.selected > a {
+  color: var(--solid-primary-surface-color);
+  background-color: var(--solid-disabled-bg-color);
+}
+.navbar-mobile > ul > li.expand > a {
+  background-color: var(--solid-disabled-bg-color);
 }
 .navbar-mobile > ul > li {
   position: relative;
 }
 .navbar-mobile > ul > li > ul {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--regular-disabled-bg-color);
 }
 .navbar-mobile > ul > li ul li a {
   padding: 7px 14px 7px 42px;

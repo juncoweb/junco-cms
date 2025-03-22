@@ -1,8 +1,4 @@
 
-Assets v5.4
+System v13.3
 =======================================================
-- Several security and performance improvements have been made.
-
-Router v4.5
-=======================================================
-- Several security and performance improvements have been made.
+- Now, the plugins folder is not accessible from the browser. Assets should be located in the scripts folder.

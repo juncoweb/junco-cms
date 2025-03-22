@@ -130,7 +130,7 @@ class Date extends DateTime
 	public function __get(string $name)
 	{
 		switch (strtolower($name)) {
-				// Day
+			// Day
 			case 'day':
 				return parent::format('d');
 
