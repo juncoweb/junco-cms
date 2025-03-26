@@ -11,18 +11,18 @@ use Database;
 
 interface RegistersInterface
 {
-	/**
-	 * Constructor
-	 */
-	public function __construct(Database $db);
+    /**
+     * Constructor
+     */
+    public function __construct(Database $db);
 
-	/**
-	 * show
-	 * 
-	 * @param string $tbl_name
-	 * @param bool   $set_db_prefix
-	 * 
-	 * @return array
-	 */
-	public function showData(string $tbl_name, bool $set_db_prefix = false): array;
+    /**
+     * show
+     * 
+     * @param string $tbl_name
+     * @param bool   $set_db_prefix
+     * 
+     * @return array
+     */
+    public function showData(string $tbl_name, bool $set_db_prefix = false): array;
 }

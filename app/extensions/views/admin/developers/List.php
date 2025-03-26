@@ -19,9 +19,9 @@ $bls->th(_t('Name'));
 $bls->th(['priority' => 2, 'width' => 120]);
 
 foreach ($pagi->fetchAll() as $row) {
-	$bls->check($row['id']);
-	$bls->td($row['developer_name']);
-	$bls->td($row['is_protected'] ? _t('Protected') : false);
+    $bls->check($row['id']);
+    $bls->td($row['developer_name']);
+    $bls->td($row['is_protected'] ? _t('Protected') : false);
 }
 
 return $bls->render();

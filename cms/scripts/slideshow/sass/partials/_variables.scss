@@ -1,15 +1,14 @@
-
 // slideshow
 // -----------------------------------------------
 $slideshow-color: #fff !default;
 $slideshow-bg-color: #222 !default;
 
 $slideshow-mask-color: null !default;
-$slideshow-mask-color: rgba(0, 0, 0, .1) !default;
+$slideshow-mask-color: rgba(0, 0, 0, 0.1) !default;
 
 $slideshow-nav-size: 3em !default;
-$slideshow-nav-bg-color: rgba(155, 155, 155, .16) !default;
+$slideshow-nav-bg-color: rgba(155, 155, 155, 0.16) !default;
 
-$slideshow-transition-duration: .8s !default;
+$slideshow-transition-duration: 0.8s !default;
 
 $slideshow-text-align: center !default;

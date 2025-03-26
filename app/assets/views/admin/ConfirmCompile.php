@@ -18,8 +18,8 @@ $form->separate(_t('Javascript or Css'));
 //
 $form->radio('fixurl', $fixurl_options)->setLabel('<span class="text-nowrap">' . _t('Fix url') . '</span>');
 $form->select('precompile', $precompile_options)
-	->setLabel(_t('Precompile'))
-	->setHelp(_t('For each style sheet, try to find and run the precompiler.'));
+    ->setLabel(_t('Precompile'))
+    ->setHelp(_t('For each style sheet, try to find and run the precompiler.'));
 $form->separate(_t('Only Css'));
 
 // modal

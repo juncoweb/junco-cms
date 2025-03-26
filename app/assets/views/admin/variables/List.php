@@ -19,9 +19,9 @@ $bls->th(_t('Name'));
 $bls->th(['priority' => 2]);
 
 foreach ($rows as $row) {
-	$bls->check($row['file']);
-	$bls->td($row['name']);
-	$bls->td($bls->isRepeated($row['scope']));
+    $bls->check($row['file']);
+    $bls->td($row['name']);
+    $bls->td($bls->isRepeated($row['scope']));
 }
 $bls->hidden('key', $key);
 

@@ -9,24 +9,24 @@ use Junco\Mvc\Model;
 
 class FrontUsysAccountModel extends Model
 {
-	// vars
-	protected $db = null;
+    // vars
+    protected $db = null;
 
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->db = db();
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->db = db();
+    }
 
-	/**
-	 * Get
-	 */
-	public function getIndexData()
-	{
-		// query
-		$data = $this->db->safeFind("
+    /**
+     * Get
+     */
+    public function getIndexData()
+    {
+        // query
+        $data = $this->db->safeFind("
 		SELECT
 		 id ,
 		 fullname ,
@@ -35,9 +35,9 @@ class FrontUsysAccountModel extends Model
 		FROM `#__users`
 		WHERE id = ?", curuser()->id)->fetch();
 
-		return [
-			'values' => $data,
-			'options' => config('usys.account_options')
-		];
-	}
+        return [
+            'values' => $data,
+            'options' => config('usys.account_options')
+        ];
+    }
 }

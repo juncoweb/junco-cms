@@ -1,107 +1,105 @@
 /* --- Progress circle --------------------------------------- */
 .progress-circle {
-	height: $progress-circle-size;
-	width: $progress-circle-size;
-	border-radius: 50%;
-	display: inline-block;
-	position: relative;
-	overflow: hidden;
+    height: $progress-circle-size;
+    width: $progress-circle-size;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
 
-	&:before {
-		font-size: $progress-circle-size * .28;
-		align-items: center;
-		background-color: $progress-circle-bg-color;
-		border-radius: 50%;
-		content: attr(data-progress)'%';
-		display: flex;
-		justify-content: center;
-		position: absolute;
-		left: $progress-circle-border-size;
-		right: $progress-circle-border-size;
-		top: $progress-circle-border-size;
-		bottom: $progress-circle-border-size;
-		transition: transform .2s ease;
-		z-index: 1;
-	}
+    &:before {
+        font-size: $progress-circle-size * 0.28;
+        align-items: center;
+        background-color: $progress-circle-bg-color;
+        border-radius: 50%;
+        content: attr(data-progress) "%";
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        left: $progress-circle-border-size;
+        right: $progress-circle-border-size;
+        top: $progress-circle-border-size;
+        bottom: $progress-circle-border-size;
+        transition: transform 0.2s ease;
+        z-index: 1;
+    }
 
-	&:hover:before,
-	&:focus:before {
-		transform: scale(.9);
-	}
+    &:hover:before,
+    &:focus:before {
+        transform: scale(0.9);
+    }
 
+    &:after {
+        content: "";
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        background-image: linear-gradient(90deg, $progress-circle-secondary-color 50%, $progress-circle-color 50%);
+        //border-radius: 50%;
+    }
 
-	&:after {
-		content: '';
-		display: inline-block;
-		height: 100%;
-		width: 100%;
-		background-image: linear-gradient(90deg, $progress-circle-secondary-color 50%, $progress-circle-color 50%);
-		//border-radius: 50%;
-	}
+    div {
+        position: absolute;
+        inset: 0;
+        background-image: linear-gradient(90deg, $progress-circle-color 50%, transparent 50%);
+        //border-radius: 50%;
+    }
 
-	div {
-		position: absolute;
-		inset: 0;
-		background-image: linear-gradient(90deg, $progress-circle-color 50%, transparent 50%);
-		//border-radius: 50%;
-	}
+    //
+    $increment: 3.6;
 
-	//
-	$increment: 3.6;
+    @for $i from 0 through 100 {
+        &[data-progress='"#{$i}"'] div {
+            transform: rotate(0deg + $increment * $i);
+        }
+    }
 
-	@for $i from 0 through 100 {
-		&[data-progress="\"#{$i}\""] div {
-			transform: rotate(0deg + $increment * $i);
-		}
-	}
+    // sizes
+    &.large {
+        height: $progress-circle-size-large;
+        width: $progress-circle-size-large;
 
-	// sizes
-	&.large {
-		height: $progress-circle-size-large;
-		width: $progress-circle-size-large;
+        &:before {
+            font-size: $progress-circle-size-large * 0.28;
+        }
+    }
 
-		&:before {
-			font-size: $progress-circle-size-large * .28;
-		}
-	}
+    &.small {
+        height: $progress-circle-size-small;
+        width: $progress-circle-size-small;
 
-	&.small {
-		height: $progress-circle-size-small;
-		width: $progress-circle-size-small;
+        &:before {
+            font-size: $progress-circle-size-small * 0.28;
+        }
+    }
 
-		&:before {
-			font-size: $progress-circle-size-small * .28;
-		}
-	}
+    // colors
+    @each $name, $color in $theme-colors {
+        $class: -#{$name};
 
-	// colors
-	@each $name,
-	$color in $theme-colors {
-		$class: -#{$name};
+        @if ($name == "default") {
+            $class: "";
+        }
 
-		@if ($name =="default") {
-			$class: "";
-		}
+        $value: var(--solid#{$class}-surface-color);
 
-		$value: var(--solid#{$class}-surface-color);
+        &.#{$name}:after {
+            background-image: linear-gradient(90deg, $progress-circle-secondary-color 50%, $value 50%);
+        }
 
-		&.#{$name}:after {
-			background-image: linear-gradient(90deg, $progress-circle-secondary-color 50%, $value 50%);
-		}
+        &.#{$name} div {
+            background-image: linear-gradient(90deg, $value 50%, transparent 50%);
+        }
+    }
 
-		&.#{$name} div {
-			background-image: linear-gradient(90deg, $value 50%, transparent 50%);
-		}
-	}
-
-	// hack
-	@for $i from 0 through 50 {
-		&[data-progress="\"#{$i}\""] div {
-			@extend %min-50;
-		}
-	}
+    // hack
+    @for $i from 0 through 50 {
+        &[data-progress='"#{$i}"'] div {
+            @extend %min-50;
+        }
+    }
 }
 
 %min-50 {
-	background-image: linear-gradient(90deg, transparent 50%, $progress-circle-secondary-color 50%);
+    background-image: linear-gradient(90deg, transparent 50%, $progress-circle-secondary-color 50%);
 }

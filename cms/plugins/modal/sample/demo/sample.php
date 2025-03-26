@@ -11,10 +11,10 @@ defined('IS_TEST') or die;
 $url = url('admin/samples/show', ['key' => 'modal.demo.modal']);
 $table = snippet('sample_table', 'samples');
 $rows = [
-	[
-		'code' =>
-		// 1
-		"Modal({
+    [
+        'code' =>
+        // 1
+        "Modal({
 		size: 'large',
 		draggable: 0,
 		overlay: 1,
@@ -24,12 +24,12 @@ $rows = [
 		//onClose: function() { return confirm('cancel?'); },
 		buttons:[{type:'close',caption:'Close'}],
 	});",
-		'details' => '',
-	],
-	[
-		'code' =>
-		// 2
-		"var target = Modal({
+        'details' => '',
+    ],
+    [
+        'code' =>
+        // 2
+        "var target = Modal({
 		size: 'large',
 		title: 'Modal test',
 		content: 'Hello world!',
@@ -43,13 +43,13 @@ $rows = [
 		content: 'Hello world!',
 		buttons:[{type:'close',caption:'Close'}],
 	});",
-		'details' => '',
-	],
+        'details' => '',
+    ],
 
-	[
-		'code' =>
-		// 3
-		"JsRequest.modal({
+    [
+        'code' =>
+        // 3
+        "JsRequest.modal({
 		url: '$url',
 		data: {modal:1},
 		modalOptions: {
@@ -60,13 +60,13 @@ $rows = [
 			//destroy: 1,
 		},
 	});",
-		'details' => '',
-	],
+        'details' => '',
+    ],
 ];
 
 // loop
 foreach ($rows as $i => $row) {
-	$table->row($i + 1, $row['code'], $row['details']);
+    $table->row($i + 1, $row['code'], $row['details']);
 }
 
 // template

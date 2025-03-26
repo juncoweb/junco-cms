@@ -15,76 +15,76 @@ use Junco\Extensions\XData\MalformedDataException;
  * @return void
  */
 return function (&$xdata = null, $cdata = null) {
-	// vars
-	if ($xdata) {
-		$data				= $xdata->getData();
-		$extension_id		= $xdata->extension_id;
-		$extension_alias	= $xdata->extension_alias;
-	} else {
-		$data				= $cdata['data'];
-		$extension_id		= $cdata['extension_id'];
-		$extension_alias	= $cdata['extension_alias'];
-	}
+    // vars
+    if ($xdata) {
+        $data                = $xdata->getData();
+        $extension_id        = $xdata->extension_id;
+        $extension_alias    = $xdata->extension_alias;
+    } else {
+        $data                = $cdata['data'];
+        $extension_id        = $cdata['extension_id'];
+        $extension_alias    = $cdata['extension_alias'];
+    }
 
-	$has		= [];
-	$inserts	= [];
-	$updates	= [];
-	$menu_id	= [];
-	$translate	= [];
-	$db			= db();
+    $has        = [];
+    $inserts    = [];
+    $updates    = [];
+    $menu_id    = [];
+    $translate    = [];
+    $db            = db();
 
-	// set
-	$has = $db->safeFind("
+    // set
+    $has = $db->safeFind("
 	SELECT CONCAT(menu_key, '||', menu_default_path), id
 	FROM `#__menus`
 	WHERE extension_id = $extension_id
 	AND is_distributed = 1")->fetchAll(Database::FETCH_COLUMN, [0 => 1]);
 
-	foreach ($data as $r) {
-		$row = [
-			'menu_key'			=> (string)$r['menu_key'],
-			'menu_default_path'	=> (string)$r['menu_path'],
-			'menu_order'		=> (int)$r['menu_order'],
-			'menu_url'			=> (string)$r['menu_url'],
-			'menu_image'		=> (string)$r['menu_image'],
-			'menu_hash'			=> (string)$r['menu_hash'],
-			'menu_params'		=> (string)$r['menu_params'],
-			'is_distributed'	=> 1,
-		];
-		$key = $row['menu_key'] . '||' . $row['menu_default_path'];
+    foreach ($data as $r) {
+        $row = [
+            'menu_key'            => (string)$r['menu_key'],
+            'menu_default_path'    => (string)$r['menu_path'],
+            'menu_order'        => (int)$r['menu_order'],
+            'menu_url'            => (string)$r['menu_url'],
+            'menu_image'        => (string)$r['menu_image'],
+            'menu_hash'            => (string)$r['menu_hash'],
+            'menu_params'        => (string)$r['menu_params'],
+            'is_distributed'    => 1,
+        ];
+        $key = $row['menu_key'] . '||' . $row['menu_default_path'];
 
-		// validate
-		if (!$row['menu_key']) {
-			throw new MalformedDataException();
-		}
-		if (!$row['menu_default_path']) {
-			throw new MalformedDataException();
-		}
+        // validate
+        if (!$row['menu_key']) {
+            throw new MalformedDataException();
+        }
+        if (!$row['menu_default_path']) {
+            throw new MalformedDataException();
+        }
 
-		if (isset($has[$key])) {
-			$updates[] = $row;
-			$menu_id[] = $has[$key];
-			unset($has[$key]);
-		} else {
-			$row['extension_id']	= $extension_id;
-			$row['menu_path']		= $row['menu_default_path'];
-			$row['status']			= $r['status'] ? 1 : 0;
-			$inserts[]				= $row;
-		}
+        if (isset($has[$key])) {
+            $updates[] = $row;
+            $menu_id[] = $has[$key];
+            unset($has[$key]);
+        } else {
+            $row['extension_id']    = $extension_id;
+            $row['menu_path']        = $row['menu_default_path'];
+            $row['status']            = $r['status'] ? 1 : 0;
+            $inserts[]                = $row;
+        }
 
-		$path = explode('|', $row['menu_default_path']);
-		$translate[] = array_pop($path);
-	}
+        $path = explode('|', $row['menu_default_path']);
+        $translate[] = array_pop($path);
+    }
 
-	if ($updates) {
-		$db->safeExecAll("UPDATE `#__menus` SET ?? WHERE id = ?", $updates, $menu_id);
-	}
-	if ($inserts) {
-		$db->safeExecAll("INSERT INTO `#__menus` (??) VALUES (??)", $inserts);
-	}
-	if ($cdata === null && $has) {
-		$db->safeExec("DELETE FROM `#__menus` WHERE id IN (?..)", array_values($has));
-	}
+    if ($updates) {
+        $db->safeExecAll("UPDATE `#__menus` SET ?? WHERE id = ?", $updates, $menu_id);
+    }
+    if ($inserts) {
+        $db->safeExecAll("INSERT INTO `#__menus` (??) VALUES (??)", $inserts);
+    }
+    if ($cdata === null && $has) {
+        $db->safeExec("DELETE FROM `#__menus` WHERE id IN (?..)", array_values($has));
+    }
 
-	(new LanguageHelper())->translate('menus.' . $extension_alias, $translate);
+    (new LanguageHelper())->translate('menus.' . $extension_alias, $translate);
 };

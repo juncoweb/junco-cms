@@ -9,12 +9,12 @@ namespace Junco\Responder\Contract;
 
 interface AjaxTextInterface extends ResponderInterface
 {
-	/**
-	 * Sets the text content.
-	 * 
-	 * @param string $content
-	 * 
-	 * @return void
-	 */
-	public function setContent(string $content): void;
+    /**
+     * Sets the text content.
+     * 
+     * @param string $content
+     * 
+     * @return void
+     */
+    public function setContent(string $content): void;
 }

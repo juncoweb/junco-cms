@@ -14,7 +14,7 @@
  * @return bool
  */
 return function ($extension_id, $extension_alias) {
-	return db()->safeFind("
+    return db()->safeFind("
 	SELECT COUNT(*)
 	FROM `#__users_roles_labels`
 	WHERE extension_id = ?", $extension_id)->fetchColumn();

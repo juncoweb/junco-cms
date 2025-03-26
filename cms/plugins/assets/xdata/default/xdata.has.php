@@ -14,5 +14,5 @@
  * @return bool
  */
 return function ($extension_id, $extension_alias) {
-	return (new AssetsExporter)->has($extension_alias);
+    return (new AssetsExporter)->has($extension_alias);
 };

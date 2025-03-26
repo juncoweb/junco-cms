@@ -6,7 +6,7 @@ $frontend-border: 1px solid !default;
 // header
 $frontend-header-setcolor: "-info" !default;
 //
-$frontend-header-active-opacity: .85 !default;
+$frontend-header-active-opacity: 0.85 !default;
 
 // top header
 $frontend-header-link-hover-color: var(--solid#{$frontend-header-setcolor}-active-font-color) !default; //?
@@ -16,7 +16,7 @@ $frontend-capital-color: null !default;
 $frontend-capital-bg-color: null !default;
 
 // logo
-$frontend-header-transition-duration: .3s !default;
+$frontend-header-transition-duration: 0.3s !default;
 $frontend-header-logo-color: null !default;
 
 // footer
@@ -27,7 +27,7 @@ $frontend-footer-border-color: var(--regular#{$frontend-footer-setcolor}-border-
 //
 $frontend-copyright-setcolor: "" !default;
 $frontend-copyright-color: var(--regular#{$frontend-copyright-setcolor}-font-color) !default;
-$frontend-copyright-bg-color: var(--regular#{$frontend-copyright-setcolor}-bg-color) !default; // #E7E7E7 
+$frontend-copyright-bg-color: var(--regular#{$frontend-copyright-setcolor}-bg-color) !default; // #E7E7E7
 $frontend-copyright-border-color: var(--regular#{$frontend-copyright-setcolor}-border-color) !default;
 
 // --- navbar ---------------------------------------------
@@ -43,4 +43,4 @@ $frontend-navbar-nested-bg-color: null !default;
 $frontend-navbar-padding: 1rem 1rem !default;
 
 // --- widget ---------------------------------------------
-$widget-list-displacement: $spacing * .5 !default;
+$widget-list-displacement: $spacing * 0.5 !default;

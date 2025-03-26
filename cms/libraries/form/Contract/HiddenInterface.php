@@ -9,17 +9,17 @@ namespace Junco\Form\Contract;
 
 interface HiddenInterface
 {
-	/**
-	 * Get
-	 * 
-	 * @return string
-	 */
-	public function render(): string;
+    /**
+     * Get
+     * 
+     * @return string
+     */
+    public function render(): string;
 
-	/**
-	 * To string representation.
-	 * 
-	 * @return string
-	 */
-	public function __toString(): string;
+    /**
+     * To string representation.
+     * 
+     * @return string
+     */
+    public function __toString(): string;
 }

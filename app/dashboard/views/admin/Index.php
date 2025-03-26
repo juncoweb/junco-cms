@@ -13,11 +13,11 @@ $collector = snippet('dashboard', $snippet);
 
 # plugins
 if ($plugins) {
-	Plugins::get('dashboard', 'load', $plugins)?->run($collector);
+    Plugins::get('dashboard', 'load', $plugins)?->run($collector);
 }
 
 if ($options) {
-	$tpl->options($options);
+    $tpl->options($options);
 }
 $tpl->title(_t('Dashboard'), 'fa-solid fa-dashboard');
 $tpl->content = $collector->render();

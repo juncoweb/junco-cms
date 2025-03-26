@@ -9,36 +9,36 @@ use Junco\Mvc\Controller;
 
 class AdminExtensionsWebstoreController extends Controller
 {
-	/**
-	 * Index
-	 */
-	public function index()
-	{
-		return $this->view();
-	}
+    /**
+     * Index
+     */
+    public function index()
+    {
+        return $this->view();
+    }
 
-	/**
-	 * List
-	 */
-	public function list()
-	{
-		return $this->view(null, (new ExtensionsWebstoreModel)->getListData());
-	}
+    /**
+     * List
+     */
+    public function list()
+    {
+        return $this->view(null, (new ExtensionsWebstoreModel)->getListData());
+    }
 
-	/**
-	 * Confirm download
-	 */
-	public function confirmDownload()
-	{
-		return $this->view(null, (new ExtensionsWebstoreModel)->getConfirmDownloadData());
-	}
+    /**
+     * Confirm download
+     */
+    public function confirmDownload()
+    {
+        return $this->view(null, (new ExtensionsWebstoreModel)->getConfirmDownloadData());
+    }
 
-	/**
-	 * Download
-	 */
-	public function download()
-	{
-		return $this->middleware('form.security', 'extensions.security')
-			?: $this->wrapper(fn() => (new ExtensionsWebstoreModel)->download());
-	}
+    /**
+     * Download
+     */
+    public function download()
+    {
+        return $this->middleware('form.security', 'extensions.security')
+            ?: $this->wrapper(fn() => (new ExtensionsWebstoreModel)->download());
+    }
 }

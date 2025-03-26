@@ -10,17 +10,17 @@
  */
 class Install
 {
-	/**
-	 * Database Can Connect
-	 *
-	 * @return bool
-	 */
-	public static function dbCanconnect()
-	{
-		try {
-			return db()->isConnected();
-		} catch (Throwable $e) {
-			return false;
-		}
-	}
+    /**
+     * Database Can Connect
+     *
+     * @return bool
+     */
+    public static function dbCanconnect()
+    {
+        try {
+            return db()->isConnected();
+        } catch (Throwable $e) {
+            return false;
+        }
+    }
 }

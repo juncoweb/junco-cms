@@ -9,21 +9,21 @@ namespace Junco\Frontlist\Contract;
 
 interface BoxInterface
 {
-	/**
-	 * Actions
-	 * 
-	 * @param string $snippet
-	 * 
-	 * @return ActionsInterface
-	 */
-	public function getActions(string $snippet = ''): ActionsInterface;
+    /**
+     * Actions
+     * 
+     * @param string $snippet
+     * 
+     * @return ActionsInterface
+     */
+    public function getActions(string $snippet = ''): ActionsInterface;
 
-	/**
-	 * Render
-	 * 
-	 * @param string $content
-	 * 
-	 * @return string
-	 */
-	public function render(string $content = ''): string;
+    /**
+     * Render
+     * 
+     * @param string $content
+     * 
+     * @return string
+     */
+    public function render(string $content = ''): string;
 }

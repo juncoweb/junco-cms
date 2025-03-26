@@ -8,8 +8,8 @@
 // form
 $form = Form::get();
 if ($values) {
-	$form->setValues($values);
-	$form->hidden('language');
+    $form->setValues($values);
+    $form->hidden('language');
 }
 //
 $form->input('name')->setLabel(_t('Name'))->setRequired();

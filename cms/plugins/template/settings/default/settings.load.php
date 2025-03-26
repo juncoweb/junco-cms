@@ -6,6 +6,6 @@
  */
 
 return function (&$rows) {
-	$rows['frontend_default_snippet']['snippet'] = 'template';
-	$rows['backend_default_snippet']['snippet'] = 'template';
+    $rows['frontend_default_snippet']['snippet'] = 'template';
+    $rows['backend_default_snippet']['snippet'] = 'template';
 };

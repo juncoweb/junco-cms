@@ -18,8 +18,8 @@ $bls->check_h();
 $bls->th(_t('Name'));
 
 foreach ($rows as $domain) {
-	$bls->check($domain);
-	$bls->td($domain);
+    $bls->check($domain);
+    $bls->td($domain);
 }
 $bls->hidden('language', $language);
 

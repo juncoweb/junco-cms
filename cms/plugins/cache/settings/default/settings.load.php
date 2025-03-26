@@ -6,11 +6,11 @@
  */
 
 return function (&$rows) {
-	$rows['adapter']['options'] = [
-		'file'		=> 'File',
-		'apcu'		=> 'APCu',
-		'memcached'	=> 'Memcached',
-		//'redis'		=> 'Redis',
-		'null'		=> 'Null',
-	];
+    $rows['adapter']['options'] = [
+        'file'        => 'File',
+        'apcu'        => 'APCu',
+        'memcached'    => 'Memcached',
+        //'redis'		=> 'Redis',
+        'null'        => 'Null',
+    ];
 };

@@ -1,25 +1,25 @@
 .widget-post {
-	>div {
-		clear: both;
-		overflow: hidden;
-		margin-bottom: 25px;
-	}
+    > div {
+        clear: both;
+        overflow: hidden;
+        margin-bottom: 25px;
+    }
 
-	.post-thumb {
-		float: left;
-		margin-right: $spacing;
+    .post-thumb {
+        float: left;
+        margin-right: $spacing;
 
-		img {
-			width: 85px;
-		}
-	}
+        img {
+            width: 85px;
+        }
+    }
 
-	.post-title a {
-		text-decoration: none;
-	}
+    .post-title a {
+        text-decoration: none;
+    }
 
-	.post-meta {
-		color: var(--regular-subtle-font-color);
-		font-size: $small-font-size;
-	}
+    .post-meta {
+        color: var(--regular-subtle-font-color);
+        font-size: $small-font-size;
+    }
 }

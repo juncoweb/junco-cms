@@ -19,8 +19,8 @@ $html = $form->render();
 $tpl = Template::get();
 $tpl->editor();
 $tpl->options([
-	'domready' => 'JsFelem.load(document.getElementById(\'js-form\'))',
-	'thirdbar' => 'form.thirdbar'
+    'domready' => 'JsFelem.load(document.getElementById(\'js-form\'))',
+    'thirdbar' => 'form.thirdbar'
 ]);
 $tpl->title(_t('Editor'));
 $tpl->content = '<div class="panel"><div class="panel-body">' . $html . '</div></div>';

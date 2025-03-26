@@ -8,18 +8,18 @@
 // vars
 $tiles = Tiles::get();
 $tiles->line([
-	['href' => url('admin/email/write'), 'icon' => 'fa-solid fa-paper-plane', 'caption' => _t('Write')],
+    ['href' => url('admin/email/write'), 'icon' => 'fa-solid fa-paper-plane', 'caption' => _t('Write')],
 ]);
 $tiles->separate(_t('Main'));
 //
 $tiles->line([
-	['href' => url('admin/email/message'), 'icon' => 'fa-solid fa-envelope-open-text', 'caption' => _t('Message')],
-	['href' => url('admin/email/debug'), 'icon' => 'fa-solid fa-bug', 'caption' => _t('Debug')],
+    ['href' => url('admin/email/message'), 'icon' => 'fa-solid fa-envelope-open-text', 'caption' => _t('Message')],
+    ['href' => url('admin/email/debug'), 'icon' => 'fa-solid fa-bug', 'caption' => _t('Debug')],
 ]);
 $tiles->separate(_t('Tools'));
 //
 $tiles->line([
-	['href' => url('admin/settings', ['key' => 'email']), 'icon' => 'fa-solid fa-gear', 'caption' => _t('Settings')],
+    ['href' => url('admin/settings', ['key' => 'email']), 'icon' => 'fa-solid fa-gear', 'caption' => _t('Settings')],
 ]);
 $tiles->separate(_t('Shortcuts'));
 

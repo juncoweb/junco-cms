@@ -9,11 +9,11 @@ use Junco\Mvc\Controller;
 
 class FrontPortalController extends Controller
 {
-	/**
-	 * Index
-	 */
-	public function index()
-	{
-		return $this->view(null, (new PortalModel)->getIndexData());
-	}
+    /**
+     * Index
+     */
+    public function index()
+    {
+        return $this->view(null, (new PortalModel)->getIndexData());
+    }
 }

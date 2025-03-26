@@ -10,17 +10,17 @@ defined('IS_TEST') or die;
 
 function render($title, $element)
 {
-	$colors = ['default', 'primary', 'secondary', 'success', 'info', 'warning', 'danger'];
-	$partial = '';
+    $colors = ['default', 'primary', 'secondary', 'success', 'info', 'warning', 'danger'];
+    $partial = '';
 
-	foreach ($colors as $color) {
-		$caption = ucfirst($color);
-		$partial .= '<div style="display: inline-block; max-widht: 400px; margin: 3px;">'
-			. strtr($element, ['{{ color }}' => $color, '{{ caption }}' => $caption])
-			. '</div>';
-	}
+    foreach ($colors as $color) {
+        $caption = ucfirst($color);
+        $partial .= '<div style="display: inline-block; max-widht: 400px; margin: 3px;">'
+            . strtr($element, ['{{ color }}' => $color, '{{ caption }}' => $caption])
+            . '</div>';
+    }
 
-	return '<div><h4>' . $title . '</h4>' . $partial . '</div>';
+    return '<div><h4>' . $title . '</h4>' . $partial . '</div>';
 }
 
 // vars
@@ -34,8 +34,8 @@ $html .= render('.input', '<div class="panel panel-solid panel-{{ color }}" styl
 // template
 $tpl = Template::get();
 $tpl->options([
-	'domready' => "JsFelem.load('#content')",
-	'thirdbar' => 'form.thirdbar'
+    'domready' => "JsFelem.load('#content')",
+    'thirdbar' => 'form.thirdbar'
 ]);
 $tpl->title('Input');
 $tpl->content = '<div class="panel"><div class="panel-body">' . $html . '</div></div>';

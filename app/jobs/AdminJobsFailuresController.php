@@ -9,53 +9,53 @@ use Junco\Mvc\Controller;
 
 class AdminJobsFailuresController extends Controller
 {
-	/**
-	 * Index
-	 */
-	public function index()
-	{
-		return $this->view();
-	}
+    /**
+     * Index
+     */
+    public function index()
+    {
+        return $this->view();
+    }
 
-	/**
-	 * List
-	 */
-	public function list()
-	{
-		return $this->view(null, (new AdminJobsFailuresModel)->getListData());
-	}
+    /**
+     * List
+     */
+    public function list()
+    {
+        return $this->view(null, (new AdminJobsFailuresModel)->getListData());
+    }
 
-	/**
-	 * Show
-	 */
-	public function show()
-	{
-		return $this->view(null, (new AdminJobsFailuresModel)->getShowData());
-	}
+    /**
+     * Show
+     */
+    public function show()
+    {
+        return $this->view(null, (new AdminJobsFailuresModel)->getShowData());
+    }
 
-	/**
-	 * Status
-	 */
-	public function status()
-	{
-		return $this->middleware('form.security')
-			?: $this->wrapper(fn() => (new JobsFailuresModel)->status());
-	}
+    /**
+     * Status
+     */
+    public function status()
+    {
+        return $this->middleware('form.security')
+            ?: $this->wrapper(fn() => (new JobsFailuresModel)->status());
+    }
 
-	/**
-	 * Confirm delete
-	 */
-	public function confirmDelete()
-	{
-		return $this->view(null, (new AdminJobsFailuresModel)->getConfirmDeleteData());
-	}
+    /**
+     * Confirm delete
+     */
+    public function confirmDelete()
+    {
+        return $this->view(null, (new AdminJobsFailuresModel)->getConfirmDeleteData());
+    }
 
-	/**
-	 * Delete
-	 */
-	public function delete()
-	{
-		return $this->middleware('form.security')
-			?: $this->wrapper(fn() => (new JobsFailuresModel)->delete());
-	}
+    /**
+     * Delete
+     */
+    public function delete()
+    {
+        return $this->middleware('form.security')
+            ?: $this->wrapper(fn() => (new JobsFailuresModel)->delete());
+    }
 }

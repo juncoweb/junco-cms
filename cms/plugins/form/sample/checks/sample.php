@@ -10,22 +10,22 @@ defined('IS_TEST') or die;
 
 function render($title, $element)
 {
-	$colors = ['default', 'primary', 'secondary', 'success', 'info', 'warning', 'danger'];
-	$partial = '';
+    $colors = ['default', 'primary', 'secondary', 'success', 'info', 'warning', 'danger'];
+    $partial = '';
 
-	foreach ($colors as $color) {
-		if ($color) {
-			$caption = ucfirst($color);
-			$color = ' input-' . $color;
-		} else {
-			$caption = 'None';
-		}
-		$partial .= '<div style="display: block; max-widht: 400px; margin: 3px;">'
-			. strtr($element, ['{{ class }}' => $color, '{{ caption }}' => $caption])
-			. '</div>';
-	}
+    foreach ($colors as $color) {
+        if ($color) {
+            $caption = ucfirst($color);
+            $color = ' input-' . $color;
+        } else {
+            $caption = 'None';
+        }
+        $partial .= '<div style="display: block; max-widht: 400px; margin: 3px;">'
+            . strtr($element, ['{{ class }}' => $color, '{{ caption }}' => $caption])
+            . '</div>';
+    }
 
-	return '<div><h4>' . $title . '</h4>' . $partial . '</div>';
+    return '<div><h4>' . $title . '</h4>' . $partial . '</div>';
 }
 
 // vars

@@ -6,7 +6,7 @@
  */
 
 return function (&$row) {
-	if ($row['use_background'] && !config('jobs.worker')) {
-		throw new Exception('You must configure the jobs before background processing.');
-	}
+    if ($row['use_background'] && !config('jobs.worker')) {
+        throw new Exception('You must configure the jobs before background processing.');
+    }
 };

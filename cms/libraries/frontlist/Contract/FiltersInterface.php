@@ -11,19 +11,19 @@ use Junco\Form\Contract\FilterElementsInterface;
 
 interface FiltersInterface extends FilterElementsInterface
 {
-	/**
-	 * Url
-	 * 
-	 * @param string $url
-	 * 
-	 * @return void
-	 */
-	public function url(string $route = ''): void;
+    /**
+     * Url
+     * 
+     * @param string $url
+     * 
+     * @return void
+     */
+    public function url(string $route = ''): void;
 
-	/**
-	 * Render
-	 * 
-	 * @return void
-	 */
-	public function render(): string;
+    /**
+     * Render
+     * 
+     * @return void
+     */
+    public function render(): string;
 }

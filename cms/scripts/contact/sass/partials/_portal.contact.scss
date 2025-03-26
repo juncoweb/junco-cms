@@ -1,12 +1,10 @@
-
 /* --- contact-form ---------------------------------------- */
 .widget-contact-form {
-	background-color: $contact-form-bg-color;
-	padding: $contact-form-padding;
+    background-color: $contact-form-bg-color;
+    padding: $contact-form-padding;
 
-	.container {
-		max-width: 500px;
-		margin: 0 auto;
-	}
+    .container {
+        max-width: 500px;
+        margin: 0 auto;
+    }
 }
-

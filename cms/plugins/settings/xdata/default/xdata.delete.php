@@ -11,5 +11,5 @@
  * @param object $xdata
  */
 return function (&$xdata) {
-	(new Settings($xdata->extension_alias))->deleteAll();
+    (new Settings($xdata->extension_alias))->deleteAll();
 };

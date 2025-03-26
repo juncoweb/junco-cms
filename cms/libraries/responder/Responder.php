@@ -11,26 +11,26 @@ use Junco\Responder\Contract\HttpBlankInterface;
 
 class Responder
 {
-	/**
-	 * 
-	 */
-	public static function asAjaxJson(): AjaxJsonInterface
-	{
-		return snippet('responder#ajax_json');
-	}
-	/**
-	 * 
-	 */
-	public static function asAjaxText(): AjaxTextInterface
-	{
-		return snippet('responder#ajax_text');
-	}
+    /**
+     * 
+     */
+    public static function asAjaxJson(): AjaxJsonInterface
+    {
+        return snippet('responder#ajax_json');
+    }
+    /**
+     * 
+     */
+    public static function asAjaxText(): AjaxTextInterface
+    {
+        return snippet('responder#ajax_text');
+    }
 
-	/**
-	 * 
-	 */
-	public static function asHttpBlank(): HttpBlankInterface
-	{
-		return snippet('responder#http_blank');
-	}
+    /**
+     * 
+     */
+    public static function asHttpBlank(): HttpBlankInterface
+    {
+        return snippet('responder#http_blank');
+    }
 }

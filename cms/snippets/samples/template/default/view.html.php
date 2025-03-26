@@ -15,24 +15,24 @@ $this->css('cms/scripts/samples/css/template-default.css');
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-	<!-- css -->
-	<?php echo $this->renderCss() ?>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <!-- css -->
+    <?php echo $this->renderCss() ?>
 
-	<!-- js -->
-	<?php echo $this->renderJs() ?>
+    <!-- js -->
+    <?php echo $this->renderJs() ?>
 
-	<!-- title -->
-	<title><?php echo $title ?></title>
+    <!-- title -->
+    <title><?php echo $title ?></title>
 </head>
 
 <body>
-	<h1><?php echo $title ?></h1>
-	<div id="container">
-		<?php echo $this->content ?>
-	</div><!-- End Container -->
+    <h1><?php echo $title ?></h1>
+    <div id="container">
+        <?php echo $this->content ?>
+    </div><!-- End Container -->
 </body>
 
 </html>

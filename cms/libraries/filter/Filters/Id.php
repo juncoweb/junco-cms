@@ -9,16 +9,16 @@ namespace Junco\Filter\Filters;
 
 class Id extends FilterAbstract
 {
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->type = 'int';
-		$this->default  = 0;
-		$this->argument = [
-			'filter' => FILTER_VALIDATE_INT,
-			'options' => ['min_range' => 0, 'default' => 0]
-		];
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->type = 'int';
+        $this->default  = 0;
+        $this->argument = [
+            'filter' => FILTER_VALIDATE_INT,
+            'options' => ['min_range' => 0, 'default' => 0]
+        ];
+    }
 }

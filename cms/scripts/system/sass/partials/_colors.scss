@@ -1,143 +1,135 @@
 /* --- colors ------------------------------------------- */
-@each $name,
-$color in $theme-colors {
-	$class: -#{$name};
+@each $name, $color in $theme-colors {
+    $class: -#{$name};
 
-	@if ($name =="default") {
-		$class: "";
-	}
+    @if ($name == "default") {
+        $class: "";
+    }
 
-	// badge
-	.badge#{$class},
-	a.badge#{$class} {
-		color: var(--solid#{$class}-font-color);
-		background-color: var(--solid#{$class}-bg-color);
-		border-color: var(--solid#{$class}-bg-color);
-	}
+    // badge
+    .badge#{$class},
+    a.badge#{$class} {
+        color: var(--solid#{$class}-font-color);
+        background-color: var(--solid#{$class}-bg-color);
+        border-color: var(--solid#{$class}-bg-color);
+    }
 
-	.badge#{$class}.badge-regular,
-	a.badge#{$class}.badge-regular {
-		color: var(--regular#{$class}-font-color);
-		background-color: var(--regular#{$class}-bg-color);
-		border-color: var(--regular#{$class}-border-color);
-	}
+    .badge#{$class}.badge-regular,
+    a.badge#{$class}.badge-regular {
+        color: var(--regular#{$class}-font-color);
+        background-color: var(--regular#{$class}-bg-color);
+        border-color: var(--regular#{$class}-border-color);
+    }
 
-	// dialog
-	.dialog#{$class} {
-		color: var(--regular#{$class}-font-color);
-		background-color: var(--regular#{$class}-bg-color);
-		border-color: var(--regular#{$class}-border-color);
-	}
+    // dialog
+    .dialog#{$class} {
+        color: var(--regular#{$class}-font-color);
+        background-color: var(--regular#{$class}-bg-color);
+        border-color: var(--regular#{$class}-border-color);
+    }
 
-	// panel
-	.panel#{$class} {
-		border-color: var(--regular#{$class}-border-color);
+    // panel
+    .panel#{$class} {
+        border-color: var(--regular#{$class}-border-color);
 
-		.panel-header,
-		.panel-footer {
-			border-color: var(--regular#{$class}-border-color);
-		}
+        .panel-header,
+        .panel-footer {
+            border-color: var(--regular#{$class}-border-color);
+        }
 
-		h1,
-		h2,
-		h3,
-		h4,
-		h5,
-		h6 {
-			color: var(--regular#{$class}-heading-color);
-		}
-	}
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: var(--regular#{$class}-heading-color);
+        }
+    }
 
-	.panel#{$class}.panel-regular {
-		color: var(--regular#{$class}-font-color);
-		background-color: var(--regular#{$class}-bg-color);
-	}
+    .panel#{$class}.panel-regular {
+        color: var(--regular#{$class}-font-color);
+        background-color: var(--regular#{$class}-bg-color);
+    }
 
-	// panel
-	.panel#{$class}.panel-solid {
-		color: var(--solid#{$class}-font-color);
-		background-color: var(--solid#{$class}-bg-color);
-		border-color: var(--solid#{$class}-border-color);
+    // panel
+    .panel#{$class}.panel-solid {
+        color: var(--solid#{$class}-font-color);
+        background-color: var(--solid#{$class}-bg-color);
+        border-color: var(--solid#{$class}-border-color);
 
-		.panel-header,
-		.panel-footer {
-			border-color: var(--solid#{$class}-border-color);
-		}
+        .panel-header,
+        .panel-footer {
+            border-color: var(--solid#{$class}-border-color);
+        }
 
-		h1,
-		h2,
-		h3,
-		h4,
-		h5,
-		h6 {
-			color: var(--solid#{$class}-heading-color);
-		}
-	}
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: var(--solid#{$class}-heading-color);
+        }
+    }
 
-	// toast
-	.toast#{$class} {
-		color: var(--solid#{$class}-font-color);
-		background-color: var(--solid#{$class}-bg-color);
-	}
+    // toast
+    .toast#{$class} {
+        color: var(--solid#{$class}-font-color);
+        background-color: var(--solid#{$class}-bg-color);
+    }
 }
 
 // helpers
-@each $name,
-$value in $colors {
+@each $name, $value in $colors {
+    .color-#{$name},
+    a.color-#{$name} {
+        color: $value;
+    }
 
-	.color-#{$name},
-	a.color-#{$name} {
-		color: $value;
-	}
-
-	.bg-#{$name} {
-		background-color: $value;
-	}
+    .bg-#{$name} {
+        background-color: $value;
+    }
 }
 
-@each $name,
-$color in $theme-colors {
+@each $name, $color in $theme-colors {
+    $class: -#{$name};
 
-	$class: -#{$name};
+    @if ($name == "default") {
+        $class: "";
+    }
 
-	@if ($name =="default") {
-		$class: "";
-	}
+    .color-#{$name},
+    a.color-#{$name} {
+        // then, I must include :hover !!!!
+        @if ($name == "default") {
+            color: var(--regular-font-color);
+        } @else {
+            color: var(--regular#{$class}-surface-color);
+        }
+    }
 
-	.color-#{$name},
-	a.color-#{$name} {
+    .bg-#{$name} {
+        background-color: var(--regular#{$class}-surface-color);
+    }
 
-		// then, I must include :hover !!!!
-		@if ($name =="default") {
-			color: var(--regular-font-color);
-		}
+    .box-#{$name} {
+        color: var(--regular#{$class}-font-color);
+        background-color: var(--regular#{$class}-bg-color);
+        border-color: var(--regular#{$class}-border-color);
+    }
 
-		@else {
-			color: var(--regular#{$class}-surface-color);
-		}
-	}
-
-	.bg-#{$name} {
-		background-color: var(--regular#{$class}-surface-color);
-	}
-
-	.box-#{$name} {
-		color: var(--regular#{$class}-font-color);
-		background-color: var(--regular#{$class}-bg-color);
-		border-color: var(--regular#{$class}-border-color);
-	}
-
-	.box-#{$name}.box-solid {
-		color: var(--solid#{$class}-font-color);
-		background-color: var(--solid#{$class}-bg-color);
-		border-color: var(--solid#{$class}-border-color);
-	}
+    .box-#{$name}.box-solid {
+        color: var(--solid#{$class}-font-color);
+        background-color: var(--solid#{$class}-bg-color);
+        border-color: var(--solid#{$class}-border-color);
+    }
 }
 
 .color-light {
-	color: var(--regular-subtle-font-color);
+    color: var(--regular-subtle-font-color);
 }
 
 .outline-none.panel {
-	border-color: transparent;
+    border-color: transparent;
 }

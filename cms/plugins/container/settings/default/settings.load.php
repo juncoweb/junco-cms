@@ -8,6 +8,6 @@
 use Junco\Filesystem\ImageHelper;
 
 return function (&$rows) {
-	$rows['system_registers']['options'] =
-		$rows['user_registers']['options'] = ['className', 'shared'];
+    $rows['system_registers']['options'] =
+        $rows['user_registers']['options'] = ['className', 'shared'];
 };

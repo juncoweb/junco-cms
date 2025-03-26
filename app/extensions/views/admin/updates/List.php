@@ -22,14 +22,14 @@ $bls->th(_t('Failed'));
 $bls->th(_t('Status'));
 
 if ($rows) {
-	foreach ($rows as $row) {
-		$bls->check($row['id']);
-		$bls->td($row['extension_name']);
-		$bls->td($row['update_version']);
-		$bls->td($row['released_at']);
-		$bls->td($row['has_failed']);
-		$bls->td($row['status']);
-	}
+    foreach ($rows as $row) {
+        $bls->check($row['id']);
+        $bls->td($row['extension_name']);
+        $bls->td($row['update_version']);
+        $bls->td($row['released_at']);
+        $bls->td($row['has_failed']);
+        $bls->td($row['status']);
+    }
 }
 
 return $bls->render($pagi);

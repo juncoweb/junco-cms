@@ -13,5 +13,5 @@
  * @return void
  */
 return function (&$xdata) {
-	(new SettingsImporter($xdata->extension_alias))->import("{$xdata->basepath}storage/settings/");
+    (new SettingsImporter($xdata->extension_alias))->import("{$xdata->basepath}storage/settings/");
 };

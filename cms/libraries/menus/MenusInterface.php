@@ -7,26 +7,26 @@
 
 interface MenusInterface
 {
-	/**
-	 * Constructor
-	 * 
-	 * @param string $key
-	 */
-	public function __construct(string $key = '');
+    /**
+     * Constructor
+     * 
+     * @param string $key
+     */
+    public function __construct(string $key = '');
 
-	/**
-	 * Set to show only rows with edges.
-	 * 
-	 * @param bool $value
-	 * 
-	 * @return void
-	 */
-	public function setWithEdges(bool $value = true): void;
+    /**
+     * Set to show only rows with edges.
+     * 
+     * @param bool $value
+     * 
+     * @return void
+     */
+    public function setWithEdges(bool $value = true): void;
 
-	/**
-	 * Render
-	 * 
-	 * @return string
-	 */
-	public function render(): string;
+    /**
+     * Render
+     * 
+     * @return string
+     */
+    public function render(): string;
 }

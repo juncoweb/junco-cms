@@ -9,27 +9,27 @@ use Junco\Mvc\Controller;
 
 class AdminJobsController extends Controller
 {
-	/**
-	 * Index
-	 */
-	public function index()
-	{
-		return $this->view();
-	}
+    /**
+     * Index
+     */
+    public function index()
+    {
+        return $this->view();
+    }
 
-	/**
-	 * List
-	 */
-	public function list()
-	{
-		return $this->view(null, (new AdminJobsModel)->getListData());
-	}
+    /**
+     * List
+     */
+    public function list()
+    {
+        return $this->view(null, (new AdminJobsModel)->getListData());
+    }
 
-	/**
-	 * Show
-	 */
-	public function show()
-	{
-		return $this->view(null, (new AdminJobsModel)->getShowData());
-	}
+    /**
+     * Show
+     */
+    public function show()
+    {
+        return $this->view(null, (new AdminJobsModel)->getShowData());
+    }
 }

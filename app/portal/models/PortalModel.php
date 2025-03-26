@@ -9,17 +9,17 @@ use Junco\Mvc\Model;
 
 class PortalModel extends Model
 {
-	/**
-	 * Get
-	 */
-	public function getIndexData()
-	{
-		$config = config('portal');
+    /**
+     * Get
+     */
+    public function getIndexData()
+    {
+        $config = config('portal');
 
-		return [
-			'snippet' => $config['portal.snippet'],
-			'plugins' => $config['portal.plugins'],
-			'options' => $config['portal.options']
-		];
-	}
+        return [
+            'snippet' => $config['portal.snippet'],
+            'plugins' => $config['portal.plugins'],
+            'options' => $config['portal.options']
+        ];
+    }
 }

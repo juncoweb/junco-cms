@@ -7,33 +7,33 @@
 
 class FormCaptcha
 {
-	/**
-	 * Verify
-	 */
-	public static function get(string $captcha)
-	{
-		$plugin = Plugin::get('captcha', 'load', $captcha);
+    /**
+     * Verify
+     */
+    public static function get(string $captcha)
+    {
+        $plugin = Plugin::get('captcha', 'load', $captcha);
 
-		if ($plugin) {
-			$attr = $plugin->run();
+        if ($plugin) {
+            $attr = $plugin->run();
 
-			if (is_array($attr)) {
-				return $attr;
-			}
-		}
+            if (is_array($attr)) {
+                return $attr;
+            }
+        }
 
-		return [];
-	}
+        return [];
+    }
 
-	/**
-	 * Verify
-	 */
-	public static function verify(string $captcha): bool
-	{
-		if (!$captcha) {
-			return true;
-		}
+    /**
+     * Verify
+     */
+    public static function verify(string $captcha): bool
+    {
+        if (!$captcha) {
+            return true;
+        }
 
-		return (bool)Plugin::get('captcha', 'verify', $captcha)?->run();
-	}
+        return (bool)Plugin::get('captcha', 'verify', $captcha)?->run();
+    }
 }

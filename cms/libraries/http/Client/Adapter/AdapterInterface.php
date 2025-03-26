@@ -12,14 +12,14 @@ use Junco\Http\Client\ClientResponseInterface;
 
 interface AdapterInterface
 {
-	/**
-	 * Sends a PSR-7 request and returns a PSR-7 response.
-	 *
-	 * @param RequestInterface $request
-	 *
-	 * @return ClientResponseInterface
-	 *
-	 * @throws \Psr\Http\Client\ClientExceptionInterface If an error happens while processing the request.
-	 */
-	public function sendRequest(RequestInterface $request): ClientResponseInterface;
+    /**
+     * Sends a PSR-7 request and returns a PSR-7 response.
+     *
+     * @param RequestInterface $request
+     *
+     * @return ClientResponseInterface
+     *
+     * @throws \Psr\Http\Client\ClientExceptionInterface If an error happens while processing the request.
+     */
+    public function sendRequest(RequestInterface $request): ClientResponseInterface;
 }

@@ -1,43 +1,41 @@
 /* --- colors ------------------------------------------- */
-@each $name,
-$color in $theme-colors {
-	$class: -#{$name};
+@each $name, $color in $theme-colors {
+    $class: -#{$name};
 
-	@if ($name =="default") {
-		$class: "";
-	}
+    @if ($name == "default") {
+        $class: "";
+    }
 
-	.color-light {
-		&.color-#{$name} {
-			color: var(--regular#{$class}-subtle-font-color);
-			&.color-solid {
-				color: var(--solid#{$class}-subtle-font-color);
-			}
-		}
-		
-	}
+    .color-light {
+        &.color-#{$name} {
+            color: var(--regular#{$class}-subtle-font-color);
+            &.color-solid {
+                color: var(--solid#{$class}-subtle-font-color);
+            }
+        }
+    }
 
-	.box-#{$name}-active {
-		color: var(--regular#{$class}-active-font-color);
-		background-color: var(--regular#{$class}-active-bg-color);
-		border-color: var(--regular#{$class}-active-border-color);
-	}
+    .box-#{$name}-active {
+        color: var(--regular#{$class}-active-font-color);
+        background-color: var(--regular#{$class}-active-bg-color);
+        border-color: var(--regular#{$class}-active-border-color);
+    }
 
-	.box-#{$name}-active.box-solid {
-		color: var(--solid#{$class}-active-font-color);
-		background-color: var(--solid#{$class}-active-bg-color);
-		border-color: var(--solid#{$class}-active-border-color);
-	}
+    .box-#{$name}-active.box-solid {
+        color: var(--solid#{$class}-active-font-color);
+        background-color: var(--solid#{$class}-active-bg-color);
+        border-color: var(--solid#{$class}-active-border-color);
+    }
 
-	.box-#{$name}-disabled {
-		color: var(--regular#{$class}-disabled-font-color);
-		background-color: var(--regular#{$class}-disabled-bg-color);
-		border-color: var(--regular#{$class}-disabled-border-color);
-	}
+    .box-#{$name}-disabled {
+        color: var(--regular#{$class}-disabled-font-color);
+        background-color: var(--regular#{$class}-disabled-bg-color);
+        border-color: var(--regular#{$class}-disabled-border-color);
+    }
 
-	.box-#{$name}-disabled.box-solid {
-		color: var(--solid#{$class}-disabled-font-color);
-		background-color: var(--solid#{$class}-disabled-bg-color);
-		border-color: var(--solid#{$class}-disabled-border-color);
-	}
+    .box-#{$name}-disabled.box-solid {
+        color: var(--solid#{$class}-disabled-font-color);
+        background-color: var(--solid#{$class}-disabled-bg-color);
+        border-color: var(--solid#{$class}-disabled-border-color);
+    }
 }

@@ -9,20 +9,20 @@ namespace Junco\Form\FormElement;
 
 class Editor extends FormElement
 {
-	/**
-	 * Constructor
-	 *
-	 * @param string  $name
-	 * @param string  $value
-	 */
-	public function __construct(
-		protected string $name,
-		string $value = ''
-	) {
-		if ($value) {
-			$value = htmlentities($value);
-		}
+    /**
+     * Constructor
+     *
+     * @param string  $name
+     * @param string  $value
+     */
+    public function __construct(
+        protected string $name,
+        string $value = ''
+    ) {
+        if ($value) {
+            $value = htmlentities($value);
+        }
 
-		$this->html = '<textarea name="' . $name . '" control-felem="editor" class="input-field">' . $value . '</textarea>';
-	}
+        $this->html = '<textarea name="' . $name . '" control-felem="editor" class="input-field">' . $value . '</textarea>';
+    }
 }

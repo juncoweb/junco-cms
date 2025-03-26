@@ -7,21 +7,21 @@
 
 //
 foreach ($layouts as $i => $row) {
-	$layouts[$i] = '<a href="' . $row['url'] . '" class="btn btn-small' . ($layout == $i ? ' btn-primary' : '') . '">' . $row['caption'] . '</a>';
+    $layouts[$i] = '<a href="' . $row['url'] . '" class="btn btn-small' . ($layout == $i ? ' btn-primary' : '') . '">' . $row['caption'] . '</a>';
 }
 
 $html = '<p>'
-	. '<div class="btn-group"><a href="' . url('admin/email') . '" class="btn btn-small"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> ' . _t('Back') . '</a></div>'
-	. '<div class="btn-group">' . implode(' · ', $layouts) . '</div>'
-	. '</p>';
+    . '<div class="btn-group"><a href="' . url('admin/email') . '" class="btn btn-small"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> ' . _t('Back') . '</a></div>'
+    . '<div class="btn-group">' . implode(' · ', $layouts) . '</div>'
+    . '</p>';
 
 if ($message) {
-	// tabs
-	$tabs = Tabs::get();
-	$tabs->tab(_t('View'), '<iframe src="' . url('admin/email/iframe') . '" style="width: 100%; min-height: 1200px; border: 0;">' . $message[0] . '</iframe>');
-	$tabs->tab(_t('Html'), '<textarea class="input-field" style="min-height: 1200px;">' . htmlentities($message[0]) . '</textarea>');
-	$tabs->tab(_t('Plain'), '<textarea class="input-field" style="min-height: 1200px;">' . htmlentities($message[1]) . '</textarea>');
-	$html .= $tabs->render();
+    // tabs
+    $tabs = Tabs::get();
+    $tabs->tab(_t('View'), '<iframe src="' . url('admin/email/iframe') . '" style="width: 100%; min-height: 1200px; border: 0;">' . $message[0] . '</iframe>');
+    $tabs->tab(_t('Html'), '<textarea class="input-field" style="min-height: 1200px;">' . htmlentities($message[0]) . '</textarea>');
+    $tabs->tab(_t('Plain'), '<textarea class="input-field" style="min-height: 1200px;">' . htmlentities($message[1]) . '</textarea>');
+    $html .= $tabs->render();
 }
 
 // template

@@ -6,9 +6,9 @@
  */
 
 return function (&$rows) {
-	$rows['myspace_plugins']['plugins'] = 'dashboard';
-	$rows['myspace_snippet']['snippet'] = 'dashboard';
+    $rows['myspace_plugins']['plugins'] = 'dashboard';
+    $rows['myspace_snippet']['snippet'] = 'dashboard';
 
-	$rows['admin_plugins']['plugins'] = 'dashboard';
-	$rows['admin_snippet']['snippet'] = 'dashboard';
+    $rows['admin_plugins']['plugins'] = 'dashboard';
+    $rows['admin_snippet']['snippet'] = 'dashboard';
 };

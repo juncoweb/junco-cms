@@ -12,28 +12,28 @@ use Junco\Notifications\NotificationInterface;
 
 class DatabaseChannel implements ChannelInterface
 {
-	// vars
-	protected $db;
+    // vars
+    protected $db;
 
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->db = db();
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->db = db();
+    }
 
-	/**
-	 * Send
-	 */
-	public function send(NotifiableInterface $notifiable, NotificationInterface $notification)
-	{
-		$user_id = $notifiable->getId();
-		$type    = $notification->getType();
-		$id      = $notification->getId();
-		$message = $notification->toDatabase();
+    /**
+     * Send
+     */
+    public function send(NotifiableInterface $notifiable, NotificationInterface $notification)
+    {
+        $user_id = $notifiable->getId();
+        $type    = $notification->getType();
+        $id      = $notification->getId();
+        $message = $notification->toDatabase();
 
-		$this->db->safeExec("INSERT INTO `#__notifications` (user_id, notification_type, notification_id, notification_message) 
+        $this->db->safeExec("INSERT INTO `#__notifications` (user_id, notification_type, notification_id, notification_message) 
 		VALUES (?, ?, ?, ?)", $user_id, $type, $id, $message);
-	}
+    }
 }

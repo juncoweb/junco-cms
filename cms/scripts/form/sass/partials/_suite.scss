@@ -1,44 +1,44 @@
 /* --- suite ----------------------------------------------------- */
 .fe-suite {
-	width: 100%;
-	border-width: $border-width;
-	border-style: dashed;
-	border-color: var(--regular-border-color);
+    width: 100%;
+    border-width: $border-width;
+    border-style: dashed;
+    border-color: var(--regular-border-color);
 
-	ul {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	}
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
 
-	>ul {
-		display: table;
-		width: 100%;
-		vertical-align: top;
-		table-layout: fixed;
+    > ul {
+        display: table;
+        width: 100%;
+        vertical-align: top;
+        table-layout: fixed;
 
-		>li {
-			display: table-cell;
-			position: relative;
-			vertical-align: top;
-			padding: 2px;
-			white-space: pre-wrap;
+        > li {
+            display: table-cell;
+            position: relative;
+            vertical-align: top;
+            padding: 2px;
+            white-space: pre-wrap;
 
-			&:last-child {
-				width: 30px;
-			}
+            &:last-child {
+                width: 30px;
+            }
 
-			&:first-child label {
-				cursor: move !important;
-			}
+            &:first-child label {
+                cursor: move !important;
+            }
 
-			div {
-				margin: 0 5px 5px;
-				display: block;
-				width: 20px;
-				height: 20px;
-				text-align: center;
-			}
-		}
-	}
+            div {
+                margin: 0 5px 5px;
+                display: block;
+                width: 20px;
+                height: 20px;
+                text-align: center;
+            }
+        }
+    }
 }

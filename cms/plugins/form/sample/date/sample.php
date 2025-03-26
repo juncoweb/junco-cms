@@ -16,8 +16,8 @@ $fac->enter();
 
 // elements
 $form->setValues([
-	'date_2' => '2017-01-16T00:00:00',
-	'date_3' => '2017-01-16'
+    'date_2' => '2017-01-16T00:00:00',
+    'date_3' => '2017-01-16'
 ]);
 
 $form->input('date_1', ['control-felem' => 'datetime-local'])->setLabel('Datetime (custom)');
@@ -39,9 +39,9 @@ $domready = "
 // template
 $tpl = Template::get();
 $tpl->options([
-	'js' => 'cms/plugins/form/sample/date/scripts.js,cms/scripts/form/js/date.js',
-	'domready' => $domready,
-	'thirdbar' => 'form.thirdbar'
+    'js' => 'cms/plugins/form/sample/date/scripts.js,cms/scripts/form/js/date.js',
+    'domready' => $domready,
+    'thirdbar' => 'form.thirdbar'
 ]);
 $tpl->title('Date');
 $tpl->content = '<div class="panel"><div class="panel-body">' . $html . '</div></div>';

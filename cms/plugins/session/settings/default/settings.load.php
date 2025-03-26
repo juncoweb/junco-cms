@@ -6,9 +6,9 @@
  */
 
 return function (&$rows = false) {
-	$rows['handler']['options'] = [
-		''		=> _t('Default'),
-		'file'	=> _t('File'),
-		'db'	=> _t('Database'),
-	];
+    $rows['handler']['options'] = [
+        ''        => _t('Default'),
+        'file'    => _t('File'),
+        'db'    => _t('Database'),
+    ];
 };

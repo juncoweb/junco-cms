@@ -9,11 +9,11 @@ use Junco\Mvc\Controller;
 
 class FrontSearchController extends Controller
 {
-	/**
-	 * Index
-	 */
-	public function index()
-	{
-		return $this->view(null, (new SearchModel)->getIndexData());
-	}
+    /**
+     * Index
+     */
+    public function index()
+    {
+        return $this->view(null, (new SearchModel)->getIndexData());
+    }
 }

@@ -16,8 +16,8 @@ $fac->cancel();
 // elements
 $form->setValues($values);
 if ($is_edit) {
-	$form->hidden('to_verify');
-	$form->hidden('key');
+    $form->hidden('to_verify');
+    $form->hidden('key');
 }
 $form->textarea('assets', ['auto-grow' => '', 'data-min-height' => 120]);
 $html_1 = $form->getLastElement();

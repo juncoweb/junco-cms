@@ -6,9 +6,9 @@
  */
 
 return function (&$rows = false) {
-	if ($rows['allow_safe_path']) {
-		$dir = Session::SAFE_PATH;
+    if ($rows['allow_safe_path']) {
+        $dir = Session::SAFE_PATH;
 
-		is_dir($dir) or mkdir($dir, SYSTEM_MKDIR_MODE);
-	}
+        is_dir($dir) or mkdir($dir, SYSTEM_MKDIR_MODE);
+    }
 };

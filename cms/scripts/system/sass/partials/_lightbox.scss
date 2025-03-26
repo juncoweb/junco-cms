@@ -1,51 +1,51 @@
 /* --- Lightbox ---------------------------------- */
 .lightbox {
-	&-fixed {
-		overflow: hidden;
-	}
+    &-fixed {
+        overflow: hidden;
+    }
 
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	overflow: auto;
-	position: fixed;
-	background: $lightbox-bg-color;
-	z-index: $lightbox-zindex;
-	padding: $spacing;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    position: fixed;
+    background: $lightbox-bg-color;
+    z-index: $lightbox-zindex;
+    padding: $spacing;
 
-	&.valign-center {
-		display: flex;
-		align-items: center;
-	}
+    &.valign-center {
+        display: flex;
+        align-items: center;
+    }
 
-	&>div {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin: auto;
+    & > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
 
-		&>div {
-			flex: auto;
-		}
-	}
+        & > div {
+            flex: auto;
+        }
+    }
 
-	&>i {
-		color: #fff;
-		font-size: $lightbox-cross-size;
-		text-align: center;
-		display: block;
-		line-height: $lightbox-cross-size;
-		padding: 0 ($lightbox-cross-size * .5) 0 ($lightbox-cross-size * .25);
-		border-radius: 8px 0 0 8px;
-		position: fixed;
-		right: 0;
-		top: 20px;
-		cursor: pointer;
-		z-index: 100;
+    & > i {
+        color: #fff;
+        font-size: $lightbox-cross-size;
+        text-align: center;
+        display: block;
+        line-height: $lightbox-cross-size;
+        padding: 0 ($lightbox-cross-size * 0.5) 0 ($lightbox-cross-size * 0.25);
+        border-radius: 8px 0 0 8px;
+        position: fixed;
+        right: 0;
+        top: 20px;
+        cursor: pointer;
+        z-index: 100;
 
-		&:hover {
-			background: #666;
-		}
-	}
+        &:hover {
+            background: #666;
+        }
+    }
 }

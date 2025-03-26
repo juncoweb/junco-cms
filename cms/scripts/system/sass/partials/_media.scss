@@ -1,29 +1,29 @@
 /* -------- media ------------------------------------------------- */
 video.responsive,
 img.responsive {
-	max-width: 100%;
-	height: auto;
-	
-	// hack line-height
-	display: inline-block; 
+    max-width: 100%;
+    height: auto;
+
+    // hack line-height
+    display: inline-block;
     vertical-align: text-top;
 }
 
 .video-player {
-	height: 0;
-	padding-bottom: 75%;
-	overflow: hidden;
-	position: relative;
+    height: 0;
+    padding-bottom: 75%;
+    overflow: hidden;
+    position: relative;
 
-	iframe,
-	object,
-	embed,
-	video {
-		border: 0;
-		height: 100%;
-		width: 100%;
-		top: 0;
-		left: 0;
-		position: absolute;
-	}
+    iframe,
+    object,
+    embed,
+    video {
+        border: 0;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
 }

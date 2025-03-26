@@ -9,10 +9,10 @@ namespace Junco\Form\Contract;
 
 interface FilterElementInterface
 {
-	/**
-	 * To string representation.
-	 * 
-	 * @return string
-	 */
-	public function __toString(): string;
+    /**
+     * To string representation.
+     * 
+     * @return string
+     */
+    public function __toString(): string;
 }

@@ -11,40 +11,40 @@ use Database;
 
 interface IndexesInterface
 {
-	/**
-	 * Constructor
-	 */
-	public function __construct(Database $db);
+    /**
+     * Constructor
+     */
+    public function __construct(Database $db);
 
-	/**
-	 * Show Indexes
-	 * 
-	 * @param string $TableName
-	 * @param array  $where
-	 * 
-	 * @return array
-	 */
-	public function fetchAll(string $TableName, array $where = []): array;
+    /**
+     * Show Indexes
+     * 
+     * @param string $TableName
+     * @param array  $where
+     * 
+     * @return array
+     */
+    public function fetchAll(string $TableName, array $where = []): array;
 
-	/**
-	 * Add Index
-	 * 
-	 * @param string $TableName
-	 * @param string $IndexName
-	 * @param array  $Index
-	 * 
-	 * @return int
-	 */
-	public function create(string $TableName, string $IndexName, array $Index): int;
+    /**
+     * Add Index
+     * 
+     * @param string $TableName
+     * @param string $IndexName
+     * @param array  $Index
+     * 
+     * @return int
+     */
+    public function create(string $TableName, string $IndexName, array $Index): int;
 
-	/**
-	 * Drop Index
-	 * 
-	 * @param string $TableName
-	 * @param string $IndexName
-	 * @param array  $Index
-	 * 
-	 * @return int
-	 */
-	public function drop(string $TableName, string $IndexName, array $Index = []): int;
+    /**
+     * Drop Index
+     * 
+     * @param string $TableName
+     * @param string $IndexName
+     * @param array  $Index
+     * 
+     * @return int
+     */
+    public function drop(string $TableName, string $IndexName, array $Index = []): int;
 }

@@ -8,5 +8,5 @@
 use Junco\Usys\MFACollector;
 
 return function (&$rows) {
-	$rows['mfa_url']['options'] = MFACollector::getAll();
+    $rows['mfa_url']['options'] = MFACollector::getAll();
 };

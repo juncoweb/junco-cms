@@ -9,11 +9,11 @@ use Junco\Showcase\Contract\ShowcaseInterface;
 
 class Showcase
 {
-	/**
-	 * Get
-	 */
-	public static function get(string $snippet = ''): ShowcaseInterface
-	{
-		return snippet('showcase', $snippet);
-	}
+    /**
+     * Get
+     */
+    public static function get(string $snippet = ''): ShowcaseInterface
+    {
+        return snippet('showcase', $snippet);
+    }
 }

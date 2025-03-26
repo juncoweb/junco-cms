@@ -11,7 +11,7 @@ $form = Form::get();
 // actions
 $fac = $form->getActions();
 if ($variables) {
-	$fac->enter();
+    $fac->enter();
 }
 $fac->cancel();
 
@@ -22,13 +22,13 @@ $form->hidden('file');
 //
 $i = 0;
 foreach ($variables as $row) {
-	$form->group(
-		$form->{$row['type']}('variables[' . $i . '][value]')->setLabel($row['name']),
-		$form->{$row['type']}('variables[' . $i . '][default]', ['readonly' => ''])
-	);
+    $form->group(
+        $form->{$row['type']}('variables[' . $i . '][value]')->setLabel($row['name']),
+        $form->{$row['type']}('variables[' . $i . '][default]', ['readonly' => ''])
+    );
 
-	$form->hidden('variables[' . $i . '][name]');
-	$i++;
+    $form->hidden('variables[' . $i . '][name]');
+    $i++;
 }
 
 // modal

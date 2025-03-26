@@ -11,29 +11,29 @@ use Database;
 
 interface _DatabaseInterface
 {
-	/**
-	 * Constructor
-	 */
-	public function __construct(Database $db);
+    /**
+     * Constructor
+     */
+    public function __construct(Database $db);
 
-	/**
-	 * Get
-	 * 
-	 * @return array
-	 */
-	public function getEngines(): array;
+    /**
+     * Get
+     * 
+     * @return array
+     */
+    public function getEngines(): array;
 
-	/**
-	 * Get
-	 * 
-	 * @return array
-	 */
-	public function getCollations(): array;
+    /**
+     * Get
+     * 
+     * @return array
+     */
+    public function getCollations(): array;
 
-	/**
-	 * Show
-	 *
-	 * @return array
-	 */
-	public function showData(): array;
+    /**
+     * Show
+     *
+     * @return array
+     */
+    public function showData(): array;
 }

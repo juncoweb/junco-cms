@@ -6,5 +6,5 @@
  */
 
 return function () {
-	return url('admin/contact');
+    return url('admin/contact');
 };

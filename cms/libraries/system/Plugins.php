@@ -21,61 +21,61 @@
 
 class Plugins
 {
-	// vars
-	protected $listeners = [];
+    // vars
+    protected $listeners = [];
 
-	/**
-	 * Constructor
-	 */
-	private function __construct() {}
+    /**
+     * Constructor
+     */
+    private function __construct() {}
 
-	/**
-	 * Find and leave ready the plugins to execute.
-	 *
-	 * @param string       $name     The name with which the plugin is recognized.
-	 * @param string       $hook     Specific function within the plugin.
-	 * @param string|array $plugins  Call to the plugin.
-	 *
-	 * @return    Object plugin or null in case of not finding plugins
-	 */
-	public static function get(string $name, string $hook, string|array $plugins)
-	{
-		if (!$plugins) {
-			return;
-		} elseif (!is_array($plugins)) {
-			$plugins = explode(',', $plugins);
-		}
+    /**
+     * Find and leave ready the plugins to execute.
+     *
+     * @param string       $name     The name with which the plugin is recognized.
+     * @param string       $hook     Specific function within the plugin.
+     * @param string|array $plugins  Call to the plugin.
+     *
+     * @return    Object plugin or null in case of not finding plugins
+     */
+    public static function get(string $name, string $hook, string|array $plugins)
+    {
+        if (!$plugins) {
+            return;
+        } elseif (!is_array($plugins)) {
+            $plugins = explode(',', $plugins);
+        }
 
-		$self = new self();
-		foreach ($plugins as $plugin_key) {
-			$key = explode('.', $plugin_key, 2);
-			$file = SYSTEM_ABSPATH . 'cms/plugins/' . $key[0] . '/' . $name . '/' . ($key[1] ?? 'default') . '/' . $name . '.' . $hook . '.php';
+        $self = new self();
+        foreach ($plugins as $plugin_key) {
+            $key = explode('.', $plugin_key, 2);
+            $file = SYSTEM_ABSPATH . 'cms/plugins/' . $key[0] . '/' . $name . '/' . ($key[1] ?? 'default') . '/' . $name . '.' . $hook . '.php';
 
-			if (is_file($file)) {
-				$self->listeners[$plugin_key] = system_import($file);
-			}
-		}
-		if ($self->listeners) {
-			return $self;
-		}
-	}
+            if (is_file($file)) {
+                $self->listeners[$plugin_key] = system_import($file);
+            }
+        }
+        if ($self->listeners) {
+            return $self;
+        }
+    }
 
-	/**
-	 * Run the plugins.
-	 *
-	 * @param mixed &$ref      Variable passed by reference to be modified.
-	 * @param mixed ...$args   Other params.
-	 */
-	public function run(&$ref = null, ...$args)
-	{
-		$pass_key = is_object($ref) && method_exists($ref, 'setPluginKey');
-		$args     = array_merge([&$ref], $args);
+    /**
+     * Run the plugins.
+     *
+     * @param mixed &$ref      Variable passed by reference to be modified.
+     * @param mixed ...$args   Other params.
+     */
+    public function run(&$ref = null, ...$args)
+    {
+        $pass_key = is_object($ref) && method_exists($ref, 'setPluginKey');
+        $args     = array_merge([&$ref], $args);
 
-		foreach ($this->listeners as $key => $func) {
-			if ($pass_key) {
-				$ref->setPluginKey($key);
-			}
-			call_user_func_array($func, $args);
-		}
-	}
+        foreach ($this->listeners as $key => $func) {
+            if ($pass_key) {
+                $ref->setPluginKey($key);
+            }
+            call_user_func_array($func, $args);
+        }
+    }
 }

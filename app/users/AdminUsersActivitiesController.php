@@ -9,19 +9,19 @@ use Junco\Mvc\Controller;
 
 class AdminUsersActivitiesController extends Controller
 {
-	/**
-	 * Index
-	 */
-	public function index()
-	{
-		return $this->view();
-	}
+    /**
+     * Index
+     */
+    public function index()
+    {
+        return $this->view();
+    }
 
-	/**
-	 * List
-	 */
-	public function list()
-	{
-		return $this->view(null, (new AdminUsersActivitiesModel)->getListData());
-	}
+    /**
+     * List
+     */
+    public function list()
+    {
+        return $this->view(null, (new AdminUsersActivitiesModel)->getListData());
+    }
 }

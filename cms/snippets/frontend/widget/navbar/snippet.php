@@ -7,35 +7,35 @@
 
 class widget_frontend_navbar_snippet
 {
-	// vars
-	protected $rows = [];
+    // vars
+    protected $rows = [];
 
-	/**
-	 * Section
-	 * 
-	 * @param array $section
-	 */
-	public function section(array $section)
-	{
-		$this->rows[] = array_merge([
-			'content'	=> '',
-			'css'		=> ''
-		], $section);
-	}
+    /**
+     * Section
+     * 
+     * @param array $section
+     */
+    public function section(array $section)
+    {
+        $this->rows[] = array_merge([
+            'content'    => '',
+            'css'        => ''
+        ], $section);
+    }
 
-	/**
-	 * Render
-	 */
-	function render()
-	{
-		$html  = '';
+    /**
+     * Render
+     */
+    function render()
+    {
+        $html  = '';
 
-		foreach ($this->rows as $row) {
-			$html .= '<div' . ($row['css'] ? '  class="' . $row['css'] . '"' : '') . '>'
-				. $row['content']
-				. '</div>';
-		}
+        foreach ($this->rows as $row) {
+            $html .= '<div' . ($row['css'] ? '  class="' . $row['css'] . '"' : '') . '>'
+                . $row['content']
+                . '</div>';
+        }
 
-		return $html;
-	}
+        return $html;
+    }
 }

@@ -1,34 +1,33 @@
-
 /* -------- toasts ------------------------------------------------- */
 .toast-container {
-	width: $toast-max-width;
-	position: fixed;
-	top: 10%;
-	right: 5%;
-	z-index: $zindex-toast;
+    width: $toast-max-width;
+    position: fixed;
+    top: 10%;
+    right: 5%;
+    z-index: $zindex-toast;
 }
 
 .toast {
-	box-shadow: $dropdown-box-shadow;
-	border-radius: $medium-border-radius;
-	display: flex;
+    box-shadow: $dropdown-box-shadow;
+    border-radius: $medium-border-radius;
+    display: flex;
 
-	> div {
-		padding: .5rem .75rem;
-	}
+    > div {
+        padding: 0.5rem 0.75rem;
+    }
 
-	&-body {
-		flex: auto;
-	}
+    &-body {
+        flex: auto;
+    }
 
-	&-close {
-		flex: none !important;
+    &-close {
+        flex: none !important;
 
-		& i {
-			cursor: pointer;
-		}
-	}
-	& ~ .toast {
-		margin-top: $spacing;
-	}
+        & i {
+            cursor: pointer;
+        }
+    }
+    & ~ .toast {
+        margin-top: $spacing;
+    }
 }

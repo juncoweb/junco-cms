@@ -9,11 +9,11 @@ use Junco\Tabs\TabsInterface;
 
 class Tabs
 {
-	/**
-	 * Get
-	 */
-	public static function get(string $snippet = '', string $id = '', array $options = []): TabsInterface
-	{
-		return snippet('tabs', $snippet, $id, $options);
-	}
+    /**
+     * Get
+     */
+    public static function get(string $snippet = '', string $id = '', array $options = []): TabsInterface
+    {
+        return snippet('tabs', $snippet, $id, $options);
+    }
 }

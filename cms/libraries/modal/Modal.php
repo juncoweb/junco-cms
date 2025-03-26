@@ -9,11 +9,11 @@ use Junco\Modal\ModalInterface;
 
 class Modal
 {
-	/**
-	 * Get
-	 */
-	public static function get(string $snippet = ''): ModalInterface
-	{
-		return snippet('modal', $snippet);
-	}
+    /**
+     * Get
+     */
+    public static function get(string $snippet = ''): ModalInterface
+    {
+        return snippet('modal', $snippet);
+    }
 }

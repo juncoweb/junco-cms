@@ -7,12 +7,12 @@
 
 
 if ($total) {
-	$question = sprintf(
-		_nt('Are you sure you want to report the bug?', 'Are you sure you want to report %d bugs?', $total),
-		$total
-	);
+    $question = sprintf(
+        _nt('Are you sure you want to report the bug?', 'Are you sure you want to report %d bugs?', $total),
+        $total
+    );
 } else {
-	$question = _t('Are you sure you want to report all bugs?');
+    $question = _t('Are you sure you want to report all bugs?');
 }
 
 // form
@@ -30,6 +30,6 @@ $modal->close();
 $modal->enter();
 $modal->title(_t('Report bugs'));
 $modal->content = $form->render()
-	. '<div class="dialog dialog-warning">' . _t('By submitting the report, you agree to share personal information.') . '</div>';
+    . '<div class="dialog dialog-warning">' . _t('By submitting the report, you agree to share personal information.') . '</div>';
 
 return $modal->response();

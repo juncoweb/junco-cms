@@ -13,15 +13,15 @@ $form->hidden('take');
 
 // Actions
 if ($bootstrap_is_writable) {
-	$form->checkbox('remove_r')->setLabel(_t('Remove automatic redirection to the installer.'));
+    $form->checkbox('remove_r')->setLabel(_t('Remove automatic redirection to the installer.'));
 } else {
-	$form->addRow(['content' => _t('Please, remove the automatic redirection from the bootstrap file.')]);
+    $form->addRow(['content' => _t('Please, remove the automatic redirection from the bootstrap file.')]);
 }
 
 if ($install_is_writable) {
-	$form->checkbox('remove_e')->setLabel(_t('Remove the installation extension.'));
+    $form->checkbox('remove_e')->setLabel(_t('Remove the installation extension.'));
 } else {
-	$form->addRow(['content' => _t('Please, remove the installation extension.')]);
+    $form->addRow(['content' => _t('Please, remove the installation extension.')]);
 }
 
 $form->separate(_t('Actions'));
@@ -39,8 +39,8 @@ $tpl = Template::get('install');
 $tpl->options(['hash' => 'finish']);
 $tpl->title(sprintf(_t('Thank you %s for choosing us!'), $fullname));
 $tpl->content = '<div class="dialog dialog-success">'
-	. sprintf(_t('The Site %s has been installed correctly.'), '<b>' . $site_name . '</b>')
-	. '</div>'
-	. $form->render();
+    . sprintf(_t('The Site %s has been installed correctly.'), '<b>' . $site_name . '</b>')
+    . '</div>'
+    . $form->render();
 
 return $tpl->response();

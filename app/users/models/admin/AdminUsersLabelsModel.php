@@ -9,31 +9,31 @@ use Junco\Mvc\Model;
 
 class AdminUsersLabelsModel extends Model
 {
-	// vars
-	protected $db = null;
+    // vars
+    protected $db = null;
 
 
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->db = db();
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->db = db();
+    }
 
-	/**
-	 * Get
-	 */
-	public function getListData()
-	{
-		// data
-		$this->filter(POST, ['search' => 'text']);
+    /**
+     * Get
+     */
+    public function getListData()
+    {
+        // data
+        $this->filter(POST, ['search' => 'text']);
 
-		// query
-		if ($this->data['search']) {
-			$this->db->where("e.extension_name LIKE %?", $this->data['search']);
-		}
-		$pagi = $this->db->paginate("
+        // query
+        if ($this->data['search']) {
+            $this->db->where("e.extension_name LIKE %?", $this->data['search']);
+        }
+        $pagi = $this->db->paginate("
 		SELECT [
 		 l.id ,
 		 l.label_key ,
@@ -47,47 +47,47 @@ class AdminUsersLabelsModel extends Model
 		[WHERE]
 		[ORDER BY extension_name]");
 
-		$rows = [];
-		foreach ($pagi->fetchAll() as $row) {
-			if (!$row['label_name']) {
-				$row['label_name'] = $row['extension_name'] . ($row['label_key'] ? ' - ' . ucfirst($row['label_key']) : '');
-			}
-			if ($row['label_key']) {
-				$row['label_key'] = '-' . $row['label_key'];
-			}
-			$row['label_key'] = $row['extension_alias'] . $row['label_key'];
+        $rows = [];
+        foreach ($pagi->fetchAll() as $row) {
+            if (!$row['label_name']) {
+                $row['label_name'] = $row['extension_name'] . ($row['label_key'] ? ' - ' . ucfirst($row['label_key']) : '');
+            }
+            if ($row['label_key']) {
+                $row['label_key'] = '-' . $row['label_key'];
+            }
+            $row['label_key'] = $row['extension_alias'] . $row['label_key'];
 
-			$rows[] = $row;
-		}
-		return $this->data + ['rows' => $rows, 'pagi' => $pagi];
-	}
+            $rows[] = $row;
+        }
+        return $this->data + ['rows' => $rows, 'pagi' => $pagi];
+    }
 
-	/**
-	 * Get
-	 */
-	public function getCreateData()
-	{
-		// data
-		$this->filter(POST, ['num_rows' => 'int|min:1|default:1']);
+    /**
+     * Get
+     */
+    public function getCreateData()
+    {
+        // data
+        $this->filter(POST, ['num_rows' => 'int|min:1|default:1']);
 
-		return [
-			'title' => _t('Create'),
-			'values' => array_fill(0, $this->data['num_rows'], null),
-			'extensions' => $this->getExtensions(),
-			'is_edit' => false,
-		];
-	}
+        return [
+            'title' => _t('Create'),
+            'values' => array_fill(0, $this->data['num_rows'], null),
+            'extensions' => $this->getExtensions(),
+            'is_edit' => false,
+        ];
+    }
 
-	/**
-	 * Get
-	 */
-	public function getEditData()
-	{
-		// data
-		$this->filter(POST, ['id' => 'id|array|required:abort']);
+    /**
+     * Get
+     */
+    public function getEditData()
+    {
+        // data
+        $this->filter(POST, ['id' => 'id|array|required:abort']);
 
-		// query
-		$rows = $this->db->safeFind("
+        // query
+        $rows = $this->db->safeFind("
 		SELECT
 		 id AS label_id,
 		 extension_id ,
@@ -97,39 +97,39 @@ class AdminUsersLabelsModel extends Model
 		FROM `#__users_roles_labels`
 		WHERE id IN ( ?.. )", $this->data['id'])->fetchAll();
 
-		foreach ($rows as $i => $row) {
-			$rows[$i] = $row;
-		}
+        foreach ($rows as $i => $row) {
+            $rows[$i] = $row;
+        }
 
-		return [
-			'title' => _t('Edit'),
-			'values' => $rows,
-			'extensions' => $this->getExtensions(),
-			'is_edit' => true,
-		];
-	}
+        return [
+            'title' => _t('Edit'),
+            'values' => $rows,
+            'extensions' => $this->getExtensions(),
+            'is_edit' => true,
+        ];
+    }
 
-	/**
-	 * Get
-	 */
-	public function getConfirmDeleteData()
-	{
-		// data
-		$this->filter(POST, ['id' => 'id|array|required:abort']);
+    /**
+     * Get
+     */
+    public function getConfirmDeleteData()
+    {
+        // data
+        $this->filter(POST, ['id' => 'id|array|required:abort']);
 
-		return $this->data;
-	}
+        return $this->data;
+    }
 
-	/**
-	 * Get
-	 */
-	protected function getExtensions()
-	{
-		return $this->db->safeFind("
+    /**
+     * Get
+     */
+    protected function getExtensions()
+    {
+        return $this->db->safeFind("
 		SELECT e.id, e.extension_name
 		FROM `#__extensions` e
 		LEFT JOIN `#__extensions_developers` d ON (e.developer_id = d.id)
 		WHERE d.is_protected = 0
 		ORDER BY e.extension_name")->fetchAll(Database::FETCH_COLUMN, [0 => 1], ['-- ' . _t('Select') . ' --']);
-	}
+    }
 }

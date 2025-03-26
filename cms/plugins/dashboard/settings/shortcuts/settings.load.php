@@ -6,9 +6,9 @@
  */
 
 return function (&$rows) {
-	$rows['shortcuts_allow_cache']['options'] = [
-		-1 => _t('Inherit'),
-		0 => _t('No'),
-		1 => _t('Yes')
-	];
+    $rows['shortcuts_allow_cache']['options'] = [
+        -1 => _t('Inherit'),
+        0 => _t('No'),
+        1 => _t('Yes')
+    ];
 };

@@ -15,25 +15,25 @@ use SystemException;
 
 class BounceMiddleware implements MiddlewareInterface
 {
-	//
-	protected int $code = 404;
+    //
+    protected int $code = 404;
 
-	/**
-	 * Constructor
-	 */
-	public function __construct(int $code = 0)
-	{
-		if ($code === 403) {
-			$this->code = $code;
-		}
-	}
+    /**
+     * Constructor
+     */
+    public function __construct(int $code = 0)
+    {
+        if ($code === 403) {
+            $this->code = $code;
+        }
+    }
 
-	/**
-	 * Process an incoming server request.
-	 */
-	public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-	{
-		throw new SystemException($this->code);
-		//return $handler->handle($request);
-	}
+    /**
+     * Process an incoming server request.
+     */
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        throw new SystemException($this->code);
+        //return $handler->handle($request);
+    }
 }

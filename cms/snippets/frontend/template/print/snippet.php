@@ -7,18 +7,18 @@
 
 class template_frontend_print_snippet extends Template
 {
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-		$config = config('frontend');
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $config = config('frontend');
 
-		$this->options($config['frontend.default_options'] + [
-			'theme' => $config['frontend.print_theme']
-		]);
-		$this->alter_options	= $config['frontend.alter_options'];
-		$this->view				= __DIR__ . '/view.html.php';
-	}
+        $this->options($config['frontend.default_options'] + [
+            'theme' => $config['frontend.print_theme']
+        ]);
+        $this->alter_options    = $config['frontend.alter_options'];
+        $this->view                = __DIR__ . '/view.html.php';
+    }
 }

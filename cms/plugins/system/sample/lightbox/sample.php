@@ -9,15 +9,15 @@ defined('IS_TEST') or die;
 
 // vars
 $rows = [
-	[
-		'code' => 'Lightbox();',
-		'details' => '',
-	],
+    [
+        'code' => 'Lightbox();',
+        'details' => '',
+    ],
 ];
 
 $table = snippet('sample_table', 'samples');
 foreach ($rows as $i => $row) {
-	$table->row($i + 1, $row['code'], $row['details']);
+    $table->row($i + 1, $row['code'], $row['details']);
 }
 
 // template

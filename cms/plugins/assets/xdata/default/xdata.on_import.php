@@ -13,8 +13,8 @@
  * @return void
  */
 return function (&$xdata) {
-	$xdata->is_installer or (new AssetsImporter)->import(
-		$xdata->basepath,
-		$xdata->extension_aliases
-	);
+    $xdata->is_installer or (new AssetsImporter)->import(
+        $xdata->basepath,
+        $xdata->extension_aliases
+    );
 };

@@ -9,36 +9,36 @@ use Junco\Mvc\Controller;
 
 class AdminLanguageTranslationsController extends Controller
 {
-	/**
-	 * Index
-	 */
-	public function index()
-	{
-		return $this->view(null, (new AdminLanguageTranslationsModel)->getIndexData());
-	}
+    /**
+     * Index
+     */
+    public function index()
+    {
+        return $this->view(null, (new AdminLanguageTranslationsModel)->getIndexData());
+    }
 
-	/**
-	 * List
-	 */
-	public function list(?array $data = null)
-	{
-		return $this->view(null, (new AdminLanguageTranslationsModel)->setData($data)->getListData());
-	}
+    /**
+     * List
+     */
+    public function list(?array $data = null)
+    {
+        return $this->view(null, (new AdminLanguageTranslationsModel)->setData($data)->getListData());
+    }
 
-	/**
-	 * Confirm download
-	 */
-	public function confirmDownload()
-	{
-		return $this->view(null, (new AdminLanguageTranslationsModel)->getDownloadData());
-	}
+    /**
+     * Confirm download
+     */
+    public function confirmDownload()
+    {
+        return $this->view(null, (new AdminLanguageTranslationsModel)->getDownloadData());
+    }
 
-	/**
-	 * Download
-	 */
-	public function download()
-	{
-		return $this->middleware('form.security')
-			?: $this->wrapper(fn() => (new AdminLanguageTranslationsModel)->download());
-	}
+    /**
+     * Download
+     */
+    public function download()
+    {
+        return $this->middleware('form.security')
+            ?: $this->wrapper(fn() => (new AdminLanguageTranslationsModel)->download());
+    }
 }

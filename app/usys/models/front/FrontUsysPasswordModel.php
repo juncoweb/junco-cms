@@ -10,24 +10,24 @@ use Junco\Users\UserActivityToken;
 
 class FrontUsysPasswordModel extends Model
 {
-	/**
-	 * Get
-	 */
-	public function getResetData()
-	{
-		return [
-			'options' => config('usys.options'),
-		];
-	}
+    /**
+     * Get
+     */
+    public function getResetData()
+    {
+        return [
+            'options' => config('usys.options'),
+        ];
+    }
 
-	/**
-	 * Get
-	 */
-	public function getEditData()
-	{
-		return [
-			'options' => config('usys.options'),
-			'token' => UserActivityToken::get(GET, 'savepwd', true)
-		];
-	}
+    /**
+     * Get
+     */
+    public function getEditData()
+    {
+        return [
+            'options' => config('usys.options'),
+            'token' => UserActivityToken::get(GET, 'savepwd', true)
+        ];
+    }
 }

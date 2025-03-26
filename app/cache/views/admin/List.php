@@ -18,10 +18,10 @@ $bls->check_h();
 $bls->th(_t('File'));
 
 if ($keys) {
-	foreach ($keys as $key) {
-		$bls->check($key);
-		$bls->td($key);
-	}
+    foreach ($keys as $key) {
+        $bls->check($key);
+        $bls->td($key);
+    }
 }
 
 return $bls->render();

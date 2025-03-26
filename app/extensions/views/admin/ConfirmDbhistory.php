@@ -11,7 +11,7 @@ $form = Form::get();
 // actions
 $fac = $form->getActions();
 if (!$is_protected) {
-	$fac->enter();
+    $fac->enter();
 }
 $fac->cancel();
 
@@ -20,24 +20,24 @@ $form->setValues($values);
 $form->hidden('id');
 
 foreach ($queries as $row) {
-	extract($row);
-	//
-	$form->header($Name, false);
-	$form->input($key)->setLabel(_t('History'));
+    extract($row);
+    //
+    $form->header($Name, false);
+    $form->input($key)->setLabel(_t('History'));
 
-	if (!empty($db_history[$Type][$Name]['Fields'])) {
-		$form->addRow([
-			'label' => _t('Fields'),
-			'content' => var_export($db_history[$Type][$Name]['Fields'], true)
-		]);
-	}
+    if (!empty($db_history[$Type][$Name]['Fields'])) {
+        $form->addRow([
+            'label' => _t('Fields'),
+            'content' => var_export($db_history[$Type][$Name]['Fields'], true)
+        ]);
+    }
 
-	$form->addRow(['content' => '<hr />']);
+    $form->addRow(['content' => '<hr />']);
 
-	foreach ($Fields as $key => $Field) {
-		$form->input($key)->setLabel($Field);
-	}
-	$form->separate();
+    foreach ($Fields as $key => $Field) {
+        $form->input($key)->setLabel($Field);
+    }
+    $form->separate();
 }
 
 // modal

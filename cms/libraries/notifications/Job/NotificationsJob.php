@@ -13,26 +13,26 @@ use Junco\Notifications\NotificationInterface;
 
 class NotificationsJob implements JobInterface
 {
-	// vars
-	protected $notifiables;
-	protected $notification;
+    // vars
+    protected $notifiables;
+    protected $notification;
 
-	/**
-	 * Constructor
-	 */
-	public function __construct(array|NotifiableInterface $notifiables, NotificationInterface $notification)
-	{
-		$this->notifiables = $notifiables;
-		$this->notification = $notification;
-	}
+    /**
+     * Constructor
+     */
+    public function __construct(array|NotifiableInterface $notifiables, NotificationInterface $notification)
+    {
+        $this->notifiables = $notifiables;
+        $this->notification = $notification;
+    }
 
-	/**
-	 * Execute the job.
-	 */
-	public function handle(): bool
-	{
-		app('notifications')->sendNow($this->notifiables, $this->notification);
+    /**
+     * Execute the job.
+     */
+    public function handle(): bool
+    {
+        app('notifications')->sendNow($this->notifiables, $this->notification);
 
-		return true;
-	}
+        return true;
+    }
 }

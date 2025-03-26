@@ -12,8 +12,8 @@ $bls = Backlist::get();
 $bft = $bls->getFilters();
 $bft->setValues($data);
 $bft->searchIn([
-	1 => _t('Name'),
-	2 => _t('Extension'),
+    1 => _t('Name'),
+    2 => _t('Extension'),
 ]);
 
 // table
@@ -23,14 +23,14 @@ $bls->link_h(_t('Name'));
 $bls->th(_t('Extension'), ['priority' => 2]);
 
 foreach ($rows as $row) {
-	$bls->check($row['key']);
-	$bls->td('<i class="' . $row['image'] . '"></i>');
-	$bls->link([
-		'url'     => $row['url'],
-		'caption' => $row['title'],
-		'after'   => $bls->body($row['description'])
-	]);
-	$bls->td($row['extension']);
+    $bls->check($row['key']);
+    $bls->td('<i class="' . $row['image'] . '"></i>');
+    $bls->link([
+        'url'     => $row['url'],
+        'caption' => $row['title'],
+        'after'   => $bls->body($row['description'])
+    ]);
+    $bls->td($row['extension']);
 }
 
 return $bls->render();

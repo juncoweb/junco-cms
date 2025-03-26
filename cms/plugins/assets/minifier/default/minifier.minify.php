@@ -8,7 +8,7 @@
 use Junco\Assets\Compilation\Minifier;
 
 return function ($target) {
-	$minifier = new Minifier();
-	$minifier->add($target);
-	$minifier->minify($target);
+    $minifier = new Minifier();
+    $minifier->add($target);
+    $minifier->minify($target);
 };

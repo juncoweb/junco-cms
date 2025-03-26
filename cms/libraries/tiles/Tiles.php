@@ -7,11 +7,11 @@
 
 class Tiles
 {
-	/**
-	 * Get
-	 */
-	public static function get(string $snippet = ''): TilesInterface
-	{
-		return snippet('tiles', $snippet);
-	}
+    /**
+     * Get
+     */
+    public static function get(string $snippet = ''): TilesInterface
+    {
+        return snippet('tiles', $snippet);
+    }
 }

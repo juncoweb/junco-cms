@@ -9,30 +9,30 @@ use Junco\Mvc\Model;
 
 class AdminUsersRolesModel extends Model
 {
-	// vars
-	protected $db = null;
+    // vars
+    protected $db = null;
 
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->db = db();
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->db = db();
+    }
 
-	/**
-	 * Get
-	 */
-	public function getListData()
-	{
-		// data
-		$this->filter(POST, ['search' => 'text']);
+    /**
+     * Get
+     */
+    public function getListData()
+    {
+        // data
+        $this->filter(POST, ['search' => 'text']);
 
-		// query
-		if ($this->data['search']) {
-			$this->db->where("role_name LIKE %?", $this->data['search']);
-		}
-		$pagi = $this->db->paginate("
+        // query
+        if ($this->data['search']) {
+            $this->db->where("role_name LIKE %?", $this->data['search']);
+        }
+        $pagi = $this->db->paginate("
 		SELECT [
 		 id ,
 		 role_name
@@ -40,37 +40,37 @@ class AdminUsersRolesModel extends Model
 		[WHERE]
 		[ORDER BY role_name]");
 
-		$rows = [];
-		foreach ($pagi->fetchAll() as $row) {
-			$rows[] = $row;
-		}
-		return $this->data + ['rows' => $rows, 'pagi' => $pagi];
-	}
+        $rows = [];
+        foreach ($pagi->fetchAll() as $row) {
+            $rows[] = $row;
+        }
+        return $this->data + ['rows' => $rows, 'pagi' => $pagi];
+    }
 
-	/**
-	 * Get
-	 */
-	public function getCreateData()
-	{
-		// data
-		$this->filter(POST, ['num_rows' => 'int|min:1|default:1']);
+    /**
+     * Get
+     */
+    public function getCreateData()
+    {
+        // data
+        $this->filter(POST, ['num_rows' => 'int|min:1|default:1']);
 
-		return [
-			'title' => _t('Create'),
-			'values' => ['autoload' => true]
-		];
-	}
+        return [
+            'title' => _t('Create'),
+            'values' => ['autoload' => true]
+        ];
+    }
 
-	/**
-	 * Get
-	 */
-	public function getEditData()
-	{
-		// data
-		$this->filter(POST, ['id' => 'id|array:first|required:abort']);
+    /**
+     * Get
+     */
+    public function getEditData()
+    {
+        // data
+        $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
-		// query
-		$data = $this->db->safeFind("
+        // query
+        $data = $this->db->safeFind("
 		SELECT
 		 id AS role_id ,
 		 role_name ,
@@ -78,20 +78,20 @@ class AdminUsersRolesModel extends Model
 		FROM `#__users_roles`
 		WHERE id = ?", $this->data['id'])->fetch() or abort();
 
-		return [
-			'title' => _t('Edit'),
-			'values' => $data
-		];
-	}
+        return [
+            'title' => _t('Edit'),
+            'values' => $data
+        ];
+    }
 
-	/**
-	 * Get
-	 */
-	public function getConfirmDeleteData()
-	{
-		// data
-		$this->filter(POST, ['id' => 'id|array|required:abort']);
+    /**
+     * Get
+     */
+    public function getConfirmDeleteData()
+    {
+        // data
+        $this->filter(POST, ['id' => 'id|array|required:abort']);
 
-		return $this->data;
-	}
+        return $this->data;
+    }
 }

@@ -9,16 +9,16 @@ namespace Junco\Form\FormElement;
 
 class CustomElement extends FormElement
 {
-	/**
-	 * Constructor
-	 *
-	 * @param string  $name
-	 * @param array	  $attr
-	 */
-	public function __construct(
-		protected string $name,
-		string $content
-	) {
-		$this->html = $content;
-	}
+    /**
+     * Constructor
+     *
+     * @param string  $name
+     * @param array	  $attr
+     */
+    public function __construct(
+        protected string $name,
+        string $content
+    ) {
+        $this->html = $content;
+    }
 }

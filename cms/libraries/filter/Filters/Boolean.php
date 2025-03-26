@@ -9,52 +9,52 @@ namespace Junco\Filter\Filters;
 
 class Boolean extends FilterAbstract
 {
-	/**
-	 * Constructor
-	 * 
-	 * @param string|array|null $filter_value
-	 */
-	public function __construct(string|array|null $filter_value = null)
-	{
-		$this->type = 'bool';
-		$this->default  = false;
-		$this->argument = [
-			'filter' => FILTER_VALIDATE_BOOLEAN
-		];
+    /**
+     * Constructor
+     * 
+     * @param string|array|null $filter_value
+     */
+    public function __construct(string|array|null $filter_value = null)
+    {
+        $this->type = 'bool';
+        $this->default  = false;
+        $this->argument = [
+            'filter' => FILTER_VALIDATE_BOOLEAN
+        ];
 
-		if ($filter_value) {
-			if (is_string($filter_value)) {
-				$filter_value = $this->strToArr($filter_value, '/');
-			}
+        if ($filter_value) {
+            if (is_string($filter_value)) {
+                $filter_value = $this->strToArr($filter_value, '/');
+            }
 
-			if (count($filter_value) != 2) {
-				throw new \Exception('There is an error in the bool filter values.');
-			}
+            if (count($filter_value) != 2) {
+                throw new \Exception('There is an error in the bool filter values.');
+            }
 
-			if (
-				is_numeric($filter_value[0])
-				&& is_numeric($filter_value[1])
-			) {
-				$filter_value[0] = (int)$filter_value[0];
-				$filter_value[1] = (int)$filter_value[1];
-			}
+            if (
+                is_numeric($filter_value[0])
+                && is_numeric($filter_value[1])
+            ) {
+                $filter_value[0] = (int)$filter_value[0];
+                $filter_value[1] = (int)$filter_value[1];
+            }
 
-			$this->default = $filter_value[0];
-			$this->callback[] = function (&$value) use ($filter_value) {
-				$value = $filter_value[$value ? 1 : 0];
-			};
-		}
-	}
+            $this->default = $filter_value[0];
+            $this->callback[] = function (&$value) use ($filter_value) {
+                $value = $filter_value[$value ? 1 : 0];
+            };
+        }
+    }
 
-	/**
-	 * Set modifiers
-	 * 
-	 * @param array $modifiers
-	 */
-	public function setModifiers(array $modifiers): void
-	{
-		$this->accept($modifiers, ['array', 'required', 'only_if', 'only_if_not']);
+    /**
+     * Set modifiers
+     * 
+     * @param array $modifiers
+     */
+    public function setModifiers(array $modifiers): void
+    {
+        $this->accept($modifiers, ['array', 'required', 'only_if', 'only_if_not']);
 
-		parent::setModifiers($modifiers);
-	}
+        parent::setModifiers($modifiers);
+    }
 }

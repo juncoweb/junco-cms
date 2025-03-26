@@ -9,28 +9,28 @@ use Junco\Mvc\Controller;
 
 class AdminUsersPermissionsController extends Controller
 {
-	/**
-	 * Index
-	 */
-	public function index()
-	{
-		return $this->view();
-	}
+    /**
+     * Index
+     */
+    public function index()
+    {
+        return $this->view();
+    }
 
-	/**
-	 * List
-	 */
-	public function list()
-	{
-		return $this->view(null, (new AdminUsersPermissionsModel)->getListData());
-	}
+    /**
+     * List
+     */
+    public function list()
+    {
+        return $this->view(null, (new AdminUsersPermissionsModel)->getListData());
+    }
 
-	/**
-	 * Status
-	 */
-	public function status()
-	{
-		return $this->middleware('form.security')
-			?: $this->wrapper(fn() => (new UsersPermissionsModel)->status());
-	}
+    /**
+     * Status
+     */
+    public function status()
+    {
+        return $this->middleware('form.security')
+            ?: $this->wrapper(fn() => (new UsersPermissionsModel)->status());
+    }
 }

@@ -6,21 +6,21 @@
  */
 
 return function (&$widget) {
-	$config = config('contact-widget');
+    $config = config('contact-widget');
 
-	if ($config['contact-widget.links']) {
-		$config['contact-widget.load_resources'] and app('assets')->css(['assets/contact-widget.min.css']);
+    if ($config['contact-widget.links']) {
+        $config['contact-widget.load_resources'] and app('assets')->css(['assets/contact-widget.min.css']);
 
-		$html = '';
-		foreach ($config['contact-widget.links'] as $row) {
-			$html .= '<a href="' . $row['url'] . '"' . (empty($row['target']) ? '' : ' target="' . $row['target'] . '"')  . ' title="' . $row['title'] . '">'
-				. '<i class="' . $row['icon'] . '"' . (empty($row['color']) ? '' : ' style="color: ' . $row['color'] . ';"') . '></i>'
-				. '</a>';
-		}
+        $html = '';
+        foreach ($config['contact-widget.links'] as $row) {
+            $html .= '<a href="' . $row['url'] . '"' . (empty($row['target']) ? '' : ' target="' . $row['target'] . '"')  . ' title="' . $row['title'] . '">'
+                . '<i class="' . $row['icon'] . '"' . (empty($row['color']) ? '' : ' style="color: ' . $row['color'] . ';"') . '></i>'
+                . '</a>';
+        }
 
-		$widget->section([
-			'content' => '<div class="ci-links">' . $html . '</div>',
-			'css' => 'widget-contact'
-		]);
-	}
+        $widget->section([
+            'content' => '<div class="ci-links">' . $html . '</div>',
+            'css' => 'widget-contact'
+        ]);
+    }
 };

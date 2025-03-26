@@ -1,174 +1,174 @@
 
 /* --- Suite ----------------------------------------------------------- */
 JsFelem.implement({
-	suite: function (el) {
-		var name = el.getAttribute('data-name');
-		var box = el.querySelectorAll('li');
-		var All = box[1].querySelectorAll('label');
-		var selected = el.getAttribute('data-selected');
-		var checkAll = el.querySelector('input[type=checkbox]');
+    suite: function (el) {
+        var name = el.getAttribute('data-name');
+        var box = el.querySelectorAll('li');
+        var All = box[1].querySelectorAll('label');
+        var selected = el.getAttribute('data-selected');
+        var checkAll = el.querySelector('input[type=checkbox]');
 
-		var Has = {};
-		var _count = 0;
-		var _total = All.length;
+        var Has = {};
+        var _count = 0;
+        var _total = All.length;
 
-		// functions
-		function reset(_selected) {
-			// clear
-			box[0].querySelectorAll('input').forEach(function (el) {
-				Has[el.value](0);
-			});
-			
-			if (typeof _selected != 'string') {
-				_selected = selected;
-			}
+        // functions
+        function reset(_selected) {
+            // clear
+            box[0].querySelectorAll('input').forEach(function (el) {
+                Has[el.value](0);
+            });
 
-			// put selected
-			if (_selected) {
-				_selected.split(',').forEach(function (k) {
-					if (typeof Has[k] != 'undefined') {
-						Has[k](1);
-					}
-				});
-			}
-		}
+            if (typeof _selected != 'string') {
+                _selected = selected;
+            }
 
-		function dragAndDrop(tag) {
-			var corrector, current;
+            // put selected
+            if (_selected) {
+                _selected.split(',').forEach(function (k) {
+                    if (typeof Has[k] != 'undefined') {
+                        Has[k](1);
+                    }
+                });
+            }
+        }
 
-			JsMove(tag, function () {
-				var target = tag.getBoundingClientRect();
-				var rect = box[0].getBoundingClientRect();
+        function dragAndDrop(tag) {
+            var corrector, current;
 
-				corrector = {
-					x: target.width / 2 + rect.left + (window.pageXOffset || document.documentElement.scrollLeft),
-					y: target.height / 2 + rect.top + (window.pageYOffset || document.documentElement.scrollTop)
-				};
-			},
-				function (event) {
-					tag.style.position = 'absolute';
-					tag.style.left = (event.pageX - corrector.x) + 'px';
-					tag.style.top = (event.pageY - corrector.y) + 'px';
+            JsMove(tag, function () {
+                var target = tag.getBoundingClientRect();
+                var rect = box[0].getBoundingClientRect();
 
-					if (current) {
-						var target = current.getBoundingClientRect();
-						if (!(target.top < event.clientY
-							&& target.bottom > event.clientY
-							&& target.left < event.clientX
-							&& target.right > event.clientX
-						)) {
-							current = null;
-						}
-					}
+                corrector = {
+                    x: target.width / 2 + rect.left + (window.pageXOffset || document.documentElement.scrollLeft),
+                    y: target.height / 2 + rect.top + (window.pageYOffset || document.documentElement.scrollTop)
+                };
+            },
+                function (event) {
+                    tag.style.position = 'absolute';
+                    tag.style.left = (event.pageX - corrector.x) + 'px';
+                    tag.style.top = (event.pageY - corrector.y) + 'px';
 
-					if (!current) {
-						box[0].querySelectorAll('label').forEach(function (x) {
-							var target = x.getBoundingClientRect();
-							if (x != tag
-								&& target.top < event.clientY
-								&& target.bottom > event.clientY
-								&& target.left < event.clientX
-								&& target.right > event.clientX
-							) {
-								current = x;
-							}
-						});
-					}
-				},
-				function () {
-					if (current) {
-						var target = tag.getBoundingClientRect();
-						var rect = current.getBoundingClientRect();
+                    if (current) {
+                        var target = current.getBoundingClientRect();
+                        if (!(target.top < event.clientY
+                            && target.bottom > event.clientY
+                            && target.left < event.clientX
+                            && target.right > event.clientX
+                        )) {
+                            current = null;
+                        }
+                    }
 
-						if (rect.left + rect.width / 2 < target.left + target.width / 2) {
-							if (current.nextSibling) {
-								box[0].insertBefore(tag, current.nextSibling);
-							} else {
-								box[0].appendChild(tag);
-							}
-						} else {
-							box[0].insertBefore(tag, current);
-						}
+                    if (!current) {
+                        box[0].querySelectorAll('label').forEach(function (x) {
+                            var target = x.getBoundingClientRect();
+                            if (x != tag
+                                && target.top < event.clientY
+                                && target.bottom > event.clientY
+                                && target.left < event.clientX
+                                && target.right > event.clientX
+                            ) {
+                                current = x;
+                            }
+                        });
+                    }
+                },
+                function () {
+                    if (current) {
+                        var target = tag.getBoundingClientRect();
+                        var rect = current.getBoundingClientRect();
 
-						current = null;
-					}
-					tag.style.position = '';
-					tag.style.left = '';
-					tag.style.top = '';
-				});
-		}
+                        if (rect.left + rect.width / 2 < target.left + target.width / 2) {
+                            if (current.nextSibling) {
+                                box[0].insertBefore(tag, current.nextSibling);
+                            } else {
+                                box[0].appendChild(tag);
+                            }
+                        } else {
+                            box[0].insertBefore(tag, current);
+                        }
 
-		//
-		All.forEach(function (el) {
-			var tag;
-			var isSelected = el.classList.contains('selected');
-			var value = el.getAttribute('data-value');
-			var fn = function (show) {
-				if (isSelected === show) {
-					return;
-				}
+                        current = null;
+                    }
+                    tag.style.position = '';
+                    tag.style.left = '';
+                    tag.style.top = '';
+                });
+        }
 
-				if (typeof tag == 'undefined') {
-					tag = JsElement('label.input-tag selected', {
-						html: '<input type="hidden" name="' + name + '[]" value="' + value + '"/>' + el.innerHTML
-					});
+        //
+        All.forEach(function (el) {
+            var tag;
+            var isSelected = el.classList.contains('selected');
+            var value = el.getAttribute('data-value');
+            var fn = function (show) {
+                if (isSelected === show) {
+                    return;
+                }
 
-					dragAndDrop(tag);
-				}
+                if (typeof tag == 'undefined') {
+                    tag = JsElement('label.input-tag selected', {
+                        html: '<input type="hidden" name="' + name + '[]" value="' + value + '"/>' + el.innerHTML
+                    });
 
-				if (show) {
-					box[0].appendChild(tag);
-					el.classList.add('selected');
-					_count++;
-				} else {
-					box[0].removeChild(tag);
-					el.classList.remove('selected');
-					_count--;
-				}
+                    dragAndDrop(tag);
+                }
 
-				checkAll.checked = (_count == _total);
-				isSelected = show;
-			};
+                if (show) {
+                    box[0].appendChild(tag);
+                    el.classList.add('selected');
+                    _count++;
+                } else {
+                    box[0].removeChild(tag);
+                    el.classList.remove('selected');
+                    _count--;
+                }
 
-			//
-			el.value = value;
-			el.addEventListener('click', function () {
-				fn(el.classList.contains('selected') ? 0 : 1);
-			});
+                checkAll.checked = (_count == _total);
+                isSelected = show;
+            };
 
-			Has[value] = fn;
-		});
+            //
+            el.value = value;
+            el.addEventListener('click', function () {
+                fn(el.classList.contains('selected') ? 0 : 1);
+            });
 
-		// buttons
-		var toggle = function (force) {
-			var v = ['', 'none', ''];
+            Has[value] = fn;
+        });
 
-			box[0].style.display = v[force];
-			box[1].style.display = v[force + 1];
-			btn.forEach(function (el, j) {
-				el.style.display = v[force + (j == 3 ? 0 : 1)];
-			});
-		};
+        // buttons
+        var toggle = function (force) {
+            var v = ['', 'none', ''];
 
-		checkAll.addEventListener('change', function () {
-			var force = checkAll.checked == true ? 1 : 0;
+            box[0].style.display = v[force];
+            box[1].style.display = v[force + 1];
+            btn.forEach(function (el, j) {
+                el.style.display = v[force + (j == 3 ? 0 : 1)];
+            });
+        };
 
-			All.forEach(function (el) {
-				Has[el.value](force);
-			});
-		});
+        checkAll.addEventListener('change', function () {
+            var force = checkAll.checked == true ? 1 : 0;
 
-		var btn = el.querySelectorAll('div');
-		btn[0].addEventListener('click', function () { toggle(0) });
-		btn[1].addEventListener('click', reset);
-		btn[3].addEventListener('click', function () { toggle(1) });
+            All.forEach(function (el) {
+                Has[el.value](force);
+            });
+        });
 
-		toggle(1);
-		reset(selected); // Show selected
+        var btn = el.querySelectorAll('div');
+        btn[0].addEventListener('click', function () { toggle(0) });
+        btn[1].addEventListener('click', reset);
+        btn[3].addEventListener('click', function () { toggle(1) });
 
-		// prepare form element
-		el.value = selected;
-		el.type = 'suite';
-		el.reset = reset;
-	}
+        toggle(1);
+        reset(selected); // Show selected
+
+        // prepare form element
+        el.value = selected;
+        el.type = 'suite';
+        el.reset = reset;
+    }
 });

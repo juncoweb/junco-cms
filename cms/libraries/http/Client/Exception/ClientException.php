@@ -15,28 +15,28 @@ use Psr\Http\Message\RequestInterface;
  */
 abstract class ClientException extends \Exception implements ClientExceptionInterface
 {
-	// vars
-	private RequestInterface $request;
+    // vars
+    private RequestInterface $request;
 
-	/**
-	 * @param string $message
-	 */
-	public function __construct($message, RequestInterface $request, \Exception $previous = null)
-	{
-		$this->request = $request;
+    /**
+     * @param string $message
+     */
+    public function __construct($message, RequestInterface $request, \Exception $previous = null)
+    {
+        $this->request = $request;
 
-		parent::__construct($message, 0, $previous);
-	}
+        parent::__construct($message, 0, $previous);
+    }
 
-	/**
-	 * Returns the request.
-	 *
-	 * The request object MAY be a different object from the one passed to ClientInterface::sendRequest()
-	 *
-	 * @return RequestInterface
-	 */
-	public function getRequest(): RequestInterface
-	{
-		return $this->request;
-	}
+    /**
+     * Returns the request.
+     *
+     * The request object MAY be a different object from the one passed to ClientInterface::sendRequest()
+     *
+     * @return RequestInterface
+     */
+    public function getRequest(): RequestInterface
+    {
+        return $this->request;
+    }
 }

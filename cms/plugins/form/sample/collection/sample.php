@@ -35,9 +35,9 @@ $domready = "
 // form
 $form = Form::get();
 $form->setValues([
-	'user_id'	=> $curuser->id,
-	'__user_id' => $curuser->fullname,
-	'label_id'	=> [0 => 'Hola', 1 => 'Chau'],
+    'user_id'    => $curuser->id,
+    '__user_id' => $curuser->fullname,
+    'label_id'    => [0 => 'Hola', 1 => 'Chau'],
 ]);
 $form->collection('userpicker', 'user_id')->setLabel('Select');
 $form->collection('userpicker', 'user_idx')->setLabel('Select');
@@ -52,8 +52,8 @@ $html = $fbox->render();
 // template
 $tpl = Template::get();
 $tpl->options([
-	'domready' => $domready,
-	'thirdbar' => 'form.thirdbar'
+    'domready' => $domready,
+    'thirdbar' => 'form.thirdbar'
 ]);
 $tpl->title(_t('Collection'));
 $tpl->content = '<div class="panel"><div class="panel-body">' . $html . '</div></div>';

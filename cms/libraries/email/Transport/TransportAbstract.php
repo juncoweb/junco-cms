@@ -11,45 +11,45 @@ use Email;
 
 abstract class TransportAbstract implements TransportInterface
 {
-	// debug
-	protected $debug		= false;
-	protected $debug_log	= [];
+    // debug
+    protected $debug        = false;
+    protected $debug_log    = [];
 
-	/**
-	 * Debug
-	 * 
-	 * @param bool $debug
-	 */
-	public function debug(bool $debug = true)
-	{
-		$this->debug = $debug;
-	}
+    /**
+     * Debug
+     * 
+     * @param bool $debug
+     */
+    public function debug(bool $debug = true)
+    {
+        $this->debug = $debug;
+    }
 
-	/**
-	 * Debug Output
-	 * 
-	 * @param int $mode
-	 * 
-	 * @return string|array
-	 */
-	public function debugOutput(int $mode = 1): string|array
-	{
-		$debug_log			= $this->debug_log;
-		$this->debug_log	= [];
+    /**
+     * Debug Output
+     * 
+     * @param int $mode
+     * 
+     * @return string|array
+     */
+    public function debugOutput(int $mode = 1): string|array
+    {
+        $debug_log            = $this->debug_log;
+        $this->debug_log    = [];
 
-		switch ($mode) {
-			case 1:
-				return implode(PHP_EOL, $debug_log) . PHP_EOL;
+        switch ($mode) {
+            case 1:
+                return implode(PHP_EOL, $debug_log) . PHP_EOL;
 
-			case 2:
-				foreach ($debug_log as $i => $line) {
-					$debug_log[$i] = '<pre>' . htmlentities($line) . '</pre>';
-				}
-				return implode($debug_log);
-			case 3:
-				return implode('<br />', $debug_log) . '<br />';
-		}
+            case 2:
+                foreach ($debug_log as $i => $line) {
+                    $debug_log[$i] = '<pre>' . htmlentities($line) . '</pre>';
+                }
+                return implode($debug_log);
+            case 3:
+                return implode('<br />', $debug_log) . '<br />';
+        }
 
-		return $debug_log;
-	}
+        return $debug_log;
+    }
 }

@@ -11,7 +11,7 @@ $tpl = Template::get();
 # plugins
 $dashboard = snippet('dashboard', $snippet);
 if ($plugins) {
-	Plugins::get('dashboard', 'load', $plugins)?->run($dashboard);
+    Plugins::get('dashboard', 'load', $plugins)?->run($dashboard);
 }
 
 $tpl->options($options);

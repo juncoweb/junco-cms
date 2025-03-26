@@ -10,7 +10,7 @@ $view = snippet('portal', $snippet);
 
 # plugins
 if ($plugins) {
-	Plugins::get('portal', 'load', $plugins)->run($view);
+    Plugins::get('portal', 'load', $plugins)->run($view);
 }
 
 // template

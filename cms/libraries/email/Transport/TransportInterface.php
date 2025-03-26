@@ -11,12 +11,12 @@ use Email;
 
 interface TransportInterface
 {
-	/**
-	 * Send
-	 * 
-	 * @param Email  $Email
-	 * 
-	 * @return bool
-	 */
-	public function send(Email $Email): bool;
+    /**
+     * Send
+     * 
+     * @param Email  $Email
+     * 
+     * @return bool
+     */
+    public function send(Email $Email): bool;
 }

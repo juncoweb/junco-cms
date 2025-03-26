@@ -1,71 +1,57 @@
 /* --- root ------------------------------------------- */
 :root,
-[data-theme=light] {
+[data-theme="light"] {
+    // regular-colors
+    @each $name, $keys in $regular-light-colors {
+        @each $key, $color in $keys {
+            $class: -#{$name};
 
-	// regular-colors
-	@each $name,
-	$keys in $regular-light-colors {
+            @if ($name == "default") {
+                $class: "";
+            }
 
-		@each $key,
-		$color in $keys {
-			$class: -#{$name};
+            --regular#{$class}-#{$key}-color: #{$color};
+        }
+    }
 
-			@if ($name =="default") {
-				$class: "";
-			}
+    // solid-colors
+    @each $name, $keys in $solid-light-colors {
+        @each $key, $color in $keys {
+            $class: -#{$name};
 
-			--regular#{$class}-#{$key}-color: #{$color};
-		}
-	}
+            @if ($name == "default") {
+                $class: "";
+            }
 
-	// solid-colors
-	@each $name,
-	$keys in $solid-light-colors {
-
-		@each $key,
-		$color in $keys {
-			$class: -#{$name};
-
-			@if ($name =="default") {
-				$class: "";
-			}
-
-			--solid#{$class}-#{$key}-color: #{$color};
-		}
-	}
+            --solid#{$class}-#{$key}-color: #{$color};
+        }
+    }
 }
 
-[data-theme=dark] {
+[data-theme="dark"] {
+    // regular-colors
+    @each $name, $keys in $regular-dark-colors {
+        @each $key, $color in $keys {
+            $class: -#{$name};
 
-	// regular-colors
-	@each $name,
-	$keys in $regular-dark-colors {
+            @if ($name == "default") {
+                $class: "";
+            }
 
-		@each $key,
-		$color in $keys {
-			$class: -#{$name};
+            --regular#{$class}-#{$key}-color: #{$color};
+        }
+    }
 
-			@if ($name =="default") {
-				$class: "";
-			}
+    // solid-colors
+    @each $name, $keys in $solid-dark-colors {
+        @each $key, $color in $keys {
+            $class: -#{$name};
 
-			--regular#{$class}-#{$key}-color: #{$color};
-		}
-	}
+            @if ($name == "default") {
+                $class: "";
+            }
 
-	// solid-colors
-	@each $name,
-	$keys in $solid-dark-colors {
-
-		@each $key,
-		$color in $keys {
-			$class: -#{$name};
-
-			@if ($name =="default") {
-				$class: "";
-			}
-
-			--solid#{$class}-#{$key}-color: #{$color};
-		}
-	}
+            --solid#{$class}-#{$key}-color: #{$color};
+        }
+    }
 }

@@ -9,38 +9,38 @@ use Junco\Mvc\Model;
 
 class DashboardModel extends Model
 {
-	// vars
-	protected array $config;
+    // vars
+    protected array $config;
 
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->config = config('dashboard');
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->config = config('dashboard');
+    }
 
-	/**
-	 * Get
-	 */
-	public function getAdminIndexData()
-	{
-		return [
-			'snippet' => $this->config['dashboard.admin_snippet'],
-			'plugins' => $this->config['dashboard.admin_plugins'],
-			'options' => $this->config['dashboard.admin_options']
-		];
-	}
+    /**
+     * Get
+     */
+    public function getAdminIndexData()
+    {
+        return [
+            'snippet' => $this->config['dashboard.admin_snippet'],
+            'plugins' => $this->config['dashboard.admin_plugins'],
+            'options' => $this->config['dashboard.admin_options']
+        ];
+    }
 
-	/**
-	 * Get
-	 */
-	public function getMyspaceIndexData()
-	{
-		return [
-			'snippet' => $this->config['dashboard.myspace_snippet'],
-			'plugins' => $this->config['dashboard.myspace_plugins'],
-			'options' => $this->config['dashboard.myspace_options']
-		];
-	}
+    /**
+     * Get
+     */
+    public function getMyspaceIndexData()
+    {
+        return [
+            'snippet' => $this->config['dashboard.myspace_snippet'],
+            'plugins' => $this->config['dashboard.myspace_plugins'],
+            'options' => $this->config['dashboard.myspace_options']
+        ];
+    }
 }

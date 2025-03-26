@@ -12,35 +12,35 @@ use Junco\Form\Contract\FormInterface;
 
 class Form
 {
-	/**
-	 * Get
-	 */
-	public static function get(string $snippet = '', string|int|false $form_id = ''): FormInterface
-	{
-		return snippet('form', $snippet, $form_id);
-	}
+    /**
+     * Get
+     */
+    public static function get(string $snippet = '', string|int|false $form_id = ''): FormInterface
+    {
+        return snippet('form', $snippet, $form_id);
+    }
 
-	/**
-	 * Get
-	 */
-	public static function getElements(string $snippet = ''): FormElementsInterface
-	{
-		return snippet('form#elements', $snippet);
-	}
+    /**
+     * Get
+     */
+    public static function getElements(string $snippet = ''): FormElementsInterface
+    {
+        return snippet('form#elements', $snippet);
+    }
 
-	/**
-	 * Get
-	 */
-	public static function getBox(string $snippet = '', string|int $box_id = ''): FormBoxInterface
-	{
-		return snippet('form#box', $snippet, $box_id);
-	}
+    /**
+     * Get
+     */
+    public static function getBox(string $snippet = '', string|int $box_id = ''): FormBoxInterface
+    {
+        return snippet('form#box', $snippet, $box_id);
+    }
 
-	/**
-	 * Get
-	 */
-	public static function getActions(string $snippet = ''): FormActionsInterface
-	{
-		return snippet('form#actions', $snippet);
-	}
+    /**
+     * Get
+     */
+    public static function getActions(string $snippet = ''): FormActionsInterface
+    {
+        return snippet('form#actions', $snippet);
+    }
 }

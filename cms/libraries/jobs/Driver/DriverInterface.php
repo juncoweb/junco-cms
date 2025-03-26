@@ -11,28 +11,28 @@ use Junco\Jobs\JobInterface;
 
 interface DriverInterface
 {
-	/**
-	 * Push a new job onto the queue.
-	 * 
-	 * @param JobInterface $job
-	 * @param string       $queue
-	 */
-	public function push(JobInterface $job, string $queue = ''): void;
+    /**
+     * Push a new job onto the queue.
+     * 
+     * @param JobInterface $job
+     * @param string       $queue
+     */
+    public function push(JobInterface $job, string $queue = ''): void;
 
-	/**
-	 * Pop the next job off of the queue.
-	 * 
-	 * @param string $queue
-	 * 
-	 * @return ?array
-	 */
-	public function pop(string $queue = ''): ?array;
+    /**
+     * Pop the next job off of the queue.
+     * 
+     * @param string $queue
+     * 
+     * @return ?array
+     */
+    public function pop(string $queue = ''): ?array;
 
-	/**
-	 * Update the status of the job.
-	 * 
-	 * @param array $data
-	 * @param bool  $status
-	 */
-	public function terminate(array $data, bool $status): void;
+    /**
+     * Update the status of the job.
+     * 
+     * @param array $data
+     * @param bool  $status
+     */
+    public function terminate(array $data, bool $status): void;
 }

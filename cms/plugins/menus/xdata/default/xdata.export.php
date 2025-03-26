@@ -6,7 +6,7 @@
  */
 
 return function (&$xdata) {
-	$data = db()->safeFind("
+    $data = db()->safeFind("
 	SELECT
 	 menu_key ,
 	 menu_default_path AS menu_path ,
@@ -20,5 +20,5 @@ return function (&$xdata) {
 	WHERE extension_id = ?
 	AND is_distributed = 1", $xdata->extension_id)->fetchAll();
 
-	return $xdata->putData($data);
+    return $xdata->putData($data);
 };

@@ -9,11 +9,11 @@ use Junco\Mvc\Controller;
 
 class AdminDashboardController extends Controller
 {
-	/**
-	 * Index
-	 */
-	public function index()
-	{
-		return $this->view(null, (new DashboardModel)->getAdminIndexData());
-	}
+    /**
+     * Index
+     */
+    public function index()
+    {
+        return $this->view(null, (new DashboardModel)->getAdminIndexData());
+    }
 }

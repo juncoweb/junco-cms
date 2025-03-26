@@ -16,16 +16,16 @@ $fac->enter();
 $form->setValues($values);
 //
 $form->select('transport', [
-	'' => _t('System'),
-	'null' => 'Null',
-	'mail' => 'Mail',
-	'smtp' => 'Smtp',
+    '' => _t('System'),
+    'null' => 'Null',
+    'mail' => 'Mail',
+    'smtp' => 'Smtp',
 ])->setLabel(_t('Transport'));
 $form->select('message_type', [
-	'html+plain'	=> 'Html + Plain',
-	'html'			=> 'Html',
-	'html+to-plain'	=> 'Html + to Plain',
-	'plain'			=> 'Plain',
+    'html+plain'    => 'Html + Plain',
+    'html'            => 'Html',
+    'html+to-plain'    => 'Html + to Plain',
+    'plain'            => 'Plain',
 ])->setLabel(_t('Message'));
 $form->separate();
 //
@@ -49,6 +49,6 @@ $tpl->js('assets/email-admin.min.js');
 $tpl->domready('Email.debug();');
 $tpl->title(_t('Code'), 'fa-solid fa-code');
 $tpl->content = '<p><a href="' . url('admin/email') . '" class="btn btn-small"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> ' . _t('Back') . '</a></p>'
-	. '<div style="max-width: 1000px;">' . $html . '</div>';
+    . '<div style="max-width: 1000px;">' . $html . '</div>';
 
 return $tpl->response();

@@ -7,28 +7,28 @@
 
 class slideshow_master_default_snippet
 {
-	// vars
-	protected string $type = 'slide';
+    // vars
+    protected string $type = 'slide';
 
-	/**
-	 * Set
-	 */
-	public function setType(string $type)
-	{
-		$this->type = $type;
-	}
+    /**
+     * Set
+     */
+    public function setType(string $type)
+    {
+        $this->type = $type;
+    }
 
-	/**
-	 * Render
-	 */
-	public function render($images)
-	{
-		$html = '<div class="slideshow ' . $this->type . '"><ul>';
-		foreach ($images as $image) {
-			$html .= '<li><div><img src="' . $image . '" /></div></li>';
-		}
-		$html .= '</ul></div>';
+    /**
+     * Render
+     */
+    public function render($images)
+    {
+        $html = '<div class="slideshow ' . $this->type . '"><ul>';
+        foreach ($images as $image) {
+            $html .= '<li><div><img src="' . $image . '" /></div></li>';
+        }
+        $html .= '</ul></div>';
 
-		return $html;
-	}
+        return $html;
+    }
 }

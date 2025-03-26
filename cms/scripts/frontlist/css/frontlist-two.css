@@ -43,7 +43,8 @@
   display: block;
   width: 100%;
 }
-.frontlist-two article .fl-author, .frontlist-two article .fl-date {
+.frontlist-two article .fl-author,
+.frontlist-two article .fl-date {
   color: var(--regular-subtle-font-color);
   font-size: 0.875rem;
 }

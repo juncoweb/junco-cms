@@ -15,7 +15,7 @@ $html = '';
 // Colors
 $partial = '';
 foreach ($colors as $color) {
-	$partial .= '<div>' . $color . ' ' . snippet('rating', 'utils')->render(3, ['color' => $color]) . '</div>';
+    $partial .= '<div>' . $color . ' ' . snippet('rating', 'utils')->render(3, ['color' => $color]) . '</div>';
 }
 $html .= sprintf($box_tag, 'Colors', $partial);
 
@@ -23,7 +23,7 @@ $html .= sprintf($box_tag, 'Colors', $partial);
 // Sizes
 $partial = '';
 foreach ($sizes as $size) {
-	$partial .= '<div>' . $size . ' ' . snippet('rating', 'utils')->render(3, ['size' => $size]) . '</div>';
+    $partial .= '<div>' . $size . ' ' . snippet('rating', 'utils')->render(3, ['size' => $size]) . '</div>';
 }
 $html .= sprintf($box_tag, 'Sizes', $partial);
 
@@ -36,9 +36,9 @@ $html .= sprintf($box_tag, 'Form', $form->render());
 // template
 $tpl = Template::get();
 $tpl->options([
-	'css' => 'cms/scripts/utils/css/rating.css',
-	'js' => 'cms/scripts/utils/js/rating.js',
-	'domready' => 'JsRating({onSelect: function() { console.log(this.value); return true; }})'
+    'css' => 'cms/scripts/utils/css/rating.css',
+    'js' => 'cms/scripts/utils/js/rating.js',
+    'domready' => 'JsRating({onSelect: function() { console.log(this.value); return true; }})'
 ]);
 $tpl->title('Rating', 'fa-solid fa-star');
 $tpl->content = '<div class="panel"><div class="panel-body">' . $html . '</div></div>';

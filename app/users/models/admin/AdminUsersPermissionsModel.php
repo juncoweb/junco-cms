@@ -9,45 +9,45 @@ use Junco\Mvc\Model;
 
 class AdminUsersPermissionsModel extends Model
 {
-	// vars
-	protected $db = null;
+    // vars
+    protected $db = null;
 
 
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->db = db();
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->db = db();
+    }
 
-	/**
-	 * Toggle
-	 */
-	public function getListData()
-	{
-		// data
-		$this->filter(POST, [
-			'role_id' => 'id',
-			'search' => 'text',
-		]);
+    /**
+     * Toggle
+     */
+    public function getListData()
+    {
+        // data
+        $this->filter(POST, [
+            'role_id' => 'id',
+            'search' => 'text',
+        ]);
 
-		// vars
-		$roles = $this->getRoles();
+        // vars
+        $roles = $this->getRoles();
 
-		//
-		if (empty($roles[$this->data['role_id']])) {
-			$this->data['role_id'] = array_key_first($roles);
-		}
+        //
+        if (empty($roles[$this->data['role_id']])) {
+            $this->data['role_id'] = array_key_first($roles);
+        }
 
-		// query
-		$this->db->rows_per_page = 9999;
-		$this->db->setParam($this->data['role_id']);
+        // query
+        $this->db->rows_per_page = 9999;
+        $this->db->setParam($this->data['role_id']);
 
-		if ($this->data['search']) {
-			$this->db->where("e.extension_name LIKE %?|l.label_key LIKE %?|l.label_name LIKE %?", $this->data['search']);
-		}
-		$pagi = $this->db->paginate("
+        if ($this->data['search']) {
+            $this->db->where("e.extension_name LIKE %?|l.label_key LIKE %?|l.label_name LIKE %?", $this->data['search']);
+        }
+        $pagi = $this->db->paginate("
 		SELECT
 		 l.id ,
 		 l.label_key ,
@@ -64,33 +64,33 @@ class AdminUsersPermissionsModel extends Model
 		[WHERE]
 		[ORDER BY extension_name, label_name]");
 
-		$rows = [];
-		foreach ($pagi->fetchAll() as $row) {
-			if (!$row['label_name']) {
-				$row['label_name'] = $row['extension_name'];
+        $rows = [];
+        foreach ($pagi->fetchAll() as $row) {
+            if (!$row['label_name']) {
+                $row['label_name'] = $row['extension_name'];
 
-				if ($row['label_key']) {
-					$row['label_name'] .= ' - ' . ucfirst($row['label_key']);
-				}
-			}
+                if ($row['label_key']) {
+                    $row['label_name'] .= ' - ' . ucfirst($row['label_key']);
+                }
+            }
 
-			$rows[$row['id']] = $row;
-		}
+            $rows[$row['id']] = $row;
+        }
 
-		return $this->data + [
-			'roles' => $roles,
-			'rows' => $rows
-		];
-	}
+        return $this->data + [
+            'roles' => $roles,
+            'rows' => $rows
+        ];
+    }
 
-	/**
-	 * Get
-	 */
-	protected function getRoles()
-	{
-		return $this->db->safeFind("
+    /**
+     * Get
+     */
+    protected function getRoles()
+    {
+        return $this->db->safeFind("
 		SELECT id, role_name
 		FROM `#__users_roles`
 		ORDER BY role_name")->fetchAll(Database::FETCH_COLUMN, [0 => 1]);
-	}
+    }
 }

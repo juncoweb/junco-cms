@@ -21,11 +21,11 @@ $bls->th(['priority' => 2, 'class' => 'text-nowrap']);
 $bls->link_h(['icon' => 'fa-solid fa-arrow-right']);
 
 foreach ($rows as $row) {
-	$bls->check($row['id']);
-	$bls->td($row['notification_message']);
-	$bls->td($row['created_at']->format($dt ??= _t('Y-M-d')));
-	//$bls->status($row['status']);
-	$bls->link($row['url'], (bool)$row['url']);
+    $bls->check($row['id']);
+    $bls->td($row['notification_message']);
+    $bls->td($row['created_at']->format($dt ??= _t('Y-M-d')));
+    //$bls->status($row['status']);
+    $bls->link($row['url'], (bool)$row['url']);
 }
 
 return $bls->render($pagi);

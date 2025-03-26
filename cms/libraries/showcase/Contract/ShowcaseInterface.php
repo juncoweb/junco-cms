@@ -11,56 +11,56 @@ use Junco\Tabs\TabsInterface;
 
 interface ShowcaseInterface
 {
-	/**
-	 * Sets the internal options.
-	 * 
-	 * @param array $options
-	 * 
-	 * @return void
-	 */
-	public function setOptions(array $options): void;
+    /**
+     * Sets the internal options.
+     * 
+     * @param array $options
+     * 
+     * @return void
+     */
+    public function setOptions(array $options): void;
 
-	/**
-	 * Get the option or default value.
-	 * 
-	 * @param string $name
-	 * @param mixed  $default
-	 * 
-	 * @return mixed
-	 */
-	public function getOption(string $name, mixed $default = null): mixed;
+    /**
+     * Get the option or default value.
+     * 
+     * @param string $name
+     * @param mixed  $default
+     * 
+     * @return mixed
+     */
+    public function getOption(string $name, mixed $default = null): mixed;
 
-	/**
-	 * Load own assets.
-	 * 
-	 * @param bool $status
-	 * 
-	 * @return void
-	 */
-	public function setAssets(bool $status = true): void;
+    /**
+     * Load own assets.
+     * 
+     * @param bool $status
+     * 
+     * @return void
+     */
+    public function setAssets(bool $status = true): void;
 
-	/**
-	 * Main
-	 * 
-	 * @param array $data
-	 */
-	public function main(array $data): void;
+    /**
+     * Main
+     * 
+     * @param array $data
+     */
+    public function main(array $data): void;
 
-	/**
-	 * Tabs
-	 * 
-	 * @param string $snippet
-	 * @param string $id
-	 * @param array  $options
-	 * 
-	 * @return TabsInterface
-	 */
-	public function getTabs(string $snippet = '', string $id = '', array $options = []): TabsInterface;
+    /**
+     * Tabs
+     * 
+     * @param string $snippet
+     * @param string $id
+     * @param array  $options
+     * 
+     * @return TabsInterface
+     */
+    public function getTabs(string $snippet = '', string $id = '', array $options = []): TabsInterface;
 
-	/**
-	 * Render
-	 * 
-	 * @return string
-	 */
-	public function render(): string;
+    /**
+     * Render
+     * 
+     * @return string
+     */
+    public function render(): string;
 }

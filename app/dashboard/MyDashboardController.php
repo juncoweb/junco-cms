@@ -9,19 +9,19 @@ use Junco\Mvc\Controller;
 
 class MyDashboardController extends Controller
 {
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->authenticate();
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->authenticate();
+    }
 
-	/**
-	 * Index
-	 */
-	public function index()
-	{
-		return $this->view(null, (new DashboardModel)->getMyspaceIndexData());
-	}
+    /**
+     * Index
+     */
+    public function index()
+    {
+        return $this->view(null, (new DashboardModel)->getMyspaceIndexData());
+    }
 }

@@ -6,17 +6,17 @@
  */
 
 return function (&$rows) {
-	if ($rows['delivery']['value']) {
-		$rows['delivery']['value'] = implode('|', array_map(function ($value) {
-			return is_array($value) ? implode('+', $value) : $value;
-		}, $rows['delivery']['value']));
-	}
+    if ($rows['delivery']['value']) {
+        $rows['delivery']['value'] = implode('|', array_map(function ($value) {
+            return is_array($value) ? implode('+', $value) : $value;
+        }, $rows['delivery']['value']));
+    }
 
-	if ($rows['delivery']['default_value']) {
-		$rows['delivery']['default_value'] = implode('|', array_map(function ($value) {
-			return is_array($value) ? implode('+', $value) : $value;
-		}, $rows['delivery']['default_value']));
-	}
+    if ($rows['delivery']['default_value']) {
+        $rows['delivery']['default_value'] = implode('|', array_map(function ($value) {
+            return is_array($value) ? implode('+', $value) : $value;
+        }, $rows['delivery']['default_value']));
+    }
 
-	$rows['links']['options'] = ['title', 'color', 'icon', 'url'];
+    $rows['links']['options'] = ['title', 'color', 'icon', 'url'];
 };

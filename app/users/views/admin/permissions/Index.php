@@ -11,8 +11,8 @@ $bbx = Backlist::getBox();
 // actions
 $bac = $bbx->getActions();
 $bac->toggle([
-	['control' => 'status', 'value' => 2, 'label' => _t('Enabled')],
-	['control' => 'status', 'value' => 1, 'label' => _t('Disabled')],
+    ['control' => 'status', 'value' => 2, 'label' => _t('Enabled')],
+    ['control' => 'status', 'value' => 1, 'label' => _t('Disabled')],
 ]);
 $bac->filters();
 $bac->refresh();

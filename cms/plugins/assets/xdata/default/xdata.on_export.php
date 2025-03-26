@@ -13,8 +13,8 @@
  * @return void
  */
 return function (&$xdata) {
-	(new AssetsExporter)->export(
-		$xdata->basepath,
-		$xdata->extension_aliases
-	);
+    (new AssetsExporter)->export(
+        $xdata->basepath,
+        $xdata->extension_aliases
+    );
 };

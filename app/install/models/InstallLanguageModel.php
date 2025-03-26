@@ -9,19 +9,19 @@ use Junco\Mvc\Model;
 
 class InstallLanguageModel extends Model
 {
-	/**
-	 * Change language
-	 */
-	public function change()
-	{
-		// data
-		$this->filter(POST, ['lang' => 'text']);
+    /**
+     * Change language
+     */
+    public function change()
+    {
+        // data
+        $this->filter(POST, ['lang' => 'text']);
 
-		// vars
-		$result = (new LanguageHelper)->change($this->data['lang']);
+        // vars
+        $result = (new LanguageHelper)->change($this->data['lang']);
 
-		if (!$result) {
-			throw new Exception(_t('Error! the task has not been realized.'));
-		}
-	}
+        if (!$result) {
+            throw new Exception(_t('Error! the task has not been realized.'));
+        }
+    }
 }

@@ -15,17 +15,17 @@ use \Exception;
 
 class UserTableExistsMiddleware implements MiddlewareInterface
 {
-	/**
-	 * Process an incoming server request.
-	 */
-	public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-	{
-		$has = db()->getSchema()->tables()->has('users');
+    /**
+     * Process an incoming server request.
+     */
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        $has = db()->getSchema()->tables()->has('users');
 
-		if (!$has) {
-			throw new Exception(sprintf('MiddlewareError: %s', _t('The installer requires the user table.')));
-		}
+        if (!$has) {
+            throw new Exception(sprintf('MiddlewareError: %s', _t('The installer requires the user table.')));
+        }
 
-		return $handler->handle($request);
-	}
+        return $handler->handle($request);
+    }
 }

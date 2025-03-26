@@ -12,8 +12,8 @@ use Junco\Notifications\NotificationInterface;
 
 interface ChannelInterface
 {
-	/**
-	 * Send
-	 */
-	public function send(NotifiableInterface $notifiable, NotificationInterface $notification);
+    /**
+     * Send
+     */
+    public function send(NotifiableInterface $notifiable, NotificationInterface $notification);
 }

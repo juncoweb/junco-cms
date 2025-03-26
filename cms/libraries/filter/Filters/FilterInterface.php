@@ -9,21 +9,21 @@ namespace Junco\Filter\Filters;
 
 interface FilterInterface
 {
-	/**
-	 * Set modifiers
-	 * 
-	 * @param array $modifiers
-	 * 
-	 * @return void
-	 */
-	public function setModifiers(array $modifiers): void;
+    /**
+     * Set modifiers
+     * 
+     * @param array $modifiers
+     * 
+     * @return void
+     */
+    public function setModifiers(array $modifiers): void;
 
-	/**
-	 * Filter
-	 * 
-	 * @param mixed $value
-	 * 
-	 * @return mixed
-	 */
-	public function filter($value, $file = null, $altValue = null): mixed;
+    /**
+     * Filter
+     * 
+     * @param mixed $value
+     * 
+     * @return mixed
+     */
+    public function filter($value, $file = null, $altValue = null): mixed;
 }

@@ -14,11 +14,11 @@ $bac->create();
 $bac->edit();
 $bac->button('confirm_compile', _t('Compile'), 'fa-solid fa-gears');
 $bac->dropdown([
-	['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash-can'],
-	['control' => 'inspect', 'label' => _t('Inspect'), 'icon' => 'fa-solid fa-code'],
-	[],
-	//['control' => 'themes', 'label' => _t('Themes'), 'icon' => 'fa-solid fa-gear'],
-	['control' => 'confirm_options', 'label' => _t('Options'), 'icon' => 'fa-solid fa-gear'],
+    ['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash-can'],
+    ['control' => 'inspect', 'label' => _t('Inspect'), 'icon' => 'fa-solid fa-code'],
+    [],
+    //['control' => 'themes', 'label' => _t('Themes'), 'icon' => 'fa-solid fa-gear'],
+    ['control' => 'confirm_options', 'label' => _t('Options'), 'icon' => 'fa-solid fa-gear'],
 ]);
 $bac->separate();
 //$bac->button(url('admin/assets.themes'), _t('Themes'), 'fa-solid fa-palette');

@@ -14,15 +14,15 @@
  */
 class FilterAbortError extends Error
 {
-	/**
-	 * Constructor
-	 */
-	public function __construct(string $message = '', int $code = 0, ?Throwable $previous = null)
-	{
-		$debug = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5);
-		$this->file	= $debug[4]['file'];
-		$this->line	= $debug[4]['line'];
+    /**
+     * Constructor
+     */
+    public function __construct(string $message = '', int $code = 0, ?Throwable $previous = null)
+    {
+        $debug = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5);
+        $this->file    = $debug[4]['file'];
+        $this->line    = $debug[4]['line'];
 
-		parent::__construct($message, $code, $previous);
-	}
+        parent::__construct($message, $code, $previous);
+    }
 }

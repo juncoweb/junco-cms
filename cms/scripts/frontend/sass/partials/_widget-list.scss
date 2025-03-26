@@ -1,54 +1,54 @@
 // --- widget ---------------------------------------------
 .widget-list {
-	margin: 0;
-	padding: 0;
-	list-style: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 
-	a {
-		color: var(--regular-font-color);
-		text-decoration: none;
+    a {
+        color: var(--regular-font-color);
+        text-decoration: none;
 
-		&:hover {
-			color: var(--regular-primary-surface-color);
-		}
-	}
+        &:hover {
+            color: var(--regular-primary-surface-color);
+        }
+    }
 
-	li {
-		border-bottom-width: $border-width;
-		border-bottom-style: $border-style;
-		border-bottom-color: var(--regular-border-color);
-		margin: 0;
-		padding: 0;
-		position: relative;
+    li {
+        border-bottom-width: $border-width;
+        border-bottom-style: $border-style;
+        border-bottom-color: var(--regular-border-color);
+        margin: 0;
+        padding: 0;
+        position: relative;
 
-		&>a {
-			padding: ($spacing * .5) $spacing;
-			display: block;
-			transition: all ease .5s;
+        & > a {
+            padding: ($spacing * 0.5) $spacing;
+            display: block;
+            transition: all ease 0.5s;
 
-			&:hover {
-				padding-left: $spacing + $widget-list-displacement;
-			}
+            &:hover {
+                padding-left: $spacing + $widget-list-displacement;
+            }
 
-			&>i {
-				margin-right: 10px;
-			}
-		}
+            & > i {
+                margin-right: 10px;
+            }
+        }
 
-		&.selected>a {
-			text-decoration: underline;
-		}
+        &.selected > a {
+            text-decoration: underline;
+        }
 
-		&>div {
-			padding: ($spacing * .5) $spacing;
-		}
-	}
+        & > div {
+            padding: ($spacing * 0.5) $spacing;
+        }
+    }
 }
 
 .widget-icon {
-	font-size: $large-font-size;
+    font-size: $large-font-size;
 }
 
 .widget-badge {
-	color: var(--regular-subtle-font-color);
+    color: var(--regular-subtle-font-color);
 }

@@ -9,21 +9,21 @@ use Junco\Mvc\Model;
 
 class SearchModel extends Model
 {
-	/**
-	 * Save
-	 */
-	public function getIndexData()
-	{
-		// data
-		$this->filter(GET, [
-			'q'      => 'text',
-			'engine' => ''
-		]);
+    /**
+     * Save
+     */
+    public function getIndexData()
+    {
+        // data
+        $this->filter(GET, [
+            'q'      => 'text',
+            'engine' => ''
+        ]);
 
-		return [
-			'engines' => new SearchEngines($this->data['engine']),
-			'search' => $this->data['q'],
-			'options' => config('search.options')
-		];
-	}
+        return [
+            'engines' => new SearchEngines($this->data['engine']),
+            'search' => $this->data['q'],
+            'options' => config('search.options')
+        ];
+    }
 }

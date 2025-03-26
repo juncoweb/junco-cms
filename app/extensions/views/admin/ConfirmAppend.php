@@ -10,8 +10,8 @@ $form = Form::get();
 $form->setValues($values);
 //
 $form->suite('extensions', $extensions)
-	->setLabel(_t('Extensions'))
-	->setHelp(_t('Append other extensions to the package.'));
+    ->setLabel(_t('Extensions'))
+    ->setHelp(_t('Append other extensions to the package.'));
 $form->hidden('id');
 
 // modal

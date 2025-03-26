@@ -6,5 +6,5 @@
  */
 
 return function (&$rows) {
-	$rows['charset'] = substr($rows['collation'], 0, strpos($rows['collation'], '_'));
+    $rows['charset'] = substr($rows['collation'], 0, strpos($rows['collation'], '_'));
 };

@@ -1,125 +1,121 @@
 /* --- backList -------------------------------------------- */
 .backlist-box {
-	position: relative;
-	//max-width: $screen-x-large;
-	//min-height: 20rem;
-	margin-bottom: $spacing;
+    position: relative;
+    //max-width: $screen-x-large;
+    //min-height: 20rem;
+    margin-bottom: $spacing;
 }
 
 .backlist-slot {
-	overflow: hidden;
-	position: relative;
+    overflow: hidden;
+    position: relative;
 }
 
 .backlist-wrapper {
-	.empty-list {
-		text-align: center;
-		padding: 0 $spacing;
+    .empty-list {
+        text-align: center;
+        padding: 0 $spacing;
 
-		p {
-			font-size: $large-font-size;
-			font-weight: bold;
-			color: var(--regular-subtle-font-color);
-			text-align: center;
-			margin: $spacing auto;
-			padding: $spacing;
-			border: $border-width $border-style var(--regular-border-color);
-			border-radius: $medium-border-radius;
-			display: inline-block;
-		}
-	}
+        p {
+            font-size: $large-font-size;
+            font-weight: bold;
+            color: var(--regular-subtle-font-color);
+            text-align: center;
+            margin: $spacing auto;
+            padding: $spacing;
+            border: $border-width $border-style var(--regular-border-color);
+            border-radius: $medium-border-radius;
+            display: inline-block;
+        }
+    }
 
-	.footer {
-		padding: $spacing (
-			$spacing * .5
-		);
-}
+    .footer {
+        padding: $spacing ($spacing * 0.5);
+    }
 }
 
 .kl-body {
-	font-size: $small-font-size;
-	color: var(--regular-subtle-font-color);
+    font-size: $small-font-size;
+    color: var(--regular-subtle-font-color);
 
-	>div:nth-child(2) {
-		display: none;
-	}
+    > div:nth-child(2) {
+        display: none;
+    }
 
-	&.expand>div {
-		display: none;
+    &.expand > div {
+        display: none;
 
-		&:nth-child(2) {
-			display: block;
-		}
-	}
+        &:nth-child(2) {
+            display: block;
+        }
+    }
 
-	.kl-tg:before {
-		content: '. . .';
-	}
+    .kl-tg:before {
+        content: ". . .";
+    }
 }
 
 .kl-sort {
-
-	&,
-	&:hover {
-		color: var(--regular-font-color) !important;
-		border-bottom-width: $border-width dashed var(--regular-border-color);
-		text-decoration: none;
-	}
+    &,
+    &:hover {
+        color: var(--regular-font-color) !important;
+        border-bottom-width: $border-width dashed var(--regular-border-color);
+        text-decoration: none;
+    }
 }
 
 .kl-editable {
-	cursor: text;
+    cursor: text;
 
-	input {
-		font-size: $small-font-size;
-	}
+    input {
+        font-size: $small-font-size;
+    }
 }
 
 /* --- actions --- */
 .backlist-actions {
-	z-index: 1;
-	position: sticky;
-	border-radius: $medium-border-radius;
-	background-color: var(--regular-surface-color);
+    z-index: 1;
+    position: sticky;
+    border-radius: $medium-border-radius;
+    background-color: var(--regular-surface-color);
 
-	&.active {
-		border: $border-width $border-style var(--regular-border-color);
-		box-shadow: $template-box-shadow;
-	}
+    &.active {
+        border: $border-width $border-style var(--regular-border-color);
+        box-shadow: $template-box-shadow;
+    }
 
-	>div:first-child {
-		display: flex;
-		padding: $spacing * .5;
+    > div:first-child {
+        display: flex;
+        padding: $spacing * 0.5;
 
-		>div {
-			flex: auto;
-		}
-	}
+        > div {
+            flex: auto;
+        }
+    }
 
-	.btn-create {
-		display: inline;
+    .btn-create {
+        display: inline;
 
-		input {
-			width: 3rem;
-		}
-	}
+        input {
+            width: 3rem;
+        }
+    }
 }
 
 /* --- filters --- */
 .backlist-filters {
-	text-align: right;
-	padding: $spacing * .5;
-	background: var(--regular-bg-color);
+    text-align: right;
+    padding: $spacing * 0.5;
+    background: var(--regular-bg-color);
 
-	input.btn {
-		width: 140px;
-	}
+    input.btn {
+        width: 140px;
+    }
 }
-
 
 /* --- pagination --- */
 .backlist-pagination .info {
-	text-wrap: nowrap;
-	margin: $spacing;
-	display: inline-block;
+    text-wrap: nowrap;
+    margin: $spacing;
+    display: inline-block;
 }

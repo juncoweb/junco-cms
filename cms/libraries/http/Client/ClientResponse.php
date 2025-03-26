@@ -14,5 +14,5 @@ use Junco\Http\Message\Response as Response;
  */
 class ClientResponse extends Response implements ClientResponseInterface
 {
-	use ClientResponseTrait;
+    use ClientResponseTrait;
 }

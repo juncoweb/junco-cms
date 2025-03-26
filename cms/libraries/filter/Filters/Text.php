@@ -9,20 +9,20 @@ namespace Junco\Filter\Filters;
 
 class Text extends FilterAbstract
 {
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->type = 'string';
-		$this->default  = '';
-		$this->argument = [
-			'filter' => FILTER_DEFAULT,
-			'flags' => FILTER_FLAG_STRIP_LOW
-		];
-		//
-		$this->callback[] = function (&$value) {
-			$value = htmlspecialchars(trim($value));
-		};
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->type = 'string';
+        $this->default  = '';
+        $this->argument = [
+            'filter' => FILTER_DEFAULT,
+            'flags' => FILTER_FLAG_STRIP_LOW
+        ];
+        //
+        $this->callback[] = function (&$value) {
+            $value = htmlspecialchars(trim($value));
+        };
+    }
 }

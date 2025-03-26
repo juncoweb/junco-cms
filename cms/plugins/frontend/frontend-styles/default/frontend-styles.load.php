@@ -6,7 +6,7 @@
  */
 
 return function () {
-	return [
-		'-dark' => 'Dark',
-	];
+    return [
+        '-dark' => 'Dark',
+    ];
 };

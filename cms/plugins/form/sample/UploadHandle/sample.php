@@ -23,24 +23,24 @@ $fac->enter();
 // elements
 $form->input('name')->setLabel(_t('Name'));
 $form->file('image', [
-	'accept' => 'image',
-	'max_size' => 12436466,
-	//'images' => [media_url('slider/small'), '1-20170107015049.jpg', 'none.gif']
+    'accept' => 'image',
+    'max_size' => 12436466,
+    //'images' => [media_url('slider/small'), '1-20170107015049.jpg', 'none.gif']
 ])->setLabel(_t('Image'));
 
 $form->file('images', [
-	'multiple' => true,
-	//'accept' => 'image',
-	'max_size' => 12436466,
-	'images' => [media_url('slider/small'), ['1-20170107015057.jpg'], 'none.gif']
+    'multiple' => true,
+    //'accept' => 'image',
+    'max_size' => 12436466,
+    'images' => [media_url('slider/small'), ['1-20170107015057.jpg'], 'none.gif']
 ])->setLabel(_t('Images'));
 $html = $form->render();
 
 // template
 $tpl = Template::get();
 $tpl->options([
-	'domready' => $domready,
-	'thirdbar' => 'form.thirdbar'
+    'domready' => $domready,
+    'thirdbar' => 'form.thirdbar'
 ]);
 $tpl->title(_t('Upload file'));
 $tpl->content = '<div class="panel"><div class="panel-body">' . $html . '</div></div>';

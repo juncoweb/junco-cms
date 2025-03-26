@@ -11,32 +11,32 @@ $bbx = Backlist::getBox();
 // actions
 $bac = $bbx->getActions();
 if ($developer_mode) {
-	$bac->create();
-	$bac->edit();
-	$bac->toggle([
-		['control' => 'confirm_status', 'name' => 'status', 'value' => 'public', 'label' => _t('Public')],
-		['control' => 'confirm_status', 'name' => 'status', 'value' => 'private', 'label' => _t('Private')],
-		['control' => 'confirm_status', 'name' => 'status', 'value' => 'deprecated', 'label' => _t('Deprecated')],
-	]);
-	$bac->dropdown([
-		['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash-can'],
-		['control' => 'changes', 'label' => _t('Changes'), 'icon' => 'fa-regular fa-file-lines'],
-		['control' => 'confirm_dbhistory', 'label' => _t('DB history'), 'icon' => 'fa-solid fa-clock-rotate-left'],
-		['control' => 'edit_readme', 'label' => _t('Readme'), 'icon' => 'fa-solid fa-file-lines'],
-		[],
-		['control' => 'confirm_append', 'label' => _t('Append'), 'icon' => 'fa-solid fa-share-nodes'],
-		['control' => 'confirm_compile', 'label' => _t('Compile'), 'icon' => 'fa-solid fa-file-zipper'],
-		[],
-		['control' => 'confirm_find_updates', 'label' => _t('Find updates'), 'icon' => 'fa-solid fa-arrows-rotate'],
-		['control' => 'confirm_update_all', 'label' => _t('Update all'), 'icon' => 'fa-solid fa-bolt'],
-		[],
-		['control' => 'developers', 'label' => _t('Developers'), 'icon' => 'fa-solid fa-user-check'],
-	]);
+    $bac->create();
+    $bac->edit();
+    $bac->toggle([
+        ['control' => 'confirm_status', 'name' => 'status', 'value' => 'public', 'label' => _t('Public')],
+        ['control' => 'confirm_status', 'name' => 'status', 'value' => 'private', 'label' => _t('Private')],
+        ['control' => 'confirm_status', 'name' => 'status', 'value' => 'deprecated', 'label' => _t('Deprecated')],
+    ]);
+    $bac->dropdown([
+        ['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash-can'],
+        ['control' => 'changes', 'label' => _t('Changes'), 'icon' => 'fa-regular fa-file-lines'],
+        ['control' => 'confirm_dbhistory', 'label' => _t('DB history'), 'icon' => 'fa-solid fa-clock-rotate-left'],
+        ['control' => 'edit_readme', 'label' => _t('Readme'), 'icon' => 'fa-solid fa-file-lines'],
+        [],
+        ['control' => 'confirm_append', 'label' => _t('Append'), 'icon' => 'fa-solid fa-share-nodes'],
+        ['control' => 'confirm_compile', 'label' => _t('Compile'), 'icon' => 'fa-solid fa-file-zipper'],
+        [],
+        ['control' => 'confirm_find_updates', 'label' => _t('Find updates'), 'icon' => 'fa-solid fa-arrows-rotate'],
+        ['control' => 'confirm_update_all', 'label' => _t('Update all'), 'icon' => 'fa-solid fa-bolt'],
+        [],
+        ['control' => 'developers', 'label' => _t('Developers'), 'icon' => 'fa-solid fa-user-check'],
+    ]);
 } else {
-	$bac->dropdown([
-		['control' => 'confirm_find_updates', 'label' => _t('Find updates'), 'icon' => 'fa-solid fa-arrows-rotate'],
-		['control' => 'confirm_update_all', 'label' => _t('Update all'), 'icon' => 'fa-solid fa-bolt'],
-	]);
+    $bac->dropdown([
+        ['control' => 'confirm_find_updates', 'label' => _t('Find updates'), 'icon' => 'fa-solid fa-arrows-rotate'],
+        ['control' => 'confirm_update_all', 'label' => _t('Update all'), 'icon' => 'fa-solid fa-bolt'],
+    ]);
 }
 //
 $bac->filters();

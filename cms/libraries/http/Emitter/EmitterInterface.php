@@ -14,8 +14,8 @@ use Psr\Http\Message\ResponseInterface;
  */
 interface EmitterInterface
 {
-	/**
-	 * Emit a response.
-	 */
-	public function emit(ResponseInterface $response);
+    /**
+     * Emit a response.
+     */
+    public function emit(ResponseInterface $response);
 }

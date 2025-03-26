@@ -6,51 +6,51 @@
  */
 
 var JsControls = function (controls) {
-	controls = Object.assign({}, controls);
+    controls = Object.assign({}, controls);
 
-	return {
-		/**
-		 * attach
-		 * @attach one page events
-		 */
-		attach: function (handle, name, fn) {
-			controls[handle][name] = fn;
-			return this;
-		},
+    return {
+        /**
+         * attach
+         * @attach one page events
+         */
+        attach: function (handle, name, fn) {
+            controls[handle][name] = fn;
+            return this;
+        },
 
-		attachAll: function (handle, obj) {
-			if (typeof controls[handle] != 'object') {
-				controls[handle] = {};
-			}
+        attachAll: function (handle, obj) {
+            if (typeof controls[handle] != 'object') {
+                controls[handle] = {};
+            }
 
-			for (let name in obj) {
-				controls[handle][name] = obj[name];
-			}
-			return this;
-		},
+            for (let name in obj) {
+                controls[handle][name] = obj[name];
+            }
+            return this;
+        },
 
-		/**
-		 * load
-		 * @create the page events
-		 */
-		load: function (handle, box, fn) {
-			let attr = 'control-' + handle;
+        /**
+         * load
+         * @create the page events
+         */
+        load: function (handle, box, fn) {
+            let attr = 'control-' + handle;
 
-			if (typeof fn != 'function') {
-				fn = function (el, fn, name) {
-					fn(el, name);
-				};
-			}
+            if (typeof fn != 'function') {
+                fn = function (el, fn, name) {
+                    fn(el, name);
+                };
+            }
 
-			Array.from(box.querySelectorAll('[' + attr + ']'))
-				.forEach(function (el) {
-					let name = el.getAttribute(attr) || 'default';
-					if (controls[handle][name]) {
-						fn(el, controls[handle][name], name);
-					}
-				});
+            Array.from(box.querySelectorAll('[' + attr + ']'))
+                .forEach(function (el) {
+                    let name = el.getAttribute(attr) || 'default';
+                    if (controls[handle][name]) {
+                        fn(el, controls[handle][name], name);
+                    }
+                });
 
-			return this;
-		},
-	};
+            return this;
+        },
+    };
 };

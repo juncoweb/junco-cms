@@ -9,11 +9,11 @@ use Junco\Mvc\Controller;
 
 class FrontProfilerController extends Controller
 {
-	/**
-	 * Index
-	 */
-	public function index()
-	{
-		return $this->view(null, (new ProfilerModel)->getIndexData());
-	}
+    /**
+     * Index
+     */
+    public function index()
+    {
+        return $this->view(null, (new ProfilerModel)->getIndexData());
+    }
 }

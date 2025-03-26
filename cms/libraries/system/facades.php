@@ -14,11 +14,11 @@ use Junco\Http\Message\Response;
  */
 function app(string $id = ''): object
 {
-	if ($id) {
-		return Container::getInstance()->get($id);
-	}
+    if ($id) {
+        return Container::getInstance()->get($id);
+    }
 
-	return Container::getInstance();
+    return Container::getInstance();
 }
 
 /**
@@ -28,7 +28,7 @@ function app(string $id = ''): object
  */
 function abort(int $code = 0)
 {
-	throw new DebuggerAbortError('Logical error and abrupt abort', $code);
+    throw new DebuggerAbortError('Logical error and abrupt abort', $code);
 }
 
 /**
@@ -36,12 +36,12 @@ function abort(int $code = 0)
  */
 function cache(): Cache
 {
-	static $cache;
-	if ($cache === null) {
-		$cache = app('cache');
-	}
+    static $cache;
+    if ($cache === null) {
+        $cache = app('cache');
+    }
 
-	return $cache;
+    return $cache;
 }
 
 /**
@@ -49,16 +49,16 @@ function cache(): Cache
  */
 function config(string $key = '')
 {
-	static $config;
-	if ($config === null) {
-		$config = app('config');
-	}
+    static $config;
+    if ($config === null) {
+        $config = app('config');
+    }
 
-	if ($key) {
-		return $config->get($key);
-	}
+    if ($key) {
+        return $config->get($key);
+    }
 
-	return $config;
+    return $config;
 }
 
 /**
@@ -68,12 +68,12 @@ function config(string $key = '')
  */
 function curuser(): Curuser
 {
-	static $curuser;
-	if ($curuser === null) {
-		$curuser = new Curuser();
-	}
+    static $curuser;
+    if ($curuser === null) {
+        $curuser = new Curuser();
+    }
 
-	return $curuser;
+    return $curuser;
 }
 
 /**
@@ -81,12 +81,12 @@ function curuser(): Curuser
  */
 function db(): Database
 {
-	static $db;
-	if ($db === null) {
-		$db = app('database');
-	}
+    static $db;
+    if ($db === null) {
+        $db = app('database');
+    }
 
-	return $db;
+    return $db;
 }
 
 /**
@@ -96,12 +96,12 @@ function db(): Database
  */
 function media_path(string $path = ''): string
 {
-	static $media;
-	if ($media === null) {
-		$media = app('MediaStorage');
-	}
+    static $media;
+    if ($media === null) {
+        $media = app('MediaStorage');
+    }
 
-	return $media->getPath($path);
+    return $media->getPath($path);
 }
 
 /**
@@ -111,12 +111,12 @@ function media_path(string $path = ''): string
  */
 function media_url(string $path = '', bool $absolute = false): string
 {
-	static $media;
-	if ($media === null) {
-		$media = app('MediaStorage');
-	}
+    static $media;
+    if ($media === null) {
+        $media = app('MediaStorage');
+    }
 
-	return $media->getUrl($path, $absolute);
+    return $media->getUrl($path, $absolute);
 }
 
 /**
@@ -124,11 +124,11 @@ function media_url(string $path = '', bool $absolute = false): string
  */
 function request()
 {
-	if (!app()->has('request')) {
-		return null;
-	}
+    if (!app()->has('request')) {
+        return null;
+    }
 
-	return app('request');
+    return app('request');
 }
 
 /**
@@ -141,7 +141,7 @@ function request()
  */
 function response(int $code = 200, string $reasonPhrase = ''): Response
 {
-	return new Response($code, [], null, '1.1', $reasonPhrase);
+    return new Response($code, [], null, '1.1', $reasonPhrase);
 }
 
 /**
@@ -149,12 +149,12 @@ function response(int $code = 200, string $reasonPhrase = ''): Response
  */
 function router(): Router
 {
-	static $router;
-	if ($router === null) {
-		$router = app('router');
-	}
+    static $router;
+    if ($router === null) {
+        $router = app('router');
+    }
 
-	return $router;
+    return $router;
 }
 
 /**
@@ -168,12 +168,12 @@ function router(): Router
  */
 function url(string $route = '', array $args = [], bool $absolute = false): string
 {
-	static $router;
-	if ($router === null) {
-		$router = app('router');
-	}
+    static $router;
+    if ($router === null) {
+        $router = app('router');
+    }
 
-	return $router->getUrl($route, $args, $absolute);
+    return $router->getUrl($route, $args, $absolute);
 }
 
 /**
@@ -184,7 +184,7 @@ function url(string $route = '', array $args = [], bool $absolute = false): stri
  */
 function redirect($url = null, bool $absolute = true): void
 {
-	app('router')->redirect($url, $absolute);
+    app('router')->redirect($url, $absolute);
 }
 
 /**
@@ -192,12 +192,12 @@ function redirect($url = null, bool $absolute = true): void
  */
 function session(): object
 {
-	static $session;
-	if ($session === null) {
-		$session = app('session');
-	}
+    static $session;
+    if ($session === null) {
+        $session = app('session');
+    }
 
-	return $session;
+    return $session;
 }
 
 /**
@@ -205,12 +205,12 @@ function session(): object
  */
 function snippet(string $extension, ?string $snippet = null, ...$args): object
 {
-	static $snippets;
-	if ($snippets === null) {
-		$snippets = app('snippets');
-	}
+    static $snippets;
+    if ($snippets === null) {
+        $snippets = app('snippets');
+    }
 
-	return $snippets->new($extension, $snippet, ...$args);
+    return $snippets->new($extension, $snippet, ...$args);
 }
 
 /**
@@ -222,9 +222,9 @@ function snippet(string $extension, ?string $snippet = null, ...$args): object
  */
 function system_import(string $file, array $data = [])
 {
-	$data and extract($data);
+    $data and extract($data);
 
-	return include $file;
+    return include $file;
 }
 
 /**
@@ -232,12 +232,12 @@ function system_import(string $file, array $data = [])
  */
 function _t(string $message): string
 {
-	static $translator;
-	if ($translator === null) {
-		$translator = app('language')->getTranslator();
-	}
+    static $translator;
+    if ($translator === null) {
+        $translator = app('language')->getTranslator();
+    }
 
-	return $translator->gettext($message);
+    return $translator->gettext($message);
 }
 
 /**
@@ -251,10 +251,10 @@ function _t(string $message): string
  */
 function _nt(string $singular, string $plural, int $n): string
 {
-	static $translator;
-	if ($translator === null) {
-		$translator = app('language')->getTranslator();
-	}
+    static $translator;
+    if ($translator === null) {
+        $translator = app('language')->getTranslator();
+    }
 
-	return $translator->ngettext($singular, $plural, $n);
+    return $translator->ngettext($singular, $plural, $n);
 }

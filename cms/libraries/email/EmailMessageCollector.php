@@ -8,60 +8,60 @@
 
 class EmailMessageCollector
 {
-	// vars
-	private $sections = [];
+    // vars
+    private $sections = [];
 
-	/**
-	 * Section
-	 */
-	public function section(string $title = '')
-	{
-		$row = [
-			'title' => $title,
-			'articles' => [],
-		];
+    /**
+     * Section
+     */
+    public function section(string $title = '')
+    {
+        $row = [
+            'title' => $title,
+            'articles' => [],
+        ];
 
-		$this->sections[] = &$row;
-		return new EmailArticles($row['articles']);
-	}
+        $this->sections[] = &$row;
+        return new EmailArticles($row['articles']);
+    }
 
-	/**
-	 * Get
-	 */
-	public function get()
-	{
-		return $this->sections;
-	}
+    /**
+     * Get
+     */
+    public function get()
+    {
+        return $this->sections;
+    }
 }
 
 class EmailArticles
 {
-	public $articles = null;
+    public $articles = null;
 
-	/**
-	 * Constructor
-	 */
-	public function __construct(&$articles)
-	{
-		$this->articles = &$articles;
-	}
+    /**
+     * Constructor
+     */
+    public function __construct(&$articles)
+    {
+        $this->articles = &$articles;
+    }
 
-	/**
-	 * Add Article
-	 */
-	public function add(
-		string $title = '',
-		string $meta = '',
-		string $content = '',
-		string $image = '',
-		string $url = ''
-	) {
-		$this->articles[] = [
-			'title'		=> $title,
-			'meta'		=> $meta,
-			'content'	=> $content,
-			'image'		=> $image,
-			'url'		=> $url,
-		];
-	}
+    /**
+     * Add Article
+     */
+    public function add(
+        string $title = '',
+        string $meta = '',
+        string $content = '',
+        string $image = '',
+        string $url = ''
+    ) {
+        $this->articles[] = [
+            'title'        => $title,
+            'meta'        => $meta,
+            'content'    => $content,
+            'image'        => $image,
+            'url'        => $url,
+        ];
+    }
 }

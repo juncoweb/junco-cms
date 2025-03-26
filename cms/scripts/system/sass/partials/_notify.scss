@@ -1,40 +1,40 @@
 /* --- notify ------------------------------------------ */
 .notify-box {
-	position: relative;
-	z-index: $notify-zindex;
+    position: relative;
+    z-index: $notify-zindex;
 
-	>span {
-		position: fixed;
-		left: 0;
-		right: 0;
+    > span {
+        position: fixed;
+        left: 0;
+        right: 0;
 
-		>span {
-			color: $notify-color;
-			position: absolute;
-			bottom: -3px;
-			padding: .625rem 1rem;
-			background: $notify-bg-color;
-			border-radius: $medium-border-radius;
-			box-shadow: $element-box-shadow;
-			left: 50%;
-			-webkit-transform: translateX(-50%);
-			transform: translateX(-50%);
-			-webkit-animation-name: notify;
-			-webkit-animation-duration: .5s;
-			animation-name: notify;
-			animation-duration: .5s;
-		}
-	}
+        > span {
+            color: $notify-color;
+            position: absolute;
+            bottom: -3px;
+            padding: 0.625rem 1rem;
+            background: $notify-bg-color;
+            border-radius: $medium-border-radius;
+            box-shadow: $element-box-shadow;
+            left: 50%;
+            -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+            -webkit-animation-name: notify;
+            -webkit-animation-duration: 0.5s;
+            animation-name: notify;
+            animation-duration: 0.5s;
+        }
+    }
 }
 
 @keyframes notify {
-	from {
-		opacity: 0;
-		bottom: 40px;
-	}
+    from {
+        opacity: 0;
+        bottom: 40px;
+    }
 
-	to {
-		opacity: 1;
-		bottom: -3px;
-	}
+    to {
+        opacity: 1;
+        bottom: -3px;
+    }
 }

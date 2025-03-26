@@ -9,30 +9,30 @@ use Junco\Mvc\Model;
 
 class AdminJobsModel extends Model
 {
-	// vars
-	protected $db = null;
+    // vars
+    protected $db = null;
 
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->db = db();
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->db = db();
+    }
 
-	/**
-	 * Get
-	 */
-	public function getListData()
-	{
-		// data
-		$this->filter(POST, ['search' => 'text']);
+    /**
+     * Get
+     */
+    public function getListData()
+    {
+        // data
+        $this->filter(POST, ['search' => 'text']);
 
-		// query
-		if ($this->data['search']) {
-			$this->db->where("job_queue LIKE %?", $this->data['search']);
-		}
-		$pagi = $this->db->paginate("
+        // query
+        if ($this->data['search']) {
+            $this->db->where("job_queue LIKE %?", $this->data['search']);
+        }
+        $pagi = $this->db->paginate("
 		SELECT [
 		 id,
 		 job_queue ,
@@ -44,34 +44,34 @@ class AdminJobsModel extends Model
 		[WHERE]
 		[ORDER BY available_at DESC]");
 
-		$rows = [];
-		if ($pagi->num_rows) {
-			$failure_url = url('admin/jobs.failures') . '#/search=%d';
+        $rows = [];
+        if ($pagi->num_rows) {
+            $failure_url = url('admin/jobs.failures') . '#/search=%d';
 
-			foreach ($pagi->fetchAll() as $row) {
-				$row['available_at'] = new Date($row['available_at']);
-				$row['failure_url'] = sprintf($failure_url, $row['id']);
+            foreach ($pagi->fetchAll() as $row) {
+                $row['available_at'] = new Date($row['available_at']);
+                $row['failure_url'] = sprintf($failure_url, $row['id']);
 
-				$rows[] = $row;
-			}
-		}
+                $rows[] = $row;
+            }
+        }
 
-		return $this->data + [
-			'rows' => $rows,
-			'pagi' => $pagi
-		];
-	}
+        return $this->data + [
+            'rows' => $rows,
+            'pagi' => $pagi
+        ];
+    }
 
-	/**
-	 * Get
-	 */
-	public function getShowData()
-	{
-		// data
-		$this->filter(POST, ['id' => 'id|array:first|required:abort']);
+    /**
+     * Get
+     */
+    public function getShowData()
+    {
+        // data
+        $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
-		// query
-		$data = $this->db->safeFind("
+        // query
+        $data = $this->db->safeFind("
 		SELECT
 		 id,
 		 job_queue ,
@@ -83,13 +83,13 @@ class AdminJobsModel extends Model
 		FROM `#__jobs`
 		WHERE id = ?", $this->data['id'])->fetch() or abort();
 
-		$data['available_at'] = new Date($data['available_at']);
-		$data['created_at']   = new Date($data['created_at']);
+        $data['available_at'] = new Date($data['available_at']);
+        $data['created_at']   = new Date($data['created_at']);
 
-		if ($data['reserved_at']) {
-			$data['reserved_at'] = new Date($data['reserved_at']);
-		}
+        if ($data['reserved_at']) {
+            $data['reserved_at'] = new Date($data['reserved_at']);
+        }
 
-		return $data;
-	}
+        return $data;
+    }
 }

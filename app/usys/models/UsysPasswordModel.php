@@ -11,75 +11,75 @@ use Junco\Users\UserHelper;
 
 class UsysPasswordModel extends Model
 {
-	// vars
-	protected $db = null;
+    // vars
+    protected $db = null;
 
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->db = db();
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->db = db();
+    }
 
-	/**
-	 * Send token
-	 */
-	public function sentToken()
-	{
-		// data
-		$this->filter(POST, ['email_username'	=> '']);
+    /**
+     * Send token
+     */
+    public function sentToken()
+    {
+        // data
+        $this->filter(POST, ['email_username'    => '']);
 
-		$user = UserHelper::getUserFromInput($this->data['email_username']);
+        $user = UserHelper::getUserFromInput($this->data['email_username']);
 
-		if (!$user) {
-			throw new Exception(_t('Invalid email/username.'));
-		} elseif ($user['status'] != 'active') {
-			return Xjs::redirectTo(url('/usys/message', ['op' => 'login']));
-		}
+        if (!$user) {
+            throw new Exception(_t('Invalid email/username.'));
+        } elseif ($user['status'] != 'active') {
+            return Xjs::redirectTo(url('/usys/message', ['op' => 'login']));
+        }
 
-		// token
-		$result = UserActivityToken::generateAndSend(
-			'savepwd',
-			$user['id'],
-			$user['email'],
-			$user['fullname']
-		);
+        // token
+        $result = UserActivityToken::generateAndSend(
+            'savepwd',
+            $user['id'],
+            $user['email'],
+            $user['fullname']
+        );
 
-		if (!$result) {
-			throw new Exception(_t('An error has occurred in the mail server. Please, try again later.'));
-		}
+        if (!$result) {
+            throw new Exception(_t('An error has occurred in the mail server. Please, try again later.'));
+        }
 
-		return Xjs::redirectTo(url('/usys/message', ['op' => 'reset-pwd']));
-	}
+        return Xjs::redirectTo(url('/usys/message', ['op' => 'reset-pwd']));
+    }
 
-	/**
-	 * Update
-	 */
-	public function update()
-	{
-		// data
-		$this->filter(POST, [
-			'password' => 'required',
-			'verified' => 'required',
-		]);
+    /**
+     * Update
+     */
+    public function update()
+    {
+        // data
+        $this->filter(POST, [
+            'password' => 'required',
+            'verified' => 'required',
+        ]);
 
-		// vars
-		$token = UserActivityToken::get(POST, 'savepwd');
+        // vars
+        $token = UserActivityToken::get(POST, 'savepwd');
 
-		if ($this->data['password'] !== $this->data['verified']) {
-			throw new Exception(_t('Passwords do not match.'));
-		}
+        if ($this->data['password'] !== $this->data['verified']) {
+            throw new Exception(_t('Passwords do not match.'));
+        }
 
-		UserHelper::validatePassword($this->data['password']);
-		$this->data['password'] = UserHelper::hash($this->data['password']);
+        UserHelper::validatePassword($this->data['password']);
+        $this->data['password'] = UserHelper::hash($this->data['password']);
 
-		// query
-		$this->db->safeExec("UPDATE `#__users` SET password = ? WHERE id = ?", $this->data['password'], $token->user_id);
+        // query
+        $this->db->safeExec("UPDATE `#__users` SET password = ? WHERE id = ?", $this->data['password'], $token->user_id);
 
-		$token->destroy();
-		curuser()->login($token->user_id);
+        $token->destroy();
+        curuser()->login($token->user_id);
 
-		return Xjs::redirectTo(url('/usys/message', ['op' => 'savepwd']));
-	}
+        return Xjs::redirectTo(url('/usys/message', ['op' => 'savepwd']));
+    }
 }

@@ -6,12 +6,12 @@
  */
 
 return function (&$rows) {
-	$langs = new LanguageHelper();
+    $langs = new LanguageHelper();
 
-	$rows['availables']['options'] = $langs->getAvailables(true);
-	$rows['type']['options'] = ['Cookie', 'URL'];
+    $rows['availables']['options'] = $langs->getAvailables(true);
+    $rows['type']['options'] = ['Cookie', 'URL'];
 
-	if (!function_exists('gettext')) {
-		$rows['use_gettext']['help'] = '<span class="color-red">' . _t('The gettext library is not available.') . '</span>';
-	}
+    if (!function_exists('gettext')) {
+        $rows['use_gettext']['help'] = '<span class="color-red">' . _t('The gettext library is not available.') . '</span>';
+    }
 };

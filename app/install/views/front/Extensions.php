@@ -8,8 +8,8 @@
 // template
 $tpl = Template::get('install');
 $tpl->options([
-	'hash' => 'extensions',
-	'submit' => true
+    'hash' => 'extensions',
+    'submit' => true
 ]);
 $tpl->title(_t('Extensions installer'));
 $tpl->content = _t('Click next to install the extensions.');

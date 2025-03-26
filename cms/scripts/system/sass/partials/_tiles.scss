@@ -1,95 +1,95 @@
 /* -------- tiles ------------------------------------------------- */
 .tiles {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 10px;
-	margin-bottom: $spacing;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: $spacing;
 
-	&>div {
-		min-width: 100px;
-		min-height: 100px;
-		background-color: var(--regular-bg-color);
-		border-radius: $medium-border-radius;
-		display: flex;
-		flex-direction: column;
+    & > div {
+        min-width: 100px;
+        min-height: 100px;
+        background-color: var(--regular-bg-color);
+        border-radius: $medium-border-radius;
+        display: flex;
+        flex-direction: column;
 
-		&:hover {
-			transform: scale(1.04);
-		}
+        &:hover {
+            transform: scale(1.04);
+        }
 
-		&>a {
-			text-decoration: none;
-			height: 100%;
-			display: flex;
-			flex-direction: column;
-		}
-	}
+        & > a {
+            text-decoration: none;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+    }
 
-	.tile-content {
-		margin: auto 0;
-		padding: .25rem;
-		text-align: center;
-	}
+    .tile-content {
+        margin: auto 0;
+        padding: 0.25rem;
+        text-align: center;
+    }
 
-	.tile-wrapper {
-		padding: 0 1.75rem;
-		display: inline-block;
-		position: relative;
-	}
+    .tile-wrapper {
+        padding: 0 1.75rem;
+        display: inline-block;
+        position: relative;
+    }
 
-	.tile-icon {
-		font-size: 1.5rem;
-	}
+    .tile-icon {
+        font-size: 1.5rem;
+    }
 
-	.tile-caption {
-		color: var(--regular-font-color);
-		font-weight: bold;
-		font-size: $small-font-size;
-	}
+    .tile-caption {
+        color: var(--regular-font-color);
+        font-weight: bold;
+        font-size: $small-font-size;
+    }
 
-	.tile-badge {
-		position: absolute;
-		inset: auto 0 -0.25rem auto;
-	}
+    .tile-badge {
+        position: absolute;
+        inset: auto 0 -0.25rem auto;
+    }
 
-	&.tiles-medium>div {
-		min-width: 140px;
-		min-height: 140px;
+    &.tiles-medium > div {
+        min-width: 140px;
+        min-height: 140px;
 
-		.tile-icon {
-			font-size: 2.5rem;
-		}
+        .tile-icon {
+            font-size: 2.5rem;
+        }
 
-		.tile-caption {
-			font-size: $font-size;
-		}
-	}
+        .tile-caption {
+            font-size: $font-size;
+        }
+    }
 
-	&.tiles-large>div {
-		min-width: 180px;
-		min-height: 180px;
+    &.tiles-large > div {
+        min-width: 180px;
+        min-height: 180px;
 
-		.tile-icon {
-			font-size: 3rem;
-		}
+        .tile-icon {
+            font-size: 3rem;
+        }
 
-		.tile-caption {
-			font-size: $large-font-size;
-		}
-	}
+        .tile-caption {
+            font-size: $large-font-size;
+        }
+    }
 
-	&-fieldset {
-		margin: 0;
-		margin-bottom: $spacing;
-		background-color: var(--regular-surface-color);
-		border-width: $border-width;
-		border-style: $border-style;
-		border-color: var(--regular-border-color);
-		border-radius: $medium-border-radius;
-		box-shadow: $template-box-shadow;
+    &-fieldset {
+        margin: 0;
+        margin-bottom: $spacing;
+        background-color: var(--regular-surface-color);
+        border-width: $border-width;
+        border-style: $border-style;
+        border-color: var(--regular-border-color);
+        border-radius: $medium-border-radius;
+        box-shadow: $template-box-shadow;
 
-		>legend {
-			color: var(--regular-font-color);
-		}
-	}
+        > legend {
+            color: var(--regular-font-color);
+        }
+    }
 }

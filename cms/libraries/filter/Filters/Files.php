@@ -11,63 +11,63 @@ use Junco\Filesystem\UploadedFileManager;
 
 class Files extends FilterAbstract
 {
-	/**
-	 * Constructor
-	 * 
-	 * @param string|array|null $filter_value
-	 */
-	public function __construct(string|array|null $filter_value = null)
-	{
-		$this->type = 'file';
-		$this->isFile = true;
-		/* $this->argument = [
+    /**
+     * Constructor
+     * 
+     * @param string|array|null $filter_value
+     */
+    public function __construct(string|array|null $filter_value = null)
+    {
+        $this->type = 'file';
+        $this->isFile = true;
+        /* $this->argument = [
 			'filter' => FILTER_DEFAULT
 		]; */
 
-		if ($filter_value) {
-			if (is_string($filter_value)) {
-				$filter_value = $this->strToArr($filter_value);
-			}
+        if ($filter_value) {
+            if (is_string($filter_value)) {
+                $filter_value = $this->strToArr($filter_value);
+            }
 
-			$this->callback[] = function (UploadedFileManager $value) use ($filter_value) {
-				$value->validate(['allow_extensions' => $filter_value]);
-			};
-		}
-	}
+            $this->callback[] = function (UploadedFileManager $value) use ($filter_value) {
+                $value->validate(['allow_extensions' => $filter_value]);
+            };
+        }
+    }
 
-	/**
-	 * Set modifiers
-	 * 
-	 * @param array $modifiers
-	 */
-	public function setModifiers(array $modifiers): void
-	{
-		$this->accept($modifiers, ['required']);
+    /**
+     * Set modifiers
+     * 
+     * @param array $modifiers
+     */
+    public function setModifiers(array $modifiers): void
+    {
+        $this->accept($modifiers, ['required']);
 
-		parent::setModifiers($modifiers);
-	}
+        parent::setModifiers($modifiers);
+    }
 
-	/**
-	 * Filter
-	 * 
-	 * @param mixed $value
-	 * 
-	 * @return mixed
-	 */
-	public function filter($value, $file = null, $altValue = null): mixed
-	{
-		$manager = new UploadedFileManager($file, true);
+    /**
+     * Filter
+     * 
+     * @param mixed $value
+     * 
+     * @return mixed
+     */
+    public function filter($value, $file = null, $altValue = null): mixed
+    {
+        $manager = new UploadedFileManager($file, true);
 
-		if ($this->required) {
-			$this->required = false;
+        if ($this->required) {
+            $this->required = false;
 
-			$manager->verifyIsEmpty();
-		}
+            $manager->verifyIsEmpty();
+        }
 
-		foreach ($this->callback as $fn) {
-			$fn($manager);
-		}
+        foreach ($this->callback as $fn) {
+            $fn($manager);
+        }
 
-		return $manager;
-	}
+        return $manager;
+    }
 }

@@ -20,13 +20,13 @@ $bls->th(_t('Key'), ['priority' => 2]);
 //$bls->th(_t('Extension'), ['priority' => 2]);
 
 foreach ($rows as $row) {
-	if (!$row['is_protected']) {
-		$bls->setLabel('editable');
-	}
-	$bls->check($row['id']);
-	$bls->td($row['label_name']);
-	$bls->td($row['label_key']);
-	//$bls->td($row['extension_name']);
+    if (!$row['is_protected']) {
+        $bls->setLabel('editable');
+    }
+    $bls->check($row['id']);
+    $bls->td($row['label_name']);
+    $bls->td($row['label_key']);
+    //$bls->td($row['extension_name']);
 }
 
 return $bls->render($pagi);

@@ -9,44 +9,44 @@ use Junco\Mvc\Controller;
 
 class AdminSamplesController extends Controller
 {
-	/**
-	 * Edit
-	 */
-	public function edit()
-	{
-		return $this->view(null, (new SamplesModel)->getEditData());
-	}
+    /**
+     * Edit
+     */
+    public function edit()
+    {
+        return $this->view(null, (new SamplesModel)->getEditData());
+    }
 
-	/**
-	 * Update
-	 */
-	public function update()
-	{
-		return $this->middleware('form.security')
-			?: $this->wrapper(fn() => (new SamplesModel)->update());
-	}
+    /**
+     * Update
+     */
+    public function update()
+    {
+        return $this->middleware('form.security')
+            ?: $this->wrapper(fn() => (new SamplesModel)->update());
+    }
 
-	/**
-	 * Index
-	 */
-	public function index()
-	{
-		return $this->view();
-	}
+    /**
+     * Index
+     */
+    public function index()
+    {
+        return $this->view();
+    }
 
-	/**
-	 * List
-	 */
-	public function list()
-	{
-		return $this->view(null, (new SamplesModel)->getListData());
-	}
+    /**
+     * List
+     */
+    public function list()
+    {
+        return $this->view(null, (new SamplesModel)->getListData());
+    }
 
-	/**
-	 * Show
-	 */
-	public function show()
-	{
-		return (new SamplesModel)->getShowData();
-	}
+    /**
+     * Show
+     */
+    public function show()
+    {
+        return (new SamplesModel)->getShowData();
+    }
 }

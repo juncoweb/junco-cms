@@ -11,15 +11,15 @@ $form->setValues($values);
 $form->hidden('id');
 //
 if ($is_used) {
-	$form->addRow(['content' => sprintf(_t('Confirm unselect the theme «%s» on the frontend.'), $theme)]);
+    $form->addRow(['content' => sprintf(_t('Confirm unselect the theme «%s» on the frontend.'), $theme)]);
 } else {
-	$form->addRow(['content' => sprintf(_t('Confirm select the theme «%s» on the frontend.'), $theme)]);
+    $form->addRow(['content' => sprintf(_t('Confirm select the theme «%s» on the frontend.'), $theme)]);
 }
 
 if ($explain_is_active) {
-	$form->toggle('disable_explanation')
-		->setLabel(_t('Explain'))
-		->setHelp(_t('If you choose not to perform this action, the change may not be displayed.'));
+    $form->toggle('disable_explanation')
+        ->setLabel(_t('Explain'))
+        ->setHelp(_t('If you choose not to perform this action, the change may not be displayed.'));
 }
 
 // modal

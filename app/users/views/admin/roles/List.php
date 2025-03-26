@@ -18,10 +18,10 @@ $bls->check_h();
 $bls->th(_t('Name'));
 
 if ($rows) {
-	foreach ($rows as $row) {
-		$bls->check($row['id']);
-		$bls->td($row['role_name']);
-	}
+    foreach ($rows as $row) {
+        $bls->check($row['id']);
+        $bls->td($row['role_name']);
+    }
 }
 
 return $bls->render($pagi);

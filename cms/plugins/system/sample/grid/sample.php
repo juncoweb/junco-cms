@@ -9,13 +9,13 @@ defined('IS_TEST') or die;
 
 function grid__get_panels(string $css, int $total)
 {
-	$html = '';
-	for ($i = 0; $i < $total; $i++) {
-		$html .= '<div class="panel panel-regular"><div class="panel-body text-center"><span class="panel-stat-value">' . ($i + 1) . '</span></div></div>';
-	}
+    $html = '';
+    for ($i = 0; $i < $total; $i++) {
+        $html .= '<div class="panel panel-regular"><div class="panel-body text-center"><span class="panel-stat-value">' . ($i + 1) . '</span></div></div>';
+    }
 
-	return '<h3>.' . $css . '</h3>'
-		. '<div class="' . $css . ' mb-4">' . $html . '</div>';
+    return '<h3>.' . $css . '</h3>'
+        . '<div class="' . $css . ' mb-4">' . $html . '</div>';
 }
 
 $html = '';
@@ -42,7 +42,7 @@ $html .= grid__get_panels('grid grid-large-box', 7);
 // template
 $tpl = Template::get();
 $tpl->options([
-	'thirdbar' => 'system.thirdbar'
+    'thirdbar' => 'system.thirdbar'
 ]);
 $tpl->title('Table');
 $tpl->content = '<div class="panel"><div class="panel-body">' . $html . '</div></div>';

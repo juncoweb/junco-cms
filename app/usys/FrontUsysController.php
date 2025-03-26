@@ -9,76 +9,76 @@ use Junco\Mvc\Controller;
 
 class FrontUsysController extends Controller
 {
-	/**
-	 * Signup
-	 */
-	public function signup()
-	{
-		curuser()->id and redirect();
+    /**
+     * Signup
+     */
+    public function signup()
+    {
+        curuser()->id and redirect();
 
-		return $this->view(null, (new FrontUsysModel)->getSignupData());
-	}
+        return $this->view(null, (new FrontUsysModel)->getSignupData());
+    }
 
-	/**
-	 * Take signup
-	 */
-	public function takeSignup()
-	{
-		return $this->middleware('form.security')
-			?: $this->authenticate(-1)
-			?: $this->wrapper(fn() => (new UsysModel)->signup());
-	}
+    /**
+     * Take signup
+     */
+    public function takeSignup()
+    {
+        return $this->middleware('form.security')
+            ?: $this->authenticate(-1)
+            ?: $this->wrapper(fn() => (new UsysModel)->signup());
+    }
 
-	/**
-	 * Login
-	 */
-	public function login()
-	{
-		curuser()->id and redirect();
+    /**
+     * Login
+     */
+    public function login()
+    {
+        curuser()->id and redirect();
 
-		return $this->view(null, (new FrontUsysModel)->getLoginData());
-	}
+        return $this->view(null, (new FrontUsysModel)->getLoginData());
+    }
 
-	/**
-	 * Take Login
-	 */
-	public function takeLogin()
-	{
-		return $this->middleware('form.security')
-			?: $this->wrapper(fn() => (new UsysModel)->login());
-	}
+    /**
+     * Take Login
+     */
+    public function takeLogin()
+    {
+        return $this->middleware('form.security')
+            ?: $this->wrapper(fn() => (new UsysModel)->login());
+    }
 
-	/**
-	 * Logout
-	 */
-	public function logout()
-	{
-		return $this->view();
-	}
+    /**
+     * Logout
+     */
+    public function logout()
+    {
+        return $this->view();
+    }
 
-	/**
-	 * Take logout
-	 */
-	public function takeLogout()
-	{
-		return $this->middleware('form.security')
-			?: $this->wrapper(fn() => (new UsysModel)->logout());
-	}
+    /**
+     * Take logout
+     */
+    public function takeLogout()
+    {
+        return $this->middleware('form.security')
+            ?: $this->wrapper(fn() => (new UsysModel)->logout());
+    }
 
-	/**
-	 * Autologin
-	 */
-	public function autologin()
-	{
-		return $this->authenticate(-1)
-			?: $this->view(null, (new FrontUsysModel)->getAutologinData());
-	}
+    /**
+     * Autologin
+     */
+    public function autologin()
+    {
+        return $this->authenticate(-1)
+            ?: $this->view(null, (new FrontUsysModel)->getAutologinData());
+    }
 
-	/**
-	 * Message
-	 */
-	public function message()
-	{
-		return $this->view(null, (new FrontUsysModel)->getMessageData());
-	}
+    /**
+     * Message
+     */
+    public function message()
+    {
+        return $this->view(null, (new FrontUsysModel)->getMessageData());
+    }
 }

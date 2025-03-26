@@ -1,114 +1,113 @@
 /* --- form-group ----------------------------------------- */
 .form-wrapper {
-	max-width: $screen-x-large;
-	margin-bottom: $spacing * 2;
+    max-width: $screen-x-large;
+    margin-bottom: $spacing * 2;
 
-	>div {
-		max-width: $screen-medium;
-		margin-left: auto;
-		margin-right: auto;
-	}
+    > div {
+        max-width: $screen-medium;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 .form-group {
-	&~& {
-		margin-top: $spacing;
-	}
+    & ~ & {
+        margin-top: $spacing;
+    }
 
-	>div~div {
-		margin-top: ($spacing * .5);
-	}
+    > div ~ div {
+        margin-top: ($spacing * 0.5);
+    }
 }
 
 .form-label {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 .form-button {
-	white-space: nowrap;
+    white-space: nowrap;
 }
 
 .form-help {
-	color: var(--regular-subtle-font-color);
+    color: var(--regular-subtle-font-color);
 }
 
 .form-content {
-	display: flex;
-	gap: $spacing;
+    display: flex;
+    gap: $spacing;
 
-	.form-ct {
-		flex: auto;
-	}
+    .form-ct {
+        flex: auto;
+    }
 }
 
 .form-header {
-	padding: ($spacing * .5) $spacing;
-	//background: var(--regular-bg-color);
-	//border-radius: $medium-border-radius;
-	display: flex;
-	gap: $spacing * .5;
-	vertical-align: bottom;
+    padding: ($spacing * 0.5) $spacing;
+    //background: var(--regular-bg-color);
+    //border-radius: $medium-border-radius;
+    display: flex;
+    gap: $spacing * 0.5;
+    vertical-align: bottom;
 
-	&>div {
-		align-self: center;
-	}
+    & > div {
+        align-self: center;
+    }
 
-	.fh-content {
-		flex: auto;
-	}
+    .fh-content {
+        flex: auto;
+    }
 
-	.fh-toggle a i {
-		color: var(--regular-font-color);
-		transition: all .2s linear;
-	}
+    .fh-toggle a i {
+        color: var(--regular-font-color);
+        transition: all 0.2s linear;
+    }
 }
 
 .form-body {
-	border-top: $border-width $border-style var(--regular-border-color);
-	padding: $spacing;
-	display: none;
+    border-top: $border-width $border-style var(--regular-border-color);
+    padding: $spacing;
+    display: none;
 }
 
-
 div.form-fieldset.expanded {
-	.fh-toggle i {
-		transform: rotate(180deg);
-	}
+    .fh-toggle i {
+        transform: rotate(180deg);
+    }
 
-	.form-body {
-		display: block;
-	}
+    .form-body {
+        display: block;
+    }
 }
 
 fieldset.form-fieldset {
-	margin: 0;
-	padding: $spacing;
-	background-color: var(--regular-surface-color);
-	border-width: $border-width;
-	border-style: $border-style;
-	border-color: var(--regular-border-color);
-	border-radius: $medium-border-radius;
-	box-shadow: $template-box-shadow;
+    margin: 0;
+    padding: $spacing;
+    background-color: var(--regular-surface-color);
+    border-width: $border-width;
+    border-style: $border-style;
+    border-color: var(--regular-border-color);
+    border-radius: $medium-border-radius;
+    box-shadow: $template-box-shadow;
 
-	>legend {
-		color: var(--regular-subtle-font-color);
-	}
+    > legend {
+        color: var(--regular-subtle-font-color);
+    }
 }
 
-.form-fieldset+.form-fieldset {
-	margin-top: ($spacing * .5);
+.form-fieldset + .form-fieldset {
+    margin-top: ($spacing * 0.5);
 }
 
 // actions
 .form-actions {
-	display: flex;
-	margin-bottom: $spacing;
+    display: flex;
+    margin-bottom: $spacing;
 
-	.form-col-1 {
-		flex: auto;
-	}
+    .form-col-1 {
+        flex: auto;
+    }
 
-	.form-col-2 {
-		text-align: right;
-	}
+    .form-col-2 {
+        text-align: right;
+    }
 }

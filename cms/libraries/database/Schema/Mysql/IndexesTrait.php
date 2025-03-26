@@ -9,28 +9,28 @@ namespace Junco\Database\Schema\Mysql;
 
 trait IndexesTrait
 {
-	/**
-	 * Get Index Columns
-	 * 
-	 * @param array  $Columns
-	 * 
-	 * @return string
-	 */
-	protected function getIndexColumnsStatement(array $Columns): string
-	{
-		foreach ($Columns as $i => $Column) {
-			if (is_array($Column)) {
-				$Column = "`" . $Column['Column_name'] . "`";
+    /**
+     * Get Index Columns
+     * 
+     * @param array  $Columns
+     * 
+     * @return string
+     */
+    protected function getIndexColumnsStatement(array $Columns): string
+    {
+        foreach ($Columns as $i => $Column) {
+            if (is_array($Column)) {
+                $Column = "`" . $Column['Column_name'] . "`";
 
-				if (!empty($Column['Sub_part'])) {
-					$Column .= "(" . $Column['Sub_part'] . ")";
-				};
-			} else {
-				$Column = "`" . $Column . "`";
-			}
-			$Columns[$i] = $Column;
-		}
+                if (!empty($Column['Sub_part'])) {
+                    $Column .= "(" . $Column['Sub_part'] . ")";
+                };
+            } else {
+                $Column = "`" . $Column . "`";
+            }
+            $Columns[$i] = $Column;
+        }
 
-		return implode(", ", $Columns);
-	}
+        return implode(", ", $Columns);
+    }
 }

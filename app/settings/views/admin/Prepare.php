@@ -10,8 +10,8 @@ $form = Form::get();
 $form->setValues($values);
 
 $form->group(
-	$form->select('extension', $extensions)->setLabel(_t('Key')),
-	$form->input('sub_extension')
+    $form->select('extension', $extensions)->setLabel(_t('Key')),
+    $form->input('sub_extension')
 );
 $form->input('add_rows', ['type' => 'number'])->setLabel(_t('Total'));
 

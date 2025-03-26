@@ -1,50 +1,50 @@
 
 /* --- Translations -------------------------------------------- */
 (function () {
-	function $U(task) {
-		return JsUrl('admin/language.translations/' + task);
-	}
+    function $U(task) {
+        return JsUrl('admin/language.translations/' + task);
+    }
 
-	function List(target) {
-		function callback(message, code) {
-			if (code) {
-				if (target_2) {
-					target_2 = target_2.close();
-				}
-				_backlist.refresh();
-			}
-			(target_2 || _backlist).notify(message);
-		}
+    function List(target) {
+        function callback(message, code) {
+            if (code) {
+                if (target_2) {
+                    target_2 = target_2.close();
+                }
+                _backlist.refresh();
+            }
+            (target_2 || _backlist).notify(message);
+        }
 
-		let target_2;
-		let _backlist = Backlist('translations')
-			.url($U)
-			.controls({
-				confirm_download: {
-					url: $U('confirm_download'),
-					modalOptions: {
-						target: target,
-						onLoad: function () {
-							target_2 = this;
-							JsForm({ btn: this }).request($U('download'), callback);
-						},
-					},
-				},
-			})
-			.data()
-			.load();
-	}
+        let target_2;
+        let _backlist = Backlist('translations')
+            .url($U)
+            .controls({
+                confirm_download: {
+                    url: $U('confirm_download'),
+                    modalOptions: {
+                        target: target,
+                        onLoad: function () {
+                            target_2 = this;
+                            JsForm({ btn: this }).request($U('download'), callback);
+                        },
+                    },
+                },
+            })
+            .data()
+            .load();
+    }
 
-	Language.setControls({
-		translations: {
-			url: $U('index'),
-			numRows: '?',
-			modalOptions: {
-				size: 'large',
-				onLoad: function () {
-					List(this);
-				},
-			},
-		}
-	});
+    Language.setControls({
+        translations: {
+            url: $U('index'),
+            numRows: '?',
+            modalOptions: {
+                size: 'large',
+                onLoad: function () {
+                    List(this);
+                },
+            },
+        }
+    });
 })();

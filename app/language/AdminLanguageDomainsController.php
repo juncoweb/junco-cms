@@ -9,19 +9,19 @@ use Junco\Mvc\Controller;
 
 class AdminLanguageDomainsController extends Controller
 {
-	/**
-	 * Index
-	 */
-	public function index()
-	{
-		return $this->view(null, (new AdminLanguageDomainsModel)->getIndexData());
-	}
+    /**
+     * Index
+     */
+    public function index()
+    {
+        return $this->view(null, (new AdminLanguageDomainsModel)->getIndexData());
+    }
 
-	/**
-	 * List
-	 */
-	public function list(?array $data = null)
-	{
-		return $this->view(null, (new AdminLanguageDomainsModel)->setData($data)->getListData());
-	}
+    /**
+     * List
+     */
+    public function list(?array $data = null)
+    {
+        return $this->view(null, (new AdminLanguageDomainsModel)->setData($data)->getListData());
+    }
 }

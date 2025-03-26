@@ -12,39 +12,39 @@ use Database;
 
 class Registers implements RegistersInterface
 {
-	//
-	protected $db;
-	protected $prefixer;
+    //
+    protected $db;
+    protected $prefixer;
 
-	/**
-	 * Constructor
-	 */
-	public function __construct(Database $db)
-	{
-		$this->db = $db;
-		$this->prefixer = $db->getPrefixer();
-	}
+    /**
+     * Constructor
+     */
+    public function __construct(Database $db)
+    {
+        $this->db = $db;
+        $this->prefixer = $db->getPrefixer();
+    }
 
-	/**
-	 * Get
-	 * 
-	 * @param string $tbl_name
-	 * @param bool   $set_db_prefix
-	 * 
-	 * @return array
-	 */
-	public function showData(string $tbl_name, bool $set_db_prefix = false): array
-	{
-		// query
-		$rows = $this->db->safeFind("SELECT * FROM `$tbl_name`")->fetchAll();
+    /**
+     * Get
+     * 
+     * @param string $tbl_name
+     * @param bool   $set_db_prefix
+     * 
+     * @return array
+     */
+    public function showData(string $tbl_name, bool $set_db_prefix = false): array
+    {
+        // query
+        $rows = $this->db->safeFind("SELECT * FROM `$tbl_name`")->fetchAll();
 
-		if ($set_db_prefix) {
-			$tbl_name = $this->prefixer->putUniversalOnTableName($tbl_name);
-		}
+        if ($set_db_prefix) {
+            $tbl_name = $this->prefixer->putUniversalOnTableName($tbl_name);
+        }
 
-		return [
-			'Table' => $tbl_name,
-			'Rows'	=> $rows
-		];
-	}
+        return [
+            'Table' => $tbl_name,
+            'Rows'    => $rows
+        ];
+    }
 }

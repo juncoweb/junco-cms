@@ -1,23 +1,23 @@
 /* --- Badge --------------------------------------------------*/
 .badge {
-	text-decoration: none;
-	white-space: nowrap;
-	border-width: $border-width;
-	border-style: $border-style;
-	padding: $badge-padding-y $badge-padding-x;
-	vertical-align: baseline;
-	border-radius: $medium-border-radius;
-	display: inline-block;
+    text-decoration: none;
+    white-space: nowrap;
+    border-width: $border-width;
+    border-style: $border-style;
+    padding: $badge-padding-y $badge-padding-x;
+    vertical-align: baseline;
+    border-radius: $medium-border-radius;
+    display: inline-block;
 
-	&~& {
-		margin-left: $border-width;
-	}
+    & ~ & {
+        margin-left: $border-width;
+    }
 
-	&-small {
-		font-size: $small-font-size;
-	}
+    &-small {
+        font-size: $small-font-size;
+    }
 
-	&-large {
-		font-size: $large-font-size;
-	}
+    &-large {
+        font-size: $large-font-size;
+    }
 }

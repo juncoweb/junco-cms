@@ -6,6 +6,6 @@
  */
 
 return function (&$rows) {
-	//$rows['plugins']['plugins'] = 'portal';
-	//$rows['snippet']['snippet'] = 'portal';
+    //$rows['plugins']['plugins'] = 'portal';
+    //$rows['snippet']['snippet'] = 'portal';
 };

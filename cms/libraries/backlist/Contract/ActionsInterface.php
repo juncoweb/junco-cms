@@ -11,50 +11,50 @@ use Junco\Form\Contract\ActionElementsInterface;
 
 interface ActionsInterface extends ActionElementsInterface
 {
-	/**
-	 * Create
-	 */
-	public function create(array|int $attr = 0);
+    /**
+     * Create
+     */
+    public function create(array|int $attr = 0);
 
-	/**
-	 * Edit
-	 */
-	public function edit();
+    /**
+     * Edit
+     */
+    public function edit();
 
-	/**
-	 * Delete
-	 */
-	public function delete();
+    /**
+     * Delete
+     */
+    public function delete();
 
-	/**
-	 * Back
-	 * 
-	 * @param string $href
-	 * @param string $title
-	 */
-	public function back(string $href = '', string $title = '');
+    /**
+     * Back
+     * 
+     * @param string $href
+     * @param string $title
+     */
+    public function back(string $href = '', string $title = '');
 
-	/**
-	 * Toggle
-	 * 
-	 * @param array|string $control
-	 * @param string       $title
-	 * @param array|string $attr
-	 */
-	public function toggle(string|array $control = '', string $title = '', array|string $attr = []);
+    /**
+     * Toggle
+     * 
+     * @param array|string $control
+     * @param string       $title
+     * @param array|string $attr
+     */
+    public function toggle(string|array $control = '', string $title = '', array|string $attr = []);
 
-	/**
-	 * Separate
-	 */
-	public function separate(): void;
+    /**
+     * Separate
+     */
+    public function separate(): void;
 
-	/**
-	 * Filters
-	 */
-	public function filters();
+    /**
+     * Filters
+     */
+    public function filters();
 
-	/**
-	 * Refresh
-	 */
-	public function refresh();
+    /**
+     * Refresh
+     */
+    public function refresh();
 }

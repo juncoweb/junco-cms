@@ -1,111 +1,107 @@
 /* -------- system ------------------------------------------------- */
 .float {
-	&-right {
-		float: right;
-	}
+    &-right {
+        float: right;
+    }
 
-	&-left {
-		float: left;
-	}
+    &-left {
+        float: left;
+    }
 }
 
 .cursor {
-	&-default {
-		cursor: default;
-	}
+    &-default {
+        cursor: default;
+    }
 
-	&-pointer {
-		cursor: pointer;
-	}
+    &-pointer {
+        cursor: pointer;
+    }
 
-	&-move {
-		cursor: move;
-	}
+    &-move {
+        cursor: move;
+    }
 }
 
 .noselect {
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .visually {
-
-	&-hidden,
-	&-hidden-focusable:not(:focus):not(:focus-within) {
-		position: absolute !important;
-		width: 1px !important;
-		height: 1px !important;
-		padding: 0 !important;
-		margin: -1px !important;
-		overflow: hidden !important;
-		clip: rect(0, 0, 0, 0) !important;
-		white-space: nowrap !important;
-		border: 0 !important;
-	}
+    &-hidden,
+    &-hidden-focusable:not(:focus):not(:focus-within) {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        clip: rect(0, 0, 0, 0) !important;
+        white-space: nowrap !important;
+        border: 0 !important;
+    }
 }
 
 @media (max-width: $screen-large) {
-	.visually-responsive-hidden {
-		position: absolute !important;
-		width: 1px !important;
-		height: 1px !important;
-		padding: 0 !important;
-		margin: -1px !important;
-		overflow: hidden !important;
-		clip: rect(0, 0, 0, 0) !important;
-		white-space: nowrap !important;
-		border: 0 !important;
-	}
+    .visually-responsive-hidden {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        clip: rect(0, 0, 0, 0) !important;
+        white-space: nowrap !important;
+        border: 0 !important;
+    }
 }
 
 .only-to-print {
-	display: none;
+    display: none;
 }
 
 @media print {
-	.only-to-print {
-		display: block;
-	}
+    .only-to-print {
+        display: block;
+    }
 
-	.do-not-print {
-		display: none;
-	}
+    .do-not-print {
+        display: none;
+    }
 }
 
 .only-on-small-screen {
-	display: none;
+    display: none;
 }
 
 @media (max-width: $screen-small) {
-	.only-on-small-screen {
-		display: inherit;
-	}
+    .only-on-small-screen {
+        display: inherit;
+    }
 
-	.only-on-large-screen {
-		display: none;
-	}
+    .only-on-large-screen {
+        display: none;
+    }
 }
 
 /* --- overflow ---- */
-$overflow: (
-	"auto",
-	"hidden",
-	"clip") !default;
+$overflow: ("auto", "hidden", "clip") !default;
 
 @each $value in $overflow {
-	.overflow-#{$value} {
-		overflow: #{$value};
-	}
+    .overflow-#{$value} {
+        overflow: #{$value};
+    }
 
-	.overflow-x-#{$value} {
-		overflow-x: #{$value};
-	}
+    .overflow-x-#{$value} {
+        overflow-x: #{$value};
+    }
 
-	.overflow-y-#{$value} {
-		overflow-y: #{$value};
-	}
+    .overflow-y-#{$value} {
+        overflow-y: #{$value};
+    }
 }

@@ -6,11 +6,11 @@
  */
 
 return function (&$rows) {
-	if (!empty($rows['locale'])) {
-		$rows['locale'] = trim($rows['locale'], '/\\');
-	}
+    if (!empty($rows['locale'])) {
+        $rows['locale'] = trim($rows['locale'], '/\\');
+    }
 
-	if (!empty($rows['use_gettext']) && !function_exists('gettext')) {
-		$rows['use_gettext'] = false;
-	}
+    if (!empty($rows['use_gettext']) && !function_exists('gettext')) {
+        $rows['use_gettext'] = false;
+    }
 };

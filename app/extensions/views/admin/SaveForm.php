@@ -22,9 +22,9 @@ $form->separate(_t('Legal'));
 //
 $form->input('extension_require')->setLabel(_t('Since'))->setRequired();
 if ($can_be_a_package) {
-	$form->toggle('is_package')->setLabel(_t('Is package'));
+    $form->toggle('is_package')->setLabel(_t('Is package'));
 } else {
-	$form->addRow(['label' => _t('Annexed to'), 'content' => '<div class="badge badge-secondary">' . $annexed_to . '</div>']);
+    $form->addRow(['label' => _t('Annexed to'), 'content' => '<div class="badge badge-secondary">' . $annexed_to . '</div>']);
 }
 
 $form->separate(_t('Package'));
@@ -32,7 +32,7 @@ $form->separate(_t('Package'));
 // modal
 $modal = Modal::get();
 if (!$is_protected) {
-	$modal->enter();
+    $modal->enter();
 }
 $modal->close();
 $modal->title([_t('Extensions'), $title]);

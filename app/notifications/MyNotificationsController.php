@@ -9,36 +9,36 @@ use Junco\Mvc\Controller;
 
 class MyNotificationsController extends Controller
 {
-	/**
-	 * Index
-	 */
-	public function index()
-	{
-		return $this->view();
-	}
+    /**
+     * Index
+     */
+    public function index()
+    {
+        return $this->view();
+    }
 
-	/**
-	 * List
-	 */
-	public function list()
-	{
-		return $this->view(null, (new MyNotificationsModel)->getListData());
-	}
+    /**
+     * List
+     */
+    public function list()
+    {
+        return $this->view(null, (new MyNotificationsModel)->getListData());
+    }
 
-	/**
-	 * Show
-	 */
-	public function show()
-	{
-		return $this->view(null, (new MyNotificationsModel)->getShowData());
-	}
+    /**
+     * Show
+     */
+    public function show()
+    {
+        return $this->view(null, (new MyNotificationsModel)->getShowData());
+    }
 
-	/**
-	 * Status
-	 */
-	public function status()
-	{
-		return $this->middleware('form.security')
-			?: $this->wrapper(fn() => (new NotificationsModel)->status());
-	}
+    /**
+     * Status
+     */
+    public function status()
+    {
+        return $this->middleware('form.security')
+            ?: $this->wrapper(fn() => (new NotificationsModel)->status());
+    }
 }

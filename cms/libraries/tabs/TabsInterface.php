@@ -9,26 +9,26 @@ namespace Junco\Tabs;
 
 interface TabsInterface
 {
-	/**
-	 * Constructor
-	 * 
-	 * @param string|array $id
-	 * @param array        $options
-	 */
-	public function __construct(string|array $id = '', array $options = []);
+    /**
+     * Constructor
+     * 
+     * @param string|array $id
+     * @param array        $options
+     */
+    public function __construct(string|array $id = '', array $options = []);
 
-	/**
-	 * Tab
-	 * 
-	 * @param string $tab
-	 * @param string $tabpanel
-	 * 
-	 * @return void
-	 */
-	public function tab(string $tab, string $tabpanel = ''): void;
+    /**
+     * Tab
+     * 
+     * @param string $tab
+     * @param string $tabpanel
+     * 
+     * @return void
+     */
+    public function tab(string $tab, string $tabpanel = ''): void;
 
-	/**
-	 * Render
-	 */
-	public function render(): string;
+    /**
+     * Render
+     */
+    public function render(): string;
 }

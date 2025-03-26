@@ -6,7 +6,7 @@
  */
 
 return function (&$xdata) {
-	$data = db()->safeFind("
+    $data = db()->safeFind("
 	SELECT
 	 label_key ,
 	 label_name ,
@@ -14,5 +14,5 @@ return function (&$xdata) {
 	FROM `#__users_roles_labels`
 	WHERE extension_id = ?", $xdata->extension_id)->fetchAll();
 
-	return $xdata->putData($data);
+    return $xdata->putData($data);
 };

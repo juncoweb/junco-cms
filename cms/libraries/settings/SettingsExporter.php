@@ -7,34 +7,34 @@
 
 class SettingsExporter extends Settings
 {
-	/**
-	 * Exports the settings to a given destination.
-	 * 
-	 * @param string $dirpath  The path to the destination.
-	 * @param bool   $setUp    Create the file with the values.
-	 * 
-	 * @return int   The number of files imported.
-	 */
-	public function export(string $dirpath, bool $setUp = false): int
-	{
-		$rows = $this->getAllData();
+    /**
+     * Exports the settings to a given destination.
+     * 
+     * @param string $dirpath  The path to the destination.
+     * @param bool   $setUp    Create the file with the values.
+     * 
+     * @return int   The number of files imported.
+     */
+    public function export(string $dirpath, bool $setUp = false): int
+    {
+        $rows = $this->getAllData();
 
-		if (!$rows) {
-			return 0;
-		}
+        if (!$rows) {
+            return 0;
+        }
 
-		$settings = new Settings($this->key, $dirpath, true);
+        $settings = new Settings($this->key, $dirpath, true);
 
-		foreach ($rows as $key => $data) {
-			$settings->setKey($key);
+        foreach ($rows as $key => $data) {
+            $settings->setKey($key);
 
-			if ($setUp) {
-				$settings->set($data);
-			}
+            if ($setUp) {
+                $settings->set($data);
+            }
 
-			$settings->save($data);
-		}
+            $settings->save($data);
+        }
 
-		return count($rows);
-	}
+        return count($rows);
+    }
 }

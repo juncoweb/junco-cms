@@ -9,12 +9,12 @@ namespace Junco\Responder\Contract;
 
 interface AjaxJsonInterface extends ResponderInterface
 {
-	/**
-	 * Sets the json content.
-	 * 
-	 * @param array $content
-	 * 
-	 * @return void
-	 */
-	public function setContent(array $content): void;
+    /**
+     * Sets the json content.
+     * 
+     * @param array $content
+     * 
+     * @return void
+     */
+    public function setContent(array $content): void;
 }

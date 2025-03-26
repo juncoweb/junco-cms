@@ -11,5 +11,5 @@
  * @param object $xdata
  */
 return function (&$xdata) {
-	(new AssetsStorage)->removeAllFromAliases($xdata->extension_aliases);
+    (new AssetsStorage)->removeAllFromAliases($xdata->extension_aliases);
 };

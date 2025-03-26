@@ -1,92 +1,91 @@
 /* -------- table ------------------------------------------------- */
 .table {
-	width: 100%;
-	border-collapse: collapse;
-	border-spacing: 0;
-	cursor: default;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    cursor: default;
 
-	thead {
-		border-bottom-width: $table-border-width;
-		border-bottom-style: $table-border-style;
-		border-bottom-color: var(--regular-border-color);
-	}
+    thead {
+        border-bottom-width: $table-border-width;
+        border-bottom-style: $table-border-style;
+        border-bottom-color: var(--regular-border-color);
+    }
 
-	th {
-		font-weight: bold;
-		text-align: left;
-		white-space: nowrap;
-	}
+    th {
+        font-weight: bold;
+        text-align: left;
+        white-space: nowrap;
+    }
 
-	th,
-	td {
-		padding: $table-padding;
-		vertical-align: baseline;
-	}
+    th,
+    td {
+        padding: $table-padding;
+        vertical-align: baseline;
+    }
 
-	// Table variant
-	&.table-auto {
-		width: initial;
-	}
+    // Table variant
+    &.table-auto {
+        width: initial;
+    }
 
-	.table-auto {
-		width: 0;
-	}
+    .table-auto {
+        width: 0;
+    }
 
-	&.table-striped>tbody>tr:nth-child(even) {
-		background: var(--regular-bg-color);
-	}
+    &.table-striped > tbody > tr:nth-child(even) {
+        background: var(--regular-bg-color);
+    }
 
-	&.table-highlight>tbody>tr:hover>td {
-		background: var(--regular-active-bg-color);
-	}
+    &.table-highlight > tbody > tr:hover > td {
+        background: var(--regular-active-bg-color);
+    }
 
-	&.table-bordered {
-		border-width: $table-border-width;
-		border-style: $table-border-style;
-		border-color: var(--regular-border-color);
+    &.table-bordered {
+        border-width: $table-border-width;
+        border-style: $table-border-style;
+        border-color: var(--regular-border-color);
 
-		th,
-		td {
-			border-width: $table-border-width;
-			border-style: $table-border-style;
-			border-color: var(--regular-border-color);
-		}
-	}
+        th,
+        td {
+            border-width: $table-border-width;
+            border-style: $table-border-style;
+            border-color: var(--regular-border-color);
+        }
+    }
 
-	&.table-condensed th,
-	&.table-condensed td {
-		padding-top: 0;
-		padding-bottom: 0;
-	}
+    &.table-condensed th,
+    &.table-condensed td {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
 
-	// Interactive classes
-	tbody>tr.active td {
-		background: var(--regular-primary-bg-color) !important;
-	}
+    // Interactive classes
+    tbody > tr.active td {
+        background: var(--regular-primary-bg-color) !important;
+    }
 
-	.table-linked a,
-	a.table-linked {
-		color: var(--regular-font-color) !important;
-		text-decoration: none !important;
+    .table-linked a,
+    a.table-linked {
+        color: var(--regular-font-color) !important;
+        text-decoration: none !important;
 
-		&:hover {
-			color: var(--regular-disabled-font-color) !important;
-			border-bottom: 1px dotted var(--regular-disabled-font-color) !important;
-		}
-	}
+        &:hover {
+            color: var(--regular-disabled-font-color) !important;
+            border-bottom: 1px dotted var(--regular-disabled-font-color) !important;
+        }
+    }
 
-	td {
-
-		&.table-dimmed,
-		&.table-dimmed a,
-		.table-dimmed,
-		.table-dimmed a {
-			color: var(--regular-subtle-font-color) !important;
-		}
-	}
+    td {
+        &.table-dimmed,
+        &.table-dimmed a,
+        .table-dimmed,
+        .table-dimmed a {
+            color: var(--regular-subtle-font-color) !important;
+        }
+    }
 }
 
 .table-responsive {
-	overflow-x: auto;
-	-webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }

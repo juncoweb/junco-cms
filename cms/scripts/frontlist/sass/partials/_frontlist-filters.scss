@@ -1,19 +1,19 @@
 /* --- Filters ---------------------------------------------- */
 .frontlist-filters {
-	text-align: right;
-	background: $fronlist-filters-bg-color;
-	margin-bottom: $spacing;
-	padding: ($spacing * .5) $spacing;
-	border-radius: $medium-border-radius;
-	position: relative;
+    text-align: right;
+    background: $fronlist-filters-bg-color;
+    margin-bottom: $spacing;
+    padding: ($spacing * 0.5) $spacing;
+    border-radius: $medium-border-radius;
+    position: relative;
 
-	form>div {
-		display: inline-block;
-		gap: $spacing;
-		flex-wrap: wrap;
-	}
+    form > div {
+        display: inline-block;
+        gap: $spacing;
+        flex-wrap: wrap;
+    }
 
-	input.btn[name=search] {
-		width: 150px;
-	}
+    input.btn[name="search"] {
+        width: 150px;
+    }
 }

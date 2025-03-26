@@ -1,11 +1,11 @@
 /* --- Template --------------------------------- */
 .table-example {
-	padding: 10px 20px 20px;
-	background: #EEE;
+    padding: 10px 20px 20px;
+    background: #EEE;
 }
 
 #container {
-	background: #FFF;
-	border: 1px dashed #CCC;
-	padding: 20px;
+    background: #FFF;
+    border: 1px dashed #CCC;
+    padding: 20px;
 }

@@ -11,10 +11,10 @@ $message = sprintf(_nt('Are you sure you want to delete the selected item?', 'Ar
 //
 $form = Form::get();
 $form->setValues([
-	'id'			=> $id,
-	'option[files]' => true,
-	'option[data]'	=> true,
-	'option[db]'	=> true,
+    'id'            => $id,
+    'option[files]' => true,
+    'option[data]'    => true,
+    'option[db]'    => true,
 ]);
 $form->hidden('id');
 //

@@ -11,33 +11,33 @@ use GdImage;
 
 interface ImageInterface
 {
-	/**
-	 * Create
-	 * 
-	 * @param string $file
-	 * 
-	 * @return GdImage|false
-	 */
-	public function createImageFromFile(string $file): GdImage|false;
+    /**
+     * Create
+     * 
+     * @param string $file
+     * 
+     * @return GdImage|false
+     */
+    public function createImageFromFile(string $file): GdImage|false;
 
-	/**
-	 * Create
-	 * 
-	 * @param int      $width
-	 * @param int      $height
-	 * @param ?GdImage $imgBase
-	 * 
-	 * @return GdImage|false
-	 */
-	public function createImage(int $width, int $height, ?GdImage $imgBase = null): GdImage|false;
+    /**
+     * Create
+     * 
+     * @param int      $width
+     * @param int      $height
+     * @param ?GdImage $imgBase
+     * 
+     * @return GdImage|false
+     */
+    public function createImage(int $width, int $height, ?GdImage $imgBase = null): GdImage|false;
 
-	/**
-	 * Write
-	 * 
-	 * @param string  $file
-	 * @param GdImage $image
-	 * 
-	 * @return bool
-	 */
-	public function write(string $file, GdImage $image): bool;
+    /**
+     * Write
+     * 
+     * @param string  $file
+     * @param GdImage $image
+     * 
+     * @return bool
+     */
+    public function write(string $file, GdImage $image): bool;
 }

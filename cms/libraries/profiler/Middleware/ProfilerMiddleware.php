@@ -15,36 +15,36 @@ use Junco\Http\Message\HttpFactory;
 
 class ProfilerMiddleware implements MiddlewareInterface
 {
-	/**
-	 * Process an incoming server request.
-	 */
-	public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-	{
-		$profiler = app('profiler');
-		$profiler->mark('At the start of the profiler middleware');
-		$format = router()->getFormat();
+    /**
+     * Process an incoming server request.
+     */
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        $profiler = app('profiler');
+        $profiler->mark('At the start of the profiler middleware');
+        $format = router()->getFormat();
 
-		// add javascript control
-		if ($format == 'template') {
-			app('assets')->domready('JsConsole.load()');
-		}
+        // add javascript control
+        if ($format == 'template') {
+            app('assets')->domready('JsConsole.load()');
+        }
 
-		// response
-		$response = $handler->handle($request);
+        // response
+        $response = $handler->handle($request);
 
-		if ($format == 'template' || $format == 'text') {
-			$content = $response->getBody();
-			$console = $profiler->render(true);
+        if ($format == 'template' || $format == 'text') {
+            $content = $response->getBody();
+            $console = $profiler->render(true);
 
-			if ($format == 'template') {
-				$content = str_replace('</body>', '<console><!--{profiler} ' . $console . '--></console></body>', $content);
-			} else {
-				$content .= '<!--{profiler} ' . $console . '-->';
-			}
+            if ($format == 'template') {
+                $content = str_replace('</body>', '<console><!--{profiler} ' . $console . '--></console></body>', $content);
+            } else {
+                $content .= '<!--{profiler} ' . $console . '-->';
+            }
 
-			$response = $response->withBody((new HttpFactory)->createStream($content));
-		}
+            $response = $response->withBody((new HttpFactory)->createStream($content));
+        }
 
-		return $response;
-	}
+        return $response;
+    }
 }

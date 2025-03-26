@@ -9,56 +9,56 @@ namespace Junco\Email;
 
 interface EmailMessageInterface
 {
-	/**
-	 * Title
-	 * 
-	 * @param string $title
-	 */
-	public function title(string $title): void;
+    /**
+     * Title
+     * 
+     * @param string $title
+     */
+    public function title(string $title): void;
 
-	/**
-	 * Legend
-	 * 
-	 * @param string $legend
-	 */
-	public function legend(string $legend): void;
+    /**
+     * Legend
+     * 
+     * @param string $legend
+     */
+    public function legend(string $legend): void;
 
-	/**
-	 * Line
-	 * 
-	 * @param string $text
-	 */
-	public function line(string $text, ...$args): void;
+    /**
+     * Line
+     * 
+     * @param string $text
+     */
+    public function line(string $text, ...$args): void;
 
-	/**
-	 * Codelink
-	 * 
-	 * @param string $url
-	 */
-	public function codelink(string $url): void;
+    /**
+     * Codelink
+     * 
+     * @param string $url
+     */
+    public function codelink(string $url): void;
 
-	/**
-	 * Legal
-	 * 
-	 * @param string $text
-	 */
-	public function legal(string $text = ''): void;
+    /**
+     * Legal
+     * 
+     * @param string $text
+     */
+    public function legal(string $text = ''): void;
 
-	/**
-	 * Body
-	 * 
-	 * @param string $html
-	 * @param string $plain
-	 */
-	public function body(string $html, string $plain = ''): void;
+    /**
+     * Body
+     * 
+     * @param string $html
+     * @param string $plain
+     */
+    public function body(string $html, string $plain = ''): void;
 
-	/**
-	 * Get plain message
-	 */
-	public function getPlain(): string;
+    /**
+     * Get plain message
+     */
+    public function getPlain(): string;
 
-	/**
-	 * Get html message
-	 */
-	public function getHtml(): string;
+    /**
+     * Get html message
+     */
+    public function getHtml(): string;
 }

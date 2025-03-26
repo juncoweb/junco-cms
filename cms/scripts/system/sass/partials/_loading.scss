@@ -1,60 +1,60 @@
 /* --- loading ----------------------------------------- */
 .js-loading {
-	background: rgba($loading-color, .3);
-	height: 4px;
-	position: fixed;
-	inset: 0 0 auto;
-	z-index: $zindex-loading;
+    background: rgba($loading-color, 0.3);
+    height: 4px;
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: $zindex-loading;
 
-	&:after,
-	&:before {
-		content: '';
-		background: rgba($loading-color, .9);
-		position: absolute;
-		top: 0;
-		bottom: 0;
-	}
+    &:after,
+    &:before {
+        content: "";
+        background: rgba($loading-color, 0.9);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+    }
 
-	&:after {
-		width: 20%;
-		animation-name: spinner;
-		animation-duration: 2s;
-		animation-iteration-count: infinite;
-		animation-timing-function: linear;
-	}
+    &:after {
+        width: 20%;
+        animation-name: spinner;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
 
-	&:before {
-		width: 10%;
-		animation-name: spinner-short;
-		animation-duration: 2s;
-		animation-iteration-count: infinite;
-		animation-timing-function: linear;
-	}
+    &:before {
+        width: 10%;
+        animation-name: spinner-short;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
 }
 
 @keyframes spinner {
-	from {
-		left: 0;
-	}
+    from {
+        left: 0;
+    }
 
-	to {
-		left: 100%;
-	}
+    to {
+        left: 100%;
+    }
 }
 
 @keyframes spinner-short {
-	from {
-		left: -100%;
-	}
+    from {
+        left: -100%;
+    }
 
-	to {
-		left: 100%;
-	}
+    to {
+        left: 100%;
+    }
 }
 
 //
 .box-loading {
-	text-align: center;
-	background-color: var(--regular-bg-color);
-	padding: $spacing;
+    text-align: center;
+    background-color: var(--regular-bg-color);
+    padding: $spacing;
 }

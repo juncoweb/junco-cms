@@ -9,13 +9,13 @@ namespace Junco\Filesystem;
 
 class ImageHelper
 {
-	/**
-	 * Get
-	 *
-	 * @return array
-	 */
-	public static function getResizeOptions(): array
-	{
-		return ['mode', 'size'];
-	}
+    /**
+     * Get
+     *
+     * @return array
+     */
+    public static function getResizeOptions(): array
+    {
+        return ['mode', 'size'];
+    }
 }

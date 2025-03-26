@@ -8,5 +8,5 @@
 use Junco\Form\FormElement\CustomElement;
 
 return function (array $attr): CustomElement {
-	return new CustomElement('', '--- selector not found ---');
+    return new CustomElement('', '--- selector not found ---');
 };

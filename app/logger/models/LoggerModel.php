@@ -11,111 +11,111 @@ use Junco\Logger\LoggerManager;
 
 class LoggerModel extends Model
 {
-	// vars
-	protected $manager;
+    // vars
+    protected $manager;
 
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->manager = new LoggerManager;
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->manager = new LoggerManager;
+    }
 
-	/**
-	 * Status
-	 */
-	public function status()
-	{
-		// data
-		$this->filter(POST, ['id' => 'id|array|required:abort']);
+    /**
+     * Status
+     */
+    public function status()
+    {
+        // data
+        $this->filter(POST, ['id' => 'id|array|required:abort']);
 
-		//
-		$this->manager->status($this->data['id']);
-	}
+        //
+        $this->manager->status($this->data['id']);
+    }
 
-	/**
-	 * Delete
-	 */
-	public function delete()
-	{
-		// data
-		$this->filter(POST, ['id' => 'id|array|required:abort']);
+    /**
+     * Delete
+     */
+    public function delete()
+    {
+        // data
+        $this->filter(POST, ['id' => 'id|array|required:abort']);
 
-		//
-		$this->manager->deleteMultiple($this->data['id']);
-	}
+        //
+        $this->manager->deleteMultiple($this->data['id']);
+    }
 
-	/**
-	 * Thin
-	 */
-	public function thin()
-	{
-		// data
-		$this->filter(POST, ['delete' => 'bool']);
+    /**
+     * Thin
+     */
+    public function thin()
+    {
+        // data
+        $this->filter(POST, ['delete' => 'bool']);
 
-		//
-		$this->manager->thin($this->data['delete']);
-	}
+        //
+        $this->manager->thin($this->data['delete']);
+    }
 
-	/**
-	 * Clean
-	 */
-	public function clean()
-	{
-		$this->manager->clear();
-	}
+    /**
+     * Clean
+     */
+    public function clean()
+    {
+        $this->manager->clear();
+    }
 
-	/**
-	 * Get
-	 */
-	public function report()
-	{
-		// data
-		$this->filter(POST, [
-			'id' 		=> 'id|array',
-			'message'	=> '',
-		]);
+    /**
+     * Get
+     */
+    public function report()
+    {
+        // data
+        $this->filter(POST, [
+            'id'         => 'id|array',
+            'message'    => '',
+        ]);
 
-		if (strlen($this->data['message']) > 600) {
-			throw new Exception(_t('The text is too long.'));
-		}
+        if (strlen($this->data['message']) > 600) {
+            throw new Exception(_t('The text is too long.'));
+        }
 
-		$reports = $this->manager->getReports($this->data['id']);
+        $reports = $this->manager->getReports($this->data['id']);
 
-		if (!$reports) {
-			throw new Exception(_t('Please, select at least one element.'));
-		}
+        if (!$reports) {
+            throw new Exception(_t('Please, select at least one element.'));
+        }
 
-		$data = [
-			'php_version'		=> PHP_VERSION,
-			'php_os'			=> PHP_OS,
-			'php_os_family'		=> PHP_OS_FAMILY,
-			'system_version'	=> $this->getSystemVersion(),
-			'message'			=> $this->data['message'],
-			'reports'			=> json_encode($reports)
-		];
+        $data = [
+            'php_version'        => PHP_VERSION,
+            'php_os'            => PHP_OS,
+            'php_os_family'        => PHP_OS_FAMILY,
+            'system_version'    => $this->getSystemVersion(),
+            'message'            => $this->data['message'],
+            'reports'            => json_encode($reports)
+        ];
 
-		$report_url = config('logger.report_url');
-		$code = (string)(new Client)
-			->post($report_url, ['data' => $data])
-			->getBody();
+        $report_url = config('logger.report_url');
+        $code = (string)(new Client)
+            ->post($report_url, ['data' => $data])
+            ->getBody();
 
-		if (!$code) {
-			throw new Exception(_t('Error! the task has not been realized.'));
-		}
-	}
+        if (!$code) {
+            throw new Exception(_t('Error! the task has not been realized.'));
+        }
+    }
 
-	/**
-	 * Get
-	 * 
-	 * @return string
-	 */
-	protected function getSystemVersion(): string
-	{
-		return db()->safeFind("
+    /**
+     * Get
+     * 
+     * @return string
+     */
+    protected function getSystemVersion(): string
+    {
+        return db()->safeFind("
 		SELECT extension_version
 		FROM `#__extensions`
 		WHERE extension_alias = 'system'")->fetchColumn();
-	}
+    }
 }

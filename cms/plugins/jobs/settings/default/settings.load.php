@@ -6,9 +6,9 @@
  */
 
 return function (&$rows) {
-	$rows['worker']['options'] = [
-		''			=> '--- ' . _t('Select') . ' ---',
-		'worker'	=> 'Worker',
-		'cron'		=> 'Cron'
-	];
+    $rows['worker']['options'] = [
+        ''            => '--- ' . _t('Select') . ' ---',
+        'worker'    => 'Worker',
+        'cron'        => 'Cron'
+    ];
 };

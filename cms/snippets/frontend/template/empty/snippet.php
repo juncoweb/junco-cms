@@ -7,12 +7,12 @@
 
 class template_frontend_empty_snippet extends Template
 {
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-		$this->view = __DIR__ . '/view.html.php';
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->view = __DIR__ . '/view.html.php';
+    }
 }

@@ -4,70 +4,61 @@
 .input-checkbox,
 .input-radio,
 .input-toggle {
-	&:focus {
-		outline: 0;
-		z-index: 1;
-	}
+    &:focus {
+        outline: 0;
+        z-index: 1;
+    }
 }
 
+@each $name, $color in $theme-colors {
+    @if ($name == "default") {
+        .btn,
+        .input-field,
+        .input-checkbox,
+        .input-radio,
+        .input-toggle {
+            &:focus {
+                box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-primary-surface-rgb-color), 0.35);
+            }
+        }
+    } @else {
+        .btn-#{$name} {
+            &.btn,
+            .btn {
+                &:focus {
+                    box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-#{$name}-surface-rgb-color), 0.35);
+                }
+            }
+        }
 
-@each $name,
-$color in $theme-colors {
-	@if ($name =="default") {
+        .input-#{$name} {
+            &.input-field,
+            .input-field,
+            &.input-checkbox,
+            .input-checkbox,
+            &.input-radio,
+            .input-radio,
+            &.input-toggle,
+            .input-toggle {
+                &:focus {
+                    box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-#{$name}-surface-rgb-color), 0.35);
+                }
+            }
+        }
 
-		.btn,
-		.input-field,
-		.input-checkbox,
-		.input-radio,
-		.input-toggle {
-			&:focus {
-				box-shadow: 0 0 0 min(.25rem, 5px) rgba(var(--solid-primary-surface-rgb-color), .35);
-			}
-		}
-
-	}
-
-	@else {
-		.btn-#{$name} {
-
-			&.btn,
-			.btn {
-				&:focus {
-					box-shadow: 0 0 0 min(.25rem, 5px) rgba(var(--solid-#{$name}-surface-rgb-color), .35);
-				}
-			}
-		}
-
-		.input-#{$name} {
-
-			&.input-field,
-			.input-field,
-			&.input-checkbox,
-			.input-checkbox,
-			&.input-radio,
-			.input-radio,
-			&.input-toggle,
-			.input-toggle {
-				&:focus {
-					box-shadow: 0 0 0 min(.25rem, 5px) rgba(var(--solid-#{$name}-surface-rgb-color), .35);
-				}
-			}
-		}
-
-		.input-#{$name} {
-
-			&.input-solid.input-field,
-			&.input-solid .input-field,
-			&.input-solid.input-checkbox,
-			&.input-solid .input-checkbox,
-			&.input-solid.input-radio,
-			&.input-solid .input-radio,
-			&.input-solid.input-toggle,
-			&.input-solid .input-toggle {
-				&:focus {
-					box-shadow: 0 0 0 min(.25rem, 5px) rgba(var(--solid-#{$name}-surface-rgb-color), .35);
-				}
-			}
-		}
-	}
+        .input-#{$name} {
+            &.input-solid.input-field,
+            &.input-solid .input-field,
+            &.input-solid.input-checkbox,
+            &.input-solid .input-checkbox,
+            &.input-solid.input-radio,
+            &.input-solid .input-radio,
+            &.input-solid.input-toggle,
+            &.input-solid .input-toggle {
+                &:focus {
+                    box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-#{$name}-surface-rgb-color), 0.35);
+                }
+            }
+        }
+    }
 }

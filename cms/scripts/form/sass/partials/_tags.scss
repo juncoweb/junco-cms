@@ -1,59 +1,58 @@
 /* --- Tags --------------------------------------------------*/
 .input-tag-wrap {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	white-space: normal;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    white-space: normal;
 }
 
 .input-tag-group {
-	display: inline-block;
-	margin-bottom: $border-width;
+    display: inline-block;
+    margin-bottom: $border-width;
 
-	> :not(:first-child):not(:last-child) {
-		border-radius: 0;
-	}
+    > :not(:first-child):not(:last-child) {
+        border-radius: 0;
+    }
 
-	> :last-child:not(:first-child) {
-		border-top-left-radius: 0;
-		border-bottom-left-radius: 0;
-	}
+    > :last-child:not(:first-child) {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
 
-	> :first-child:not(:last-child) {
-		border-top-right-radius: 0;
-		border-bottom-right-radius: 0;
-	}
+    > :first-child:not(:last-child) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
 
-	&~& {
-		margin-left: 2px;
-	}
+    & ~ & {
+        margin-left: 2px;
+    }
 }
 
 .input-tag {
-	color: var(--regular-font-color);
-	background: var(--regular-bg-color);
-	padding: .375rem .875rem;
-	text-decoration: none;
-	border-radius: $medium-border-radius;
-	display: inline-block;
-	cursor: default;
+    color: var(--regular-font-color);
+    background: var(--regular-bg-color);
+    padding: 0.375rem 0.875rem;
+    text-decoration: none;
+    border-radius: $medium-border-radius;
+    display: inline-block;
+    cursor: default;
 
-	&~& {
-		margin-left: 1px;
-	}
+    & ~ & {
+        margin-left: 1px;
+    }
 
-	&.selected {
-		color: var(--regular-active-font-color);
-		background-color: var(--regular-active-bg-color);
-	}
+    &.selected {
+        color: var(--regular-active-font-color);
+        background-color: var(--regular-active-bg-color);
+    }
 }
 
 a.input-tag {
-
-	&:focus,
-	&:hover {
-		color: var(--regular-font-color);
-		text-decoration: none;
-		background-color: var(--regular-active-bg-color);
-	}
+    &:focus,
+    &:hover {
+        color: var(--regular-font-color);
+        text-decoration: none;
+        background-color: var(--regular-active-bg-color);
+    }
 }

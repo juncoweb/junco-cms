@@ -9,34 +9,34 @@ use Junco\Mvc\Model;
 
 class AdminJobsFailuresModel extends Model
 {
-	// vars
-	protected $db = null;
+    // vars
+    protected $db = null;
 
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->db = db();
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->db = db();
+    }
 
-	/**
-	 * Get
-	 */
-	public function getListData()
-	{
-		// data
-		$this->filter(POST, ['search' => 'text']);
+    /**
+     * Get
+     */
+    public function getListData()
+    {
+        // data
+        $this->filter(POST, ['search' => 'text']);
 
-		// query
-		if ($this->data['search']) {
-			if (is_numeric($this->data['search'])) {
-				$this->db->where("job_id = ?", (int)$this->data['search']);
-			} else {
-				$this->db->where("job_queue LIKE %?", $this->data['search']);
-			}
-		}
-		$pagi = $this->db->paginate("
+        // query
+        if ($this->data['search']) {
+            if (is_numeric($this->data['search'])) {
+                $this->db->where("job_id = ?", (int)$this->data['search']);
+            } else {
+                $this->db->where("job_queue LIKE %?", $this->data['search']);
+            }
+        }
+        $pagi = $this->db->paginate("
 		SELECT [
 		 id ,
 		 job_uuid ,
@@ -48,28 +48,28 @@ class AdminJobsFailuresModel extends Model
 		[WHERE]
 		[ORDER BY created_at DESC]");
 
-		$rows = [];
-		foreach ($pagi->fetchAll() as $row) {
-			$row['created_at'] = new Date($row['created_at']);
-			$rows[] = $row;
-		}
+        $rows = [];
+        foreach ($pagi->fetchAll() as $row) {
+            $row['created_at'] = new Date($row['created_at']);
+            $rows[] = $row;
+        }
 
-		return $this->data + [
-			'rows' => $rows,
-			'pagi' => $pagi
-		];
-	}
+        return $this->data + [
+            'rows' => $rows,
+            'pagi' => $pagi
+        ];
+    }
 
-	/**
-	 * Get
-	 */
-	public function getShowData()
-	{
-		// data
-		$this->filter(POST, ['id' => 'id|array:first|required:abort']);
+    /**
+     * Get
+     */
+    public function getShowData()
+    {
+        // data
+        $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
-		// query
-		$data = $this->db->safeFind("
+        // query
+        $data = $this->db->safeFind("
 		SELECT
 		 id ,
 		 job_id ,
@@ -81,19 +81,19 @@ class AdminJobsFailuresModel extends Model
 		FROM `#__jobs_failures`
 		WHERE id = ?", $this->data['id'])->fetch() or abort();
 
-		$data['created_at'] = new Date($data['created_at']);
+        $data['created_at'] = new Date($data['created_at']);
 
-		return $data;
-	}
+        return $data;
+    }
 
-	/**
-	 * Get
-	 */
-	public function getConfirmDeleteData()
-	{
-		// data
-		$this->filter(POST, ['id' => 'id|array|required:abort']);
+    /**
+     * Get
+     */
+    public function getConfirmDeleteData()
+    {
+        // data
+        $this->filter(POST, ['id' => 'id|array|required:abort']);
 
-		return $this->data;
-	}
+        return $this->data;
+    }
 }

@@ -6,12 +6,12 @@
  */
 
 if ($error) {
-	$title = _t('Error Page');
-	$html = $error_msg;
+    $title = _t('Error Page');
+    $html = $error_msg;
 } else {
-	$title = _t('Confirmation correct!');
-	$html = '<p>' . _t('Your email has been confirmed and the changes have been saved.') . '</p>'
-		. '<p>' . sprintf(_t('Sincerely %s'), config('site.name')) . '</p>';
+    $title = _t('Confirmation correct!');
+    $html = '<p>' . _t('Your email has been confirmed and the changes have been saved.') . '</p>'
+        . '<p>' . sprintf(_t('Sincerely %s'), config('site.name')) . '</p>';
 }
 
 // template

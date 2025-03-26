@@ -12,10 +12,10 @@ $html = '';
 $colors = ['default', 'primary', 'secondary', 'success', 'info', 'warning', 'danger'];
 
 foreach ($colors as $color) {
-	$html .= '<div class="toast toast-' . $color . '">'
-		.   '<div class="toast-body">' . $color . '</div>'
-		.   '<div class="toast-close"><i class="fa-solid fa-xmark"></i></div>'
-		. '</div>';
+    $html .= '<div class="toast toast-' . $color . '">'
+        .   '<div class="toast-body">' . $color . '</div>'
+        .   '<div class="toast-close"><i class="fa-solid fa-xmark"></i></div>'
+        . '</div>';
 }
 $html = '<p><button class="btn btn-primary btn-solid" onclick="JsToast(\'Lorem ipsum\')" aria-label="Launches a toast alert">Toast</button></p><div style="width: 350px">' . $html . '</div>';
 

@@ -11,23 +11,23 @@ use FormCaptcha;
 
 class Enter extends FormElement
 {
-	/**
-	 * Constructor
-	 */
-	public function __construct(string $label, array $attr = [])
-	{
-		$captcha = $this->extract($attr, 'captcha');
+    /**
+     * Constructor
+     */
+    public function __construct(string $label, array $attr = [])
+    {
+        $captcha = $this->extract($attr, 'captcha');
 
-		if ($captcha) {
-			$attr = array_merge($attr, (new FormCaptcha)->get($captcha));
-		}
+        if ($captcha) {
+            $attr = array_merge($attr, (new FormCaptcha)->get($captcha));
+        }
 
-		$this->html = $this->extract($attr, 'html')
-			. '<button' . $this->attr([
-				'type' => 'submit',
-				'class' => 'btn btn-primary btn-solid'
-			], $attr) . '>'
-			. ($label ?: _t('Enter'))
-			. '</button>';
-	}
+        $this->html = $this->extract($attr, 'html')
+            . '<button' . $this->attr([
+                'type' => 'submit',
+                'class' => 'btn btn-primary btn-solid'
+            ], $attr) . '>'
+            . ($label ?: _t('Enter'))
+            . '</button>';
+    }
 }

@@ -8,7 +8,7 @@
 use Junco\Router\ReplacesHelper;
 
 return function (&$rows) {
-	$rows['front_default_component']['options'] = db()->safeFind("
+    $rows['front_default_component']['options'] = db()->safeFind("
 	SELECT
 	 extension_alias ,
 	 extension_name
@@ -16,7 +16,7 @@ return function (&$rows) {
 	WHERE components LIKE '%a%'
 	ORDER BY extension_name, extension_alias")->fetchAll(Database::FETCH_COLUMN, [0 => 1], ['--- ' . _t('Select') . ' ---']);
 
-	(new ReplacesHelper)
-		->before($rows['route_replaces']['value'])
-		->before($rows['route_replaces']['default_value']);
+    (new ReplacesHelper)
+        ->before($rows['route_replaces']['value'])
+        ->before($rows['route_replaces']['default_value']);
 };

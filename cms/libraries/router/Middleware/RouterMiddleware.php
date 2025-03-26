@@ -16,22 +16,22 @@ use \Router;
 
 class RouterMiddleware implements MiddlewareInterface
 {
-	/**
-	 * Process an incoming server request.
-	 */
-	public function process(ServerRequestInterface $request, RequestHandlerInterface|Runner $handler): ResponseInterface
-	{
-		$router = new Router($request->getMethod(), $request->getQueryParams());
-		$handler->setRouter($router);
-		//
-		$router->initialize();
-		$router->getArguments(function (array $args) use (&$request) {
-			// Should be added as attributes and NOT as query params :\
-			$request = $request->withQueryParams(
-				array_merge($request->getQueryParams(), $args)
-			);
-		});
+    /**
+     * Process an incoming server request.
+     */
+    public function process(ServerRequestInterface $request, RequestHandlerInterface|Runner $handler): ResponseInterface
+    {
+        $router = new Router($request->getMethod(), $request->getQueryParams());
+        $handler->setRouter($router);
+        //
+        $router->initialize();
+        $router->getArguments(function (array $args) use (&$request) {
+            // Should be added as attributes and NOT as query params :\
+            $request = $request->withQueryParams(
+                array_merge($request->getQueryParams(), $args)
+            );
+        });
 
-		return $handler->handle($request);
-	}
+        return $handler->handle($request);
+    }
 }

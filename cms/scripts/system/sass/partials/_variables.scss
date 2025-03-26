@@ -11,7 +11,7 @@ $default-dark-font-color: #e5e9ec !default;
 
 //
 $primary-color: #009eff !default; // #009eff #3366cc #ff6633 #EDAE49
-$secondary-color: #EB51AA !default;
+$secondary-color: #eb51aa !default;
 
 //
 $blue: #067bcc !default;
@@ -21,216 +21,252 @@ $red: #dc3540 !default;
 $yellow: #ffc134 !default;
 $black: #000000 !default;
 
-$colors: (
-	) !default;
-$colors: map-merge(("blue": $blue,
-			"green": $green,
-			"orange": $orange,
-			"red": $red,
-			"yellow": $yellow),
-		$colors
+$colors: () !default;
+$colors: map-merge(
+    (
+        "blue": $blue,
+        "green": $green,
+        "orange": $orange,
+        "red": $red,
+        "yellow": $yellow
+    ),
+    $colors
 );
 
-$theme-colors: (
-	) !default;
-$theme-colors: map-merge(("default": ("light": $default-light-color, "dark": $default-dark-color, "contrast": "primary"),
-			"primary": ("light": $primary-color, "dark": $primary-color, "contrast": "secondary"),
-			"secondary": ("light": $secondary-color, "dark": $secondary-color, "contrast": "primary"),
-			"success": ("light": $green, "dark": $green, "contrast": "default"),
-			"info": ("light": $blue, "dark": $blue, "contrast": "default"),
-			"warning": ("light": $yellow, "dark": $yellow, "contrast": "default"),
-			"danger": ("light": $red, "dark": $red, "contrast": "default")),
-		$theme-colors
+$theme-colors: () !default;
+$theme-colors: map-merge(
+    (
+        "default": (
+            "light": $default-light-color,
+            "dark": $default-dark-color,
+            "contrast": "primary"
+        ),
+        "primary": (
+            "light": $primary-color,
+            "dark": $primary-color,
+            "contrast": "secondary"
+        ),
+        "secondary": (
+            "light": $secondary-color,
+            "dark": $secondary-color,
+            "contrast": "primary"
+        ),
+        "success": (
+            "light": $green,
+            "dark": $green,
+            "contrast": "default"
+        ),
+        "info": (
+            "light": $blue,
+            "dark": $blue,
+            "contrast": "default"
+        ),
+        "warning": (
+            "light": $yellow,
+            "dark": $yellow,
+            "contrast": "default"
+        ),
+        "danger": (
+            "light": $red,
+            "dark": $red,
+            "contrast": "default"
+        )
+    ),
+    $theme-colors
 );
 
 @function to-rgb($color) {
-	@return red($color)"," green($color)"," blue($color);
+    @return red($color) "," green($color) "," blue($color);
 }
 
 // regular-colors
 @function create-regular-light-color-map($key, $color) {
-	$surface-color: null;
-	$font-color: null;
-	$subtle-font-color: null;
-	$border-color: $color;
-	$bg-color: mix(white, $color, 66%);
+    $surface-color: null;
+    $font-color: null;
+    $subtle-font-color: null;
+    $border-color: $color;
+    $bg-color: mix(white, $color, 66%);
 
-	@if ($key =="default") {
-		$surface-color: $default-light-surface-color;
-		$font-color: $default-light-font-color;
-		$subtle-font-color: mix(white, $font-color, 55%); // 58%
-	}
+    @if ($key == "default") {
+        $surface-color: $default-light-surface-color;
+        $font-color: $default-light-font-color;
+        $subtle-font-color: mix(white, $font-color, 55%); // 58%
+    } @else {
+        $surface-color: $color;
+        $font-color: mix(black, $color, 60%);
+        $subtle-font-color: mix(white, $font-color, 80%);
+    }
 
-	@else {
-		$surface-color: $color;
-		$font-color: mix(black, $color, 60%);
-		$subtle-font-color: mix(white, $font-color, 80%);
-	}
-
-	$map: (
-		"surface": $surface-color,
-		"surface-rgb": to-rgb($surface-color),
-		//
-		"font": $font-color,
-		"active-font": darken($font-color, 30%),
-		"disabled-font": lighten($font-color, 30%),
-		"heading": $font-color,
-		"subtle-font": $subtle-font-color,
-		//
-		"border": $border-color,
-		"active-border": darken($border-color, 5%),
-		"disabled-border": lighten($border-color, 5%),
-		//
-		"bg": $bg-color,
-		"active-bg": darken($bg-color, 10%),
-		"disabled-bg": lighten($bg-color, 10%)
-	);
-@return $map;
+    $map: (
+        "surface": $surface-color,
+        "surface-rgb": to-rgb($surface-color),
+        //
+        "font": $font-color,
+        "active-font": darken($font-color, 30%),
+        "disabled-font": lighten($font-color, 30%),
+        "heading": $font-color,
+        "subtle-font": $subtle-font-color,
+        //
+        "border": $border-color,
+        "active-border": darken($border-color, 5%),
+        "disabled-border": lighten($border-color, 5%),
+        //
+        "bg": $bg-color,
+        "active-bg": darken($bg-color, 10%),
+        "disabled-bg": lighten($bg-color, 10%)
+    );
+    @return $map;
 }
 
 // regular-colors
 @function create-regular-dark-color-map($key, $color) {
-	$surface-color: null;
-	$font-color: null;
-	$subtle-font-color: null;
-	$bg-color: null;
+    $surface-color: null;
+    $font-color: null;
+    $subtle-font-color: null;
+    $bg-color: null;
 
-	@if ($key =="default") {
-		$surface-color: $default-dark-surface-color;
-		//$color: $default-dark-color;
-		$font-color: $default-dark-font-color;
-		$bg-color: mix(black, $color, 20%);
-	}
+    @if ($key == "default") {
+        $surface-color: $default-dark-surface-color;
+        //$color: $default-dark-color;
+        $font-color: $default-dark-font-color;
+        $bg-color: mix(black, $color, 20%);
+    } @else {
+        $surface-color: $color;
+        $color: mix(black, $color, 40%);
+        $font-color: mix(white, $color, 80%);
+        $bg-color: mix(white, $color, 25%);
+    }
 
-	@else {
-		$surface-color: $color;
-		$color: mix(black, $color, 40%);
-		$font-color: mix(white, $color, 80%);
-		$bg-color: mix(white, $color, 25%);
-	}
-
-	$subtle-font-color: mix(black, $font-color, 40%);
-	$border-color: $color;
-	$map: (
-		"surface": $surface-color,
-		"surface-rgb": to-rgb($surface-color),
-		//
-		"font": $font-color,
-		"active-font": darken($font-color, 30%),
-		"disabled-font": darken($font-color, 50%),
-		"heading": $font-color,
-		"subtle-font": $subtle-font-color,
-		//
-		"border": $border-color,
-		"active-border": lighten($border-color, 5%),
-		"disabled-border": darken($border-color, 30%),
-		//
-		"bg": $bg-color,
-		"active-bg": darken($bg-color, 10%),
-		"disabled-bg": darken($bg-color, 20%)
-	);
-@return $map;
+    $subtle-font-color: mix(black, $font-color, 40%);
+    $border-color: $color;
+    $map: (
+        "surface": $surface-color,
+        "surface-rgb": to-rgb($surface-color),
+        //
+        "font": $font-color,
+        "active-font": darken($font-color, 30%),
+        "disabled-font": darken($font-color, 50%),
+        "heading": $font-color,
+        "subtle-font": $subtle-font-color,
+        //
+        "border": $border-color,
+        "active-border": lighten($border-color, 5%),
+        "disabled-border": darken($border-color, 30%),
+        //
+        "bg": $bg-color,
+        "active-bg": darken($bg-color, 10%),
+        "disabled-bg": darken($bg-color, 20%)
+    );
+    @return $map;
 }
 
-$regular-light-colors: (
-	) !default;
-$regular-dark-colors: (
-	) !default;
+$regular-light-colors: () !default;
+$regular-dark-colors: () !default;
 
-@each $key,
-$color in $theme-colors {
-	$map: (
-	);
-$map: map-merge($map, ($key: create-regular-light-color-map($key, map-get($color, "light"))));
-$regular-light-colors: map-merge($regular-light-colors, $map);
-$map: (
-);
-$map: map-merge($map, ($key: create-regular-dark-color-map($key, map-get($color, "dark"))));
-$regular-dark-colors: map-merge($regular-dark-colors, $map);
+@each $key, $color in $theme-colors {
+    $map: ();
+    $map: map-merge(
+        $map,
+        (
+            $key: create-regular-light-color-map($key, map-get($color, "light"))
+        )
+    );
+    $regular-light-colors: map-merge($regular-light-colors, $map);
+    $map: ();
+    $map: map-merge(
+        $map,
+        (
+            $key: create-regular-dark-color-map($key, map-get($color, "dark"))
+        )
+    );
+    $regular-dark-colors: map-merge($regular-dark-colors, $map);
 }
 
 // solid-colors
 @function create-solid-light-color-map($key, $color) {
-	@if ($key =="default") {
-		$color: $default-light-font-color;
-	}
+    @if ($key == "default") {
+        $color: $default-light-font-color;
+    }
 
-	$font-color: mix(white, $color, 94%);
-	$subtle-font-color: mix(white, $color, 60%);
-	$border-color: mix(white, $color, 25%);
-	$bg-color: $color;
-	$map: (
-		"surface": $color,
-		"surface-rgb": to-rgb($color),
-		//
-		"font": $font-color,
-		"active-font": darken($font-color, 15%),
-		"disabled-font": lighten($font-color, 15%),
-		"heading": $font-color,
-		"subtle-font": $subtle-font-color,
-		//
-		"border": $border-color,
-		"active-border": darken($border-color, 20%),
-		"disabled-border": lighten($border-color, 15%),
-		//
-		"bg": $bg-color,
-		"active-bg": darken($bg-color, 15%),
-		"disabled-bg": lighten($bg-color, 15%)
-	);
-@return $map;
+    $font-color: mix(white, $color, 94%);
+    $subtle-font-color: mix(white, $color, 60%);
+    $border-color: mix(white, $color, 25%);
+    $bg-color: $color;
+    $map: (
+        "surface": $color,
+        "surface-rgb": to-rgb($color),
+        //
+        "font": $font-color,
+        "active-font": darken($font-color, 15%),
+        "disabled-font": lighten($font-color, 15%),
+        "heading": $font-color,
+        "subtle-font": $subtle-font-color,
+        //
+        "border": $border-color,
+        "active-border": darken($border-color, 20%),
+        "disabled-border": lighten($border-color, 15%),
+        //
+        "bg": $bg-color,
+        "active-bg": darken($bg-color, 15%),
+        "disabled-bg": lighten($bg-color, 15%)
+    );
+    @return $map;
 }
 
 @function create-solid-dark-color-map($key, $color) {
-	@if ($key =="default") {
-		$color: mix(black, $color, 20%);
-	}
+    @if ($key == "default") {
+        $color: mix(black, $color, 20%);
+    } @else {
+        $color: mix(black, $color, 30%);
+    }
 
-	@else {
-		$color: mix(black, $color, 30%);
-	}
-
-	$font-color: mix(white, $color, 94%);
-	$subtle-font-color: mix(white, $color, 70%);
-	$border-color: mix(white, $color, 25%);
-	$bg-color: $color;
-	$map: (
-		"surface": $color,
-		"surface-rgb": to-rgb($color),
-		//
-		"font": $font-color,
-		"active-font": darken($font-color, 15%),
-		"disabled-font": darken($font-color, 40%),
-		"heading": $font-color,
-		"subtle-font": $subtle-font-color,
-		//
-		"border": $border-color,
-		"active-border": darken($border-color, 20%),
-		"disabled-border": darken($border-color, 40%),
-		//
-		"bg": $bg-color,
-		"active-bg": darken($bg-color, 10%),
-		"disabled-bg": darken($bg-color, 20%)
-	);
-@return $map;
+    $font-color: mix(white, $color, 94%);
+    $subtle-font-color: mix(white, $color, 70%);
+    $border-color: mix(white, $color, 25%);
+    $bg-color: $color;
+    $map: (
+        "surface": $color,
+        "surface-rgb": to-rgb($color),
+        //
+        "font": $font-color,
+        "active-font": darken($font-color, 15%),
+        "disabled-font": darken($font-color, 40%),
+        "heading": $font-color,
+        "subtle-font": $subtle-font-color,
+        //
+        "border": $border-color,
+        "active-border": darken($border-color, 20%),
+        "disabled-border": darken($border-color, 40%),
+        //
+        "bg": $bg-color,
+        "active-bg": darken($bg-color, 10%),
+        "disabled-bg": darken($bg-color, 20%)
+    );
+    @return $map;
 }
 
-$solid-light-colors: (
-	) !default;
-$solid-dark-colors: (
-	) !default;
+$solid-light-colors: () !default;
+$solid-dark-colors: () !default;
 
-@each $key,
-$color in $theme-colors {
-	// light
-	$map: (
-	);
-$map: map-merge($map, ($key: create-solid-light-color-map($key, map-get($color, "light"))));
-$solid-light-colors: map-merge($solid-light-colors, $map);
-// dark
-$map: (
-);
-$map: map-merge($map, ($key: create-solid-dark-color-map($key, map-get($color, "dark"))));
-$solid-dark-colors: map-merge($solid-dark-colors, $map);
+@each $key, $color in $theme-colors {
+    // light
+    $map: ();
+    $map: map-merge(
+        $map,
+        (
+            $key: create-solid-light-color-map($key, map-get($color, "light"))
+        )
+    );
+    $solid-light-colors: map-merge($solid-light-colors, $map);
+    // dark
+    $map: ();
+    $map: map-merge(
+        $map,
+        (
+            $key: create-solid-dark-color-map($key, map-get($color, "dark"))
+        )
+    );
+    $solid-dark-colors: map-merge($solid-dark-colors, $map);
 }
 
 // screen
@@ -250,9 +286,15 @@ $zindex-loading: 1080 !default;
 $zindex-toast: 1080 !default;
 
 // shadows
-$shadow-color: rgba(var(--solid-surface-rgb-color), .075);
-$template-box-shadow: 0 2px 2px 0 $shadow-color, 0 3px 1px -2px $shadow-color, 0 1px 5px 0 $shadow-color !default;
-$dropdown-box-shadow: 0 2px 2px 0 $shadow-color, 0 3px 1px -2px $shadow-color, 0 1px 5px 0 $shadow-color !default;
+$shadow-color: rgba(var(--solid-surface-rgb-color), 0.075);
+$template-box-shadow:
+    0 2px 2px 0 $shadow-color,
+    0 3px 1px -2px $shadow-color,
+    0 1px 5px 0 $shadow-color !default;
+$dropdown-box-shadow:
+    0 2px 2px 0 $shadow-color,
+    0 3px 1px -2px $shadow-color,
+    0 1px 5px 0 $shadow-color !default;
 $element-box-shadow: 1px 1px 2px $shadow-color !default;
 
 // border
@@ -260,21 +302,21 @@ $border-width: 1px !default;
 $border-style: solid !default;
 
 // border-radius
-$small-border-radius: .25rem !default; // 4px
-$medium-border-radius: .375rem !default; // 6px
-$large-border-radius: .5rem !default; // 8px
-$x-large-border-radius: .625rem !default; // 10px
+$small-border-radius: 0.25rem !default; // 4px
+$medium-border-radius: 0.375rem !default; // 6px
+$large-border-radius: 0.5rem !default; // 8px
+$x-large-border-radius: 0.625rem !default; // 10px
 
 // spacing
 $spacing: 1rem !default;
 $spacers: (
-	0: 0,
-	1: $spacing * .25,
-	2: $spacing * .5,
-	4: $spacing,
-	6: $spacing * 1.5,
-	8: $spacing * 2,
-	) !default;
+    0: 0,
+    1: $spacing * 0.25,
+    2: $spacing * 0.5,
+    4: $spacing,
+    6: $spacing * 1.5,
+    8: $spacing * 2
+) !default;
 
 // tipography
 // -----------------------------------------------
@@ -282,19 +324,21 @@ $font-family: system-ui !default;
 $font-family-monospace: monospace !default;
 
 $font-size: 1rem !default; // .875rem
-$small-font-size: $font-size * .875 !default;
+$small-font-size: $font-size * 0.875 !default;
 $large-font-size: $font-size * 1.25 !default;
 $line-height: 1.5 !default;
 
-$heading-sizes: (
-	) !default;
-$heading-sizes: map-merge(("h1": 2rem,
-			"h2": 1.75rem,
-			"h3": 1.5rem,
-			"h4": 1.25rem,
-			"h5": 1.125rem,
-			"h6": 1rem),
-		$heading-sizes
+$heading-sizes: () !default;
+$heading-sizes: map-merge(
+    (
+        "h1": 2rem,
+        "h2": 1.75rem,
+        "h3": 1.5rem,
+        "h4": 1.25rem,
+        "h5": 1.125rem,
+        "h6": 1rem
+    ),
+    $heading-sizes
 );
 
 // link
@@ -310,10 +354,9 @@ $font-selection-bg: $primary-color !default;
 
 // code
 $code-font-size: $small-font-size !default;
-$code-padding: .25rem .375rem !default;
+$code-padding: 0.25rem 0.375rem !default;
 $code-color: $link-color !default;
 $code-bg: var(--regular-bg-color) !default;
-
 
 // Components
 // -----------------------------------------------
@@ -321,7 +364,7 @@ $code-bg: var(--regular-bg-color) !default;
 // Badge
 // -----------------------------------------------
 $badge-padding-y: 0 !default;
-$badge-padding-x: .625rem !default;
+$badge-padding-x: 0.625rem !default;
 
 // dialog
 // -----------------------------------------------
@@ -331,16 +374,15 @@ $dialog-border-width: 0 0 0 5px !default;
 // notify
 // -----------------------------------------------
 $notify-color: var(--solid-primary-font-color) !default;
-$notify-bg-color: rgba(var(--solid-primary-surface-rgb-color), .75) !default;
+$notify-bg-color: rgba(var(--solid-primary-surface-rgb-color), 0.75) !default;
 $notify-zindex: $zindex-loading;
 
 // lightbox
 // -----------------------------------------------
-$lightbox-bg-color: rgba(0, 0, 0, .9) !default;
+$lightbox-bg-color: rgba(0, 0, 0, 0.9) !default;
 $lightbox-cross-size: 32px !default;
 $lightbox-max-width: $screen-x-large !default;
 $lightbox-zindex: $zindex-lightbox !default;
-
 
 // loading
 // -----------------------------------------------
@@ -351,7 +393,7 @@ $loading-color: $secondary-color !default;
 $table-border-width: $border-width !default;
 $table-border-style: $border-style !default;
 
-$table-padding: $spacing * .5 !default;
+$table-padding: $spacing * 0.5 !default;
 
 // toasts
 // -----------------------------------------------
@@ -360,5 +402,5 @@ $toast-max-width: 350px !default;
 // tooltip
 // -----------------------------------------------
 $tooltip-color: var(--solid-font-color);
-$tooltip-bg-color: rgba(var(--solid-surface-rgb-color), .8);
+$tooltip-bg-color: rgba(var(--solid-surface-rgb-color), 0.8);
 $tooltip-border-radius: $medium-border-radius;

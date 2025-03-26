@@ -6,10 +6,10 @@
  */
 
 return function (&$rows) {
-	// query
-	$rows['btn_caption']['options'] = [
-		'responsive' => _t('Responsive'),
-		'visible' => _t('Visible'),
-		'hidden' => _t('Hidden'),
-	];
+    // query
+    $rows['btn_caption']['options'] = [
+        'responsive' => _t('Responsive'),
+        'visible' => _t('Visible'),
+        'hidden' => _t('Hidden'),
+    ];
 };

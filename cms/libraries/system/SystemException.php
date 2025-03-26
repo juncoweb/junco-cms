@@ -7,13 +7,13 @@
 
 class SystemException extends Exception
 {
-	public function __construct(string $message = '', int $code = 0, ?Throwable $previous = null)
-	{
-		if (is_numeric($message)) {
-			$code    = (int)$message;
-			$message = app('debugger')->getMessageFromCode($message);
-		}
+    public function __construct(string $message = '', int $code = 0, ?Throwable $previous = null)
+    {
+        if (is_numeric($message)) {
+            $code    = (int)$message;
+            $message = app('debugger')->getMessageFromCode($message);
+        }
 
-		parent::__construct($message, $code, $previous);
-	}
+        parent::__construct($message, $code, $previous);
+    }
 }

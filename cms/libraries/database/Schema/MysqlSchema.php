@@ -31,112 +31,112 @@ use Database;
  */
 class MysqlSchema implements SchemaInterface
 {
-	//
-	protected $db;
-	protected $_database;
-	protected $fields;
-	protected $foreignKeys;
-	protected $indexes;
-	protected $registers;
-	protected $routines;
-	protected $tables;
-	protected $triggers;
+    //
+    protected $db;
+    protected $_database;
+    protected $fields;
+    protected $foreignKeys;
+    protected $indexes;
+    protected $registers;
+    protected $routines;
+    protected $tables;
+    protected $triggers;
 
-	/**
-	 * Constructor
-	 */
-	public function __construct(Database $db)
-	{
-		$this->db = $db;
-	}
+    /**
+     * Constructor
+     */
+    public function __construct(Database $db)
+    {
+        $this->db = $db;
+    }
 
-	/**
-	 * Get
-	 * 
-	 * @return array
-	 */
-	public function getInfo(): array
-	{
-		return $this->db->getInfo();
-	}
+    /**
+     * Get
+     * 
+     * @return array
+     */
+    public function getInfo(): array
+    {
+        return $this->db->getInfo();
+    }
 
-	/**
-	 * Database
-	 * 
-	 * @return _DatabaseInterface
-	 */
-	public function database(): _DatabaseInterface
-	{
-		return $this->_database ??= new _Database($this->db);
-	}
+    /**
+     * Database
+     * 
+     * @return _DatabaseInterface
+     */
+    public function database(): _DatabaseInterface
+    {
+        return $this->_database ??= new _Database($this->db);
+    }
 
-	/**
-	 * Fields
-	 * 
-	 * @return FieldsInterface
-	 */
-	public function fields(): FieldsInterface
-	{
-		return $this->fields ??= new Fields($this->db);
-	}
+    /**
+     * Fields
+     * 
+     * @return FieldsInterface
+     */
+    public function fields(): FieldsInterface
+    {
+        return $this->fields ??= new Fields($this->db);
+    }
 
-	/**
-	 * ForeignKeys
-	 * 
-	 * @return ForeignKeysInterface
-	 */
-	public function foreignKeys(): ForeignKeysInterface
-	{
-		return $this->foreignKeys ??= new ForeignKeys($this->db);
-	}
+    /**
+     * ForeignKeys
+     * 
+     * @return ForeignKeysInterface
+     */
+    public function foreignKeys(): ForeignKeysInterface
+    {
+        return $this->foreignKeys ??= new ForeignKeys($this->db);
+    }
 
-	/**
-	 * Indexes
-	 * 
-	 * @return IndexesInterface
-	 */
-	public function indexes(): IndexesInterface
-	{
-		return $this->indexes ??= new Indexes($this->db);
-	}
+    /**
+     * Indexes
+     * 
+     * @return IndexesInterface
+     */
+    public function indexes(): IndexesInterface
+    {
+        return $this->indexes ??= new Indexes($this->db);
+    }
 
-	/**
-	 * Registers
-	 * 
-	 * @return RegistersInterface
-	 */
-	public function registers(): RegistersInterface
-	{
-		return $this->registers ??= new Registers($this->db);
-	}
+    /**
+     * Registers
+     * 
+     * @return RegistersInterface
+     */
+    public function registers(): RegistersInterface
+    {
+        return $this->registers ??= new Registers($this->db);
+    }
 
-	/**
-	 * Routines
-	 * 
-	 * @return RoutinesInterface
-	 */
-	public function routines(): RoutinesInterface
-	{
-		return $this->routines ??= new Routines($this->db);
-	}
+    /**
+     * Routines
+     * 
+     * @return RoutinesInterface
+     */
+    public function routines(): RoutinesInterface
+    {
+        return $this->routines ??= new Routines($this->db);
+    }
 
-	/**
-	 * Tables
-	 * 
-	 * @return TablesInterface
-	 */
-	public function tables(): TablesInterface
-	{
-		return $this->tables ??= new Tables($this->db);
-	}
+    /**
+     * Tables
+     * 
+     * @return TablesInterface
+     */
+    public function tables(): TablesInterface
+    {
+        return $this->tables ??= new Tables($this->db);
+    }
 
-	/**
-	 * Triggers
-	 * 
-	 * @return TriggersInterface
-	 */
-	public function triggers(): TriggersInterface
-	{
-		return $this->triggers ??= new Triggers($this->db);
-	}
+    /**
+     * Triggers
+     * 
+     * @return TriggersInterface
+     */
+    public function triggers(): TriggersInterface
+    {
+        return $this->triggers ??= new Triggers($this->db);
+    }
 }

@@ -6,5 +6,5 @@
  */
 
 return function (&$row) {
-	(new AssetsBasic)->updateVersion((bool)$row['version_control']);
+    (new AssetsBasic)->updateVersion((bool)$row['version_control']);
 };

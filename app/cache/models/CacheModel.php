@@ -9,55 +9,55 @@ use Junco\Mvc\Model;
 
 class CacheModel extends Model
 {
-	/**
-	 * Get
-	 */
-	public function getListData()
-	{
-		// data
-		$this->filter(POST, ['search' => 'text']);
+    /**
+     * Get
+     */
+    public function getListData()
+    {
+        // data
+        $this->filter(POST, ['search' => 'text']);
 
-		// vars
-		$keys = cache()->getKeys();
+        // vars
+        $keys = cache()->getKeys();
 
-		if (
-			$keys
-			&& $this->data['search']
-			&& preg_match('@[\w-]+@', preg_quote($this->data['search'], '@'))
-		) {
-			$filter = '@' . $this->data['search'] . '@i';
+        if (
+            $keys
+            && $this->data['search']
+            && preg_match('@[\w-]+@', preg_quote($this->data['search'], '@'))
+        ) {
+            $filter = '@' . $this->data['search'] . '@i';
 
-			foreach ($keys as $index => $has) {
-				if (!preg_match($filter, $has)) {
-					unset($keys[$index]);
-				}
-			}
-		}
+            foreach ($keys as $index => $has) {
+                if (!preg_match($filter, $has)) {
+                    unset($keys[$index]);
+                }
+            }
+        }
 
-		return $this->data + ['keys' => $keys];
-	}
+        return $this->data + ['keys' => $keys];
+    }
 
-	/**
-	 * Get
-	 */
-	public function getConfirmDeleteData()
-	{
-		// data
-		$this->filter(POST, ['id' => 'array|required:abort']);
+    /**
+     * Get
+     */
+    public function getConfirmDeleteData()
+    {
+        // data
+        $this->filter(POST, ['id' => 'array|required:abort']);
 
-		return $this->data;
-	}
+        return $this->data;
+    }
 
-	/**
-	 * Delete
-	 */
-	public function delete()
-	{
-		// data
-		$this->filter(POST, ['keys' => 'array|required:abort']);
+    /**
+     * Delete
+     */
+    public function delete()
+    {
+        // data
+        $this->filter(POST, ['keys' => 'array|required:abort']);
 
-		if (!cache()->deleteMultiple($this->data['keys'])) {
-			throw new Exception(_t('Error! the task has not been realized.'));
-		}
-	}
+        if (!cache()->deleteMultiple($this->data['keys'])) {
+            throw new Exception(_t('Error! the task has not been realized.'));
+        }
+    }
 }

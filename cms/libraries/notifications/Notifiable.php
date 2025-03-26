@@ -9,15 +9,15 @@ namespace Junco\Notifications;
 
 abstract class Notifiable implements NotifiableInterface
 {
-	// vars
-	private $sender = null;
+    // vars
+    private $sender = null;
 
-	/**
-	 * Notify
-	 */
-	public function notify(NotificationInterface $notification)
-	{
-		$this->sender ??= app('notifications');
-		$this->sender->send($this, $notification);
-	}
+    /**
+     * Notify
+     */
+    public function notify(NotificationInterface $notification)
+    {
+        $this->sender ??= app('notifications');
+        $this->sender->send($this, $notification);
+    }
 }

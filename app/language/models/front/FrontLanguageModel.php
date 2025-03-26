@@ -9,21 +9,21 @@ use Junco\Mvc\Model;
 
 class FrontLanguageModel extends Model
 {
-	/**
-	 * Get
-	 */
-	public function getContentData()
-	{
-		// vars
-		$languages = (new LanguageHelper)->getAvailables();
+    /**
+     * Get
+     */
+    public function getContentData()
+    {
+        // vars
+        $languages = (new LanguageHelper)->getAvailables();
 
-		if (curuser()->isAdmin()) {
-			$languages = array_merge(['Clear'], $languages);
-		}
+        if (curuser()->isAdmin()) {
+            $languages = array_merge(['Clear'], $languages);
+        }
 
-		return [
-			'languages' => $languages,
-			'values' => ['lang' => app('language')->getCurrent()],
-		];
-	}
+        return [
+            'languages' => $languages,
+            'values' => ['lang' => app('language')->getCurrent()],
+        ];
+    }
 }

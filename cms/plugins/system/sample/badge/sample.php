@@ -14,35 +14,35 @@ $html = '';
 // ---
 $partial = '';
 foreach ($colors as $color) {
-	$partial .= '<div class="badge badge-' . $color . '">' . $color . '</div>';
+    $partial .= '<div class="badge badge-' . $color . '">' . $color . '</div>';
 }
 $html .= '<p><h4>.badge</h4>' . $partial . '</p>';
 
 // ---
 $partial = '';
 foreach ($colors as $color) {
-	$partial .= '<div class="badge badge-regular badge-' . $color . '">' . $color . '</div>';
+    $partial .= '<div class="badge badge-regular badge-' . $color . '">' . $color . '</div>';
 }
 $html .= '<p><h4>.badge .badge-regular</h4>' . $partial . '</p>';
 
 // ---
 $partial = '';
 foreach ($colors as $color) {
-	$partial .= '<div class="badge badge-' . $color . ' badge-large">' . $color . '</div>';
+    $partial .= '<div class="badge badge-' . $color . ' badge-large">' . $color . '</div>';
 }
 $html .= '<p><h4>.badge .badge-large</h4>' . $partial . '</p>';
 
 // ---
 $partial = '';
 foreach ($colors as $color) {
-	$partial .= '<div class="badge badge-' . $color . ' badge-small">' . $color . '</div>';
+    $partial .= '<div class="badge badge-' . $color . ' badge-small">' . $color . '</div>';
 }
 $html .= '<p><h4>.badge .badge-small</h4>' . $partial . '</p>';
 
 // template
 $tpl = Template::get();
 $tpl->options([
-	'thirdbar' => 'system.thirdbar'
+    'thirdbar' => 'system.thirdbar'
 ]);
 $tpl->title('Badge');
 $tpl->content = '<div class="panel"><div class="panel-body">' . $html . '</div></div>';

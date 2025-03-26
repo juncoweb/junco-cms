@@ -13,9 +13,9 @@ $form->hidden('download_url');
 //
 $form->addRow(['content' => _t('Are you sure you want to update the extension selected?')]);
 if ($is_close) {
-	$form->input('extension_key')->setLabel(_t('Key'));
-	$form->hidden('_extension_key');
-	$form->hidden('is_close', true);
+    $form->input('extension_key')->setLabel(_t('Key'));
+    $form->hidden('_extension_key');
+    $form->hidden('is_close', true);
 }
 
 // modal

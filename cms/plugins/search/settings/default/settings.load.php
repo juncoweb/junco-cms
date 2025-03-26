@@ -6,5 +6,5 @@
  */
 
 return function (&$rows) {
-	$rows['engines_plugins']['plugins'] = 'search_engine';
+    $rows['engines_plugins']['plugins'] = 'search_engine';
 };

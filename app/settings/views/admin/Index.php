@@ -8,9 +8,9 @@
 // template
 $tpl = Template::get();
 $tpl->options([
-	'js' => 'assets/settings-admin.min.js',
-	'domready' => 'Settings.Load(\'' . $key . '\')',
-	'thirdbar' => 'settings.thirdbar'
+    'js' => 'assets/settings-admin.min.js',
+    'domready' => 'Settings.Load(\'' . $key . '\')',
+    'thirdbar' => 'settings.thirdbar'
 ]);
 $tpl->content = '<div id="settings-box" class="set-box"></div>';
 

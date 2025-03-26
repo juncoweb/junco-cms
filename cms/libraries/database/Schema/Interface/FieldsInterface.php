@@ -11,48 +11,48 @@ use Database;
 
 interface FieldsInterface
 {
-	/**
-	 * Constructor
-	 */
-	public function __construct(Database $db);
+    /**
+     * Constructor
+     */
+    public function __construct(Database $db);
 
-	/**
-	 * Show Fields
-	 * 
-	 * @param string $TableName
-	 * @param array  $where
-	 * 
-	 * @return array
-	 */
-	public function fetchAll(string $TableName, array $where = []): array;
+    /**
+     * Show Fields
+     * 
+     * @param string $TableName
+     * @param array  $where
+     * 
+     * @return array
+     */
+    public function fetchAll(string $TableName, array $where = []): array;
 
-	/**
-	 * Get Fields
-	 * 
-	 * @param string $TableName
-	 * @param array  $where
-	 * 
-	 * @return array
-	 */
-	public function list(string $TableName, array $where = []): array;
+    /**
+     * Get Fields
+     * 
+     * @param string $TableName
+     * @param array  $where
+     * 
+     * @return array
+     */
+    public function list(string $TableName, array $where = []): array;
 
-	/**
-	 * Alter
-	 * 
-	 * @param string  $TableName
-	 * @param array	  $Fields
-	 * 
-	 * @return int
-	 */
-	public function alter(string $TableName, array $Fields): int;
+    /**
+     * Alter
+     * 
+     * @param string  $TableName
+     * @param array	  $Fields
+     * 
+     * @return int
+     */
+    public function alter(string $TableName, array $Fields): int;
 
-	/**
-	 * Drop
-	 * 
-	 * @param string		$TableName
-	 * @param string|array	$FieldName
-	 * 
-	 * @return int
-	 */
-	public function drop(string $TableName, string|array $FieldName): int;
+    /**
+     * Drop
+     * 
+     * @param string		$TableName
+     * @param string|array	$FieldName
+     * 
+     * @return int
+     */
+    public function drop(string $TableName, string|array $FieldName): int;
 }

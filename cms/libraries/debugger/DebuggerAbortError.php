@@ -14,15 +14,15 @@
  */
 class DebuggerAbortError extends Error
 {
-	/**
-	 * Constructor
-	 */
-	public function __construct(string $message = '', int $code = 0, ?Throwable $previous = null)
-	{
-		$debug = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
-		$this->message	= $message;
-		$this->code		= $code;
-		$this->file		= $debug[1]['file'];
-		$this->line		= $debug[1]['line'];
-	}
+    /**
+     * Constructor
+     */
+    public function __construct(string $message = '', int $code = 0, ?Throwable $previous = null)
+    {
+        $debug = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
+        $this->message    = $message;
+        $this->code        = $code;
+        $this->file        = $debug[1]['file'];
+        $this->line        = $debug[1]['line'];
+    }
 }

@@ -6,7 +6,7 @@
  */
 
 return function (&$widget) {
-	$widget->section([
-		'content' => (new Samples)->menu('system')
-	]);
+    $widget->section([
+        'content' => (new Samples)->menu('system')
+    ]);
 };

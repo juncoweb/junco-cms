@@ -1,26 +1,26 @@
 /* --- Contact ---------------------------------------- */
 .contact {
-	position: relative;
+    position: relative;
 }
 
 .contact-success {
-	font-weight: bold;
-	text-align: center;
-	margin: 35px 0 0;
-	width: 100%;
-	position: absolute;
-	visibility: hidden;
+    font-weight: bold;
+    text-align: center;
+    margin: 35px 0 0;
+    width: 100%;
+    position: absolute;
+    visibility: hidden;
 }
 
 .contact-finish .contact-success {
-	visibility: visible;
+    visibility: visible;
 }
 
 .contact-finish form {
-	visibility: hidden;
+    visibility: hidden;
 }
 
 .contact-form {
-	max-width: 480px;
-	margin: 0 auto;
+    max-width: 480px;
+    margin: 0 auto;
 }

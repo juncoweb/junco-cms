@@ -8,15 +8,15 @@
 use Junco\Console\Cron;
 
 return function (&$row = false) {
-	if (!(new Cron)->validate($row['cron_expression'])) {
-		throw new Exception(_t('The CRON expression is invalid.'));
-	}
+    if (!(new Cron)->validate($row['cron_expression'])) {
+        throw new Exception(_t('The CRON expression is invalid.'));
+    }
 
-	$cron_plugins = Utils::arrayToggle(
-		config('console.cron_plugins'),
-		'extensions',
-		(bool)$row['enabled']
-	);
+    $cron_plugins = Utils::arrayToggle(
+        config('console.cron_plugins'),
+        'extensions',
+        (bool)$row['enabled']
+    );
 
-	(new Settings('console'))->update(['cron_plugins' => $cron_plugins]);
+    (new Settings('console'))->update(['cron_plugins' => $cron_plugins]);
 };

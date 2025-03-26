@@ -7,22 +7,22 @@
 
 class dashboard_master_default_snippet
 {
-	// vars
-	protected $rows = [];
+    // vars
+    protected $rows = [];
 
-	/**
-	 * 
-	 */
-	public function row(string $html)
-	{
-		$this->rows[] = $html;
-	}
+    /**
+     * 
+     */
+    public function row(string $html)
+    {
+        $this->rows[] = $html;
+    }
 
-	/**
-	 * 
-	 */
-	public function render()
-	{
-		return implode('', $this->rows);
-	}
+    /**
+     * 
+     */
+    public function render()
+    {
+        return implode('', $this->rows);
+    }
 }

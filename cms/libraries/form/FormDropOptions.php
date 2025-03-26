@@ -7,24 +7,24 @@
 
 class FormDropOptions
 {
-	// vars
-	private $options = [];
+    // vars
+    private $options = [];
 
-	/**
-	 * Set 
-	 *
-	 * @param string 
-	 */
-	public function push($option)
-	{
-		$this->options[] = $option;
-	}
+    /**
+     * Set 
+     *
+     * @param string 
+     */
+    public function push($option)
+    {
+        $this->options[] = $option;
+    }
 
-	/**
-	 * Get
-	 */
-	public function get(): array
-	{
-		return $this->options;
-	}
+    /**
+     * Get
+     */
+    public function get(): array
+    {
+        return $this->options;
+    }
 }

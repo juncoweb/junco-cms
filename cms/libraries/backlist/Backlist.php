@@ -10,19 +10,19 @@ use Junco\Backlist\Contract\BoxInterface;
 
 class Backlist
 {
-	/**
-	 * Get
-	 */
-	public static function get(string $snippet = ''): BacklistInterface
-	{
-		return snippet('backlist', $snippet);
-	}
+    /**
+     * Get
+     */
+    public static function get(string $snippet = ''): BacklistInterface
+    {
+        return snippet('backlist', $snippet);
+    }
 
-	/**
-	 * box
-	 */
-	public static function getBox(string $snippet = '', string $id = ''): BoxInterface
-	{
-		return snippet('backlist#box', $snippet, $id);
-	}
+    /**
+     * box
+     */
+    public static function getBox(string $snippet = '', string $id = ''): BoxInterface
+    {
+        return snippet('backlist#box', $snippet, $id);
+    }
 }

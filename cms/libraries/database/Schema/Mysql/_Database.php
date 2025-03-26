@@ -12,52 +12,52 @@ use Database;
 
 class _Database implements _DatabaseInterface
 {
-	//
-	protected $db;
+    //
+    protected $db;
 
-	/**
-	 * Constructor
-	 */
-	public function __construct(Database $db)
-	{
-		$this->db = $db;
-	}
+    /**
+     * Constructor
+     */
+    public function __construct(Database $db)
+    {
+        $this->db = $db;
+    }
 
-	/**
-	 * Get
-	 * 
-	 * @return array
-	 */
-	public function getEngines(): array
-	{
-		return $this->db
-			->safeFind("SHOW ENGINES")
-			->fetchAll(\Database::FETCH_COLUMN, ['Engine' => 'Engine']);
-	}
+    /**
+     * Get
+     * 
+     * @return array
+     */
+    public function getEngines(): array
+    {
+        return $this->db
+            ->safeFind("SHOW ENGINES")
+            ->fetchAll(\Database::FETCH_COLUMN, ['Engine' => 'Engine']);
+    }
 
-	/**
-	 * Get
-	 * 
-	 * @return array
-	 */
-	public function getCollations(): array
-	{
-		return $this->db->safeFind("SHOW COLLATION")->fetchAll();
-	}
+    /**
+     * Get
+     * 
+     * @return array
+     */
+    public function getCollations(): array
+    {
+        return $this->db->safeFind("SHOW COLLATION")->fetchAll();
+    }
 
-	/**
-	 * Get
-	 *
-	 * @return array
-	 */
-	public function showData(): array
-	{
-		$db_name = $this->db->safeFind("SELECT DATABASE()")->fetchColumn();
-		$query = $this->db->safeFind("SHOW CREATE DATABASE `$db_name`")->fetchColumn(1);
+    /**
+     * Get
+     *
+     * @return array
+     */
+    public function showData(): array
+    {
+        $db_name = $this->db->safeFind("SELECT DATABASE()")->fetchColumn();
+        $query = $this->db->safeFind("SHOW CREATE DATABASE `$db_name`")->fetchColumn(1);
 
-		return  [
-			'Name'			=> $db_name,
-			'MysqlQuery'	=> $query,
-		];
-	}
+        return  [
+            'Name'            => $db_name,
+            'MysqlQuery'    => $query,
+        ];
+    }
 }

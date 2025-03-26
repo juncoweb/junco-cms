@@ -6,8 +6,8 @@
  */
 
 return function (&$rows) {
-	$rows['pdo_adapter']['options'] = [
-		'pgsql'	=> 'PostgreSQL',
-		'mysql'	=> 'MySql',
-	];
+    $rows['pdo_adapter']['options'] = [
+        'pgsql'    => 'PostgreSQL',
+        'mysql'    => 'MySql',
+    ];
 };

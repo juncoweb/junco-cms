@@ -13,5 +13,5 @@
  * @return void
  */
 return function (&$xdata) {
-	(new SettingsExporter($xdata->extension_alias))->export("{$xdata->basepath}storage/settings/", $xdata->is_installer);
+    (new SettingsExporter($xdata->extension_alias))->export("{$xdata->basepath}storage/settings/", $xdata->is_installer);
 };

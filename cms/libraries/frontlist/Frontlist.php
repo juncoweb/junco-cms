@@ -10,23 +10,23 @@ use Junco\Frontlist\Contract\FrontlistInterface;
 
 class Frontlist
 {
-	/**
-	 * Get
-	 */
-	public static function get(string $snippet = ''): FrontlistInterface
-	{
-		return snippet('frontlist', $snippet);
-	}
+    /**
+     * Get
+     */
+    public static function get(string $snippet = ''): FrontlistInterface
+    {
+        return snippet('frontlist', $snippet);
+    }
 
-	/**
-	 * box
-	 */
-	public static function getBox(string $snippet = '', string $id = ''): BoxInterface
-	{
-		if ($snippet === 'default') {
-			$snippet = '';
-		}
+    /**
+     * box
+     */
+    public static function getBox(string $snippet = '', string $id = ''): BoxInterface
+    {
+        if ($snippet === 'default') {
+            $snippet = '';
+        }
 
-		return snippet('frontlist#box', $snippet ?: '', $id);
-	}
+        return snippet('frontlist#box', $snippet ?: '', $id);
+    }
 }

@@ -9,16 +9,16 @@ namespace Junco\Filter\Filters;
 
 class Float_ extends FilterAbstract
 {
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->type = 'float';
-		$this->default  = 0;
-		$this->argument = [
-			'filter' => FILTER_VALIDATE_FLOAT,
-			'options' => ['default' => 0]
-		];
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->type = 'float';
+        $this->default  = 0;
+        $this->argument = [
+            'filter' => FILTER_VALIDATE_FLOAT,
+            'options' => ['default' => 0]
+        ];
+    }
 }

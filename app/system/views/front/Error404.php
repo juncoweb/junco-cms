@@ -6,9 +6,9 @@
  */
 
 $html = '<div class="m-8 italic">'
-	. '<p>The requested was not found on this server. That’s all we know.</p>'
-	. '<p>If you want, you can search the site.</p>'
-	. '</div>';
+    . '<p>The requested was not found on this server. That’s all we know.</p>'
+    . '<p>If you want, you can search the site.</p>'
+    . '</div>';
 
 // template
 $tpl = Template::get();

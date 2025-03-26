@@ -1,37 +1,35 @@
 /* -------- spacing ------------------------------------------------- */
 .mx-auto {
-	margin-right: auto;
-	margin-left: auto;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 $spacing-properties: (
-	"": "",
-	"t": -top,
-	"r": -right,
-	"b": -bottom,
-	"l": -left
+    "": "",
+    "t": -top,
+    "r": -right,
+    "b": -bottom,
+    "l": -left
 );
 
-@each $size,
-$value in $spacers {
-	.mx-#{$size} {
-		margin-left: $value;
-		margin-right: $value;
-	}
+@each $size, $value in $spacers {
+    .mx-#{$size} {
+        margin-left: $value;
+        margin-right: $value;
+    }
 
-	.px-#{$size} {
-		padding-left: $value;
-		padding-right: $value;
-	}
+    .px-#{$size} {
+        padding-left: $value;
+        padding-right: $value;
+    }
 
-	@each $name,
-	$prop in $spacing-properties {
-		.m#{$name}-#{$size} {
-			margin#{$prop}: $value;
-		}
+    @each $name, $prop in $spacing-properties {
+        .m#{$name}-#{$size} {
+            margin#{$prop}: $value;
+        }
 
-		.p#{$name}-#{$size} {
-			padding#{$prop}: $value;
-		}
-	}
+        .p#{$name}-#{$size} {
+            padding#{$prop}: $value;
+        }
+    }
 }

@@ -8,17 +8,17 @@
 defined('IS_TEST') or die;
 
 if (app('system')->isDemo()) {
-	$html = '<div class="m-4">' . _t('This task is not allowed in demos.') . '</div>';
+    $html = '<div class="m-4">' . _t('This task is not allowed in demos.') . '</div>';
 } else {
-	// @see: http://php.net/manual/es/function.phpinfo.php
-	ob_start();
-	phpinfo();
-	preg_match('%<style type="text/css">(.*?)</style>.*?(<body>.*</body>)%s', ob_get_clean(), $matches);
+    // @see: http://php.net/manual/es/function.phpinfo.php
+    ob_start();
+    phpinfo();
+    preg_match('%<style type="text/css">(.*?)</style>.*?(<body>.*</body>)%s', ob_get_clean(), $matches);
 
-	$html = '<style type="text/css">' . change_styles($matches[1]) . '</style>' . "\n"
-		. '<div class="phpinfodisplay table-responsive">'
-		. $matches[2] . "\n"
-		. '</div>' . "\n";
+    $html = '<style type="text/css">' . change_styles($matches[1]) . '</style>' . "\n"
+        . '<div class="phpinfodisplay table-responsive">'
+        . $matches[2] . "\n"
+        . '</div>' . "\n";
 }
 
 // template
@@ -37,13 +37,13 @@ return $tpl->response();
  */
 function change_styles(string $styles): ?string
 {
-	$styles = preg_replace_callback('/((?:\.|\w|:)(?:.*?))\{(.*?)\}/', function ($match) {
-		return '.phpinfodisplay ' . implode(', .phpinfodisplay', explode(',', $match[1])) . '{' . $match[2] . '}';
-	}, $styles);
+    $styles = preg_replace_callback('/((?:\.|\w|:)(?:.*?))\{(.*?)\}/', function ($match) {
+        return '.phpinfodisplay ' . implode(', .phpinfodisplay', explode(',', $match[1])) . '{' . $match[2] . '}';
+    }, $styles);
 
-	return strtr($styles, [
-		' body' => '',
-		' :root' => '',
-		'@media (prefers-color-scheme: dark)' => '[data-theme=dark]'
-	]);
+    return strtr($styles, [
+        ' body' => '',
+        ' :root' => '',
+        '@media (prefers-color-scheme: dark)' => '[data-theme=dark]'
+    ]);
 }

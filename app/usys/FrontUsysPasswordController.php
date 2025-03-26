@@ -9,45 +9,45 @@ use Junco\Mvc\Controller;
 
 class FrontUsysPasswordController extends Controller
 {
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->authenticate(-1);
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->authenticate(-1);
+    }
 
-	/**
-	 * Index
-	 */
-	public function reset()
-	{
-		return $this->view(null, (new FrontUsysPasswordModel)->getResetData());
-	}
+    /**
+     * Index
+     */
+    public function reset()
+    {
+        return $this->view(null, (new FrontUsysPasswordModel)->getResetData());
+    }
 
-	/**
-	 * Reset
-	 */
-	public function sendToken()
-	{
-		return $this->middleware('form.security')
-			?: $this->wrapper(fn() => (new UsysPasswordModel)->sentToken());
-	}
+    /**
+     * Reset
+     */
+    public function sendToken()
+    {
+        return $this->middleware('form.security')
+            ?: $this->wrapper(fn() => (new UsysPasswordModel)->sentToken());
+    }
 
-	/**
-	 * Edit
-	 */
-	public function edit()
-	{
-		return $this->view(null, (new FrontUsysPasswordModel)->getEditData());
-	}
+    /**
+     * Edit
+     */
+    public function edit()
+    {
+        return $this->view(null, (new FrontUsysPasswordModel)->getEditData());
+    }
 
-	/**
-	 * Update
-	 */
-	public function update()
-	{
-		return $this->middleware('form.security')
-			?: $this->wrapper(fn() => (new UsysPasswordModel)->update());
-	}
+    /**
+     * Update
+     */
+    public function update()
+    {
+        return $this->middleware('form.security')
+            ?: $this->wrapper(fn() => (new UsysPasswordModel)->update());
+    }
 }

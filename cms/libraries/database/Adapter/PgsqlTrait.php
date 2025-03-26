@@ -12,41 +12,41 @@ namespace Junco\Database\Adapter;
  */
 trait PgsqlTrait
 {
-	/**
-	 * Sanitize
-	 * 
-	 * @param string $query
-	 * 
-	 * @return void
-	 */
-	protected function sanitizeQuery(string &$query): void
-	{
-		$query = str_replace('`', '', $query);
-		$query = preg_replace_callback('/(?<Limit>LIMIT)\s+(?<Value>\d+)\s*,\s*(?<Offset>\d+)/', function ($match) {
-			if (isset($match['Limit'])) {
-				return "LIMIT $match[Offset] OFFSET $match[Value]";
-			}
-		}, $query);
-		//die($query);
-	}
+    /**
+     * Sanitize
+     * 
+     * @param string $query
+     * 
+     * @return void
+     */
+    protected function sanitizeQuery(string &$query): void
+    {
+        $query = str_replace('`', '', $query);
+        $query = preg_replace_callback('/(?<Limit>LIMIT)\s+(?<Value>\d+)\s*,\s*(?<Offset>\d+)/', function ($match) {
+            if (isset($match['Limit'])) {
+                return "LIMIT $match[Offset] OFFSET $match[Value]";
+            }
+        }, $query);
+        //die($query);
+    }
 
-	/**
-	 * Sanitize
-	 * 
-	 * @param string $query
-	 * 
-	 * @return void
-	 */
-	protected function sanitizeQueryToNativePg(string &$query): void
-	{
-		$this->sanitizeQuery($query);
+    /**
+     * Sanitize
+     * 
+     * @param string $query
+     * 
+     * @return void
+     */
+    protected function sanitizeQueryToNativePg(string &$query): void
+    {
+        $this->sanitizeQuery($query);
 
-		$count = 0;
-		$query = preg_replace_callback('/(?<Holder>\?)/', function ($match) use (&$count) {
-			if (isset($match['Holder'])) {
-				return '$' . (++$count);
-			}
-		}, $query);
-		//die($query);
-	}
+        $count = 0;
+        $query = preg_replace_callback('/(?<Holder>\?)/', function ($match) use (&$count) {
+            if (isset($match['Holder'])) {
+                return '$' . (++$count);
+            }
+        }, $query);
+        //die($query);
+    }
 }

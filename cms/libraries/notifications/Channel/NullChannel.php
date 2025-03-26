@@ -12,11 +12,11 @@ use Junco\Notifications\NotificationInterface;
 
 class NullChannel implements ChannelInterface
 {
-	/**
-	 * Send
-	 */
-	public function send(NotifiableInterface $notifiable, NotificationInterface $notification)
-	{
-		return null;
-	}
+    /**
+     * Send
+     */
+    public function send(NotifiableInterface $notifiable, NotificationInterface $notification)
+    {
+        return null;
+    }
 }

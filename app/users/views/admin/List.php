@@ -12,9 +12,9 @@ $bls = Backlist::get();
 $bft = $bls->getFilters();
 $bft->setValues($data);
 $bft->searchIn([
-	1 => _t('Name'),
-	2 => _t('User'),
-	3 => _t('Email')
+    1 => _t('Name'),
+    2 => _t('User'),
+    3 => _t('Email')
 ]);
 $bft->select('role_id', $roles);
 $bft->sort($sort, $order);
@@ -27,19 +27,19 @@ $bls->th(_t('Created'), ['priority' => 2, 'width' => 90, 'sort' => true, 'class'
 $bls->button_h('status');
 
 if ($rows) {
-	$statuses = [
-		'autosignup' => ['icon' => 'fa-solid fa-circle color-blue', 'title' => _t('Auto signup')],
-		'inactive' => ['icon' => 'fa-solid fa-circle color-red', 'title' => _t('Inactive')],
-		'active' => ['icon' => 'fa-solid fa-circle color-green', 'title' => _t('Active')],
-	];
+    $statuses = [
+        'autosignup' => ['icon' => 'fa-solid fa-circle color-blue', 'title' => _t('Auto signup')],
+        'inactive' => ['icon' => 'fa-solid fa-circle color-red', 'title' => _t('Inactive')],
+        'active' => ['icon' => 'fa-solid fa-circle color-green', 'title' => _t('Active')],
+    ];
 
-	foreach ($rows as $row) {
-		$bls->check($row['id']);
-		$bls->td($row['fullname']);
-		$bls->td(implode(', ', $row['roles']));
-		$bls->td((new Date($row['created_at']))->format(_t('Y-M-d')));
-		$bls->button($statuses[$row['status']]);
-	}
+    foreach ($rows as $row) {
+        $bls->check($row['id']);
+        $bls->td($row['fullname']);
+        $bls->td(implode(', ', $row['roles']));
+        $bls->td((new Date($row['created_at']))->format(_t('Y-M-d')));
+        $bls->button($statuses[$row['status']]);
+    }
 }
 
 

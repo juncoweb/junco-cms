@@ -14,70 +14,70 @@ use Junco\Jobs\Jobs;
 
 class Notifications
 {
-	// vars
-	protected array $channels = [];
-	protected       $jobs = null;
+    // vars
+    protected array $channels = [];
+    protected       $jobs = null;
 
-	/**
-	 * Costruct
-	 */
-	public function __construct()
-	{
-		if (config('notifications.use_background')) {
-			$this->jobs = new Jobs();
-		}
-	}
+    /**
+     * Costruct
+     */
+    public function __construct()
+    {
+        if (config('notifications.use_background')) {
+            $this->jobs = new Jobs();
+        }
+    }
 
-	/**
-	 * Send
-	 */
-	public function send(array|NotifiableInterface $notifiables, NotificationInterface $notification)
-	{
-		if ($this->jobs) {
-			$this->jobs->push(new NotificationsJob($notifiables, $notification), $notification->queue ?? '');
-		} else {
-			$this->sendNow($notifiables, $notification);
-		}
-	}
+    /**
+     * Send
+     */
+    public function send(array|NotifiableInterface $notifiables, NotificationInterface $notification)
+    {
+        if ($this->jobs) {
+            $this->jobs->push(new NotificationsJob($notifiables, $notification), $notification->queue ?? '');
+        } else {
+            $this->sendNow($notifiables, $notification);
+        }
+    }
 
-	/**
-	 * Send
-	 */
-	public function sendNow(array|NotifiableInterface $notifiables, NotificationInterface $notification)
-	{
-		if (!is_array($notifiables)) {
-			$notifiables = [$notifiables];
-		}
-		$viaChannels = $notification->via();
+    /**
+     * Send
+     */
+    public function sendNow(array|NotifiableInterface $notifiables, NotificationInterface $notification)
+    {
+        if (!is_array($notifiables)) {
+            $notifiables = [$notifiables];
+        }
+        $viaChannels = $notification->via();
 
-		if ($viaChannels) {
-			$language = $notification->getLanguage();
+        if ($viaChannels) {
+            $language = $notification->getLanguage();
 
-			if ($language) {
-				//app('language')->getTranslator()->setLanguage($language);
-			}
+            if ($language) {
+                //app('language')->getTranslator()->setLanguage($language);
+            }
 
-			foreach ($viaChannels as $viaChannel) {
-				$channel = $this->getChannel($viaChannel);
+            foreach ($viaChannels as $viaChannel) {
+                $channel = $this->getChannel($viaChannel);
 
-				if ($channel) {
-					foreach ($notifiables as $notifiable) {
-						$channel->send($notifiable, $notification);
-					}
-				}
-			}
-		}
-	}
+                if ($channel) {
+                    foreach ($notifiables as $notifiable) {
+                        $channel->send($notifiable, $notification);
+                    }
+                }
+            }
+        }
+    }
 
-	/**
-	 * Get channel
-	 */
-	protected function getChannel(string $channel)
-	{
-		return ($this->channels[$channel] ??= match ($channel) {
-			'database' => new DatabaseChannel(),
-			'email' => new EmailChannel(),
-			default => null
-		});
-	}
+    /**
+     * Get channel
+     */
+    protected function getChannel(string $channel)
+    {
+        return ($this->channels[$channel] ??= match ($channel) {
+            'database' => new DatabaseChannel(),
+            'email' => new EmailChannel(),
+            default => null
+        });
+    }
 }

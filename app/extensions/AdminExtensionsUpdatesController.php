@@ -9,19 +9,19 @@ use Junco\Mvc\Controller;
 
 class AdminExtensionsUpdatesController extends Controller
 {
-	/**
-	 * Index
-	 */
-	public function index()
-	{
-		return $this->view();
-	}
+    /**
+     * Index
+     */
+    public function index()
+    {
+        return $this->view();
+    }
 
-	/**
-	 * List
-	 */
-	public function list()
-	{
-		return $this->view(null, (new AdminExtensionsUpdatesModel)->getListData());
-	}
+    /**
+     * List
+     */
+    public function list()
+    {
+        return $this->view(null, (new AdminExtensionsUpdatesModel)->getListData());
+    }
 }

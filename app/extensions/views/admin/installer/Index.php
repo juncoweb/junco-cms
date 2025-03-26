@@ -12,11 +12,11 @@ $bbx = Backlist::getBox();
 $bac = $bbx->getActions();
 $bac->delete();
 $bac->dropdown([
-	['control' => 'confirm_find_updates', 'label' => _t('Find updates'), 'icon' => 'fa-solid fa-arrows-rotate'],
-	['control' => 'confirm_update_all', 'label' => _t('Update all'), 'icon' => 'fa-solid fa-bolt'],
-	['control' => 'confirm_upload', 'label' => _t('Upload package'), 'icon' => 'fa-solid fa-upload'],
-	[],
-	['control' => 'confirm_maintenance', 'label' => _t('Maintenance'), 'icon' => 'fa-solid fa-hammer'],
+    ['control' => 'confirm_find_updates', 'label' => _t('Find updates'), 'icon' => 'fa-solid fa-arrows-rotate'],
+    ['control' => 'confirm_update_all', 'label' => _t('Update all'), 'icon' => 'fa-solid fa-bolt'],
+    ['control' => 'confirm_upload', 'label' => _t('Upload package'), 'icon' => 'fa-solid fa-upload'],
+    [],
+    ['control' => 'confirm_maintenance', 'label' => _t('Maintenance'), 'icon' => 'fa-solid fa-hammer'],
 ]);
 $bac->refresh();
 

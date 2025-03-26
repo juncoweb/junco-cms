@@ -11,69 +11,69 @@ use Junco\Users\UserHelper;
 
 class UsysAccountModel extends Model
 {
-	// vars
-	protected $db = null;
+    // vars
+    protected $db = null;
 
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->db = db();
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->db = db();
+    }
 
-	/**
-	 * Update
-	 */
-	public function update()
-	{
-		// data
-		$this->filter(POST, [
-			'fullname'		=> 'text',
-			'username'		=> '',
-			'__password'	=> '',
-			'password'		=> '',
-			'email'			=> 'email',
-		]);
+    /**
+     * Update
+     */
+    public function update()
+    {
+        // data
+        $this->filter(POST, [
+            'fullname'        => 'text',
+            'username'        => '',
+            '__password'    => '',
+            'password'        => '',
+            'email'            => 'email',
+        ]);
 
-		$curuser = curuser();
+        $curuser = curuser();
 
-		//
-		UserHelper::verifyPassword($this->data['__password'], $curuser->password);
+        //
+        UserHelper::verifyPassword($this->data['__password'], $curuser->password);
 
-		if (!$this->data['fullname']) {
-			throw new Exception(_t('Please, fill in the name.'));
-		}
-		UserHelper::validateUsername($this->data['username']);
+        if (!$this->data['fullname']) {
+            throw new Exception(_t('Please, fill in the name.'));
+        }
+        UserHelper::validateUsername($this->data['username']);
 
-		// username
-		if ($this->data['username'] != $curuser->username) {
-			UserHelper::isUniqueUsername($this->data['username']);
-		}
+        // username
+        if ($this->data['username'] != $curuser->username) {
+            UserHelper::isUniqueUsername($this->data['username']);
+        }
 
-		// email
-		if ($this->data['email'] && $this->data['email'] != $curuser->email) {
-			UserHelper::isUniqueEmail($this->data['email']);
-		} else {
-			unset($this->data['email']);
-		}
+        // email
+        if ($this->data['email'] && $this->data['email'] != $curuser->email) {
+            UserHelper::isUniqueEmail($this->data['email']);
+        } else {
+            unset($this->data['email']);
+        }
 
-		// password
-		if ($this->data['password'] && $this->data['password'] !== $this->data['__password']) {
-			UserHelper::validatePassword($this->data['password']);
+        // password
+        if ($this->data['password'] && $this->data['password'] !== $this->data['__password']) {
+            UserHelper::validatePassword($this->data['password']);
 
-			$this->data['password'] = UserHelper::hash($this->data['password']);
-		} else {
-			unset($this->data['password']);
-		}
-		unset($this->data['__password']);
+            $this->data['password'] = UserHelper::hash($this->data['password']);
+        } else {
+            unset($this->data['password']);
+        }
+        unset($this->data['__password']);
 
-		// query
-		$this->db->safeExec("UPDATE `#__users` SET ?? WHERE id = ?", $this->data, $curuser->id);
+        // query
+        $this->db->safeExec("UPDATE `#__users` SET ?? WHERE id = ?", $this->data, $curuser->id);
 
-		// token
-		if (isset($this->data['email'])) {
-			UserActivityToken::generateAndSend('savemail', $curuser->id, $this->data['email'], $curuser->fullname);
-		}
-	}
+        // token
+        if (isset($this->data['email'])) {
+            UserActivityToken::generateAndSend('savemail', $curuser->id, $this->data['email'], $curuser->fullname);
+        }
+    }
 }

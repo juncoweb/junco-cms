@@ -16,15 +16,15 @@ $lorem_1 = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean com
 $lorem_2 = 'Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.';
 
 foreach ($colors as $i => $color) {
-	$tab_id = 't' . $i;
-	//
-	$tabs = Tabs::get('', $tab_id);
-	$tabs->tab('One', $lorem_1);
-	$tabs->tab('Two', $lorem_2);
-	$tabs->tab('Three');
+    $tab_id = 't' . $i;
+    //
+    $tabs = Tabs::get('', $tab_id);
+    $tabs->tab('One', $lorem_1);
+    $tabs->tab('Two', $lorem_2);
+    $tabs->tab('Three');
 
-	$html .= $tabs->render();
-	$domready .= 'JsTabs("#' . $tab_id . '").select();';
+    $html .= $tabs->render();
+    $domready .= 'JsTabs("#' . $tab_id . '").select();';
 }
 
 $html = '<div style="margin: 50px;">' . $html . '</div>';
@@ -32,8 +32,8 @@ $html = '<div style="margin: 50px;">' . $html . '</div>';
 // template
 $tpl = Template::get();
 $tpl->options([
-	'domready' => $domready,
-	'thirdbar' => 'system.thirdbar'
+    'domready' => $domready,
+    'thirdbar' => 'system.thirdbar'
 ]);
 $tpl->content = $html;
 

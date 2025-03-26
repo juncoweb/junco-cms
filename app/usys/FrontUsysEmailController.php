@@ -9,11 +9,11 @@ use Junco\Mvc\Controller;
 
 class FrontUsysEmailController extends Controller
 {
-	/**
-	 * Save
-	 */
-	public function save()
-	{
-		return $this->view(null, (new FrontUsysEmailModel)->getSaveData());
-	}
+    /**
+     * Save
+     */
+    public function save()
+    {
+        return $this->view(null, (new FrontUsysEmailModel)->getSaveData());
+    }
 }

@@ -8,8 +8,8 @@
 // form
 $form = Form::get();
 if ($values) {
-	$form->setValues($values);
-	$form->hidden('user_id');
+    $form->setValues($values);
+    $form->hidden('user_id');
 }
 $form->input('fullname', ['required' => true])->setLabel(_t('Name'))->setRequired();
 $form->input('username', ['required' => true])->setLabel(_t('Username'))->setRequired();

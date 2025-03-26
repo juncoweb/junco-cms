@@ -6,9 +6,9 @@
  */
 
 return function (&$row) {
-	$delivery = [];
-	foreach (explode('|', $row['delivery']) as $partial) {
-		$delivery[] = $partial ? explode('+', $partial) : [];
-	}
-	$row['delivery'] = $delivery;
+    $delivery = [];
+    foreach (explode('|', $row['delivery']) as $partial) {
+        $delivery[] = $partial ? explode('+', $partial) : [];
+    }
+    $row['delivery'] = $delivery;
 };

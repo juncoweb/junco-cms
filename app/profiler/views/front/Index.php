@@ -6,7 +6,7 @@
  */
 
 if ($frame) {
-	$frame = '<iframe src="' . $frame . '" height=""></iframe>';
+    $frame = '<iframe src="' . $frame . '" height=""></iframe>';
 }
 
 ?>
@@ -14,22 +14,22 @@ if ($frame) {
 <html>
 
 <head>
-	<title><?= $title ?></title>
-	<link type="text/css" rel="stylesheet" href="<?= $base_url ?>assets/profiler.min.css">
-	<script type="text/javascript" src="<?= $base_url ?>assets/profiler.min.js"></script>
+    <title><?= $title ?></title>
+    <link type="text/css" rel="stylesheet" href="<?= $base_url ?>assets/profiler.min.css">
+    <script type="text/javascript" src="<?= $base_url ?>assets/profiler.min.js"></script>
 </head>
 
 <body>
-	<?= $frame ?>
-	<console>
-		<h1>
-			<ul>
-				<li><a href="javascript:void(0)" class="toggle"></a></li>
-				<li><a href="javascript:void(0)" class="clear"></a></li>
-			</ul><?= $title ?>
-		</h1>
-		<div></div>
-	</console>
+    <?= $frame ?>
+    <console>
+        <h1>
+            <ul>
+                <li><a href="javascript:void(0)" class="toggle"></a></li>
+                <li><a href="javascript:void(0)" class="clear"></a></li>
+            </ul><?= $title ?>
+        </h1>
+        <div></div>
+    </console>
 </body>
 
 </html>

@@ -9,17 +9,17 @@ use Junco\Mvc\Model;
 
 class ProfilerModel extends Model
 {
-	/**
-	 * Get
-	 */
-	public function getIndexData()
-	{
-		// data
-		$this->filter(GET, ['frame' => '']);
+    /**
+     * Get
+     */
+    public function getIndexData()
+    {
+        // data
+        $this->filter(GET, ['frame' => '']);
 
-		return $this->data + [
-			'title'		=> _t('Console'),
-			'base_url'	=> config('site.baseurl')
-		];
-	}
+        return $this->data + [
+            'title'        => _t('Console'),
+            'base_url'    => config('site.baseurl')
+        ];
+    }
 }

@@ -18,12 +18,12 @@ $modal->title('Hello!');
 $modal->content = '<div>time: ' . time() . '</div>';
 
 switch ($example) {
-	case 1:
-		$modal->button('alert(\'Hello!\')', _t('Enter'));
-		break;
-	case 2:
-		$modal->content .= str_repeat($string, 0);
-		break;
+    case 1:
+        $modal->button('alert(\'Hello!\')', _t('Enter'));
+        break;
+    case 2:
+        $modal->content .= str_repeat($string, 0);
+        break;
 }
 
 return $modal->response();

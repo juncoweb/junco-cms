@@ -1,54 +1,79 @@
 /**
  * Lightbox
- *
- * @return
- * the element box
-*/
+ */
+function Lightbox(options) {
+    options = Object.assign({
+        iniVisible: true,
+        hideWithButton: true,
+        hideWithOverlay: true,
+        valignCenter: true,
+    }, options);
 
-function Lightbox(force, options) {
-	let overlay = document.body.appendChild(JsElement('div.lightbox', {
-		html: '<div></div><i class="fa-solid fa-xmark lightbox-cross"></i>'
-	}));
-	let el = overlay.firstChild;
-	options = Object.assign({
-		hideOnlyWithButton: false,
-		valignCenter: true,
-	}, options);
+    const body = document.body;
+    const overlay = body.appendChild(JsElement('div.lightbox', { html: '<div></div>' }));
+    const box = overlay.firstChild;
+    const that = {
+        remnove: function () {
+            overlay.parentNode.removeChild(overlay);
+            body.classList.remove('lightbox-fixed');
+        },
 
-	function cross(btn, box) {
-		btn.addEventListener('click', function () {
-			el.hide();
-		});
-		box.addEventListener('click', function (event) {
-			if (event.target !== box) {
-				event.stopPropagation();
-			}
-		});
-	}
+        toggle: function (force) {
+            const status = body.classList.toggle('lightbox-fixed', force);
+            overlay.style.display = status ? '' : 'none';
 
-	if (options.valignCenter) {
-		overlay.classList.add('valign-center');
-	}
-	if (options.hideOnlyWithButton) {
-		cross(overlay.querySelector('.lightbox-cross'), overlay);
-	} else {
-		cross(overlay, el);
-	}
+            return status;
+        },
 
-	el.destroy = function () {
-		overlay.parentNode.removeChild(overlay);
-		document.body.classList.remove('lightbox-fixed');
-	};
-	el.toggle = function (force) {
-		overlay.style.display = document.body.classList.toggle('lightbox-fixed', force) ? '' : 'none';
-	};
-	el.show = function () {
-		this.toggle(true);
-	};
-	el.hide = function () {
-		this.toggle(false);
-	};
-	el.toggle(force);
+        show: function () {
+            this.toggle(true);
+        },
 
-	return el;
+        hide: function () {
+            this.toggle(false);
+        },
+
+        getContainer: function () {
+            return box;
+        },
+
+        setContent: function (content) {
+            if (typeof content === 'string') {
+                box.innerHTML = content;
+            } else {
+                box.innerHTML = '';
+                box.appendChild(content);
+            }
+
+            return this;
+        }
+    };
+
+    if (options.valignCenter) {
+        overlay.classList.add('valign-center');
+    }
+
+    if (options.hideWithButton) {
+        overlay
+            .appendChild(JsElement('i.fa-solid fa-xmark lightbox-cross'))
+            .addEventListener('click', function (event) {
+                event.stopPropagation();
+                that.hide();
+            });
+    }
+
+    if (options.hideWithOverlay) {
+        overlay.addEventListener('click', function (event) {
+            event.stopPropagation();
+            that.hide();
+        });
+
+        box.addEventListener('click', function (event) {
+            event.stopPropagation();
+        });
+    }
+
+    that.toggle(options.iniVisible);
+
+    return that;
 };

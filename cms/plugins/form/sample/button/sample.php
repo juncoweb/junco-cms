@@ -10,20 +10,20 @@ defined('IS_TEST') or die;
 
 function render($title, $element)
 {
-	$colors = ['default', 'primary', 'secondary', 'success', 'info', 'warning', 'danger'];
-	$partial = '';
+    $colors = ['default', 'primary', 'secondary', 'success', 'info', 'warning', 'danger'];
+    $partial = '';
 
-	foreach ($colors as $color) {
-		if ($color) {
-			$caption = ucfirst($color);
-			$color = ' btn-' . $color;
-		} else {
-			$caption = 'None';
-		}
-		$partial .= ' ' . strtr($element, ['{{ class }}' => $color, '{{ caption }}' => $caption]);
-	}
+    foreach ($colors as $color) {
+        if ($color) {
+            $caption = ucfirst($color);
+            $color = ' btn-' . $color;
+        } else {
+            $caption = 'None';
+        }
+        $partial .= ' ' . strtr($element, ['{{ class }}' => $color, '{{ caption }}' => $caption]);
+    }
 
-	return '<div><h4>' . $title . '</h4>' . $partial . '</div>';
+    return '<div><h4>' . $title . '</h4>' . $partial . '</div>';
 }
 
 // vars
@@ -38,10 +38,7 @@ $html .= render('btn btn-solid btn-outline', '<button class="btn btn-solid{{ cla
 
 // template
 $tpl = Template::get();
-$tpl->options([
-	'css' => 'cms/plugins/form/sample/demo/sample.css',
-	'thirdbar' => 'form.thirdbar'
-]);
+$tpl->options(['thirdbar' => 'form.thirdbar']);
 $tpl->title('Button');
 $tpl->content = '<div class="panel"><div class="panel-body">' . $html . '</div></div>';
 

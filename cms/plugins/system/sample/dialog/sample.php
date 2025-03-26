@@ -12,13 +12,13 @@ $colors = ['default', 'primary', 'secondary', 'success', 'info', 'warning', 'dan
 $html = '';
 
 foreach ($colors as $color) {
-	$html .= '<div class="dialog' . ($color ? ' dialog-' . $color : '') . '">' . $color . '</div>';
+    $html .= '<div class="dialog' . ($color ? ' dialog-' . $color : '') . '">' . $color . '</div>';
 }
 
 // template
 $tpl = Template::get();
 $tpl->options([
-	'thirdbar' => 'system.thirdbar'
+    'thirdbar' => 'system.thirdbar'
 ]);
 $tpl->title('Dialog');
 $tpl->content = '<div class="panel"><div class="panel-body">' . $html . '</div></div>';

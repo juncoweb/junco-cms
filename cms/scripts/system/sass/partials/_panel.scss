@@ -1,38 +1,38 @@
 /* -------- panel ------------------------------------------------- */
 .panel {
-	background-color: var(--regular-surface-color);
-	border-width: $border-width;
-	border-style: $border-style;
-	border-radius: $medium-border-radius;
-	box-shadow: $template-box-shadow;
-	position: relative;
+    background-color: var(--regular-surface-color);
+    border-width: $border-width;
+    border-style: $border-style;
+    border-radius: $medium-border-radius;
+    box-shadow: $template-box-shadow;
+    position: relative;
 
-	&-header {
-		padding: $spacing;
-		border-bottom-width: $border-width;
-		border-bottom-style: $border-style;
+    &-header {
+        padding: $spacing;
+        border-bottom-width: $border-width;
+        border-bottom-style: $border-style;
 
-		h1,
-		h2,
-		h3,
-		h4,
-		h5 {
-			margin: 0;
-		}
-	}
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            margin: 0;
+        }
+    }
 
-	&-body {
-		padding: $spacing;
-		overflow-x: auto;
+    &-body {
+        padding: $spacing;
+        overflow-x: auto;
 
-		.panel-stat-value {
-			font-size: 2.1 * $font-size;
-		}
-	}
+        .panel-stat-value {
+            font-size: 2.1 * $font-size;
+        }
+    }
 
-	&-footer {
-		padding: $spacing;
-		border-top-width: $border-width;
-		border-top-style: $border-style;
-	}
+    &-footer {
+        padding: $spacing;
+        border-top-width: $border-width;
+        border-top-style: $border-style;
+    }
 }

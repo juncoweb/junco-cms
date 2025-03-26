@@ -9,11 +9,11 @@ namespace Junco\Filter\Filters;
 
 class None extends FilterAbstract
 {
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->default = null;
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->default = null;
+    }
 }

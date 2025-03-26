@@ -9,65 +9,65 @@ use Junco\Mvc\Controller;
 
 class AdminExtensionsDevelopersController extends Controller
 {
-	/**
-	 * Confirm delete
-	 */
-	public function confirmDelete()
-	{
-		return $this->view(null, (new AdminExtensionsDevelopersModel)->getDeleteData());
-	}
+    /**
+     * Confirm delete
+     */
+    public function confirmDelete()
+    {
+        return $this->view(null, (new AdminExtensionsDevelopersModel)->getDeleteData());
+    }
 
-	/**
-	 * Delete
-	 */
-	public function delete()
-	{
-		return $this->middleware('form.security')
-			?: $this->wrapper(fn() => (new ExtensionsDevelopersModel)->delete());
-	}
+    /**
+     * Delete
+     */
+    public function delete()
+    {
+        return $this->middleware('form.security')
+            ?: $this->wrapper(fn() => (new ExtensionsDevelopersModel)->delete());
+    }
 
-	/**
-	 * Index
-	 */
-	public function index()
-	{
-		return $this->view();
-	}
+    /**
+     * Index
+     */
+    public function index()
+    {
+        return $this->view();
+    }
 
-	/**
-	 * List
-	 */
-	public function list()
-	{
-		return $this->view(null, (new AdminExtensionsDevelopersModel)->getListData());
-	}
+    /**
+     * List
+     */
+    public function list()
+    {
+        return $this->view(null, (new AdminExtensionsDevelopersModel)->getListData());
+    }
 
-	/**
-	 * Create
-	 */
-	public function create()
-	{
-		return $this->view('SaveForm', [
-			'title' => _t('Create'),
-			'values' => null,
-			'is_protected' => false,
-		]);
-	}
+    /**
+     * Create
+     */
+    public function create()
+    {
+        return $this->view('SaveForm', [
+            'title' => _t('Create'),
+            'values' => null,
+            'is_protected' => false,
+        ]);
+    }
 
-	/**
-	 * Edit
-	 */
-	public function edit()
-	{
-		return $this->view('SaveForm', (new AdminExtensionsDevelopersModel)->getEditData());
-	}
+    /**
+     * Edit
+     */
+    public function edit()
+    {
+        return $this->view('SaveForm', (new AdminExtensionsDevelopersModel)->getEditData());
+    }
 
-	/**
-	 * Save
-	 */
-	public function save()
-	{
-		return $this->middleware('form.security')
-			?: $this->wrapper(fn() => (new ExtensionsDevelopersModel)->save());
-	}
+    /**
+     * Save
+     */
+    public function save()
+    {
+        return $this->middleware('form.security')
+            ?: $this->wrapper(fn() => (new ExtensionsDevelopersModel)->save());
+    }
 }

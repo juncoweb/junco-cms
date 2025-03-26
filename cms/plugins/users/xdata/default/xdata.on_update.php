@@ -15,5 +15,5 @@ use Junco\Users\LabelsCache;
  * @return void
  */
 return function (&$xdata) {
-	(new LabelsCache)->update();
+    (new LabelsCache)->update();
 };

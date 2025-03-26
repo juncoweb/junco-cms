@@ -9,8 +9,8 @@ use Junco\Assets\Compilation\ScssCompiler;
 use Junco\Assets\Compilation\UrlFixer;
 
 return function (&$rows) {
-	$rows['precompile']['options'] = ScssCompiler::getOptions();
-	$rows['fixurl']['options'] = UrlFixer::getOptions();
-	$rows['cssmin_plugin']['plugin'] =
-		$rows['jsmin_plugin']['plugin'] = 'minifier';
+    $rows['precompile']['options'] = ScssCompiler::getOptions();
+    $rows['fixurl']['options'] = UrlFixer::getOptions();
+    $rows['cssmin_plugin']['plugin'] =
+        $rows['jsmin_plugin']['plugin'] = 'minifier';
 };

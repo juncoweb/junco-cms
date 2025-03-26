@@ -6,6 +6,6 @@
  */
 
 return function (&$rows) {
-	if ($rows['url'] && substr($rows['url'], -1) != '/')
-		$rows['url'] .= '/';
+    if ($rows['url'] && substr($rows['url'], -1) != '/')
+        $rows['url'] .= '/';
 };

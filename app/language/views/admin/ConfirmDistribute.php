@@ -11,7 +11,7 @@ $modal->close();
 $modal->enter();
 $modal->title(_t('Distribute'));
 $modal->content = '<p>' . _t('Are you sure you want to distribute the language?') . '</p>'
-	. '<div class="dialog dialog-warning">' . _t('This distribution will replace any previous distribution.') . '</div>';
+    . '<div class="dialog dialog-warning">' . _t('This distribution will replace any previous distribution.') . '</div>';
 //
 $modal->form();
 $modal->form->hidden('language', $id);

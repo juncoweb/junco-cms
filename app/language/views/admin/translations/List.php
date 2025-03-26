@@ -6,7 +6,7 @@
  */
 
 if (!empty($error)) {
-	return '<div class="dialog dialog-warning mt-4">' . $error . '</div>';
+    return '<div class="dialog dialog-warning mt-4">' . $error . '</div>';
 }
 
 // list
@@ -25,18 +25,18 @@ $bls->th(['width' => 100, 'class' => 'text-nowrap']);
 $bls->th(['width' => 80, 'class' => 'text-nowrap', 'priority' => 2]);
 
 if ($rows) {
-	$_date = _t('Y-M-d');
-	$_hour = _t('H:i:s');
+    $_date = _t('Y-M-d');
+    $_hour = _t('H:i:s');
 
-	foreach ($rows as $row) {
-		$row['created_at'] = new Date($row['created_at']);
+    foreach ($rows as $row) {
+        $row['created_at'] = new Date($row['created_at']);
 
-		$bls->check($row['id']);
-		$bls->td($row['translation_code']);
-		$bls->td($row['developer_name']);
-		$bls->td($row['created_at']->format($_date));
-		$bls->td($row['created_at']->format($_hour));
-	}
+        $bls->check($row['id']);
+        $bls->td($row['translation_code']);
+        $bls->td($row['developer_name']);
+        $bls->td($row['created_at']->format($_date));
+        $bls->td($row['created_at']->format($_hour));
+    }
 }
 
 return $bls->render();

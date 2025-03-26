@@ -9,7 +9,7 @@ use Junco\Console\Cron;
 use Junco\Jobs\Jobs;
 
 return function (Cron &$cron) {
-	$cron->on('* * * * *')?->call(function () {
-		(new Jobs)->run();
-	});
+    $cron->on('* * * * *')?->call(function () {
+        (new Jobs)->run();
+    });
 };

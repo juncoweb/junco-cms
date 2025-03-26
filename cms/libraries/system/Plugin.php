@@ -20,47 +20,47 @@
  */
 class Plugin
 {
-	// vars
-	protected $listener = null;
+    // vars
+    protected $listener = null;
 
 
-	/**
-	 * Constructor
-	 */
-	private function __construct() {}
+    /**
+     * Constructor
+     */
+    private function __construct() {}
 
-	/**
-	 * Find and leave ready the plugin to execute.
-	 * 
-	 * @param string       $name     The name with which the plugin is recognized.
-	 * @param string       $hook     Specific function within the plugin.
-	 * @param string|array $plugin   The plugin .
-	 * 
-	 * @return object      plugin or null in case of not finding plugins
-	 */
-	public static function get(string $name, string $hook, string|array $plugin)
-	{
-		if ($plugin) {
-			$plugin = explode('.', $plugin, 2);
-			$file = SYSTEM_ABSPATH . 'cms/plugins/' . $plugin[0] . '/' . $name . '/' . ($plugin[1] ?? 'default') . '/' . $name . '.' . $hook . '.php';
+    /**
+     * Find and leave ready the plugin to execute.
+     * 
+     * @param string       $name     The name with which the plugin is recognized.
+     * @param string       $hook     Specific function within the plugin.
+     * @param string|array $plugin   The plugin .
+     * 
+     * @return object      plugin or null in case of not finding plugins
+     */
+    public static function get(string $name, string $hook, string|array $plugin)
+    {
+        if ($plugin) {
+            $plugin = explode('.', $plugin, 2);
+            $file = SYSTEM_ABSPATH . 'cms/plugins/' . $plugin[0] . '/' . $name . '/' . ($plugin[1] ?? 'default') . '/' . $name . '.' . $hook . '.php';
 
-			if (is_file($file)) {
-				$self = new self();
-				$self->listener = system_import($file);
-				return $self;
-			}
-		}
-	}
+            if (is_file($file)) {
+                $self = new self();
+                $self->listener = system_import($file);
+                return $self;
+            }
+        }
+    }
 
-	/**
-	 * Run the plugin.
-	 * 
-	 * @param mixed ...$args   The parameters that the plugin function requires.
-	 *
-	 * @return mixed           The return of the plugin function.
-	 */
-	public function run(...$args)
-	{
-		return call_user_func_array($this->listener, $args);
-	}
+    /**
+     * Run the plugin.
+     * 
+     * @param mixed ...$args   The parameters that the plugin function requires.
+     *
+     * @return mixed           The return of the plugin function.
+     */
+    public function run(...$args)
+    {
+        return call_user_func_array($this->listener, $args);
+    }
 }

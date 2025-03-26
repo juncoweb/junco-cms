@@ -23,17 +23,17 @@ $bls->th(_t('Type'), ['priority' => 2]);
 $bls->button_h('inspect');
 
 if ($pagi->num_rows) {
-	$statuses = [
-		['icon' => 'fa-solid fa-circle color-green', 'title' => _t('Ok')],
-		['icon' => 'fa-solid fa-circle color-red', 'title' => _t('Verify')],
-	];
+    $statuses = [
+        ['icon' => 'fa-solid fa-circle color-green', 'title' => _t('Ok')],
+        ['icon' => 'fa-solid fa-circle color-red', 'title' => _t('Verify')],
+    ];
 
-	foreach ($pagi->fetchAll() as $row) {
-		$bls->check($row['key']);
-		$bls->td($row['name']);
-		$bls->td($row['type']);
-		$bls->button($statuses[$row['to_verify']]);
-	}
+    foreach ($pagi->fetchAll() as $row) {
+        $bls->check($row['key']);
+        $bls->td($row['name']);
+        $bls->td($row['type']);
+        $bls->button($statuses[$row['to_verify']]);
+    }
 }
 
 

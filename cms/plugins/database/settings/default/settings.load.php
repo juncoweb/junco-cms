@@ -6,17 +6,17 @@
  */
 
 return function (&$rows) {
-	$rows['adapter']['options'] = [
-		'pdo'	=> 'PDO',
-		'mysql'	=> 'MySql',
-		'pgsql'	=> 'PostgreSql',
-	];
+    $rows['adapter']['options'] = [
+        'pdo'    => 'PDO',
+        'mysql'    => 'MySql',
+        'pgsql'    => 'PostgreSql',
+    ];
 
-	// collations
-	$collations	= [];
-	foreach (db()->getSchema()->database()->getCollations() as $row) {
-		$collations[$row['Charset']][$row['Collation']]	= $row['Collation'];
-	}
+    // collations
+    $collations    = [];
+    foreach (db()->getSchema()->database()->getCollations() as $row) {
+        $collations[$row['Charset']][$row['Collation']]    = $row['Collation'];
+    }
 
-	$rows['collation']['options'] = $collations;
+    $rows['collation']['options'] = $collations;
 };

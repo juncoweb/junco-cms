@@ -14,17 +14,17 @@ use Psr\Http\Message\ResponseInterface;
 
 class SecurityMiddleware implements MiddlewareInterface
 {
-	/**
-	 * Process an incoming server request.
-	 */
-	public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-	{
-		$is_demo = defined('IS_DEMO') ? constant('IS_DEMO') : false;
+    /**
+     * Process an incoming server request.
+     */
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        $is_demo = defined('IS_DEMO') ? constant('IS_DEMO') : false;
 
-		if ($is_demo) {
-			throw new \Exception(_t('This task is not allowed in demos.'));
-		}
+        if ($is_demo) {
+            throw new \Exception(_t('This task is not allowed in demos.'));
+        }
 
-		return $handler->handle($request);
-	}
+        return $handler->handle($request);
+    }
 }

@@ -14,5 +14,5 @@
  * @return bool
  */
 return function ($extension_id, $extension_alias) {
-	return (new Settings($extension_alias))->has();
+    return (new Settings($extension_alias))->has();
 };
