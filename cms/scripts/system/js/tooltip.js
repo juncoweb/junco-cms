@@ -104,6 +104,7 @@ const Tooltip = function (box) {
 
                 tooltip.style.top = top - rectC.top + 'px';
                 tooltip.style.left = left - rectC.left + 'px';
+                TooltipActive.add(this);
             }
 
             this.classList.toggle('show', force);
@@ -127,3 +128,18 @@ const Tooltip = function (box) {
 
     Array.from(box.querySelectorAll('[data-tooltip]')).forEach(tt);
 };
+
+const TooltipActive = (function () {
+    let current;
+    return {
+        add: function (el) {
+            this.hide();
+            current = el;
+        },
+        hide: function (el) {
+            if (current) {
+                current.toggle(-2);
+            }
+        },
+    };
+})();

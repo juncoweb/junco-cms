@@ -15,17 +15,17 @@ use Filesystem;
 class Installer extends Unpackager
 {
     // vars
-    public    bool  $only_selected_alias    = false;
-    public    bool  $clean_everything        = false;
-    public    bool  $remove_package            = false;
-    public    bool  $execute_before            = true;
-    public    bool  $execute_after            = true;
-    public    int   $db_import                = self::IMPORT_FROM_JSON;
+    public bool  $only_selected_alias  = false;
+    public bool  $clean_everything     = false;
+    public bool  $remove_package       = false;
+    public bool  $execute_before       = true;
+    public bool  $execute_after        = true;
+    public int   $db_import            = self::IMPORT_FROM_JSON;
     //
-    protected $fs                = null;
-    protected $xdm                = null;
-    protected $importer            = null;
-    protected array $extensions    = [];
+    protected Filesystem $fs;
+    protected DatabaseImporter $importer;
+    protected ?XDataManager $xdm = null;
+    protected array $extensions = [];
 
     /**
      * Constructor
@@ -36,7 +36,7 @@ class Installer extends Unpackager
     {
         parent::__construct($is_installer);
 
-        $this->fs        = new Filesystem('');
+        $this->fs       = new Filesystem('');
         $this->importer = new DatabaseImporter();
     }
 
@@ -168,13 +168,13 @@ class Installer extends Unpackager
     {
         foreach ($this->extensions as $row) {
             if ($row['components']) {
-                foreach (str_split($row['components']) as $i) {
-                    if (isset($this->components[$i])) {
-                        $src = $this->src_path . sprintf($this->components[$i]['source'], $row['extension_alias']);
-                        $dst = SYSTEM_ABSPATH . sprintf($this->components[$i]['local'], $row['extension_alias']);
+                $directories = $this->components->fetchAll($row['extension_alias'], $row['components']);
 
-                        $this->fs->copy($src, $dst);
-                    }
+                foreach ($directories as $dir) {
+                    $this->fs->copy(
+                        $this->src_path . $dir['source'],
+                        SYSTEM_ABSPATH . $dir['local']
+                    );
                 }
             }
         }
@@ -223,7 +223,11 @@ class Installer extends Unpackager
      */
     protected function databaseIsImported(int $value): bool
     {
-        return in_array($value, [self::IMPORT_FROM_SQL, self::IMPORT_FROM_JSON, self::IMPORT_FROM_JSON_MIRROR]);
+        return in_array($value, [
+            self::IMPORT_FROM_SQL,
+            self::IMPORT_FROM_JSON,
+            self::IMPORT_FROM_JSON_MIRROR
+        ]);
     }
 
     /**
@@ -278,17 +282,17 @@ class Installer extends Unpackager
     {
         foreach ($this->extensions as $row) {
             $this->db->safeExec("INSERT INTO `#__extensions` (??) VALUES (??) ON DUPLICATE KEY UPDATE ??", [
-                'extension_alias'        => $row['extension_alias'],
-                'developer_id'            => $this->developer_id,
+                'extension_alias'       => $row['extension_alias'],
+                'developer_id'          => $this->developer_id,
                 'extension_name'        => $row['extension_name'],
-                'extension_version'        => $row['extension_version'],
-                'extension_credits'        => $row['extension_credits'],
-                'extension_license'        => $row['extension_license'],
+                'extension_version'     => $row['extension_version'],
+                'extension_credits'     => $row['extension_credits'],
+                'extension_license'     => $row['extension_license'],
                 'extension_abstract'    => $row['extension_abstract'],
-                'extension_require'        => $row['extension_require'],
+                'extension_require'     => $row['extension_require'],
                 'components'            => $row['components'],
                 'db_queries'            => $row['db_queries'],
-                'xdata'                    => $row['xdata'],
+                'xdata'                 => $row['xdata'],
             ]);
         }
     }
@@ -301,7 +305,7 @@ class Installer extends Unpackager
         $role_id = config('install.admininstrator_role_id') ?: 1;
         $this->db->safeExec("INSERT INTO `#__users_roles` (??) VALUES (??) ON DUPLICATE KEY UPDATE ??", [
             'id'        => $role_id,
-            'role_name'    => 'Administrator'
+            'role_name' => 'Administrator'
         ]);
     }
 

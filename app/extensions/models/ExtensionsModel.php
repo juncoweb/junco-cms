@@ -10,6 +10,7 @@ use Junco\Extensions\Extensions;
 use Junco\Extensions\Updater\Carrier;
 use Junco\Extensions\XData\XDataManager;
 use Junco\Extensions\Compiler\Compiler;
+use Junco\Extensions\Components;
 
 class ExtensionsModel extends Model
 {
@@ -35,13 +36,13 @@ class ExtensionsModel extends Model
         // data
         $this->filter(POST, [
             'id'                    => 'id',
-            'developer_id'            => 'id|required',
-            'extension_alias'        => 'required',
+            'developer_id'          => 'id|required',
+            'extension_alias'       => 'required',
             'extension_name'        => 'text',
-            'extension_credits'        => 'text',
-            'extension_license'        => 'text',
+            'extension_credits'     => 'text',
+            'extension_license'     => 'text',
             'extension_abstract'    => 'text',
-            'extension_require'        => 'text',
+            'extension_require'     => 'text',
             'is_package'            => 'bool',
         ]);
 
@@ -77,7 +78,7 @@ class ExtensionsModel extends Model
         if ($this->id) {
             $this->db->safeExec("UPDATE `#__extensions` SET ?? WHERE id = ?", $this->data, $this->id);
         } else {
-            $this->data['extension_version'] = '0.0';
+            $this->data['extension_version'] = '0.1';
             $this->db->safeExec("INSERT INTO `#__extensions` (??) VALUES (??)", $this->data);
         }
     }
@@ -89,7 +90,7 @@ class ExtensionsModel extends Model
     {
         // data
         $this->filter(POST, [
-            'id' => 'id|array|required:abort',
+            'id'     => 'id|array|required:abort',
             'status' => 'in:public,private,deprecated|required:abort',
         ]);
 
@@ -187,7 +188,7 @@ class ExtensionsModel extends Model
     {
         // data
         $this->filter(POST, [
-            'id' => 'id|required:abort',
+            'id'         => 'id|required:abort',
             'extensions' => 'id|array',
         ]);
 
@@ -213,18 +214,18 @@ class ExtensionsModel extends Model
         // data
         $this->filter(POST, [
             'id'                    => 'id|array|required:abort',
-            'get_install_package'    => 'bool',
-            'package_name_format'    => '',
-            'compress'                => 'bool',
-            'plugins'                => 'array',
+            'get_install_package'   => 'bool',
+            'package_name_format'   => 'int',
+            'output'                => 'int',
+            'plugins'               => 'array',
         ]);
 
         // compiler
         $compiler = new Compiler();
-        $compiler->get_install_package    = $this->data['get_install_package'];
-        $compiler->package_name_format    = $this->data['package_name_format'];
-        $compiler->compress                = $this->data['compress'];
-        $compiler->plugins                = array_keys($this->data['plugins']);
+        $compiler->get_install_package = $this->data['get_install_package'];
+        $compiler->package_name_format = $this->data['package_name_format'];
+        $compiler->output = $this->data['output'];
+        $compiler->plugins = array_keys($this->data['plugins']);
 
         foreach ($this->data['id'] as $package_id) {
             $compiler->compile($package_id);
@@ -255,7 +256,7 @@ class ExtensionsModel extends Model
     {
         // data
         $this->filter(POST, [
-            'alias' => 'text|required:abort',
+            'alias'  => 'text|required:abort',
             'readme' => '',
         ]);
 
@@ -325,12 +326,12 @@ class ExtensionsModel extends Model
      */
     protected function removeFiles(array $rows)
     {
-        $components    = Extensions::getComponents();
-        $fs    = new Filesystem();
+        $components = new Components();
+        $fs = new Filesystem();
 
         foreach ($rows as $row) {
-            foreach ($components as $component) {
-                $fs->remove(sprintf($component['local'], $row['extension_alias']));
+            foreach ($components->getDirectories($row['extension_alias']) as $dir) {
+                $fs->remove($dir);
             }
         }
     }

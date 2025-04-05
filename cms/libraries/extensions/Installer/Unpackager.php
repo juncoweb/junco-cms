@@ -7,37 +7,39 @@
 
 namespace Junco\Extensions\Installer;
 
+use Junco\Extensions\Components;
 use Junco\Extensions\Extensions;
+use Junco\Database\Schema\Interface\SchemaInterface;
 use Database;
 use Exception;
 
 class Unpackager
 {
     // const
-    protected const IMPORT_FROM_SQL            = 0;
+    protected const IMPORT_FROM_SQL         = 0;
     protected const IMPORT_FROM_JSON        = 1;
-    protected const IMPORT_FROM_JSON_MIRROR    = 2;
-    protected const NOT_IMPORT                = 3;
+    protected const IMPORT_FROM_JSON_MIRROR = 2;
+    protected const NOT_IMPORT              = 3;
 
     // conf.
-    public    bool   $debug                = false;
-    public    bool   $copy_files        = true;
+    public bool $debug      = false;
+    public bool $copy_files = true;
 
     // vars
-    protected $db;
-    protected $schema;
+    protected Database $db;
+    protected SchemaInterface $schema;
+    protected Components $components;
     protected bool   $is_installer;
-    protected array  $components;
-    protected string $basepath            = '';
-    protected string $src_path            = '';
-    protected string $dst_path            = SYSTEM_ABSPATH;
-    protected array  $error                = [];
-    protected bool   $error_fatal        = false;
+    protected string $basepath       = '';
+    protected string $src_path       = '';
+    protected string $dst_path       = SYSTEM_ABSPATH;
+    protected array  $error          = [];
+    protected bool   $error_fatal    = false;
     //
     protected array $developer = [
-        'developer_name'        => '',
-        'project_url'            => '',
-        'webstore_url'            => '',
+        'developer_name' => '',
+        'project_url'    => '',
+        'webstore_url'   => '',
     ];
     protected array $summary = [
         'extension_version'        => '',
@@ -45,16 +47,16 @@ class Unpackager
         'extension_license'        => '',
         'extension_require'        => '',
     ];
-    protected int    $developer_id        = 0;
-    protected bool   $update_developer    = false;
-    protected array  $extensions_1        = [];
-    protected array  $extensions_2        = [];
-    protected array  $maj_version        = [];
+    protected int    $developer_id      = 0;
+    protected bool   $update_developer  = false;
+    protected array  $extensions_1      = [];
+    protected array  $extensions_2      = [];
+    protected array  $maj_version       = [];
     protected bool   $has_system        = false;
     protected array  $system            = [];
-    protected string $system_path        = '';
-    protected array  $default_sequence    = ['f', 's', 'd'];
-    protected array  $sequence            = [];
+    protected string $system_path       = '';
+    protected array  $default_sequence  = ['f', 's', 'd'];
+    protected array  $sequence          = [];
 
     /**
      * Constructor
@@ -65,8 +67,8 @@ class Unpackager
     {
         $this->db            = db();
         $this->schema        = $this->db->getSchema();
-        $this->components    = Extensions::getComponents();
-        $this->is_installer    = $is_installer;
+        $this->components    = new Components();
+        $this->is_installer  = $is_installer;
     }
 
     /**
@@ -78,8 +80,7 @@ class Unpackager
      */
     protected function unpack(string $package): bool
     {
-        $result = $this->setPath($package);
-        if ($result === false) {
+        if (!$this->setPath($package)) {
             return false;
         }
 
@@ -91,8 +92,7 @@ class Unpackager
         $this->setDeveloper($json['developer']);
         $this->setSummary($json['summary']);
 
-        $result = $this->setExtensions($json['extensions']);
-        if ($result === false) {
+        if (!$this->setExtensions($json['extensions'])) {
             return false;
         }
 
@@ -230,17 +230,17 @@ class Unpackager
         $this->extensions_2 = [];
         $this->maj_version = [];
         $baseRow = [
-            'extension_alias'        => '',
+            'extension_alias'       => '',
             'extension_name'        => '',
-            'extension_version'        => $this->summary['extension_version'],
-            'extension_credits'        => $this->summary['extension_credits'],
-            'extension_license'        => $this->summary['extension_license'],
+            'extension_version'     => $this->summary['extension_version'],
+            'extension_credits'     => $this->summary['extension_credits'],
+            'extension_license'     => $this->summary['extension_license'],
             'extension_abstract'    => '',
-            'extension_require'        => $this->summary['extension_require'],
+            'extension_require'     => $this->summary['extension_require'],
             'components'            => '',
             'db_queries'            => '',
             'db_history'            => false,
-            'xdata'                    => '',
+            'xdata'                 => '',
         ];
         $pk_version  = [];
         $db_version  = $this->getCurrentVersions();
@@ -258,7 +258,7 @@ class Unpackager
 
             $row = array_merge($baseRow, $row);
             $this->extensions_2[] = $row;
-            $pk_version[$alias]      = $row['extension_version'];
+            $pk_version[$alias]   = $row['extension_version'];
         }
         $this->has_system = isset($this->extensions_1['system']);
 
@@ -327,12 +327,20 @@ class Unpackager
 
             // components
             if ($this->copy_files && $row['components']) {
-                foreach (str_split($row['components']) as $i) {
-                    if (!isset($this->components[$i]) && !$this->has_system) {
-                        $this->fatal(_t('Falied open file «%s».'), $i . ':' . $row['extension_alias']);
-                    } elseif (!is_dir($file = $this->src_path . sprintf($this->components[$i]['source'], $row['extension_alias']))) {
-                        $this->fatal(_t('Falied open file «%s».'), $file);
-                    }
+                $keys = str_split($row['components']);
+                $rows = $this->components->fetchAll($row['extension_alias'], $keys);
+
+                if (count($keys) != count($rows)) {
+                    $this->fatal(
+                        _t('Falied open extension «%s». Missing components: «%s»'),
+                        $row['extension_alias'],
+                        implode('|', array_diff($keys, array_keys($rows)))
+                    );
+                }
+
+                foreach ($rows as $row) {
+                    is_dir($this->src_path . $row['source'])
+                        or $this->fatal(_t('Falied open dir «%s».'), $row['source']);
                 }
             }
         }
@@ -498,21 +506,15 @@ class Unpackager
      */
     protected function getPathsToBeCleared(): array
     {
-        $paths        = [];
-        $components = [];
-        foreach ($this->components as $i => $component) {
-            if ($component['clean']) {
-                $components[] = $i;
-            }
-        }
+        $keys = $this->components->getCleanables();
+        $paths = [];
 
         foreach ($this->extensions_2 as $row) {
-            foreach ($components as $i) {
-                $dir = sprintf($this->components[$i]['source'], $row['extension_alias']);
+            $rows = $this->components->fetchAll($row['extension_alias'], $keys);
 
-                if (is_dir($this->dst_path . $dir)) {
-                    $this->cleaner($paths, $dir);
-                }
+            foreach ($rows as $row) {
+                is_dir($this->dst_path . $row['source'])
+                    and $this->cleaner($paths, $row['source']);
             }
         }
 
@@ -615,10 +617,10 @@ class Unpackager
     protected function getDbImport(): array
     {
         return [
-            self::IMPORT_FROM_SQL    => 'SQL',
-            self::IMPORT_FROM_JSON    => 'JSON',
+            self::IMPORT_FROM_SQL => 'SQL',
+            self::IMPORT_FROM_JSON => 'JSON',
             self::IMPORT_FROM_JSON_MIRROR => 'JSON + ' . _t('Drop nonexistent columns'),
-            self::NOT_IMPORT        => _t('None')
+            self::NOT_IMPORT => _t('None')
         ];
     }
 
@@ -632,17 +634,17 @@ class Unpackager
         $this->unpack($package);
         $this->majorUpdateVerification();
         return [
-            'package'        => $package,
-            'error'            => $this->error,
-            'error_fatal'    => $this->error_fatal,
+            'package'       => $package,
+            'error'         => $this->error,
+            'error_fatal'   => $this->error_fatal,
             'readme'        => $this->getReadmeContent(),
-            'developer'        => $this->developer,
-            'summary'        => $this->summary,
+            'developer'     => $this->developer,
+            'summary'       => $this->summary,
             'extensions'    => $this->extensions_1,
-            'cleaner_paths'    => $this->getPathsToBeCleared(),
-            'executables'    => $this->getExecutables(),
-            'changelog'        => $this->getChangelogContent(),
-            'db_import'        => $this->getDbImport(),
+            'cleaner_paths' => $this->getPathsToBeCleared(),
+            'executables'   => $this->getExecutables(),
+            'changelog'     => $this->getChangelogContent(),
+            'db_import'     => $this->getDbImport(),
         ];
     }
 
@@ -691,9 +693,9 @@ class Unpackager
         $caller = debug_backtrace();
         $this->error_fatal = true;
         $this->error[] = [
-            'type'        => 'fatal',
-            'message'    => $message,
-            'line'        => $caller[0]['line']
+            'type'    => 'fatal',
+            'message' => $message,
+            'line'    => $caller[0]['line']
         ];
 
         return false;
@@ -715,9 +717,9 @@ class Unpackager
 
         $caller = debug_backtrace();
         $this->error[] = [
-            'type'        => 'alert',
-            'message'    => $message,
-            'line'        => $caller[0]['line']
+            'type'    => 'alert',
+            'message' => $message,
+            'line'    => $caller[0]['line']
         ];
 
         return false;

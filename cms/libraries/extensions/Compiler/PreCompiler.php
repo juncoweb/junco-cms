@@ -7,6 +7,7 @@
 
 namespace Junco\Extensions\Compiler;
 
+use Junco\Extensions\Components;
 use Junco\Extensions\Extensions;
 use Junco\Extensions\XData\XDataManager;
 use Junco\Extensions\Compiler\PluginCollector;
@@ -20,11 +21,11 @@ class PreCompiler
     protected string $update_requires;
     protected string $update_versions;
     //
-    protected ?array $package                = null;
-    protected array  $verifiedChanges        = [];
+    protected ?array $package               = null;
+    protected array  $verifiedChanges       = [];
     protected array  $allChanges            = [];
     protected array  $extensions            = [];
-    protected bool   $get_install_package    = false;
+    protected bool   $get_install_package   = false;
     protected array  $messages = [
         'errors'  => [],
         'repairs' => [],
@@ -43,9 +44,9 @@ class PreCompiler
      */
     public function __construct(string $update_versions, string $update_requires)
     {
-        $this->db                = db();
-        $this->update_versions    = $update_versions;
-        $this->update_requires    = $update_requires;
+        $this->db = db();
+        $this->update_versions = $update_versions;
+        $this->update_requires = $update_requires;
     }
 
     /**
@@ -391,10 +392,10 @@ class PreCompiler
      */
     protected function makeRepairs(): void
     {
-        $package_name        = $this->package['extension_alias'];
-        $package_version    = $this->extensions[$this->package['id']]['extension_version'];
-        $components            = Extensions::getComponents();
-        $xdm                = new XDataManager;
+        $package_name    = $this->package['extension_alias'];
+        $package_version = $this->extensions[$this->package['id']]['extension_version'];
+        $components      = new Components();
+        $xdm             = new XDataManager;
 
         foreach ($this->extensions as $row) {
             $set = [];
@@ -410,12 +411,10 @@ class PreCompiler
             }
 
             // components
-            $has = '';
-            foreach ($components as $key => $component) {
-                if (is_dir(SYSTEM_ABSPATH . sprintf($component['local'], $row['extension_alias']))) {
-                    $has .= $key;
-                }
-            }
+            $has = implode(array_keys(
+                $components->getDirectories($row['extension_alias'])
+            ));
+
             if ($row['components'] != $has) {
                 $set['components'] = $has;
             }

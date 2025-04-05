@@ -7,7 +7,9 @@
 
 use Junco\Mvc\Model;
 use Junco\Extensions\Extensions;
+use Junco\Extensions\Compiler\Compiler;
 use Junco\Extensions\Compiler\PreCompiler;
+use Junco\Extensions\Components;
 use Junco\Extensions\Updater\Carrier;
 
 class AdminExtensionsModel extends Model
@@ -42,7 +44,7 @@ class AdminExtensionsModel extends Model
         $this->filter(POST, [
             'search'        => 'text',
             'status'        => 'text|in:all,public,private,deprecated|default:all',
-            'developer_id'    => 'id',
+            'developer_id'  => 'id',
             'option'        => 'int',
         ]);
 
@@ -111,10 +113,10 @@ class AdminExtensionsModel extends Model
         }
 
         return $this->data + [
-            'developers'        => $this->getListDevelopers(),
-            'developer_mode'    => SYSTEM_DEVELOPER_MODE,
-            'rows'                => $rows,
-            'pagi'                => $pagi
+            'developers' => $this->getListDevelopers(),
+            'developer_mode' => SYSTEM_DEVELOPER_MODE,
+            'rows' => $rows,
+            'pagi' => $pagi
         ];
     }
 
@@ -276,9 +278,9 @@ class AdminExtensionsModel extends Model
     {
         // data
         $this->filter(POST, [
-            'id'                => 'id|array|required:abort',
-            'update_versions'    => 'text|in:no,yes',
-            'update_requires'    => 'text|in:no,yes',
+            'id'              => 'id|array|required:abort',
+            'update_versions' => 'text|in:no,yes',
+            'update_requires' => 'text|in:no,yes',
         ]);
 
         // compiler
@@ -310,8 +312,8 @@ class AdminExtensionsModel extends Model
                 return $data + [
                     'changes' => $compiler->getChanges(),
                     'values' => [
-                        'update_requires'    => 'yes',
-                        'id'                => $this->data['id']
+                        'update_requires' => 'yes',
+                        'id' => $this->data['id']
                     ],
                 ];
 
@@ -319,21 +321,23 @@ class AdminExtensionsModel extends Model
                 return $data + [
                     'updates' => $compiler->getUpdates(),
                     'values' => [
-                        'update_versions'    => 'yes',
-                        'update_requires'    => $this->data['update_requires'],
-                        'id'                => $this->data['id']
+                        'update_versions' => 'yes',
+                        'update_requires' => $this->data['update_requires'],
+                        'id' => $this->data['id']
                     ],
                 ];
 
             case -3:
                 return $data + [
-                    'install_package'    => $compiler->getInstallPackage(),
-                    'repairs'            => $compiler->getRepairs(),
-                    'compiler_plugins'    => $compiler->getplugins(),
+                    'install_package' => $compiler->getInstallPackage(),
+                    'repairs' => $compiler->getRepairs(),
+                    'compiler_plugins' => $compiler->getPlugins(),
+                    'name_formats' => Compiler::nameFormats(),
+                    'outputs' => Compiler::getOutputs(),
                     'values' => [
-                        'package_name_format'    => true,
-                        'compress'                => true,
-                        'id'                    => $this->data['id'],
+                        'package_name_format' => Compiler::DISTRIBUTION_NAME_FORMAT,
+                        'output' => Compiler::OUTPUT_FILE,
+                        'id' => $this->data['id'],
                     ],
                 ];
         }
@@ -406,7 +410,7 @@ class AdminExtensionsModel extends Model
         }
 
         return [
-            'title'    => $extension['name'] ?: $extension['alias'],
+            'title' => $extension['name'] ?: $extension['alias'],
             'values' => $this->data,
             'queries' => $queries,
             'db_history' => $db_history,
@@ -453,9 +457,9 @@ class AdminExtensionsModel extends Model
      */
     protected function setDevelopersData(array &$rows)
     {
-        $filepath   = (new Carrier)->getTargetPath() . '%s_%s.zip';
-        $statuses   = ['public', 'private'];
-        $components = Extensions::getComponents();
+        $filepath = (new Carrier)->getTargetPath() . '%s_%s.zip';
+        $names    = (new Components)->getNames();
+        $statuses = ['public', 'private'];
 
         foreach ($rows as $i => $row) {
             $rows[$i]['can_compile']    = !$row['is_protected'] && $row['package_id'] == -1;
@@ -464,13 +468,13 @@ class AdminExtensionsModel extends Model
                 && is_file(sprintf($filepath, $row['extension_alias'], $row['extension_version']));
 
             if ($row['components']) {
-                $x = [];
-                foreach (str_split($row['components']) as $j) {
-                    if (isset($components[$j])) {
-                        $x[$j] = $components[$j]['name'];
-                    }
+                $components = [];
+
+                foreach (str_split($row['components']) as $key) {
+                    $components[$key] = $names[$key] ?? '?';
                 }
-                $rows[$i]['components'] = $x;
+
+                $rows[$i]['components'] = $components;
             }
         }
     }

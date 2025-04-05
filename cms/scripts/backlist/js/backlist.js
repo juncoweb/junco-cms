@@ -340,6 +340,7 @@ function Backlist(ID) {
                 if (v != (document.documentElement.scrollTop > top)) {
                     v = el.classList.toggle('active');
                     el.style.top = top + 'px';
+                    TooltipActive.hide();
                 }
             }
 

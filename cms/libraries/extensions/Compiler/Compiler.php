@@ -15,47 +15,55 @@ use Exception;
 use Plugins;
 use DatabaseExporter;
 use Archive;
+use Junco\Extensions\Components;
 
 class Compiler
 {
+    const STORAGE_NAME_FORMAT       = 0;
+    const DISTRIBUTION_NAME_FORMAT  = 1;
+    //
+    const OUTPUT_FOLDER = 0;
+    const OUTPUT_FILE   = 1;
+    const OUTPUT_BOTH   = 2;
+
     // vars
     protected Database   $db;
     protected Filesystem $fs;
+    protected Components $components;
     protected array      $config;
     //
-    protected array  $json                = [];
-    protected array  $package            = [];
-    protected array  $extensions        = [];
-    protected ?array $components_data    = null;
+    protected array  $json          = [];
+    protected array  $package       = [];
+    protected array  $extensions    = [];
 
     // package type
-    protected bool   $is_system        = false;
-    protected bool   $is_installer    = false; // In case the system is being compiled, this changes the packaging to an installer.
-    protected bool   $has_queries    = false; // This activates the functions to export queries.
+    protected bool   $is_system     = false;
+    protected bool   $is_installer  = false; // In case the system is being compiled, this changes the packaging to an installer.
+    protected bool   $has_queries   = false; // This activates the functions to export queries.
 
     // directories
-    protected string $abspath        = '';
-    protected string $dstpath        = ''; // Destination directory
-    protected string $inspath        = ''; // This directory contains the installer and / or installation files.
-    protected string $syspath        = '';
-    protected string $sqlpath        = ''; // The database structures are stored in this directory.
+    protected string $abspath       = '';
+    protected string $dstpath       = ''; // Destination directory
+    protected string $inspath       = ''; // This directory contains the installer and / or installation files.
+    protected string $syspath       = '';
+    protected string $sqlpath       = ''; // The database structures are stored in this directory.
 
     // settings
-    public    int    $package_name_format    = 0;
-    public    bool   $get_install_package    = false;
-    public    bool   $compress                = false;
-    public    array  $plugins                = [];
+    public    int    $package_name_format = self::STORAGE_NAME_FORMAT;
+    public    int    $output              = self::OUTPUT_FOLDER;
+    public    bool   $get_install_package = false;
+    public    array  $plugins             = [];
 
     /**
      *  Construct
      */
     public function __construct()
     {
-        $this->db                = db();
-        $this->fs                = new Filesystem('');
-        $this->components_data    = Extensions::getComponents();
-        $this->config            = config('extensions');
-        $this->abspath            = SYSTEM_ABSPATH;
+        $this->db           = db();
+        $this->fs           = new Filesystem('');
+        $this->components   = new Components();
+        $this->config       = config('extensions');
+        $this->abspath      = SYSTEM_ABSPATH;
     }
 
     /**
@@ -70,14 +78,14 @@ class Compiler
         $this->package = $this->getPackage($package_id);
 
         // settings
-        $this->is_system    = ($this->package['extension_alias'] == 'system');
-        $this->is_installer    = ($this->is_system && $this->get_install_package);
+        $this->is_system = ($this->package['extension_alias'] == 'system');
+        $this->is_installer = ($this->is_system && $this->get_install_package);
         $this->json = [
-            'developer'            => $this->getDeveloper($this->package['developer_id']),
-            'package_alias'        => $this->package['extension_alias'],
-            'min_php_version'    => $this->config['extensions.min_php_version'],
-            'max_php_version'    => $this->config['extensions.max_php_version'],
-            'summary'            => [],
+            'developer'         => $this->getDeveloper($this->package['developer_id']),
+            'package_alias'     => $this->package['extension_alias'],
+            'min_php_version'   => $this->config['extensions.min_php_version'],
+            'max_php_version'   => $this->config['extensions.max_php_version'],
+            'summary'           => [],
             'extensions'        => []
         ];
 
@@ -100,8 +108,12 @@ class Compiler
         $this->saveReadme();
         $this->moveExecutables();
 
-        if ($this->compress) {
+        if ($this->isFileAOutput($this->output)) {
             $this->compressPackage();
+        }
+
+        if (!$this->isFolderAOutput($this->output)) {
+            $this->remove();
         }
     }
 
@@ -296,7 +308,7 @@ class Compiler
      */
     protected function getFolderName(): string
     {
-        if ($this->package_name_format == 1) {
+        if ($this->package_name_format == self::DISTRIBUTION_NAME_FORMAT) {
             if ($this->is_installer) {
                 return sprintf('JuncoCMS_%s', $this->package['version']);
             }
@@ -411,15 +423,13 @@ class Compiler
      */
     protected function compileFiles(string $components, string $extension_alias): void
     {
-        foreach (str_split($components) as $i) {
-            if (empty($this->components_data[$i])) {
-                continue;
-            }
+        $directories = $this->components->fetchAll($extension_alias, $components);
 
-            $src = $this->abspath . sprintf($this->components_data[$i]['local'], $extension_alias);
-            $dst = $this->dstpath . sprintf($this->components_data[$i]['source'], $extension_alias);
+        foreach ($directories as $key => $dir) {
+            $src = $this->abspath . $dir['local'];
+            $dst = $this->dstpath . $dir['source'];
 
-            if (in_array($i, ['m', 'v'])) {
+            if (in_array($key, ['m', 'v'])) {
                 $this->fs->copyDirWithIgnores($src, $dst);
             } else {
                 $this->fs->copy($src, $dst);
@@ -547,6 +557,57 @@ class Compiler
     }
 
     /**
+     * Is
+     * 
+     * @return bool
+     */
+    protected function isFileAOutput(int $output): bool
+    {
+        return in_array($output, [self::OUTPUT_FILE, self::OUTPUT_BOTH]);
+    }
+
+    /**
+     * Is
+     * 
+     * @return bool
+     */
+    protected function isFolderAOutput(int $output): bool
+    {
+        return in_array($output, [self::OUTPUT_FOLDER, self::OUTPUT_BOTH]);
+    }
+
+    /**
+     * Compress package
+     * 
+     * @return void
+     */
+    protected function compress(): void
+    {
+        $file = rtrim($this->dstpath, '\\/') . '.zip';
+        $archive = new Archive('');
+
+        if ($this->is_installer) {
+            $archive->compress($file, $this->dstpath);
+        } else {
+            $info = pathinfo($file);
+            $dir = $info['dirname'] . '/';
+            $folder = $info['filename'];
+
+            $archive->compress($file, $dir, [$folder]);
+        }
+    }
+
+    /**
+     * Remove
+     * 
+     * @return void
+     */
+    protected function remove(): void
+    {
+        $this->fs->remove($this->dstpath);
+    }
+
+    /**
      * Compress package
      * 
      * @return void
@@ -565,5 +626,32 @@ class Compiler
 
             $archive->compress($file, $dir, [$folder]);
         }
+    }
+
+    /**
+     * Get
+     * 
+     * @return array
+     */
+    public static function getOutputs(): array
+    {
+        return [
+            self::OUTPUT_FOLDER => _t('Folder'),
+            self::OUTPUT_FILE => _t('File'),
+            self::OUTPUT_BOTH => _t('Both'),
+        ];
+    }
+
+    /**
+     * Get
+     * 
+     * @return array
+     */
+    public static function nameFormats(): array
+    {
+        return [
+            self::STORAGE_NAME_FORMAT => _t('Storage'),
+            self::DISTRIBUTION_NAME_FORMAT => _t('Distribution')
+        ];
     }
 }

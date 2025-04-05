@@ -906,7 +906,7 @@ body.full-body {
   position: relative;
 }
 .navbar-mobile > ul > li > ul {
-  background: var(--regular-disabled-bg-color);
+  background: var(--solid-disabled-bg-color);
 }
 .navbar-mobile > ul > li ul li a {
   padding: 7px 14px 7px 42px;

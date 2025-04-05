@@ -18,7 +18,7 @@ let Extensions = (function () {
     function compile(_target) {
         let f = JsForm({ btn: _target });
         if (f) {
-            if (!f.getForm().compress) {
+            if (!f.getForm().output) {
                 f.request({
                     url: $U('confirm_compile'),
                     modalOptions: {

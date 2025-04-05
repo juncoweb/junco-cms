@@ -477,7 +477,7 @@ body.full-body {
         )
         $spacing
     );
-    @include navbar-nested($padding: 7px 14px 7px 42px, $bg-color: var(--regular-disabled-bg-color));
+    @include navbar-nested($padding: 7px 14px 7px 42px, $bg-color: var(--solid-disabled-bg-color));
     @include navbar-dropdown($position: relative, $width: null);
     @include navbar-hover-dropdown;
 }

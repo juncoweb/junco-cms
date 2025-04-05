@@ -25,6 +25,8 @@ class Extensions
 
     /**
      * Returns a list with all system components.
+     * 
+     * @deprecated
      */
     public static function getComponents(): array
     {
@@ -44,10 +46,10 @@ class Extensions
      */
     public static function getQueries(string $alias, bool $as_array = false): array
     {
-        $db            = db();
-        $schema        = $db->getSchema();
-        $queries    = [];
-        $regex        = '/^' . $db->getPrefix() . '(' . $alias . '(?:_.*)?)$/';
+        $db      = db();
+        $schema  = $db->getSchema();
+        $queries = [];
+        $regex   = '/^' . $db->getPrefix() . '(' . $alias . '(?:_.*)?)$/';
 
         // query - tables
         self::$tables ??= $schema->tables()->list();

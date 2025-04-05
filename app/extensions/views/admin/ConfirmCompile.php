@@ -44,8 +44,8 @@ if ($status) {
             break;
 
         case -3:
-            $form->radio('package_name_format', ['Storage', 'Distribution'])->setLabel(_t('Format'));
-            $form->checkbox('compress')->setLabel(_t('Compress'));
+            $form->radio('package_name_format', $name_formats)->setLabel(_t('Format'));
+            $form->radio('output', $outputs)->setLabel(_t('Output'));
             if ($install_package) {
                 $form->checkbox('get_install_package')->setLabel(_t('Get install package'));
             }
