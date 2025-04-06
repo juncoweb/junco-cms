@@ -12,21 +12,43 @@ class Components
     // vars
     protected string $abspath;
     protected array  $components = [
-        'a' => ['name' => 'Application', 'source' => 'app/%s/', 'local' => 'app/%s/'],
-        'j' => ['name' => 'Scripts', 'source' => 'cms/scripts/%s/', 'local' => 'cms/scripts/%s/'],
-        'k' => ['name' => 'Snippets', 'source' => 'cms/snippets/%s/', 'local' => 'cms/snippets/%s/'],
-        'l' => ['name' => 'Libraries', 'source' => 'cms/libraries/%s/', 'local' => 'cms/libraries/%s/'],
-        'p' => ['name' => 'Plugins', 'source' => 'cms/plugins/%s/', 'local' => 'cms/plugins/%s/'],
-        'm' => ['name' => 'Media', 'source' => 'media/%s/', 'local' => SYSTEM_MEDIA_PATH . '%s/'],
-        'v' => ['name' => 'Vendor', 'source' => 'vendor/%s/', 'local' => 'vendor/%s/'],
+        'a' => [
+            'name' => 'Application',
+            'path' => 'app/%s/'
+        ],
+        'j' => [
+            'name' => 'Scripts',
+            'path' => 'cms/scripts/%s/'
+        ],
+        'k' => [
+            'name' => 'Snippets',
+            'path' => 'cms/snippets/%s/'
+        ],
+        'l' => [
+            'name' => 'Libraries',
+            'path' => 'cms/libraries/%s/'
+        ],
+        'p' => [
+            'name' => 'Plugins',
+            'path' => 'cms/plugins/%s/'
+        ],
+        'm' => [
+            'name' => 'Media',
+            'path' => 'media/%s/',
+            'local' => SYSTEM_MEDIA_PATH . '%s/'
+        ],
+        'v' => [
+            'name' => 'Vendor',
+            'path' => 'vendor/%s/'
+        ],
     ];
 
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(?string $abspath = null)
     {
-        $this->abspath = SYSTEM_ABSPATH;
+        $this->abspath = $abspath ?? SYSTEM_ABSPATH;
     }
 
     /**
@@ -80,9 +102,10 @@ class Components
         $dirs = [];
 
         foreach ($keys as $key) {
+            $this->components[$key]['local'] ??= $this->components[$key]['path'];
             $dir = sprintf($this->components[$key]['local'], $extension);
 
-            if (is_dir($this->abspath . $dir)) {
+            if ($this->isDir($dir)) {
                 $dirs[$key] = $dir;
             }
         }
@@ -91,7 +114,7 @@ class Components
     }
 
     /**
-     * Returns the local and source paths. It does not check for their existence.
+     * Returns the local and default paths. It does not check for their existence.
      * 
      * @param string       $extension
      * @param string|array $keys
@@ -105,8 +128,8 @@ class Components
 
         foreach ($keys as $key) {
             $rows[$key] = [
-                'local' => sprintf($this->components[$key]['local'], $extension),
-                'source' => sprintf($this->components[$key]['source'], $extension)
+                'source' => sprintf($this->components[$key]['path'], $extension),
+                'local' => sprintf($this->components[$key]['local'] ??= $this->components[$key]['path'], $extension)
             ];
         }
 
@@ -121,5 +144,17 @@ class Components
     public function getCleanables(): array
     {
         return ['a', 'j', 'k', 'l', 'p', 'v'];
+    }
+
+    /**
+     * Is directory
+     * 
+     * @param string $dir
+     * 
+     * @return bool
+     */
+    protected function isDir(string $dir): bool
+    {
+        return is_dir($this->abspath . $dir);
     }
 }

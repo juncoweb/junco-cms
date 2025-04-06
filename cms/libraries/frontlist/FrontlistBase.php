@@ -20,18 +20,19 @@ abstract class FrontlistBase implements FrontlistInterface
     //
     protected array $rows = [];
     protected array $row = [
-        'id'            => '',
-        'url'            => '',
-        'image'            => '',
-        'image_html'    => '',
-        'title'            => '',
-        'description'    => '',
-        'footer'        => '',
-        'date'            => '',
-        'author'        => '',
-        'button'        => '',
-        'rating'        => '',
-        'labels'        => [],
+        'id'          => '',
+        'url'         => '',
+        'image'       => '',
+        'image_html'  => '',
+        'title'       => '',
+        'description' => '',
+        'footer'      => '',
+        'date'        => '',
+        'author'      => '',
+        'price'       => null,
+        'button'      => '',
+        'rating'      => '',
+        'labels'      => [],
     ];
     public string $empty_list = '';
 

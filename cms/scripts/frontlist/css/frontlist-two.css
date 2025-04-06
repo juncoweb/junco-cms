@@ -55,6 +55,11 @@
 .frontlist-two article .fl-button {
   text-align: right;
 }
+.frontlist-two article .fl-labels {
+  background-color: var(--regular-bg-color);
+  color: var(--regular-subtle-font-color);
+  font-size: 0.875rem;
+}
 .frontlist-two article .fl-footer {
   margin-top: 2px;
   background-color: var(--regular-bg-color);

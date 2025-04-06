@@ -44,9 +44,6 @@ class showcase_master_default_snippet extends ShowcaseBase
 
         // info
         $info = [];
-        if ($data['author_name']) {
-            $info[] = '<div class="article-author">' . sprintf(_t('By %s'), '<a href="' . $data['author_url'] . '">' . $data['author_name'] . '</a>') . '</div>';
-        }
 
         if ($data['date']) {
             if (is_string($data['date'])) {
@@ -54,11 +51,17 @@ class showcase_master_default_snippet extends ShowcaseBase
             }
             $info[] = '<div class="article-date">' . $data['date']->format(_t('Y-M-d')) . '</div>';
         }
-        if ($data['labels']) {
-            $info[] = '<div class="article-labels">' . implode(', ', array_map(function ($label) {
-                return sprintf('<a href="%s">%s</a>', $label['url'], $label['name']);
-            }, $data['labels'])) . '</div>';
+
+        if ($data['author_name']) {
+            $info[] = '<div class="article-author">' . sprintf(_t('By %s'), '<a href="' . $data['author_url'] . '">' . $data['author_name'] . '</a>') . '</div>';
         }
+
+        if ($data['labels']) {
+            $info[] = '<div class="article-labels">' . sprintf(_t('Labels %s'), implode(', ', array_map(function ($label) {
+                return sprintf('<a href="%s">%s</a>', $label['url'], $label['name']);
+            }, $data['labels']))) . '</div>';
+        }
+
         if ($data['info']) {
             foreach ($data['info'] as $value) {
                 $info[] = '<div>' . $value . '</div>';

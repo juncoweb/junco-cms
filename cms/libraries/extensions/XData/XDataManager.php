@@ -17,8 +17,8 @@ class XDataManager
 {
     // vars
     protected XData  $xdata;
-    protected array  $services    = [];
-    protected ?array $finder    = null;
+    protected array  $services = [];
+    protected ?array $finder   = null;
 
     /**
      * Constructor
@@ -56,10 +56,10 @@ class XDataManager
 
         foreach ($hosts as $host) {
             $this->services[] = [
-                'extension_alias_host'        => $host,
-                'extension_alias_client'    => $extension_alias_client,
-                'extension_id_client'        => $extension_id_client,
-                'file'                        => $output_type,
+                'extension_alias_host'   => $host,
+                'extension_alias_client' => $extension_alias_client,
+                'extension_id_client'    => $extension_id_client,
+                'file'                   => $output_type,
             ];
         }
     }
@@ -90,9 +90,9 @@ class XDataManager
                 $plugins[$row['extension_alias_host']]?->run($this->xdata);
             } catch (Throwable $e) {
                 app('logger')->error($e->getMessage(), [
-                    'code'        => $e->getCode(),
-                    'file'        => $e->getFile(),
-                    'line'        => $e->getLine(),
+                    'code'      => $e->getCode(),
+                    'file'      => $e->getFile(),
+                    'line'      => $e->getLine(),
                     'backtrace' => $e->getTraceAsString()
                 ]);
             }

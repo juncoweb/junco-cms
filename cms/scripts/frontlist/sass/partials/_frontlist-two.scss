@@ -68,6 +68,12 @@ $frontlist-two-padding: 10px;
             text-align: right;
         }
 
+        .fl-labels {
+            background-color: var(--regular-bg-color);
+            color: $fronlist-desc-color;
+            font-size: $small-font-size;
+        }
+
         .fl-footer {
             margin-top: 2px;
             background-color: var(--regular-bg-color);

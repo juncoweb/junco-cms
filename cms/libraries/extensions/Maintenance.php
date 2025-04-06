@@ -20,7 +20,7 @@ class Maintenance
     public function __construct()
     {
         $prefix = config('extensions-maintenance.prefix') ?: 'maintenance';
-        $this->htaccess        = SYSTEM_ABSPATH . '.htaccess';
+        $this->htaccess      = SYSTEM_ABSPATH . '.htaccess';
         $this->__htaccess    = sprintf(SYSTEM_ABSPATH . '%s.htaccess', $prefix);
         $this->status        = is_file($this->__htaccess);
     }

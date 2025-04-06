@@ -185,14 +185,14 @@ class ExtensionsInstallerModel extends Model
         ]);
 
         // installer
-        $installer                         = new Installer();
-        $installer->only_selected_alias    = true;
+        $installer                      = new Installer();
+        $installer->only_selected_alias = true;
         $installer->clean_everything    = false;
-        $installer->copy_files            = $this->data['copy_files'];
-        $installer->remove_package        = $this->data['remove_package'];
-        $installer->db_import            = $this->data['db_import'];
-        $installer->execute_before        = $this->data['execute_before'];
-        $installer->execute_after        = $this->data['execute_after'];
+        $installer->copy_files          = $this->data['copy_files'];
+        $installer->remove_package      = $this->data['remove_package'];
+        $installer->db_import           = $this->data['db_import'];
+        $installer->execute_before      = $this->data['execute_before'];
+        $installer->execute_after       = $this->data['execute_after'];
         $installer->install(
             $this->data['package'],
             $this->data['extension_alias'],

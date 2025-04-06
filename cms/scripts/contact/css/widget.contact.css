@@ -3,7 +3,7 @@
   font-size: 1.25rem;
 }
 .widget-contact .ci-links a {
-  color: var(--regular-bg-color);
+  color: var(--regular-font-color);
   display: inline-block;
   text-align: center;
   vertical-align: middle;
@@ -15,7 +15,7 @@
   border-radius: 50%;
 }
 .widget-contact .ci-links a:hover {
-  color: var(--regular-bg-color);
+  color: var(--solid-font-color);
   background-color: #009eff;
 }
 .widget-contact .ci-links a i {

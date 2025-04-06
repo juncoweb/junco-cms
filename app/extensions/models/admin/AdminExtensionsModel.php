@@ -7,9 +7,9 @@
 
 use Junco\Mvc\Model;
 use Junco\Extensions\Extensions;
+use Junco\Extensions\Components;
 use Junco\Extensions\Compiler\Compiler;
 use Junco\Extensions\Compiler\PreCompiler;
-use Junco\Extensions\Components;
 use Junco\Extensions\Updater\Carrier;
 
 class AdminExtensionsModel extends Model

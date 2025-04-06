@@ -120,7 +120,7 @@
             "type": "textarea",
             "group": 4,
             "ordering": 1,
-            "default_value": "composer.json.dist,\r\nindex.php,\r\nLICENSE,\r\nmaintenance.html",
+            "default_value": "composer.json.dist,\r\nindex.php,\r\nLICENSE,\r\nmaintenance.html,\r\nREADME.md",
             "help": "",
             "history": [],
             "autoload": 1,

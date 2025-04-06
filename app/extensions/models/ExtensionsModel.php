@@ -6,11 +6,11 @@
  */
 
 use Junco\Mvc\Model;
+use Junco\Extensions\Components;
 use Junco\Extensions\Extensions;
 use Junco\Extensions\Updater\Carrier;
 use Junco\Extensions\XData\XDataManager;
 use Junco\Extensions\Compiler\Compiler;
-use Junco\Extensions\Components;
 
 class ExtensionsModel extends Model
 {
@@ -152,8 +152,8 @@ class ExtensionsModel extends Model
     {
         // data
         $this->filter(POST, [
-            'id'        => 'id|array|required:abort',
-            'option'    => 'array',
+            'id'     => 'id|array|required:abort',
+            'option' => 'array',
         ]);
 
         // query
@@ -239,8 +239,8 @@ class ExtensionsModel extends Model
     {
         // data
         $this->filter(POST, [
-            'id'            => 'id|required:abort',
-            'db_history'    => 'array',
+            'id'         => 'id|required:abort',
+            'db_history' => 'array',
         ]);
 
         // query
@@ -415,9 +415,11 @@ class ExtensionsModel extends Model
                 }
             }
         }
+
         if ($json) {
             return json_encode($json);
         }
+
         return '';
     }
 }

@@ -7,7 +7,7 @@
 
 namespace Junco\Extensions\Compiler;
 
-use Junco\Extensions\Extensions;
+use Junco\Extensions\Components;
 use Junco\Extensions\XData\XDataManager;
 use Filesystem;
 use Database;
@@ -15,7 +15,6 @@ use Exception;
 use Plugins;
 use DatabaseExporter;
 use Archive;
-use Junco\Extensions\Components;
 
 class Compiler
 {
@@ -90,7 +89,7 @@ class Compiler
         ];
 
         // extensions
-        $this->getExtensions($this->package['id'], $this->package['developer_id']);
+        $this->extensions = $this->getExtensions($this->package['id'], $this->package['developer_id']);
 
         // take
         $this->makeDirectories();
@@ -161,9 +160,9 @@ class Compiler
      * @param int $package_id
      * @param int $developer_id
      * 
-     * @return void
+     * @return array
      */
-    protected function getExtensions(int $package_id, int $developer_id): void
+    protected function getExtensions(int $package_id, int $developer_id): array
     {
         $summary = [
             'extension_version'    => [],
@@ -249,7 +248,7 @@ class Compiler
             $this->json['extensions'][$extension['extension_alias']] = $data;
         }
 
-        $this->extensions = $extensions;
+        return $extensions;
     }
 
     /**

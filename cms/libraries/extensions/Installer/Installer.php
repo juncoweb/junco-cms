@@ -54,7 +54,7 @@ class Installer extends Unpackager
         // initialize
         $this->unpack($package);
         $this->getExtensions($extension_alias);
-        $this->xdm = new XDataManager($this->basepath, $this->is_installer);
+        $this->xdm = new XDataManager($this->srcpath, $this->is_installer);
 
         // before
         if ($this->execute_before && !$this->is_installer) {
@@ -92,10 +92,10 @@ class Installer extends Unpackager
         }
 
         // remove package
-        if ($this->remove_package) {
-            $this->fs->remove($this->src_path);
+        if ($this->remove_package && !$this->is_installer) {
+            $this->fs->remove($this->srcpath);
 
-            $zipFile = substr($this->src_path, 0, -1) . '.zip';
+            $zipFile = substr($this->srcpath, 0, -1) . '.zip';
 
             is_file($zipFile)
                 and $this->fs->remove($zipFile);
@@ -138,7 +138,7 @@ class Installer extends Unpackager
      */
     protected function execute(string $action): void
     {
-        $cdir = glob($this->src_path . "executables/*/{$action}.php");
+        $cdir = glob($this->mainpath . "executables/*/{$action}.php");
 
         if ($cdir) {
             foreach ($cdir as $file) {
@@ -172,8 +172,8 @@ class Installer extends Unpackager
 
                 foreach ($directories as $dir) {
                     $this->fs->copy(
-                        $this->src_path . $dir['source'],
-                        SYSTEM_ABSPATH . $dir['local']
+                        $this->srcpath . $dir['source'],
+                        $this->dstpath . $dir['local']
                     );
                 }
             }
@@ -186,10 +186,10 @@ class Installer extends Unpackager
     protected function copySystem(): void
     {
         foreach ($this->system as $node) {
-            $src = $this->src_path . $this->system_path . $node;
-            $dst = SYSTEM_ABSPATH . $node;
-
-            $this->fs->copy($src, $dst);
+            $this->fs->copy(
+                $this->syspath . $node,
+                $this->dstpath . $node
+            );
         }
 
         $this->system = []; // free
@@ -244,12 +244,14 @@ class Installer extends Unpackager
 
         if ($queries) {
             $this->importer->drop_nonexistent_columns = ($this->db_import === self::IMPORT_FROM_JSON_MIRROR);
+
+            $sqlpath   = $this->mainpath . config('extensions.sql_path');
             $extension = ($this->db_import === self::IMPORT_FROM_SQL)
                 ? '.sql'
                 : '.json';
 
             foreach ($queries as $extension_alias) {
-                $this->importer->fromFile($this->src_path . config('extensions.sql_path') . $extension_alias . $extension);
+                $this->importer->fromFile($sqlpath . $extension_alias . $extension);
             }
         }
     }
@@ -329,7 +331,7 @@ class Installer extends Unpackager
     protected function clean(array $paths): void
     {
         foreach ($paths as $path) {
-            $this->fs->remove(SYSTEM_ABSPATH . $path);
+            $this->fs->remove($this->dstpath . $path);
         }
     }
 

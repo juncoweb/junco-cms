@@ -42,22 +42,26 @@ class frontlist_master_two_snippet extends FrontlistBase
 
                 $html  .= '<div>';
                 $html .= '<div><h3>' . $title . '</h3></div>';
-                if ($row['author']) {
-                    $html .= '<div class="fl-author">' . $row['author'] . '</div>';
-                }
                 if ($row['date']) {
                     $html .= '<div class="fl-date">' . $row['date'] . '</div>';
                 }
+
+                if ($row['author']) {
+                    $html .= '<div class="fl-author">' . $row['author'] . '</div>';
+                }
+
                 if ($row['description']) {
                     $html .= '<div class="fl-description">' . $row['description'] . '</div>';
                 }
+
                 if ($row['button']) {
                     $html .= '<div class="fl-button">' . $row['button'] . '</div>';
                 }
+
                 if ($row['labels']) {
-                    $html .= '<div class="fl-footer">' . implode(' ', array_map(function ($label) {
-                        return '<a href="' . $label['url'] . '" class="badge badge-secondary">' . $label['name'] . '</a>';
-                    }, $row['labels'])) . '</div>';
+                    $html .= '<div class="fl-labels">' . sprintf(_t('Labels %s'), implode(' ', array_map(function ($label) {
+                        return '<a href="' . $label['url'] . '">' . $label['name'] . '</a>';
+                    }, $row['labels']))) . '</div>';
                 }
                 $html .= '</div></div>';
 

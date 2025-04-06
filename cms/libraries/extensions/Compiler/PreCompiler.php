@@ -455,10 +455,10 @@ class PreCompiler
 
             if (isset($req[1])) {
                 $version = trim($req[1]);
-                $name = trim($req[0]);
+                $name    = trim($req[0]);
             } else {
                 $version = trim($req[0]);
-                $name = 'system';
+                $name    = 'system';
             }
 
             $parsed[$name] = $version;

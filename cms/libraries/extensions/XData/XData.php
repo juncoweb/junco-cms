@@ -13,17 +13,17 @@ class XData
     const XDATA_FILE = '%s.%s.json';
 
     // vars
-    protected string $basepath                    = '';
-    protected string $store_path                = '';
-    protected bool   $is_installer                = false;
-    protected ?array $extensions                = null;
+    protected string $basepath     = '';
+    protected string $store_path   = '';
+    protected bool   $is_installer = false;
+    protected ?array $extensions   = null;
 
     //
-    protected string $extension_alias_client    = '';
-    protected string $extension_alias_host        = '';
-    protected int    $extension_id_client        = 0;
-    protected mixed  $output_type                = null;
-    protected array  $extension_aliases_client    = [];
+    protected string $extension_alias_client   = '';
+    protected string $extension_alias_host     = '';
+    protected int    $extension_id_client      = 0;
+    protected mixed  $output_type              = null;
+    protected array  $extension_aliases_client = [];
 
     /**
      * Constructor
@@ -33,9 +33,9 @@ class XData
      */
     public function __construct(string $basepath = '', bool $is_installer = false)
     {
-        $this->basepath        = $basepath;
-        $this->store_path    = $basepath . ($is_installer ? 'app/install/' : '') . config('extensions.xdata_path');
-        $this->is_installer    = $is_installer;
+        $this->basepath     = $basepath;
+        $this->store_path   = $basepath . ($is_installer ? 'app/install/' : '') . config('extensions.xdata_path');
+        $this->is_installer = $is_installer;
     }
 
     /**
@@ -51,11 +51,11 @@ class XData
         int    $extension_id_client,
         mixed  $output_type,
     ): void {
-        $this->extension_alias_host            = $extension_alias_host;
-        $this->extension_alias_client        = $extension_alias_client;
-        $this->extension_id_client            = $extension_id_client;
-        $this->output_type                    = $output_type;
-        $this->extension_aliases_client[]    = $extension_alias_client;
+        $this->extension_alias_host       = $extension_alias_host;
+        $this->extension_alias_client     = $extension_alias_client;
+        $this->extension_id_client        = $extension_id_client;
+        $this->output_type                = $output_type;
+        $this->extension_aliases_client[] = $extension_alias_client;
     }
 
     /**
@@ -63,11 +63,11 @@ class XData
      */
     public function resetClient(): void
     {
-        $this->extension_alias_host        = '';
-        $this->extension_alias_client    = '';
+        $this->extension_alias_host       = '';
+        $this->extension_alias_client     = '';
         $this->extension_id_client        = 0;
         $this->output_type                = null;
-        $this->extension_aliases_client = array_unique($this->extension_aliases_client);
+        $this->extension_aliases_client   = array_unique($this->extension_aliases_client);
     }
 
     /**

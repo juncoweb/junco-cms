@@ -27,25 +27,25 @@
 
         .edit {
             color: var(--regular-subtle-font-color);
-            font-size: 1rem;
+            font-size: $font-size;
         }
     }
 
     //&-content {  }
     &-info {
-        color: var(--regular-border-color);
+        color: var(--regular-subtle-font-color);
     }
 
     //&-date { }
     &-description {
         img {
             padding: 1px;
-            border: 4px solid var(--regular-bg-color);
+            border: 4px solid var(--regular-border-color);
             margin: 5px;
         }
 
         p {
-            margin: 0 0 18px;
+            margin: 0 0 $spacing;
         }
     }
 }

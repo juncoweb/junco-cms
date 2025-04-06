@@ -30,11 +30,11 @@ class Unpackager
     protected SchemaInterface $schema;
     protected Components $components;
     protected bool   $is_installer;
-    protected string $basepath       = '';
-    protected string $src_path       = '';
-    protected string $dst_path       = SYSTEM_ABSPATH;
-    protected array  $error          = [];
-    protected bool   $error_fatal    = false;
+    protected string $dstpath;
+    protected string $srcpath       = '';
+    protected string $mainpath      = '';
+    protected array  $error         = [];
+    protected bool   $error_fatal   = false;
     //
     protected array $developer = [
         'developer_name' => '',
@@ -42,10 +42,10 @@ class Unpackager
         'webstore_url'   => '',
     ];
     protected array $summary = [
-        'extension_version'        => '',
-        'extension_credits'        => '',
-        'extension_license'        => '',
-        'extension_require'        => '',
+        'extension_version' => '',
+        'extension_credits' => '',
+        'extension_license' => '',
+        'extension_require' => '',
     ];
     protected int    $developer_id      = 0;
     protected bool   $update_developer  = false;
@@ -54,7 +54,7 @@ class Unpackager
     protected array  $maj_version       = [];
     protected bool   $has_system        = false;
     protected array  $system            = [];
-    protected string $system_path       = '';
+    protected string $syspath           = '';
     protected array  $default_sequence  = ['f', 's', 'd'];
     protected array  $sequence          = [];
 
@@ -65,10 +65,11 @@ class Unpackager
      */
     public function __construct(bool $is_installer = false)
     {
-        $this->db            = db();
-        $this->schema        = $this->db->getSchema();
-        $this->components    = new Components();
-        $this->is_installer  = $is_installer;
+        $this->db           = db();
+        $this->schema       = $this->db->getSchema();
+        $this->components   = new Components();
+        $this->is_installer = $is_installer;
+        $this->dstpath      = SYSTEM_ABSPATH;
     }
 
     /**
@@ -121,15 +122,15 @@ class Unpackager
     {
         if ($this->is_installer) {
             $this->copy_files = false;
-            $this->basepath   = SYSTEM_ABSPATH;
-            $this->src_path   = SYSTEM_ABSPATH . 'app/install/';
+            $this->srcpath    = $this->dstpath;
+            $this->mainpath   = $this->dstpath . 'app/install/';
         } else {
             if (!$package) {
                 return $this->fatal('The package is empty.');
             }
 
-            $this->basepath =
-                $this->src_path = SYSTEM_STORAGE . config('extensions.installer_path') . $package . '/';
+            $this->srcpath =
+                $this->mainpath = SYSTEM_STORAGE . config('extensions.installer_path') . $package . '/';
         }
 
         return true;
@@ -142,7 +143,7 @@ class Unpackager
      */
     protected function getJsonContent(): array|false
     {
-        $file = $this->src_path . config('extensions.install_file');
+        $file = $this->mainpath . config('extensions.install_file');
         if (!is_file($file)) {
             return $this->fatal('The installation file was not found.');
         }
@@ -339,7 +340,7 @@ class Unpackager
                 }
 
                 foreach ($rows as $row) {
-                    is_dir($this->src_path . $row['source'])
+                    is_dir($this->srcpath . $row['source'])
                         or $this->fatal(_t('Falied open dir «%s».'), $row['source']);
                 }
             }
@@ -357,12 +358,10 @@ class Unpackager
             $this->system = $json['system'];
         }
 
-        if (!empty($json['system_path'])) {
-            $this->system_path = $json['system_path'];
-        }
+        $this->syspath = $this->mainpath . ($json['system_path'] ?? '');
 
         foreach ($this->system as $path) {
-            if (!file_exists($this->src_path . $this->system_path . $path)) {
+            if (!file_exists($this->syspath . $path)) {
                 $this->fatal(_t('Falied open file «%s».'), $path);
             }
         }
@@ -513,7 +512,7 @@ class Unpackager
             $rows = $this->components->fetchAll($row['extension_alias'], $keys);
 
             foreach ($rows as $row) {
-                is_dir($this->dst_path . $row['source'])
+                is_dir($this->dstpath . $row['source'])
                     and $this->cleaner($paths, $row['source']);
             }
         }
@@ -531,17 +530,17 @@ class Unpackager
      */
     protected function cleaner(array &$paths, string $dir): void
     {
-        if (is_dir($this->src_path . $dir)) {
-            foreach (scandir($this->dst_path . $dir) as $node) {
+        if (is_dir($this->srcpath . $dir)) {
+            foreach (scandir($this->dstpath . $dir) as $node) {
                 if ($node == '.' || $node == '..') {
                     continue;
                 }
 
                 $node = $dir . $node;
 
-                if (is_dir($this->dst_path . $node)) {
+                if (is_dir($this->dstpath . $node)) {
                     $this->cleaner($paths, $node . '/');
-                } elseif (!is_file($this->src_path . $node)) {
+                } elseif (!is_file($this->srcpath . $node)) {
                     $paths[] = $node;
                 }
             }
@@ -556,7 +555,7 @@ class Unpackager
     protected function getExecutables(): array
     {
         // vars
-        $cdir        = glob($this->src_path . 'executables/*/*.php');
+        $cdir = glob($this->mainpath . 'executables/*/*.php');
         $executables = [];
 
         if ($cdir) {
@@ -584,7 +583,7 @@ class Unpackager
      */
     protected function getReadmeContent(): string
     {
-        return $this->getFileContents($this->src_path . 'README.html');
+        return $this->getFileContents($this->mainpath . 'README.html');
     }
 
     /**
@@ -594,7 +593,7 @@ class Unpackager
      */
     protected function getChangelogContent(): string
     {
-        return nl2br(strip_tags($this->getFileContents($this->src_path . 'CHANGELOG.TXT')));
+        return nl2br(strip_tags($this->getFileContents($this->mainpath . 'CHANGELOG.TXT')));
     }
 
     /**
