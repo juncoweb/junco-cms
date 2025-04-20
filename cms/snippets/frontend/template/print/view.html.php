@@ -23,7 +23,7 @@ $this->css(['assets/frontend-print.min.css']);
     <meta name="description" content="<?= $this->site->description ?>" />
 
     <!-- link -->
-    <link rel="shortcut icon" type="image/x-icon" href="<?= (isset($this->options->favicon) ? $this->options->favicon : 'favicon.ico') ?>" />
+    <?= $this->renderLink() ?>
     <!-- css -->
     <?= $this->renderCss() ?>
     <!-- script -->

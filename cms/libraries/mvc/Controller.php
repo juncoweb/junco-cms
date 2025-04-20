@@ -13,9 +13,9 @@ use Psr\Http\Message\ResponseInterface;
 class Controller
 {
     // vars
-    private ?RequestHandler $handler        = null;
-    private array            $middlewares    = [];
-    private array            $traces            = [];
+    private ?RequestHandler $handler      = null;
+    private array           $middlewares  = [];
+    private array           $traces       = [];
 
     /**
      * Middleware
@@ -127,7 +127,7 @@ class Controller
      */
     final protected function getViewFile(?string $path = null): string
     {
-        $component    = '';
+        $component = '';
 
         if ($path) {
             $path = explode('.', $path);
@@ -143,12 +143,12 @@ class Controller
             $component    = lcfirst(array_splice($_path, 1, 1)[0]);
 
             if ($path) {
-                $path        = array_merge($_path, $path);
-                $filename    = array_pop($path);
+                $path     = array_merge($_path, $path);
+                $filename = array_pop($path);
             } else {
-                $trace        = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3)[2];
-                $path        = $_path;
-                $filename     = ucfirst($trace['function']);
+                $trace    = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3)[2];
+                $path     = $_path;
+                $filename = ucfirst($trace['function']);
             }
         }
 

@@ -17,7 +17,7 @@
     <meta name="description" content="<?php echo $this->site->description ?>" />
 
     <!-- link -->
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo (isset($this->options->favicon) ? $this->options->favicon : 'favicon.ico') ?>" />
+    <?= $this->renderLink() ?>
     <!-- css -->
     <?php echo $this->renderCss() ?>
     <!-- script -->

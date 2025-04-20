@@ -12,10 +12,10 @@ use Filter;
 class Model
 {
     // vars
-    protected $data            = [];
-    protected $data_array    = [];
-    private   $__data        = null;
-    private   $__data_array    = null;
+    protected array  $data         = [];
+    protected array  $data_array   = [];
+    private   ?array $__data       = null;
+    private   ?array $__data_array = null;
 
     /**
      * Set data
@@ -42,8 +42,8 @@ class Model
     final protected function filter(int $type, array $rules): void
     {
         if ($this->__data !== null) {
-            $type            = $this->__data;
-            $this->__data    = null;
+            $type = $this->__data;
+            $this->__data = null;
         }
 
         $this->data = Filter::all($type, $rules);
@@ -74,7 +74,7 @@ class Model
     final protected function filterArray(int $type, array $rules): bool
     {
         if ($this->__data_array !== null) {
-            $type                = $this->__data_array;
+            $type = $this->__data_array;
             $this->__data_array = null;
         }
 

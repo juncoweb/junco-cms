@@ -14,15 +14,15 @@ class Template extends ResponderBase implements TemplateInterface
     protected array  $config;
     protected Assets $assets;
     protected object $options;
-    protected ?array $alter_options    = null;
+    protected ?array $alter_options = null;
     protected object $site;
     //
-    protected $pathway                = null;
+    protected $pathway              = null;
     protected $title                = null;
-    protected array $title_options    = [];
-    protected $help_url                = null;
-    public    $content                = null;
-    protected $view                    = null;
+    protected array  $title_options = [];
+    protected string $help_url      = '';
+    public    $content              = null;
+    protected string $view          = '';
 
     /**
      * Get Snippet
@@ -51,12 +51,12 @@ class Template extends ResponderBase implements TemplateInterface
         //
         $site = config('site');
         $this->site = (object)[
-            'name'            => $site['site.name'],
-            'description'    => $site['site.description'],
-            'author'        => $site['site.author'],
-            'email'            => $site['site.email'],
-            'url'            => $site['site.url'],
-            'baseurl'        => $site['site.baseurl'],
+            'name'        => $site['site.name'],
+            'description' => $site['site.description'],
+            'author'      => $site['site.author'],
+            'email'       => $site['site.email'],
+            'url'         => $site['site.url'],
+            'baseurl'     => $site['site.baseurl'],
         ];
     }
 
@@ -101,6 +101,20 @@ class Template extends ResponderBase implements TemplateInterface
         }
 
         return $html . "\n";
+    }
+
+    /**
+     * Render
+     */
+    protected function renderLink(): string
+    {
+        $html = '<link rel="shortcut icon" type="image/x-icon" href="' . $this->site->baseurl . ($this->options->favicon ?? 'favicon.ico') . '" />' . "\n";
+
+        if (!empty($this->options->rss)) {
+            $html .= "\t" . '<link rel="alternate" type="application/rss+xml" href="' . $this->site->baseurl . $this->options->rss . '" title="' . $this->site->name . ' RSS" />' . "\n";
+        }
+
+        return $html;
     }
 
     /**
@@ -246,9 +260,9 @@ class Template extends ResponderBase implements TemplateInterface
      */
     protected function renderJs()
     {
-        $js            = $this->assets->getJs();
-        $domready    = $this->assets->getDomready();
-        $html        = '';
+        $js       = $this->assets->getJs();
+        $domready = $this->assets->getDomready();
+        $html     = '';
 
         if ($js) {
             $html .= $this->realRenderJs($js);
@@ -369,7 +383,7 @@ class Template extends ResponderBase implements TemplateInterface
      */
     public function helpLink(string $url): void
     {
-        $this->help_url    = $url;
+        $this->help_url = $url;
     }
 
     /**

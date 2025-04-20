@@ -21,40 +21,26 @@ class template_frontend_default_snippet extends Template
         parent::__construct();
         $config = config('frontend');
         $options = $config['frontend.default_options'];
-        $options['logo_img']        = $config['frontend.logo_img'];
-        $options['logo_text']        = $config['frontend.logo_text'];
-        $options['header_fixed']    = $config['frontend.header_fixed'];
-        $options['header_css']        = $config['frontend.header_css'];
-        $options['theme']            = $config['frontend.theme'];
-        $options['on_display']        = $config['frontend.on_display'];
-        $options['topbar']            = $config['frontend.topbar'] ?: [];
-        $options['navbar']            = $config['frontend.navbar'];
-        $options['sidebar']            = $config['frontend.sidebar'];
-        $options['footer']            = $config['frontend.footer'];
-        $options['hash']            = router()->getHash();
+        $options['logo_img']     = $config['frontend.logo_img'];
+        $options['logo_text']    = $config['frontend.logo_text'];
+        $options['header_fixed'] = $config['frontend.header_fixed'];
+        $options['header_css']   = $config['frontend.header_css'];
+        $options['theme']        = $config['frontend.theme'];
+        $options['on_display']   = $config['frontend.on_display'];
+        $options['topbar']       = $config['frontend.topbar'] ?: [];
+        $options['navbar']       = $config['frontend.navbar'];
+        $options['sidebar']      = $config['frontend.sidebar'];
+        $options['footer']       = $config['frontend.footer'];
+        $options['hash']         = router()->getHash();
 
         $this->assets->options($options);
-        $this->alter_options        = $config['frontend.alter_options'];
-        $this->view                    = __DIR__ . '/view.html.php';
+        $this->alter_options     = $config['frontend.alter_options'];
+        $this->view              = __DIR__ . '/view.html.php';
         //
-        $this->terms_url            = $config['frontend.terms_url'];
-        $this->privacy_url            = $config['frontend.privacy_url'];
-        $this->cookie_consent        = $config['frontend.cookie_consent'] && empty($_COOKIE['cookieConsent']);
-        $this->user                    = curuser();
-    }
-
-    /**
-     * Render
-     */
-    protected function renderLink(): string
-    {
-        $html = '<link rel="shortcut icon" type="image/x-icon" href="' . $this->site->baseurl . ($this->options->favicon ?? 'favicon.ico') . '" />' . "\n";
-
-        if (!empty($this->options->rss)) {
-            $html .= "\t" . '<link rel="alternate" type="application/rss+xml" href="' . $this->site->baseurl . $this->options->rss . '" title="' . $this->site->name . ' RSS" />' . "\n";
-        }
-
-        return $html;
+        $this->terms_url         = $config['frontend.terms_url'];
+        $this->privacy_url       = $config['frontend.privacy_url'];
+        $this->cookie_consent    = $config['frontend.cookie_consent'] && empty($_COOKIE['cookieConsent']);
+        $this->user              = curuser();
     }
 
     /**
@@ -233,8 +219,8 @@ class template_frontend_default_snippet extends Template
      */
     protected function renderCopyright()
     {
-        $copyright    = sprintf(_t('© %d by %s - All rights reserved'), date('Y'), '<a href="' . $this->site->url . '">' . $this->site->name . '</a>');
-        $legal        = [];
+        $copyright = sprintf(_t('© %d by %s - All rights reserved'), date('Y'), '<a href="' . $this->site->url . '">' . $this->site->name . '</a>');
+        $legal = [];
 
         if ($this->terms_url) {
             $legal[] = '<a href="' . $this->terms_url . '">' . _t('Terms & Conditions') . '</a>';
