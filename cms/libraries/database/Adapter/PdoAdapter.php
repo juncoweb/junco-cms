@@ -195,6 +195,14 @@ class PdoAdapterStatement implements StatementInterface
     public function execute(array $params = []): void
     {
         try {
+            foreach ($params as &$param) {
+                if ($param instanceof \UnitEnum) {
+                    $param = $param instanceof \BackedEnum
+                        ? $param->value
+                        : $param->name;
+                }
+            }
+
             $this->stmt->execute($params);
         } catch (PDOException $e) {
             // I change the exception for an error.

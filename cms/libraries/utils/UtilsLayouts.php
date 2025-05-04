@@ -7,15 +7,15 @@
 
 class UtilsLayouts
 {
-    // private
-    protected $filters        = [];
-    protected $data            = [];
-    protected $translates    = [];
+    //
+    protected array $filters    = [];
+    protected array $data       = [];
+    protected array $translates = [];
 
     /**
      * 
      */
-    public function data($data)
+    public function data(array $data)
     {
         $this->data = array_merge($this->data, $data);
     }
@@ -23,7 +23,7 @@ class UtilsLayouts
     /**
      * 
      */
-    public function translates($translates)
+    public function translates(array $translates)
     {
         $this->translates = array_merge($this->translates, array_map('strtolower', $translates));
     }
@@ -31,7 +31,7 @@ class UtilsLayouts
     /**
      * Filter
      */
-    public function filter($func)
+    public function filter(callable $func)
     {
         $this->filters[] = $func;
     }
@@ -48,12 +48,12 @@ class UtilsLayouts
             $prefix .= '_';
         } else {
             $this->translates([
-                'date'    => _t('Date'),
-                'day'    => _t('Day'),
-                'month'    => _t('Month'),
-                'year'    => _t('Year'),
-                'time'    => _t('Time'),
-                'hour'    => _t('Hour'),
+                'date'  => _t('Date'),
+                'day'   => _t('Day'),
+                'month' => _t('Month'),
+                'year'  => _t('Year'),
+                'time'  => _t('Time'),
+                'hour'  => _t('Hour'),
             ]);
         }
 
@@ -82,7 +82,7 @@ class UtilsLayouts
     /**
      * Create
      */
-    public function create($html)
+    public function create(string $html)
     {
         return preg_replace_callback('#\{\{\s*(.*?)\s*\}\}#', [$this, 'replace'], $html);
     }
@@ -90,7 +90,7 @@ class UtilsLayouts
     /**
      * Replace
      */
-    protected function replace($match)
+    protected function replace(array $match)
     {
         $value = strtolower($match[1]);
 

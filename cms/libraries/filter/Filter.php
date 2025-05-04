@@ -10,11 +10,11 @@ use Junco\Filter\Filters\FilterInterface;
 class Filter
 {
     // vars
-    protected array  $data        = [];
-    protected ?array $files        = null;
-    protected array  $filters    = [];
-    protected array  $var_names    = [];
-    protected array  $classes = [
+    protected array  $data      = [];
+    protected ?array $files     = null;
+    protected array  $filters   = [];
+    protected array  $var_names = [];
+    protected array  $classes   = [
         // numbers
         'int' => Junco\Filter\Filters\Integer::class,
         'id' => Junco\Filter\Filters\Id::class,
@@ -47,6 +47,7 @@ class Filter
 
         // others
         'callback' => Junco\Filter\Filters\Callback::class,
+        'enum' => Junco\Filter\Filters\Enum::class,
         'none' => Junco\Filter\Filters\None::class,
     ];
 
@@ -131,8 +132,8 @@ class Filter
             if ($modifiers) {
                 $filter->setModifiers($modifiers);
             }
-            $this->var_names[]            = $var_name;
-            $this->filters[$var_name]    = $filter;
+            $this->var_names[] = $var_name;
+            $this->filters[$var_name] = $filter;
         }
 
         return $this;

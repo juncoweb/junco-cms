@@ -76,103 +76,108 @@ if ($developer_mode) {
     $restore_tag .= ' <a href="javascript:void(0)" control-form="unlock" role="button" title="' . ($t = _t('Lock')) . '" aria-label="' . $t . '" class="btn-inline"><input type="checkbox" name="unlock[]" value="%1$s" style="display: none;"/><i class="fa-solid fa-lock"></i></a>';
 }
 
-foreach ($groups as $i => $group) {
-    if ($group['description']) {
-        $form->addRow(['help' => $group['description']]);
-    }
-
-    foreach ($group['rows'] as $row) {
-        switch ($row['type']) {
-            // input
-            case 'input-integer':
-                $form->input($row['name'], ['type' => 'number']);
-                break;
-
-            case 'input-range':
-                $form->input($row['name'], ['type' => 'range', 'min' => $row['min'], 'max' => $row['max'], 'class' => 'input-range']);
-                break;
-
-            default:
-            case 'input-text':
-                $form->input($row['name']);
-                break;
-
-            case 'input-email':
-                $form->input($row['name'], ['type' => 'email']);
-                break;
-
-            case 'input-password':
-                $form->input($row['name'], ['type' => 'password', 'control-felem' => 'password']);
-                break;
-
-            case 'input-phone':
-                $form->input($row['name'], ['type' => 'tel']);
-                break;
-
-            case 'input-url':
-                $form->input($row['name'], ['type' => 'url']);
-                break;
-
-            case 'input-color':
-                $form->input($row['name'], ['type' => 'color', 'control-felem' => 'color']);
-                break;
-
-            // select
-            case 'select-integer':
-            case 'select-text':
-            case 'snippet';
-            case 'plugin':
-                if ($row['options'] === null) {
-                    $form->load('settings.not_found');
-                } else {
-                    $form->select($row['name'], $row['options']);
-                }
-                break;
-
-            case 'select-multiple-integer':
-            case 'select-multiple-text':
-            case 'plugins':
-                if ($row['options'] === null) {
-                    $form->load('settings.not_found');
-                } else {
-                    $form->suite($row['name'], $row['options']);
-                }
-                break;
-
-            // others
-            case 'textarea':
-                $form->textarea($row['name'], ['auto-grow' => '']);
-                break;
-
-            case 'boolean':
-                $form->toggle($row['name']);
-                break;
-
-            case 'json':
-                $form->load('settings.json', [
-                    'name' => $row['name'],
-                    'options' => $row['options']
-                ]);
-                break;
+if ($groups) {
+    foreach ($groups as $i => $group) {
+        if ($group['description']) {
+            $form->addRow(['help' => $group['description']]);
         }
 
-        if ($row['restore']) {
-            $row['restore'] = sprintf($restore_tag, $row['name']);
+        foreach ($group['rows'] as $row) {
+            switch ($row['type']) {
+                // input
+                case 'input-integer':
+                    $form->input($row['name'], ['type' => 'number']);
+                    break;
+
+                case 'input-range':
+                    $form->input($row['name'], ['type' => 'range', 'min' => $row['min'], 'max' => $row['max'], 'class' => 'input-range']);
+                    break;
+
+                default:
+                case 'input-text':
+                    $form->input($row['name']);
+                    break;
+
+                case 'input-email':
+                    $form->input($row['name'], ['type' => 'email']);
+                    break;
+
+                case 'input-password':
+                    $form->input($row['name'], ['type' => 'password', 'control-felem' => 'password']);
+                    break;
+
+                case 'input-phone':
+                    $form->input($row['name'], ['type' => 'tel']);
+                    break;
+
+                case 'input-url':
+                    $form->input($row['name'], ['type' => 'url']);
+                    break;
+
+                case 'input-color':
+                    $form->input($row['name'], ['type' => 'color', 'control-felem' => 'color']);
+                    break;
+
+                // select
+                case 'select-integer':
+                case 'select-text':
+                case 'snippet';
+                case 'plugin':
+                    if ($row['options'] === null) {
+                        $form->load('settings.not_found');
+                    } else {
+                        $form->select($row['name'], $row['options']);
+                    }
+                    break;
+
+                case 'select-multiple-integer':
+                case 'select-multiple-text':
+                case 'plugins':
+                    if ($row['options'] === null) {
+                        $form->load('settings.not_found');
+                    } else {
+                        $form->suite($row['name'], $row['options']);
+                    }
+                    break;
+
+                // others
+                case 'textarea':
+                    $form->textarea($row['name'], ['auto-grow' => '']);
+                    break;
+
+                case 'boolean':
+                    $form->toggle($row['name']);
+                    break;
+
+                case 'json':
+                    $form->load('settings.json', [
+                        'name' => $row['name'],
+                        'options' => $row['options']
+                    ]);
+                    break;
+            }
+
+            if ($row['restore']) {
+                $row['restore'] = sprintf($restore_tag, $row['name']);
+            }
+
+            $element = $form->getLastElement();
+            $element->setLabel(_t($row['label']));
+            $element->setHelp($row['help']);
+            $form->addRow([
+                'label' => $element->getLabel(),
+                'content' => $element->render(),
+                'button' => $row['restore'],
+                'help' => $element->getHelp()
+            ]);
         }
 
-        $element = $form->getLastElement();
-        $element->setLabel(_t($row['label']));
-        $element->setHelp($row['help']);
-        $form->addRow([
-            'label' => $element->getLabel(),
-            'content' => $element->render(),
-            'button' => $row['restore'],
-            'help' => $element->getHelp()
-        ]);
+        $form->separate($group['legend']);
     }
-
-    $form->separate($group['legend']);
+} else {
+    $form->addBlock('<div class="text-center italic">' . _t('Empty list.') . '<div>');
 }
+
 
 $html = $form->render() . '<textarea id="restore" style="display: none;">' . $restore . '</textarea>';
 

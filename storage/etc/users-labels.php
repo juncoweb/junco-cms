@@ -14,6 +14,8 @@ define('L_CAREERS', 24);
 define('L_CAREERS_COURSES', 26);
 define('L_CAREERS_ENROLLMENTS', 25);
 define('L_CERTIFICATIONS', 46);
+define('L_CERTIFICATIONS_AUDIT', 52);
+define('L_CERTIFICATIONS_SCHEDULES', 51);
 define('L_CONTENTS', 3);
 define('L_CONTENTS_EDITOR', 4);
 define('L_FOODSERVICES', 44);

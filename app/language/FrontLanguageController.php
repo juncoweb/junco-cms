@@ -33,8 +33,8 @@ class FrontLanguageController extends Controller
      */
     public function change()
     {
-        return $this->wrapper(fn() => (new LanguageModel)->change());
+        return $this->wrapper(fn() => (new LanguageModel)->select());
         /* return $this->middleware('form.security')
-			?: $this->wrapper(fn() => (new LanguageModel)->change()); */
+			?: $this->wrapper(fn() => (new LanguageModel)->select()); */
     }
 }

@@ -198,6 +198,12 @@ class MysqliStatement implements StatementInterface
     {
         $types = '';
         foreach ($params as &$param) {
+            if ($param instanceof \UnitEnum) {
+                $param = $param instanceof \BackedEnum
+                    ? $param->value
+                    : $param->name;
+            }
+
             if (is_float($param)) {
                 $types .= 'd';
             } elseif (is_int($param)) {

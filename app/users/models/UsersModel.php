@@ -30,12 +30,12 @@ class UsersModel extends Model
     {
         // data
         $this->filter(POST, [
-            'user_id'    => 'id',
-            'fullname'    => 'text',
-            'username'    => '',
-            'password'    => '',
-            'email'        => 'email',
-            'role_id'    => 'id|array',
+            'user_id'  => 'id',
+            'fullname' => 'text',
+            'username' => '',
+            'password' => '',
+            'email'    => 'email',
+            'role_id'  => 'id|array',
         ]);
 
         // extract
@@ -77,7 +77,7 @@ class UsersModel extends Model
             $this->db->safeExec("UPDATE `#__users` SET ?? WHERE id = ?", $this->data, $this->user_id);
         } else {
             $this->db->safeExec("INSERT INTO `#__users` (??) VALUES (??)", $this->data);
-            $this->user_id  = $this->db->lastInsertId();
+            $this->user_id = $this->db->lastInsertId();
         }
 
         (new UsersRolesMapper)->set($this->user_id, $this->role_id);
