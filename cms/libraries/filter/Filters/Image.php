@@ -8,45 +8,10 @@
 namespace Junco\Filter\Filters;
 
 use Junco\Filesystem\UploadedImageManager;
+use Psr\Http\Message\UploadedFileInterface;
 
-class Image extends FilterAbstract
+class Image extends FileFilterAbstract
 {
-    /**
-     * Constructor
-     * 
-     * @param string|array|null $filter_value
-     */
-    public function __construct(string|array|null $filter_value = null)
-    {
-        $this->type = 'file';
-        $this->isFile = true;
-        /* $this->argument = [
-			'filter' => FILTER_DEFAULT
-		]; */
-
-        if ($filter_value) {
-            if (is_string($filter_value)) {
-                $filter_value = $this->strToArr($filter_value);
-            }
-
-            $this->callback[] = function (UploadedImageManager $value) use ($filter_value) {
-                $value->validate(['allow_extensions' => $filter_value]);
-            };
-        }
-    }
-
-    /**
-     * Set modifiers
-     * 
-     * @param array $modifiers
-     */
-    public function setModifiers(array $modifiers): void
-    {
-        $this->accept($modifiers, ['required']);
-
-        parent::setModifiers($modifiers);
-    }
-
     /**
      * Filter
      * 
@@ -54,7 +19,7 @@ class Image extends FilterAbstract
      * 
      * @return mixed
      */
-    public function filter($value, $file = null, $altValue = null): mixed
+    public function filter(mixed $value, ?UploadedFileInterface $file = null, mixed $altValue = null): mixed
     {
         $manager = new UploadedImageManager($file);
 

@@ -27,12 +27,12 @@ class CookieGuard implements GuardInterface
      */
     public function __construct()
     {
-        $this->db        = db();
-        $this->session    = session();
+        $this->db = db();
+        $this->session = session();
 
-        $config            = config('usys-system');
-        $this->rm_key    = $config['usys-system.rm_key'];
-        $this->user_key    = $config['usys-system.user_key'];
+        $config         = config('usys-system');
+        $this->rm_key   = $config['usys-system.rm_key'];
+        $this->user_key = $config['usys-system.user_key'];
     }
 
     /**
@@ -199,18 +199,16 @@ class CookieGuard implements GuardInterface
         }
 
         if ($security) {
-            $sql_hash = '';
-
-            if (!hash_equals($data['session_hash'], $this->session->getHash())) {
-                if (!$this->session->isSafeToContinue()) {
-                    return 0;
-                }
-
-                $new_hash = $this->session->getHash();
-                $sql_hash = ", session_hash = '$new_hash'";
+            if (!$this->session->isSafeToContinue($data['session_hash'])) {
+                return 0;
             }
 
-            $this->db->safeExec("UPDATE `#__usys_sessions` SET accessed_at = NOW(){$sql_hash} WHERE id = $data[id]");
+            $this->db->safeExec("
+            UPDATE `#__usys_sessions` 
+            SET
+             accessed_at = NOW(),
+             session_hash = ?  
+            WHERE id = ?", $this->session->getHash(), $data['id']);
         }
 
         return $data['user_id'];

@@ -53,7 +53,9 @@ class UsersRolesModel extends Model
         $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // security
-        $this->security($this->data['id']);
+        if ($this->inUse($this->data['id'])) {
+            throw new Exception(_t('The record can not be deleted because it is being used.'));
+        }
 
         // query
         $this->db->safeExec("DELETE FROM `#__users_roles` WHERE id IN (?..)", $this->data['id']);
@@ -61,23 +63,14 @@ class UsersRolesModel extends Model
     }
 
     /**
-     * Security
      * 
-     * @param array $role_id
-     * 
-     * @throws Exception
      */
-    protected function security(array $role_id): void
+    protected function inUse(array $role_id): bool
     {
-        // security
-        $total = $this->db->safeFind("
+        return (bool)$this->db->safeFind("
 		SELECT 
 		 COUNT(*)
 		FROM `#__users_roles_map`
 		WHERE role_id IN (?..)", $role_id)->fetchColumn();
-
-        if ($total) {
-            throw new Exception(_t('The record can not be deleted because it is being used.'));
-        }
     }
 }

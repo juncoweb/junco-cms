@@ -10,7 +10,10 @@ use Junco\Extensions\Extensions;
 use Junco\Extensions\Components;
 use Junco\Extensions\Compiler\Compiler;
 use Junco\Extensions\Compiler\PreCompiler;
+use Junco\Extensions\Enum\ExtensionStatus;
+use Junco\Extensions\Enum\UpdateStatus;
 use Junco\Extensions\Updater\Carrier;
+use PHPUnit\Runner\Extension\Extension;
 
 class AdminExtensionsModel extends Model
 {
@@ -32,6 +35,7 @@ class AdminExtensionsModel extends Model
     {
         return [
             'developer_mode' => SYSTEM_DEVELOPER_MODE,
+            'statuses' => ExtensionStatus::cases(),
         ];
     }
 
@@ -43,12 +47,13 @@ class AdminExtensionsModel extends Model
         // data
         $this->filter(POST, [
             'search'        => 'text',
-            'status'        => 'text|in:all,public,private,deprecated|default:all',
+            'status'        => 'enum:extensions.extension_status|default:all',
             'developer_id'  => 'id',
             'option'        => 'int',
         ]);
 
         // query
+        $this->db->setParam(UpdateStatus::available);
         if ($this->data['option'] == 1) {
             $this->db->where("u.has_update IS NOT NULL");
         }
@@ -100,13 +105,17 @@ class AdminExtensionsModel extends Model
 			 extension_id ,
 			 TRUE AS has_update
 			FROM `#__extensions_updates`
-			WHERE status = 'available'
+			WHERE status = ?
 			GROUP BY extension_id
 		) u ON (u.extension_id = e.id)
 		$sql_table
 		[WHERE]
 		ORDER BY extension_name");
         $rows = $pagi->fetchAll();
+
+        foreach ($rows as $i => $row) {
+            $rows[$i]['status'] = $statuses[$row['status']] ??= ExtensionStatus::{$row['status']}->fetch();
+        }
 
         if ($rows && SYSTEM_DEVELOPER_MODE) {
             $this->setDevelopersData($rows);
@@ -115,6 +124,7 @@ class AdminExtensionsModel extends Model
         return $this->data + [
             'developers' => $this->getListDevelopers(),
             'developer_mode' => SYSTEM_DEVELOPER_MODE,
+            'statuses' => ExtensionStatus::getList(['all' => _t('All status')]),
             'rows' => $rows,
             'pagi' => $pagi
         ];
@@ -188,24 +198,12 @@ class AdminExtensionsModel extends Model
         // data
         $this->filter(POST, [
             'id' => 'id|array|required:abort',
-            'status' => 'in:public,private,deprecated|required:abort'
+            'status' => 'enum:extensions.extension_status|required:abort'
         ]);
 
-        switch ($this->data['status']) {
-            case 'public':
-                $this->data['status_name'] = _t('Public');
-                break;
-
-            case 'private':
-                $this->data['status_name'] = _t('Private');
-                break;
-
-            case 'deprecated':
-                $this->data['status_name'] = _t('Deprecated');
-                break;
-        }
-
-        return $this->data;
+        return $this->data + [
+            'status_title' => ExtensionStatus::{$this->data['status']}->title(),
+        ];
     }
 
     /**
@@ -459,13 +457,10 @@ class AdminExtensionsModel extends Model
     {
         $filepath = (new Carrier)->getTargetPath() . '%s_%s.zip';
         $names    = (new Components)->getNames();
-        $statuses = ['public', 'private'];
 
         foreach ($rows as $i => $row) {
             $rows[$i]['can_compile']    = !$row['is_protected'] && $row['package_id'] == -1;
-            $rows[$i]['package_exists'] =
-                in_array($row['status'], $statuses)
-                && is_file(sprintf($filepath, $row['extension_alias'], $row['extension_version']));
+            $rows[$i]['package_exists'] = $row['status']['is_active'] && is_file(sprintf($filepath, $row['extension_alias'], $row['extension_version']));
 
             if ($row['components']) {
                 $components = [];

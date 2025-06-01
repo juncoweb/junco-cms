@@ -23,6 +23,8 @@ class Enum extends FilterAbstract
         $cases = array_column($filter_value::cases(), 'name');
 
         $this->type = 'mixed';
+        $this->default  = null;
+        $this->accept = ['default', 'array', 'or_use', 'only_if', 'only_if_not', 'required'];
         $this->argument = [
             'filter' => FILTER_CALLBACK,
             'options' => function ($value) use ($cases) {
@@ -33,18 +35,6 @@ class Enum extends FilterAbstract
                 return $value;
             }
         ];
-    }
-
-    /**
-     * Set modifiers
-     * 
-     * @param array $modifiers
-     */
-    public function setModifiers(array $modifiers): void
-    {
-        $this->accept($modifiers, ['default', 'array', 'required', 'only_if', 'only_if_not']);
-
-        parent::setModifiers($modifiers);
     }
 
     /**

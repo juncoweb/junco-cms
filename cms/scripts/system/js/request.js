@@ -1,15 +1,22 @@
 /**
  * Request
  */
-
-var JsRequest = (function () {
+const JsRequest = (function () {
     function getType(value) {
         let type = typeof value;
-        if (type == 'object') {
-            type = Object.prototype.toString.call(value).slice(8, -1);
-            return (type.slice(0, 4) == 'HTML' ? type.slice(4, -7) : type).toLowerCase();
+
+        if (type != 'object') {
+            return type;
         }
-        return type;
+
+        type = Object.prototype.toString.call(value).slice(8, -1);
+
+        if (type.slice(0, 4) == 'HTML') {
+            type = type.slice(4, -7);
+        }
+
+        return type.toLowerCase();
+
     }
 
     function toQueryArray(data, esc) {
@@ -83,15 +90,18 @@ var JsRequest = (function () {
 
     function toQueryString(data) {
         data = toQueryArray(data);
-        if (data) {
-            return data
-                .map(function (a) {
-                    return encodeURIComponent(a[0]) + '=' + encodeURIComponent(a[1])
-                })
-                .join('&')
-                .replace(/%20/g, '+');
+
+        if (!data) {
+            return '';
         }
-        return '';
+
+        return data
+            .map(function (a) {
+                return encodeURIComponent(a[0]) + '=' + encodeURIComponent(a[1])
+            })
+            .join('&')
+            .replace(/%20/g, '+');
+
     }
 
     function toFormData(data) {
@@ -99,11 +109,29 @@ var JsRequest = (function () {
             return new FormData(data);
         }
 
+        const fd = getFormData(data);
+
+        toQueryArray(data).forEach((dataItem) => {
+            switch (dataItem.length) {
+                case 2:
+                    fd.append(dataItem[0], dataItem[1]);
+                    break;
+                case 3:
+                    fd.append(dataItem[0], dataItem[1], dataItem[2]);
+                    break;
+            }
+        });
+
+        return fd;
+    }
+
+    function getFormData(data) {
         let f, fd;
 
-        // seeking a form and formdata
-        if (getType(data) == 'array') {
-            for (let i = 0, L = data.length; i < L && !f && !fd; i++) {
+        if (getType(data) == 'array') { // seeking a form and FormData
+            const L = data.length;
+
+            for (let i = 0; i < L && !f && !fd; i++) {
                 switch (getType(data[i])) {
                     case 'form':
                         f = data[i];
@@ -118,22 +146,7 @@ var JsRequest = (function () {
             }
         }
 
-        if (!fd) {
-            fd = new FormData(f);
-        }
-
-        toQueryArray(data).forEach(function (dataItem) {
-            switch (dataItem.length) {
-                case 2:
-                    fd.append(dataItem[0], dataItem[1]);
-                    break;
-                case 3:
-                    fd.append(dataItem[0], dataItem[1], dataItem[2]);
-                    break;
-            }
-        });
-
-        return fd;
+        return fd || new FormData(f);
     }
 
     function toURLGet(url, data) {
@@ -141,17 +154,27 @@ var JsRequest = (function () {
     }
 
     function parseUrlData(url) {
-        var data = [];
-        if (url.indexOf('?') != -1) {
-            var a = url.split('?')[1].split('&');
-            for (var i in a) {
-                data.push(a[i].split('=').map(function (com) {
-                    return decodeURIComponent(com);
-                }));
-            }
+        if (url.indexOf('?') == -1) {
+            return [];
+        }
+
+        let data = [];
+        let a = url.split('?')[1].split('&');
+
+        for (let i in a) {
+            data.push(a[i].split('=').map(function (comp) {
+                return decodeURIComponent(comp);
+            }));
         }
 
         return data;
+    }
+
+
+    function $(e) {
+        return typeof e == 'string'
+            ? document.querySelector(e)
+            : e;
     }
 
     // online
@@ -168,6 +191,7 @@ var JsRequest = (function () {
             type: 'danger'
         });
     }
+
     var online = window.navigator.onLine;
     var offline_displayed = false;
 
@@ -189,6 +213,7 @@ var JsRequest = (function () {
     return {
         mergeData: function () {
             let data = [];
+
             for (let i = 0; i < arguments.length; i++) {
                 if (Array.isArray(arguments[i])) {
                     for (let j = 0; j < arguments[i].length; j++) {
@@ -220,12 +245,11 @@ var JsRequest = (function () {
 
         link: function (options, forceOptions) {
             options = Object.assign({}, options, forceOptions);
-            var el = document.body.appendChild(JsElement('a', {
+
+            const el = document.body.appendChild(JsElement('a', {
                 href: toURLGet(options.url, options.data),
-                target: options.target || '_self',
-                styles: {
-                    display: 'none'
-                }
+                target: (options.target || '_self'),
+                styles: { display: 'none' }
             }));
 
             el.click();
@@ -271,12 +295,10 @@ var JsRequest = (function () {
             options = Object.assign({}, options, forceOptions);
 
             if (options.update) {
-                var el = options.update;
+                const el = $(options.update);
                 delete options.update;
+
                 options.onSuccess = function (html) {
-                    if (typeof el == 'string') {
-                        el = document.querySelector(el);
-                    }
                     el.innerHTML = html;
                 };
             }
@@ -295,6 +317,7 @@ var JsRequest = (function () {
 
             if (typeof options.format != 'undefined') {
                 options.headers ??= {};
+
                 if (options.responseType == 'json') {
                     options.headers['Accept'] = 'application/json';
                 }

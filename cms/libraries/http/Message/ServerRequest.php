@@ -20,12 +20,12 @@ use Junco\Http\Message\Stream;
 class ServerRequest extends Request implements ServerRequestInterface
 {
     // vars
-    protected array $serverParams            = [];
-    protected array $cookieParams            = [];
+    protected array $serverParams           = [];
+    protected array $cookieParams           = [];
     protected array $queryParams            = [];
-    protected array $uploadedFiles            = [];
-    protected array $attributes                = [];
-    protected array|object|null $parsedBody    = null;
+    protected array $uploadedFiles          = [];
+    protected array $attributes             = [];
+    protected array|object|null $parsedBody = null;
 
     /**
      * Constructor
@@ -39,17 +39,17 @@ class ServerRequest extends Request implements ServerRequestInterface
      * @throws \InvalidArgumentException For any invalid value.
      */
     public function __construct(
-        string                $method,
+        string              $method,
         string|UriInterface $uri,
-        ?array                $headers = null,
+        ?array              $headers = null,
         ?StreamInterface    $stream = null,
-        ?string                $version = null,
-        ?array                $serverParams = null
+        ?string             $version = null,
+        ?array              $serverParams = null
     ) {
         $stream ??= new Stream('php://input', 'r+');
 
         if ($serverParams) {
-            $this->serverParams    = $serverParams;
+            $this->serverParams = $serverParams;
         }
 
         parent::__construct($method, $uri, $headers, $stream, $version);

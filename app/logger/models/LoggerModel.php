@@ -88,12 +88,12 @@ class LoggerModel extends Model
         }
 
         $data = [
-            'php_version'        => PHP_VERSION,
-            'php_os'            => PHP_OS,
-            'php_os_family'        => PHP_OS_FAMILY,
-            'system_version'    => $this->getSystemVersion(),
-            'message'            => $this->data['message'],
-            'reports'            => json_encode($reports)
+            'php_version'    => PHP_VERSION,
+            'php_os'         => PHP_OS,
+            'php_os_family'  => PHP_OS_FAMILY,
+            'system_version' => $this->getSystemVersion(),
+            'message'        => $this->data['message'],
+            'reports'        => json_encode($reports)
         ];
 
         $report_url = config('logger.report_url');

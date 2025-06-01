@@ -157,11 +157,11 @@ class MenusModel extends Model
     {
         // data
         $this->filter(POST, [
-            'extension_id'        => 'id|required',
+            'extension_id'      => 'id|required',
             'menu_title'        => '',
-            'menu_subcomponent'    => '',
-            'menu_keys'            => 'array|required',
-            'menu_folder'        => 'in:Contents,Media,More,Security,Site spaces,System,Templates,Tools,User spaces,Usys|required:abort',
+            'menu_subcomponent' => '',
+            'menu_keys'         => 'array|required',
+            'menu_folder'       => 'in:Contents,Media,More,Security,Site spaces,System,Templates,Tools,User spaces,Usys|required:abort',
             'menu_image'        => 'text',
         ]);
 
@@ -203,15 +203,19 @@ class MenusModel extends Model
                 $this->data['menu_title'] = $extension['name'] ?: $extension['alias'];
             }
 
+            if (in_array($key, ['backend-Default', 'settings-Default'])) {
+                $this->data['menu_title'] = $this->data['menu_folder'] . '|' . $this->data['menu_title'];
+            }
+
             $data[] = [
-                'menu_key'        => $key,
-                'menu_path'        => (in_array($key, ['backend-Default', 'settings-Default']) ? $menu_folder . '|' : '') . $this->data['menu_title'],
-                'menu_order'    => in_array($key, ['frontend-Main', 'my-Default', 'profile-Default']) ? 10 : 0,
-                'menu_url'        => $menu_url,
-                'menu_image'    => in_array($key, ['backend-Default', 'frontend-Main']) ? '' : ($menu_image ?: 'fa-solid fa-file-lines'),
-                'menu_hash'        => $extension['alias'] . ($this->data['menu_subcomponent'] ? '-' . $this->data['menu_subcomponent'] : ''),
-                'menu_params'    => '',
-                'status'        => 1
+                'menu_key'    => $key,
+                'menu_path'   => $this->data['menu_title'],
+                'menu_order'  => in_array($key, ['frontend-Main', 'my-Default', 'profile-Default']) ? 10 : 0,
+                'menu_url'    => $menu_url,
+                'menu_image'  => in_array($key, ['backend-Default', 'frontend-Main']) ? '' : ($this->data['menu_image'] ?: 'fa-solid fa-file-lines'),
+                'menu_hash'   => $extension['alias'] . ($this->data['menu_subcomponent'] ? '-' . $this->data['menu_subcomponent'] : ''),
+                'menu_params' => '',
+                'status'      => 1
             ];
         }
 

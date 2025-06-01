@@ -11,14 +11,14 @@ use Junco\Extensions\Extensions;
 use Junco\Extensions\Updater\Carrier;
 use Junco\Extensions\XData\XDataManager;
 use Junco\Extensions\Compiler\Compiler;
+use Junco\Extensions\Enum\ExtensionStatus;
 
 class ExtensionsModel extends Model
 {
     // vars
-    protected $db = null;
-    //
-    protected int  $id            = 0;
-    protected bool $is_package    = false;
+    protected $db;
+    protected int  $id         = 0;
+    protected bool $is_package = false;
 
     /**
      * Constructor
@@ -35,15 +35,15 @@ class ExtensionsModel extends Model
     {
         // data
         $this->filter(POST, [
-            'id'                    => 'id',
-            'developer_id'          => 'id|required',
-            'extension_alias'       => 'required',
-            'extension_name'        => 'text',
-            'extension_credits'     => 'text',
-            'extension_license'     => 'text',
-            'extension_abstract'    => 'text',
-            'extension_require'     => 'text',
-            'is_package'            => 'bool',
+            'id'                 => 'id',
+            'developer_id'       => 'id|required',
+            'extension_alias'    => 'required',
+            'extension_name'     => 'text',
+            'extension_credits'  => 'text',
+            'extension_license'  => 'text',
+            'extension_abstract' => 'text',
+            'extension_require'  => 'text',
+            'is_package'         => 'bool',
         ]);
 
         // validate
@@ -91,7 +91,7 @@ class ExtensionsModel extends Model
         // data
         $this->filter(POST, [
             'id'     => 'id|array|required:abort',
-            'status' => 'in:public,private,deprecated|required:abort',
+            'status' => 'enum:extensions.extension_status|required:abort',
         ]);
 
         // query
@@ -116,9 +116,9 @@ class ExtensionsModel extends Model
             if ($row['webstore_token']) {
                 if (!isset($servers[$row['developer_id']])) {
                     $servers[$row['developer_id']] = [
-                        'webstore_url'        => $row['webstore_url'],
-                        'webstore_token'    => $row['webstore_token'],
-                        'extensions'        => []
+                        'webstore_url'   => $row['webstore_url'],
+                        'webstore_token' => $row['webstore_token'],
+                        'extensions'     => []
                     ];
                 }
                 $servers[$row['developer_id']]['extensions'][] = $row['extension_alias'];
@@ -224,8 +224,8 @@ class ExtensionsModel extends Model
         $compiler = new Compiler();
         $compiler->get_install_package = $this->data['get_install_package'];
         $compiler->package_name_format = $this->data['package_name_format'];
-        $compiler->output = $this->data['output'];
-        $compiler->plugins = array_keys($this->data['plugins']);
+        $compiler->output              = $this->data['output'];
+        $compiler->plugins             = array_keys($this->data['plugins']);
 
         foreach ($this->data['id'] as $package_id) {
             $compiler->compile($package_id);
@@ -282,36 +282,20 @@ class ExtensionsModel extends Model
                 throw new Exception('Error (time_limit)');
             }
 
-            // query
-            list(
-                $extension_alias,
-                $extension_name,
-                $extension_version,
-                $webstore_url,
-                $webstore_token
-            ) = $this->db->safeFind("
-			SELECT
-			 e.extension_alias ,
-			 e.extension_name ,
-			 e.extension_version ,
-			 d.webstore_url ,
-			 d.webstore_token
-			FROM `#__extensions` e
-			LEFT JOIN `#__extensions_developers` d ON (e.developer_id = d.id)
-			WHERE e.id = ?
-			AND e.status IN ('public', 'private')", $this->data['id'])->fetch(Database::FETCH_NUM) or abort();
+            //
+            $extension = $this->getExtensionData($this->data['id']) or abort();
 
-            if (!$webstore_token) {
+            if (!$extension['webstore_token']) {
                 throw new Exception(_t('The distribution system requires a token.'));
             }
 
-            $messages[] = sprintf(_t('Uploading «%s»...'), $extension_name);
+            $messages[] = sprintf(_t('Uploading «%s»...'), $extension['name']);
 
             // vars
-            $file = sprintf('%s_%s.zip', $extension_alias, $extension_version);
+            $file = sprintf('%s_%s.zip', $extension['alias'], $extension['version']);
             $messages[] = (new Carrier)->distribute(
-                $webstore_url,
-                $webstore_token,
+                $extension['webstore_url'],
+                $extension['webstore_token'],
                 $file
             );
         } catch (Exception $e) {
@@ -421,5 +405,23 @@ class ExtensionsModel extends Model
         }
 
         return '';
+    }
+
+    /**
+     * Get
+     */
+    protected function getExtensionData(int $extension_id): array|false
+    {
+        return $this->db->safeFind("
+        SELECT
+         e.extension_alias AS alias,
+         e.extension_name AS name,
+         e.extension_version AS version,
+         d.webstore_url ,
+         d.webstore_token
+        FROM `#__extensions` e
+        LEFT JOIN `#__extensions_developers` d ON (e.developer_id = d.id)
+        WHERE e.id = ?
+        AND e.status IN ( ?.. )", $extension_id, ExtensionStatus::getActives())->fetch();
     }
 }

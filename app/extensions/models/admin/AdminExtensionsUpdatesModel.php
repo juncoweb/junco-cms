@@ -5,6 +5,7 @@
  * @author: Junco CMS (tm)
  */
 
+use Junco\Extensions\Enum\UpdateStatus;
 use Junco\Mvc\Model;
 
 class AdminExtensionsUpdatesModel extends Model
@@ -31,7 +32,7 @@ class AdminExtensionsUpdatesModel extends Model
         if ($this->data['search']) {
             $this->db->where("e.extension_alias LIKE %?|e.extension_name LIKE %?", $this->data['search']);
         }
-        $this->db->where("u.status IN ('canceled', 'installed')");
+        $this->db->where("u.status IN ( ?.. )", UpdateStatus::getActives());
 
         $pagi = $this->db->paginate("
 		SELECT [
@@ -52,10 +53,15 @@ class AdminExtensionsUpdatesModel extends Model
             if (!$row['extension_name']) {
                 $row['extension_name'] = $row['extension_alias'];
             }
+            $row['released_at'] = new Date($row['released_at']);
+            $row['status'] = $statuses[$row['status']] ??= UpdateStatus::{$row['status']}->fetch();
 
             $rows[] = $row;
         }
 
-        return $this->data + ['rows' => $rows, 'pagi' => $pagi];
+        return $this->data + [
+            'rows' => $rows,
+            'pagi' => $pagi
+        ];
     }
 }

@@ -83,17 +83,13 @@ class AdminExtensionsDevelopersModel extends Model
         $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // security
-        $security = $this->db->safeFind(
-            "
+        $security = $this->db->safeFind("
 		SELECT
 		 COUNT(*) AS total,
-		 (SELECT COUNT(*) FROM `#__extensions` WHERE developer_id = ?) AS num_extensions
-		FROM `#__extensions_developers`
-		WHERE id = ?
-		AND is_protected = 1",
-            $this->data['id'],
-            $this->data['id']
-        )->fetch();
+		 (SELECT COUNT(*) FROM `#__extensions` WHERE developer_id = d.id) AS num_extensions
+		FROM `#__extensions_developers` d
+		WHERE d.id = ?
+		AND d.is_protected = 1", $this->data['id'])->fetch();
 
         if ($security['total']) {
             throw new Exception(_t('You are trying to delete a protected item.'));

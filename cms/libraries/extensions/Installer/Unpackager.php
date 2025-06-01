@@ -12,6 +12,7 @@ use Junco\Extensions\Extensions;
 use Junco\Database\Schema\Interface\SchemaInterface;
 use Database;
 use Exception;
+use Junco\Extensions\Enum\UpdateStatus;
 
 class Unpackager
 {
@@ -478,8 +479,8 @@ class Unpackager
 		 extension_require
 		FROM `#__extensions`
 		WHERE extension_alias NOT IN (?..)
-		AND id NOT IN (SELECT extension_id FROM `#__extensions_updates` WHERE status = 'available')
-		ORDER BY extension_name", array_keys($this->extensions_1))->fetchAll();
+		AND id NOT IN (SELECT extension_id FROM `#__extensions_updates` WHERE status = ?)
+		ORDER BY extension_name", array_keys($this->extensions_1), UpdateStatus::available)->fetchAll();
 
         $has = [];
         foreach ($rows as $row) {

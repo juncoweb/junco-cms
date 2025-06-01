@@ -5,6 +5,7 @@
  * @author: Junco CMS (tm)
  */
 
+use Junco\Extensions\Enum\UpdateStatus;
 use Junco\Mvc\Model;
 use Junco\Extensions\Updater\Carrier;
 use Junco\Extensions\Installer\Unpackager;
@@ -40,15 +41,15 @@ class AdminExtensionsInstallerModel extends Model
 		 e.extension_alias
 		FROM `#__extensions_updates` u
 		LEFT JOIN `#__extensions` e ON ( u.extension_id = e.id )
-		WHERE u.status = 'available'")->fetchAll();
+		WHERE u.status = ?", UpdateStatus::available)->fetchAll();
 
         foreach ($rows as $index => $row) {
             $indexes[$row['extension_alias'] . '_' . $row['update_version']] = $index;
             $rows[$index] = [
-                'id'            => $row['id'],
-                'caption'        => $row['extension_name'],
-                'step'            => 0,
-                'has_failed'    => $row['has_failed'],
+                'id'         => $row['id'],
+                'caption'    => $row['extension_name'],
+                'step'       => 0,
+                'has_failed' => $row['has_failed'],
             ];
         }
 
@@ -132,12 +133,12 @@ class AdminExtensionsInstallerModel extends Model
         return [
             'is_close' => $json['is_close'],
             'values' => [
-                'update_id'            => $update['id'],
-                'download_url'        => $json['download_url'],
-                'extension_key'     => $json['extension_key'],
-                '_extension_key'    => $json['extension_key'],
-                'clear'                => true,
-                'decompress'        => true
+                'update_id'      => $update['id'],
+                'download_url'   => $json['download_url'],
+                'extension_key'  => $json['extension_key'],
+                '_extension_key' => $json['extension_key'],
+                'clear'          => true,
+                'decompress'     => true
             ]
         ];
     }
@@ -164,17 +165,17 @@ class AdminExtensionsInstallerModel extends Model
 		LEFT JOIN `#__extensions` e ON ( u.extension_id = e.id )
 		LEFT JOIN `#__extensions_developers` d ON ( e.developer_id = d.id )
 		WHERE u.extension_id = ?
-		AND u.status = 'available'
+		AND u.status = ?
 		ORDER BY u.released_at
-		LIMIT 1", $this->data['id'])->fetch() or abort();
+		LIMIT 1", $this->data['id'], UpdateStatus::available)->fetch() or abort();
 
         $json = (new Carrier)->getServerData($update);
 
         return [
             'is_close' => $json['is_close'],
             'values' => [
-                'update_id'        => $update['id'],
-                'download_url'    => $json['download_url'],
+                'update_id'      => $update['id'],
+                'download_url'   => $json['download_url'],
                 'extension_key'  => $json['extension_key'],
                 '_extension_key' => $json['extension_key'],
             ]
@@ -221,7 +222,7 @@ class AdminExtensionsInstallerModel extends Model
         if ($this->data['id']) {
             $this->db->where("id IN (?..)", $this->data['id']);
         }
-        $this->db->where("status = 'available'");
+        $this->db->where("status = ?", UpdateStatus::available);
 
         $num_updates = $this->db->safeFind("
 		SELECT COUNT(*)

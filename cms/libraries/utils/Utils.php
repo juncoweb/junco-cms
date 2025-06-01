@@ -29,23 +29,11 @@ class Utils
      * 
      * @deprecated since version 14
      * 
-     * @param string $name
-     * 
-     * @return string
-     */
-    public static function cleanName(string $name)
-    {
-        return self::sanitizeSlug($name);
-    }
-
-    /**
-     * Transform a text to serve as a slug
-     * 
      * @param string $slug
      * 
      * @return string
      */
-    public static function sanitizeSlug(string $slug, string $replace = '-')
+    public static function sanitizeSlug(string $slug, string $replace = '-'): string
     {
         $slug = str_replace(
             ['á', 'é', 'í', 'ó', 'ú', 'à', 'è', 'ì', 'ò', 'ù', 'â', 'ê', 'î', 'ô', 'û', 'ä', 'ë', 'ï', 'ö', 'ü', 'Á', 'É', 'Í', 'Ó', 'Ú', 'À', 'È', 'Ì', 'Ò', 'Ù', 'Â', 'Ê', 'Î', 'Ô', 'Û', 'Ä', 'Ë', 'Ï', 'Ö', 'Ü', 'ñ', 'Ñ', 'ç', 'Ç', 'º', 'ª'],

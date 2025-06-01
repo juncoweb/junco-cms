@@ -106,11 +106,10 @@ class AdminSettingsModel extends Model
         // data
         $this->filter(POST, [
             'options' => '',
-            'json' => '',
+            'json' => 'json:decode_a',
         ]);
 
         // vars
-        $json = (array)json_decode($this->data['json'], true);
         $is_edit = !empty($json);
 
         if ($this->data['options']) {

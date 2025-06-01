@@ -20,8 +20,8 @@ use Psr\Http\Message\UriInterface;
 class Request extends Message implements RequestInterface
 {
     // vars
-    protected string $method            = 'GET';
-    protected ?string $requestTarget    = null;
+    protected string $method         = 'GET';
+    protected ?string $requestTarget = null;
     protected ?UriInterface $uri;
 
     /**
@@ -36,18 +36,18 @@ class Request extends Message implements RequestInterface
      * @throws \InvalidArgumentException For any invalid value.
      */
     public function __construct(
-        string                $method,
+        string              $method,
         string|UriInterface $uri,
-        ?array                $headers = null,
+        ?array              $headers = null,
         ?StreamInterface    $stream = null,
-        ?string                $version = null
+        ?string             $version = null
     ) {
         if (is_string($uri)) {
             $uri = new Uri($uri);
         }
 
-        $this->method    = $this->filterMethod($method);
-        $this->uri        = $uri;
+        $this->method = $this->filterMethod($method);
+        $this->uri    = $uri;
 
         if ($headers) {
             $this->setHeaders($headers);

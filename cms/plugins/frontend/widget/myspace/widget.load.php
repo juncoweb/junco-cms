@@ -21,7 +21,7 @@ return function (&$widget) {
         $rows  = [];
 
         foreach ($menus->read() as $row) {
-            $params    = json_decode($row['menu_params'], true);
+            $params = json_decode($row['menu_params'], true);
 
             if (isset($params['label_id'])) {
                 if (!is_array($params['label_id'])) {

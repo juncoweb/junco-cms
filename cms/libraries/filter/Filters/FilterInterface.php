@@ -7,6 +7,8 @@
 
 namespace Junco\Filter\Filters;
 
+use Psr\Http\Message\UploadedFileInterface;
+
 interface FilterInterface
 {
     /**
@@ -25,5 +27,5 @@ interface FilterInterface
      * 
      * @return mixed
      */
-    public function filter($value, $file = null, $altValue = null): mixed;
+    public function filter(mixed $value, ?UploadedFileInterface $file = null, mixed $altValue = null): mixed;
 }

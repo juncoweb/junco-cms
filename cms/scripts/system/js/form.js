@@ -30,8 +30,6 @@ var JsForm = function (form, options = {}) {
     options = Object.assign({ focusable: true }, options);
     var btn = options.btn;
 
-
-
     function focus() {
         function fn(types, checkables = [], tags = []) {
             for (let el, i = 0; el = form.elements[i]; i++) {

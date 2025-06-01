@@ -1,4 +1,4 @@
 
-System v13.3
+Filter v2.8
 =======================================================
-- Now, the plugins folder is not accessible from the browser. Assets should be located in the scripts folder.
+- Added new filters: enum, slug, json.

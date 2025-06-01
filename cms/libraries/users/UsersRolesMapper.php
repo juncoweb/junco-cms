@@ -39,7 +39,7 @@ class UsersRolesMapper
     /**
      * Set
      */
-    public function set(int $user_id, array $role_id)
+    public function set(int $user_id, array $role_id): void
     {
         if (
             $user_id == curuser()->id
@@ -74,6 +74,7 @@ class UsersRolesMapper
         if (!$role_id) {
             return false;
         }
+
         return (bool)$this->db->safeFind("
 		SELECT COUNT(*)
 		FROM `#__users_roles_labels_map`

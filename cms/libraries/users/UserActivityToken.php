@@ -24,22 +24,22 @@ class UserActivityToken
     const VALIDATOR_LENGTH = 20;
 
     // vars
-    public $id        = 0;
-    public $user_id    = null;
-    public $to        = null;
-    public $value    = null;
-    public $key        = null;
+    public int    $id       = 0;
+    public int    $user_id  = 0;
+    public string $to       = '';
+    public string $value    = '';
+    public string $key      = '';
 
     /**
      * Constructor
      */
-    private function __construct(&$token, &$data)
+    private function __construct(string &$token, array &$data)
     {
-        $this->id        = $data['id'];
-        $this->user_id    = $data['user_id'];
-        $this->to        = $data['token_to'];
-        $this->value    = $token;
-        $this->key        = config('users-activities.token_key');
+        $this->id      = $data['id'];
+        $this->user_id = $data['user_id'];
+        $this->to      = $data['token_to'];
+        $this->value   = $token;
+        $this->key     = config('users-activities.token_key');
     }
 
     /**
@@ -54,16 +54,16 @@ class UserActivityToken
     public static function get(int $method, string $type, bool $nte = false)
     {
         try {
-            $token    = Filter::input($method, config('users-activities.token_key'));
-            $length    = self::SELECTOR_LENGTH + self::VALIDATOR_LENGTH;
+            $token  = Filter::input($method, config('users-activities.token_key'));
+            $length = self::SELECTOR_LENGTH + self::VALIDATOR_LENGTH;
 
             if (!$token || !preg_match('@^[\w-]{' . $length . '}$@i', $token)) {
                 throw new Exception('', -1);
             }
 
-            $selector    = substr($token, 0, self::SELECTOR_LENGTH);
-            $validator    = substr($token, -self::VALIDATOR_LENGTH);
-            $expires    = 'FALSE';
+            $selector  = substr($token, 0, self::SELECTOR_LENGTH);
+            $validator = substr($token, -self::VALIDATOR_LENGTH);
+            $expires   = 'FALSE';
 
             switch ($type) {
                 case 'activation':
@@ -116,9 +116,9 @@ class UserActivityToken
 
             if (!($type === 'signup' && $code === -1)) {
                 (new UserActivity)->record('token', $code, $data['user_id'] ?? 0, [
-                    'activity_id'    => $data['id'] ?? 0,
-                    'type'            => $type,
-                    'token'            => $token
+                    'activity_id' => $data['id'] ?? 0,
+                    'type'        => $type,
+                    'token'       => $token
                 ]);
             }
 

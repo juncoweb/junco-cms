@@ -5,6 +5,7 @@
  * @author: Junco CMS (tm)
  */
 
+use Junco\Extensions\Enum\UpdateStatus;
 use Junco\Mvc\Model;
 use Junco\Extensions\Updater\Carrier;
 use Junco\Extensions\Updater\Updater;
@@ -252,11 +253,11 @@ class ExtensionsInstallerModel extends Model
 		 e.extension_name
 		FROM `#__extensions_updates` u
 		LEFT JOIN `#__extensions` e ON ( u.extension_id = e.id )
-		WHERE u.status = 'available'")->fetchAll();
+		WHERE u.status = ?", UpdateStatus::available)->fetchAll();
 
         if ($rows) {
             $extensions = [];
-            $html        = '';
+            $html       = '';
             $url        = url('admin/extensions') . '#/option=1';
 
             foreach ($rows as $row) {

@@ -13,30 +13,30 @@ use Exception;
 class UploadedFileManager
 {
     // vars
-    protected string  $basedir            = '';
-    protected string  $dirpath            = '';
-    protected bool    $mkdir            = true;
-    protected array   $uploadedFiles    = [];
-    protected array   $files            = [];
-    protected int     $num_files        = 0;
-    protected bool    $isMultiple        = false;
-    protected bool    $keepCurrent        = false;
-    protected int     $pointer            = -1;
-    protected ?string $userToken        = null;
+    protected string  $basedir       = '';
+    protected string  $dirpath       = '';
+    protected bool    $mkdir         = true;
+    protected array   $uploadedFiles = [];
+    protected array   $files         = [];
+    protected int     $num_files     = 0;
+    protected bool    $isMultiple    = false;
+    protected bool    $keepCurrent   = false;
+    protected int     $pointer       = -1;
+    protected ?string $userToken     = null;
 
     // const
-    const DEFAULT_RENAME    = 0;
-    const DEFAULT_NAME        = 1;
-    const CURUSER_NAME        = 2;
-    const CLEAN_NAME        = 3;
-    const UNIQUE_ID            = 4;
+    const DEFAULT_RENAME = 0;
+    const DEFAULT_NAME   = 1;
+    const CURUSER_NAME   = 2;
+    const CLEAN_NAME     = 3;
+    const UNIQUE_ID      = 4;
 
     /**
      * Constructor
      *
      * @param string $file
      */
-    public function __construct(UploadedFileInterface|array $UploadedFile = null, bool $isMultiple = false)
+    public function __construct(UploadedFileInterface|array|null $UploadedFile = null, bool $isMultiple = false)
     {
         $this->isMultiple = $isMultiple;
         $this->basedir    = SYSTEM_ABSPATH . SYSTEM_MEDIA_PATH;
@@ -367,8 +367,8 @@ class UploadedFileManager
                 throw new Exception(_t('File upload failed.'));
         }
 
-        $this->files[]            = $this->builtFileData($UploadedFile->getClientFilename());
-        $this->uploadedFiles[]    = $UploadedFile;
+        $this->files[] = $this->builtFileData($UploadedFile->getClientFilename());
+        $this->uploadedFiles[] = $UploadedFile;
         $this->num_files++;
     }
 
@@ -383,10 +383,10 @@ class UploadedFileManager
     {
         $info = pathinfo($filename);
         return [
-            'clientFilename'    => $filename,
-            'filename'            => $filename,
-            'basename'            => $info['filename'],
-            'extension'            => strtolower($info['extension'] ?? '')
+            'clientFilename' => $filename,
+            'filename'       => $filename,
+            'basename'       => $info['filename'],
+            'extension'      => strtolower($info['extension'] ?? '')
         ];
     }
 
@@ -531,10 +531,10 @@ class UploadedFileManager
     public static function getRenames()
     {
         return [
-            self::DEFAULT_NAME    => 'Default name',
-            self::CURUSER_NAME    => 'User based',
-            self::CLEAN_NAME     => 'Clean name',
-            self::UNIQUE_ID        => 'Unique ID',
+            self::DEFAULT_NAME => 'Default name',
+            self::CURUSER_NAME => 'User based',
+            self::CLEAN_NAME   => 'Clean name',
+            self::UNIQUE_ID    => 'Unique ID',
         ];
     }
 }

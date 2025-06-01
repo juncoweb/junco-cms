@@ -29,11 +29,11 @@ class FrontUsysModel extends Model
     {
         // vars
         $data = [
-            'options'        => config('usys.options'),
+            'options'       => config('usys.options'),
             'login_plugins' => config('usys.login_plugins'),
-            'legal_url'        => config('users.legal'),
-            'user'            => null,
-            'widgets'        => []
+            'legal_url'     => config('users.legal'),
+            'user'          => null,
+            'widgets'       => []
         ];
 
         // security

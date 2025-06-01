@@ -16,22 +16,11 @@ class Date extends FilterAbstract
     {
         $this->type = 'date';
         $this->default  = null;
+        $this->accept = ['min', 'max', 'array', 'default', 'or_use', 'only_if', 'only_if_not', 'required'];
         $this->argument = [
             'filter' => FILTER_CALLBACK,
             'options' => [$this, 'validate']
         ];
-    }
-
-    /**
-     * Set modifiers
-     * 
-     * @param array $modifiers
-     */
-    public function setModifiers(array $modifiers): void
-    {
-        $this->accept($modifiers, ['min', 'max', 'array', 'default', 'required', 'only_if', 'only_if_not']);
-
-        parent::setModifiers($modifiers);
     }
 
     /**

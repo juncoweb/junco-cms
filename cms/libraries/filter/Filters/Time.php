@@ -19,24 +19,13 @@ class Time extends FilterAbstract
     {
         $this->type = 'time';
         $this->default  = null;
+        $this->accept = ['array', 'default', 'or_use', 'only_if', 'only_if_not', 'required'];
         $this->argument = [
             'filter' => FILTER_VALIDATE_REGEXP,
             'options' => [
                 'regexp' => self::TIME_PATTERN
             ]
         ];
-    }
-
-    /**
-     * Set modifiers
-     * 
-     * @param array $modifiers
-     */
-    public function setModifiers(array $modifiers): void
-    {
-        $this->accept($modifiers, ['array', 'default', 'required', 'only_if', 'only_if_not']);
-
-        parent::setModifiers($modifiers);
     }
 
     /**

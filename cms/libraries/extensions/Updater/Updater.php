@@ -13,6 +13,8 @@ use Junco\Extensions\Installer\Unpackager;
 use Database;
 use Exception;
 use Filesystem;
+use Junco\Extensions\Enum\ExtensionStatus;
+use Junco\Extensions\Enum\UpdateStatus;
 
 class Updater extends Carrier
 {
@@ -35,10 +37,10 @@ class Updater extends Carrier
     public function findUpdates(): int
     {
         // vars
-        $webstore        = [];
-        $locals            = [];
-        $updates        = [];
-        $synchronize    = [];
+        $webstore    = [];
+        $locals      = [];
+        $updates     = [];
+        $synchronize = [];
 
         // query - extensions
         $extensions = $this->db->safeFind("
@@ -66,9 +68,9 @@ class Updater extends Carrier
             ];
 
             $locals[$row['developer_name']][$row['extension_alias']] = [
-                'id'        => $row['id'],
-                'version'    => $row['extension_version'],
-                'status'    => $row['status'],
+                'id'      => $row['id'],
+                'version' => $row['extension_version'],
+                'status'  => $row['status'],
             ];
         }
 
@@ -95,15 +97,15 @@ class Updater extends Carrier
                                 && version_compare($local['version'], $remote['version']) < 0
                             ) {
                                 $updates[] = [
-                                    'extension_id'        => $local['id'],
-                                    'update_version'    => $remote['version'],
-                                    'released_at'        => $remote['released_at'] ?? null,
+                                    'extension_id'   => $local['id'],
+                                    'update_version' => $remote['version'],
+                                    'released_at'    => $remote['released_at'] ?? null,
                                 ];
                             }
                             if (
                                 !empty($remote['status'])
                                 && $local['status'] != $remote['status']
-                                && in_array($remote['status'], ['public', 'private', 'deprecated'])
+                                && ExtensionStatus::isValid($remote['status'])
                             ) {
                                 $synchronize[] = [$remote['status'], $local['id']];
                             }
@@ -183,7 +185,10 @@ class Updater extends Carrier
             $update_id = [$update_id];
         }
 
-        $this->db->safeExec("UPDATE `#__extensions_updates` SET status = 'installed' WHERE id IN (?..)", $update_id);
+        $this->db->safeExec("
+        UPDATE `#__extensions_updates`
+        SET status = ?
+        WHERE id IN (?..)", UpdateStatus::installed, $update_id);
     }
 
     /**
@@ -220,22 +225,22 @@ class Updater extends Carrier
         } elseif (!empty($filter['id'])) {
             $this->db->where("u.id IN (?..)", $filter['id']);
         }
-        $this->db->where("u.status = 'available'");
+        $this->db->where("u.status = ?", UpdateStatus::available);
 
         $rows = $this->db->safeFind("
-			SELECT
-			 u.id ,
-			 u.update_version ,
-			 e.extension_alias ,
-			 e.extension_name ,
-			 e.extension_key ,
-			 e.extension_version ,
-			 d.webstore_url
-			FROM `#__extensions_updates` u
-			LEFT JOIN `#__extensions` e ON ( u.extension_id = e.id )
-			LEFT JOIN `#__extensions_developers` d ON ( e.developer_id = d.id )
-			[WHERE]
-			ORDER BY u.released_at")->fetchAll();
+		SELECT
+         u.id ,
+         u.update_version ,
+         e.extension_alias ,
+         e.extension_name ,
+         e.extension_key ,
+         e.extension_version ,
+         d.webstore_url
+        FROM `#__extensions_updates` u
+        LEFT JOIN `#__extensions` e ON ( u.extension_id = e.id )
+        LEFT JOIN `#__extensions_developers` d ON ( e.developer_id = d.id )
+        [WHERE]
+        ORDER BY u.released_at")->fetchAll();
 
         foreach ($rows as $i => $row) {
             $rows[$i]['package']      = sprintf('%s_%s', $row['extension_alias'], $row['update_version']);
@@ -305,8 +310,8 @@ class Updater extends Carrier
      */
     protected function updatePackage(array &$update, string $package): void
     {
-        $update['package']            = $package;
-        $update['update_version']    = explode('_', $package)[1];
+        $update['package']        = $package;
+        $update['update_version'] = explode('_', $package)[1];
     }
 
     /**
@@ -375,7 +380,7 @@ class Updater extends Carrier
 		SELECT extension_id, id
 		FROM `#__extensions_updates`
 		WHERE extension_id IN (?..)
-		AND status = 'available'", array_column($updates, 'extension_id'))->fetchAll(Database::FETCH_COLUMN, [0 => 1]);
+		AND status = ?", array_column($updates, 'extension_id'), UpdateStatus::available)->fetchAll(Database::FETCH_COLUMN, [0 => 1]);
 
         foreach ($updates as $update) {
             $update_id = $has[$update['extension_id']] ?? 0;
@@ -386,9 +391,9 @@ class Updater extends Carrier
             } else {
                 $stmt_2 ??= $this->db->prepare("
 				INSERT INTO `#__extensions_updates` (extension_id, update_version, released_at, status) 
-				VALUES (?, ?, ?, 'available')");
+				VALUES (?, ?, ?, ?)");
 
-                $this->db->safeExec($stmt_2, $update['extension_id'], $update['update_version'], $update['released_at']);
+                $this->db->safeExec($stmt_2, $update['extension_id'], $update['update_version'], $update['released_at'], UpdateStatus::available);
             }
         }
     }

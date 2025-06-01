@@ -7,23 +7,28 @@
 
 namespace Junco\Filter\Filters;
 
+use Psr\Http\Message\UploadedFileInterface;
+
 abstract class FilterAbstract implements FilterInterface
 {
     // vars
-    public bool   $isArray        = false;
-    public bool   $isFile        = false;
-    public bool   $altValue        = false;
-    public string $onlyIf        = '';
-    public bool   $onlyIfValue    = false;
-    public mixed  $required        = false;
+    public bool   $isArray     = false;
+    public bool   $isFile      = false;
+    public bool   $altValue    = false;
+    public string $orUse       = '';
+    public string $onlyIf      = '';
+    public bool   $onlyIfValue = false;
+    public mixed  $required    = false;
     //
-    public array  $argument     = ['filter' => FILTER_DEFAULT];
+    public array  $argument = ['filter' => FILTER_DEFAULT];
 
     //
-    protected string $type        = 'int';
-    protected bool   $isFirst    = false;
-    protected mixed  $default    = false;
-    protected array  $callback    = [];
+    protected string $type          = 'int';
+    protected bool   $isFirst       = false;
+    protected mixed  $default       = false;
+    protected array  $callback      = [];
+    protected array  $afterCallback = [];
+    protected ?array $accept        = null;
 
     /**
      * Set modifiers
@@ -34,6 +39,18 @@ abstract class FilterAbstract implements FilterInterface
      */
     public function setModifiers(array $modifiers): void
     {
+        if ($this->accept !== null) {
+            $diff = array_diff(array_keys($modifiers), $this->accept);
+
+            if ($diff) {
+                throw new \Exception(sprintf(
+                    'The filter «%s» does not accept the «%s» rule.',
+                    get_class($this),
+                    implode(', ', $diff)
+                ));
+            }
+        }
+
         foreach ($modifiers as $rule_name => $rule_value) {
             switch ($rule_name) {
                 case 'array':
@@ -56,8 +73,8 @@ abstract class FilterAbstract implements FilterInterface
                     $this->setInModifier($rule_value);
                     break;
 
-                case 'required':
-                    $this->setRequiredModifier($rule_value);
+                case 'or_use':
+                    $this->setOrUseModifier($rule_value);
                     break;
 
                 case 'only_if':
@@ -68,10 +85,16 @@ abstract class FilterAbstract implements FilterInterface
                     $this->setOnlyIfModifier($rule_value, false);
                     break;
 
+                case 'required':
+                    $this->setRequiredModifier($rule_value);
+                    break;
+
                 default:
                     throw new \Exception(sprintf('The filter «%s» does not accept the «%s» rule.', get_class($this), $rule_name));
             }
         }
+
+        $this->callback += $this->afterCallback;
     }
 
     /**
@@ -81,7 +104,7 @@ abstract class FilterAbstract implements FilterInterface
      * 
      * @return mixed
      */
-    public function filter($value, $file = null, $altValue = null): mixed
+    public function filter(mixed $value, ?UploadedFileInterface $file = null, mixed $altValue = null): mixed
     {
         if ($this->isFirst) {
             $value = $value[0] ?? null;
@@ -104,26 +127,23 @@ abstract class FilterAbstract implements FilterInterface
     }
 
     /**
-     * Accept
-     * 
-     * @param array $modifiers
-     * @param array $accept
-     * 
-     * @throws \Exception
+     * callback
      */
-    protected function accept(array $modifiers, array $accept)
+    protected function getFilteredValue($value)
     {
-        if ($accept) {
-            $diff = array_diff(array_keys($modifiers), $accept);
+        if ($value === false) {
+            return $this->default;
+        }
 
-            if ($diff) {
-                throw new \Exception(sprintf(
-                    'The filter «%s» does not accept the «%s» rule.',
-                    get_class($this),
-                    implode(', ', $diff)
-                ));
+        foreach ($this->callback as $fn) {
+            $fn($value);
+
+            if ($value === false) {
+                return $this->default;
             }
         }
+
+        return $value;
     }
 
     /**
@@ -220,12 +240,6 @@ abstract class FilterAbstract implements FilterInterface
                 };
                 break;
 
-            case 'file':
-                $this->callback[] = function (&$value) use ($rule_value) {
-                    $value->validate(['min_size' => (int)$rule_value]);
-                };
-                break;
-
             default:
                 throw new \Exception(sprintf(
                     'The filter «%s» does not accept the «%s» rule.',
@@ -270,12 +284,6 @@ abstract class FilterAbstract implements FilterInterface
                 };
                 break;
 
-            case 'file':
-                $this->callback[] = function (&$value) use ($rule_value) {
-                    $value->validate(['max_size' => (int)$rule_value]);
-                };
-                break;
-
             default:
                 throw new \Exception(sprintf(
                     'The filter «%s» does not accept the «%s» rule.',
@@ -306,11 +314,12 @@ abstract class FilterAbstract implements FilterInterface
     /**
      * Set
      * 
-     * @param mixed $rule_value
+     * @param string $rule_value
+     * @param bool   $value
      */
-    protected function setRequiredModifier(mixed $rule_value)
+    protected function setOrUseModifier(string $rule_value, bool $value = true)
     {
-        $this->required = $rule_value ?? true;
+        $this->orUse = $rule_value;
     }
 
     /**
@@ -321,8 +330,18 @@ abstract class FilterAbstract implements FilterInterface
      */
     protected function setOnlyIfModifier(string $rule_value, bool $value = true)
     {
-        $this->onlyIf        = $rule_value;
-        $this->onlyIfValue    = $value;
+        $this->onlyIf      = $rule_value;
+        $this->onlyIfValue = $value;
+    }
+
+    /**
+     * Set
+     * 
+     * @param mixed $rule_value
+     */
+    protected function setRequiredModifier(mixed $rule_value)
+    {
+        $this->required = $rule_value ?? true;
     }
 
     /**
@@ -337,26 +356,6 @@ abstract class FilterAbstract implements FilterInterface
     }
 
     /**
-     * callback
-     */
-    protected function getFilteredValue($value)
-    {
-        if ($value === false) {
-            return $this->default;
-        }
-
-        foreach ($this->callback as $fn) {
-            $fn($value);
-
-            if ($value === false) {
-                return $this->default;
-            }
-        }
-
-        return $value;
-    }
-
-    /**
      * Set
      */
     protected function getTimestap(mixed $dt): int
@@ -367,12 +366,15 @@ abstract class FilterAbstract implements FilterInterface
             }
             $dt = date('Y-m-d 00:00:00');
         }
+
         if (is_string($dt)) {
             return strtotime($dt);
         }
+
         if (is_int($dt)) {
             return $dt;
         }
+
         if ($dt instanceof \Datetime) {
             return $dt->getTimestamp();
         }

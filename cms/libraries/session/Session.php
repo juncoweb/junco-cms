@@ -8,9 +8,10 @@
 class Session
 {
     // vars
-    protected $config        = null;
-    protected $user_agent    = null;
-    protected $user_ip        = null;
+    protected array   $config;
+    protected string  $user_agent;
+    protected string  $user_ip;
+    protected ?string $hash;
 
     // const
     const SAFE_PATH = SYSTEM_STORAGE . 'session';
@@ -45,10 +46,7 @@ class Session
         $this->user_agent = ($_SERVER['HTTP_USER_AGENT'] ?? '');
 
         // security - I verify the user agent
-        if (
-            !isset($_SESSION['__user_agent'])
-            || $_SESSION['__user_agent'] != $this->user_agent
-        ) {
+        if ($this->user_agent !== ($_SESSION['__user_agent'] ?? null)) {
             $this->destroy();
         }
 
@@ -144,6 +142,14 @@ class Session
      */
     public function getHash(): string
     {
+        return $this->hash ??= $this->buildHash();
+    }
+
+    /**
+     * @return string
+     */
+    protected function buildHash(): string
+    {
         $hash = $this->user_agent;
 
         if ($this->config['session.verify_ip']) {
@@ -192,14 +198,14 @@ class Session
 
         // browser
         $_browsers = [
-            'opera'            => ['Opera', 'opera/'],
-            'opr/'            => ['Opera', 'opr/'],
-            'edge'          => ['Edge', 'edge/'],
-            'chrome'        => ['Chrome', 'chrome/'],
-            'safari'        => ['Safari', 'version/'],
-            'firefox'        => ['Firefox', 'firefox/'],
-            'msie'            => ['Internet Explorer', 'msie/'],
-            'trident/7'        => ['Internet Explorer', 'rv:'],
+            'opera'     => ['Opera', 'opera/'],
+            'opr/'      => ['Opera', 'opr/'],
+            'edge'      => ['Edge', 'edge/'],
+            'chrome'    => ['Chrome', 'chrome/'],
+            'safari'    => ['Safari', 'version/'],
+            'firefox'   => ['Firefox', 'firefox/'],
+            'msie'      => ['Internet Explorer', 'msie/'],
+            'trident/7' => ['Internet Explorer', 'rv:'],
         ];
 
         foreach ($_browsers as $needle => $value) {
@@ -226,8 +232,12 @@ class Session
      *
      * @return bool
      */
-    public function isSafeToContinue(): bool
+    public function isSafeToContinue(string $hash): bool
     {
+        if ($hash != $this->getHash()) {
+            return false;
+        }
+
         if ($this->config['session.verify_ip']) {
             if (($_SESSION['__user_ip'] ?? '') !== $this->user_ip) {
                 return false;

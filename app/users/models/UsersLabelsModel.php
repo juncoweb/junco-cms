@@ -11,7 +11,7 @@ use Junco\Users\LabelsCache;
 class UsersLabelsModel extends Model
 {
     // vars
-    protected $db = null;
+    protected $db;
 
     /**
      * Constructor
@@ -28,10 +28,10 @@ class UsersLabelsModel extends Model
     {
         // data
         $this->filterArray(POST, [
-            'extension_id'        => 'id|required',
-            'label_key'            => 'text',
+            'extension_id'      => 'id|required',
+            'label_key'         => 'text',
             'label_name'        => 'text',
-            'label_description'    => 'text',
+            'label_description' => 'text',
         ]) or abort();
 
         $this->filter(POST, [
@@ -40,14 +40,22 @@ class UsersLabelsModel extends Model
         ]);
 
         // security
-        $this->security(array_unique(array_column($this->data_array, 'extension_id')));
+        $this->isProtected(array_unique(array_column($this->data_array, 'extension_id'))) and abort();
 
         // validate
         foreach ($this->data_array as $i => $data) {
             if ($data['label_key']) {
-                $this->filterLabelKey($data['label_key'], $i);
+                $data['label_key'] = $this->sanitizeLabelKey($data['label_key']);
+
+                if (!$data['label_key']) {
+                    throw new Exception(_t('The key must be alphanumeric.') . sprintf(' (%d)', $i + 1));
+                }
+
+                if (!$this->isUniqueLabelKey($data['extension_id'], $data['label_key'], $this->data['label_id'][$i] ?? 0)) {
+                    throw new Exception(_t('The key is being used.') . sprintf(' (%d)', $i + 1));
+                }
             }
-            $this->verifyUniqueLabelKey($data['extension_id'], $data['label_key'], $this->data['label_id'][$i] ?? 0, $i);
+
             $this->data_array[$i] = $data;
         }
 
@@ -71,13 +79,7 @@ class UsersLabelsModel extends Model
         $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // security
-        $this->db->safeFind("
-		SELECT COUNT(*)
-		FROM `#__users_roles_labels` l
-		LEFT JOIN `#__extensions` e ON (l.extension_id = e.id)
-		LEFT JOIN `#__extensions_developers` d ON (e.developer_id = d.id)
-		WHERE l.id = ?
-		AND d.is_protected = 1", $this->data['id'])->fetchColumn() and abort();
+        $this->isProtectedFromLabelId($this->data['id']) and abort();
 
         // query
         $this->db->safeExec("DELETE FROM `#__users_roles_labels` WHERE id IN (?..)", $this->data['id']);
@@ -88,44 +90,53 @@ class UsersLabelsModel extends Model
     }
 
     /**
-     * Get
+     * Sanitize
      */
-    protected function security(array $extension_id)
+    protected function sanitizeLabelKey(string $label_key): string
     {
-        $this->db->safeFind("
-		SELECT COUNT(*)
-		FROM `#__extensions` e
-		LEFT JOIN `#__extensions_developers` d ON (e.developer_id = d.id)
-		WHERE e.id = ?
-		AND d.is_protected = 1", $extension_id)->fetchColumn() and abort();
-    }
-
-    /**
-     * Filter
-     */
-    protected function filterLabelKey(string &$label_key, int $i)
-    {
-        $label_key = strtolower($label_key);
-
-        if (preg_match('/[^a-z0-9_]/', $label_key)) {
-            throw new Exception(_t('The key must be alphanumeric.') . sprintf(' (%d)', $i + 1));
-        }
+        return preg_match('/[^a-zA-Z0-9_]/', $label_key)
+            ? ''
+            : strtolower($label_key);
     }
 
     /**
      * Verify
      */
-    protected function verifyUniqueLabelKey(int $extension_id, string $label_key, int $label_id, int $i)
+    protected function isUniqueLabelKey(int $extension_id, string $label_key, int $label_id)
     {
-        // query
         $current_id = $this->db->safeFind("
 		SELECT id
 		FROM `#__users_roles_labels`
 		WHERE extension_id = ?
 		AND label_key = ?", $extension_id, $label_key)->fetchColumn();
 
-        if ($current_id && $current_id != $label_id) {
-            throw new Exception(_t('The key is being used.') . sprintf(' (%d)', $i + 1));
-        }
+        return !$current_id || $current_id == $label_id;
+    }
+
+    /**
+     * Get
+     */
+    protected function isProtected(array $extension_id): bool
+    {
+        return (bool)$this->db->safeFind("
+		SELECT COUNT(*)
+		FROM `#__extensions` e
+		LEFT JOIN `#__extensions_developers` d ON (e.developer_id = d.id)
+		WHERE e.id = ?
+		AND d.is_protected = 1", $extension_id)->fetchColumn();
+    }
+
+    /**
+     * Get
+     */
+    protected function isProtectedFromLabelId(array $label_id): bool
+    {
+        return (bool)$this->db->safeFind("
+		SELECT COUNT(*)
+		FROM `#__users_roles_labels` l
+		LEFT JOIN `#__extensions` e ON (l.extension_id = e.id)
+		LEFT JOIN `#__extensions_developers` d ON (e.developer_id = d.id)
+		WHERE l.id IN ( ?.. )
+		AND d.is_protected = 1", $label_id)->fetchColumn();
     }
 }

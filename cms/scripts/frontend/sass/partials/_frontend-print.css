@@ -1,6 +1,7 @@
 /* --- Layout ----------------------------------------------------------- */
 body {
     margin: 40px 0;
+    position: relative;
 }
 
 .tpl-header {

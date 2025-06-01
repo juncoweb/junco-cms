@@ -23,11 +23,12 @@ class Filter
         // string
         'text' => Junco\Filter\Filters\Text::class,
         'multiline' => Junco\Filter\Filters\Multiline::class,
-        'uuid' => Junco\Filter\Filters\Uuid::class,
         //
         'url' => Junco\Filter\Filters\Url::class,
         'email' => Junco\Filter\Filters\Email::class,
         'color' => Junco\Filter\Filters\Color::class,
+        'uuid' => Junco\Filter\Filters\Uuid::class,
+        'slug' => Junco\Filter\Filters\Slug::class,
 
         // boolean
         'bool' => Junco\Filter\Filters\Boolean::class,
@@ -47,6 +48,7 @@ class Filter
 
         // others
         'callback' => Junco\Filter\Filters\Callback::class,
+        'json' => Junco\Filter\Filters\Json::class,
         'enum' => Junco\Filter\Filters\Enum::class,
         'none' => Junco\Filter\Filters\None::class,
     ];
@@ -127,13 +129,8 @@ class Filter
     protected function prepare(array $definition): self
     {
         foreach ($definition as $var_name => $rules) {
-            $filter = $this->getFilter($var_name, $rules, $modifiers);
-
-            if ($modifiers) {
-                $filter->setModifiers($modifiers);
-            }
             $this->var_names[] = $var_name;
-            $this->filters[$var_name] = $filter;
+            $this->filters[$var_name] = $this->getFilter($var_name, $rules);
         }
 
         return $this;
@@ -144,11 +141,10 @@ class Filter
      * 
      * @param string	   $var_name
      * @param string|array $rules
-     * @param ?array       &$modifiers
      * 
-     * @return FilterInterface|null
+     * @return FilterInterface
      */
-    protected function getFilter(string $var_name, $rules, ?array &$modifiers = null): FilterInterface|null
+    protected function getFilter(string $var_name, string|array $rules): FilterInterface
     {
         $modifiers = [];
         $filter = null;
@@ -173,7 +169,11 @@ class Filter
             }
         }
 
-        return $filter ?? new $this->classes['none']();
+        // If there is no filter, it will be a "none" filter
+        $filter ??= new $this->classes['none']();
+        $filter->setModifiers($modifiers);
+
+        return $filter;
     }
 
     /**
@@ -252,7 +252,7 @@ class Filter
                 $altValue = null;
 
                 if ($this->filters[$var_name]->isFile) {
-                    $this->files ??= request()->getUploadedFiles();
+                    $this->files ??= request()?->getUploadedFiles() ?? [];
                     $file = $this->iterate
                         ? ($this->files[$index][$var_name] ?? null)
                         : ($this->files[$var_name] ?? null);
@@ -263,6 +263,8 @@ class Filter
                             ? ($data['__' . $index][$var_name] ?? null)
                             : ($data['__' . $var_name] ?? null);
                     }
+                } elseif (empty($value) && $this->filters[$var_name]->orUse) {
+                    $value = $row[$this->filters[$var_name]->orUse] ?? null;
                 }
 
                 $this->data[$index][$var_name] = $this->filters[$var_name]->filter($value, $file, $altValue);

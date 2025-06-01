@@ -62,7 +62,7 @@ class AdminLanguageModel extends Model
         $this->filter(POST, ['id' => 'array:first|required:abort']);
 
         // query
-        $locale    = (new LanguageHelper)->getLocale();
+        $locale  = (new LanguageHelper)->getLocale();
         $json    = $locale . $this->data['id'] . '/' . $this->data['id'] . '.json';
         $json    = is_file($json)
             ? json_decode(file_get_contents($json), true)

@@ -13,11 +13,12 @@ $bac = $bbx->getActions();
 if ($developer_mode) {
     $bac->create();
     $bac->edit();
-    $bac->toggle([
-        ['control' => 'confirm_status', 'name' => 'status', 'value' => 'public', 'label' => _t('Public')],
-        ['control' => 'confirm_status', 'name' => 'status', 'value' => 'private', 'label' => _t('Private')],
-        ['control' => 'confirm_status', 'name' => 'status', 'value' => 'deprecated', 'label' => _t('Deprecated')],
-    ]);
+    $bac->toggle(array_map(fn($case) => [
+        'control' => 'confirm_status',
+        'name' => 'status',
+        'value' => $case->name,
+        'label' => $case->title()
+    ], $statuses));
     $bac->dropdown([
         ['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash-can'],
         ['control' => 'changes', 'label' => _t('Changes'), 'icon' => 'fa-regular fa-file-lines'],

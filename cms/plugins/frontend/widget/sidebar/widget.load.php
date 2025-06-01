@@ -22,10 +22,10 @@ return function (&$widget) {
         $rows  = [];
 
         foreach ($menus->read() as $row) {
-            $params            = $row['menu_params'] ? json_decode($row['menu_params'], true) : false;
-            $row['color']    = $params['color'] ?? false;
-            $row['uri']        = $params['uri'] ?? false;
-            $rows[]            = $row;
+            $params       = $row['menu_params'] ? json_decode($row['menu_params'], true) : false;
+            $row['color'] = $params['color'] ?? false;
+            $row['uri']   = $params['uri'] ?? false;
+            $rows[]       = $row;
         }
 
         $allow_cache and $cache->set($key, $rows);

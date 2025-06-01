@@ -175,7 +175,7 @@ if ($groups) {
         $form->separate($group['legend']);
     }
 } else {
-    $form->addBlock('<div class="text-center italic">' . _t('Empty list.') . '<div>');
+    $form->addBlock('<div class="text-center italic">' . _t('Empty list') . '<div>');
 }
 
 

@@ -18,6 +18,7 @@ class Boolean extends FilterAbstract
     {
         $this->type = 'bool';
         $this->default  = false;
+        $this->accept = ['array', 'only_if', 'only_if_not', 'required'];
         $this->argument = [
             'filter' => FILTER_VALIDATE_BOOLEAN
         ];
@@ -44,17 +45,5 @@ class Boolean extends FilterAbstract
                 $value = $filter_value[$value ? 1 : 0];
             };
         }
-    }
-
-    /**
-     * Set modifiers
-     * 
-     * @param array $modifiers
-     */
-    public function setModifiers(array $modifiers): void
-    {
-        $this->accept($modifiers, ['array', 'required', 'only_if', 'only_if_not']);
-
-        parent::setModifiers($modifiers);
     }
 }

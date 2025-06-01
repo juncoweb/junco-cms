@@ -21,12 +21,7 @@ $bls = Backlist::get();
 $bft = $bls->getFilters();
 $bft->setValues($data);
 $bft->select('option', $options);
-$bft->select('status',  [
-    'all' => _t('All status'),
-    'public' => _t('Public'),
-    'private' => _t('Private'),
-    'deprecated' => _t('Deprecated'),
-], $status);
+$bft->select('status',  $statuses, $status);
 $bft->select('developer_id', $developers);
 $bft->search();
 
@@ -42,17 +37,12 @@ if ($developer_mode) {
     $bls->button_h('distribute', _t('Distribute'), 'fa-solid fa-upload');
     $bls->button_h('confirm_compile', _t('Compile'), 'fa-solid fa-file-zipper');
 }
-$bls->button_h(['control' => null, 'icon' => '']);
+$bls->button_h(['control' => null, 'icon' => 'fa-solid fa-circle color-{{ color }}']);
 
 if ($rows) {
     $details_title = [_t('Developer'), _t('Version'), _t('Description'), _t('Credits'), _t('License'), _t('Website')];
-    $statuses = [
-        'public'        => ['icon' => 'fa-solid fa-circle color-green', 'title' => _t('Public')],
-        'private'        => ['icon' => 'fa-solid fa-circle color-orange', 'title' => _t('Private')],
-        'deprecated'    => ['icon' => 'fa-solid fa-circle color-red', 'title' => _t('Deprecated')],
-    ];
     if ($developer_mode) {
-        $details_title    = array_merge($details_title, [_t('Components'), _t('Queries'), _t('Data')]);
+        $details_title = array_merge($details_title, [_t('Components'), _t('Queries'), _t('Data')]);
     }
 
     foreach ($rows as $row) {
@@ -75,7 +65,7 @@ if ($rows) {
             }
         }
         $row['data'] = htmlentities(json_encode([
-            'title'   =>  $row['extension_name'],
+            'title'   => $row['extension_name'],
             'content' => $content
         ]));
 
@@ -93,7 +83,7 @@ if ($rows) {
             $bls->button([], $row['package_exists']);
             $bls->button([], $row['can_compile']);
         }
-        $bls->button($statuses[$row['status']]);
+        $bls->button($row['status']);
     }
 
     $html = '<div id="details-caption" style="display: none;">' . json_encode($details_title) . '</div>';
