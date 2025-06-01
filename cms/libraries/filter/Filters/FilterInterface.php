@@ -27,5 +27,5 @@ interface FilterInterface
      * 
      * @return mixed
      */
-    public function filter(mixed $value, ?UploadedFileInterface $file = null, mixed $altValue = null): mixed;
+    public function filter(mixed $value, UploadedFileInterface|array|null $file = null, mixed $altValue = null): mixed;
 }

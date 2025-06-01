@@ -104,7 +104,7 @@ abstract class FilterAbstract implements FilterInterface
      * 
      * @return mixed
      */
-    public function filter(mixed $value, ?UploadedFileInterface $file = null, mixed $altValue = null): mixed
+    public function filter(mixed $value, UploadedFileInterface|array|null $file = null, mixed $altValue = null): mixed
     {
         if ($this->isFirst) {
             $value = $value[0] ?? null;
