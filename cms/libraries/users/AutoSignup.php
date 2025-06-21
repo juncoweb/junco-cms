@@ -9,11 +9,12 @@ namespace Junco\Users;
 
 use Junco\Users\UserHelper;
 use Exception;
+use Junco\Users\Enum\UserStatus;
 
 class AutoSignup
 {
     // vars
-    protected $db = null;
+    protected $db;
 
     /**
      * Constructor
@@ -49,9 +50,9 @@ class AutoSignup
 		WHERE email = ?", $email)->fetch();
 
         if (!$user) {
-            $role_id    = config('users.default_ucid') or abort();
-            $username    = $this->getValidUsername($email);
-            $status        = 'autosignup';
+            $role_id  = config('users.default_ucid') or abort();
+            $username = $this->getValidUsername($email);
+            $status   = UserStatus::autosignup;
 
             if (!$fullname) {
                 $fullname = $username;
@@ -59,11 +60,11 @@ class AutoSignup
 
             // query
             $this->db->safeExec("INSERT INTO `#__users` (??) VALUES (??)", [
-                'fullname'            => $fullname,
-                'username'            => $username,
-                'email'                => $email,
-                'verified_email'    => $verified_email ? 'yes' : 'no',
-                'status'            => $status
+                'fullname'       => $fullname,
+                'username'       => $username,
+                'email'          => $email,
+                'verified_email' => $verified_email ? 'yes' : 'no',
+                'status'         => $status
             ]);
             $user_id = $this->db->lastInsertId();
 
@@ -76,12 +77,12 @@ class AutoSignup
             }
 
             $user = [
-                'id'            => $user_id,
-                'fullname'        => $fullname,
-                'username'        => $username,
-                'email'            => $email,
-                'status'        => $status,
-                'is_created'    => true
+                'id'         => $user_id,
+                'fullname'   => $fullname,
+                'username'   => $username,
+                'email'      => $email,
+                'status'     => $status,
+                'is_created' => true
             ];
         }
 

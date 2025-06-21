@@ -15,12 +15,11 @@ class AdminAssetsThemesModel extends Model
      */
     public function getListData()
     {
-        //
         $rows = (new AssetsThemes)->getAll();
 
         if ($rows) {
-            $theme    = config('frontend.theme');
-            $url    = url('admin/assets.variables', ['key' => '%s']);
+            $theme = config('frontend.theme');
+            $url   = url('admin/assets.variables', ['key' => '%s']);
 
             foreach ($rows as $i => $row) {
                 $rows[$i]['url']        = sprintf($url, $row['key']);
@@ -45,9 +44,9 @@ class AdminAssetsThemesModel extends Model
         return [
             'title' => _t('Copy'),
             'values' => [
-                'extension_alias'    => $part[0],
-                'name'                => $part[1] ?? '',
-                'from'                => $this->data['id'],
+                'extension_alias' => $part[0],
+                'name'            => $part[1] ?? '',
+                'from'            => $this->data['id'],
             ],
             'extensions' => $this->getExtensions(),
         ];

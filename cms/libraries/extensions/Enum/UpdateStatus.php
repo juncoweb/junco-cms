@@ -43,17 +43,9 @@ enum UpdateStatus
     public function fetch(): array
     {
         return [
-            'color' => self::{$this->name}->color(),
-            'title' => self::{$this->name}->title()
+            'color' => $this->color(),
+            'title' => $this->title()
         ];
-    }
-
-    /**
-     * Is equal
-     */
-    public function isEqual(string $name): bool
-    {
-        return $this->name === $name;
     }
 
     /**

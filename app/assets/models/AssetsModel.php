@@ -11,10 +11,10 @@ use Junco\Mvc\Model;
 class AssetsModel extends Model
 {
     // vars
-    protected string $key                = '';
-    protected string $extension_alias    = '';
-    protected string $name                = '';
-    protected string $type                = '';
+    protected string $key             = '';
+    protected string $extension_alias = '';
+    protected string $name            = '';
+    protected string $type            = '';
 
     /**
      * Compile
@@ -23,10 +23,10 @@ class AssetsModel extends Model
     {
         // data
         $this->filter(POST, [
-            'keys'            => 'array|required:abort',
-            'minify'        => 'bool',
-            'fixurl'        => 'int',
-            'precompile'    => 'int',
+            'keys'       => 'array|required:abort',
+            'minify'     => 'bool',
+            'fixurl'     => 'int',
+            'precompile' => 'int',
         ]);
 
         (new AssetsBasic)->compileFromKeys(
@@ -55,14 +55,14 @@ class AssetsModel extends Model
     {
         // data
         $this->filter(POST, [
-            'key'                => 'text',
-            'extension_alias'    => 'text',
-            'name'                => 'text',
-            'type'                => 'in:css,js|required',
+            'key'             => 'text',
+            'extension_alias' => 'text',
+            'name'            => 'text',
+            'type'            => 'in:css,js|required',
             //
-            'assets'            => '',
-            'default_assets'    => '',
-            'to_verify'            => 'bool:0/1',
+            'assets'          => '',
+            'default_assets'  => '',
+            'to_verify'       => 'bool:0/1',
         ]);
 
         // extract
@@ -80,7 +80,6 @@ class AssetsModel extends Model
             $this->key
         );
     }
-
 
     /**
      * Options

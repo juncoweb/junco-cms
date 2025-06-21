@@ -6,6 +6,7 @@
  */
 
 use Junco\Mvc\Model;
+use Junco\Users\Enum\UserStatus;
 use Junco\Users\UserActivityToken;
 
 class FrontUsysActivationModel extends Model
@@ -25,7 +26,7 @@ class FrontUsysActivationModel extends Model
             $token = UserActivityToken::get(GET, 'activation')->destroy();
 
             // query
-            db()->safeExec("UPDATE `#__users` SET verified_email = 'yes', status = 'active' WHERE id = ?", $token->user_id);
+            db()->safeExec("UPDATE `#__users` SET verified_email = 'yes', status = ? WHERE id = ?", UserStatus::active, $token->user_id);
 
             // set
             curuser()->login($token->user_id);

@@ -6,6 +6,7 @@
  */
 
 use Junco\Mvc\Model;
+use Junco\Users\Enum\UserStatus;
 use Junco\Users\UserActivityToken;
 use Junco\Users\UserHelper;
 
@@ -34,7 +35,8 @@ class UsysPasswordModel extends Model
 
         if (!$user) {
             throw new Exception(_t('Invalid email/username.'));
-        } elseif ($user['status'] != 'active') {
+        }
+        if (!UserStatus::active->isEqual($user['status'])) {
             return Xjs::redirectTo(url('/usys/message', ['op' => 'login']));
         }
 

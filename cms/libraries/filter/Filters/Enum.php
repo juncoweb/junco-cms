@@ -7,8 +7,12 @@
 
 namespace Junco\Filter\Filters;
 
+use Error;
+
 class Enum extends FilterAbstract
 {
+    protected string $enumName;
+
     /**
      * Constructor
      * 
@@ -20,23 +24,42 @@ class Enum extends FilterAbstract
             $filter_value = $this->getEnumName($filter_value);
         }
 
-        $cases = array_column($filter_value::cases(), 'name');
+        $this->enumName = $filter_value;
+        $cases = $this->enumName::cases();
 
         $this->type = 'mixed';
-        $this->default  = null;
+        $this->default = null;
         $this->accept = ['default', 'array', 'or_use', 'only_if', 'only_if_not', 'required'];
         $this->argument = [
             'filter' => FILTER_CALLBACK,
             'options' => function ($value) use ($cases) {
-                if (!in_array($value, $cases)) {
-                    return false;
+                foreach ($cases as $case) {
+                    if ($case->name === $value) {
+                        return $case;
+                    }
                 }
 
-                return $value;
+                return false;
             }
         ];
     }
+    /**
+     * Set
+     * 
+     * @param mixed $rule_value
+     */
+    protected function setDefaultModifier(mixed $rule_value)
+    {
+        if ($rule_value) {
+            $this->default = $this->enumName::{$rule_value};
+        } else {
+            if (!method_exists($this->enumName, 'default')) {
+                throw new Error(sprintf('The enum «%s» does not have a default value.', $this->enumName));
+            }
 
+            $this->default = $this->enumName::default();
+        }
+    }
     /**
      * 
      */

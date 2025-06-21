@@ -24,23 +24,16 @@ $bls->check_h();
 $bls->th(_t('Name'), ['sort' => true]);
 $bls->th(_t('Role'), ['priority' => 2]);
 $bls->th(_t('Created'), ['priority' => 2, 'width' => 90, 'sort' => true, 'class' => 'text-nowrap']);
-$bls->button_h('status');
+$bls->button_h(['control' => 'status', 'icon' => 'fa-solid fa-circle color-{{ color }}']);
 
 if ($rows) {
-    $statuses = [
-        'autosignup' => ['icon' => 'fa-solid fa-circle color-blue', 'title' => _t('Auto signup')],
-        'inactive' => ['icon' => 'fa-solid fa-circle color-red', 'title' => _t('Inactive')],
-        'active' => ['icon' => 'fa-solid fa-circle color-green', 'title' => _t('Active')],
-    ];
-
     foreach ($rows as $row) {
         $bls->check($row['id']);
         $bls->td($row['fullname']);
         $bls->td(implode(', ', $row['roles']));
-        $bls->td((new Date($row['created_at']))->format(_t('Y-M-d')));
-        $bls->button($statuses[$row['status']]);
+        $bls->td($row['created_at']->format(_t('Y-M-d')));
+        $bls->button($row['status']);
     }
 }
-
 
 return $bls->render($pagi);

@@ -10,8 +10,7 @@ use Junco\Mvc\Model;
 class UsersPermissionsModel extends Model
 {
     // vars
-    protected $db = null;
-
+    protected $db;
 
     /**
      * Constructor
@@ -28,9 +27,9 @@ class UsersPermissionsModel extends Model
     {
         // data
         $this->filter(POST, [
-            'id'        => 'id|array|required:abort',
-            'role_id'    => 'id|required:abort',
-            'status'    => 'int',
+            'id'      => 'id|array|required:abort',
+            'role_id' => 'id|required:abort',
+            'status'  => 'int',
         ]);
 
         // security

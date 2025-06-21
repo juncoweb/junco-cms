@@ -6,6 +6,7 @@
  */
 
 use Junco\Mvc\Model;
+use Junco\Users\Enum\UserStatus;
 use Junco\Users\UserActivityToken;
 use Junco\Usys\LoginWidgetCollector;
 
@@ -107,25 +108,25 @@ class FrontUsysModel extends Model
 
         switch ($this->data['op']) {
             case 'signup':
-                $title        = _t('Registration complete!');
-                $message    = _t('Your account has been successfully created and an activation message has been sent to your email.');
-                $attention    = _t('Check your email and follow the instructions. If you do not receive the message, check your SPAM settings on your account. Make sure your email account does not automatically delete SPAM.');
+                $title     = _t('Registration complete!');
+                $message   = _t('Your account has been successfully created and an activation message has been sent to your email.');
+                $attention = _t('Check your email and follow the instructions. If you do not receive the message, check your SPAM settings on your account. Make sure your email account does not automatically delete SPAM.');
                 break;
 
             case 'login':
-                $title        = _t('Account activation pending');
-                $message    = _t('Your user account is not active yet.') . '<br />' . sprintf(_t('Remember that, if necessary, you can request a new %sactivation message%s.'), '<a href="' . url('/usys.activation/reset') . '">', '</a>');
-                $attention    = _t('Check your email and follow the instructions. If you do not receive the message, check your SPAM settings on your account. Make sure your email account does not automatically delete SPAM.');
+                $title     = _t('Account activation pending');
+                $message   = _t('Your user account is not active yet.') . '<br />' . sprintf(_t('Remember that, if necessary, you can request a new %sactivation message%s.'), '<a href="' . url('/usys.activation/reset') . '">', '</a>');
+                $attention = _t('Check your email and follow the instructions. If you do not receive the message, check your SPAM settings on your account. Make sure your email account does not automatically delete SPAM.');
                 break;
 
             case 'reset-pwd':
-                $title        = _t('Message sent successfully!');
-                $message    = _t('A confirmation message to manage a new password has been sent to your email.');
+                $title   = _t('Message sent successfully!');
+                $message = _t('A confirmation message to manage a new password has been sent to your email.');
                 break;
 
             case 'savepwd':
-                $title        = _t('Password saved successfully.');
-                $message    = _t('The new password has been saved correctly and the session has been started automatically.');
+                $title   = _t('Password saved successfully.');
+                $message = _t('The new password has been saved correctly and the session has been started automatically.');
                 break;
 
             case 'reset-act':
@@ -138,10 +139,10 @@ class FrontUsysModel extends Model
         }
 
         return [
-            'title'        => $title,
-            'message'    => $message,
+            'title'     => $title,
+            'message'   => $message,
             'attention' => $attention ?? '',
-            'options'    => config('usys.options'),
+            'options'   => config('usys.options'),
         ];
     }
 
@@ -160,7 +161,7 @@ class FrontUsysModel extends Model
 		WHERE id = ?", $token->user_id)->fetch();
 
         // security
-        if ($user && $user['status'] === 'autosignup') {
+        if ($user && UserStatus::autosignup->isEqual($user['status'])) {
             return $user;
         }
 

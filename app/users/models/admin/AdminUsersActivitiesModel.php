@@ -10,8 +10,7 @@ use Junco\Mvc\Model;
 class AdminUsersActivitiesModel extends Model
 {
     // vars
-    protected $db = null;
-
+    protected $db;
 
     /**
      * Constructor
@@ -75,6 +74,9 @@ class AdminUsersActivitiesModel extends Model
 		[WHERE]
 		[ORDER BY a.created_at DESC]");
 
-        return $this->data + ['types' => $types, 'pagi' => $pagi];
+        return $this->data + [
+            'types' => $types,
+            'pagi' => $pagi
+        ];
     }
 }

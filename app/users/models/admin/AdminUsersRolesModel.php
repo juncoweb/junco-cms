@@ -10,7 +10,7 @@ use Junco\Mvc\Model;
 class AdminUsersRolesModel extends Model
 {
     // vars
-    protected $db = null;
+    protected $db;
 
     /**
      * Constructor
@@ -44,7 +44,11 @@ class AdminUsersRolesModel extends Model
         foreach ($pagi->fetchAll() as $row) {
             $rows[] = $row;
         }
-        return $this->data + ['rows' => $rows, 'pagi' => $pagi];
+
+        return $this->data + [
+            'rows' => $rows,
+            'pagi' => $pagi
+        ];
     }
 
     /**

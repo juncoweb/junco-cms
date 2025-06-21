@@ -11,7 +11,7 @@ use Junco\Users\UserHelper;
 class UsersModel extends Model
 {
     // vars
-    protected       $db = null;
+    protected $db;
     protected int   $user_id = 0;
     protected array $role_id = [];
 
@@ -90,29 +90,24 @@ class UsersModel extends Model
     {
         // data
         $this->filter(POST, [
-            'id'        => 'id|array|required:abort',
-            'status'    => 'int',
+            'id'     => 'id|array|required:abort',
+            'status' => 'enum:users.user_status',
         ]);
 
         // validate
-        if (in_array(curuser()->id, $this->data['id'])) {
+        if ($this->isCurUser($this->data['id'])) {
             throw new Exception(_t('Your account is not editable.'));
         }
 
-        switch ($this->data['status']) {
-            case 1:
-                $status = "'inactive'";
-                break;
-            case 2:
-                $status = "'active'";
-                break;
-            default:
-                $status = "IF(status = 'active', 'inactive', 'active')";
-                break;
-        }
-
         // query
-        $this->db->safeExec("UPDATE `#__users` SET status = $status WHERE id IN (?..)", $this->data['id']);
+        if ($this->data['status']) {
+            $this->db->safeExec("UPDATE `#__users` SET status = ? WHERE id IN (?..)", $this->data['status'], $this->data['id']);
+        } else {
+            $this->db->safeExec("
+            UPDATE `#__users`
+            SET status = IF(status = 'active', 'inactive', 'active')
+            WHERE id IN (?..)", $this->data['id']);
+        }
     }
 
     /**
@@ -126,5 +121,13 @@ class UsersModel extends Model
         // query
         $this->db->safeExec("DELETE FROM `#__users_roles_map` WHERE user_id IN (?..)", $this->data['id']);
         $this->db->safeExec("DELETE FROM `#__users` WHERE id IN (?..)", $this->data['id']);
+    }
+
+    /**
+     * Is
+     */
+    protected function isCurUser(array $user_id): bool
+    {
+        return in_array(curuser()->id, $user_id);
     }
 }

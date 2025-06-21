@@ -50,10 +50,10 @@ class UsersLabelsModel extends Model
                 if (!$data['label_key']) {
                     throw new Exception(_t('The key must be alphanumeric.') . sprintf(' (%d)', $i + 1));
                 }
+            }
 
-                if (!$this->isUniqueLabelKey($data['extension_id'], $data['label_key'], $this->data['label_id'][$i] ?? 0)) {
-                    throw new Exception(_t('The key is being used.') . sprintf(' (%d)', $i + 1));
-                }
+            if (!$this->isUniqueLabelKey($data['extension_id'], $data['label_key'], $this->data['label_id'][$i] ?? 0)) {
+                throw new Exception(_t('The key is being used.') . sprintf(' (%d)', $i + 1));
             }
 
             $this->data_array[$i] = $data;
@@ -102,7 +102,7 @@ class UsersLabelsModel extends Model
     /**
      * Verify
      */
-    protected function isUniqueLabelKey(int $extension_id, string $label_key, int $label_id)
+    protected function isUniqueLabelKey(int $extension_id, string $label_key, int $label_id): bool
     {
         $current_id = $this->db->safeFind("
 		SELECT id

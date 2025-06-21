@@ -12,7 +12,7 @@ use Junco\Users\Notification\UserNotifiable;
 class ContactModel extends Model
 {
     // vars
-    protected $db = null;
+    protected $db;
 
     /**
      * Constructor
@@ -41,9 +41,9 @@ class ContactModel extends Model
     {
         // data
         $this->filter(POST, [
-            'contact_name'        => 'text|required',
-            'contact_email'        => 'email|required',
-            'contact_message'    => '',
+            'contact_name'    => 'text|required',
+            'contact_email'   => 'email|required',
+            'contact_message' => '',
         ]);
 
         if (!$this->verifyCaptcha()) {
@@ -58,11 +58,11 @@ class ContactModel extends Model
         $this->data['user_id'] = curuser()->id;
 
         // security
-        $this->floodcontrol();
+        $this->floodcontrol($this->data['user_ip']);
 
         // query - insert
         $this->db->safeExec("INSERT INTO `#__contact` (??) VALUES (??)", $this->data);
-        $this->data['contact_id'] =  $this->db->lastInsertId();
+        $this->data['contact_id'] = $this->db->lastInsertId();
 
         // notify
         UserNotifiable::notifyByLabel(L_SYSTEM_ADMIN, new ContactNotification($this->data));
@@ -95,23 +95,25 @@ class ContactModel extends Model
     /**
      * Flodcontrol
      */
-    protected function floodcontrol()
+    protected function floodcontrol($user_ip)
     {
         $max = (int)config('contact.floodcontrol');
 
-        if ($max) {
-            $total = $this->db->safeFind("
-			SELECT COUNT(*)
-			FROM `#__contact`
-			WHERE user_ip = ?
-			AND created_at > DATE_SUB(NOW(), INTERVAL 1 HOUR)", $this->data['user_ip'])->fetchColumn();
+        if (!$max) {
+            return;
+        }
 
-            if ($total >= $max) {
-                throw new Exception(
-                    '<b>' . _t('Your message has not been sent.') . '</b>'
-                        . ' ' . sprintf(_t('For safety, the site does not allow more than %d messages per hour.'), $max)
-                );
-            }
+        $total = $this->db->safeFind("
+        SELECT COUNT(*)
+        FROM `#__contact`
+        WHERE user_ip = ?
+        AND created_at > DATE_SUB(NOW(), INTERVAL 1 HOUR)", $user_ip)->fetchColumn();
+
+        if ($total >= $max) {
+            throw new Exception(
+                '<b>' . _t('Your message has not been sent.') . '</b>'
+                    . ' ' . sprintf(_t('For safety, the site does not allow more than %d messages per hour.'), $max)
+            );
         }
     }
 }

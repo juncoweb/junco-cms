@@ -7,6 +7,7 @@
 
 namespace Junco\Users\Tractor;
 
+use Junco\Users\Enum\UserStatus;
 use Junco\Users\Exception\UserNotActiveException;
 use Junco\Users\Exception\UserNotFoundException;
 use Junco\Users\UserActivity;
@@ -64,7 +65,7 @@ class LoginTractor
             throw new UserNotFoundException(_t('Invalid username/password'));
         }
 
-        if ($user['status'] !== 'active') {
+        if (!UserStatus::active->isEqual($user['status'])) {
             $this->activity->record('login', $this->getActivityCode($user['status']), $user['id']);
             throw new UserNotActiveException();
         }
@@ -126,11 +127,11 @@ class LoginTractor
      */
     protected function getActivityCode(string $status)
     {
-        switch ($status) {
-            case 'inactive':
-                return -2;
-            case 'autosignup':
-                return -3;
+        if (UserStatus::inactive->isEqual($status)) {
+            return -2;
+        }
+        if (UserStatus::autosignup->isEqual($status)) {
+            return -3;
         }
 
         abort();

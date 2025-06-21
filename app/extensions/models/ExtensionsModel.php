@@ -126,13 +126,14 @@ class ExtensionsModel extends Model
         }
 
         $carrier = new Carrier;
+        $status  = $this->data['status']->name;
 
         foreach ($servers as $server) {
             $response = $carrier->changeStatus(
                 $server['webstore_url'],
                 $server['webstore_token'],
                 $server['extensions'],
-                $this->data['status']
+                $status
             );
 
             if (!(int)$response) {

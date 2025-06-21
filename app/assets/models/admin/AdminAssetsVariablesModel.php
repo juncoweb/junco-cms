@@ -112,22 +112,22 @@ class AdminAssetsVariablesModel extends Model
     {
         // data
         $this->filter(POST, [
-            'key'        => 'text|required:abort',
-            'file'        => 'text|required:abort',
+            'key'       => 'text|required:abort',
+            'file'      => 'text|required:abort',
             'variables' => 'array',
         ]);
 
         // vars
-        $varFile    = $this->getVarFile($this->data['key']) or abort();
-        $file        = $this->data['file'];
-        $blocks        = explode('// ', file_get_contents($varFile));
-        $partials    = [];
-        $variables    = [];
+        $varFile   = $this->getVarFile($this->data['key']) or abort();
+        $file      = $this->data['file'];
+        $blocks    = explode('// ', file_get_contents($varFile));
+        $partials  = [];
+        $variables = [];
 
         foreach ($blocks as $partial) {
-            $partial  = trim($partial);
-            $index    = preg_split('#(\r|\n)#', $partial, 2);
-            $index    = trim($index[0]);
+            $partial = trim($partial);
+            $index   = preg_split('#(\r|\n)#', $partial, 2);
+            $index   = trim($index[0]);
 
             if ($index) {
                 $partials[$index] = $partial . PHP_EOL;
@@ -219,9 +219,9 @@ class AdminAssetsVariablesModel extends Model
     protected function read(string $file, string $varFile)
     {
         // vars
-        $file        = SYSTEM_ABSPATH . $file;
-        $info        = pathinfo($file);
-        $variables    = [];
+        $file      = SYSTEM_ABSPATH . $file;
+        $info      = pathinfo($file);
+        $variables = [];
 
         // default
         if (

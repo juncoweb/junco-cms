@@ -18,6 +18,7 @@ define('L_CERTIFICATIONS_AUDIT', 52);
 define('L_CERTIFICATIONS_SCHEDULES', 51);
 define('L_CONTENTS', 3);
 define('L_CONTENTS_EDITOR', 4);
+define('L_FEES', 57);
 define('L_FOODSERVICES', 44);
 define('L_FORMS', 34);
 define('L_GOODS', 18);

@@ -47,7 +47,7 @@ class AdminExtensionsModel extends Model
         // data
         $this->filter(POST, [
             'search'        => 'text',
-            'status'        => 'enum:extensions.extension_status|default:all',
+            'status'        => 'enum:extensions.extension_status',
             'developer_id'  => 'id',
             'option'        => 'int',
         ]);
@@ -76,7 +76,7 @@ class AdminExtensionsModel extends Model
         if ($this->data['developer_id']) {
             $this->db->where("e.developer_id = ?", $this->data['developer_id']);
         }
-        if ($this->data['status'] != 'all') {
+        if ($this->data['status']) {
             $this->db->where("e.status = ?", $this->data['status']);
         }
         $pagi = $this->db->paginate("
@@ -121,10 +121,12 @@ class AdminExtensionsModel extends Model
             $this->setDevelopersData($rows);
         }
 
-        return $this->data + [
+        return [
+            ...$this->data,
+            'status' => $this->data['status']?->name,
             'developers' => $this->getListDevelopers(),
             'developer_mode' => SYSTEM_DEVELOPER_MODE,
-            'statuses' => ExtensionStatus::getList(['all' => _t('All status')]),
+            'statuses' => ExtensionStatus::getList(['' => _t('All status')]),
             'rows' => $rows,
             'pagi' => $pagi
         ];
@@ -191,7 +193,7 @@ class AdminExtensionsModel extends Model
     }
 
     /**
-     * Get confirm status data
+     * Get
      */
     public function getConfirmStatusData()
     {
@@ -201,8 +203,10 @@ class AdminExtensionsModel extends Model
             'status' => 'enum:extensions.extension_status|required:abort'
         ]);
 
-        return $this->data + [
-            'status_title' => ExtensionStatus::{$this->data['status']}->title(),
+        return [
+            ...$this->data,
+            'status' => $this->data['status']->name,
+            'status_title' => $this->data['status']->title(),
         ];
     }
 

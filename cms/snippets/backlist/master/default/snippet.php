@@ -11,16 +11,16 @@ use Junco\Backlist\Contract\FiltersInterface;
 class backlist_master_default_snippet implements BacklistInterface
 {
     // vars
-    protected array  $th            = [];
-    protected int    $th_i            = 0;
-    protected array  $td            = [];
-    protected int    $td_i            = 0;
-    protected int    $tr_i            = 0;
-    protected string $index            = 'id';
-    protected array  $labels        = [];
-    protected array  $not_repeated    = [];
-    protected string $hiddens        = '';
-    protected string $title_tag        = '';
+    protected array  $th           = [];
+    protected int    $th_i         = 0;
+    protected array  $td           = [];
+    protected int    $td_i         = 0;
+    protected int    $tr_i         = 0;
+    protected string $index        = 'id';
+    protected array  $labels       = [];
+    protected array  $not_repeated = [];
+    protected string $hiddens      = '';
+    protected string $title_tag    = '';
     //
     protected FiltersInterface $filters;
 
@@ -73,7 +73,6 @@ class backlist_master_default_snippet implements BacklistInterface
             $options['content'] = $this->filters->sort_h($options['content']);
         }
 
-
         if (isset($options['priority']) && $options['priority'] == 2) {
             if (empty($options['class'])) {
                 $options['class'] = 'table-dimmed';
@@ -95,7 +94,7 @@ class backlist_master_default_snippet implements BacklistInterface
         $options['class'] = empty($options['class']) ? '' : ' class="' . $options['class'] . '"';
         $options['html'] = '<th' . $width . $options['class'] . '>' . $options['content'] . '</th>';
 
-        $this->th[]    = $options;
+        $this->th[] = $options;
         $this->th_i++;
     }
 
@@ -218,26 +217,26 @@ class backlist_master_default_snippet implements BacklistInterface
     public function up_down_h()
     {
         $attr = [
-            'href'            => 'javascript:void(0)',
-            'control-list'    => 'updown',
-            'data-value'    => 'up',
-            'class'            => 'btn-inline',
-            'title'         => ($title = _t('Up')),
-            'role'            => 'button',
+            'href'         => 'javascript:void(0)',
+            'control-list' => 'updown',
+            'data-value'   => 'up',
+            'class'        => 'btn-inline',
+            'title'        => ($title = _t('Up')),
+            'role'         => 'button',
         ];
 
         $this->th([
             'width' => 20,
-            'tag'    => '<a' . $this->attr($attr) . '><i class="fa-solid fa-chevron-up" aria-hidden="true"></i>' . sprintf($this->title_tag, $title) . '</a>'
+            'tag' => '<a' . $this->attr($attr) . '><i class="fa-solid fa-chevron-up" aria-hidden="true"></i>' . sprintf($this->title_tag, $title) . '</a>'
         ]);
 
         $attr = array_merge($attr, [
-            'data-value'    => 'down',
-            'title'         => ($title = _t('Down')),
+            'data-value' => 'down',
+            'title'      => ($title = _t('Down')),
         ]);
         $this->th([
             'width' => 20,
-            'tag'    => '<a' . $this->attr($attr) . '><i class="fa-solid fa-chevron-down" aria-hidden="true">' . sprintf($this->title_tag, $title) . '</i></a>'
+            'tag' => '<a' . $this->attr($attr) . '><i class="fa-solid fa-chevron-down" aria-hidden="true">' . sprintf($this->title_tag, $title) . '</i></a>'
         ]);
     }
 
@@ -367,7 +366,7 @@ class backlist_master_default_snippet implements BacklistInterface
             'title' => _t('Search'),
             'attr'  => [
                 'control-filter' => 'search',
-                'data-value'   => '{{ value }}'
+                'data-value' => '{{ value }}'
             ],
             'options' => ['content' => $content]
         ];
@@ -452,18 +451,18 @@ class backlist_master_default_snippet implements BacklistInterface
 
         if (isset($control)) {
             $attr = array_merge([
-                'href'            => 'javascript:void(0)',
-                'control-list'     => ($control ?: '{{ control }}'),
-                'class'            => 'btn-inline',
-                'role'            => 'button',
-                'title'            => $title
+                'href'         => 'javascript:void(0)',
+                'control-list' => ($control ?: '{{ control }}'),
+                'class'        => 'btn-inline',
+                'role'         => 'button',
+                'title'        => $title
             ], $attr);
 
             $options['tag'] = '<a' . $this->attr($attr) . '>' . $caption . '</a>';
         } else {
             $attr = array_merge([
-                'class'            => 'btn-inline',
-                'title'            => $title
+                'class' => 'btn-inline',
+                'title' => $title
             ], $attr);
 
             $options['tag'] = '<div' . $this->attr($attr) . '>' . $caption . '</div>';
@@ -593,14 +592,14 @@ class backlist_master_default_snippet implements BacklistInterface
         }
 
         // freeing memory
-        $this->th            = [];
-        $this->th_i            = 0;
-        $this->td            = [];
-        $this->td_i            = 0;
-        $this->tr_i            = 0;
-        $this->labels        = [];
-        $this->not_repeated    = [];
-        $this->hiddens        = '';
+        $this->th           = [];
+        $this->th_i         = 0;
+        $this->td           = [];
+        $this->td_i         = 0;
+        $this->tr_i         = 0;
+        $this->labels       = [];
+        $this->not_repeated = [];
+        $this->hiddens      = '';
 
         return (isset($this->filters) ? $this->filters->render() : '')
             . '<div class="backlist-wrapper">' . $html . '</div>';

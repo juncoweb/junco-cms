@@ -10,8 +10,7 @@ use Junco\Mvc\Model;
 class AdminUsersPermissionsModel extends Model
 {
     // vars
-    protected $db = null;
-
+    protected $db;
 
     /**
      * Constructor

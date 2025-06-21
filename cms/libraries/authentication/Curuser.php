@@ -9,6 +9,7 @@ namespace Junco\Authentication;
 
 use Authentication;
 use Database;
+use Junco\Users\Enum\UserStatus;
 use SystemException;
 
 class Curuser
@@ -57,18 +58,18 @@ class Curuser
 			 status
 			FROM `#__users`
 			WHERE id = ?
-			AND status = 'active'", $user_id)->fetch();
+			AND status = ?", $user_id, UserStatus::active)->fetch();
 
             if ($data) {
-                $this->id            = $data['id'];
-                $this->username        = $data['username'];
-                $this->fullname        = $data['fullname'];
-                $this->email        = $data['email'];
-                $this->password        = $data['password'];
-                $this->user_slug    = $data['user_slug'];
-                $this->avatar_id    = $data['avatar_id'];
-                $this->avatar_file    = $data['avatar_file'];
-                $this->status        = $data['status'];
+                $this->id          = $data['id'];
+                $this->username    = $data['username'];
+                $this->fullname    = $data['fullname'];
+                $this->email       = $data['email'];
+                $this->password    = $data['password'];
+                $this->user_slug   = $data['user_slug'];
+                $this->avatar_id   = $data['avatar_id'];
+                $this->avatar_file = $data['avatar_file'];
+                $this->status      = $data['status'];
             }
         }
     }

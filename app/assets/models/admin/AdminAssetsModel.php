@@ -22,16 +22,16 @@ class AdminAssetsModel extends Model
     {
         // data
         $this->filter(POST, ['id' => 'array|required:abort']);
-        $config = config('assets');
 
+        $config = config('assets');
         return [
             'fixurl_options' => UrlFixer::getOptions(),
             'precompile_options' => ScssCompiler::getOptions(),
             'values' => [
-                'minify'            => $config['assets.minify'],
-                'fixurl'            => $config['assets.fixurl'],
-                'precompile'    => $config['assets.precompile'],
-                'keys'                => $this->data['id'],
+                'minify'     => $config['assets.minify'],
+                'fixurl'     => $config['assets.fixurl'],
+                'precompile' => $config['assets.precompile'],
+                'keys'       => $this->data['id'],
             ]
         ];
     }
@@ -43,10 +43,10 @@ class AdminAssetsModel extends Model
     {
         // data
         $this->filter(POST, [
-            'search'    => 'text',
-            'type'        => '',
-            'verify'    => 'bool',
-            'compare'    => 'bool'
+            'search'  => 'text',
+            'type'    => '',
+            'verify'  => 'bool',
+            'compare' => 'bool'
         ]);
 
         // extract

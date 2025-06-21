@@ -55,18 +55,10 @@ enum ExtensionStatus
     public function fetch(): array
     {
         return [
-            'color' => self::{$this->name}->color(),
-            'title' => self::{$this->name}->title(),
-            'is_active' => self::{$this->name}->isActive(),
+            'color' => $this->color(),
+            'title' => $this->title(),
+            'is_active' => $this->isActive(),
         ];
-    }
-
-    /**
-     * Is equal
-     */
-    public function isEqual(string $name): bool
-    {
-        return $this->name === $name;
     }
 
     /**

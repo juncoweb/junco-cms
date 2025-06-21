@@ -14,7 +14,7 @@ class AdminUsersController extends Controller
      */
     public function index()
     {
-        return $this->view();
+        return $this->view(null, (new AdminUsersModel)->getIndexData());
     }
 
     /**

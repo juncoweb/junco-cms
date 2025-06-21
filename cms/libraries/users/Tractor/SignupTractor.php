@@ -7,6 +7,7 @@
 
 namespace Junco\Users\Tractor;
 
+use Junco\Users\Enum\UserStatus;
 use Junco\Users\Exception\UserValidationException;
 use Junco\Users\UserActivityToken;
 use Junco\Users\UserHelper;
@@ -72,8 +73,8 @@ class SignupTractor
         if ($user_id > 0) {
             $this->db->safeExec("
 			UPDATE `#__users` 
-			SET fullname = ?, username = ?, password = ?, status = 'active'
-			WHERE id = ?", $fullname, $username, $password, $user_id);
+			SET fullname = ?, username = ?, password = ?, status = ?
+			WHERE id = ?", $fullname, $username, $password, UserStatus::active, $user_id);
 
             return true;
         }

@@ -6,11 +6,12 @@
  */
 
 use Junco\Mvc\Model;
+use Junco\Users\Enum\UserStatus;
 
 class AdminUsersModel extends Model
 {
     // vars
-    protected $db = null;
+    protected $db;
 
     /**
      * Constructor
@@ -23,15 +24,23 @@ class AdminUsersModel extends Model
     /**
      * Get
      */
+    public function getIndexData()
+    {
+        return ['statuses' => UserStatus::getList(true)];
+    }
+
+    /**
+     * Get
+     */
     public function getListData()
     {
         // data
         $this->filter(POST, [
-            'search'    => 'text',
-            'field'        => 'id',
-            'role_id'    => 'id',
-            'order'        => 'int',
-            'sort'        => 'text'
+            'search'  => 'text',
+            'field'   => 'id',
+            'role_id' => 'id',
+            'order'   => 'int',
+            'sort'    => 'text'
         ]);
 
         // query
@@ -79,7 +88,10 @@ class AdminUsersModel extends Model
 
         $rows = [];
         foreach ($pagi->fetchAll() as $row) {
+            $row['created_at'] = new Date($row['created_at']);
+            $row['status'] = $statuses[$row['status']] ??= UserStatus::{$row['status']}->fetch();
             $row['roles'] = [];
+
             $rows[$row['id']] = $row;
         }
 
@@ -192,7 +204,7 @@ class AdminUsersModel extends Model
     /**
      * Get
      */
-    protected function getRoles(array $base = [])
+    protected function getRoles(array $base = []): array
     {
         return $this->db->safeFind("
 		SELECT id, role_name
@@ -203,7 +215,7 @@ class AdminUsersModel extends Model
     /**
      * Set
      */
-    protected function setRoles(array $rows)
+    protected function setRoles(array $rows): array
     {
         if ($rows) {
             $roles = $this->db->safeFind("

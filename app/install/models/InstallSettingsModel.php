@@ -6,6 +6,7 @@
  */
 
 use Junco\Mvc\Model;
+use Junco\Users\Enum\UserStatus;
 use Junco\Users\UserHelper;
 
 class InstallSettingsModel extends Model
@@ -103,30 +104,30 @@ class InstallSettingsModel extends Model
 
         // query: settings
         (new Settings('site'))->update([
-            'name'        => $this->site_name,
-            'url'        => $this->sanitizeUrl($this->site_url),
-            'baseurl'    => $this->sanitizeBaseUrl($this->site_baseurl),
-            'email'        => $this->site_email
+            'name'    => $this->site_name,
+            'url'     => $this->sanitizeUrl($this->site_url),
+            'baseurl' => $this->sanitizeBaseUrl($this->site_baseurl),
+            'email'   => $this->site_email
         ]);
 
         // query: admin
-        $this->data['password']    = UserHelper::hash($this->data['password']);
+        $this->data['password'] = UserHelper::hash($this->data['password']);
 
         $role_id = config('install.admininstrator_role_id') ?: 1;
         $label_id = L_SYSTEM_ADMIN;
 
         // query
         $this->db->safeExec("INSERT INTO `#__users` (??) VALUES (??) ON DUPLICATE KEY UPDATE ??", $this->data + [
-            'id'        => $this->user_id,
-            'status'    => 'active'
+            'id'     => $this->user_id,
+            'status' => UserStatus::active
         ]);
 
         /**
          * Assig user role
          */
         $this->db->safeExec("INSERT IGNORE INTO `#__users_roles_map` (??) VALUES (??)", [
-            'user_id'    => $this->user_id,
-            'role_id'    => $role_id,
+            'user_id' => $this->user_id,
+            'role_id' => $role_id,
         ]);
 
         /**

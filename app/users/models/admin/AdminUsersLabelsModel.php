@@ -10,8 +10,7 @@ use Junco\Mvc\Model;
 class AdminUsersLabelsModel extends Model
 {
     // vars
-    protected $db = null;
-
+    protected $db;
 
     /**
      * Constructor
@@ -59,7 +58,11 @@ class AdminUsersLabelsModel extends Model
 
             $rows[] = $row;
         }
-        return $this->data + ['rows' => $rows, 'pagi' => $pagi];
+
+        return $this->data + [
+            'rows' => $rows,
+            'pagi' => $pagi
+        ];
     }
 
     /**
@@ -123,7 +126,7 @@ class AdminUsersLabelsModel extends Model
     /**
      * Get
      */
-    protected function getExtensions()
+    protected function getExtensions(): array
     {
         return $this->db->safeFind("
 		SELECT e.id, e.extension_name

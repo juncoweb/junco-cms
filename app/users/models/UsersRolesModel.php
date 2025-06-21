@@ -10,8 +10,8 @@ use Junco\Mvc\Model;
 class UsersRolesModel extends Model
 {
     // vars
-    protected $db = null;
-    protected $role_id = 0;
+    protected $db;
+    protected int $role_id = 0;
 
     /**
      * Constructor
@@ -28,9 +28,9 @@ class UsersRolesModel extends Model
     {
         // data
         $this->filter(POST, [
-            'role_id'            => 'id',
-            'role_name'            => 'text|required',
-            'role_description'    => 'text',
+            'role_id'          => 'id',
+            'role_name'        => 'text|required',
+            'role_description' => 'text',
         ]);
 
         // extract

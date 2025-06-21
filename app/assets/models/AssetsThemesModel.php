@@ -16,9 +16,9 @@ class AssetsThemesModel extends Model
     {
         // data
         $this->filter(POST, [
-            'extension_alias'    => '',
-            'name'                => '',
-            'from'                => '',
+            'extension_alias' => '',
+            'name' => '',
+            'from' => '',
         ]);
 
         // validate
@@ -47,9 +47,9 @@ class AssetsThemesModel extends Model
     {
         // data
         $this->filter(POST, [
-            'id'        => 'required:abort',
-            'minify'    => 'bool',
-            'fixurl'    => 'int'
+            'id'     => 'required:abort',
+            'minify' => 'bool',
+            'fixurl' => 'int'
         ]);
 
         (new AssetsThemes)->compileTheme(
@@ -77,8 +77,8 @@ class AssetsThemesModel extends Model
     {
         // data
         $this->filter(POST, [
-            'id'                    => 'text|required:abort',
-            'disable_explanation'    => 'bool'
+            'id' => 'text|required:abort',
+            'disable_explanation' => 'bool'
         ]);
 
         // verify

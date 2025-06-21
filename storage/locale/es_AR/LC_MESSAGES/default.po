@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JuncoCMS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-04 13:34-0300\n"
-"PO-Revision-Date: 2025-05-04 13:34-0300\n"
+"POT-Creation-Date: 2025-06-01 12:19-0300\n"
+"PO-Revision-Date: 2025-06-01 12:21-0300\n"
 "Last-Translator: mpasciulla@hotmail.com\n"
 "Language-Team: contact@juncoweb.com\n"
 "Language: es_AR\n"
@@ -20,19 +20,20 @@ msgstr ""
 "X-Poedit-SearchPath-2: storage/translate\n"
 "X-Poedit-SearchPath-3: app\n"
 
-#: app/afip/models/AfipOutletsModel.php:75
-#: app/afip/models/AfipTaxpayersModel.php:92
+#: app/afip/models/AfipOutletsModel.php:73
+#: app/afip/models/AfipTaxpayersModel.php:90
 #: app/certifications/models/CertificationsCallsModel.php:127
-#: app/goods/models/GoodsCategoriesModel.php:75
-#: app/goods/models/GoodsStatusesModel.php:62
-#: app/products/models/ProductsCategoriesModel.php:114
-#: app/tickets/models/TicketsCategoriesModel.php:71
-#: app/users/models/UsersRolesModel.php:80
-#: app/workshops/models/WorkshopsAttendancesValuesModel.php:86
-#: app/workshops/models/WorkshopsGroupsModel.php:93
+#: app/certifications/models/CertificationsSchedulesModel.php:133
+#: app/goods/models/GoodsCategoriesModel.php:69
+#: app/goods/models/GoodsStatusesModel.php:60
+#: app/products/models/ProductsCategoriesModel.php:106
+#: app/tickets/models/TicketsCategoriesModel.php:69
+#: app/users/models/UsersRolesModel.php:57
+#: app/workshops/models/WorkshopsAttendancesValuesModel.php:70
+#: app/workshops/models/WorkshopsGroupsModel.php:88
 #: app/workshops/models/WorkshopsMastersModel.php:56
-#: app/workshops/models/WorkshopsPapersModel.php:74
-#: cms/plugins/codemanager/generator/nested-set-tree-categories/src/app/__alias__/models/__ModelName__.php:121
+#: app/workshops/models/WorkshopsPapersModel.php:57
+#: cms/plugins/codemanager/generator/nested-set-tree-categories/src/app/__alias__/models/__ModelName__.php:117
 msgid "The record can not be deleted because it is being used."
 msgstr "El registro no se puede eliminar porque se está utilizando."
 
@@ -90,7 +91,7 @@ msgstr "No hay ningún diseño seleccionado donde mostrar el comprobante."
 #: app/certifications/models/audit/AuditCertificationsExaminersModel.php:76
 #: app/certifications/models/audit/AuditCertificationsExamsModel.php:85
 #: app/certifications/models/audit/AuditCertificationsModel.php:78
-#: app/certifications/models/audit/AuditCertificationsRolesModel.php:79
+#: app/certifications/models/audit/AuditCertificationsRolesModel.php:86
 #: app/certifications/views/audit/applicants/CreateAll.php:43
 #: app/certifications/views/audit/schedules/Prepare.php:14
 #: app/codemanager/models/admin/AdminCodemanagerEndpointsModel.php:113
@@ -116,9 +117,9 @@ msgstr "No hay ningún diseño seleccionado donde mostrar el comprobante."
 #: app/codemanager/views/endpoint/Showcase.php:47
 #: app/codemanager/views/endpoint/Task.php:20
 #: app/contents/models/admin/AdminContentsLabelsModel.php:50
-#: app/contents/models/admin/AdminContentsModel.php:111
-#: app/contents/models/admin/AdminContentsSectionsModel.php:57
-#: app/contents/models/my/MyContentsModel.php:105
+#: app/contents/models/admin/AdminContentsModel.php:122
+#: app/contents/models/admin/AdminContentsSectionsModel.php:63
+#: app/contents/models/my/MyContentsModel.php:100
 #: app/contents/views/my/Prepare.php:17
 #: app/contents/views/my/files/Create.php:17
 #: app/dbmanager/models/admin/AdminDbmanagerBrowseModel.php:137
@@ -146,7 +147,7 @@ msgstr "No hay ningún diseño seleccionado donde mostrar el comprobante."
 #: app/docs/views/admin/files/Create.php:18
 #: app/extensions/AdminExtensionsDevelopersController.php:51
 #: app/extensions/models/admin/AdminExtensionsChangesModel.php:74
-#: app/extensions/models/admin/AdminExtensionsModel.php:131
+#: app/extensions/models/admin/AdminExtensionsModel.php:141
 #: app/fees/models/admin/AdminFeesConceptsModel.php:50
 #: app/foodservices/models/audit/AuditFoodservicesModel.php:55
 #: app/forms/models/admin/AdminFormsMastersElementsModel.php:90
@@ -154,7 +155,7 @@ msgstr "No hay ningún diseño seleccionado donde mostrar el comprobante."
 #: app/goods/models/admin/AdminGoodsCategoriesModel.php:55
 #: app/goods/models/admin/AdminGoodsLayoutsModel.php:42
 #: app/goods/models/admin/AdminGoodsStatusesModel.php:53
-#: app/goods/models/audit/AuditGoodsModel.php:346
+#: app/goods/models/audit/AuditGoodsModel.php:340
 #: app/groups/models/my/MyGroupsModel.php:76
 #: app/groups/models/my/MyGroupsRolesModel.php:74
 #: app/groups/views/my/members/Create.php:18 app/inserts/views/my/Modal.php:18
@@ -180,9 +181,9 @@ msgstr "No hay ningún diseño seleccionado donde mostrar el comprobante."
 #: app/outdoors/views/audit/participants/Create.php:22
 #: app/persons/models/admin/AdminPersonsTiesKindsModel.php:53
 #: app/persons/models/admin/AdminPersonsTypesModel.php:59
-#: app/persons/models/audit/AuditPersonsModel.php:87
-#: app/persons/models/audit/AuditPersonsTiesModel.php:88
-#: app/persons/models/my/MyPersonsModel.php:125
+#: app/persons/models/audit/AuditPersonsModel.php:89
+#: app/persons/models/audit/AuditPersonsTiesModel.php:86
+#: app/persons/models/my/MyPersonsModel.php:94
 #: app/policies/models/admin/AdminPoliciesModel.php:59
 #: app/portfolios/models/admin/AdminPortfoliosImagesModel.php:92
 #: app/portfolios/models/admin/AdminPortfoliosModel.php:61
@@ -194,7 +195,7 @@ msgstr "No hay ningún diseño seleccionado donde mostrar el comprobante."
 #: app/sales/models/audit/AuditSalesModel.php:59
 #: app/sellers/models/admin/AdminSellersModel.php:54
 #: app/sellers/models/admin/AdminSellersRolesModel.php:65
-#: app/settings/models/admin/AdminSettingsModel.php:151
+#: app/settings/models/admin/AdminSettingsModel.php:150
 #: app/settings/views/admin/Form.php:43 app/settings/views/admin/Prepare.php:22
 #: app/smileys/models/admin/AdminSmileysModel.php:73
 #: app/smileys/models/admin/AdminSmileysSuitesModel.php:45
@@ -215,7 +216,7 @@ msgstr "No hay ningún diseño seleccionado donde mostrar el comprobante."
 #: app/tickets/models/admin/AdminTicketsCategoriesModel.php:53
 #: app/tickets/models/audit/AuditTicketsModel.php:77
 #: app/tickets/models/my/MyTicketsModel.php:73
-#: app/tickets/models/my/MyTicketsRepliesModel.php:111
+#: app/tickets/models/my/MyTicketsRepliesModel.php:109
 #: app/tickets/views/audit/Create.php:22
 #: app/tickets/views/audit/replies/Create.php:22
 #: app/tickets/views/my/Create.php:23
@@ -307,17 +308,19 @@ msgstr "Crear"
 #: app/certifications/models/audit/AuditCertificationsExaminersModel.php:109
 #: app/certifications/models/audit/AuditCertificationsExamsModel.php:117
 #: app/certifications/models/audit/AuditCertificationsModel.php:105
-#: app/certifications/models/audit/AuditCertificationsRolesModel.php:120
-#: app/certifications/models/audit/AuditCertificationsSchedulesModel.php:172
+#: app/certifications/models/audit/AuditCertificationsRolesModel.php:127
+#: app/certifications/models/audit/AuditCertificationsSchedulesModel.php:173
 #: app/certifications/views/audit/Index.php:15
+#: app/certifications/views/audit/schedules/Index.php:19
 #: app/codemanager/models/admin/AdminCodemanagerEndpointsModel.php:113
 #: app/codemanager/views/admin/application/ConfirmExport.php:15
 #: app/codemanager/views/endpoint/Form.php:17
 #: app/codemanager/views/endpoint/Form.php:67
 #: app/contents/models/admin/AdminContentsLabelsModel.php:72
-#: app/contents/models/admin/AdminContentsModel.php:125
-#: app/contents/models/admin/AdminContentsSectionsModel.php:84
-#: app/contents/models/my/MyContentsModel.php:122
+#: app/contents/models/admin/AdminContentsModel.php:136
+#: app/contents/models/admin/AdminContentsSectionsModel.php:93
+#: app/contents/models/my/MyContentsModel.php:117
+#: app/contents/views/my/Index.php:25
 #: app/dbmanager/models/admin/AdminDbmanagerBrowseModel.php:192
 #: app/dbmanager/models/admin/AdminDbmanagerConstraintsModel.php:92
 #: app/dbmanager/models/admin/AdminDbmanagerDefinitionsModel.php:61
@@ -332,7 +335,7 @@ msgstr "Crear"
 #: app/docs/models/admin/AdminDocsModel.php:95 app/docs/views/front/Show.php:14
 #: app/extensions/models/admin/AdminExtensionsChangesModel.php:101
 #: app/extensions/models/admin/AdminExtensionsDevelopersModel.php:71
-#: app/extensions/models/admin/AdminExtensionsModel.php:173
+#: app/extensions/models/admin/AdminExtensionsModel.php:183
 #: app/fees/models/admin/AdminFeesConceptsModel.php:75
 #: app/filemanager/views/admin/Index.php:26
 #: app/filemanager/views/admin/Index.php:48
@@ -343,7 +346,7 @@ msgstr "Crear"
 #: app/goods/models/admin/AdminGoodsCategoriesModel.php:79
 #: app/goods/models/admin/AdminGoodsLayoutsModel.php:65
 #: app/goods/models/admin/AdminGoodsStatusesModel.php:80
-#: app/goods/models/audit/AuditGoodsModel.php:379
+#: app/goods/models/audit/AuditGoodsModel.php:373
 #: app/goods/views/audit/statuses/Edit.php:21
 #: app/groups/models/my/MyGroupsModel.php:106
 #: app/groups/models/my/MyGroupsRolesModel.php:102
@@ -368,10 +371,10 @@ msgstr "Crear"
 #: app/outdoors/views/audit/participants/Edit.php:19
 #: app/persons/models/admin/AdminPersonsTiesKindsModel.php:75
 #: app/persons/models/admin/AdminPersonsTypesModel.php:86
-#: app/persons/models/audit/AuditPersonsModel.php:136
-#: app/persons/models/audit/AuditPersonsTiesModel.php:125
-#: app/persons/models/my/MyPersonsModel.php:223
-#: app/persons/views/my/Index.php:21
+#: app/persons/models/audit/AuditPersonsModel.php:139
+#: app/persons/models/audit/AuditPersonsTiesModel.php:123
+#: app/persons/models/my/MyPersonsModel.php:168
+#: app/persons/views/audit/ties/Index.php:16 app/persons/views/my/Index.php:14
 #: app/policies/models/admin/AdminPoliciesModel.php:84
 #: app/policies/views/admin/Index.php:20
 #: app/portfolios/models/admin/AdminPortfoliosImagesModel.php:120
@@ -384,7 +387,7 @@ msgstr "Crear"
 #: app/sales/models/audit/AuditSalesModel.php:88
 #: app/sellers/models/admin/AdminSellersModel.php:81
 #: app/sellers/models/admin/AdminSellersRolesModel.php:95
-#: app/settings/models/admin/AdminSettingsModel.php:151
+#: app/settings/models/admin/AdminSettingsModel.php:150
 #: app/settings/views/admin/Form.php:44
 #: app/smileys/models/admin/AdminSmileysModel.php:94
 #: app/smileys/models/admin/AdminSmileysSuitesModel.php:67
@@ -493,7 +496,7 @@ msgstr "Diseños"
 #: app/books/views/admin/Dashboard.php:13
 #: app/careers/views/admin/Dashboard.php:15
 #: app/careers/views/audit/courses/Show.php:54
-#: app/careers/views/audit/enrollments/Show.php:60
+#: app/careers/views/audit/enrollments/Show.php:53
 #: app/careers/views/audit/students/Show.php:47
 #: app/careers/views/audit/studies/Show.php:65
 #: app/codemanager/views/admin/application/ConfirmImport.php:95
@@ -635,10 +638,10 @@ msgstr "Afip"
 #: app/certifications/views/audit/SaveForm.php:22
 #: app/certifications/views/audit/exams/SaveForm.php:15
 #: app/codemanager/views/admin/application/ConfirmExport.php:38
-#: app/extensions/views/admin/List.php:48
+#: app/extensions/views/admin/List.php:43
 #: app/extensions/views/admin/changes/SaveForm.php:13
 #: app/foodservices/views/audit/SaveForm.php:23
-#: app/goods/models/audit/AuditGoodsModel.php:296
+#: app/goods/models/audit/AuditGoodsModel.php:290
 #: app/goods/views/admin/statuses/SaveForm.php:31
 #: app/goods/views/audit/ConfirmExport.php:24 app/goods/views/audit/List.php:22
 #: app/goods/views/audit/SaveForm.php:13 app/invoices/views/my/Show.php:27
@@ -756,7 +759,9 @@ msgstr "Para"
 #: app/certifications/views/audit/examiners/ConfirmDelete.php:11
 #: app/certifications/views/audit/exams/ConfirmDelete.php:11
 #: app/certifications/views/audit/roles/ConfirmDelete.php:11
-#: app/certifications/views/audit/schedules/Index.php:23
+#: app/certifications/views/audit/roles/Index.php:16
+#: app/certifications/views/audit/schedules/ConfirmDelete.php:11
+#: app/certifications/views/audit/schedules/Index.php:20
 #: app/codemanager/models/admin/AdminCodemanagerEndpointsModel.php:134
 #: app/codemanager/views/admin/application/ConfirmDelete.php:11
 #: app/codemanager/views/admin/endpoints/ConfirmDelete.php:12
@@ -774,6 +779,7 @@ msgstr "Para"
 #: app/contents/views/admin/labels/ConfirmDelete.php:11
 #: app/contents/views/admin/sections/ConfirmDelete.php:11
 #: app/contents/views/my/ConfirmDelete.php:24
+#: app/contents/views/my/Index.php:26
 #: app/contents/views/my/files/ConfirmDelete.php:11
 #: app/dbmanager/views/admin/backups/ConfirmDelete.php:10
 #: app/dbmanager/views/admin/browse/ConfirmDelete.php:11
@@ -795,7 +801,7 @@ msgstr "Para"
 #: app/docs/views/admin/chapters/Index.php:17
 #: app/docs/views/admin/files/ConfirmDelete.php:11
 #: app/extensions/views/admin/ConfirmDelete.php:31
-#: app/extensions/views/admin/Index.php:22
+#: app/extensions/views/admin/Index.php:23
 #: app/extensions/views/admin/changes/ConfirmDelete.php:11
 #: app/extensions/views/admin/developers/ConfirmDelete.php:11
 #: app/extensions/views/admin/installer/ConfirmDelete.php:11
@@ -844,6 +850,7 @@ msgstr "Para"
 #: app/persons/views/admin/kinds/ConfirmDelete.php:11
 #: app/persons/views/admin/types/ConfirmDelete.php:11
 #: app/persons/views/audit/ties/ConfirmDelete.php:11
+#: app/persons/views/audit/ties/Index.php:17
 #: app/policies/views/admin/ConfirmDelete.php:11
 #: app/policies/views/admin/Index.php:21
 #: app/portfolios/views/admin/ConfirmDelete.php:11
@@ -985,11 +992,11 @@ msgstr "Eliminar"
 #: app/careers/views/audit/students/CreateList.php:18
 #: app/careers/views/audit/students/List.php:26
 #: app/careers/views/audit/studies/List.php:25
+#: app/careers/views/my/forms/List.php:18
 #: app/careers/views/my/payments/List.php:18
-#: app/certifications/views/audit/List.php:18
 #: app/certifications/views/audit/applicants/List.php:19
 #: app/certifications/views/audit/examiners/List.php:11
-#: app/certifications/views/audit/roles/List.php:11
+#: app/certifications/views/audit/roles/List.php:18
 #: app/codemanager/models/CodemanagerApplicationImporterModel.php:380
 #: app/codemanager/views/admin/application/ConfirmImport.php:46
 #: app/codemanager/views/admin/application/Create.php:16
@@ -1033,7 +1040,7 @@ msgstr "Eliminar"
 #: app/docs/views/admin/chapters/List.php:18
 #: app/docs/views/admin/files/ConfirmRename.php:14
 #: app/docs/views/admin/files/List.php:11
-#: app/extensions/views/admin/List.php:35
+#: app/extensions/views/admin/List.php:30
 #: app/extensions/views/admin/SaveForm.php:13
 #: app/extensions/views/admin/developers/List.php:18
 #: app/extensions/views/admin/developers/SaveForm.php:13
@@ -1337,7 +1344,7 @@ msgstr "El número que se asignará al siguiente comprobante."
 #: app/books/views/audit/SaveForm.php:31
 #: app/codemanager/models/admin/AdminCodemanagerModel.php:118
 #: app/email/views/admin/Debug.php:41 app/email/views/admin/Debug.php:50
-#: app/goods/models/audit/AuditGoodsModel.php:299
+#: app/goods/models/audit/AuditGoodsModel.php:293
 #: app/goods/views/audit/ConfirmExport.php:25 app/goods/views/audit/Show.php:10
 #: app/inserts/views/my/Modal.php:17
 #: app/language/views/admin/translations/List.php:22
@@ -1364,7 +1371,7 @@ msgstr "Código"
 #: app/menus/views/admin/SaveForm.php:24
 #: app/mercadopago/views/admin/SaveForm.php:26
 #: app/outdoors/views/audit/places/SaveForm.php:16
-#: app/persons/models/PersonsHistoriesModel.php:70
+#: app/persons/models/PersonsHistoriesModel.php:131
 #: app/persons/views/audit/SaveForm.php:24 app/persons/views/my/SaveForm.php:38
 #: app/portfolios/views/admin/images/List.php:18
 #: app/portfolios/views/admin/images/SaveForm.php:23
@@ -1395,26 +1402,16 @@ msgid "Image"
 msgstr "Imagen"
 
 #: app/afip/views/admin/taxpayers/SaveForm.php:18
-#: app/careers/views/audit/students/ConfirmExport.php:23
-#: app/careers/views/audit/students/Export.php:40
-#: app/forms/views/my/Print.php:19
-#: app/groups/views/my/members/ConfirmExport.php:25
-#: app/groups/views/my/members/Export.php:40
-#: app/outdoors/views/audit/participants/ConfirmExport.php:32
-#: app/outdoors/views/audit/participants/Export.php:40
+#: app/forms/views/my/Print.php:19 app/groups/views/my/members/Export.php:40
 #: app/outdoors/views/audit/places/SaveForm.php:15
 #: app/outdoors/views/front/Place.php:10
 #: app/persons/models/admin/AdminPersonsTypesModel.php:112
 #: app/persons/views/audit/ConfirmExport.php:23
 #: app/persons/views/audit/Export.php:40
 #: app/persons/views/audit/SaveForm.php:62 app/persons/views/my/SaveForm.php:76
-#: app/subscriptions/views/audit/subscribers/ConfirmExport.php:28
-#: app/subscriptions/views/audit/subscribers/Export.php:37
 #: app/workshops/views/audit/enrollments/Voucher.php:19
-#: app/workshops/views/my/students/ConfirmExport.php:29
-#: app/workshops/views/my/students/Export.php:40
 #: cms/plugins/contact/widget/default/widget.load.php:24
-#: cms/snippets/persons/master/default/snippet.php:111
+#: cms/snippets/persons/master/default/snippet.php:53
 #: storage/settings/data/contact/translate.contact-widget.php:11
 msgid "Address"
 msgstr "Dirección"
@@ -1424,7 +1421,7 @@ msgid "Condition"
 msgstr "Condición"
 
 #: app/afip/views/admin/taxpayers/SaveForm.php:20
-#: app/persons/models/audit/AuditPersonsModel.php:206
+#: app/persons/models/audit/AuditPersonsModel.php:205
 #: app/persons/views/audit/SaveForm.php:55 app/persons/views/my/SaveForm.php:69
 msgid "Other"
 msgstr "Otro"
@@ -1432,6 +1429,7 @@ msgstr "Otro"
 #: app/afip/views/admin/taxpayers/SaveForm.php:21
 #: app/afip/views/admin/vouchertypes/List.php:22
 #: app/bingos/views/my/games/List.php:44
+#: cms/libraries/subscriptions/Enum/ExportSubscribers.php:46
 #: cms/plugins/subscriptions/dashboard/default/dashboard.load.php:70
 msgid "Started"
 msgstr "Comenzó"
@@ -1540,9 +1538,9 @@ msgstr "Vencimiento"
 #: app/careers/views/audit/courses/Show.php:26
 #: app/careers/views/audit/courses/Show.php:30
 #: app/careers/views/audit/courses/Show.php:44
-#: app/careers/views/audit/enrollments/Show.php:27
-#: app/careers/views/audit/enrollments/Show.php:31
-#: app/careers/views/audit/enrollments/Show.php:49
+#: app/careers/views/audit/enrollments/Show.php:20
+#: app/careers/views/audit/enrollments/Show.php:24
+#: app/careers/views/audit/enrollments/Show.php:42
 #: app/careers/views/audit/forms/List.php:16
 #: app/careers/views/audit/students/Show.php:19
 #: app/careers/views/audit/students/Show.php:23
@@ -1551,7 +1549,8 @@ msgstr "Vencimiento"
 #: app/careers/views/audit/studies/Show.php:28
 #: app/careers/views/audit/studies/Show.php:32
 #: app/careers/views/audit/studies/Show.php:54
-#: app/certifications/models/my/MyCertificationsModel.php:192
+#: app/careers/views/my/forms/List.php:23
+#: app/certifications/models/my/MyCertificationsModel.php:193
 #: app/certifications/views/audit/applicants/Index.php:10
 #: app/certifications/views/audit/calls/Index.php:15
 #: app/certifications/views/audit/schedules/List.php:46
@@ -1559,10 +1558,11 @@ msgstr "Vencimiento"
 #: app/certifications/views/my/Logs.php:13
 #: app/codemanager/views/admin/Summary.php:37
 #: app/codemanager/views/admin/application/ConfirmImport.php:24
-#: app/contents/views/admin/List.php:54 app/debates/views/admin/List.php:47
+#: app/contents/views/admin/List.php:51 app/debates/views/admin/List.php:47
 #: app/downloads/views/admin/List.php:48
 #: app/extensions/views/admin/changes/List.php:20
-#: app/groups/models/my/MyGroupsMembersModel.php:364
+#: app/extensions/views/admin/updates/List.php:29
+#: app/groups/models/my/MyGroupsMembersModel.php:320
 #: app/invoices/models/my/MyInvoicesModel.php:110
 #: app/invoices/models/my/MyInvoicesModel.php:111
 #: app/invoices/views/admin/viewer/List.php:36
@@ -1574,8 +1574,7 @@ msgstr "Vencimiento"
 #: app/outdoors/models/front/FrontOutdoorsModel.php:92
 #: app/outdoors/views/audit/List.php:24
 #: app/outdoors/views/audit/forms/List.php:36
-#: app/persons/models/PersonsHistoriesModel.php:84
-#: app/persons/models/PersonsHistoriesModel.php:122
+#: app/persons/models/PersonsHistoriesModel.php:50
 #: app/policies/views/admin/List.php:26 app/reviews/views/front/List.php:14
 #: app/subscriptions/models/SubscriptionsSummaryModel.php:215
 #: app/subscriptions/models/SubscriptionsSummaryModel.php:256
@@ -1597,7 +1596,7 @@ msgstr "Vencimiento"
 #: app/workshops/models/audit/AuditWorkshopsAttendancesModel.php:56
 #: app/workshops/models/audit/AuditWorkshopsLessonsModel.php:116
 #: app/workshops/models/my/MyWorkshopsAttendancesModel.php:60
-#: app/workshops/models/my/MyWorkshopsLessonsModel.php:133
+#: app/workshops/models/my/MyWorkshopsLessonsModel.php:163
 #: app/workshops/views/audit/attendances/Logs.php:21
 #: app/workshops/views/audit/enrollments/Show.php:28
 #: app/workshops/views/audit/enrollments/Show.php:32
@@ -1612,6 +1611,7 @@ msgstr "Vencimiento"
 #: app/workshops/views/my/groups/lessons/Notes.php:11
 #: app/workshops/views/my/lessons/List.php:31
 #: cms/libraries/balances/BalancesExport.php:259
+#: cms/libraries/persons/Repository/PersonsRepository.php:234
 #: cms/plugins/balances/dashboard/default/dashboard.load.php:106
 #: cms/plugins/codemanager/generator/careers-forms/src/app/__alias__/views/__scope__/__SubcomponentName__/List.php:16
 #: cms/plugins/contact/dashboard/default/dashboard.load.php:36
@@ -1663,7 +1663,7 @@ msgstr "Terminó"
 #: app/balances/views/my/labels/Show.php:45 app/bingos/views/front/Show.php:16
 #: app/bingos/views/my/games/SaveForm.php:18 app/bugs/views/admin/List.php:18
 #: app/careers/views/audit/courses/Show.php:37
-#: app/careers/views/audit/enrollments/Show.php:38
+#: app/careers/views/audit/enrollments/Show.php:31
 #: app/careers/views/audit/students/Show.php:30
 #: app/careers/views/audit/studies/Show.php:43
 #: app/certifications/views/audit/schedules/Create.php:16
@@ -1717,7 +1717,7 @@ msgstr "Fecha"
 #: app/afip/views/audit/Create.php:21
 #: app/bingos/views/admin/series/Create.php:21
 #: app/codemanager/views/admin/icons/Index.php:19
-#: app/invoices/models/my/MyInvoicesModel.php:231
+#: app/invoices/models/my/MyInvoicesModel.php:207
 #: app/invoices/views/admin/viewer/List.php:21
 #: app/invoices/views/audit/Extract.php:85 app/invoices/views/audit/List.php:21
 #: app/invoices/views/my/List.php:20 app/settings/views/admin/Prepare.php:16
@@ -1731,26 +1731,21 @@ msgstr "Fecha"
 msgid "Total"
 msgstr "Total"
 
-#: app/afip/views/audit/Create.php:26
-#: app/careers/views/audit/students/ConfirmExport.php:19
-#: app/careers/views/audit/students/Export.php:28
-#: app/forms/views/my/Print.php:16
-#: app/groups/views/my/members/ConfirmExport.php:21
+#: app/afip/views/audit/Create.php:26 app/forms/views/my/Print.php:16
 #: app/groups/views/my/members/Export.php:28
-#: app/outdoors/views/audit/participants/ConfirmExport.php:28
-#: app/outdoors/views/audit/participants/Export.php:28
 #: app/persons/models/admin/AdminPersonsTypesModel.php:110
 #: app/persons/views/audit/ConfirmExport.php:19
 #: app/persons/views/audit/Export.php:28
 #: app/persons/views/audit/SaveForm.php:29
 #: app/persons/views/audit/SaveForm.php:34 app/persons/views/my/SaveForm.php:43
 #: app/persons/views/my/SaveForm.php:46
-#: app/subscriptions/views/audit/subscribers/ConfirmExport.php:25
-#: app/subscriptions/views/audit/subscribers/Export.php:28
 #: app/workshops/views/audit/enrollments/Voucher.php:16
-#: app/workshops/views/my/students/ConfirmExport.php:25
-#: app/workshops/views/my/students/Export.php:28
-#: cms/snippets/persons/master/default/snippet.php:103
+#: cms/libraries/careers/Enum/ExportStudentFields.php:39
+#: cms/libraries/groups/Enum/ExportMembers.php:38
+#: cms/libraries/outdoors/Enum/ExportParticipants.php:39
+#: cms/libraries/subscriptions/Enum/ExportSubscribers.php:39
+#: cms/libraries/workshops/Enum/ExportStudents.php:38
+#: cms/snippets/persons/master/default/snippet.php:45
 msgid "Document"
 msgstr "Documento"
 
@@ -1759,7 +1754,7 @@ msgid "Customer"
 msgstr "Cliente"
 
 #: app/afip/views/audit/Create.php:35
-#: app/careers/views/audit/enrollments/Show.php:26
+#: app/careers/views/audit/enrollments/Show.php:19
 #: app/goods/views/audit/Show.php:10
 #: app/subscriptions/views/audit/payments/List.php:25
 #: app/subscriptions/views/my/List.php:28 app/tickets/views/audit/Info.php:8
@@ -1789,7 +1784,7 @@ msgstr "Por favor, complete la extensión."
 
 #: app/assets/models/AssetsModel.php:94 app/cache/models/CacheModel.php:60
 #: app/dbmanager/models/DbmanagerLogsModel.php:44
-#: app/extensions/models/ExtensionsInstallerModel.php:155
+#: app/extensions/models/ExtensionsInstallerModel.php:156
 #: app/filemanager/models/FilemanagerModel.php:405
 #: app/filemanager/models/FilemanagerModel.php:438
 #: app/filemanager/models/FilemanagerModel.php:469
@@ -1823,19 +1818,18 @@ msgstr "El tema no existe."
 #: app/careers/models/front/FrontCareersModel.php:216
 #: app/careers/views/admin/variations/SaveForm.php:16
 #: app/careers/views/audit/courses/List.php:14
-#: app/careers/views/audit/enrollments/List.php:15
 #: app/careers/views/audit/students/List.php:11
 #: app/codemanager/views/admin/application/List.php:14
 #: app/codemanager/views/admin/endpoints/List.php:14
 #: app/dbmanager/views/admin/export/Index.php:32
 #: app/dbmanager/views/admin/export/Index.php:39
 #: app/debates/views/admin/List.php:14
-#: app/docs/models/front/FrontDocsModel.php:405
+#: app/docs/models/front/FrontDocsModel.php:410
 #: app/extensions/views/admin/List.php:9
 #: app/newsletters/views/admin/subscribers/ConfirmExport.php:12
 #: app/newsletters/views/admin/subscribers/List.php:14
 #: app/newsletters/views/admin/trackings/List.php:15
-#: app/outdoors/models/audit/AuditOutdoorsParticipantsModel.php:93
+#: app/outdoors/models/audit/AuditOutdoorsParticipantsModel.php:92
 #: app/persons/models/admin/AdminPersonsTypesModel.php:49
 #: app/socialnetworks/views/admin/List.php:17
 #: app/socials/views/admin/List.php:17
@@ -1849,6 +1843,7 @@ msgstr "El tema no existe."
 #: app/workshops/views/audit/enrollments/List.php:15
 #: app/workshops/views/audit/students/List.php:15
 #: cms/libraries/balances/BalancesExport.php:394
+#: cms/libraries/careers/Enum/EnrollmentStatus.php:101
 #: cms/libraries/certifications/Enum/ApplicantStatus.php:49
 #: cms/plugins/careers/settings/default/settings.load.php:11
 #: cms/plugins/test/generator/socials/src/app/__alias__/views/__scope__/List.php:17
@@ -1866,31 +1861,31 @@ msgstr "Todo"
 #: app/careers/models/admin/AdminCareersPinsModel.php:146
 #: app/careers/models/audit/AuditCareersCoursesModel.php:259
 #: app/careers/models/audit/AuditCareersCoursesModel.php:287
-#: app/careers/models/audit/AuditCareersEnrollmentsModel.php:153
+#: app/careers/models/audit/AuditCareersEnrollmentsModel.php:235
 #: app/careers/views/admin/types/SaveForm.php:9
 #: app/codemanager/models/admin/AdminCodemanagerEndpointsModel.php:389
 #: app/dbmanager/models/DbmanagerReplaceModel.php:34
 #: app/dbmanager/views/admin/export/Index.php:32
 #: app/dbmanager/views/admin/export/Index.php:39
 #: app/docs/models/admin/AdminDocsModel.php:121
-#: app/extensions/models/admin/AdminExtensionsModel.php:502
+#: app/extensions/models/admin/AdminExtensionsModel.php:497
 #: app/fees/models/admin/AdminFeesConceptsModel.php:97
 #: app/forms/models/admin/AdminFormsMastersModel.php:147
 #: app/forms/models/admin/AdminFormsMastersModel.php:185
 #: app/forms/views/admin/elements/SaveForm.php:15
-#: app/groups/models/my/MyGroupsMembersModel.php:396
+#: app/groups/models/my/MyGroupsMembersModel.php:352
 #: app/install/views/front/Language.php:13
 #: app/invoices/models/InvoicesExtractorModel.php:294
 #: app/invoices/models/admin/AdminInvoicesCredentialsModel.php:97
 #: app/invoices/models/admin/AdminInvoicesGatewaysModel.php:115
-#: app/invoices/models/my/MyInvoicesModel.php:158
+#: app/invoices/models/my/MyInvoicesModel.php:141
 #: app/language/views/admin/ConfirmSelect.php:12
 #: app/language/views/admin/Index.php:13
 #: app/language/views/front/Content.php:11
 #: app/menus/models/MenusMakerModel.php:127
 #: app/menus/models/admin/AdminMenusModel.php:200
-#: app/outdoors/models/audit/AuditOutdoorsParticipantsModel.php:292
-#: app/outdoors/models/audit/AuditOutdoorsParticipantsModel.php:428
+#: app/outdoors/models/audit/AuditOutdoorsParticipantsModel.php:239
+#: app/outdoors/models/audit/AuditOutdoorsParticipantsModel.php:377
 #: app/outdoors/views/audit/participants/ConfirmCertificate.php:18
 #: app/reviews/models/admin/AdminReviewsCredentialsModel.php:113
 #: app/smileys/models/admin/AdminSmileysModel.php:160
@@ -1901,7 +1896,7 @@ msgstr "Todo"
 #: app/workshops/models/admin/AdminWorkshopsCalendarsModel.php:129
 #: app/workshops/models/admin/AdminWorkshopsGroupsModel.php:122
 #: app/workshops/models/audit/AuditWorkshopsEnrollmentsModel.php:147
-#: app/workshops/models/my/MyWorkshopsStudentsModel.php:150
+#: app/workshops/models/my/MyWorkshopsStudentsModel.php:151
 #: cms/libraries/outdoors/OutdoorsImportCollector.php:57
 #: cms/plugins/afip/settings/default/settings.load.php:16
 #: cms/plugins/afip/settings/default/settings.load.php:22
@@ -1909,8 +1904,8 @@ msgstr "Todo"
 #: cms/plugins/careers/persons-signup/default/persons-signup.attach.php:57
 #: cms/plugins/careers/settings/default/settings.load.php:18
 #: cms/plugins/codemanager/settings/default/settings.load.php:16
-#: cms/plugins/contents/settings/default/settings.load.php:37
-#: cms/plugins/contents/settings/portal/settings.load.php:23
+#: cms/plugins/contents/settings/default/settings.load.php:38
+#: cms/plugins/contents/settings/portal/settings.load.php:25
 #: cms/plugins/email/settings/default/settings.load.php:10
 #: cms/plugins/email/settings/default/settings.load.php:31
 #: cms/plugins/extensions/settings/updater/settings.load.php:10
@@ -1924,7 +1919,7 @@ msgstr "Todo"
 #: cms/plugins/router/settings/default/settings.load.php:17
 #: cms/plugins/smileys/settings/default/settings.load.php:14
 #: cms/plugins/socials/settings/default/settings.load.php:12
-#: cms/plugins/static/settings/default/settings.load.php:16
+#: cms/plugins/static/settings/default/settings.load.php:18
 #: cms/plugins/tickets/settings/default/settings.load.php:15
 #: cms/plugins/users/settings/default/settings.load.php:19
 #: cms/plugins/widgets/settings/portal/settings.load.php:15
@@ -1994,8 +1989,8 @@ msgstr "Sólo css"
 #: app/assets/views/admin/themes/ConfirmCompile.php:19
 #: app/assets/views/admin/themes/Index.php:15
 #: app/extensions/views/admin/ConfirmCompile.php:90
-#: app/extensions/views/admin/Index.php:28
-#: app/extensions/views/admin/List.php:43
+#: app/extensions/views/admin/Index.php:29
+#: app/extensions/views/admin/List.php:38
 msgid "Compile"
 msgstr "Compilar"
 
@@ -2024,7 +2019,6 @@ msgstr "Edite el archivo de configuración de Javascript."
 #: app/assets/views/admin/ConfirmOptions.php:24
 #: app/assets/views/admin/Index.php:21
 #: app/balances/views/admin/layouts/SaveForm.php:32
-#: app/contents/models/ContentsSectionsModel.php:47
 #: app/contents/views/admin/sections/SaveForm.php:35
 #: app/dbmanager/views/admin/tables/ConfirmOptions.php:26
 #: app/dbmanager/views/admin/tables/Index.php:26
@@ -2166,6 +2160,7 @@ msgstr "Archivo"
 #: app/bingos/views/my/SaveForm.php:22
 #: app/careers/views/audit/students/ConfirmExport.php:10
 #: app/codemanager/views/endpoint/Form.php:17
+#: app/contents/views/admin/sections/List.php:12
 #: app/dbmanager/views/admin/browse/SaveForm.php:12
 #: app/dbmanager/views/admin/indexes/List.php:12
 #: app/dbmanager/views/admin/indexes/SaveForm.php:18
@@ -2211,7 +2206,7 @@ msgid "Ok"
 msgstr "Perfecto"
 
 #: app/assets/views/admin/SaveForm.php:29
-#: app/persons/models/PersonsHistoriesModel.php:85
+#: app/persons/views/audit/HistoriesForm.php:11
 msgid "Current"
 msgstr "Actual"
 
@@ -2319,14 +2314,14 @@ msgid "Themes"
 msgstr "Temas"
 
 #: app/balances/models/BalancesEntriesModel.php:86
-#: app/subscriptions/models/SubscriptionsModel.php:163
+#: app/subscriptions/models/SubscriptionsModel.php:176
 #: cms/libraries/database/DatabaseImporter.php:43
 msgid "The file is empty or could not be read."
 msgstr "El archivo está vacío o no se puede leer."
 
 #: app/balances/models/BalancesEntriesModel.php:108
 #: app/balances/models/BalancesEntriesModel.php:126
-#: app/videos/models/VideosServersModel.php:152
+#: app/videos/models/VideosServersModel.php:162
 msgid "The file format is invalid."
 msgstr "El formato de archivo no es válido."
 
@@ -2336,7 +2331,7 @@ msgid "Please, fill in the value."
 msgstr "Por favor, complete el valor."
 
 #: app/balances/models/BalancesEntriesModel.php:140
-#: app/careers/models/CareersCoursesModel.php:81
+#: app/careers/models/CareersCoursesModel.php:76
 #: app/careers/models/CareersFeesModel.php:48
 #: app/careers/models/CareersFeesModel.php:52
 #: app/certifications/models/CertificationsRolesModel.php:57
@@ -2348,7 +2343,7 @@ msgstr "Por favor, complete el valor."
 #: app/socialnetworks/models/SocialnetworksModel.php:46
 #: app/socials/models/SocialsModel.php:46
 #: app/workshops/models/WorkshopsGroupsModel.php:55
-#: cms/libraries/filter/Filter.php:422
+#: cms/libraries/filter/Filter.php:424
 #: cms/plugins/test/generator/socials/src/app/__alias__/models/__ModelName__.php:46
 msgid "Please, fill in the required data."
 msgstr "Por favor, complete los datos requeridos."
@@ -2375,7 +2370,7 @@ msgid "The date must be greater than «%s»"
 msgstr "La fecha debe ser mayor a «%s»"
 
 #: app/balances/models/BalancesEntriesModel.php:216
-#: app/contents/models/ContentsModel.php:147
+#: app/contents/models/ContentsModel.php:100
 #: app/dbmanager/AdminDbmanagerReplaceController.php:29
 #: app/dbmanager/models/DbmanagerExecuteModel.php:60
 #: app/subscriptions/MySubscriptionsController.php:44
@@ -2426,9 +2421,9 @@ msgstr "Cambiar"
 #: app/careers/views/audit/roles/SaveForm.php:20
 #: app/careers/views/audit/roles/SaveForm.php:29
 #: app/certifications/views/audit/Index.php:19
-#: app/certifications/views/audit/roles/Index.php:20
-#: app/certifications/views/audit/roles/SaveForm.php:26
-#: app/certifications/views/audit/roles/SaveForm.php:44
+#: app/certifications/views/audit/roles/Index.php:24
+#: app/certifications/views/audit/roles/SaveForm.php:30
+#: app/certifications/views/audit/roles/SaveForm.php:52
 #: app/groups/views/my/Index.php:19 app/groups/views/my/roles/Index.php:20
 #: app/groups/views/my/roles/SaveForm.php:28
 #: app/invoices/views/admin/auditors/Index.php:21
@@ -2455,11 +2450,11 @@ msgid "Toggle my access permission."
 msgstr "Alternar mi permiso de acceso."
 
 #: app/balances/views/admin/Index.php:16 app/balances/views/admin/List.php:29
-#: app/contents/views/admin/List.php:14 app/contents/views/admin/List.php:45
-#: app/debates/views/admin/Index.php:14 app/debates/views/admin/List.php:14
-#: app/debates/views/admin/List.php:29 app/products/views/audit/Index.php:18
-#: app/products/views/audit/List.php:18 app/products/views/audit/List.php:34
-#: app/webstore/views/admin/List.php:36
+#: app/contents/views/admin/List.php:14 app/debates/views/admin/Index.php:14
+#: app/debates/views/admin/List.php:14 app/debates/views/admin/List.php:29
+#: app/products/views/audit/Index.php:18 app/products/views/audit/List.php:18
+#: app/products/views/audit/List.php:34 app/webstore/views/admin/List.php:36
+#: cms/libraries/contents/Enum/ContentStatus.php:26
 #: cms/snippets/frontlist/master/comments/snippet.php:54
 msgid "Trash"
 msgstr "Papelera"
@@ -2470,10 +2465,6 @@ msgstr "Papelera"
 #: app/books/views/admin/List.php:16 app/books/views/admin/List.php:31
 #: app/books/views/audit/Index.php:16 app/books/views/audit/List.php:32
 #: app/demos/views/admin/Index.php:20 app/demos/views/admin/List.php:36
-#: app/extensions/models/admin/AdminExtensionsModel.php:200
-#: app/extensions/views/admin/Index.php:18
-#: app/extensions/views/admin/List.php:27
-#: app/extensions/views/admin/List.php:51
 #: app/invoices/views/admin/layouts/List.php:14
 #: app/newsletters/views/admin/List.php:51
 #: app/policies/views/admin/Index.php:17
@@ -2487,6 +2478,7 @@ msgstr "Papelera"
 #: app/workshops/views/audit/lessons/List.php:27
 #: app/workshops/views/my/groups/lessons/Index.php:21
 #: app/workshops/views/my/groups/lessons/List.php:27
+#: cms/libraries/extensions/Enum/ExtensionStatus.php:23
 #: cms/snippets/backlist/master/default/snippet.php:504
 msgid "Private"
 msgstr "Privado"
@@ -2502,10 +2494,6 @@ msgstr "Privado"
 #: app/debates/views/admin/List.php:14 app/debates/views/admin/List.php:30
 #: app/demos/views/admin/Index.php:19 app/demos/views/admin/List.php:37
 #: app/docs/views/admin/SaveForm.php:28
-#: app/extensions/models/admin/AdminExtensionsModel.php:196
-#: app/extensions/views/admin/Index.php:17
-#: app/extensions/views/admin/List.php:26
-#: app/extensions/views/admin/List.php:50
 #: app/filemanager/views/admin/ConfirmPermissions.php:24
 #: app/invoices/views/admin/layouts/List.php:14
 #: app/links/views/admin/SaveForm.php:26 app/menus/views/admin/SaveForm.php:27
@@ -2534,6 +2522,7 @@ msgstr "Privado"
 #: app/webstore/views/my/Index.php:16 app/webstore/views/my/List.php:21
 #: app/webstore/views/my/List.php:40
 #: app/workshops/views/admin/calendars/SaveForm.php:22
+#: cms/libraries/extensions/Enum/ExtensionStatus.php:22
 #: cms/plugins/codemanager/generator/component-crud/src/app/__alias__/views/__scope__/SaveForm.php:27
 #: cms/plugins/codemanager/generator/modal-crud/src/app/__alias__/views/__scope__/__SubcomponentName__/SaveForm.php:22
 #: cms/plugins/codemanager/generator/subcomponent-crud/src/app/__alias__/views/__scope__/__SubcomponentName__/SaveForm.php:27
@@ -2565,7 +2554,7 @@ msgstr "Balances"
 #: app/demos/views/admin/Index.php:16
 #: app/extensions/views/admin/ConfirmCompile.php:34
 #: app/extensions/views/admin/ConfirmCompile.php:41
-#: app/forms/views/my/Edit.php:28 app/forms/views/my/Edit.php:34
+#: app/forms/views/my/Edit.php:29 app/forms/views/my/Edit.php:35
 #: app/forms/views/my/Print.php:47 app/forms/views/my/Print.php:55
 #: app/goods/views/admin/statuses/SaveForm.php:9
 #: app/install/views/front/Requirements.php:9
@@ -2578,8 +2567,8 @@ msgstr "Balances"
 #: cms/libraries/assets/Compilation/UrlFixer.php:97
 #: cms/libraries/forms/FormsExtractor.php:99
 #: cms/libraries/forms/FormsExtractor.php:104
-#: cms/plugins/contents/settings/default/settings.load.php:12
-#: cms/plugins/contents/settings/portal/settings.load.php:11
+#: cms/plugins/contents/settings/default/settings.load.php:13
+#: cms/plugins/contents/settings/portal/settings.load.php:13
 #: cms/plugins/dashboard/settings/shortcuts/settings.load.php:11
 #: storage/settings/data/workshops/translate.workshops.php:26
 msgid "No"
@@ -2597,11 +2586,12 @@ msgstr "Propietario"
 #: app/dbmanager/views/admin/tables/Index.php:28
 #: app/dbmanager/views/admin/tables/Print.php:30
 #: app/dbmanager/views/admin/tables/Print.php:31
-#: app/docs/views/front/Show.php:11 app/forms/views/my/Edit.php:76
+#: app/docs/views/front/Show.php:11 app/forms/views/my/Edit.php:75
+#: app/forms/views/my/Edit.php:90
 #: app/groups/views/my/members/ConfirmPrint.php:16
 #: app/invoices/views/admin/layouts/SaveForm.php:24
 #: app/invoices/views/my/ShowModal.php:42 app/persons/views/audit/Index.php:16
-#: app/persons/views/audit/ShowModal.php:13 app/persons/views/my/Index.php:20
+#: app/persons/views/audit/ShowModal.php:13 app/persons/views/my/Index.php:13
 #: app/subscriptions/views/admin/layouts/Prepare.php:14
 #: app/subscriptions/views/audit/subscribers/ConfirmPrint.php:24
 #: app/subscriptions/views/audit/subscribers/Index.php:28
@@ -2617,19 +2607,19 @@ msgstr "Imprimir"
 #: app/balances/views/admin/layouts/Prepare.php:13
 #: app/balances/views/my/entries/ConfirmExport.php:39
 #: app/balances/views/my/entries/Index.php:21
-#: app/careers/views/audit/students/ConfirmExport.php:34
+#: app/careers/views/audit/students/ConfirmExport.php:21
 #: app/careers/views/audit/students/Index.php:17
 #: app/codemanager/views/admin/application/ConfirmExport.php:50
 #: app/codemanager/views/admin/application/Index.php:18
 #: app/dbmanager/views/admin/export/Index.php:65
 #: app/goods/views/audit/ConfirmExport.php:41
 #: app/goods/views/audit/Index.php:20
-#: app/groups/views/my/members/ConfirmExport.php:36
+#: app/groups/views/my/members/ConfirmExport.php:24
 #: app/groups/views/my/members/Index.php:18
 #: app/language/views/admin/Index.php:25
 #: app/newsletters/views/admin/subscribers/ConfirmExport.php:21
 #: app/newsletters/views/admin/subscribers/Index.php:17
-#: app/outdoors/views/audit/participants/ConfirmExport.php:40
+#: app/outdoors/views/audit/participants/ConfirmExport.php:28
 #: app/outdoors/views/audit/participants/Index.php:26
 #: app/persons/views/audit/ConfirmExport.php:36
 #: app/smileys/views/admin/ConfirmExport.php:14
@@ -2638,11 +2628,11 @@ msgstr "Imprimir"
 #: app/socialnetworks/views/admin/Index.php:23
 #: app/socials/views/admin/ConfirmExport.php:14
 #: app/socials/views/admin/Index.php:23
-#: app/subscriptions/views/audit/subscribers/ConfirmExport.php:36
+#: app/subscriptions/views/audit/subscribers/ConfirmExport.php:24
 #: app/subscriptions/views/audit/subscribers/Index.php:29
 #: app/videos/views/admin/servers/ConfirmExport.php:14
 #: app/videos/views/admin/servers/Index.php:16
-#: app/workshops/views/my/students/ConfirmExport.php:36
+#: app/workshops/views/my/students/ConfirmExport.php:24
 #: app/workshops/views/my/students/Index.php:22
 #: cms/plugins/dbmanager/widget/thirdbar/widget.load.php:15
 #: cms/plugins/test/generator/socials/src/app/__alias__/views/__scope__/ConfirmExport.php:14
@@ -2696,10 +2686,11 @@ msgstr "Escritorio"
 #: app/bugs/views/admin/Index.php:13 app/bugs/views/admin/List.php:20
 #: app/careers/views/audit/courses/Index.php:26
 #: app/careers/views/audit/enrollments/Index.php:22
-#: app/careers/views/audit/enrollments/List.php:25
+#: app/careers/views/audit/enrollments/List.php:19
 #: app/careers/views/audit/students/Index.php:15
 #: app/careers/views/audit/studies/Index.php:14
 #: app/careers/views/audit/studies/List.php:25
+#: app/careers/views/front/Enrollment.php:103
 #: app/certifications/views/my/Index.php:13
 #: app/codemanager/views/admin/Summary.php:9
 #: app/contact/views/admin/Index.php:13 app/contact/views/admin/List.php:20
@@ -2709,6 +2700,7 @@ msgstr "Escritorio"
 #: app/webstore/views/admin/addresses/List.php:29
 #: app/webstore/views/admin/downloads/List.php:36
 #: app/webstore/views/my/keys/Index.php:15
+#: app/workshops/views/front/Enrollment.php:82
 #: cms/plugins/settings/form_element/json/form_element.load.php:12
 #: cms/snippets/backlist/master/default/snippet.php:284
 #: storage/settings/data/foodservices/translate.foodservices.php:3
@@ -2762,7 +2754,7 @@ msgid "My balances"
 msgstr "Mis balances"
 
 #: app/balances/views/my/SaveForm.php:14 app/books/views/audit/SaveForm.php:34
-#: app/careers/views/audit/courses/SaveForm.php:32
+#: app/careers/views/audit/courses/SaveForm.php:33
 #: app/contents/views/admin/sections/SaveForm.php:22
 #: app/goods/views/audit/ConfirmStatus2.php:26
 #: app/goods/views/audit/statuses/Edit.php:13
@@ -3001,13 +2993,13 @@ msgstr "Cuerpo"
 
 #: app/balances/views/my/roles/SaveForm.php:16
 #: app/careers/views/audit/enrollments/Create.php:16
-#: app/careers/views/audit/enrollments/Show.php:26
+#: app/careers/views/audit/enrollments/Show.php:19
 #: app/careers/views/audit/roles/SaveForm.php:16
 #: app/careers/views/front/Enrollment.php:76
 #: app/certifications/views/audit/examiners/SaveForm.php:16
-#: app/certifications/views/audit/roles/SaveForm.php:17
-#: app/certifications/views/audit/roles/SaveForm.php:20
-#: app/goods/models/audit/AuditGoodsModel.php:314
+#: app/certifications/views/audit/roles/SaveForm.php:19
+#: app/certifications/views/audit/roles/SaveForm.php:22
+#: app/goods/models/audit/AuditGoodsModel.php:308
 #: app/goods/views/admin/statuses/SaveForm.php:32
 #: app/goods/views/audit/ConfirmExport.php:30
 #: app/goods/views/audit/ConfirmStatus2.php:15
@@ -3037,18 +3029,19 @@ msgstr "Legajo"
 msgid "Adjunct"
 msgstr "Adjunto"
 
-#: app/billings/models/BillingsModel.php:111
-#: app/contents/models/ContentsSectionsModel.php:65
-#: app/foodservices/models/FoodservicesModel.php:141
-#: app/jobs/models/JobsFailuresModel.php:60 app/jobs/models/JobsModel.php:60
-#: app/mercadopago/models/MercadopagoModel.php:70
-#: app/policies/models/PoliciesModel.php:130
-#: app/portfolios/models/PortfoliosModel.php:62
-#: app/products/models/ProductsModel.php:192
-#: app/sellers/models/SellersModel.php:114 app/test/models/TestModel.php:111
-#: app/workshops/models/WorkshopsModel.php:67
-#: cms/plugins/codemanager/generator/component-crud/src/app/__alias__/models/__ModelName__.php:111
-#: cms/plugins/codemanager/generator/subcomponent-crud/src/app/__alias__/models/__ModelName__.php:60
+#: app/billings/models/BillingsModel.php:110
+#: app/contents/models/ContentsModel.php:70
+#: app/contents/models/ContentsSectionsModel.php:45
+#: app/foodservices/models/FoodservicesModel.php:140
+#: app/jobs/models/JobsModel.php:60
+#: app/mercadopago/models/MercadopagoModel.php:67
+#: app/policies/models/PoliciesModel.php:48
+#: app/portfolios/models/PortfoliosModel.php:44
+#: app/products/models/ProductsModel.php:191
+#: app/sellers/models/SellersModel.php:48 app/test/models/TestModel.php:110
+#: app/workshops/models/WorkshopsModel.php:52
+#: cms/plugins/codemanager/generator/component-crud/src/app/__alias__/models/__ModelName__.php:49
+#: cms/plugins/codemanager/generator/subcomponent-crud/src/app/__alias__/models/__ModelName__.php:50
 msgid "The slug already exists."
 msgstr "El slug ya existe."
 
@@ -3176,7 +3169,7 @@ msgstr "Oscuro"
 #: app/bingos/views/front/Reserve.php:15 app/bingos/views/my/SaveForm.php:42
 #: app/bingos/views/my/games/SaveForm.php:28
 #: app/bingos/views/my/roles/SaveForm.php:21
-#: app/books/views/audit/SaveForm.php:29 app/extensions/views/admin/List.php:48
+#: app/books/views/audit/SaveForm.php:29 app/extensions/views/admin/List.php:43
 #: app/extensions/views/admin/SaveForm.php:19
 #: app/extensions/views/admin/developers/SaveForm.php:24
 #: app/extensions/views/admin/installer/ConfirmInstall.php:68
@@ -3230,6 +3223,7 @@ msgstr "Tableros"
 #: app/bingos/views/admin/Dashboard.php:19
 #: app/books/views/admin/Dashboard.php:17
 #: app/careers/views/admin/Dashboard.php:19
+#: app/certifications/views/audit/roles/SaveForm.php:39
 #: app/fees/views/admin/Dashboard.php:18
 #: app/filemanager/views/admin/ConfirmPermissions.php:40
 #: app/filemanager/views/admin/ConfirmPermissions.php:58
@@ -3291,25 +3285,21 @@ msgstr "Tema"
 #: app/careers/views/admin/categories/SaveForm.php:22
 #: app/careers/views/audit/courses/Show.php:18
 #: app/careers/views/audit/enrollments/Certificate.php:26
-#: app/careers/views/audit/enrollments/ConfirmStatus.php:17
-#: app/careers/views/audit/enrollments/Show.php:23
-#: app/careers/views/audit/enrollments/Show.php:40
-#: app/careers/views/audit/students/ConfirmExport.php:26
-#: app/careers/views/audit/students/Export.php:49
+#: app/careers/views/audit/enrollments/ConfirmStatus.php:10
+#: app/careers/views/audit/enrollments/Show.php:16
+#: app/careers/views/audit/enrollments/Show.php:33
 #: app/careers/views/audit/students/List.php:27
 #: app/careers/views/audit/students/Show.php:18
 #: app/careers/views/audit/studies/Show.php:24 app/careers/views/my/List.php:31
-#: app/careers/views/my/enrollments/List.php:20
+#: app/careers/views/my/enrollments/List.php:12
 #: app/certifications/views/my/Logs.php:21
-#: app/contents/views/admin/Index.php:31
 #: app/docs/views/admin/categories/SaveForm.php:24
 #: app/extensions/views/admin/ConfirmStatus.php:10
 #: app/extensions/views/admin/installer/ConfirmInstall.php:71
-#: app/extensions/views/admin/updates/List.php:22
 #: app/forms/views/admin/List.php:20 app/forms/views/audit/ConfirmActive.php:13
 #: app/forms/views/audit/ConfirmOpened.php:13
 #: app/forms/views/audit/ConfirmRevised.php:13
-#: app/goods/models/audit/AuditGoodsModel.php:308
+#: app/goods/models/audit/AuditGoodsModel.php:302
 #: app/goods/views/admin/categories/SaveForm.php:21
 #: app/goods/views/audit/ConfirmExport.php:28
 #: app/goods/views/audit/ConfirmStatus2.php:13
@@ -3321,7 +3311,6 @@ msgstr "Tema"
 #: app/newsletters/views/admin/List.php:26
 #: app/newsletters/views/admin/subscribers/ConfirmExport.php:15
 #: app/newsletters/views/admin/trackings/List.php:24
-#: app/persons/models/PersonsHistoriesModel.php:80
 #: app/persons/views/audit/AssignUserForm.php:58
 #: app/persons/views/audit/ConfirmStatus.php:12
 #: app/persons/views/audit/ties/SaveForm.php:24
@@ -3340,6 +3329,7 @@ msgstr "Tema"
 #: app/workshops/views/audit/enrollments/Show.php:24
 #: app/workshops/views/audit/enrollments/Show.php:41
 #: app/workshops/views/my/attendances/Logs.php:13
+#: cms/libraries/careers/Enum/ExportStudentFields.php:46
 #: cms/plugins/test/generator/socials/src/app/__alias__/views/__scope__/ConfirmImport.php:16
 #: cms/snippets/backlist/master/default/actions.php:129
 #: storage/settings/data/goods/translate.goods.php:4
@@ -3625,7 +3615,7 @@ msgstr "Continuar"
 #: app/bingos/views/my/board/Create.php:16
 #: app/careers/views/front/Enrollment.php:120
 #: app/usys/views/front/Message.php:14
-#: app/workshops/views/front/Enrollment.php:97
+#: app/workshops/views/front/Enrollment.php:98
 msgid "Attention!"
 msgstr "Atención!"
 
@@ -3703,8 +3693,8 @@ msgstr "Mis tableros"
 #: app/bingos/views/my/credits/Index.php:20
 #: app/bingos/views/my/credits/List.php:17
 #: app/bingos/views/my/credits/List.php:31
-#: app/careers/models/audit/AuditCareersEnrollmentsModel.php:335
-#: app/careers/models/audit/AuditCareersStudentsModel.php:327
+#: app/careers/models/audit/AuditCareersEnrollmentsModel.php:337
+#: app/careers/models/audit/AuditCareersStudentsModel.php:335
 #: app/careers/views/admin/subjects/List.php:32
 #: app/careers/views/admin/subjects/SaveForm.php:33
 #: app/careers/views/audit/students/Index.php:25
@@ -3732,12 +3722,8 @@ msgstr "Aprobado"
 #: app/bingos/views/my/credits/List.php:32
 #: app/bingos/views/my/games/List.php:43
 #: app/bingos/views/my/winners/List.php:30
-#: app/careers/models/audit/AuditCareersStudentsModel.php:324
-#: app/careers/views/audit/enrollments/ConfirmStatus.php:12
+#: app/careers/models/audit/AuditCareersStudentsModel.php:332
 #: app/careers/views/audit/enrollments/Index.php:18
-#: app/careers/views/audit/enrollments/List.php:19
-#: app/careers/views/audit/enrollments/List.php:34
-#: app/careers/views/audit/enrollments/Show.php:14
 #: app/careers/views/audit/students/List.php:15
 #: app/careers/views/audit/students/Show.php:14
 #: app/careers/views/audit/studies/List.php:19
@@ -3745,13 +3731,16 @@ msgstr "Aprobado"
 #: app/careers/views/audit/studies/List.php:36
 #: app/careers/views/audit/studies/Show.php:14
 #: app/careers/views/audit/studies/Show.php:36
+#: app/certifications/views/audit/schedules/Index.php:16
 #: app/certifications/views/audit/schedules/List.php:29
 #: app/certifications/views/my/List.php:30
 #: app/invoices/views/admin/viewer/List.php:28
 #: app/invoices/views/audit/Info.php:19 app/invoices/views/audit/List.php:37
 #: app/invoices/views/my/List.php:27
 #: app/subscriptions/views/audit/payments/List.php:30
+#: cms/libraries/careers/Enum/EnrollmentStatus.php:26
 #: cms/libraries/certifications/Enum/ApplicantStatus.php:26
+#: cms/libraries/extensions/Enum/UpdateStatus.php:22
 #: cms/plugins/invoices/dashboard/default/dashboard.load.php:52
 #: cms/plugins/test/generator/schedules/src/app/__alias__/views/__scope__/__SubcomponentName__/List.php:29
 #: cms/plugins/xtools/sample/enums/sample.php:59
@@ -3764,12 +3753,7 @@ msgstr "No tienes créditos que gestionar."
 
 #: app/bingos/views/my/credits/List.php:16
 #: app/bingos/views/my/credits/List.php:30
-#: app/careers/views/audit/enrollments/ConfirmStatus.php:9
 #: app/careers/views/audit/enrollments/Index.php:15
-#: app/careers/views/audit/enrollments/List.php:16
-#: app/careers/views/audit/enrollments/List.php:31
-#: app/careers/views/audit/enrollments/Show.php:11
-#: app/careers/views/my/enrollments/List.php:31
 #: app/careers/views/my/payments/List.php:25
 #: app/careers/views/my/payments/List.php:26
 #: app/invoices/views/admin/viewer/List.php:26
@@ -3787,6 +3771,7 @@ msgstr "No tienes créditos que gestionar."
 #: app/workshops/views/audit/students/List.php:16
 #: app/workshops/views/audit/students/List.php:33
 #: app/workshops/views/my/List.php:24
+#: cms/libraries/careers/Enum/EnrollmentStatus.php:23
 #: cms/plugins/invoices/dashboard/default/dashboard.load.php:46
 #: cms/plugins/persons/settings/default/settings.load.php:12
 msgid "Pending"
@@ -3842,7 +3827,8 @@ msgstr "Tablero"
 #: app/bingos/views/my/games/List.php:42
 #: app/bingos/views/my/winners/List.php:29
 #: app/careers/views/audit/forms/List.php:20
-#: app/careers/views/my/enrollments/List.php:32
+#: app/careers/views/my/forms/List.php:27
+#: app/certifications/views/audit/schedules/Index.php:15
 #: app/certifications/views/audit/schedules/List.php:30
 #: app/forms/views/audit/ConfirmActive.php:14
 #: app/goods/views/admin/statuses/SaveForm.php:33
@@ -3944,22 +3930,16 @@ msgid "Hole"
 msgstr "Agujero"
 
 #: app/bingos/views/my/roles/SaveForm.php:16
-#: app/careers/views/audit/students/ConfirmExport.php:25
-#: app/careers/views/audit/students/Export.php:46
 #: app/contact/views/admin/Show.php:32 app/debates/views/front/Index.php:24
 #: app/email/views/admin/Index.php:28
 #: app/forms/views/admin/elements/SaveForm.php:12
-#: app/forms/views/my/Print.php:21
-#: app/groups/views/my/members/ConfirmExport.php:27
-#: app/groups/views/my/members/Export.php:46
+#: app/forms/views/my/Print.php:21 app/groups/views/my/members/Export.php:46
 #: app/install/views/front/Settings.php:26
 #: app/install/views/front/Settings.php:44
 #: app/newsletters/views/admin/Test.php:15
 #: app/newsletters/views/admin/impressions/List.php:19
 #: app/newsletters/views/admin/subscribers/Export.php:23
 #: app/newsletters/views/front/subscribe/Index.php:39
-#: app/outdoors/views/audit/participants/ConfirmExport.php:34
-#: app/outdoors/views/audit/participants/Export.php:46
 #: app/outdoors/views/audit/places/SaveForm.php:20
 #: app/outdoors/views/front/Place.php:19
 #: app/persons/models/admin/AdminPersonsTypesModel.php:114
@@ -3969,24 +3949,19 @@ msgstr "Agujero"
 #: app/persons/views/audit/ConfirmExport.php:25
 #: app/persons/views/audit/Export.php:46
 #: app/persons/views/audit/SaveForm.php:82 app/persons/views/my/SaveForm.php:98
-#: app/settings/views/admin/Edit.php:30
-#: app/subscriptions/views/audit/subscribers/ConfirmExport.php:30
-#: app/subscriptions/views/audit/subscribers/Export.php:43
-#: app/tickets/views/audit/Info.php:19 app/users/views/admin/List.php:17
-#: app/users/views/admin/SaveForm.php:17
+#: app/settings/views/admin/Edit.php:30 app/tickets/views/audit/Info.php:19
+#: app/users/views/admin/List.php:17 app/users/views/admin/SaveForm.php:17
 #: app/users/views/admin/activities/List.php:19
 #: app/usys/views/front/Signup.php:26 app/usys/views/front/account/Index.php:17
 #: app/usys/views/front/activation/Reset.php:21
 #: app/usys/views/front/activation/Reset.php:26
 #: app/webstore/views/my/keys/ConfirmSendmail.php:13
 #: app/workshops/views/audit/enrollments/Voucher.php:21
-#: app/workshops/views/my/students/ConfirmExport.php:31
-#: app/workshops/views/my/students/Export.php:46
 #: cms/libraries/codemanager/EndpointHelper.php:23
 #: cms/plugins/contact/portal/default/portal.load.php:23
 #: cms/plugins/contact/widget/default/widget.load.php:30
 #: cms/snippets/contact/master/default/snippet.php:32
-#: cms/snippets/persons/master/default/snippet.php:113
+#: cms/snippets/persons/master/default/snippet.php:55
 #: storage/settings/data/contact/translate.contact-widget.php:13
 #: storage/settings/data/dbmanager/translate.dbmanager.php:4
 #: storage/settings/data/newsletters/translate.newsletters-bounces.php:2
@@ -4006,7 +3981,7 @@ msgstr "Sí mismo"
 #: app/bingos/views/my/roles/SaveForm.php:22
 #: app/careers/views/audit/roles/SaveForm.php:23
 #: app/certifications/views/audit/examiners/SaveForm.php:27
-#: app/certifications/views/audit/roles/SaveForm.php:27
+#: app/certifications/views/audit/roles/SaveForm.php:31
 #: cms/plugins/codemanager/generator/roles/src/app/__alias__/views/__scope__/roles/SaveForm.php:23
 msgid "Can manage:"
 msgstr "Puede administrar:"
@@ -4019,7 +3994,7 @@ msgstr "Cartón #%s"
 
 #: app/bingos/views/my/winners/List.php:22
 #: app/certifications/views/audit/examiners/SaveForm.php:20
-#: app/certifications/views/audit/roles/SaveForm.php:33
+#: app/certifications/views/audit/roles/SaveForm.php:37
 #: app/menus/views/admin/SaveForm.php:22
 #: app/mercadopago/views/admin/List.php:21
 #: app/outdoors/views/audit/roles/SaveForm.php:21
@@ -4069,7 +4044,6 @@ msgstr "Lista vacía"
 
 #: app/books/models/BooksAuthorsModel.php:47
 #: app/books/models/BooksEditorialsModel.php:47
-#: app/contents/models/ContentsModel.php:333
 #: app/docs/models/DocsChaptersModel.php:307
 #: app/outdoors/models/OutdoorsPlacesModel.php:54
 #: cms/libraries/groups/Groups.php:44
@@ -4079,7 +4053,7 @@ msgstr "El nombre ya existe."
 
 #: app/books/models/BooksAuthorsModel.php:67
 #: app/books/models/BooksEditorialsModel.php:67
-#: app/outdoors/models/OutdoorsPlacesModel.php:94
+#: app/outdoors/models/OutdoorsPlacesModel.php:89
 msgid "Please, remove the resources before continuing."
 msgstr "Por favor, retire los recursos antes de continuar."
 
@@ -4124,7 +4098,7 @@ msgstr "Eliminado"
 
 #: app/books/views/admin/List.php:25 app/bugs/views/admin/Show.php:21
 #: app/careers/views/audit/courses/Show.php:26
-#: app/careers/views/audit/enrollments/Show.php:27
+#: app/careers/views/audit/enrollments/Show.php:20
 #: app/careers/views/audit/students/Show.php:19
 #: app/careers/views/audit/studies/List.php:26
 #: app/careers/views/audit/studies/Show.php:28
@@ -4135,7 +4109,7 @@ msgstr "Eliminado"
 #: app/newsletters/views/admin/impressions/List.php:18
 #: app/newsletters/views/admin/subscriber/List.php:12
 #: app/newsletters/views/admin/trackings/List.php:22
-#: app/persons/models/PersonsHistoriesModel.php:79
+#: app/persons/models/PersonsHistoriesModel.php:155
 #: app/policies/views/admin/List.php:19
 #: app/subscriptions/views/audit/trajectories/Index.php:27
 #: app/users/views/admin/List.php:26 app/webstore/views/admin/List.php:28
@@ -4188,9 +4162,7 @@ msgid "Pages"
 msgstr "Páginas"
 
 #: app/books/views/audit/SaveForm.php:33 app/books/views/front/Show.php:26
-#: app/contents/views/admin/Index.php:30 app/contents/views/admin/List.php:48
-#: app/contents/views/my/ConfirmStatus.php:20
-#: app/contents/views/my/Index.php:24 app/contents/views/my/List.php:25
+#: cms/libraries/contents/Enum/ContentStatus.php:25
 msgid "Published"
 msgstr "Publicado"
 
@@ -4260,7 +4232,7 @@ msgstr "Todavía no hay algo escrito."
 #: app/bugs/models/admin/AdminBugsModel.php:88
 #: app/invoices/models/admin/AdminInvoicesModel.php:56
 #: app/invoices/models/audit/AuditInvoicesModel.php:95
-#: app/invoices/models/my/MyInvoicesModel.php:56
+#: app/invoices/models/my/MyInvoicesModel.php:55
 #: app/invoices/views/audit/ConfirmCancel.php:24
 #: app/invoices/views/audit/ConfirmPay.php:25
 #: app/invoices/views/audit/Info.php:47 app/tickets/views/audit/Info.php:52
@@ -4287,14 +4259,14 @@ msgstr "Nivel"
 
 #: app/bugs/views/admin/List.php:31 app/careers/views/audit/courses/Show.php:26
 #: app/careers/views/audit/courses/Show.php:30
-#: app/careers/views/audit/enrollments/Show.php:27
-#: app/careers/views/audit/enrollments/Show.php:31
+#: app/careers/views/audit/enrollments/Show.php:20
+#: app/careers/views/audit/enrollments/Show.php:24
 #: app/careers/views/audit/students/Show.php:19
 #: app/careers/views/audit/students/Show.php:23
 #: app/careers/views/audit/studies/Show.php:18
 #: app/careers/views/audit/studies/Show.php:28
 #: app/careers/views/audit/studies/Show.php:32
-#: app/certifications/models/my/MyCertificationsModel.php:193
+#: app/certifications/models/my/MyCertificationsModel.php:194
 #: app/certifications/views/audit/schedules/List.php:47
 #: app/certifications/views/my/List.php:45
 #: app/certifications/views/my/Logs.php:14 app/tickets/views/audit/Info.php:34
@@ -4380,7 +4352,7 @@ msgid "Generated"
 msgstr "Generado"
 
 #: app/bugs/views/admin/Show.php:40 app/careers/views/audit/courses/Show.php:30
-#: app/careers/views/audit/enrollments/Show.php:31
+#: app/careers/views/audit/enrollments/Show.php:24
 #: app/careers/views/audit/students/Show.php:23
 #: app/careers/views/audit/studies/Show.php:32
 #: app/workshops/views/audit/enrollments/Show.php:32
@@ -4405,15 +4377,15 @@ msgid "Cache"
 msgstr "Cache"
 
 #: app/careers/models/CareersBachModel.php:66
-#: app/careers/models/CareersEnrollmentsModel.php:181
+#: app/careers/models/CareersEnrollmentsModel.php:87
 #: app/careers/models/CareersPaymentsModel.php:63
-#: app/careers/models/front/FrontCareersEnrollmentModel.php:131
+#: app/careers/models/front/FrontCareersEnrollmentModel.php:132
 #: app/certifications/models/CertificationsCallsModel.php:52
 #: app/certifications/models/CertificationsCallsModel.php:67
 #: app/certifications/models/CertificationsCoursesModel.php:39
-#: app/persons/models/PersonsModel.php:392
-#: app/subscriptions/models/SubscriptionsPaymentsModel.php:197
-#: app/subscriptions/models/SubscriptionsPaymentsModel.php:237
+#: app/persons/models/PersonsModel.php:401
+#: app/subscriptions/models/SubscriptionsPaymentsModel.php:201
+#: app/subscriptions/models/SubscriptionsPaymentsModel.php:241
 #: app/subscriptions/models/SubscriptionsVariationsMapModel.php:98
 #: app/subscriptions/models/audit/AuditSubscriptionsPaymentsModel.php:157
 #: app/workshops/views/front/Enrollment.php:64
@@ -4428,62 +4400,62 @@ msgstr "Por favor, elimine las propuestas para continuar."
 
 #: app/careers/models/CareersCategoriesModel.php:70
 #: app/certifications/models/CertificationsExamsModel.php:73
-#: app/certifications/models/CertificationsModel.php:73
+#: app/certifications/models/CertificationsModel.php:76
 #: app/fees/models/FeesConceptsModel.php:72
 #: app/invoices/models/InvoicesCredentialsModel.php:72
-#: app/invoices/models/InvoicesGatewaysModel.php:103
-#: app/invoices/models/InvoicesRolesModel.php:97
+#: app/invoices/models/InvoicesGatewaysModel.php:98
+#: app/invoices/models/InvoicesRolesModel.php:92
 #: app/mercadopago/models/MercadopagoApplicationsModel.php:82
 #: app/reviews/models/ReviewsCredentialsModel.php:61
-#: app/subscriptions/models/SubscriptionsTypesModel.php:132
-#: app/subscriptions/models/SubscriptionsVariationsModel.php:107
+#: app/subscriptions/models/SubscriptionsTypesModel.php:127
+#: app/subscriptions/models/SubscriptionsVariationsModel.php:102
 msgid "Please remove the registers that are being used before continuing."
 msgstr "Quite los registros que se están utilizando antes de continuar."
 
-#: app/careers/models/CareersCoursesModel.php:78
+#: app/careers/models/CareersCoursesModel.php:73
 msgid "Please, select at least one subject."
 msgstr "Por favor, seleccione al menos una materia."
 
-#: app/careers/models/CareersCoursesModel.php:213
+#: app/careers/models/CareersCoursesModel.php:223
 #, php-format
 msgid "The «%s» course cannot be eliminated because it has students."
 msgstr "El curso «%s» no se puede eliminar porque tiene alumnos."
 
-#: app/careers/models/CareersCoursesModel.php:228
+#: app/careers/models/CareersCoursesModel.php:238
 msgid "Please, delete the exams to continue."
 msgstr "Por favor, borre los exámenes para continuar."
 
-#: app/careers/models/CareersEnrollmentsModel.php:40
+#: app/careers/models/CareersEnrollmentsModel.php:42
 msgid "Please, select a calendar."
 msgstr "Por favor, seleccione un calendario."
 
-#: app/careers/models/CareersEnrollmentsModel.php:45
+#: app/careers/models/CareersEnrollmentsModel.php:47
 msgid "Please, select a person."
 msgstr "Por favor, seleccione un legajo."
 
-#: app/careers/models/CareersEnrollmentsModel.php:67
+#: app/careers/models/CareersEnrollmentsModel.php:59
 msgid "Something's wrong. Enrollments overlap."
 msgstr "Algo esta mal. Las matriculaciones se superponen."
 
-#: app/careers/models/CareersEnrollmentsModel.php:131
+#: app/careers/models/CareersEnrollmentsModel.php:83
 #: app/workshops/models/WorkshopsEnrollmentsModel.php:105
 msgid "Please, activate all persons before continuing."
 msgstr "Por favor, activa todos los legajos antes de continuar."
 
-#: app/careers/models/CareersEnrollmentsModel.php:165
+#: app/careers/models/CareersEnrollmentsModel.php:152
 #: app/workshops/models/WorkshopsEnrollmentsModel.php:140
 msgid "Please, revise all forms before continuing."
 msgstr "Por favor, revise todos los formularios antes de continuar."
 
-#: app/careers/models/CareersEnrollmentsModel.php:198
+#: app/careers/models/CareersEnrollmentsModel.php:181
 msgid "You must first cancel the student's course."
 msgstr "Primero debe cancelar el curso del estudiante."
 
-#: app/careers/models/CareersEnrollmentsModel.php:214
+#: app/careers/models/CareersEnrollmentsModel.php:197
 msgid "Enrollments with courses can only be canceled."
 msgstr "Las inscripciones a cursos sólo pueden cancelarse."
 
-#: app/careers/models/CareersEnrollmentsModel.php:279
+#: app/careers/models/CareersEnrollmentsModel.php:225
 #, php-format
 msgid ""
 "The enrollment of «%s» can not be deleted because it is registered to "
@@ -4491,14 +4463,14 @@ msgid ""
 msgstr ""
 "La matrícula de «%s» no se puede eliminar porque está registrada a cursos."
 
-#: app/careers/models/CareersFeesModel.php:87
+#: app/careers/models/CareersFeesModel.php:84
 #: app/careers/models/CareersPapersModel.php:57
 #: app/careers/models/CareersVariationsModel.php:103
 msgid "Error! There are elements that are being used."
 msgstr "¡Error! Hay elementos que se están utilizando."
 
 #: app/careers/models/CareersModel.php:95
-#: app/workshops/models/WorkshopsModel.php:123
+#: app/workshops/models/WorkshopsModel.php:98
 msgid "A career with subscribed students cannot be eliminated."
 msgstr "Una carrera con estudiantes suscritos no puede ser eliminada."
 
@@ -4529,7 +4501,7 @@ msgstr "Debe quitar todos los pins antes de continuar."
 msgid "All level %d"
 msgstr "Todo el nivel %d"
 
-#: app/careers/models/audit/AuditCareersEnrollmentsModel.php:332
+#: app/careers/models/audit/AuditCareersEnrollmentsModel.php:334
 #: app/certifications/views/audit/applicants/Index.php:35
 #: app/certifications/views/my/List.php:29
 #: cms/libraries/certifications/Enum/ApplicantStatus.php:25
@@ -4537,8 +4509,8 @@ msgstr "Todo el nivel %d"
 msgid "Disapproved"
 msgstr "Desaprobado"
 
-#: app/careers/models/audit/AuditCareersEnrollmentsModel.php:333
-#: app/careers/models/audit/AuditCareersStudentsModel.php:325
+#: app/careers/models/audit/AuditCareersEnrollmentsModel.php:335
+#: app/careers/models/audit/AuditCareersStudentsModel.php:333
 #: app/careers/views/audit/students/Index.php:23
 #: app/careers/views/audit/students/List.php:12
 #: app/careers/views/audit/students/Show.php:11
@@ -4548,8 +4520,8 @@ msgstr "Desaprobado"
 msgid "Studying"
 msgstr "Cursando"
 
-#: app/careers/models/audit/AuditCareersEnrollmentsModel.php:334
-#: app/careers/models/audit/AuditCareersStudentsModel.php:326
+#: app/careers/models/audit/AuditCareersEnrollmentsModel.php:336
+#: app/careers/models/audit/AuditCareersStudentsModel.php:334
 #: app/careers/views/admin/subjects/List.php:28
 #: app/careers/views/admin/subjects/SaveForm.php:32
 #: app/careers/views/audit/students/Index.php:24
@@ -4562,7 +4534,7 @@ msgstr "Cursando"
 msgid "Studied"
 msgstr "Cursado"
 
-#: app/careers/models/front/FrontCareersEnrollmentModel.php:156
+#: app/careers/models/front/FrontCareersEnrollmentModel.php:157
 #: app/careers/views/admin/Dashboard.php:11
 #: app/careers/views/admin/Index.php:35 app/careers/views/admin/SaveForm.php:31
 #: app/careers/views/admin/categories/Index.php:20
@@ -4580,7 +4552,7 @@ msgstr "Cursado"
 msgid "Careers"
 msgstr "Carreras"
 
-#: app/careers/models/front/FrontCareersEnrollmentModel.php:157
+#: app/careers/models/front/FrontCareersEnrollmentModel.php:158
 #: app/careers/views/admin/fees/SaveForm.php:26
 #: app/careers/views/admin/variations/SaveForm.php:26
 #: app/careers/views/audit/enrollments/Create.php:31
@@ -4598,11 +4570,14 @@ msgstr "Programa"
 #: app/careers/models/front/FrontCareersModel.php:275
 #: app/careers/models/front/FrontCareersModel.php:276
 #: app/contact/views/admin/List.php:37
-#: app/goods/views/audit/statuses/List.php:17 app/jobs/views/admin/List.php:37
-#: app/jobs/views/admin/Show.php:9 app/jobs/views/admin/Show.php:18
-#: app/jobs/views/admin/Show.php:19 app/jobs/views/admin/failures/List.php:29
+#: app/goods/views/audit/statuses/List.php:17
+#: app/groups/models/my/MyGroupsMembersModel.php:273
+#: app/jobs/views/admin/List.php:37 app/jobs/views/admin/Show.php:9
+#: app/jobs/views/admin/Show.php:18 app/jobs/views/admin/Show.php:19
+#: app/jobs/views/admin/failures/List.php:29
 #: app/jobs/views/admin/failures/Show.php:9
 #: app/newsletters/views/front/List.php:27
+#: app/subscriptions/models/SubscriptionsSubscribersModel.php:271
 #: app/subscriptions/views/audit/subscribers/Print.php:17
 #: app/subscriptions/views/audit/subscribers/Print.php:21
 #: app/subscriptions/views/audit/trajectories/Index.php:27
@@ -4636,43 +4611,43 @@ msgstr "Comienzo"
 msgid "End"
 msgstr "Final"
 
-#: app/careers/models/my/MyCareersModel.php:42
-#: app/persons/models/my/MyPersonsModel.php:97
+#: app/careers/models/my/MyCareersModel.php:43
+#: app/persons/models/my/MyPersonsModel.php:66
 #: cms/libraries/invoices/InvoicesGateways.php:86
 #: cms/libraries/persons/Persons.php:49
 msgid "You don't have a person yet."
 msgstr "Aún no tienes un legajo."
 
-#: app/careers/models/my/MyCareersModel.php:42
+#: app/careers/models/my/MyCareersModel.php:43
 #, php-format
 msgid "Go %shere%s"
 msgstr "Ir %saquí%s"
 
-#: app/careers/models/my/MyCareersModel.php:44
-#: app/persons/models/my/MyPersonsModel.php:87
+#: app/careers/models/my/MyCareersModel.php:45
+#: app/persons/models/my/MyPersonsModel.php:57
 #: cms/libraries/persons/Persons.php:57
 msgid "Your person is not enabled."
 msgstr "Su legajo no está habilitado."
 
-#: app/careers/models/my/MyCareersModel.php:51
+#: app/careers/models/my/MyCareersModel.php:52
 #, php-format
 msgid "You don't have any career yet. Find one %shere%s"
 msgstr "Todavía no tienes una carrera. Encuentra una %saquí%s"
 
-#: app/careers/models/my/MyCareersModel.php:71
+#: app/careers/models/my/MyCareersModel.php:72
 #: app/careers/views/audit/studies/Create.php:10
 msgid "You do not have an enrollment yet."
 msgstr "Aún no tienes una matrícula."
 
-#: app/careers/models/my/MyCareersModel.php:73
-#: app/careers/models/my/MyCareersModel.php:78
-#: app/careers/models/my/MyCareersModel.php:124
+#: app/careers/models/my/MyCareersModel.php:74
+#: app/careers/models/my/MyCareersModel.php:79
+#: app/careers/models/my/MyCareersModel.php:125
 #: cms/libraries/careers/CareersStudents.php:50
-#: cms/libraries/careers/CareersStudents.php:112
+#: cms/libraries/careers/CareersStudents.php:111
 msgid "Your enrollment is pending."
 msgstr "Su matriculado está pendiente."
 
-#: app/careers/models/my/MyCareersModel.php:75
+#: app/careers/models/my/MyCareersModel.php:76
 msgid "The calendar to which he enrolled has not yet begun."
 msgstr "El calendario al que se inscribió aún no ha comenzado."
 
@@ -4691,7 +4666,7 @@ msgstr "Calendarios"
 #: app/careers/views/admin/proposals/List.php:12
 #: app/careers/views/admin/proposals/SaveForm.php:17
 #: app/careers/views/audit/enrollments/Index.php:24
-#: app/careers/views/my/enrollments/List.php:15
+#: app/careers/views/my/enrollments/Index.php:16
 #: app/subscriptions/views/admin/masters/Index.php:20
 #: app/workshops/views/admin/Dashboard.php:14
 #: app/workshops/views/admin/calendars/SaveForm.php:36
@@ -4829,7 +4804,7 @@ msgstr ""
 #: app/careers/views/admin/calendars/SaveForm.php:35
 #: app/careers/views/audit/enrollments/Index.php:25
 #: app/careers/views/audit/enrollments/Voucher.php:21
-#: app/careers/views/my/enrollments/List.php:12
+#: app/careers/views/my/enrollments/Index.php:18
 #: app/invoices/views/audit/List.php:26
 #: app/workshops/views/admin/calendars/SaveForm.php:37
 #: app/workshops/views/audit/enrollments/Index.php:22
@@ -4845,8 +4820,8 @@ msgstr "Comprobante"
 #: app/careers/views/audit/courses/Show.php:22
 #: app/careers/views/audit/enrollments/Certificate.php:25
 #: app/careers/views/audit/enrollments/Create.php:19
-#: app/careers/views/audit/enrollments/Show.php:22
-#: app/careers/views/audit/students/Export.php:67
+#: app/careers/views/audit/enrollments/Show.php:15
+#: app/careers/views/audit/students/Export.php:24
 #: app/careers/views/audit/studies/Show.php:27
 #: app/careers/views/front/Enrollment.php:77
 #: app/careers/views/front/List.php:23
@@ -4878,8 +4853,7 @@ msgstr "Regular"
 #: app/careers/views/admin/fees/SaveForm.php:28
 #: app/careers/views/admin/variations/SaveForm.php:29
 #: app/careers/views/audit/roles/SaveForm.php:19
-#: app/careers/views/audit/students/ConfirmExport.php:34
-#: app/careers/views/audit/students/Export.php:66
+#: app/careers/views/audit/students/Export.php:23
 #: app/careers/views/audit/studies/Create.php:24
 #: app/careers/views/audit/studies/Show.php:23
 #: app/certifications/views/audit/applicants/CreateAll.php:21
@@ -4923,11 +4897,12 @@ msgstr "Monto"
 #: app/careers/views/audit/enrollments/Index.php:28
 #: app/careers/views/audit/forms/Index.php:26
 #: app/careers/views/front/Enrollment.php:107
-#: app/careers/views/my/enrollments/List.php:19
+#: app/careers/views/my/enrollments/Index.php:17
+#: app/careers/views/my/forms/Index.php:24
 #: app/careers/views/my/forms/Replace.php:12
 #: app/forms/views/admin/Dashboard.php:11
 #: app/forms/views/admin/Dashboard.php:26 app/forms/views/admin/Index.php:22
-#: app/forms/views/admin/masters/Index.php:32
+#: app/forms/views/admin/masters/Index.php:32 app/forms/views/my/Edit.php:109
 #: app/outdoors/views/audit/Index.php:18
 #: app/outdoors/views/audit/forms/Index.php:27
 #: app/outdoors/views/audit/masters/Index.php:23
@@ -4946,7 +4921,7 @@ msgstr "Monto"
 #: app/workshops/views/audit/forms/Index.php:26
 #: app/workshops/views/audit/students/ConfirmExtractForms.php:32
 #: app/workshops/views/audit/students/Index.php:19
-#: app/workshops/views/front/Enrollment.php:86
+#: app/workshops/views/front/Enrollment.php:87
 #: app/workshops/views/my/forms/Index.php:16
 #: app/workshops/views/my/students/Index.php:24
 #: storage/translate/menus.forms.php:1
@@ -5107,6 +5082,7 @@ msgstr "Fechas"
 #: app/careers/views/audit/courses/Show.php:13
 #: app/careers/views/audit/forms/Index.php:13
 #: app/careers/views/audit/forms/List.php:18 app/careers/views/my/List.php:15
+#: app/careers/views/my/forms/List.php:25
 #: app/forms/views/audit/ConfirmOpened.php:14
 #: app/outdoors/views/audit/forms/Index.php:13
 #: app/outdoors/views/audit/forms/List.php:17
@@ -5148,7 +5124,7 @@ msgid "Finished"
 msgstr "Terminado"
 
 #: app/careers/views/audit/courses/Index.php:44
-#: app/careers/views/audit/courses/SaveForm.php:41
+#: app/careers/views/audit/courses/SaveForm.php:42
 #: app/certifications/views/audit/Index.php:21
 #: app/certifications/views/audit/calls/List.php:14
 #: app/certifications/views/audit/courses/Index.php:26
@@ -5163,6 +5139,7 @@ msgstr "Sólo activos"
 #: app/careers/views/audit/courses/List.php:19
 #: app/careers/views/audit/courses/List.php:23
 #: app/careers/views/audit/roles/SaveForm.php:21
+#: app/careers/views/audit/students/ConfirmExport.php:21
 #: app/groups/views/my/members/Create.php:18
 #: app/workshops/models/audit/AuditWorkshopsStudentsModel.php:36
 #: app/workshops/models/audit/AuditWorkshopsStudentsModel.php:55
@@ -5176,23 +5153,23 @@ msgstr "Estudiantes"
 
 #: app/careers/views/audit/courses/SaveForm.php:16
 #: app/careers/views/audit/enrollments/Certificate.php:23
-#: app/careers/views/my/List.php:29
+#: app/careers/views/my/List.php:29 app/certifications/views/audit/List.php:18
 #: app/certifications/views/audit/SaveForm.php:16
 #: app/certifications/views/audit/schedules/List.php:21
 #: cms/libraries/careers/Program.php:81
 msgid "[careers]:Subject"
 msgstr "Materia"
 
-#: app/careers/views/audit/courses/SaveForm.php:29
+#: app/careers/views/audit/courses/SaveForm.php:30
 msgid "Add a text after the subject's name."
 msgstr "Añade un texto después del nombre de la materia."
 
-#: app/careers/views/audit/courses/SaveForm.php:29
+#: app/careers/views/audit/courses/SaveForm.php:30
 #: app/workshops/views/admin/groups/SaveForm.php:26
 msgid "Maximum number of students who can register."
 msgstr "Número máximo de estudiantes que pueden inscribirse."
 
-#: app/careers/views/audit/courses/SaveForm.php:30
+#: app/careers/views/audit/courses/SaveForm.php:31
 #: app/careers/views/audit/courses/Show.php:25
 #: app/careers/views/audit/studies/Create.php:25
 #: app/workshops/views/admin/groups/SaveForm.php:25
@@ -5200,19 +5177,19 @@ msgstr "Número máximo de estudiantes que pueden inscribirse."
 msgid "Quota"
 msgstr "Cuota"
 
-#: app/careers/views/audit/courses/SaveForm.php:34
+#: app/careers/views/audit/courses/SaveForm.php:35
 #: app/careers/views/audit/courses/Show.php:21
 #: app/careers/views/audit/enrollments/Create.php:23
-#: app/careers/views/audit/enrollments/List.php:26
-#: app/careers/views/audit/enrollments/Show.php:18
+#: app/careers/views/audit/enrollments/List.php:20
+#: app/careers/views/audit/enrollments/Show.php:11
 #: cms/plugins/careers/persons-signup/default/persons-signup.attach.php:38
 msgid "Career"
 msgstr "Carrera"
 
 #: app/careers/views/audit/courses/Show.php:29
 #: app/careers/views/audit/courses/Show.php:40
-#: app/careers/views/audit/enrollments/Show.php:30
-#: app/careers/views/audit/enrollments/Show.php:41
+#: app/careers/views/audit/enrollments/Show.php:23
+#: app/careers/views/audit/enrollments/Show.php:34
 #: app/careers/views/audit/students/Show.php:22
 #: app/careers/views/audit/students/Show.php:33
 #: app/careers/views/audit/studies/Show.php:31
@@ -5230,13 +5207,12 @@ msgid "Notary"
 msgstr "Notario"
 
 #: app/careers/views/audit/courses/Show.php:29
-#: app/careers/views/audit/enrollments/Show.php:26
-#: app/careers/views/audit/enrollments/Show.php:30
+#: app/careers/views/audit/enrollments/Show.php:19
+#: app/careers/views/audit/enrollments/Show.php:23
 #: app/careers/views/audit/students/Show.php:22
 #: app/careers/views/audit/studies/Show.php:31
 #: app/careers/views/front/Enrollment.php:30
 #: app/careers/views/front/Enrollment.php:57
-#: app/careers/views/front/Enrollment.php:103
 #: app/codemanager/views/admin/libraries/Documentation.php:39
 #: app/codemanager/views/endpoint/Form.php:24
 #: app/email/views/admin/Message.php:21
@@ -5250,7 +5226,6 @@ msgstr "Notario"
 #: app/workshops/views/audit/enrollments/Show.php:27
 #: app/workshops/views/audit/enrollments/Show.php:31
 #: app/workshops/views/front/Enrollment.php:39
-#: app/workshops/views/front/Enrollment.php:84
 #: cms/plugins/afip/sample/layout/sample.php:15
 #: cms/plugins/persons/dashboard/default/dashboard.load.php:30
 #: storage/settings/data/filemanager/translate.filemanager.php:7
@@ -5258,7 +5233,7 @@ msgid "View"
 msgstr "Vista"
 
 #: app/careers/views/audit/courses/Show.php:55
-#: app/careers/views/audit/enrollments/Show.php:61
+#: app/careers/views/audit/enrollments/Show.php:54
 #: app/careers/views/audit/students/Show.php:48
 #: app/careers/views/audit/studies/Show.php:66
 #: app/certifications/views/my/Index.php:16
@@ -5276,38 +5251,8 @@ msgstr "Vista"
 msgid "Logs"
 msgstr "Registros"
 
-#: app/careers/views/audit/enrollments/ConfirmStatus.php:10
-#: app/careers/views/audit/enrollments/Index.php:16
-#: app/careers/views/audit/enrollments/List.php:17
-#: app/careers/views/audit/enrollments/List.php:32
-#: app/careers/views/audit/enrollments/Show.php:12
-#: app/workshops/views/audit/enrollments/Index.php:17
-#: app/workshops/views/audit/enrollments/List.php:17
-#: app/workshops/views/audit/enrollments/List.php:31
-#: app/workshops/views/audit/enrollments/Show.php:12
-#: app/workshops/views/audit/students/List.php:17
-#: app/workshops/views/audit/students/List.php:34
-#: app/workshops/views/my/List.php:25
-msgid "Denied"
-msgstr "Denegado"
-
-#: app/careers/views/audit/enrollments/ConfirmStatus.php:11
-#: app/careers/views/audit/enrollments/Index.php:17
-#: app/careers/views/audit/enrollments/List.php:18
-#: app/careers/views/audit/enrollments/List.php:33
-#: app/careers/views/audit/enrollments/Show.php:13
-#: app/workshops/views/audit/enrollments/Index.php:16
-#: app/workshops/views/audit/enrollments/List.php:18
-#: app/workshops/views/audit/enrollments/List.php:32
-#: app/workshops/views/audit/enrollments/Show.php:13
-#: app/workshops/views/audit/students/List.php:18
-#: app/workshops/views/audit/students/List.php:35
-#: app/workshops/views/my/List.php:26
-msgid "Accepted"
-msgstr "Aceptado"
-
-#: app/careers/views/audit/enrollments/ConfirmStatus.php:21
-#: app/contents/views/my/ConfirmStatus.php:28
+#: app/careers/views/audit/enrollments/ConfirmStatus.php:14
+#: app/contents/views/my/ConfirmStatus.php:25
 #: app/extensions/views/admin/ConfirmStatus.php:13
 #: app/forms/views/audit/ConfirmActive.php:14
 #: app/forms/views/audit/ConfirmOpened.php:14
@@ -5318,14 +5263,38 @@ msgstr "Aceptado"
 msgid "Please, confirm change the status to «%s»."
 msgstr "Por favor, confirme cambiar el estado a «%s»."
 
+#: app/careers/views/audit/enrollments/Index.php:16
+#: app/workshops/views/audit/enrollments/Index.php:17
+#: app/workshops/views/audit/enrollments/List.php:17
+#: app/workshops/views/audit/enrollments/List.php:31
+#: app/workshops/views/audit/enrollments/Show.php:12
+#: app/workshops/views/audit/students/List.php:17
+#: app/workshops/views/audit/students/List.php:34
+#: app/workshops/views/my/List.php:25
+#: cms/libraries/careers/Enum/EnrollmentStatus.php:24
+msgid "Denied"
+msgstr "Denegado"
+
+#: app/careers/views/audit/enrollments/Index.php:17
+#: app/workshops/views/audit/enrollments/Index.php:16
+#: app/workshops/views/audit/enrollments/List.php:18
+#: app/workshops/views/audit/enrollments/List.php:32
+#: app/workshops/views/audit/enrollments/Show.php:13
+#: app/workshops/views/audit/students/List.php:18
+#: app/workshops/views/audit/students/List.php:35
+#: app/workshops/views/my/List.php:26
+#: cms/libraries/careers/Enum/EnrollmentStatus.php:25
+msgid "Accepted"
+msgstr "Aceptado"
+
 #: app/careers/views/audit/enrollments/Index.php:30
 #: app/careers/views/audit/studies/Index.php:23
 msgid "Studies"
 msgstr "Estudios"
 
-#: app/careers/views/audit/enrollments/Index.php:46
+#: app/careers/views/audit/enrollments/Index.php:45
 #: app/careers/views/my/Index.php:28
-#: app/careers/views/my/enrollments/Index.php:18
+#: app/careers/views/my/enrollments/Index.php:32
 #: app/workshops/views/audit/enrollments/Index.php:42
 #: app/workshops/views/audit/enrollments/Papers.php:11
 #: storage/translate/menus.careers.php:6
@@ -5335,10 +5304,11 @@ msgstr "Matrículas"
 
 #: app/careers/views/audit/forms/Index.php:14
 #: app/careers/views/audit/forms/List.php:19
+#: app/careers/views/my/forms/List.php:26
 #: app/forms/views/audit/ConfirmRevised.php:14
 #: app/outdoors/views/audit/forms/Index.php:14
 #: app/outdoors/views/audit/forms/List.php:18
-#: app/persons/models/PersonsHistoriesModel.php:121
+#: app/persons/views/audit/HistoriesForm.php:50
 #: app/subscriptions/views/audit/forms/List.php:18
 #: app/subscriptions/views/my/forms/List.php:18
 #: app/workshops/views/audit/forms/Index.php:14
@@ -5350,6 +5320,7 @@ msgid "Revised"
 msgstr "Revisado"
 
 #: app/careers/views/audit/forms/Index.php:17
+#: app/careers/views/my/forms/Index.php:13
 #: app/careers/views/my/forms/Replace.php:12
 #: app/dbmanager/views/admin/replace/Index.php:20
 #: app/dbmanager/views/admin/replace/Index.php:35
@@ -5365,6 +5336,7 @@ msgid "Replace"
 msgstr "Reemplazar"
 
 #: app/careers/views/audit/forms/List.php:21
+#: app/careers/views/my/forms/List.php:28
 #: app/outdoors/views/audit/forms/List.php:20
 #: app/subscriptions/views/audit/forms/List.php:20
 #: app/subscriptions/views/my/forms/List.php:20
@@ -5378,198 +5350,29 @@ msgstr "Archivado"
 #: app/certifications/views/audit/Index.php:20
 #: app/certifications/views/audit/examiners/SaveForm.php:26
 #: app/certifications/views/audit/exams/Index.php:27
-#: app/certifications/views/audit/roles/SaveForm.php:37
 #: storage/settings/data/careers/translate.careers.php:6
 #: storage/translate/menus.careers.php:7
 msgid "Exams"
 msgstr "Exámenes"
 
-#: app/careers/views/audit/students/ConfirmExport.php:15
-#: app/goods/views/audit/ConfirmExport.php:23
-#: app/groups/views/my/members/ConfirmExport.php:17
-#: app/outdoors/views/audit/participants/ConfirmExport.php:24
-#: app/persons/views/audit/ConfirmExport.php:15
-#: app/subscriptions/views/audit/subscribers/ConfirmExport.php:21
-#: app/workshops/views/my/students/ConfirmExport.php:21
-#: storage/settings/data/contents/translate.contents.php:12
-#: storage/settings/data/contents/translate.contents.php:43
-#: storage/settings/data/widgets/translate.widgets-portal.php:7
-msgid "Counter"
-msgstr "Contador"
-
-#: app/careers/views/audit/students/ConfirmExport.php:16
-#: app/careers/views/audit/students/Export.php:19
-#: app/groups/views/my/members/ConfirmExport.php:18
-#: app/groups/views/my/members/Export.php:19
-#: app/outdoors/views/audit/participants/ConfirmExport.php:25
-#: app/outdoors/views/audit/participants/Export.php:19
-#: app/persons/views/audit/ConfirmExport.php:16
-#: app/persons/views/audit/Export.php:19
-#: app/subscriptions/views/audit/subscribers/ConfirmExport.php:22
-#: app/subscriptions/views/audit/subscribers/Export.php:19
-#: app/workshops/views/my/students/ConfirmExport.php:22
-#: app/workshops/views/my/students/Export.php:19
-#: storage/settings/data/addthis/translate.addthis.php:3
-#: storage/settings/data/facebook/translate.facebook.php:3
-#: storage/settings/data/google/translate.google.php:7
-#: storage/settings/data/google/translate.google.php:11
-#: storage/settings/data/google/translate.google.php:13
-msgid "ID"
-msgstr "ID"
-
-#: app/careers/views/audit/students/ConfirmExport.php:17
-#: app/careers/views/audit/students/Export.php:22
-#: app/forms/views/my/Print.php:13
-#: app/groups/views/my/members/ConfirmExport.php:19
-#: app/groups/views/my/members/Export.php:22
-#: app/invoices/views/audit/Extract.php:76
-#: app/outdoors/views/audit/participants/ConfirmExport.php:26
-#: app/outdoors/views/audit/participants/Export.php:22
-#: app/persons/models/PersonsHistoriesModel.php:68
-#: app/persons/views/audit/ConfirmExport.php:17
-#: app/persons/views/audit/Export.php:22
-#: app/persons/views/audit/SaveForm.php:14
-#: app/persons/views/audit/SaveForm.php:19 app/persons/views/my/SaveForm.php:36
-#: app/subscriptions/models/SubscriptionsSummaryModel.php:184
-#: app/subscriptions/models/SubscriptionsSummaryModel.php:224
-#: app/subscriptions/models/SubscriptionsSummaryModel.php:265
-#: app/subscriptions/views/audit/subscribers/ConfirmExport.php:23
-#: app/subscriptions/views/audit/subscribers/Export.php:22
-#: app/workshops/models/WorkshopsAttendancesExtractorModel.php:253
-#: app/workshops/views/audit/enrollments/Voucher.php:13
-#: app/workshops/views/my/students/ConfirmExport.php:23
-#: app/workshops/views/my/students/Export.php:22
-#: cms/libraries/forms/FormsExtractor.php:51
-msgid "Surname"
-msgstr "Apellido"
-
-#: app/careers/views/audit/students/ConfirmExport.php:18
-#: app/careers/views/audit/students/Export.php:25
-#: app/forms/views/my/Print.php:14
-#: app/groups/views/my/members/ConfirmExport.php:20
-#: app/groups/views/my/members/Export.php:25
-#: app/invoices/views/audit/Extract.php:77
-#: app/outdoors/views/audit/participants/ConfirmExport.php:27
-#: app/outdoors/views/audit/participants/Export.php:25
-#: app/persons/models/PersonsHistoriesModel.php:69
-#: app/persons/views/audit/ConfirmExport.php:18
-#: app/persons/views/audit/Export.php:25
-#: app/persons/views/audit/SaveForm.php:14
-#: app/persons/views/audit/SaveForm.php:22 app/persons/views/my/SaveForm.php:37
-#: app/subscriptions/models/SubscriptionsSummaryModel.php:185
-#: app/subscriptions/models/SubscriptionsSummaryModel.php:225
-#: app/subscriptions/models/SubscriptionsSummaryModel.php:266
-#: app/subscriptions/views/audit/subscribers/ConfirmExport.php:24
-#: app/subscriptions/views/audit/subscribers/Export.php:25
-#: app/workshops/models/WorkshopsAttendancesExtractorModel.php:253
-#: app/workshops/views/audit/enrollments/Voucher.php:14
-#: app/workshops/views/my/students/ConfirmExport.php:24
-#: app/workshops/views/my/students/Export.php:25
-#: cms/libraries/forms/FormsExtractor.php:51
-msgid "Firstname"
-msgstr "Nombre"
-
-#: app/careers/views/audit/students/ConfirmExport.php:20
-#: app/careers/views/audit/students/Export.php:31
-#: app/forms/views/my/Print.php:18
-#: app/groups/views/my/members/ConfirmExport.php:22
-#: app/groups/views/my/members/Export.php:31
-#: app/outdoors/views/audit/participants/ConfirmExport.php:29
-#: app/outdoors/views/audit/participants/Export.php:31
-#: app/persons/models/PersonsHistoriesModel.php:74
-#: app/persons/views/audit/ConfirmExport.php:20
-#: app/persons/views/audit/Export.php:31
-#: app/persons/views/audit/SaveForm.php:54 app/persons/views/my/SaveForm.php:68
-#: app/subscriptions/views/audit/subscribers/ConfirmExport.php:26
-#: app/subscriptions/views/audit/subscribers/Export.php:31
-#: app/workshops/views/audit/enrollments/Voucher.php:18
-#: app/workshops/views/my/students/ConfirmExport.php:26
-#: app/workshops/views/my/students/Export.php:31
-#: cms/snippets/persons/master/default/snippet.php:105
-msgid "Birthdate"
-msgstr "Fecha de nacimiento"
-
-#: app/careers/views/audit/students/ConfirmExport.php:21
-#: app/careers/views/audit/students/Export.php:34
-#: app/groups/views/my/members/ConfirmExport.php:23
-#: app/groups/views/my/members/Export.php:34
-#: app/outdoors/views/audit/participants/ConfirmExport.php:30
-#: app/outdoors/views/audit/participants/Export.php:34
-#: app/persons/views/audit/ConfirmExport.php:21
-#: app/persons/views/audit/Export.php:34
-#: app/workshops/views/my/students/ConfirmExport.php:27
-#: app/workshops/views/my/students/Export.php:34
-#: cms/snippets/persons/master/default/snippet.php:106
-msgid "Age"
-msgstr "Edad"
-
-#: app/careers/views/audit/students/ConfirmExport.php:22
-#: app/careers/views/audit/students/Export.php:37
-#: app/forms/views/my/Print.php:17
-#: app/groups/views/my/members/ConfirmExport.php:24
-#: app/groups/views/my/members/Export.php:37
-#: app/outdoors/views/audit/participants/ConfirmExport.php:31
-#: app/outdoors/views/audit/participants/Export.php:37
-#: app/persons/models/PersonsHistoriesModel.php:75
-#: app/persons/models/admin/AdminPersonsTypesModel.php:111
-#: app/persons/views/audit/ConfirmExport.php:22
-#: app/persons/views/audit/Export.php:37
-#: app/persons/views/audit/SaveForm.php:51 app/persons/views/my/SaveForm.php:65
-#: app/subscriptions/views/audit/subscribers/ConfirmExport.php:27
-#: app/subscriptions/views/audit/subscribers/Export.php:34
-#: app/workshops/views/audit/enrollments/Voucher.php:17
-#: app/workshops/views/my/students/ConfirmExport.php:28
-#: app/workshops/views/my/students/Export.php:37
-#: cms/snippets/persons/master/default/snippet.php:104
-msgid "Gender"
-msgstr "Género"
-
-#: app/careers/views/audit/students/ConfirmExport.php:24
-#: app/careers/views/audit/students/Export.php:43
-#: app/forms/views/my/Print.php:20
-#: app/groups/views/my/members/ConfirmExport.php:26
-#: app/groups/views/my/members/Export.php:43
-#: app/outdoors/views/audit/participants/ConfirmExport.php:33
-#: app/outdoors/views/audit/participants/Export.php:43
-#: app/outdoors/views/audit/places/SaveForm.php:19
-#: app/outdoors/views/front/Place.php:16
-#: app/persons/models/admin/AdminPersonsTypesModel.php:113
-#: app/persons/views/audit/ConfirmExport.php:24
-#: app/persons/views/audit/Export.php:43
-#: app/persons/views/audit/SaveForm.php:72 app/persons/views/my/SaveForm.php:87
-#: app/settings/views/admin/Edit.php:32
-#: app/subscriptions/views/audit/subscribers/ConfirmExport.php:29
-#: app/subscriptions/views/audit/subscribers/Export.php:40
-#: app/workshops/views/audit/enrollments/Voucher.php:20
-#: app/workshops/views/my/students/ConfirmExport.php:30
-#: app/workshops/views/my/students/Export.php:43
-#: cms/libraries/codemanager/EndpointHelper.php:25
-#: cms/plugins/contact/widget/default/widget.load.php:27
-#: cms/plugins/gateways/invoices-gateways/cuentadni/invoices-gateways.button.php:13
-#: cms/snippets/persons/master/default/snippet.php:112
-#: storage/settings/data/contact/translate.contact-widget.php:12
-#: storage/settings/data/gateways/translate.gateways.php:9
-msgid "Phone"
-msgstr "Teléfono"
-
-#: app/careers/views/audit/students/ConfirmExport.php:27
+#: app/careers/views/audit/students/ConfirmExport.php:14
 #: app/codemanager/views/endpoint/Api.php:56
 #: app/codemanager/views/endpoint/Backlist.php:48
 #: app/codemanager/views/endpoint/Form.php:59
 #: app/extensions/views/admin/ConfirmDbhistory.php:30
 #: app/goods/views/audit/ConfirmExport.php:31
-#: app/groups/views/my/members/ConfirmExport.php:28
-#: app/outdoors/views/audit/participants/ConfirmExport.php:36
+#: app/groups/views/my/members/ConfirmExport.php:16
+#: app/outdoors/views/audit/participants/ConfirmExport.php:23
 #: app/persons/views/audit/ConfirmExport.php:26
-#: app/subscriptions/views/audit/subscribers/ConfirmExport.php:32
-#: app/workshops/views/my/students/ConfirmExport.php:32
+#: app/subscriptions/views/audit/subscribers/ConfirmExport.php:20
+#: app/workshops/views/my/students/ConfirmExport.php:20
 msgid "Fields"
 msgstr "Campos"
 
 #: app/careers/views/audit/studies/ConfirmCancel.php:11
 #: app/careers/views/front/Enrollment.php:79 app/careers/views/my/Enroll.php:27
 #: app/careers/views/my/enrollments/Enroll.php:10
-#: app/contents/views/my/ConfirmStatus.php:25
+#: app/contents/views/my/ConfirmStatus.php:21
 #: app/extensions/views/admin/installer/ConfirmFindUpdates.php:10
 #: app/filemanager/views/admin/ConfirmClear.php:10
 #: app/filemanager/views/admin/ConfirmExtract.php:11
@@ -5599,7 +5402,7 @@ msgid "There are no open courses."
 msgstr "No hay cursos abiertos."
 
 #: app/careers/views/audit/studies/List.php:15 app/careers/views/my/List.php:16
-#: app/extensions/views/admin/List.php:25
+#: app/extensions/models/admin/AdminExtensionsModel.php:127
 #: app/goods/models/audit/AuditGoodsModel.php:107
 #: app/goods/models/front/FrontGoodsModel.php:115
 #: app/groups/views/my/members/List.php:19 app/persons/views/audit/List.php:21
@@ -5670,7 +5473,7 @@ msgstr "Inscriba a otra persona"
 #: app/careers/views/front/Enrollment.php:67
 #: app/careers/views/front/List.php:33 app/careers/views/my/Enroll.php:30
 #: app/careers/views/my/enrollments/Enroll.php:12
-#: app/careers/views/my/enrollments/List.php:29
+#: app/careers/views/my/enrollments/Index.php:14
 #: app/workshops/views/front/Enrollment.php:39
 #: app/workshops/views/front/Enrollment.php:58
 #: app/workshops/views/front/List.php:19
@@ -5735,7 +5538,7 @@ msgid "There are %s%d fees%s to be paid."
 msgstr "Hay %s%d aranceles %s a pagar."
 
 #: app/careers/views/front/Enrollment.php:108
-#: app/workshops/views/front/Enrollment.php:87
+#: app/workshops/views/front/Enrollment.php:88
 msgid ""
 "Please note that you must then complete the following automatically created "
 "forms."
@@ -5789,7 +5592,7 @@ msgstr "Nueva carrera"
 msgid "Certifications"
 msgstr "Certificaciones"
 
-#: app/careers/views/my/Index.php:39 app/careers/views/my/Index.php:59
+#: app/careers/views/my/Index.php:39 app/careers/views/my/Index.php:58
 #: storage/translate/menus.careers.php:1
 msgid "My careers"
 msgstr "Mis carreras"
@@ -5872,25 +5675,6 @@ msgstr "Cantidad"
 msgid "Partial"
 msgstr "Parcial"
 
-#: app/careers/views/my/enrollments/List.php:30
-#: app/groups/views/my/members/ConfirmStatus.php:14
-#: app/groups/views/my/members/List.php:20
-#: app/newsletters/views/admin/subscribers/ConfirmExport.php:13
-#: app/newsletters/views/admin/subscribers/Index.php:14
-#: app/newsletters/views/admin/subscribers/List.php:14
-#: app/newsletters/views/admin/subscribers/List.php:24
-#: app/persons/views/audit/AssignUserForm.php:34
-#: app/persons/views/audit/List.php:22 app/persons/views/audit/List.php:40
-#: app/sales/views/audit/List.php:26 app/subscriptions/views/audit/List.php:23
-#: app/subscriptions/views/audit/subscribers/List.php:17
-#: app/subscriptions/views/audit/subscribers/List.php:43
-#: app/subscriptions/views/audit/subscribers/Print.php:19
-#: app/subscriptions/views/audit/trajectories/List.php:29
-#: app/users/views/admin/Index.php:15 app/users/views/admin/List.php:32
-#: cms/plugins/persons/settings/default/settings.load.php:13
-msgid "Inactive"
-msgstr "Inactivo"
-
 #: app/careers/views/my/forms/Replace.php:13
 msgid ""
 "This form belongs to the file. Do you want to replace it with a new one?"
@@ -5925,7 +5709,7 @@ msgstr "Abra la bandeja (%s) y confirme para generar un recibo."
 msgid "You will be able to pay your invoices in «%sMy Invoices%s»."
 msgstr "Podrás pagar tus recibos en «%sMis recibos%s»."
 
-#: app/certifications/models/CertificationsApplicantsModel.php:44
+#: app/certifications/models/CertificationsApplicantsModel.php:45
 msgid "The exam has not been done yet."
 msgstr "El examen no ha sido hecho todavía."
 
@@ -5961,7 +5745,7 @@ msgstr "Candidatos"
 
 #: app/certifications/views/audit/calls/Index.php:32
 #: app/certifications/views/audit/calls/List.php:14
-#: app/certifications/views/audit/schedules/Index.php:26
+#: app/certifications/views/audit/schedules/Index.php:23
 #: app/certifications/views/audit/schedules/List.php:23
 #: cms/plugins/test/generator/schedules/src/app/__alias__/views/__scope__/__SubcomponentName__/Index.php:26
 #: cms/plugins/test/generator/schedules/src/app/__alias__/views/__scope__/__SubcomponentName__/List.php:23
@@ -5974,7 +5758,7 @@ msgstr "Llamados"
 #: app/demos/views/admin/Index.php:15
 #: app/extensions/views/admin/ConfirmCompile.php:34
 #: app/extensions/views/admin/ConfirmCompile.php:41
-#: app/forms/views/my/Edit.php:28 app/forms/views/my/Edit.php:34
+#: app/forms/views/my/Edit.php:29 app/forms/views/my/Edit.php:35
 #: app/forms/views/my/Print.php:45 app/forms/views/my/Print.php:54
 #: app/goods/views/admin/statuses/SaveForm.php:10
 #: app/install/views/front/Requirements.php:10
@@ -5985,14 +5769,14 @@ msgstr "Llamados"
 #: app/webstore/views/admin/referers/Index.php:17
 #: cms/libraries/forms/FormsExtractor.php:99
 #: cms/libraries/forms/FormsExtractor.php:102
-#: cms/plugins/contents/settings/default/settings.load.php:12
-#: cms/plugins/contents/settings/portal/settings.load.php:12
+#: cms/plugins/contents/settings/default/settings.load.php:13
+#: cms/plugins/contents/settings/portal/settings.load.php:14
 #: cms/plugins/dashboard/settings/shortcuts/settings.load.php:12
 #: storage/settings/data/workshops/translate.workshops.php:27
 msgid "Yes"
 msgstr "Si"
 
-#: app/certifications/views/audit/courses/Index.php:28
+#: app/certifications/views/audit/courses/Index.php:29
 msgid ""
 "Here you can view and select the courses that will use this certification."
 msgstr ""
@@ -6015,9 +5799,9 @@ msgstr "Deshabilitado"
 #: app/certifications/views/audit/examiners/Index.php:20
 #: app/certifications/views/audit/examiners/SaveForm.php:25
 #: app/certifications/views/audit/examiners/SaveForm.php:33
-#: app/certifications/views/audit/roles/SaveForm.php:36
+#: app/certifications/views/audit/roles/SaveForm.php:43
 #: app/certifications/views/audit/schedules/Create.php:21
-#: app/certifications/views/audit/schedules/Index.php:25
+#: app/certifications/views/audit/schedules/Index.php:22
 #: cms/plugins/test/generator/schedules/src/app/__alias__/views/__scope__/__SubcomponentName__/Create.php:21
 #: cms/plugins/test/generator/schedules/src/app/__alias__/views/__scope__/__SubcomponentName__/Index.php:25
 msgid "Examiners"
@@ -6025,22 +5809,33 @@ msgstr "Examinadores"
 
 #: app/certifications/views/audit/examiners/List.php:12
 #: app/certifications/views/audit/examiners/SaveForm.php:19
-#: app/certifications/views/audit/roles/SaveForm.php:32
+#: app/certifications/views/audit/roles/SaveForm.php:36
 msgid "Signature"
 msgstr "Firma"
 
 #: app/certifications/views/audit/examiners/SaveForm.php:24
-#: app/certifications/views/audit/roles/SaveForm.php:35
-#: app/outdoors/views/audit/SaveForm.php:24
-#: app/subscriptions/views/audit/trajectories/ConfirmSchedule.php:25
-msgid "Schedule"
-msgstr "Cronograma"
+#: app/certifications/views/audit/roles/SaveForm.php:41
+#: app/certifications/views/audit/roles/SaveForm.php:45
+#: app/certifications/views/audit/schedules/Index.php:36
+#: storage/translate/menus.certifications.php:1
+msgid "Schedules"
+msgstr "Horarios"
 
-#: app/certifications/views/audit/roles/SaveForm.php:25
+#: app/certifications/views/audit/roles/SaveForm.php:28
 msgid "Certification"
 msgstr "Certificación"
 
-#: app/certifications/views/audit/roles/SaveForm.php:29
+#: app/certifications/views/audit/roles/SaveForm.php:28
+msgid ""
+"Allows you to edit and delete the certification; manage the exam list; and "
+"assign the certification to different courses."
+msgstr ""
+
+#: app/certifications/views/audit/roles/SaveForm.php:30
+msgid "Allows you to manage roles."
+msgstr "Permite gestionar los roles."
+
+#: app/certifications/views/audit/roles/SaveForm.php:33
 msgid ""
 "These preferences shall be used as defaults when creating the examining "
 "authorities on each call."
@@ -6048,16 +5843,23 @@ msgstr ""
 "Estas preferencias se utilizarán por defecto al crear las autoridades "
 "examinadoras en cada convocatoria."
 
-#: app/certifications/views/audit/roles/SaveForm.php:38
+#: app/certifications/views/audit/roles/SaveForm.php:41
+msgid "Allows you to manage the exam schedule."
+msgstr "Permite gestionar el calendario de exámenes."
+
+#: app/certifications/views/audit/roles/SaveForm.php:43
+msgid "Allows you to manage examiners."
+msgstr "Permite gestionar los examinadores."
+
+#: app/certifications/views/audit/roles/SaveForm.php:45
+msgid "Allows you to manage exams."
+msgstr "Permite gestionar los exámenes."
+
+#: app/certifications/views/audit/roles/SaveForm.php:46
 #: app/codemanager/views/admin/endpoints/ConfirmPreferences.php:21
 #: app/codemanager/views/admin/endpoints/Index.php:12
 msgid "Preferences"
 msgstr "Preferencias"
-
-#: app/certifications/views/audit/schedules/Index.php:39
-#: storage/translate/menus.certifications.php:1
-msgid "Schedules"
-msgstr "Horarios"
 
 #: app/certifications/views/my/ConfirmApply.php:14
 msgid "Call"
@@ -6071,18 +5873,18 @@ msgstr "Aplicar"
 #: app/dbmanager/models/admin/AdminDbmanagerStructureModel.php:54
 #: app/demos/views/admin/ConfirmRestart.php:14
 #: app/goods/models/audit/AuditGoodsModel.php:125
-#: app/goods/models/audit/AuditGoodsModel.php:495
-#: app/goods/models/audit/AuditGoodsModel.php:535
-#: app/goods/models/audit/AuditGoodsModel.php:547
+#: app/goods/models/audit/AuditGoodsModel.php:489
+#: app/goods/models/audit/AuditGoodsModel.php:529
+#: app/goods/models/audit/AuditGoodsModel.php:541
 #: app/goods/views/audit/List.php:38
-#: app/outdoors/models/audit/AuditOutdoorsParticipantsModel.php:413
+#: app/outdoors/models/audit/AuditOutdoorsParticipantsModel.php:362
 #: app/settings/models/admin/AdminSettingsFormModel.php:217
 #: app/socials/views/admin/items/List.php:29
 #: app/subscriptions/models/admin/AdminSubscriptionsTypesModel.php:142
 #: app/subscriptions/views/audit/trajectories/ConfirmSchedule.php:16
 #: app/workshops/views/admin/attendances/SaveForm.php:18
 #: cms/libraries/certifications/Enum/SignatureType.php:22
-#: cms/libraries/extensions/Installer/Unpackager.php:622
+#: cms/libraries/extensions/Installer/Unpackager.php:623
 #: cms/plugins/fontawesome/settings/default/settings.load.php:10
 #: cms/plugins/goods/settings/default/settings.load.php:15
 #: cms/plugins/goods/settings/default/settings.load.php:20
@@ -6273,7 +6075,7 @@ msgstr "Middlewares"
 #: app/codemanager/models/admin/AdminCodemanagerModel.php:100
 #: app/extensions/views/admin/ConfirmAppend.php:13
 #: app/extensions/views/admin/ConfirmCompile.php:90
-#: app/extensions/views/admin/Index.php:51
+#: app/extensions/views/admin/Index.php:52
 #: app/extensions/views/admin/SaveForm.php:38
 #: app/extensions/views/admin/installer/ConfirmInstall.php:112
 #: app/extensions/views/admin/installer/Index.php:28
@@ -6426,7 +6228,7 @@ msgid "Meta"
 msgstr "Meta"
 
 #: app/codemanager/views/admin/application/ConfirmExport.php:43
-#: app/extensions/views/admin/List.php:55
+#: app/extensions/views/admin/List.php:45
 msgid "Queries"
 msgstr "Consultas"
 
@@ -6500,7 +6302,7 @@ msgid "Endpoints"
 msgstr "Puntos de entrada"
 
 #: app/codemanager/views/admin/application/List.php:20
-#: app/extensions/views/admin/List.php:55
+#: app/extensions/views/admin/List.php:45
 #: app/extensions/views/admin/installer/ConfirmInstall.php:64
 msgid "Components"
 msgstr "Componentes"
@@ -6800,7 +6602,7 @@ msgstr "Por seguridad, el sitio no permite más que %d mensajes por hora."
 #: cms/plugins/contact/widget/default/widget.load.php:21
 #: cms/plugins/frontend/settings/default/settings.load.php:19
 #: cms/snippets/frontend/template/default/snippet.php:197
-#: cms/snippets/persons/master/default/snippet.php:109
+#: cms/snippets/persons/master/default/snippet.php:51
 #: storage/settings/data/contact/translate.contact.php:3
 #: storage/translate/menus.contact.php:1 storage/translate/menus.contact.php:2
 #: storage/translate/menus.contact.php:3
@@ -6842,43 +6644,24 @@ msgstr "La tarea ha sido realizada correctamente."
 msgid "The file type is invalid."
 msgstr "El tipo de archivo no es válido."
 
-#: app/contents/models/ContentsModel.php:96
-#: app/contents/models/my/MyContentsModel.php:207
+#: app/contents/models/ContentsModel.php:58
+#: app/contents/models/my/MyContentsModel.php:151
 #: app/portfolios/models/admin/AdminPortfoliosImagesModel.php:88
 #: app/settings/views/admin/Form.php:9
 msgid "Error! The section not found."
 msgstr "¡Error! La sección no ha sido encontrada."
 
-#: app/contents/models/ContentsSectionsModel.php:47
-#: app/contents/models/ContentsSectionsModel.php:52
-#: app/portfolios/models/PortfoliosModel.php:48
-#, php-format
-msgid "The value «%s» must be a json."
-msgstr "El valor «%s» debe ser json."
-
-#: app/contents/models/ContentsSectionsModel.php:52
-#: app/contents/views/admin/sections/SaveForm.php:39
-#: app/portfolios/models/PortfoliosModel.php:48
-#: app/portfolios/views/admin/SaveForm.php:26
-#: storage/settings/data/contents/translate.contents.php:54
-#: storage/settings/data/goods/translate.goods.php:20
-#: storage/settings/data/portfolios/translate.portfolios.php:5
-#: storage/settings/data/products/translate.products.php:25
-#: storage/settings/data/sales/translate.sales.php:21
-msgid "Resizes"
-msgstr "Redimensiones"
-
-#: app/contents/models/ContentsSectionsModel.php:103
+#: app/contents/models/ContentsSectionsModel.php:78
 msgid "Please, delete all posts before continuing."
 msgstr "Por favor, elimine todas las publicaciones antes de continuar."
 
-#: app/contents/models/admin/AdminContentsModel.php:32
+#: app/contents/models/admin/AdminContentsModel.php:33
 #: app/contents/views/admin/SaveForm.php:17
 #: app/contents/views/admin/sections/Index.php:25
 #: app/contents/views/my/Prepare.php:17
 #: cms/plugins/contents/feed/default/feed.create.php:13
 #: cms/plugins/contents/feed/default/feed.nominate.php:11
-#: cms/plugins/contents/search/default/search.plugin.php:20
+#: cms/plugins/contents/search/default/search.plugin.php:22
 #: storage/settings/data/contents/translate.contents.php:11
 #: storage/translate/menus.backend.php:2 storage/translate/menus.contents.php:1
 #: storage/translate/menus.contents.php:3
@@ -6888,12 +6671,12 @@ msgstr "Por favor, elimine todas las publicaciones antes de continuar."
 msgid "Contents"
 msgstr "Contenidos"
 
-#: app/contents/models/front/FrontContentsModel.php:225
+#: app/contents/models/front/FrontContentsModel.php:228
 #, php-format
 msgid "Author: %s"
 msgstr "Autor: %s"
 
-#: app/contents/models/front/FrontContentsModel.php:259
+#: app/contents/models/front/FrontContentsModel.php:262
 #, php-format
 msgid "Label: %s"
 msgstr "Etiqueta: %s"
@@ -6903,9 +6686,7 @@ msgstr "Etiqueta: %s"
 msgid "Please create the publication before proceeding."
 msgstr "Por favor, cree la publicación antes de continuar."
 
-#: app/contents/models/my/MyContentsModel.php:172
-#: app/contents/models/my/MyContentsModel.php:184
-#: app/contents/models/my/MyContentsModel.php:188
+#: app/contents/models/my/MyContentsModel.php:143
 #: app/filemanager/models/FilemanagerModel.php:349
 #: app/filemanager/models/FilemanagerModel.php:577
 #: app/google/models/GoogleModel.php:142 app/persons/MyPersonsController.php:18
@@ -6938,31 +6719,11 @@ msgstr "Habilitado"
 msgid "Comments"
 msgstr "Comentarios"
 
-#: app/contents/views/admin/Index.php:26 app/contents/views/admin/List.php:42
+#: app/contents/views/admin/Index.php:26 app/contents/views/admin/List.php:45
 #: app/contents/views/my/Form.php:52 app/videos/views/admin/Index.php:14
 #: app/videos/views/admin/List.php:33
 msgid "Featured"
 msgstr "Destacado"
-
-#: app/contents/views/admin/Index.php:28 app/contents/views/admin/List.php:46
-#: app/contents/views/my/ConfirmStatus.php:18
-#: app/contents/views/my/Index.php:22 app/contents/views/my/List.php:23
-#: app/socialnetworks/views/admin/ConfirmImport.php:14
-#: app/socialnetworks/views/admin/List.php:18
-#: app/socialnetworks/views/admin/List.php:36
-#: app/socials/views/admin/ConfirmImport.php:14
-#: app/socials/views/admin/List.php:18 app/socials/views/admin/List.php:36
-#: cms/plugins/test/generator/socials/src/app/__alias__/views/__scope__/ConfirmImport.php:14
-#: cms/plugins/test/generator/socials/src/app/__alias__/views/__scope__/List.php:18
-#: cms/plugins/test/generator/socials/src/app/__alias__/views/__scope__/List.php:36
-msgid "Draft"
-msgstr "Borrador"
-
-#: app/contents/views/admin/Index.php:29
-#: app/contents/views/my/ConfirmStatus.php:19
-#: app/contents/views/my/Index.php:23 app/contents/views/my/List.php:24
-msgid "Pending review"
-msgstr "Pendiente de revisión"
 
 #: app/contents/views/admin/Index.php:34
 #: app/contents/views/my/ConfirmChangeSection.php:19
@@ -6980,22 +6741,18 @@ msgstr "Agregado"
 msgid "Visits"
 msgstr "Visitas"
 
-#: app/contents/views/admin/List.php:37
+#: app/contents/views/admin/List.php:40
 msgid "Comments allowed"
 msgstr "Comentarios permitidos"
 
-#: app/contents/views/admin/List.php:38
+#: app/contents/views/admin/List.php:41
 msgid "Comments not allowed"
 msgstr "Comentarios no permitidos"
 
-#: app/contents/views/admin/List.php:41 app/videos/views/admin/List.php:32
+#: app/contents/views/admin/List.php:44 app/videos/views/admin/List.php:32
 #: cms/plugins/socials/settings/default/settings.load.php:29
 msgid "Normal"
 msgstr "Normal"
-
-#: app/contents/views/admin/List.php:47
-msgid "Under review"
-msgstr "En revisión"
 
 #: app/contents/views/admin/sections/Index.php:25
 #: app/contents/views/admin/sections/SaveForm.php:44
@@ -7010,17 +6767,6 @@ msgstr "Secciones"
 #: app/contents/views/my/Form.php:40 app/portfolios/views/admin/SaveForm.php:25
 msgid "The text is used to make the url friendly."
 msgstr "El texto se utiliza para hacer el url amigable."
-
-#: app/contents/views/admin/sections/SaveForm.php:30
-#: app/forms/models/admin/AdminFormsMastersModel.php:143
-#: storage/settings/data/static/translate.static.php:2
-#: storage/translate/menus.static.php:1
-msgid "Static"
-msgstr "Estático"
-
-#: app/contents/views/admin/sections/SaveForm.php:30
-msgid "Dynamic"
-msgstr "Dinámico"
 
 #: app/contents/views/admin/sections/SaveForm.php:32
 msgid "If is dynamic, the contents can view in a list."
@@ -7095,6 +6841,16 @@ msgstr ""
 "Las opciones se usan para agregar recursos o modificar aspectos de la "
 "plantilla."
 
+#: app/contents/views/admin/sections/SaveForm.php:39
+#: app/portfolios/views/admin/SaveForm.php:26
+#: storage/settings/data/contents/translate.contents.php:54
+#: storage/settings/data/goods/translate.goods.php:20
+#: storage/settings/data/portfolios/translate.portfolios.php:5
+#: storage/settings/data/products/translate.products.php:25
+#: storage/settings/data/sales/translate.sales.php:21
+msgid "Resizes"
+msgstr "Redimensiones"
+
 #: app/contents/views/admin/sections/SaveForm.php:40
 #: app/portfolios/views/admin/SaveForm.php:26
 msgid "Rewrites the default image resizing."
@@ -7122,7 +6878,7 @@ msgstr[1] "¿Seguro que desea eliminar los %d elementos seleccionados?"
 msgid "Eliminate definitively."
 msgstr "Eliminar definitivamente."
 
-#: app/contents/views/my/ConfirmStatus.php:11
+#: app/contents/views/my/ConfirmStatus.php:13
 msgid "Change the publication date."
 msgstr "Cambiar la fecha de publicación."
 
@@ -7140,7 +6896,7 @@ msgid "Tools"
 msgstr "Herramientas"
 
 #: app/contents/views/my/Form.php:48 cms/libraries/system/SystemHelper.php:74
-#: cms/plugins/contents/settings/portal/settings.load.php:10
+#: cms/plugins/contents/settings/portal/settings.load.php:12
 #: cms/plugins/dashboard/settings/shortcuts/settings.load.php:10
 msgid "Inherit"
 msgstr "Heredar"
@@ -7150,7 +6906,7 @@ msgstr "Heredar"
 msgid "Show author"
 msgstr "Mostrar autor"
 
-#: app/contents/views/my/Index.php:38 app/contents/views/my/SaveForm.php:21
+#: app/contents/views/my/Index.php:39 app/contents/views/my/SaveForm.php:21
 #: storage/translate/menus.contents.php:6
 msgid "My contents"
 msgstr "Mis contenidos"
@@ -7201,9 +6957,9 @@ msgstr "Insertar"
 #: app/filemanager/models/FilemanagerModel.php:459
 #: app/install/models/InstallSettingsModel.php:83
 #: app/install/models/InstallSettingsModel.php:94
-#: app/menus/models/MenusModel.php:55 app/persons/models/PersonsModel.php:792
+#: app/menus/models/MenusModel.php:55 app/persons/models/PersonsModel.php:746
 #: app/users/models/UsersModel.php:46 app/usys/models/UsysAccountModel.php:45
-#: cms/libraries/filter/Filter.php:403
+#: cms/libraries/filter/Filter.php:405
 #: cms/libraries/users/Tractor/SignupTractor.php:52
 msgid "Please, fill in the name."
 msgstr "Por favor, complete el nombre."
@@ -7659,8 +7415,8 @@ msgstr "En otra ocasión hemos registrado su reporte, gracias por colaborar."
 #: app/debates/models/DebatesModel.php:326
 #: app/install/models/InstallSettingsModel.php:89
 #: app/install/models/InstallSettingsModel.php:101
-#: app/persons/models/PersonsModel.php:165 app/users/models/UsersModel.php:72
-#: cms/libraries/filter/Filter.php:409 cms/libraries/users/AutoSignup.php:36
+#: app/users/models/UsersModel.php:72 cms/libraries/filter/Filter.php:411
+#: cms/libraries/users/AutoSignup.php:36
 msgid "Please, fill in with a valid email."
 msgstr "Por favor, complete con un email válido."
 
@@ -7731,7 +7487,7 @@ msgstr "Responder"
 #: app/demos/views/admin/ConfirmRestart.php:14
 #: app/extensions/views/admin/ConfirmCompile.php:35
 #: app/extensions/views/admin/ConfirmCompile.php:42
-#: app/extensions/views/admin/List.php:40
+#: app/extensions/views/admin/List.php:35
 #: app/extensions/views/admin/installer/ConfirmUpdate.php:25
 #: app/extensions/views/admin/installer/ConfirmUpdateAll.php:21
 msgid "Update"
@@ -7961,7 +7717,7 @@ msgstr "Volver"
 msgid "Plain"
 msgstr "Plano"
 
-#: app/extensions/models/ExtensionsInstallerModel.php:66
+#: app/extensions/models/ExtensionsInstallerModel.php:67
 #: app/extensions/views/admin/installer/ConfirmUpdateAll.php:11
 #, php-format
 msgid "An update is available."
@@ -7969,65 +7725,50 @@ msgid_plural "There is available %d updates."
 msgstr[0] "Hay una actualización disponible."
 msgstr[1] "Hay disponible %d actualizaciones."
 
-#: app/extensions/models/ExtensionsInstallerModel.php:67
+#: app/extensions/models/ExtensionsInstallerModel.php:68
 #: app/extensions/views/admin/installer/ConfirmUpdateAll.php:15
 msgid "No updates available."
 msgstr "No hay actualizaciones disponibles."
 
-#: app/extensions/models/ExtensionsInstallerModel.php:267
+#: app/extensions/models/ExtensionsInstallerModel.php:268
 msgid "The latest version of the system is available."
 msgstr "La última versión del sistema está disponible."
 
-#: app/extensions/models/ExtensionsInstallerModel.php:268
+#: app/extensions/models/ExtensionsInstallerModel.php:269
 #, php-format
 msgid "You can now upgrade to %s."
 msgstr "Ahora puede actualizar a %s."
 
-#: app/extensions/models/ExtensionsInstallerModel.php:276
+#: app/extensions/models/ExtensionsInstallerModel.php:277
 #, php-format
 msgid "The following extensions have updates available: %s"
 msgstr "Las siguientes extensiones tienen actualizaciones disponibles: %s"
 
 #: app/extensions/models/ExtensionsModel.php:51
-#: cms/libraries/extensions/Installer/Unpackager.php:272
+#: cms/libraries/extensions/Installer/Unpackager.php:273
 #, php-format
 msgid "The extension alias «%s» is invalid."
 msgstr "El alias de extensión «%s» no es válido."
 
-#: app/extensions/models/ExtensionsModel.php:305
+#: app/extensions/models/ExtensionsModel.php:289
 #: app/language/models/LanguageModel.php:179
 msgid "The distribution system requires a token."
 msgstr "El sistema de distribución requiere un token."
 
-#: app/extensions/models/ExtensionsModel.php:308
+#: app/extensions/models/ExtensionsModel.php:292
 #, php-format
 msgid "Uploading «%s»..."
 msgstr "Cargando «%s»..."
 
-#: app/extensions/models/admin/AdminExtensionsDevelopersModel.php:99
+#: app/extensions/models/admin/AdminExtensionsDevelopersModel.php:95
 msgid "You are trying to delete a protected item."
 msgstr "Está intentando eliminar un elemento protegido."
 
-#: app/extensions/models/admin/AdminExtensionsDevelopersModel.php:102
+#: app/extensions/models/admin/AdminExtensionsDevelopersModel.php:98
 msgid "Please, remove all extensions from this developer."
 msgstr "Por favor, elimine todas las extensiones de este desarrollador."
 
-#: app/extensions/models/admin/AdminExtensionsModel.php:204
-#: app/extensions/views/admin/Index.php:19
-#: app/extensions/views/admin/List.php:28
-#: app/extensions/views/admin/List.php:52
-#: app/socialnetworks/views/admin/ConfirmImport.php:13
-#: app/socialnetworks/views/admin/List.php:35
-#: app/socials/views/admin/ConfirmImport.php:13
-#: app/socials/views/admin/List.php:35 app/webstore/views/admin/List.php:35
-#: app/webstore/views/my/Index.php:18 app/webstore/views/my/List.php:23
-#: app/webstore/views/my/List.php:42
-#: cms/plugins/test/generator/socials/src/app/__alias__/views/__scope__/ConfirmImport.php:13
-#: cms/plugins/test/generator/socials/src/app/__alias__/views/__scope__/List.php:35
-msgid "Deprecated"
-msgstr "Obsoleto"
-
-#: app/extensions/models/admin/AdminExtensionsModel.php:490
+#: app/extensions/models/admin/AdminExtensionsModel.php:485
 msgid "All developers"
 msgstr "Desarrolladores"
 
@@ -8036,7 +7777,7 @@ msgid "Append other extensions to the package."
 msgstr "Añade otras extensiones al paquete."
 
 #: app/extensions/views/admin/ConfirmAppend.php:21
-#: app/extensions/views/admin/Index.php:27
+#: app/extensions/views/admin/Index.php:28
 msgid "Append"
 msgstr "Anexar"
 
@@ -8079,13 +7820,13 @@ msgstr "Algunas reparaciones han sido hechas."
 
 #: app/extensions/views/admin/ConfirmDbhistory.php:26
 #: app/goods/views/audit/Index.php:18 app/goods/views/audit/Show.php:13
-#: app/persons/models/PersonsHistoriesModel.php:120
+#: app/persons/views/audit/HistoriesForm.php:15
 #: app/settings/views/admin/Edit.php:12
 msgid "History"
 msgstr "Historia"
 
 #: app/extensions/views/admin/ConfirmDbhistory.php:45
-#: app/extensions/views/admin/Index.php:24
+#: app/extensions/views/admin/Index.php:25
 msgid "DB history"
 msgstr "Historial DB"
 
@@ -8098,32 +7839,32 @@ msgid "Delete data"
 msgstr "Eliminar datos"
 
 #: app/extensions/views/admin/EditReadme.php:25
-#: app/extensions/views/admin/Index.php:25
+#: app/extensions/views/admin/Index.php:26
 #: app/extensions/views/admin/installer/ConfirmInstall.php:32
 msgid "Readme"
 msgstr "Leeme"
 
-#: app/extensions/views/admin/Index.php:23
+#: app/extensions/views/admin/Index.php:24
 #: app/extensions/views/admin/changes/Index.php:19
 #: app/extensions/views/admin/changes/SaveForm.php:20
 msgid "Changes"
 msgstr "Cambios"
 
-#: app/extensions/views/admin/Index.php:30
-#: app/extensions/views/admin/Index.php:37
+#: app/extensions/views/admin/Index.php:31
+#: app/extensions/views/admin/Index.php:38
 #: app/extensions/views/admin/installer/ConfirmFindUpdates.php:12
 #: app/extensions/views/admin/installer/Index.php:15
 msgid "Find updates"
 msgstr "Buscar actualizaciones"
 
-#: app/extensions/views/admin/Index.php:31
-#: app/extensions/views/admin/Index.php:38
+#: app/extensions/views/admin/Index.php:32
+#: app/extensions/views/admin/Index.php:39
 #: app/extensions/views/admin/installer/ConfirmUpdateAll.php:24
 #: app/extensions/views/admin/installer/Index.php:16
 msgid "Update all"
 msgstr "Actualizar todo"
 
-#: app/extensions/views/admin/Index.php:33
+#: app/extensions/views/admin/Index.php:34
 #: app/extensions/views/admin/developers/Index.php:19
 #: app/extensions/views/admin/developers/SaveForm.php:34
 #: app/webstore/views/admin/Dashboard.php:12
@@ -8144,14 +7885,14 @@ msgstr "Sólo paquetes"
 msgid "Only with changes"
 msgstr "Sólo con cambios"
 
-#: app/extensions/views/admin/List.php:42
+#: app/extensions/views/admin/List.php:37
 #: app/language/views/admin/ConfirmDistribute.php:12
 #: app/language/views/admin/Index.php:27
 #: storage/settings/data/language/translate.language-distribute.php:2
 msgid "Distribute"
 msgstr "Distribuir"
 
-#: app/extensions/views/admin/List.php:48
+#: app/extensions/views/admin/List.php:43
 #: app/extensions/views/admin/SaveForm.php:14
 #: app/extensions/views/admin/installer/ConfirmInstall.php:50
 #: app/language/views/admin/translations/List.php:23
@@ -8160,7 +7901,7 @@ msgstr "Distribuir"
 msgid "Developer"
 msgstr "Desarrollador"
 
-#: app/extensions/views/admin/List.php:48
+#: app/extensions/views/admin/List.php:43
 #: app/extensions/views/admin/installer/ConfirmInstall.php:67
 #: app/extensions/views/admin/updates/List.php:19
 #: app/webstore/views/front/Details.php:17
@@ -8169,7 +7910,7 @@ msgstr "Desarrollador"
 msgid "Version"
 msgstr "Versión"
 
-#: app/extensions/views/admin/List.php:48
+#: app/extensions/views/admin/List.php:43
 #: app/extensions/views/admin/SaveForm.php:20
 #: app/extensions/views/admin/developers/SaveForm.php:25
 #: app/extensions/views/admin/installer/ConfirmInstall.php:69
@@ -8180,13 +7921,13 @@ msgstr "Versión"
 msgid "License"
 msgstr "Licencia"
 
-#: app/extensions/views/admin/List.php:48
+#: app/extensions/views/admin/List.php:43
 #: app/webstore/models/front/FrontWebstoreModel.php:214
 #: app/webstore/views/my/links/SaveForm.php:23
 msgid "Website"
 msgstr "Sitio web"
 
-#: app/extensions/views/admin/List.php:55 app/goods/views/audit/SaveForm.php:21
+#: app/extensions/views/admin/List.php:45 app/goods/views/audit/SaveForm.php:21
 #: app/goods/views/audit/Show.php:17
 msgid "Data"
 msgstr "Datos"
@@ -8217,8 +7958,6 @@ msgid "Legal"
 msgstr "Legales"
 
 #: app/extensions/views/admin/SaveForm.php:23
-#: app/subscriptions/views/audit/subscribers/ConfirmExport.php:31
-#: app/subscriptions/views/audit/subscribers/Export.php:46
 msgid "Since"
 msgstr "Desde"
 
@@ -8518,14 +8257,14 @@ msgstr "Feed"
 #: app/invoices/models/InvoicesGatewaysModel.php:40
 #: app/language/models/LanguageModel.php:41 app/menus/models/MenusModel.php:52
 #: app/mercadopago/models/MercadopagoApplicationsModel.php:41
-#: cms/libraries/filter/Filter.php:415
+#: cms/libraries/filter/Filter.php:417
 msgid "Please, fill in the key."
 msgstr "Por favor, complete la clave."
 
 #: app/fees/models/FeesConceptsModel.php:51
 #: app/invoices/models/InvoicesCredentialsModel.php:51
 #: app/invoices/models/InvoicesGatewaysModel.php:64
-#: app/reviews/models/ReviewsCredentialsModel.php:82
+#: app/reviews/models/ReviewsCredentialsModel.php:40
 #: cms/libraries/assets/AssetsStorage.php:28
 msgid "The key already exists."
 msgstr "El clave ya existe."
@@ -8584,7 +8323,7 @@ msgid "New folder"
 msgstr "Nueva carpeta"
 
 #: app/filemanager/models/FilemanagerModel.php:869
-#: app/filemanager/views/admin/List.php:37 app/forms/views/my/Edit.php:61
+#: app/filemanager/views/admin/List.php:37 app/forms/views/my/Edit.php:54
 #: app/invoices/views/audit/Info.php:11 app/invoices/views/audit/Info.php:28
 #: app/users/views/admin/activities/List.php:33
 #: app/videos/views/front/List.php:47 app/videos/views/front/Watch.php:14
@@ -8815,6 +8554,13 @@ msgstr "Por favor, elimine los formularios para continuar."
 msgid "Replaceable"
 msgstr "Reemplazable"
 
+#: app/forms/models/admin/AdminFormsMastersModel.php:143
+#: cms/libraries/contents/Enum/SectionType.php:21
+#: storage/settings/data/static/translate.static.php:2
+#: storage/translate/menus.static.php:1
+msgid "Static"
+msgstr "Estático"
+
 #: app/forms/views/admin/Dashboard.php:12
 #: app/forms/views/admin/masters/Index.php:32
 #: app/forms/views/admin/masters/SaveForm.php:60
@@ -8912,14 +8658,105 @@ msgstr "Sobre el éxito"
 msgid "This form is active. Do you want to replace it with a new one?"
 msgstr "Este formulario está activo. ¿Quieres reemplazarlo por uno nuevo?"
 
-#: app/forms/views/my/Edit.php:21 app/forms/views/my/Edit.php:23
+#: app/forms/views/my/Edit.php:22 app/forms/views/my/Edit.php:24
 msgid "Write here"
 msgstr "Escribe aquí"
 
-#: app/forms/views/my/Edit.php:61 app/webstore/views/front/Details.php:18
+#: app/forms/views/my/Edit.php:54 app/webstore/views/front/Details.php:18
 #: cms/plugins/balances/dashboard/default/dashboard.load.php:112
 msgid "Last update"
 msgstr "Última actualización"
+
+#: app/forms/views/my/Print.php:13 app/groups/views/my/members/Export.php:22
+#: app/invoices/views/audit/Extract.php:76
+#: app/persons/models/PersonsHistoriesModel.php:123
+#: app/persons/views/audit/ConfirmExport.php:17
+#: app/persons/views/audit/Export.php:22
+#: app/persons/views/audit/SaveForm.php:14
+#: app/persons/views/audit/SaveForm.php:19 app/persons/views/my/SaveForm.php:36
+#: app/subscriptions/models/SubscriptionsSummaryModel.php:184
+#: app/subscriptions/models/SubscriptionsSummaryModel.php:224
+#: app/subscriptions/models/SubscriptionsSummaryModel.php:265
+#: app/workshops/models/WorkshopsAttendancesExtractorModel.php:253
+#: app/workshops/views/audit/enrollments/Voucher.php:13
+#: cms/libraries/careers/Enum/ExportStudentFields.php:37
+#: cms/libraries/forms/FormsExtractor.php:51
+#: cms/libraries/groups/Enum/ExportMembers.php:36
+#: cms/libraries/outdoors/Enum/ExportParticipants.php:37
+#: cms/libraries/subscriptions/Enum/ExportSubscribers.php:37
+#: cms/libraries/workshops/Enum/ExportStudents.php:36
+msgid "Surname"
+msgstr "Apellido"
+
+#: app/forms/views/my/Print.php:14 app/groups/views/my/members/Export.php:25
+#: app/invoices/views/audit/Extract.php:77
+#: app/persons/models/PersonsHistoriesModel.php:127
+#: app/persons/views/audit/ConfirmExport.php:18
+#: app/persons/views/audit/Export.php:25
+#: app/persons/views/audit/SaveForm.php:14
+#: app/persons/views/audit/SaveForm.php:22 app/persons/views/my/SaveForm.php:37
+#: app/subscriptions/models/SubscriptionsSummaryModel.php:185
+#: app/subscriptions/models/SubscriptionsSummaryModel.php:225
+#: app/subscriptions/models/SubscriptionsSummaryModel.php:266
+#: app/workshops/models/WorkshopsAttendancesExtractorModel.php:253
+#: app/workshops/views/audit/enrollments/Voucher.php:14
+#: cms/libraries/careers/Enum/ExportStudentFields.php:38
+#: cms/libraries/forms/FormsExtractor.php:51
+#: cms/libraries/groups/Enum/ExportMembers.php:37
+#: cms/libraries/outdoors/Enum/ExportParticipants.php:38
+#: cms/libraries/subscriptions/Enum/ExportSubscribers.php:38
+#: cms/libraries/workshops/Enum/ExportStudents.php:37
+msgid "Firstname"
+msgstr "Nombre"
+
+#: app/forms/views/my/Print.php:17 app/groups/views/my/members/Export.php:37
+#: app/persons/models/PersonsHistoriesModel.php:151
+#: app/persons/models/admin/AdminPersonsTypesModel.php:111
+#: app/persons/views/audit/ConfirmExport.php:22
+#: app/persons/views/audit/Export.php:37
+#: app/persons/views/audit/SaveForm.php:51 app/persons/views/my/SaveForm.php:65
+#: app/workshops/views/audit/enrollments/Voucher.php:17
+#: cms/libraries/careers/Enum/ExportStudentFields.php:42
+#: cms/libraries/groups/Enum/ExportMembers.php:41
+#: cms/libraries/outdoors/Enum/ExportParticipants.php:42
+#: cms/libraries/subscriptions/Enum/ExportSubscribers.php:42
+#: cms/libraries/workshops/Enum/ExportStudents.php:41
+#: cms/snippets/persons/master/default/snippet.php:46
+msgid "Gender"
+msgstr "Género"
+
+#: app/forms/views/my/Print.php:18 app/groups/views/my/members/Export.php:31
+#: app/persons/models/PersonsHistoriesModel.php:147
+#: app/persons/views/audit/ConfirmExport.php:20
+#: app/persons/views/audit/Export.php:31
+#: app/persons/views/audit/SaveForm.php:54 app/persons/views/my/SaveForm.php:68
+#: app/workshops/views/audit/enrollments/Voucher.php:18
+#: cms/libraries/careers/Enum/ExportStudentFields.php:40
+#: cms/libraries/groups/Enum/ExportMembers.php:39
+#: cms/libraries/outdoors/Enum/ExportParticipants.php:40
+#: cms/libraries/subscriptions/Enum/ExportSubscribers.php:40
+#: cms/libraries/workshops/Enum/ExportStudents.php:39
+#: cms/snippets/persons/master/default/snippet.php:47
+msgid "Birthdate"
+msgstr "Fecha de nacimiento"
+
+#: app/forms/views/my/Print.php:20 app/groups/views/my/members/Export.php:43
+#: app/outdoors/views/audit/places/SaveForm.php:19
+#: app/outdoors/views/front/Place.php:16
+#: app/persons/models/admin/AdminPersonsTypesModel.php:113
+#: app/persons/views/audit/ConfirmExport.php:24
+#: app/persons/views/audit/Export.php:43
+#: app/persons/views/audit/SaveForm.php:72 app/persons/views/my/SaveForm.php:87
+#: app/settings/views/admin/Edit.php:32
+#: app/workshops/views/audit/enrollments/Voucher.php:20
+#: cms/libraries/codemanager/EndpointHelper.php:25
+#: cms/plugins/contact/widget/default/widget.load.php:27
+#: cms/plugins/gateways/invoices-gateways/cuentadni/invoices-gateways.button.php:13
+#: cms/snippets/persons/master/default/snippet.php:54
+#: storage/settings/data/contact/translate.contact-widget.php:12
+#: storage/settings/data/gateways/translate.gateways.php:9
+msgid "Phone"
+msgstr "Teléfono"
 
 #: app/geoip2/views/admin/Index.php:28
 #: storage/settings/data/geoip2/translate.geoip2.php:3
@@ -8998,25 +8835,25 @@ msgstr "Todas las categorías"
 msgid "Active status"
 msgstr "Estados activos"
 
-#: app/goods/models/audit/AuditGoodsModel.php:302
+#: app/goods/models/audit/AuditGoodsModel.php:296
 #: app/goods/views/audit/ConfirmExport.php:26
 #: app/goods/views/audit/SaveForm.php:18 app/goods/views/audit/Show.php:19
 msgid "Serial"
 msgstr "Serial"
 
-#: app/goods/models/audit/AuditGoodsModel.php:305
+#: app/goods/models/audit/AuditGoodsModel.php:299
 #: app/goods/views/audit/ConfirmExport.php:27
 #: app/goods/views/audit/SaveForm.php:19 app/goods/views/audit/Show.php:20
 msgid "Quotation"
 msgstr "Cotización"
 
-#: app/goods/models/audit/AuditGoodsModel.php:311
+#: app/goods/models/audit/AuditGoodsModel.php:305
 #: app/goods/views/audit/ConfirmExport.php:29
 #: app/goods/views/audit/SaveForm.php:20 app/goods/views/audit/Show.php:21
 msgid "Annotations"
 msgstr "Anotaciones"
 
-#: app/goods/models/audit/AuditGoodsModel.php:329
+#: app/goods/models/audit/AuditGoodsModel.php:323
 #: app/goods/views/admin/Index.php:29
 #: app/goods/views/admin/categories/Index.php:20
 #: app/goods/views/admin/layouts/Index.php:19
@@ -9031,7 +8868,7 @@ msgstr "Anotaciones"
 msgid "Goods"
 msgstr "Bienes"
 
-#: app/goods/models/audit/AuditGoodsModel.php:478
+#: app/goods/models/audit/AuditGoodsModel.php:472
 #, php-format
 msgid "The person «%s» is binded to the current status «%s»"
 msgstr "El legajo «%s» está vinculado al estado actual «%s»"
@@ -9056,6 +8893,19 @@ msgstr "Separar"
 #: app/goods/views/audit/ConfirmExport.php:21
 msgid "Separate by categories"
 msgstr "Separar por categorías"
+
+#: app/goods/views/audit/ConfirmExport.php:23
+#: app/persons/views/audit/ConfirmExport.php:15
+#: cms/libraries/careers/Enum/ExportStudentFields.php:35
+#: cms/libraries/groups/Enum/ExportMembers.php:34
+#: cms/libraries/outdoors/Enum/ExportParticipants.php:35
+#: cms/libraries/subscriptions/Enum/ExportSubscribers.php:35
+#: cms/libraries/workshops/Enum/ExportStudents.php:34
+#: storage/settings/data/contents/translate.contents.php:12
+#: storage/settings/data/contents/translate.contents.php:43
+#: storage/settings/data/widgets/translate.widgets-portal.php:7
+msgid "Counter"
+msgstr "Contador"
 
 #: app/goods/views/audit/ConfirmStatus1.php:19
 msgid "Unbind"
@@ -9118,6 +8968,47 @@ msgstr "Mis grupos"
 msgid "Change"
 msgstr "Cambiar"
 
+#: app/groups/views/my/members/ConfirmStatus.php:14
+#: app/groups/views/my/members/List.php:20
+#: app/newsletters/views/admin/subscribers/ConfirmExport.php:13
+#: app/newsletters/views/admin/subscribers/Index.php:14
+#: app/newsletters/views/admin/subscribers/List.php:14
+#: app/newsletters/views/admin/subscribers/List.php:24
+#: app/persons/views/audit/AssignUserForm.php:34
+#: app/persons/views/audit/List.php:22 app/persons/views/audit/List.php:40
+#: app/sales/views/audit/List.php:26 app/subscriptions/views/audit/List.php:23
+#: app/subscriptions/views/audit/subscribers/List.php:17
+#: app/subscriptions/views/audit/subscribers/List.php:43
+#: app/subscriptions/views/audit/subscribers/Print.php:19
+#: app/subscriptions/views/audit/trajectories/List.php:29
+#: app/users/views/admin/Index.php:15 app/users/views/admin/List.php:32
+#: cms/plugins/persons/settings/default/settings.load.php:13
+msgid "Inactive"
+msgstr "Inactivo"
+
+#: app/groups/views/my/members/Export.php:19
+#: app/persons/views/audit/ConfirmExport.php:16
+#: app/persons/views/audit/Export.php:19
+#: storage/settings/data/addthis/translate.addthis.php:3
+#: storage/settings/data/facebook/translate.facebook.php:3
+#: storage/settings/data/google/translate.google.php:7
+#: storage/settings/data/google/translate.google.php:11
+#: storage/settings/data/google/translate.google.php:13
+msgid "ID"
+msgstr "ID"
+
+#: app/groups/views/my/members/Export.php:34
+#: app/persons/views/audit/ConfirmExport.php:21
+#: app/persons/views/audit/Export.php:34
+#: cms/libraries/careers/Enum/ExportStudentFields.php:41
+#: cms/libraries/groups/Enum/ExportMembers.php:40
+#: cms/libraries/outdoors/Enum/ExportParticipants.php:41
+#: cms/libraries/subscriptions/Enum/ExportSubscribers.php:41
+#: cms/libraries/workshops/Enum/ExportStudents.php:40
+#: cms/snippets/persons/master/default/snippet.php:48
+msgid "Age"
+msgstr "Edad"
+
 #: app/groups/views/my/members/List.php:15 app/persons/views/audit/List.php:17
 #: app/subscriptions/views/audit/subscribers/List.php:24
 #: app/workshops/views/my/students/List.php:15
@@ -9172,7 +9063,7 @@ msgstr "Por favor, complete el host."
 
 #: app/install/models/InstallDatabaseModel.php:74
 #: app/videos/models/VideosModel.php:51
-#: app/websites/models/WebsitesModel.php:56
+#: app/websites/models/WebsitesModel.php:53
 msgid "Please, fill in the user."
 msgstr "Por favor, complete el usuario."
 
@@ -9421,23 +9312,23 @@ msgstr "Semiautomático"
 msgid "Automatic"
 msgstr "Automático"
 
-#: app/invoices/models/my/MyInvoicesModel.php:171
+#: app/invoices/models/my/MyInvoicesModel.php:140
 msgid "Payment gateway"
 msgstr "Puerta de pago"
 
-#: app/invoices/models/my/MyInvoicesModel.php:220
+#: app/invoices/models/my/MyInvoicesModel.php:196
 msgid "Invoice number"
 msgstr "Número de recibo"
 
-#: app/invoices/models/my/MyInvoicesModel.php:221
+#: app/invoices/models/my/MyInvoicesModel.php:197
 msgid "Invoice date"
 msgstr "Fecha de recibo"
 
-#: app/invoices/models/my/MyInvoicesModel.php:222
+#: app/invoices/models/my/MyInvoicesModel.php:198
 msgid "Issue date"
 msgstr "Fecha de emisión"
 
-#: app/invoices/models/my/MyInvoicesModel.php:223
+#: app/invoices/models/my/MyInvoicesModel.php:199
 msgid "Due date"
 msgstr "Fecha de vencimiento"
 
@@ -9469,13 +9360,12 @@ msgstr "Visualizador"
 
 #: app/invoices/views/admin/auditors/List.php:19
 #: app/invoices/views/admin/auditors/SaveForm.php:20
-#: app/outdoors/views/audit/participants/ConfirmExport.php:35
 #: app/outdoors/views/audit/participants/ConfirmImport.php:20
 #: app/outdoors/views/audit/participants/Create.php:15
 #: app/outdoors/views/audit/participants/Edit.php:13
-#: app/outdoors/views/audit/participants/Export.php:49
 #: app/outdoors/views/audit/participants/List.php:20
 #: app/users/views/admin/List.php:25
+#: cms/libraries/outdoors/Enum/ExportParticipants.php:46
 #: storage/settings/data/install/translate.install.php:6
 #: storage/settings/data/users/translate.users.php:6
 msgid "Role"
@@ -9616,6 +9506,7 @@ msgid "Waiting"
 msgstr "Esperando"
 
 #: app/jobs/views/admin/Show.php:18
+#: cms/libraries/extensions/Enum/UpdateStatus.php:23
 msgid "Available"
 msgstr "Disponible"
 
@@ -9625,6 +9516,11 @@ msgstr "Fracaso"
 
 #: app/jobs/views/admin/failures/Show.php:11
 #: app/persons/views/audit/AssignUserForm.php:42
+#: cms/libraries/careers/Enum/ExportStudentFields.php:36
+#: cms/libraries/groups/Enum/ExportMembers.php:35
+#: cms/libraries/outdoors/Enum/ExportParticipants.php:36
+#: cms/libraries/subscriptions/Enum/ExportSubscribers.php:36
+#: cms/libraries/workshops/Enum/ExportStudents.php:35
 #: storage/settings/data/afip/translate.afip.php:23
 #: storage/settings/data/cache/translate.cache-memcached.php:3
 #: storage/settings/data/contents/translate.contents-widgets.php:10
@@ -9638,7 +9534,7 @@ msgid "Uuid"
 msgstr "Uuid"
 
 #: app/language/models/LanguageModel.php:153
-#: app/users/models/UsersLabelsModel.php:128
+#: app/users/models/UsersLabelsModel.php:55
 msgid "The key is being used."
 msgstr "La clave se está utilizando."
 
@@ -10254,7 +10150,7 @@ msgstr "Por favor, complete la hora de salida."
 msgid "Please, fill in the place."
 msgstr "Por favor, complete el lugar."
 
-#: app/outdoors/models/audit/AuditOutdoorsParticipantsModel.php:413
+#: app/outdoors/models/audit/AuditOutdoorsParticipantsModel.php:362
 msgid "The last"
 msgstr "El último"
 
@@ -10285,6 +10181,11 @@ msgstr "Salidas"
 #: storage/settings/data/outdoors/translate.outdoors.php:4
 msgid "Place"
 msgstr "Lugar"
+
+#: app/outdoors/views/audit/SaveForm.php:24
+#: app/subscriptions/views/audit/trajectories/ConfirmSchedule.php:25
+msgid "Schedule"
+msgstr "Cronograma"
 
 #: app/outdoors/views/audit/participants/ConfirmExport.php:22
 msgid "Sort"
@@ -10319,36 +10220,36 @@ msgstr "%s km."
 msgid "%d participans"
 msgstr "%d participantes"
 
-#: app/persons/models/PersonsHistoriesModel.php:71
+#: app/persons/models/PersonsHistoriesModel.php:135
 msgid "Doc. Type"
 msgstr "Tipo de doc."
 
-#: app/persons/models/PersonsHistoriesModel.php:72
+#: app/persons/models/PersonsHistoriesModel.php:139
 msgid "Doc. Number"
 msgstr "Número de doc."
 
-#: app/persons/models/PersonsHistoriesModel.php:73
+#: app/persons/models/PersonsHistoriesModel.php:143
 #: app/persons/views/audit/SaveForm.php:53
 msgid "Nationality"
 msgstr "Nacionalidad"
 
-#: app/persons/models/PersonsModel.php:176
+#: app/persons/models/PersonsModel.php:161
 msgid "The user was not found."
 msgstr "No se encontró el usuario."
 
-#: app/persons/models/PersonsModel.php:184
+#: app/persons/models/PersonsModel.php:167
 msgid "The email is already associated with another account."
 msgstr "El correo electrónico ya está asociado con otra cuenta."
 
-#: app/persons/models/PersonsModel.php:263
-#: app/persons/models/PersonsModel.php:829
+#: app/persons/models/PersonsModel.php:272
+#: app/persons/models/PersonsModel.php:783
 msgid "The document already exists."
 msgstr "El documento ya existe."
 
-#: app/persons/models/PersonsModel.php:266
-#: app/persons/models/my/MyPersonsModel.php:99
-#: app/persons/models/my/MyPersonsModel.php:131
-#: app/persons/models/my/MyPersonsModel.php:146
+#: app/persons/models/PersonsModel.php:275
+#: app/persons/models/my/MyPersonsModel.php:68
+#: app/persons/models/my/MyPersonsModel.php:100
+#: app/persons/models/my/MyPersonsModel.php:116
 msgid ""
 "The creation of the person must be done personally. Please, communicate with "
 "secretary."
@@ -10356,27 +10257,27 @@ msgstr ""
 "La creación del legajo debe hacerse personalmente. Por favor, comuníquese "
 "con la secretaria."
 
-#: app/persons/models/PersonsModel.php:402
+#: app/persons/models/PersonsModel.php:411
 msgid "Both persons have an assigned user."
 msgstr "Ambos legajos tienen un usuario asignado."
 
-#: app/persons/models/PersonsModel.php:407
+#: app/persons/models/PersonsModel.php:416
 msgid "One of the persons must not have your document number."
 msgstr "Uno de los legajos no debe tener su número de documento."
 
-#: app/persons/models/PersonsModel.php:803
+#: app/persons/models/PersonsModel.php:757
 msgid "Please, select a type of document."
 msgstr "Por favor, seleccione un tipo de documento."
 
-#: app/persons/models/PersonsModel.php:807
+#: app/persons/models/PersonsModel.php:761
 msgid "Please, fill in the document."
 msgstr "Por favor, complete el documento."
 
-#: app/persons/models/PersonsTiesKindsModel.php:73
+#: app/persons/models/PersonsTiesKindsModel.php:69
 msgid "Please, delete the person maps to continue."
 msgstr "Por favor, elimine los lazos de los legajos para continuar."
 
-#: app/persons/models/PersonsTypesModel.php:103
+#: app/persons/models/PersonsTypesModel.php:97
 msgid "The type of document is being used."
 msgstr "El tipo de documento esta siendo utilizado."
 
@@ -10385,23 +10286,17 @@ msgstr "El tipo de documento esta siendo utilizado."
 msgid "Identification"
 msgstr "Identificación"
 
-#: app/persons/models/audit/AuditPersonsTiesModel.php:190
-#: app/usys/views/front/Signup.php:10
-msgid "This option is not available."
-msgstr "Esta opción no está disponible."
-
-#: app/persons/models/my/MyPersonsModel.php:84
-#: app/persons/views/audit/ShowContent.php:12
-#: app/persons/views/audit/ShowContent.php:21
+#: app/persons/models/my/MyPersonsModel.php:54
+#: app/persons/views/audit/ShowContent.php:15
 msgid "There is a pending request for approval of data."
 msgstr "Hay una solicitud pendiente para la aprobación de los datos."
 
-#: app/persons/models/my/MyPersonsModel.php:97
+#: app/persons/models/my/MyPersonsModel.php:66
 #, php-format
 msgid "If you want, you can create your person %shere%s"
 msgstr "Si lo desea, puede crear su legajo %saquí%s"
 
-#: app/persons/models/my/MyPersonsModel.php:155
+#: app/persons/models/my/MyPersonsModel.php:125
 msgid ""
 "The creation of persons is limited to one. Please, communicate with "
 "secretary."
@@ -10423,12 +10318,12 @@ msgstr "Tipos de lazos"
 #: app/persons/views/admin/kinds/Index.php:20
 #: app/persons/views/admin/types/Index.php:20
 #: app/persons/views/audit/ConfirmExport.php:36
-#: app/persons/views/audit/HistoriesForm.php:45
+#: app/persons/views/audit/HistoriesForm.php:65
 #: app/persons/views/audit/Index.php:39
 #: app/persons/views/audit/SaveForm.php:106 app/persons/views/audit/Show.php:15
 #: app/persons/views/audit/ShowModal.php:11
 #: app/persons/views/audit/ties/SaveForm.php:31
-#: app/persons/views/my/Index.php:37
+#: app/persons/views/my/Index.php:39
 #: cms/plugins/persons/forms-masters/default/forms-masters.load.php:9
 #: cms/plugins/persons/persons-trace/default/persons-trace.load.php:41
 #: storage/settings/data/persons/translate.persons.php:6
@@ -10495,7 +10390,7 @@ msgstr "Unificar"
 msgid "This action is not reversible."
 msgstr "Esta acción no es reversible."
 
-#: app/persons/views/audit/HistoriesForm.php:45
+#: app/persons/views/audit/HistoriesForm.php:65
 #: app/persons/views/audit/Index.php:21
 msgid "Histories"
 msgstr "Historias"
@@ -10515,7 +10410,7 @@ msgid "Revise"
 msgstr "Revisar"
 
 #: app/persons/views/audit/List.php:37
-#: app/persons/views/audit/ties/Index.php:23
+#: app/persons/views/audit/ties/Index.php:26
 #: storage/settings/data/persons/translate.persons.php:3
 msgid "Ties"
 msgstr "Lazos"
@@ -10525,7 +10420,6 @@ msgid "Suffix"
 msgstr "Sufijo"
 
 #: app/persons/views/audit/SaveForm.php:94
-#: cms/snippets/persons/master/default/snippet.php:79
 msgid "Observations"
 msgstr "Observaciones"
 
@@ -10533,11 +10427,11 @@ msgstr "Observaciones"
 msgid "Kind"
 msgstr "Tipo"
 
-#: app/persons/views/my/Index.php:38
+#: app/persons/views/my/Index.php:40
 msgid "My person"
 msgstr "Mi legajo"
 
-#: app/persons/views/my/Index.php:59 app/persons/views/my/SaveForm.php:127
+#: app/persons/views/my/Index.php:61 app/persons/views/my/SaveForm.php:127
 #: app/persons/views/my/SaveForm.php:136 storage/translate/menus.cards.php:4
 #: storage/translate/menus.persons.php:4
 msgid "My persons"
@@ -10862,6 +10756,30 @@ msgstr "Suites"
 msgid "Smileys"
 msgstr "Emoticones"
 
+#: app/socialnetworks/views/admin/ConfirmImport.php:13
+#: app/socialnetworks/views/admin/List.php:35
+#: app/socials/views/admin/ConfirmImport.php:13
+#: app/socials/views/admin/List.php:35 app/webstore/views/admin/List.php:35
+#: app/webstore/views/my/Index.php:18 app/webstore/views/my/List.php:23
+#: app/webstore/views/my/List.php:42
+#: cms/libraries/extensions/Enum/ExtensionStatus.php:24
+#: cms/plugins/test/generator/socials/src/app/__alias__/views/__scope__/ConfirmImport.php:13
+#: cms/plugins/test/generator/socials/src/app/__alias__/views/__scope__/List.php:35
+msgid "Deprecated"
+msgstr "Obsoleto"
+
+#: app/socialnetworks/views/admin/ConfirmImport.php:14
+#: app/socialnetworks/views/admin/List.php:18
+#: app/socialnetworks/views/admin/List.php:36
+#: app/socials/views/admin/ConfirmImport.php:14
+#: app/socials/views/admin/List.php:18 app/socials/views/admin/List.php:36
+#: cms/libraries/contents/Enum/ContentStatus.php:23
+#: cms/plugins/test/generator/socials/src/app/__alias__/views/__scope__/ConfirmImport.php:14
+#: cms/plugins/test/generator/socials/src/app/__alias__/views/__scope__/List.php:18
+#: cms/plugins/test/generator/socials/src/app/__alias__/views/__scope__/List.php:36
+msgid "Draft"
+msgstr "Borrador"
+
 #: app/socialnetworks/views/admin/Dashboard.php:11
 #: app/socialnetworks/views/admin/Index.php:32
 #: app/socialnetworks/views/admin/SaveForm.php:31
@@ -10952,33 +10870,33 @@ msgstr "Por favor, complete el próximo número."
 msgid "Please, delete all members to continue."
 msgstr "Por favor, elimine todos los miembros a seguir."
 
-#: app/subscriptions/models/SubscriptionsModel.php:115
+#: app/subscriptions/models/SubscriptionsModel.php:113
 msgid "Only empty subscriptions can be deleted."
 msgstr "Sólo las suscripciones vacías se pueden eliminar."
 
-#: app/subscriptions/models/SubscriptionsModel.php:257
+#: app/subscriptions/models/SubscriptionsModel.php:270
 #, php-format
 msgid "There is an error in the fees on line on subscriber #%d."
 msgstr "Hay un error en las cuotas en línea del abonado #%d."
 
-#: app/subscriptions/models/SubscriptionsModel.php:266
+#: app/subscriptions/models/SubscriptionsModel.php:279
 msgid "No fees were found."
 msgstr "No se han encontrado las cuotas."
 
-#: app/subscriptions/models/SubscriptionsModel.php:276
+#: app/subscriptions/models/SubscriptionsModel.php:289
 msgid "There is an error in the fees."
 msgstr "Hay un error en las cuotas."
 
-#: app/subscriptions/models/SubscriptionsModel.php:292
+#: app/subscriptions/models/SubscriptionsModel.php:305
 msgid "There is an error in the subscribers."
 msgstr "Hay un error en los suscriptores."
 
-#: app/subscriptions/models/SubscriptionsModel.php:314
+#: app/subscriptions/models/SubscriptionsModel.php:327
 #, php-format
 msgid "The fee #%d is doubled for subscriber #%d."
 msgstr "La cuota #%d se duplica para el abonado #%d."
 
-#: app/subscriptions/models/SubscriptionsModel.php:336
+#: app/subscriptions/models/SubscriptionsModel.php:349
 #, php-format
 msgid "The fee #%d is not created for the subscriber #%d."
 msgstr "La cuota #%d no se crea para el abonado #%d."
@@ -11027,7 +10945,7 @@ msgid_plural "Currently, the subscriber has %d active variations."
 msgstr[0] "Actualmente, el suscriptor tiene una variación activa."
 msgstr[1] "Actualmente, el suscriptor tiene %d variaciones activas."
 
-#: app/subscriptions/models/audit/AuditSubscriptionsSubscribersModel.php:178
+#: app/subscriptions/models/audit/AuditSubscriptionsSubscribersModel.php:177
 msgid "The titular is not active."
 msgstr "El titular no está activo."
 
@@ -11504,8 +11422,8 @@ msgstr "Mis tickets"
 
 #: app/translations/models/TranslationsStorageModel.php:93
 #: app/webstore/models/WebstoreStatusModel.php:41
-#: app/webstore/models/WebstoreStorageModel.php:57
-#: app/webstore/models/WebstoreStorageModel.php:200
+#: app/webstore/models/WebstoreStorageModel.php:56
+#: app/webstore/models/WebstoreStorageModel.php:202
 msgid "The developer could not be authenticated."
 msgstr "El desarrollador no pudo ser autenticado."
 
@@ -11514,7 +11432,7 @@ msgstr "El desarrollador no pudo ser autenticado."
 msgid "views"
 msgstr "vistas"
 
-#: app/users/models/UsersLabelsModel.php:111
+#: app/users/models/UsersLabelsModel.php:51
 msgid "The key must be alphanumeric."
 msgstr "La clave debe ser alfanumérica."
 
@@ -11522,7 +11440,7 @@ msgstr "La clave debe ser alfanumérica."
 msgid "Please, fill in the username."
 msgstr "Por favor, complete el usuario."
 
-#: app/users/models/UsersModel.php:60 cms/libraries/filter/Filter.php:418
+#: app/users/models/UsersModel.php:60 cms/libraries/filter/Filter.php:420
 #: cms/libraries/users/Tractor/LoginTractor.php:51
 msgid "Please, fill in the password."
 msgstr "Por favor, complete la contraseña."
@@ -11707,6 +11625,10 @@ msgstr "¿Está seguro de que desea cerrar la sesión?"
 msgid "Sincerely %s"
 msgstr "Atte. %s"
 
+#: app/usys/views/front/Signup.php:10
+msgid "This option is not available."
+msgstr "Esta opción no está disponible."
+
 #: app/usys/views/front/Signup.php:25
 msgid "Password Confirmation"
 msgstr "Confirmar Contraseña"
@@ -11812,7 +11734,7 @@ msgstr ""
 "le será útil, y la nueva contraseña debe ser solicitada a través de la "
 "administración."
 
-#: app/videos/models/VideosModel.php:57 cms/libraries/filter/Filter.php:412
+#: app/videos/models/VideosModel.php:57 cms/libraries/filter/Filter.php:414
 msgid "Please, fill in with a valid link."
 msgstr "Por favor, complete con un enlace válido."
 
@@ -11828,7 +11750,7 @@ msgstr "El servidor no ha podido ser identificado."
 msgid "The ID of the video has not been found."
 msgstr "La ID del video no ha sido encontrada."
 
-#: app/videos/models/VideosServersModel.php:82
+#: app/videos/models/VideosServersModel.php:77
 msgid "Please, delete all videos to continue."
 msgstr "Por favor, elimine todos los videos para continuar."
 
@@ -11875,7 +11797,7 @@ msgstr "Agregado por %s"
 msgid "From %s"
 msgstr "De %s"
 
-#: app/websites/models/WebsitesModel.php:74
+#: app/websites/models/WebsitesModel.php:65
 msgid "Sorry, you've reached the maximum allowed."
 msgstr "Lo sentimos, has alcanzado el máximo permitido."
 
@@ -11933,28 +11855,28 @@ msgstr "%s le ha enviado un correo electrónico"
 msgid "Please, leave at least one package available for download."
 msgstr "Por favor, deje al menos un paquete disponible para su descarga."
 
-#: app/webstore/models/WebstoreStorageModel.php:141
-#: app/webstore/models/WebstoreStorageModel.php:306
+#: app/webstore/models/WebstoreStorageModel.php:143
+#: app/webstore/models/WebstoreStorageModel.php:308
 msgid "The package could not be authenticated."
 msgstr "No se pudo autenticar el paquete."
 
-#: app/webstore/models/WebstoreStorageModel.php:149
+#: app/webstore/models/WebstoreStorageModel.php:151
 msgid "The package is incorrectly named."
 msgstr "El paquete tiene un nombre incorrecto."
 
-#: app/webstore/models/WebstoreStorageModel.php:163
-#: app/webstore/models/WebstoreStorageModel.php:169
+#: app/webstore/models/WebstoreStorageModel.php:165
+#: app/webstore/models/WebstoreStorageModel.php:171
 msgid "Error! The reading of the compressed file failed."
 msgstr "¡Error! Falló la lectura del archivo comprimido."
 
-#: app/webstore/models/WebstoreStorageModel.php:313
-#: app/webstore/models/WebstoreStorageModel.php:317
-#: cms/libraries/extensions/Installer/Unpackager.php:282
+#: app/webstore/models/WebstoreStorageModel.php:315
+#: app/webstore/models/WebstoreStorageModel.php:319
+#: cms/libraries/extensions/Installer/Unpackager.php:283
 #, php-format
 msgid "The extension «%s» is outdated."
 msgstr "La extensión «%s» está desactualizada."
 
-#: app/webstore/models/WebstoreStorageModel.php:392
+#: app/webstore/models/WebstoreStorageModel.php:394
 #, php-format
 msgid "The install value «%s» is empty or invalid."
 msgstr "El valor de instalación «%s» está vacío o es inválido."
@@ -11981,6 +11903,11 @@ msgstr "Referencias"
 
 #: app/webstore/views/admin/Dashboard.php:19
 #: app/webstore/views/admin/addresses/Index.php:27
+#: cms/libraries/careers/Enum/ExportStudentFields.php:43
+#: cms/libraries/groups/Enum/ExportMembers.php:42
+#: cms/libraries/outdoors/Enum/ExportParticipants.php:43
+#: cms/libraries/subscriptions/Enum/ExportSubscribers.php:43
+#: cms/libraries/workshops/Enum/ExportStudents.php:42
 msgid "Addresses"
 msgstr "Direcciones"
 
@@ -12162,7 +12089,7 @@ msgstr "Subtítulo"
 msgid "Show title"
 msgstr "Mostrar título"
 
-#: app/workshops/models/WorkshopsCalendarsModel.php:85
+#: app/workshops/models/WorkshopsCalendarsModel.php:80
 msgid "Please, delete the groups to continue."
 msgstr "Por favor, elimine los grupos para continuar."
 
@@ -12175,20 +12102,20 @@ msgstr "No se puede dar de baja a un alumno con asistencias."
 msgid "The group must be active to continue."
 msgstr "El grupo debe estar activo para continuar."
 
-#: app/workshops/models/WorkshopsGroupsLessonsModel.php:86
-msgid "Please, remove all the assistants before continuing."
-msgstr "Por favor, remueva todas las asistencias antes de continuar."
-
-#: app/workshops/models/WorkshopsGroupsLessonsModel.php:128
+#: app/workshops/models/WorkshopsGroupsLessonsModel.php:69
 msgid "There is already a lesson on the same schedule."
 msgstr "Ya hay una lección en el mismo horario."
+
+#: app/workshops/models/WorkshopsGroupsLessonsModel.php:89
+msgid "Please, remove all the assistants before continuing."
+msgstr "Por favor, remueva todas las asistencias antes de continuar."
 
 #: app/workshops/models/WorkshopsMastersModel.php:36
 msgid "The record cannot be modified because it is in use."
 msgstr "El registro no puede modificarse porque está en uso."
 
 #: app/workshops/models/audit/AuditWorkshopsLessonsModel.php:114
-#: app/workshops/models/my/MyWorkshopsLessonsModel.php:131
+#: app/workshops/models/my/MyWorkshopsLessonsModel.php:161
 #: app/workshops/views/audit/groups/List.php:18
 #: app/workshops/views/audit/groups/List.php:20
 #: app/workshops/views/audit/lessons/Index.php:9
@@ -12442,39 +12369,55 @@ msgid "The changes were made: %s."
 msgstr "Se hicieron los cambios: %s."
 
 #: cms/libraries/careers/CareersStudents.php:53
-#: cms/libraries/careers/CareersStudents.php:115
+#: cms/libraries/careers/CareersStudents.php:114
 msgid "There is no active enrollment yet."
 msgstr "Aún no hay ninguna inscripción activa."
 
-#: cms/libraries/careers/CareersStudents.php:146
+#: cms/libraries/careers/CareersStudents.php:145
 msgid "The career is closed"
 msgstr "La carrera está cerrada"
 
-#: cms/libraries/careers/CareersStudents.php:148
+#: cms/libraries/careers/CareersStudents.php:147
 msgid "The course is closed."
 msgstr "El curso está cerrado."
 
-#: cms/libraries/careers/CareersStudents.php:150
+#: cms/libraries/careers/CareersStudents.php:149
 msgid "Sorry, there is no more quota."
 msgstr "Lo sentimos, no hay más cupo."
 
-#: cms/libraries/careers/CareersStudents.php:187
+#: cms/libraries/careers/CareersStudents.php:186
 msgid "Enrollment requirements are insufficient."
 msgstr "Los requisitos de inscripción son insuficientes."
 
-#: cms/libraries/careers/CareersStudents.php:209
+#: cms/libraries/careers/CareersStudents.php:208
 msgid "There is already an active course."
 msgstr "Ya hay un curso activo."
 
-#: cms/libraries/certifications/Applicants.php:45
+#: cms/libraries/careers/Enum/ExportStudentFields.php:44
+#: cms/libraries/groups/Enum/ExportMembers.php:43
+#: cms/libraries/outdoors/Enum/ExportParticipants.php:44
+#: cms/libraries/subscriptions/Enum/ExportSubscribers.php:44
+#: cms/libraries/workshops/Enum/ExportStudents.php:43
+msgid "Phones"
+msgstr "Teléfonos"
+
+#: cms/libraries/careers/Enum/ExportStudentFields.php:45
+#: cms/libraries/groups/Enum/ExportMembers.php:44
+#: cms/libraries/outdoors/Enum/ExportParticipants.php:45
+#: cms/libraries/subscriptions/Enum/ExportSubscribers.php:45
+#: cms/libraries/workshops/Enum/ExportStudents.php:44
+msgid "Emails"
+msgstr "Emails"
+
+#: cms/libraries/certifications/Applicants.php:48
 msgid "The calendar has expired."
 msgstr "El calendario ha expirado."
 
-#: cms/libraries/certifications/Applicants.php:54
+#: cms/libraries/certifications/Applicants.php:57
 msgid "The call is off calendar."
 msgstr "La convocatoria está fuera de calendario."
 
-#: cms/libraries/certifications/Applicants.php:59
+#: cms/libraries/certifications/Applicants.php:61
 msgid "The student is already registered."
 msgstr "El estudiante ya está matriculado."
 
@@ -12523,6 +12466,14 @@ msgstr "El enlace permanente tiene una clave que no está permitida."
 #: cms/libraries/contents/ContentsHelper.php:63
 msgid "The permalink does not have an identifier."
 msgstr "El enlace permanente no tiene un identificador."
+
+#: cms/libraries/contents/Enum/ContentStatus.php:24
+msgid "Presented"
+msgstr "Presentado"
+
+#: cms/libraries/contents/Enum/SectionType.php:22
+msgid "Dynamic"
+msgstr "Dinámico"
 
 #: cms/libraries/currency/Currency.php:20
 msgid "$.,00"
@@ -12813,77 +12764,81 @@ msgstr "Almacenamiento"
 msgid "Distribution"
 msgstr "Distribución"
 
+#: cms/libraries/extensions/Enum/UpdateStatus.php:24
+msgid "Installed"
+msgstr "Instalado"
+
 #: cms/libraries/extensions/Installer/Installer.php:128
 msgid "Please, select the extensions."
 msgstr "Por favor, seleccione la extensión."
 
-#: cms/libraries/extensions/Installer/Unpackager.php:161
-#: cms/libraries/extensions/Installer/Unpackager.php:164
-#: cms/libraries/extensions/Installer/Unpackager.php:167
-#: cms/libraries/extensions/Installer/Unpackager.php:198
-#: cms/libraries/extensions/Installer/Unpackager.php:218
-#: cms/libraries/extensions/Installer/Unpackager.php:269
-#: cms/libraries/extensions/Installer/Unpackager.php:275
-#: cms/libraries/extensions/Installer/Unpackager.php:278
-#: cms/libraries/extensions/Installer/Unpackager.php:289
-#: cms/libraries/extensions/Installer/Unpackager.php:292
-#: cms/libraries/extensions/Installer/Unpackager.php:295
+#: cms/libraries/extensions/Installer/Unpackager.php:162
+#: cms/libraries/extensions/Installer/Unpackager.php:165
+#: cms/libraries/extensions/Installer/Unpackager.php:168
+#: cms/libraries/extensions/Installer/Unpackager.php:199
+#: cms/libraries/extensions/Installer/Unpackager.php:219
+#: cms/libraries/extensions/Installer/Unpackager.php:270
+#: cms/libraries/extensions/Installer/Unpackager.php:276
+#: cms/libraries/extensions/Installer/Unpackager.php:279
+#: cms/libraries/extensions/Installer/Unpackager.php:290
+#: cms/libraries/extensions/Installer/Unpackager.php:293
+#: cms/libraries/extensions/Installer/Unpackager.php:296
 #, php-format
 msgid "The install value «%s» is empty."
 msgstr "El valor de instalación «%s» está vacío."
 
-#: cms/libraries/extensions/Installer/Unpackager.php:173
+#: cms/libraries/extensions/Installer/Unpackager.php:174
 #, php-format
 msgid "The extension requires a php version equal to or greater than «%s»"
 msgstr "La extensión requiere una versión php igual o mayor que «%s»"
 
-#: cms/libraries/extensions/Installer/Unpackager.php:179
+#: cms/libraries/extensions/Installer/Unpackager.php:180
 #, php-format
 msgid "The extension requires a php version lower than «%s»"
 msgstr "La extensión requiere una versión de php inferior a «%s»"
 
-#: cms/libraries/extensions/Installer/Unpackager.php:307
+#: cms/libraries/extensions/Installer/Unpackager.php:308
 #, php-format
 msgid "The extension «%s» requires the extension «%s»."
 msgstr "La extensión «%s» requiere la extensión «%s»."
 
-#: cms/libraries/extensions/Installer/Unpackager.php:313
+#: cms/libraries/extensions/Installer/Unpackager.php:314
 #, php-format
 msgid "The extension «%s» requires the extension «%s» in a version «%s»."
 msgstr "La extensión «%s» requiere la extensión «%s» en una versión «%s»."
 
-#: cms/libraries/extensions/Installer/Unpackager.php:320
+#: cms/libraries/extensions/Installer/Unpackager.php:321
 #, php-format
 msgid ""
 "The extension «%s» requires the extension «%s» in a version «%s» or higher."
 msgstr ""
 "La extensión «%s» requiere la extensión «%s» en una versión «%s» o superior."
 
-#: cms/libraries/extensions/Installer/Unpackager.php:336
+#: cms/libraries/extensions/Installer/Unpackager.php:337
 #, php-format
 msgid "Falied open extension «%s». Missing components: «%s»"
 msgstr "Fallo al abrir la extensión \"%s\". Faltan componentes: \"%s\""
 
-#: cms/libraries/extensions/Installer/Unpackager.php:344
+#: cms/libraries/extensions/Installer/Unpackager.php:345
 #, php-format
 msgid "Falied open dir «%s»."
 msgstr "Error al abrir el directorio «%s»."
 
-#: cms/libraries/extensions/Installer/Unpackager.php:365
+#: cms/libraries/extensions/Installer/Unpackager.php:366
 #, php-format
 msgid "Falied open file «%s»."
 msgstr "Error al abrir el archivo: «%s»."
 
-#: cms/libraries/extensions/Installer/Unpackager.php:430
+#: cms/libraries/extensions/Installer/Unpackager.php:431
 msgid "The developer data has modified."
 msgstr "La información del desarrollador ha sido modificada."
 
-#: cms/libraries/extensions/Installer/Unpackager.php:445
+#: cms/libraries/extensions/Installer/Unpackager.php:446
 #, php-format
 msgid "The «%s» extension developer doesn't match the registered."
 msgstr "El desarrollador de la extensión «%s» no coincide con el registrado."
 
-#: cms/libraries/extensions/Installer/Unpackager.php:497
+#: cms/libraries/extensions/Installer/Unpackager.php:498
 #, php-format
 msgid ""
 "This will be a major update, please make sure you have the updates for the "
@@ -12892,7 +12847,7 @@ msgstr ""
 "Esta será una actualización mayor, por favor asegúrese de tener las "
 "actualizaciones para las siguientes extensiones: %s"
 
-#: cms/libraries/extensions/Installer/Unpackager.php:621
+#: cms/libraries/extensions/Installer/Unpackager.php:622
 msgid "Drop nonexistent columns"
 msgstr "Eliminar columnas inexistentes"
 
@@ -12967,7 +12922,7 @@ msgstr "Has excedido el máximo de %d archivos permitidos."
 msgid "The destination directory does not exist."
 msgstr "El directorio de destino no existe."
 
-#: cms/libraries/filter/Filter.php:406
+#: cms/libraries/filter/Filter.php:408
 msgid "Please, fill in the title."
 msgstr "Por favor, complete el título."
 
@@ -13422,19 +13377,19 @@ msgstr "Disminuir el tamaño del texto"
 msgid "Printable version"
 msgstr "Versión para imprimir"
 
-#: cms/plugins/contents/settings/default/settings.load.php:12
+#: cms/plugins/contents/settings/default/settings.load.php:13
 msgid "Only dynamic contents"
 msgstr "Sólo contenido dinámico"
 
-#: cms/plugins/contents/settings/default/settings.load.php:15
+#: cms/plugins/contents/settings/default/settings.load.php:16
 msgid "Only one"
 msgstr "Sólo uno"
 
-#: cms/plugins/contents/settings/default/settings.load.php:15
+#: cms/plugins/contents/settings/default/settings.load.php:16
 msgid "Several"
 msgstr "Varios"
 
-#: cms/plugins/contents/settings/default/settings.load.php:26
+#: cms/plugins/contents/settings/default/settings.load.php:27
 msgid "Please, install the \"inserts\" extension."
 msgstr "Por favor, instale la extensión \"inserts\"."
 
@@ -13449,17 +13404,17 @@ msgstr "Las extensiones disponibles son: %s."
 msgid "The max size to upload is %s."
 msgstr "El tamaño máximo para subir es %s."
 
-#: cms/plugins/contents/settings/portal/settings.load.php:32
+#: cms/plugins/contents/settings/portal/settings.load.php:34
 #: cms/plugins/socials/settings/default/settings.load.php:30
 msgid "Small"
 msgstr "Pequeño"
 
-#: cms/plugins/contents/settings/portal/settings.load.php:33
+#: cms/plugins/contents/settings/portal/settings.load.php:35
 #: cms/plugins/users/settings/default/settings.load.php:31
 msgid "Medium"
 msgstr "Medio"
 
-#: cms/plugins/contents/settings/portal/settings.load.php:34
+#: cms/plugins/contents/settings/portal/settings.load.php:36
 msgid "Lineal"
 msgstr "Lineal"
 
@@ -14104,13 +14059,9 @@ msgstr "Lista de pasos"
 msgid "Loading"
 msgstr "Cargando"
 
-#: cms/snippets/persons/master/default/snippet.php:41
+#: cms/snippets/persons/master/default/snippet.php:36
 msgid "Years"
 msgstr "Años"
-
-#: cms/snippets/persons/master/default/snippet.php:80
-msgid "No observation"
-msgstr "Ninguna observación"
 
 #: cms/snippets/products/frontlist/default/snippet.php:40
 #: cms/snippets/products/showcase/default/snippet.php:100
@@ -16415,6 +16366,19 @@ msgstr "Permite gestionar la lista de suscriptores."
 msgid "It allows to collect, issue and cancel fees."
 msgstr "Permite cobrar, emitir y anular aranceles."
 
+#, php-format
+#~ msgid "The value «%s» must be a json."
+#~ msgstr "El valor «%s» debe ser json."
+
+#~ msgid "Pending review"
+#~ msgstr "Pendiente de revisión"
+
+#~ msgid "Under review"
+#~ msgstr "En revisión"
+
+#~ msgid "No observation"
+#~ msgstr "Ninguna observación"
+
 #, fuzzy
 #~| msgid "Empty list"
 #~ msgid "Empty list."
@@ -17723,9 +17687,6 @@ msgstr "Permite cobrar, emitir y anular aranceles."
 
 #~ msgid "Add remaining dates."
 #~ msgstr "Añadir las fechas restantes."
-
-#~ msgid "Press enter."
-#~ msgstr "Presione enviar."
 
 #~ msgid "Song"
 #~ msgstr "Canciones"

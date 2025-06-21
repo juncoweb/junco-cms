@@ -10,8 +10,7 @@ use Junco\Mvc\Model;
 class FrontContactModel extends Model
 {
     // vars
-    protected $db = null;
-    protected $config = null;
+    protected $db;
 
     /**
      * Constructor
@@ -19,7 +18,6 @@ class FrontContactModel extends Model
     public function __construct()
     {
         $this->db = db();
-        $this->config = config('contact');
     }
 
     /**
@@ -27,9 +25,10 @@ class FrontContactModel extends Model
      */
     public function getIndexData()
     {
+        $config = config('contact');
         return [
-            'snippet' => $this->config['contact.snippet'],
-            'options' => $this->config['contact.options']
+            'snippet' => $config['contact.snippet'],
+            'options' => $config['contact.options']
         ];
     }
 
@@ -39,7 +38,7 @@ class FrontContactModel extends Model
     public function getMessageData()
     {
         return [
-            'options' => $this->config['contact.options']
+            'options' => config('contact.options')
         ];
     }
 }

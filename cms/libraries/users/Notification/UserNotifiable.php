@@ -9,6 +9,7 @@ namespace Junco\Users\Notification;
 
 use Junco\Notifications\Notifiable;
 use Junco\Notifications\Notification;
+use Junco\Users\Enum\UserStatus;
 
 class UserNotifiable extends Notifiable
 {
@@ -87,7 +88,7 @@ class UserNotifiable extends Notifiable
 		LEFT JOIN `#__users_roles_map` m2 ON ( m1.role_id = m2.role_id )
 		LEFT JOIN `#__users` u ON ( m2.user_id = u.id )
 		WHERE m1.label_id IN (?..)
-		AND u.status = 'active'", $labels)->fetchAll();
+		AND u.status = ?", $labels, UserStatus::active)->fetchAll();
 
         $notifiables = [];
         foreach ($users as $user) {

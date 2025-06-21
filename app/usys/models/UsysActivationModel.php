@@ -6,6 +6,7 @@
  */
 
 use Junco\Mvc\Model;
+use Junco\Users\Enum\UserStatus;
 use Junco\Users\UserActivityToken;
 use Junco\Users\UserHelper;
 
@@ -29,9 +30,9 @@ class UsysActivationModel extends Model
     {
         // data
         $this->filter(POST, [
-            'option'            => '',
-            'email_username'    => '',
-            'new_email'            => ''
+            'option'         => '',
+            'email_username' => '',
+            'new_email'      => ''
         ]);
 
         /**
@@ -43,7 +44,7 @@ class UsysActivationModel extends Model
             throw new Exception(_t('Invalid email/username.'));
         }
 
-        if ($user['status'] === 'active') {
+        if (UserStatus::active->isEqual($user['status'])) {
             throw new Exception(_t('Your account is active. Please, enter from the login.'));
         }
 
@@ -56,7 +57,7 @@ class UsysActivationModel extends Model
          */
         // validate
         if (
-            $user['status'] === 'inactive'
+            UserStatus::inactive->isEqual($user['status'])
             && $this->data['new_email']
             && $this->data['new_email'] !== $user['email']
         ) {
@@ -71,7 +72,9 @@ class UsysActivationModel extends Model
         }
 
         // token
-        $type = ($user['status'] === 'inactive') ? 'activation' : 'signup';
+        $type = UserStatus::inactive->isEqual($user['status'])
+            ? 'activation'
+            : 'signup';
 
         $result = UserActivityToken::generateAndSend(
             $type,
