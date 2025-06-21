@@ -98,7 +98,7 @@ function media_path(string $path = ''): string
 {
     static $media;
     if ($media === null) {
-        $media = app('filesystem.media_storage');
+        $media = app(Junco\Filesystem\MediaStorage::class);
     }
 
     return $media->getPath($path);
@@ -113,7 +113,7 @@ function media_url(string $path = '', bool $absolute = false): string
 {
     static $media;
     if ($media === null) {
-        $media = app('filesystem.media_storage');
+        $media = app(Junco\Filesystem\MediaStorage::class);
     }
 
     return $media->getUrl($path, $absolute);

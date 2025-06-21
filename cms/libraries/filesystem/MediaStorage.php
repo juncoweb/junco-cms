@@ -19,9 +19,9 @@ class MediaStorage
      */
     public function __construct()
     {
-        $config                = config('site');
-        $this->media_path    = SYSTEM_ABSPATH . SYSTEM_MEDIA_PATH;
-        $this->site_url        = $config['site.url'] . SYSTEM_MEDIA_PATH;
+        $config             = config('site');
+        $this->media_path   = SYSTEM_ABSPATH . SYSTEM_MEDIA_PATH;
+        $this->site_url     = $config['site.url'] . SYSTEM_MEDIA_PATH;
         $this->site_baseurl = $config['site.baseurl'] . SYSTEM_MEDIA_PATH;
     }
 
