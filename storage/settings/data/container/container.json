@@ -11,12 +11,7 @@
             "type": "json",
             "group": 0,
             "ordering": 1,
-            "default_value": {
-                "MediaStorage": {
-                    "className": "\\Junco\\Filesystem\\MediaStorage",
-                    "shared": 1
-                }
-            },
+            "default_value": "",
             "help": "",
             "history": [],
             "autoload": 1,

@@ -1,4 +1,4 @@
 
 Filter v2.8
 =======================================================
-- Added new filters: enum, slug, json.
+- Now, enum filters return an Enum.

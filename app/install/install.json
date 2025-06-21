@@ -8,10 +8,10 @@
     "min_php_version": "8.2",
     "max_php_version": "0",
     "summary": {
-        "extension_version": "3.2, 5.4, 0.1, 3.4, 5.1, 1.1, 3.1, 1.2, 2.4, 2.5, 4.5, 2.8, 3.3, 2.6, 2.3, 4.1, 13.4",
+        "extension_version": "3.2, 5.4, 0.1, 3.4, 5.1, 1.1, 3.1, 1.2, 2.4, 2.5, 4.5, 2.8, 3.3, 2.6, 2.3, 4.1, 13.5",
         "extension_credits": "Junco CMS (tm), https:\/\/uri.thephpleague.com, PHP-FIG, Leaf Corcoran, MIT",
         "extension_license": "GPLv3, MIT, MIT License, Symfony Community (https:\/\/symfony.com\/contributors)",
-        "extension_require": "13.4"
+        "extension_require": "13.5"
     },
     "extensions": {
         "archive": {
@@ -427,7 +427,7 @@
         },
         "system": {
             "extension_name": "System",
-            "extension_version": "13.4",
+            "extension_version": "13.5",
             "extension_credits": "Junco CMS (tm)",
             "extension_license": "GPLv3",
             "extension_abstract": "Package of extensions that form the core of the Junco system.",

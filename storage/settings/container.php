@@ -8,11 +8,6 @@ return [
 	/**
 	 * Registers
 	 */
-	'system_registers' => [
-		'MediaStorage' => [
-			'className' => '\\Junco\\Filesystem\\MediaStorage',
-			'shared' => 1
-		]
-	],
+	'system_registers' => '',
 	'user_registers' => '',
 ];

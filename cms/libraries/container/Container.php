@@ -23,8 +23,8 @@ class Container implements ContainerInterface
     // vars
     static protected $instance;
     //
-    protected array $instances    = [];
-    protected array $registers    = [];
+    protected array $instances = [];
+    protected array $registers = [];
 
     /**
      * Singleton
@@ -308,7 +308,7 @@ class Container implements ContainerInterface
         $className = $id;
 
         if (strpos($className, '\\') === false) {
-            $className = ucfirst($className);
+            $className = $this->getClassName($className);
         }
 
         $this->registers[$id] = [
@@ -317,5 +317,25 @@ class Container implements ContainerInterface
         ];
 
         return $className;
+    }
+
+    /**
+     * Get class name.
+     *
+     * @param string $className
+     * 
+     * @return string
+     */
+    protected function getClassName(string $className): string
+    {
+        $namespace = '';
+
+        if (strpos($className, '.') !== false) {
+            $parts     = explode('.', $className);
+            $className = array_pop($parts);
+            $namespace = "Junco\\" . implode("\\", array_map('ucfirst', $parts)) . "\\";
+        }
+
+        return $namespace . implode(array_map('ucfirst', explode('_', $className)));
     }
 }
