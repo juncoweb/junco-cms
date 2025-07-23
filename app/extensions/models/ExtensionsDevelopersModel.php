@@ -10,9 +10,8 @@ use Junco\Mvc\Model;
 class ExtensionsDevelopersModel extends Model
 {
     // vars
-    protected $db = null;
-    //
-    protected $id = null;
+    protected $db;
+    protected int $id = 0;
 
     /**
      * Constructor
@@ -29,13 +28,13 @@ class ExtensionsDevelopersModel extends Model
     {
         // data
         $this->filter(POST, [
-            'id'                => 'id',
-            'developer_name'    => 'text|required',
-            'project_url'        => '',
-            'webstore_url'        => '',
-            'webstore_token'    => '',
-            'default_credits'    => 'required',
-            'default_license'    => 'required',
+            'id'              => 'id',
+            'developer_name'  => 'text|required',
+            'project_url'     => '',
+            'webstore_url'    => '',
+            'webstore_token'  => '',
+            'default_credits' => 'required',
+            'default_license' => 'required',
         ]);
 
         // extract

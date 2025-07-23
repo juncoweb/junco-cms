@@ -81,7 +81,7 @@ class AutoSignup
                 'fullname'   => $fullname,
                 'username'   => $username,
                 'email'      => $email,
-                'status'     => $status,
+                'status'     => $status->name,
                 'is_created' => true
             ];
         }

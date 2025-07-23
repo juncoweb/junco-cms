@@ -22,9 +22,9 @@ class Enter extends FormElement
             $attr = array_merge($attr, (new FormCaptcha)->get($captcha));
         }
 
-        $this->html = $this->extract($attr, 'html')
+        $this->content = $this->extract($attr, 'html')
             . '<button' . $this->attr([
-                'type' => 'submit',
+                'type'  => 'submit',
                 'class' => 'btn btn-primary btn-solid'
             ], $attr) . '>'
             . ($label ?: _t('Enter'))

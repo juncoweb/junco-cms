@@ -10,10 +10,9 @@ use Junco\Mvc\Model;
 class AdminSettingsFormModel extends Model
 {
     // vars
-    protected $snippets        = [];
-    protected $plugins        = [];
-    protected $row            = null;
-
+    protected array $snippets = [];
+    protected array $plugins  = [];
+    protected array $row      = [];
 
     /**
      * Get
@@ -39,13 +38,13 @@ class AdminSettingsFormModel extends Model
         $developer_mode = SYSTEM_DEVELOPER_MODE;
         $this->data['__key'] = $this->data['key'];
         $this->data += [
-            'developer_mode'    => $developer_mode,
-            'title'                => $data['title'] ? _t($data['title']) : ucfirst($this->data['key']),
-            'description'        => $data['description'],
-            'warning'            => $data['warning'],
-            'keys'                => $this->getKeys($settings, $this->data['key']),
-            'values'            => $this->data,
-            'groups'            => [],
+            'developer_mode' => $developer_mode,
+            'title'          => $data['title'] ? _t($data['title']) : ucfirst($this->data['key']),
+            'description'    => $data['description'],
+            'warning'        => $data['warning'],
+            'keys'           => $this->getKeys($settings, $this->data['key']),
+            'values'         => $this->data,
+            'groups'         => [],
         ];
         $restore = [];
         $restore_types_1 = [
@@ -74,96 +73,99 @@ class AdminSettingsFormModel extends Model
 
         // prepare groups
         foreach ($data['rows'] as $name => $row) {
-            if ($developer_mode || $row['status']) {
-                $row['name'] = $name;
-                $this->row = $row;
-
-                // help
-                if (!empty($row['alter_help'])) {
-                    $row['help'] = $row['alter_help'];
-                } elseif ($row['help']) {
-                    $row['help'] = _t($row['help']);
-                }
-
-                switch ($row['type']) {
-                    case 'snippet';
-                        $row['options'] = $this->getSnippets();
-
-                        if (!$row['help']) {
-                            $row['help'] = _t('Select a snippet to display.');
-                        }
-                        break;
-
-                    case 'plugin':
-                        $row['options'] = $this->getPlugin();
-
-                        if (!$row['help']) {
-                            $row['help'] = _t('The plugins allow additional functions.');
-                        }
-                        break;
-
-                    case 'plugins':
-                        $row['options'] = $this->getPlugins();
-
-                        if (!$row['help']) {
-                            $row['help'] = _t('The plugins allow additional functions.');
-                        }
-                        break;
-
-                    case 'select-multiple-integer':
-                    case 'select-multiple-text':
-                    case 'select-integer':
-                    case 'select-text':
-                        $this->sanitizeArray($row['options']);
-
-                        if (!$row['help']) {
-                            $row['help'] = _t('Select a list item.');
-                        }
-                        break;
-
-                    case 'list':
-                        $row['value']            = $this->getArrayValue($row['value']);
-                        $row['default_value']    = $this->getArrayValue($row['default_value']);
-                        break;
-
-                    case 'json':
-                        $this->sanitizeArray($row['options']);
-
-                        if ($row['options'] !== null) {
-                            $row['options'] = $this->getArrayValue($row['options']);
-                        }
-
-                        $row['value']            = $this->getJsonValue($row['value']);
-                        $row['default_value']    = $this->getJsonValue($row['default_value']);
-
-                        break;
-
-                    case 'input-range':
-                        $row['min'] ??= 0;
-                        $row['max'] ??= 100;
-                        break;
-                }
-
-                // restore
-                if ((in_array($row['type'], $restore_types_1)
-                        || (in_array($row['type'], $restore_types_2) && $row['options'] !== null)
-                    ) && ($row['value'] != $row['default_value']
-                    )
-                ) {
-                    $restore[$row['name']] = $row['default_value'];
-                    $row['restore'] = true;
-                } else {
-                    $row['restore'] = false;
-                }
-
-                $this->data['groups'][$row['group']] ??= [
-                    'legend'        => !empty($data['groups'][$row['group']]) ? _t($data['groups'][$row['group']]) : '',
-                    'description'    => !empty($data['descriptions'][$row['group']]) ? _t($data['descriptions'][$row['group']]) : '',
-                    'rows'            => []
-                ];
-                $this->data['groups'][$row['group']]['rows'][] = $row;
-                $this->data['values'][$row['name']] = $row['value'];
+            if (!$row['status'] && !$developer_mode) {
+                continue;
             }
+
+            $row['name'] = $name;
+            $this->row = $row;
+
+            // help
+            if (!empty($row['alter_help'])) {
+                $row['help'] = $row['alter_help'];
+            } elseif ($row['help']) {
+                $row['help'] = _t($row['help']);
+            }
+
+            switch ($row['type']) {
+                case 'snippet';
+                    $row['options'] = $this->getSnippets();
+
+                    if (!$row['help']) {
+                        $row['help'] = _t('Select a snippet to display.');
+                    }
+                    break;
+
+                case 'plugin':
+                    $row['options'] = $this->getPlugin();
+
+                    if (!$row['help']) {
+                        $row['help'] = _t('The plugins allow additional functions.');
+                    }
+                    break;
+
+                case 'plugins':
+                    $row['options'] = $this->getPlugins();
+
+                    if (!$row['help']) {
+                        $row['help'] = _t('The plugins allow additional functions.');
+                    }
+                    break;
+
+                case 'select-multiple-integer':
+                case 'select-multiple-text':
+                case 'select-integer':
+                case 'select-text':
+                    $this->sanitizeArray($row['options']);
+
+                    if (!$row['help']) {
+                        $row['help'] = _t('Select a list item.');
+                    }
+                    break;
+
+                case 'list':
+                    $row['value']         = $this->getArrayValue($row['value']);
+                    $row['default_value'] = $this->getArrayValue($row['default_value']);
+                    break;
+
+                case 'json':
+                    $this->sanitizeArray($row['options']);
+
+                    if ($row['options'] !== null) {
+                        $row['options'] = $this->getArrayValue($row['options']);
+                    }
+
+                    $row['value']         = $this->getJsonValue($row['value']);
+                    $row['default_value'] = $this->getJsonValue($row['default_value']);
+                    break;
+
+                case 'input-range':
+                    $row['min'] ??= 0;
+                    $row['max'] ??= 100;
+                    break;
+            }
+
+            // restore
+            if (
+                ($row['value'] != $row['default_value'])
+                && (
+                    in_array($row['type'], $restore_types_1)
+                    || (in_array($row['type'], $restore_types_2) && $row['options'] !== null)
+                )
+            ) {
+                $restore[$row['name']] = $row['default_value'];
+                $row['restore'] = true;
+            } else {
+                $row['restore'] = false;
+            }
+
+            $this->data['groups'][$row['group']] ??= [
+                'legend'      => !empty($data['groups'][$row['group']]) ? _t($data['groups'][$row['group']]) : '',
+                'description' => !empty($data['descriptions'][$row['group']]) ? _t($data['descriptions'][$row['group']]) : '',
+                'rows'        => []
+            ];
+            $this->data['groups'][$row['group']]['rows'][] = $row;
+            $this->data['values'][$row['name']] = $row['value'];
         }
 
         return $this->data + [
@@ -198,7 +200,7 @@ class AdminSettingsFormModel extends Model
     /**
      * Get
      */
-    protected function getSnippets()
+    protected function getSnippets(): array
     {
         $name = $this->resolveName('snippet');
         $this->snippets[$name] ??= SystemHelper::scanSnippets($name);
@@ -209,7 +211,7 @@ class AdminSettingsFormModel extends Model
     /**
      * Get
      */
-    protected function getPlugin()
+    protected function getPlugin(): array
     {
         $name = $this->resolveName('plugin');
         $this->plugins[$name] ??= SystemHelper::scanPlugins($name);
@@ -220,7 +222,7 @@ class AdminSettingsFormModel extends Model
     /**
      * Get
      */
-    protected function getPlugins()
+    protected function getPlugins(): array
     {
         $name = $this->resolveName('plugins');
         $this->plugins[$name] ??= SystemHelper::scanPlugins($name);
@@ -231,7 +233,7 @@ class AdminSettingsFormModel extends Model
     /**
      * Get
      */
-    protected function resolveName(string $resolve)
+    protected function resolveName(string $resolve): string
     {
         if (!empty($this->row[$resolve])) {
             return $this->row[$resolve];

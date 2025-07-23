@@ -85,11 +85,11 @@ class AdminExtensionsController extends Controller
     }
 
     /**
-     * Append Form
+     * Confirm append
      */
     public function confirmAppend()
     {
-        return $this->view(null, (new AdminExtensionsModel)->getAppendData());
+        return $this->view(null, (new AdminExtensionsModel)->getConfirmAppendData());
     }
 
     /**
@@ -106,7 +106,7 @@ class AdminExtensionsController extends Controller
      */
     public function confirmCompile()
     {
-        return $this->view(null, (new AdminExtensionsModel)->getCompileData());
+        return $this->view(null, (new AdminExtensionsModel)->getConfirmCompileData());
     }
 
     /**
@@ -115,7 +115,7 @@ class AdminExtensionsController extends Controller
     public function compile()
     {
         return $this->middleware('form.security')
-            ?: $this->wrapper(fn() => (new ExtensionsModel)->compileAll());
+            ?: $this->wrapper(fn() => (new ExtensionsModel)->compile());
     }
 
     /**
@@ -123,7 +123,7 @@ class AdminExtensionsController extends Controller
      */
     public function confirmDbhistory()
     {
-        return $this->view(null, (new AdminExtensionsModel)->getDbHistoryData());
+        return $this->view(null, (new AdminExtensionsModel)->getConfirmDbHistoryData());
     }
 
     /**
@@ -132,7 +132,7 @@ class AdminExtensionsController extends Controller
     public function dbHistory()
     {
         return $this->middleware('form.security')
-            ?: $this->wrapper(fn() => (new ExtensionsModel)->db_history());
+            ?: $this->wrapper(fn() => (new ExtensionsModel)->dbHistory());
     }
 
     /**

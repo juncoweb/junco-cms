@@ -66,56 +66,51 @@ if ($warning) {
 
 //
 if ($description) {
-    $form->addRow(['help' => $description]);
+    $form->element($description);
     $form->separate('');
 }
 
 // elements
-$restore_tag = '<a href="javascript:void(0)" control-form="restore" role="button" title="' . ($t = _t('Restore')) . '" aria-label="' . $t . '" data-restore="%s" class="btn-inline"><i class="fa-solid fa-wand-magic"></i></a>';
-if ($developer_mode) {
-    $restore_tag .= ' <a href="javascript:void(0)" control-form="unlock" role="button" title="' . ($t = _t('Lock')) . '" aria-label="' . $t . '" class="btn-inline"><input type="checkbox" name="unlock[]" value="%1$s" style="display: none;"/><i class="fa-solid fa-lock"></i></a>';
-}
-
 if ($groups) {
     foreach ($groups as $i => $group) {
         if ($group['description']) {
-            $form->addRow(['help' => $group['description']]);
+            $form->element($group['description']);
         }
 
         foreach ($group['rows'] as $row) {
             switch ($row['type']) {
                 // input
                 case 'input-integer':
-                    $form->input($row['name'], ['type' => 'number']);
+                    $element = $form->input($row['name'], ['type' => 'number']);
                     break;
 
                 case 'input-range':
-                    $form->input($row['name'], ['type' => 'range', 'min' => $row['min'], 'max' => $row['max'], 'class' => 'input-range']);
+                    $element = $form->input($row['name'], ['type' => 'range', 'min' => $row['min'], 'max' => $row['max'], 'class' => 'input-range']);
                     break;
 
                 default:
                 case 'input-text':
-                    $form->input($row['name']);
+                    $element = $form->input($row['name']);
                     break;
 
                 case 'input-email':
-                    $form->input($row['name'], ['type' => 'email']);
+                    $element = $form->input($row['name'], ['type' => 'email']);
                     break;
 
                 case 'input-password':
-                    $form->input($row['name'], ['type' => 'password', 'control-felem' => 'password']);
+                    $element = $form->input($row['name'], ['type' => 'password', 'control-felem' => 'password']);
                     break;
 
                 case 'input-phone':
-                    $form->input($row['name'], ['type' => 'tel']);
+                    $element = $form->input($row['name'], ['type' => 'tel']);
                     break;
 
                 case 'input-url':
-                    $form->input($row['name'], ['type' => 'url']);
+                    $element = $form->input($row['name'], ['type' => 'url']);
                     break;
 
                 case 'input-color':
-                    $form->input($row['name'], ['type' => 'color', 'control-felem' => 'color']);
+                    $element = $form->input($row['name'], ['type' => 'color', 'control-felem' => 'color']);
                     break;
 
                 // select
@@ -124,9 +119,9 @@ if ($groups) {
                 case 'snippet';
                 case 'plugin':
                     if ($row['options'] === null) {
-                        $form->load('settings.not_found');
+                        $element = $form->load('settings.not_found');
                     } else {
-                        $form->select($row['name'], $row['options']);
+                        $element = $form->select($row['name'], $row['options']);
                     }
                     break;
 
@@ -134,42 +129,52 @@ if ($groups) {
                 case 'select-multiple-text':
                 case 'plugins':
                     if ($row['options'] === null) {
-                        $form->load('settings.not_found');
+                        $element = $form->load('settings.not_found');
                     } else {
-                        $form->suite($row['name'], $row['options']);
+                        $element = $form->suite($row['name'], $row['options']);
                     }
                     break;
 
                 // others
                 case 'textarea':
-                    $form->textarea($row['name'], ['auto-grow' => '']);
+                    $element = $form->textarea($row['name'], ['auto-grow' => '']);
                     break;
 
                 case 'boolean':
-                    $form->toggle($row['name']);
+                    $element = $form->toggle($row['name']);
                     break;
 
                 case 'json':
-                    $form->load('settings.json', [
+                    $element = $form->load('settings.json', [
                         'name' => $row['name'],
                         'options' => $row['options']
                     ]);
                     break;
             }
 
-            if ($row['restore']) {
-                $row['restore'] = sprintf($restore_tag, $row['name']);
-            }
+            $element
+                ->setLabel(_t($row['label']))
+                ->setHelp($row['help']);
 
-            $element = $form->getLastElement();
-            $element->setLabel(_t($row['label']));
-            $element->setHelp($row['help']);
-            $form->addRow([
-                'label' => $element->getLabel(),
-                'content' => $element->render(),
-                'button' => $row['restore'],
-                'help' => $element->getHelp()
-            ]);
+            if ($row['restore']) {
+                $element->setAction([
+                    'icon'         => 'fa-solid fa-wand-magic',
+                    'control-form' => 'restore',
+                    'data-restore' => $row['name'],
+                    'title'        => _t('Restore'),
+                ]);
+
+                if ($developer_mode) {
+                    $element->setAction([
+                        'checkbox' => true,
+                        'name'     => 'unlock[]',
+                        'value'    => $row['name'],
+                        'icon'     => 'fa-solid fa-lock',
+                        'icon_alt' => 'fa-solid fa-unlock-alt',
+                        'title'    => _t('Lock'),
+                    ]);
+                }
+            }
         }
 
         $form->separate($group['legend']);

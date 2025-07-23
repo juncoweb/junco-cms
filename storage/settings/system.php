@@ -8,7 +8,7 @@ return [
 	/**
 	 * General
 	 */
-	'developer_mode' => 0,
+	'developer_mode' => false,
 	'profiler' => '0',
 	'handle_errors' => '',
 

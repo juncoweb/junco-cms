@@ -1,4 +1,4 @@
-/* --- form-group ----------------------------------------- */
+/* --- form ----------------------------------------- */
 .form-wrapper {
     max-width: $screen-x-large;
     margin-bottom: $spacing * 2;
@@ -7,6 +7,23 @@
         max-width: $screen-medium;
         margin-left: auto;
         margin-right: auto;
+    }
+}
+
+.form-columns {
+    display: flex;
+    gap: $spacing;
+
+    > div {
+        flex: auto;
+    }
+}
+@media (max-width: $screen-medium) {
+    .form-columns {
+        display: block;
+        > div ~ div {
+            margin-top: $spacing;
+        }
     }
 }
 
@@ -24,21 +41,8 @@
     font-weight: bold;
 }
 
-.form-button {
-    white-space: nowrap;
-}
-
 .form-help {
     color: var(--regular-subtle-font-color);
-}
-
-.form-content {
-    display: flex;
-    gap: $spacing;
-
-    .form-ct {
-        flex: auto;
-    }
 }
 
 .form-header {
@@ -67,6 +71,10 @@
     border-top: $border-width $border-style var(--regular-border-color);
     padding: $spacing;
     display: none;
+}
+
+.form-fieldset > :last-child {
+    margin-bottom: 0;
 }
 
 div.form-fieldset.expanded {

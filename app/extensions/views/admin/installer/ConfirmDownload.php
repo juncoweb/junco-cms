@@ -11,7 +11,7 @@ $form->setValues($values);
 $form->hidden('update_id');
 $form->hidden('download_url');
 //
-$form->addRow(['content' => _t('Are you sure you want to download the file selected?')]);
+$form->element(_t('Are you sure you want to download the file selected?'));
 if ($is_close) {
     $form->input('extension_key')->setLabel(_t('Key'));
     $form->hidden('_extension_key');

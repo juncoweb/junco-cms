@@ -84,7 +84,7 @@ class UsersModel extends Model
     }
 
     /**
-     * Toggle
+     * Status
      */
     public function status()
     {

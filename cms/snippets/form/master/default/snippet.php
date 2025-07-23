@@ -17,12 +17,11 @@ class form_master_default_snippet extends form_master_default_elements implement
     // vars
     protected string|int|false $id;
     //
-    protected string $header        = '';
-    protected string $toggleClass    = '';
-    protected string $panelClass    = '';
-    protected array  $blocks        = [];
-    protected int    $counter        = -1;
-    protected string $hiddens        = '';
+    protected string $header      = '';
+    protected string $toggleClass = '';
+    protected string $panelClass  = '';
+    protected array  $blocks      = [];
+    protected string $hiddens     = '';
     protected ?FormActionsInterface $actions = null;
 
     /**
@@ -55,13 +54,14 @@ class form_master_default_snippet extends form_master_default_elements implement
     {
         $boxes = [];
         $data = [
-            'label'        => null,
-            'content'    => null,
-            'required'    => false
+            'label'    => null,
+            'content'  => null,
+            'required' => false
         ];
 
         if ($attr instanceof FormElementInterface) {
-            array_pop($this->rows);
+            $this->extractElement($attr);
+
             $data['content']  = $attr->render();
             $data['label']    = $attr->getLabel();
             $data['required'] = $attr->isRequired();
@@ -122,7 +122,7 @@ class form_master_default_snippet extends form_master_default_elements implement
     {
         if (!is_array($attr)) {
             $attr = [
-                'class' => 'form-fieldset',
+                'class'  => 'form-fieldset',
                 'legend' => $attr
             ];
         } else {
@@ -132,15 +132,14 @@ class form_master_default_snippet extends form_master_default_elements implement
 
         $html = '';
         foreach ($this->rows as $row) {
-            if ($row instanceof FormElementInterface) {
-                $html .= $this->renderRow(
-                    $row->render(),
-                    $row->getLabel(),
-                    $row->isRequired(),
-                    $row->getHelp()
-                );
+            if (is_array($row)) {
+                $partial = '';
+                foreach ($row as $element) {
+                    $partial .= '<div>' . $this->renderRow($element) . '</div>';
+                }
+                $html .= '<div class="form-group"><div class="form-columns">' . $partial . '</div></div>';
             } else {
-                $html .= $row;
+                $html .= $this->renderRow($row);
             }
         }
 
@@ -164,27 +163,21 @@ class form_master_default_snippet extends form_master_default_elements implement
     }
 
     /**
-     * Adds a row
+     * Columns
      * 
-     * @param array $attr
+     * @param FormElementInterface[]
      * 
      * @return void
      */
-    public function addRow(array $attr): void
+    public function columns(FormElementInterface ...$elements): void
     {
-        $attr['custom'] ??= [];
-
-        if (isset($attr['button'])) {
-            $attr['custom']['bt'] = $attr['button'];
+        foreach ($elements as $element) {
+            $this->extractElement($element);
         }
 
-        $this->rows[] = $this->renderRow(
-            $attr['content'] ?? null,
-            $attr['label'] ?? null,
-            $attr['required'] ?? false,
-            $attr['help'] ?? '',
-            $attr['custom']
-        );
+        $this->rows[] = count($elements) == 1
+            ? $elements[0]
+            : $elements;
     }
 
     /**
@@ -225,7 +218,9 @@ class form_master_default_snippet extends form_master_default_elements implement
      */
     public function render(): string
     {
-        $html = isset($this->actions) ? $this->actions->render() : '';
+        $html = isset($this->actions)
+            ? $this->actions->render()
+            : '';
 
         if ($this->rows) {
             $this->separate();
@@ -253,45 +248,30 @@ class form_master_default_snippet extends form_master_default_elements implement
     /**
      * Render
      */
-    protected function renderRow(?string $content, ?string $label, bool $required, string $help, array $custom = []): string
+    protected function renderRow(FormElementInterface $element): string
     {
-        //
-        $html  = '';
-        $class = ' form';
-
-        if ($content !== null) {
-            $class .= '-ct';
-            $html .= '<div class="form-ct">' . $content . '</div>';
-        }
-
-        if ($custom) {
-            foreach ($custom as $name => $content) {
-                $class .= '-' . $name;
-                $html .= '<div class="form-' . $name . '">' . $content . '</div>';
-            }
-        }
-
-        if ($class === ' form-ct') {
-            $class = '';
-        }
-
-        $html = '<div class="form-content' . $class . '">' . $html . '</div>';
+        $content = $element->render();
+        $label   = $element->getLabel();
+        $help    = $element->getHelp();
+        $html    = '';
 
         if ($label !== null) {
-            if ($required) {
-                $label .= ' <sup><i class="fa-regular fa-asterisk color-primary" title="' . _t('Required') . '" aria-hidden="true"></i></sup>';
+            if ($element->isRequired()) {
+                $label .= '<i class="fa-regular fa-asterisk color-primary ml-2 mr-2" title="' . _t('Required') . '" aria-hidden="true"></i>';
             }
 
-            $html = '<div class="form-label">' . $label . '</div>' . $html;
+            $html .= '<div class="form-label">' . $label . '</div>';
+        }
+
+        if ($content) {
+            $html .= '<div class="form-content">' . $content . '</div>';
         }
 
         if ($help) {
             $html .= '<div class="form-help">' . $help . '</div>';
         }
 
-        $html = '<div class="form-group">' . $html . '</div>';
-
-        return $html;
+        return '<div class="form-group">' . $html . '</div>';
     }
 
     /**

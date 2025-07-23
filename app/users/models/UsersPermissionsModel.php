@@ -21,7 +21,7 @@ class UsersPermissionsModel extends Model
     }
 
     /**
-     * Toggle
+     * Status
      */
     public function status()
     {

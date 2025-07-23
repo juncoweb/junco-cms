@@ -13,7 +13,7 @@ class MysqlImporter
 {
     // vars
     protected $db;
-    protected $prefixer    = null;
+    protected $prefixer;
 
     /**
      * Constructor

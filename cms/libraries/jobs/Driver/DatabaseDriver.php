@@ -12,7 +12,7 @@ use Junco\Jobs\JobInterface;
 class DatabaseDriver implements DriverInterface
 {
     // vars
-    protected $db = null;
+    protected $db;
     protected string $default_queue;
 
     /**

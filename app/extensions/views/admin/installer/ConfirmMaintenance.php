@@ -9,7 +9,7 @@
 $form = Form::get();
 $form->setValues(['status' => $status]);
 $form->toggle('status')->setLabel(_t('Enable'));
-$form->addRow(['content' => '<div class="color-light text-center">' . _t('Enables the maintenance mode of the website.') . '</div>']);
+$form->element('<div class="color-light text-center">' . _t('Enables the maintenance mode of the website.') . '</div>');
 
 // modal
 $modal = Modal::get();

@@ -13,12 +13,11 @@ use Junco\Extensions\Compiler\PreCompiler;
 use Junco\Extensions\Enum\ExtensionStatus;
 use Junco\Extensions\Enum\UpdateStatus;
 use Junco\Extensions\Updater\Carrier;
-use PHPUnit\Runner\Extension\Extension;
 
 class AdminExtensionsModel extends Model
 {
     // vars
-    protected $db = null;
+    protected $db;
 
     /**
      * Constructor
@@ -224,23 +223,16 @@ class AdminExtensionsModel extends Model
     /**
      * Get
      */
-    public function getAppendData()
+    public function getConfirmAppendData()
     {
         // data
         $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
-        // query
-        $data = $this->db->safeFind("
-		SELECT
-		 id ,
-		 developer_id ,
-		 extension_name
-		FROM `#__extensions`
-		WHERE id = ?", $this->data['id'])->fetch() or abort();
+        // security
+        $data = $this->getExtensionData($this->data['id']) or abort();
 
         // query
-        $rows = $this->db->safeFind(
-            "
+        $rows = $this->db->safeFind("
 		SELECT
 		 id,
 		 extension_name ,
@@ -248,10 +240,7 @@ class AdminExtensionsModel extends Model
 		FROM `#__extensions`
 		WHERE developer_id = ?
 		AND package_id IN (0, ?)
-		ORDER BY extension_name",
-            $data['developer_id'],
-            $data['id']
-        )->fetchAll();
+		ORDER BY extension_name", $data['developer_id'], $data['id'])->fetchAll();
 
         $extensions = [];
         $selected = [];
@@ -276,7 +265,7 @@ class AdminExtensionsModel extends Model
     /**
      * Get
      */
-    public function getCompileData()
+    public function getConfirmCompileData()
     {
         // data
         $this->filter(POST, [
@@ -348,7 +337,7 @@ class AdminExtensionsModel extends Model
     /**
      * Get
      */
-    public function getDbHistoryData()
+    public function getConfirmDbHistoryData()
     {
         // data
         $this->filter(POST, ['id' => 'id|array:first|required:abort']);
@@ -356,14 +345,17 @@ class AdminExtensionsModel extends Model
         // query
         $extension = $this->db->safeFind("
 		SELECT
-		extension_alias AS alias,
-		extension_name AS name,
-		db_history ,
-		(SELECT is_protected FROM `#__extensions_developers` d WHERE developer_id = d.id) AS is_protected
-		FROM `#__extensions` WHERE id = ?", $this->data['id'])->fetch();
+		 extension_alias AS alias,
+		 extension_name AS name,
+		 db_history ,
+		 (SELECT is_protected FROM `#__extensions_developers` d WHERE developer_id = d.id) AS is_protected
+		FROM `#__extensions`
+        WHERE id = ?", $this->data['id'])->fetch();
 
         // vars
-        $db_history = $extension['db_history'] ? (array)json_decode($extension['db_history'], true) : [];
+        $db_history = $extension['db_history']
+            ? (array)json_decode($extension['db_history'], true)
+            : [];
         $_queries = Extensions::getQueries($extension['alias']);
         $queries = [];
 
@@ -412,10 +404,10 @@ class AdminExtensionsModel extends Model
         }
 
         return [
-            'title' => $extension['name'] ?: $extension['alias'],
-            'values' => $this->data,
-            'queries' => $queries,
-            'db_history' => $db_history,
+            'title'        => $extension['name'] ?: $extension['alias'],
+            'values'       => $this->data,
+            'queries'      => $queries,
+            'db_history'   => $db_history,
             'is_protected' => $extension['is_protected']
         ];
     }
@@ -428,22 +420,12 @@ class AdminExtensionsModel extends Model
         // data
         $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
-        // query
-        $data = $this->db->safeFind("
-		SELECT
-		 extension_alias ,
-		 extension_name
-		FROM `#__extensions`
-		WHERE id = ?", $this->data['id'])->fetch();
-
-
-        // vars
-        $file = SYSTEM_STORAGE . sprintf('readme/%s/README.html', $data['extension_alias']);
-        $readme = '';
-
-        if (is_file($file)) {
-            $readme = file_get_contents($file);
-        }
+        //
+        $data   = $this->getExtensionData($this->data['id']) or abort();
+        $file   = $this->getReadmeFile($data['extension_alias']);
+        $readme = is_file($file)
+            ? file_get_contents($file)
+            : '';
 
         return [
             'title' => $data['extension_name'],
@@ -510,5 +492,28 @@ class AdminExtensionsModel extends Model
 		SELECT extension_version
 		FROM `#__extensions`
 		WHERE extension_alias = 'system'")->fetchColumn();
+    }
+
+    /**
+     * Get
+     */
+    protected function getExtensionData(int $extension_id): array|false
+    {
+        return $this->db->safeFind("
+		SELECT
+		 id ,
+		 developer_id ,
+         extension_alias ,
+		 extension_name
+		FROM `#__extensions`
+		WHERE id = ?", $extension_id)->fetch();
+    }
+
+    /**
+     * Get
+     */
+    protected function getReadmeFile(string $extension_alias): string
+    {
+        return SYSTEM_STORAGE . sprintf('readme/%s/README.html', $extension_alias);
     }
 }

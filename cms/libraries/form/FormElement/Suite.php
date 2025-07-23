@@ -36,7 +36,7 @@ class Suite extends FormElement
             $html .= '<label data-value="' . $value . '" class="input-tag' . (in_array($value, $default) ? ' selected' : '') . '">' . $caption . '</label>';
         }
 
-        $this->html = '<div control-felem="suite" data-name="' . $name . '" data-selected="' . $selected . '" class="fe-suite">'
+        $this->content = '<div control-felem="suite" data-name="' . $name . '" data-selected="' . $selected . '" class="fe-suite">'
             . '<ul><li></li><li>' . $html . '</li><li>'
             . '<div title="' . _t('Swap') . '"><i class="fa-solid fa-chevron-right"></i></div>'
             . '<div title="' . _t('Reset') . '"><i class="fa-solid fa-rotate-left"></i></div>'

@@ -12,9 +12,8 @@ use Junco\Filesystem\UploadedFileManager;
 class LanguageModel extends Model
 {
     // vars
-    protected $db = null;
-    //
-    protected $language = null;
+    protected $db;
+    protected string $language = '';
 
 
     /**
@@ -32,8 +31,8 @@ class LanguageModel extends Model
     {
         // data
         $this->filter(POST, [
-            'language'        => 'text|required:abort',
-            'language_to'    => 'text',
+            'language'    => 'text|required:abort',
+            'language_to' => 'text',
         ]);
 
         // validate
@@ -61,9 +60,7 @@ class LanguageModel extends Model
     public function export()
     {
         // data
-        $this->filter(GET, [
-            'id' => 'array:first|required:abort',
-        ]);
+        $this->filter(GET, ['id' => 'array:first|required:abort']);
 
         return $this->getArchiveFile($this->data['id']);
     }
@@ -74,9 +71,7 @@ class LanguageModel extends Model
     public function import()
     {
         // data
-        $this->filter(POST, [
-            'file' => 'archive|required',
-        ]);
+        $this->filter(POST, ['file' => 'archive|required']);
 
         $locale = (new LanguageHelper)->getLocale();
         $this->data['file']
@@ -94,8 +89,8 @@ class LanguageModel extends Model
     {
         // data
         $this->filter(POST, [
-            'language'    => 'text|required:abort',
-            'name'        => 'text|required',
+            'language' => 'text|required:abort',
+            'name'     => 'text|required',
         ]);
 
         // extract
@@ -119,8 +114,8 @@ class LanguageModel extends Model
         $this->filter(POST, ['language' => 'array|required:abort']);
 
         // vars
-        $locale    = (new LanguageHelper)->getLocale();
-        $fs    = new Filesystem($locale);
+        $locale = (new LanguageHelper)->getLocale();
+        $fs     = new Filesystem($locale);
 
         foreach ($this->data['language'] as $language) {
             $fs->remove($language);
@@ -144,9 +139,7 @@ class LanguageModel extends Model
     public function status()
     {
         // data
-        $this->filter(POST, [
-            'id' => 'array:first|required:abort',
-        ]);
+        $this->filter(POST, ['id' => 'array:first|required:abort']);
 
         // security
         if ($this->data['id'] == app('language')->getCurrent()) {
@@ -160,7 +153,6 @@ class LanguageModel extends Model
             $availables[] = $this->data['id'];
         }
 
-
         (new Settings('language'))->update(['availables' => array_values($availables)]);
     }
 
@@ -170,9 +162,7 @@ class LanguageModel extends Model
     public function distribute()
     {
         // data
-        $this->filter(POST, [
-            'language' => 'text|required:abort',
-        ]);
+        $this->filter(POST, ['language' => 'text|required:abort']);
 
         $config = config('language-distribute');
         if (!$config['language-distribute.token']) {
@@ -211,13 +201,12 @@ class LanguageModel extends Model
     /**
      * Get
      */
-    protected function getArchiveFile($language)
+    protected function getArchiveFile(string $language): array
     {
         // vars
-        $locale        = (new LanguageHelper)->getLocale();
-        $filename    = $language . '.zip';
-        $file        = app('system')->getTmpPath() . $filename;
-
+        $locale   = (new LanguageHelper)->getLocale();
+        $filename = $language . '.zip';
+        $file     = app('system')->getTmpPath() . $filename;
 
         // compress
         (new Archive(''))->compress($file, $locale, [$language]);

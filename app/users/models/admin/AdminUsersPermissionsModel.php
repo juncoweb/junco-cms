@@ -21,7 +21,7 @@ class AdminUsersPermissionsModel extends Model
     }
 
     /**
-     * Toggle
+     * Get
      */
     public function getListData()
     {

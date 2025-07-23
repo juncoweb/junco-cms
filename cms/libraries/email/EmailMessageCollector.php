@@ -14,7 +14,7 @@ class EmailMessageCollector
     /**
      * Section
      */
-    public function section(string $title = '')
+    public function section(string $title = ''): EmailArticles
     {
         $row = [
             'title' => $title,
@@ -28,7 +28,7 @@ class EmailMessageCollector
     /**
      * Get
      */
-    public function get()
+    public function get(): array
     {
         return $this->sections;
     }

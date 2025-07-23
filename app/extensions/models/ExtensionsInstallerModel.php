@@ -16,7 +16,7 @@ use Junco\Filesystem\UploadedFileManager;
 class ExtensionsInstallerModel extends Model
 {
     // vars
-    protected $db = null;
+    protected $db;
 
     /**
      * Constructor
@@ -34,7 +34,7 @@ class ExtensionsInstallerModel extends Model
         // data
         $this->filter(POST, [
             'delete' => 'bool',
-            'file' => 'archive|required',
+            'file'   => 'archive|required',
         ]);
 
         // file
@@ -78,13 +78,13 @@ class ExtensionsInstallerModel extends Model
     {
         // data
         $this->filter(POST, [
-            'update_id'            => 'id|required:abort',
-            'download_url'        => '',
-            'is_close'            => '',
-            'clear'                => 'bool',
-            'decompress'        => 'bool',
-            'extension_key'        => '',
-            '_extension_key'    => '',
+            'update_id'      => 'id|required:abort',
+            'download_url'   => '',
+            'is_close'       => '',
+            'clear'          => 'bool',
+            'decompress'     => 'bool',
+            'extension_key'  => '',
+            '_extension_key' => '',
         ]);
 
         // key
@@ -114,11 +114,11 @@ class ExtensionsInstallerModel extends Model
     {
         // data
         $this->filter(POST, [
-            'update_id'            => 'id|required:abort',
-            'download_url'        => '',
-            'is_close'            => '',
-            'extension_key'        => '',
-            '_extension_key'    => '',
+            'update_id'      => 'id|required:abort',
+            'download_url'   => '',
+            'is_close'       => '',
+            'extension_key'  => '',
+            '_extension_key' => '',
         ]);
 
         // key
@@ -147,7 +147,7 @@ class ExtensionsInstallerModel extends Model
         // data
         $this->filter(POST, [
             'id'        => 'id|array',
-            'before_at'    => 'bool'
+            'before_at' => 'bool'
         ]);
 
         $result = (new Updater)->updateAll($this->data);
@@ -175,14 +175,14 @@ class ExtensionsInstallerModel extends Model
     {
         // data
         $this->filter(POST, [
-            'extension_alias'    => 'array',
-            'package'            => 'text',
-            'copy_files'        => 'bool',
-            'remove_package'    => 'bool',
-            'db_import'            => 'int',
-            'clean_paths'        => 'array',
-            'execute_before'    => 'bool',
-            'execute_after'        => 'bool',
+            'extension_alias' => 'array',
+            'package'         => 'text',
+            'copy_files'      => 'bool',
+            'remove_package'  => 'bool',
+            'db_import'       => 'int',
+            'clean_paths'     => 'array',
+            'execute_before'  => 'bool',
+            'execute_after'   => 'bool',
         ]);
 
         // installer

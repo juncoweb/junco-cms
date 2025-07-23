@@ -15,13 +15,13 @@ $form->hidden('take');
 if ($bootstrap_is_writable) {
     $form->checkbox('remove_r')->setLabel(_t('Remove automatic redirection to the installer.'));
 } else {
-    $form->addRow(['content' => _t('Please, remove the automatic redirection from the bootstrap file.')]);
+    $form->element(_t('Please, remove the automatic redirection from the bootstrap file.'));
 }
 
 if ($install_is_writable) {
     $form->checkbox('remove_e')->setLabel(_t('Remove the installation extension.'));
 } else {
-    $form->addRow(['content' => _t('Please, remove the installation extension.')]);
+    $form->element(_t('Please, remove the installation extension.'));
 }
 
 $form->separate(_t('Actions'));

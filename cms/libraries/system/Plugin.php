@@ -23,7 +23,6 @@ class Plugin
     // vars
     protected $listener = null;
 
-
     /**
      * Constructor
      */
@@ -32,13 +31,13 @@ class Plugin
     /**
      * Find and leave ready the plugin to execute.
      * 
-     * @param string       $name     The name with which the plugin is recognized.
-     * @param string       $hook     Specific function within the plugin.
-     * @param string|array $plugin   The plugin .
+     * @param string $name     The name with which the plugin is recognized.
+     * @param string $hook     Specific function within the plugin.
+     * @param string $plugin   The plugin .
      * 
-     * @return object      plugin or null in case of not finding plugins
+     * @return ?self           Plugin or null in case of not finding plugins
      */
-    public static function get(string $name, string $hook, string|array $plugin)
+    public static function get(string $name, string $hook, string $plugin): ?self
     {
         if ($plugin) {
             $plugin = explode('.', $plugin, 2);
@@ -47,9 +46,12 @@ class Plugin
             if (is_file($file)) {
                 $self = new self();
                 $self->listener = system_import($file);
+
                 return $self;
             }
         }
+
+        return null;
     }
 
     /**
@@ -59,7 +61,7 @@ class Plugin
      *
      * @return mixed           The return of the plugin function.
      */
-    public function run(...$args)
+    public function run(mixed ...$args): mixed
     {
         return call_user_func_array($this->listener, $args);
     }

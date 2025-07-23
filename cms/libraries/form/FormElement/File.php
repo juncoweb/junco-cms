@@ -32,6 +32,6 @@ class File extends FormElement
 
         $options = htmlentities(json_encode($options));
 
-        $this->html = '<input type="file" name="' . $name . '" control-felem="file" data-options="' . $options . '" class="input-field"' . $multiple . '/>';
+        $this->content = '<input type="file" name="' . $name . '" control-felem="file" data-options="' . $options . '" class="input-field"' . $multiple . '/>';
     }
 }

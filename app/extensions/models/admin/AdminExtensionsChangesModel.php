@@ -10,8 +10,7 @@ use Junco\Mvc\Model;
 class AdminExtensionsChangesModel extends Model
 {
     // vars
-    protected $db = null;
-
+    protected $db;
 
     /**
      * Constructor
@@ -27,19 +26,14 @@ class AdminExtensionsChangesModel extends Model
     public function getIndexData()
     {
         // data
-        $this->filter(POST, [
-            'id' => 'id|array:first|required:abort'
-        ]);
+        $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
-        $title = $this->db->safeFind("
-		SELECT
-		 IF (extension_name, extension_name, extension_alias)
-		FROM `#__extensions`
-		WHERE id = ?", $this->data['id'])->fetchColumn() or abort();
+        //
+        $data = $this->getExtensionData($this->data['id']) or abort();
 
         return [
-            'title' => $title,
-            'data' => ['extension_id' => $this->data['id']]
+            'title' => $data['extension_name'] ?: $data['extension_alias'],
+            'data' => ['extension_id' => $data['id']]
         ];
     }
 
@@ -112,5 +106,19 @@ class AdminExtensionsChangesModel extends Model
         $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         return $this->data['id'];
+    }
+
+    /**
+     * Get
+     */
+    protected function getExtensionData(int $extension_id): array|false
+    {
+        return $this->db->safeFind("
+		SELECT
+		 id ,
+         extension_name, 
+         extension_alias
+		FROM `#__extensions`
+		WHERE id = ?", $extension_id)->fetch();
     }
 }

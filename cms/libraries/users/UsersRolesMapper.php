@@ -8,7 +8,7 @@
 class UsersRolesMapper
 {
     // vars
-    protected $db = null;
+    protected $db;
 
     /**
      * Constructor

@@ -23,12 +23,12 @@ class Checkbox extends FormElement
     ) {
 
         $html = '<input' . $this->attr([
-            'type'    => 'checkbox',
-            'name'    => $name,
-            'value'    => 1
+            'type'  => 'checkbox',
+            'name'  => $name,
+            'value' => 1
         ], $attr) . (empty($default) ? '' : ' checked') . ' class="input-checkbox"/>';
 
-        $this->html  = $html;
+        $this->content  = $html;
     }
 
     /**
@@ -41,7 +41,7 @@ class Checkbox extends FormElement
     public function setLabel(?string $label = ''): self
     {
         if ($label) {
-            $this->html = '<label class="input-label">' . $this->html . '<span class="ml-2">' . $label . '</span></label>';
+            $this->content = '<label class="input-label">' . $this->content . '<span class="ml-2">' . $label . '</span></label>';
         } else {
             $this->label = $label;
         }

@@ -21,12 +21,12 @@ class Toggle extends FormElement
         string $value,
         array  $attr = []
     ) {
-        $this->html = '<input' . $this->attr([
-            'type'    => 'checkbox',
-            'name'    => $name,
+        $this->content = '<input' . $this->attr([
+            'type'  => 'checkbox',
+            'name'  => $name,
             'id'    => $name,
-            'value'    => 1,
-            'class'    => 'input-toggle'
+            'value' => 1,
+            'class' => 'input-toggle'
         ], $attr) . ($value ? ' checked' : '') . '/>';
     }
 
@@ -40,7 +40,7 @@ class Toggle extends FormElement
     public function setLabel(?string $label = ''): self
     {
         if ($label) {
-            $this->html = '<label class="input-label">' . $this->html . '<span class="ml-2">' . $label . '</span></label>';
+            $this->content = '<label class="input-label">' . $this->content . '<span class="ml-2">' . $label . '</span></label>';
         } else {
             $this->label = $label;
         }

@@ -9,7 +9,7 @@
 $form = Form::get();
 
 if ($user) {
-    $form->addRow(['content' => $user['fullname']]);
+    $form->element($user['fullname']);
     $form->setValues($user);
 }
 
@@ -22,8 +22,8 @@ if ($not_expire) {
     $element = $form->getLastElement();
 }
 
-$form->addRow(['content' => $element . '<a href="' . url('/usys.password/reset') . '" class="reset-pwd">' . _t('I forgot my password') . '</a>']);
-$form->addRow(['content' => sprintf(_t('Don\'t have any account? Sign up %shere%s'), '<a href="' . url('/usys/signup') . '">', '</a>')]);
+$form->element($element . '<a href="' . url('/usys.password/reset') . '" class="reset-pwd">' . _t('I forgot my password') . '</a>');
+$form->element(sprintf(_t('Don\'t have any account? Sign up %shere%s'), '<a href="' . url('/usys/signup') . '">', '</a>'));
 $form->enter(_t('Log in'));
 
 if ($redirect) {

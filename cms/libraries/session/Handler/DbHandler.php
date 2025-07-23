@@ -10,7 +10,7 @@ namespace Junco\Session\Handler;
 class DbHandler implements \SessionHandlerInterface
 {
     // vars
-    protected $db = null;
+    protected $db;
 
     /**
      * Initialize session

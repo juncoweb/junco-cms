@@ -20,7 +20,7 @@ $form = Form::get();
 $form->setValues($values);
 $form->hidden('id');
 //
-$form->addRow(['content' => $question]);
+$form->element($question);
 $form->textarea('message', ['auto-grow' => ''])->setLabel(_t('Message'));
 
 

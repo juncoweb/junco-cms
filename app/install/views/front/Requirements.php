@@ -12,40 +12,31 @@ $YesNo = [
 
 // form
 $form = Form::get();
-$form->addRow([
-    'label' => sprintf('PHP >= %s', $min_php_version),
-    'content' => $YesNo[$min_php_version_result],
-    'help' => $min_php_version_result ? '' : sprintf(_t('Your version is %s.'), $php_version)
-]);
+$form->element($YesNo[$min_php_version_result])
+    ->setLabel(sprintf('PHP >= %s', $min_php_version))
+    ->setHelp($min_php_version_result ? '' : sprintf(_t('Your version is %s.'), $php_version));
+
 if ($max_php_version) {
-    $form->addRow([
-        'label' => sprintf('PHP < %s', $max_php_version),
-        'content' => $YesNo[$max_php_version_result],
-        'help' => $max_php_version_result ? '' : sprintf(_t('Your version is %s.'), $php_version)
-    ]);
+    $form->element($YesNo[$max_php_version_result])
+        ->setLabel(sprintf('PHP < %s', $max_php_version))
+        ->setHelp($max_php_version_result ? '' : sprintf(_t('Your version is %s.'), $php_version));
 }
 $form->separate(_t('General'));
 
 // libraries
-$form->addRow([
-    'label' => 'MySQLi',
-    'content' => $YesNo[$db_support],
-    'help' => $db_support ? '' : _t('Support for MySQLi databases.')
-]);
-$form->addRow([
-    'label' => 'GD',
-    'content' => $YesNo[$gd_support],
-    'help' => $gd_support ? '' : _t('Support for editing images.')
-]);
+$form->element($YesNo[$db_support])
+    ->setLabel('MySQLi')
+    ->setHelp($db_support ? '' : _t('Support for MySQLi databases.'));
+$form->element($YesNo[$gd_support])
+    ->setLabel('GD')
+    ->setHelp($gd_support ? '' : _t('Support for editing images.'));
 $form->separate(_t('PHP Libraries'));
 
 // writable files
 foreach ($writables as $row) {
-    $form->addRow([
-        'label' => $row['file'],
-        'content' => $YesNo[$row['is_writable']],
-        'help' => $row['is_writable'] ?  '' : _t('Attention! This folder should be writable.')
-    ]);
+    $form->element($YesNo[$row['is_writable']])
+        ->setLabel($row['file'])
+        ->setHelp($row['is_writable'] ?  '' : _t('Attention! This folder should be writable.'));
 }
 $form->separate(_t('Writable files'));
 
@@ -53,6 +44,7 @@ $form->separate(_t('Writable files'));
 $tpl = Template::get('install');
 $tpl->options(['hash' => 'requirements']);
 $tpl->title(_t('System Requirements'));
-$tpl->content = '<p>' . _t('The following are the minimum requirements needed to function properly the site.') . '</p>' . $form->render();
+$tpl->content = '<p>' . _t('The following are the minimum requirements needed to function properly the site.') . '</p>'
+    . $form->render();
 
 return $tpl->response();

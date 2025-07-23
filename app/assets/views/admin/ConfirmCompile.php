@@ -10,9 +10,6 @@ $form = Form::get();
 $form->setValues($values);
 $form->hidden('keys');
 //
-$form->addRow(['content' => _t('Please, confirm compile the asset files.')]);
-$form->separate();
-//
 $form->checkbox('minify')->setLabel(_t('Minify'));
 $form->separate(_t('Javascript or Css'));
 //
@@ -27,6 +24,7 @@ $modal = Modal::get();
 $modal->title($_text = _t('Compile'));
 $modal->enter($_text);
 $modal->close();
-$modal->content = $form->render();
+$modal->content = '<p>' . _t('Please, confirm compile the asset files.') . '</p>'
+    . $form->render();
 
 return $modal->response();

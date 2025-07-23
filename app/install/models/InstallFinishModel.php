@@ -10,18 +10,18 @@ use Junco\Mvc\Model;
 class InstallFinishModel extends Model
 {
     // vars
-    protected $db                = null;
-    protected $bootstrap_file    = null;
-    protected $install_file        = null;
+    protected $db;
+    protected string $bootstrap_file;
+    protected string $install_file;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->db                = db();
-        $this->bootstrap_file    = SYSTEM_ABSPATH . 'bootstrap.php';
-        $this->install_file        = SYSTEM_ABSPATH . 'app/install';
+        $this->db             = db();
+        $this->bootstrap_file = SYSTEM_ABSPATH . 'bootstrap.php';
+        $this->install_file   = SYSTEM_ABSPATH . 'app/install';
     }
 
     /**
@@ -31,33 +31,28 @@ class InstallFinishModel extends Model
     {
         // data
         $this->filter(GET, [
-            'take'        => '',
-            'remove_r'    => '',
-            'remove_e'    => '',
-            'redirect'    => '',
-            'goto'        => '',
+            'take'     => '',
+            'remove_r' => '',
+            'remove_e' => '',
+            'redirect' => '',
+            'goto'     => '',
         ]);
 
         if ($this->data['take']) {
-            $this->take();
+            return $this->take();
         }
 
-        // vars
-        $admininstrator_user_id = config('install.admininstrator_user_id');
-        $fullname = $this->db->safeFind("SELECT fullname FROM `#__users` WHERE id = ?", $admininstrator_user_id)->fetchColumn();
-
-        // security
-        $fullname or redirect();
+        $data = $this->getUserData(config('install.admininstrator_user_id')) or redirect();
 
         return [
-            'fullname' => $fullname,
+            'fullname' => $data['fullname'],
             'site_name' => config('site.name'),
             'values' => [
-                'remove_r'    => true,
-                'remove_e'    => true,
-                'redirect'    => 1,
-                'take'        => 1,
-                'goto'        => $this->data['goto'],
+                'remove_r' => true,
+                'remove_e' => true,
+                'redirect' => 1,
+                'take'     => 1,
+                'goto'     => $this->data['goto'],
             ],
             'bootstrap_is_writable' => is_writable($this->bootstrap_file),
             'install_is_writable' => is_writable($this->install_file),
@@ -71,30 +66,67 @@ class InstallFinishModel extends Model
     {
         try {
             if ($this->data['remove_r']) {
-                $contents = file_get_contents($this->bootstrap_file);
-                $contents = preg_replace('/\# Redirect to install(.*)/s', '', $contents);
-
-                @file_put_contents($this->bootstrap_file, $contents);
+                $this->removeRedirection();
             }
 
             if ($this->data['remove_e']) {
-                // query
-                $extension_id = $this->db->safeFind("SELECT id FROM `#__extensions` WHERE extension_alias = 'install'")->fetchColumn();
-                if ($extension_id) {
-                    (new ExtensionsModel)->setData([
-                        'id' => [$extension_id],
-                        'option' => ['files' => true, 'data' => true]
-                    ])->delete();
-                }
+                $this->removeInstallExtension();
             }
 
             if ($this->data['redirect'] == 1) {
                 redirect();
-            } elseif ($this->data['redirect'] == 2) {
+            }
+
+            if ($this->data['redirect'] == 2) {
                 redirect(['admin/']);
             }
         } catch (Exception $e) {
             die($e->getMessage());
         }
+    }
+
+    /**
+     * Get
+     */
+    protected function getUserData(int $user_id): array|false
+    {
+        return $this->db->safeFind("
+        SELECT
+         id ,
+         fullname
+        FROM `#__users`
+        WHERE id = ?", $user_id)->fetch();
+    }
+
+    /**
+     * Remove
+     */
+    protected function removeRedirection(): void
+    {
+        $contents = file_get_contents($this->bootstrap_file);
+        $contents = preg_replace('/\# Redirect to install(.*)/s', '', $contents);
+
+        @file_put_contents($this->bootstrap_file, $contents);
+    }
+
+    /**
+     * Remove
+     */
+    protected function removeInstallExtension(): void
+    {
+        $extension_id = $this->db->safeFind("
+        SELECT
+         id 
+        FROM `#__extensions`
+        WHERE extension_alias = 'install'")->fetchColumn();
+
+        if (!$extension_id) {
+            return;
+        }
+
+        (new ExtensionsModel)->setData([
+            'id' => [$extension_id],
+            'option' => ['files' => true, 'data' => true]
+        ])->delete();
     }
 }

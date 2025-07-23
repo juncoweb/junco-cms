@@ -10,7 +10,7 @@ use Junco\Mvc\Model;
 class AdminMenusModel extends Model
 {
     // vars
-    protected $db = null;
+    protected $db;
 
     /**
      * Constructor
@@ -27,9 +27,9 @@ class AdminMenusModel extends Model
     {
         // data
         $this->filter(POST, [
-            'search'    => 'text',
-            'field'        => 'int|min:1|max:2|default:1',
-            'menu_key'    => '',
+            'search'   => 'text',
+            'field'    => 'int|min:1|max:2|default:1',
+            'menu_key' => '',
         ]);
 
         // query
@@ -65,10 +65,11 @@ class AdminMenusModel extends Model
 
         $rows = [];
         foreach ($pagi->fetchAll() as $row) {
-            $path                = explode('|', $row['menu_path']);
-            $row['depth']        = count($path) - 1;
-            $row['menu_name']    = $path[$row['depth']];
-            $rows[]    = $row;
+            $path             = explode('|', $row['menu_path']);
+            $row['depth']     = count($path) - 1;
+            $row['menu_name'] = $path[$row['depth']];
+
+            $rows[] = $row;
         }
 
         if ($this->data['menu_key']) {
@@ -91,10 +92,10 @@ class AdminMenusModel extends Model
         $this->filter(POST, ['num_rows' => 'int|min:1|default:1']);
 
         return [
-            'title' => _t('Create'),
-            'values' => array_fill(0, $this->data['num_rows'], null),
+            'title'      => _t('Create'),
+            'values'     => array_fill(0, $this->data['num_rows'], null),
             'extensions' => $this->getExtensions(),
-            'is_edit' => false,
+            'is_edit'    => false,
         ];
     }
 
@@ -125,10 +126,10 @@ class AdminMenusModel extends Model
 		ORDER BY menu_path, menu_order", $this->data['id'])->fetchAll() or abort();
 
         return [
-            'title' => _t('Edit'),
-            'values' => $data,
+            'title'      => _t('Edit'),
+            'values'     => $data,
             'extensions' => $this->getExtensions(),
-            'is_edit' => true,
+            'is_edit'    => true,
         ];
     }
 
@@ -158,10 +159,10 @@ class AdminMenusModel extends Model
 		ORDER BY menu_path, menu_order", $this->data['id'])->fetchAll() or abort();
 
         return [
-            'title' => _t('Copy'),
-            'values' => $data,
+            'title'      => _t('Copy'),
+            'values'     => $data,
             'extensions' => $this->getExtensions(),
-            'is_edit' => false,
+            'is_edit'    => false,
         ];
     }
 
@@ -179,7 +180,7 @@ class AdminMenusModel extends Model
     /**
      * Get
      */
-    protected function getMenuKeys()
+    protected function getMenuKeys(): array
     {
         return $this->db->safeFind("
 		SELECT menu_key
@@ -191,9 +192,8 @@ class AdminMenusModel extends Model
     /**
      * Get
      */
-    protected function getExtensions()
+    protected function getExtensions(): array
     {
-        // extensions
         return $this->db->safeFind("
 		SELECT id, extension_name
 		FROM `#__extensions`

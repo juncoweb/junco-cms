@@ -15,7 +15,7 @@ $form->select('developer_id', $developers)->setLabel(_t('Developer'))->setRequir
 $form->textarea('extension_abstract', ['auto-grow' => ''])->setLabel(_t('Abstract'));
 $form->separate();
 //
-$form->addRow(['help' => _t('If left empty, these values will be filled with the default values.')]);
+$form->element(_t('If left empty, these values will be filled with the default values.'));
 $form->input('extension_credits')->setLabel(_t('Credits'));
 $form->input('extension_license')->setLabel(_t('License'));
 $form->separate(_t('Legal'));
@@ -24,7 +24,7 @@ $form->input('extension_require')->setLabel(_t('Since'))->setRequired();
 if ($can_be_a_package) {
     $form->toggle('is_package')->setLabel(_t('Is package'));
 } else {
-    $form->addRow(['label' => _t('Annexed to'), 'content' => '<div class="badge badge-secondary">' . $annexed_to . '</div>']);
+    $form->element('<div class="badge badge-secondary">' . $annexed_to . '</div>')->setLabel(_t('Annexed to'));
 }
 
 $form->separate(_t('Package'));

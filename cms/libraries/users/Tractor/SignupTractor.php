@@ -15,7 +15,7 @@ use Junco\Users\UserHelper;
 class SignupTractor
 {
     // vars
-    protected $db = null;
+    protected $db;
 
     /**
      * Constructor

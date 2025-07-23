@@ -69,6 +69,6 @@ class Collection extends FormElement
         $html .= '<div id="aria-controls-' . $name . '" class="dropdown-menu" style="display: none;" role="listbox" aria-labelledby="' . $name . '"></div>';
         $html .= '<span id="collection-just-use" aria-label="' . _t('Just use') . '"></span>';
 
-        $this->html = '<div class="input-collection">' . $html . '</div>';
+        $this->content = '<div class="input-collection">' . $html . '</div>';
     }
 }

@@ -167,12 +167,6 @@ let Settings = (function () {
             $restore.toggle(el);
         },
 
-        unlock: function (el) {
-            let c = el.querySelector('input');
-            c.checked = c.checked ? false : true;
-            el.querySelector('i').className = (c.checked ? 'fa-solid fa-unlock-alt color-light' : 'fa-solid fa-lock');
-        },
-
         load: function (el) {
             if (el.href) {
                 Load(el.href, true);

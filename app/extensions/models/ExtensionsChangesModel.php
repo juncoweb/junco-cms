@@ -10,10 +10,8 @@ use Junco\Mvc\Model;
 class ExtensionsChangesModel extends Model
 {
     // vars
-    protected $db = null;
-    //
-    protected $id = null;
-
+    protected $db;
+    protected int $id = 0;
 
     /**
      * Constructor
@@ -30,10 +28,10 @@ class ExtensionsChangesModel extends Model
     {
         // data
         $this->filter(POST, [
-            'id'                    => 'id',
-            'change_description'    => 'text|required',
-            'is_compatible'            => 'bool:0/1',
-            'extension_id'            => 'id|only_if_not:id|required:abort'
+            'id'                 => 'id',
+            'change_description' => 'text|required',
+            'is_compatible'      => 'bool:0/1',
+            'extension_id'       => 'id|only_if_not:id|required:abort'
         ]);
 
         // extract

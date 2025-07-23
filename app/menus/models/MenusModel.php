@@ -10,7 +10,7 @@ use Junco\Mvc\Model;
 class MenusModel extends Model
 {
     // vars
-    protected $db = null;
+    protected $db;
 
     /**
      * Constructor
@@ -27,20 +27,20 @@ class MenusModel extends Model
     {
         // data
         $this->filterArray(POST, [
-            'extension_id'    => 'id',
-            'menu_key'        => 'text',
-            'menu_path'        => 'text',
-            'menu_order'    => 'id|default',
-            'menu_url'        => 'text',
-            'menu_image'    => 'text',
-            'menu_hash'        => 'text',
-            'menu_params'    => '',
-            'status'        => 'bool:0/1',
+            'extension_id' => 'id',
+            'menu_key'     => 'text',
+            'menu_path'    => 'text',
+            'menu_order'   => 'id|default',
+            'menu_url'     => 'text',
+            'menu_image'   => 'text',
+            'menu_hash'    => 'text',
+            'menu_params'  => '',
+            'status'       => 'bool:0/1',
         ]) or abort();
 
         $this->filter(POST, [
-            'is_edit'    => '',
-            'id'        => 'id|array|only_if:is_edit|required:abort',
+            'is_edit' => '',
+            'id'      => 'id|array|only_if:is_edit|required:abort',
         ]);
 
         // validate
@@ -68,37 +68,8 @@ class MenusModel extends Model
             $this->db->safeExecAll("INSERT INTO `#__menus` (??, menu_default_path) VALUES (??, menu_path)", $this->data_array);
         }
 
-        // query
-        $rows = $this->db->safeFind(
-            "
-		SELECT
-		 e.extension_alias ,
-		 m.menu_default_path ,
-		 m.menu_path
-		FROM `#__menus` m
-		LEFT JOIN `#__extensions` e ON ( m.extension_id = e.id )
-		WHERE e.id IN (?..)",
-            array_column($this->data_array, 'extension_id')
-        )->fetchAll(Database::FETCH_NUM);
-
-        $translates = [];
-        foreach ($rows as $row) {
-            $_text = explode('|', $row[1]);
-            $_text = array_pop($_text);
-
-            if ($_text != ';') {
-                $translates[$row[0]][] = $_text;
-            }
-
-            if ($row[1] != $row[2]) {
-                $_text = explode('|', $row[2]);
-                $_text = array_pop($_text);
-
-                if ($_text != ';') {
-                    $translates[$row[0]][] = $_text;
-                }
-            }
-        }
+        // translate
+        $translates = $this->getTranslates(array_column($this->data_array, 'extension_id'));
 
         foreach ($translates as $alias => $translate) {
             (new LanguageHelper)->translate('menus.' . $alias, $translate);
@@ -106,7 +77,7 @@ class MenusModel extends Model
     }
 
     /**
-     * Toggle
+     * Status
      */
     public function status()
     {
@@ -130,7 +101,7 @@ class MenusModel extends Model
     }
 
     /**
-     * Toggle
+     * Lock
      */
     public function lock()
     {
@@ -253,5 +224,41 @@ class MenusModel extends Model
         }
 
         return preg_match('/^[a-z][a-z0-9]*$/', $subcomponent);
+    }
+
+    /**
+     * Get
+     */
+    protected function getTranslates(array $extension_id): array
+    {
+        $rows = $this->db->safeFind("
+		SELECT
+		 e.extension_alias ,
+		 m.menu_default_path ,
+		 m.menu_path
+		FROM `#__menus` m
+		LEFT JOIN `#__extensions` e ON ( m.extension_id = e.id )
+		WHERE e.id IN (?..)", $extension_id)->fetchAll();
+
+        $translates = [];
+        foreach ($rows as $row) {
+            $parts = explode('|', $row['menu_default_path']);
+            $_text = array_pop($parts);
+
+            if ($_text != ';') {
+                $translates[$row['extension_alias']][] = $_text;
+            }
+
+            if ($row['menu_default_path'] != $row['menu_path']) {
+                $parts = explode('|', $row['menu_path']);
+                $_text = array_pop($parts);
+
+                if ($_text != ';') {
+                    $translates[$row['extension_alias']][] = $_text;
+                }
+            }
+        }
+
+        return $translates;
     }
 }

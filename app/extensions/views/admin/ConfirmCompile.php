@@ -63,7 +63,7 @@ if ($status) {
                     }
                 }
 
-                $form->addRow(['content' => $html_1]);
+                $form->element($html_1);
             }
 
             if ($compiler_plugins) {

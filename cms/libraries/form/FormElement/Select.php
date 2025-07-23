@@ -39,9 +39,9 @@ class Select extends FormElement
             }
         }
 
-        $this->html = '<select' . $this->attr([
-            'name' => $name,
-            'id' => $name,
+        $this->content = '<select' . $this->attr([
+            'name'  => $name,
+            'id'    => $name,
             'class' => 'input-field'
         ], $attr) . '>' . $html . '</select>';
     }

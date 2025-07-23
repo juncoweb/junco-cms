@@ -10,8 +10,7 @@ use Junco\Mvc\Model;
 class AdminSettingsModel extends Model
 {
     // vars
-    protected $db = null;
-
+    protected $db;
 
     /**
      * Constructor
@@ -59,10 +58,10 @@ class AdminSettingsModel extends Model
     {
         // data
         $this->filter(POST, [
-            'key'            => '',
-            'extension'        => '',
+            'key'           => '',
+            'extension'     => '',
             'sub_extension' => '',
-            'add_rows'        => 'int',
+            'add_rows'      => 'int',
         ]);
 
         if (!$this->data['key']) {
@@ -110,6 +109,7 @@ class AdminSettingsModel extends Model
         ]);
 
         // vars
+        $json    = $this->data['json'];
         $is_edit = !empty($json);
 
         if ($this->data['options']) {
@@ -147,9 +147,9 @@ class AdminSettingsModel extends Model
         }
 
         return [
-            'title' => $is_edit ? _t('Edit') : _t('Create'),
+            'title'   => $is_edit ? _t('Edit') : _t('Create'),
             'is_edit' => $is_edit,
-            'json' => $json,
+            'json'    => $json,
             'options' => $this->data['options'],
         ];
     }
@@ -168,7 +168,7 @@ class AdminSettingsModel extends Model
     /**
      * Get
      */
-    protected function getExtensions()
+    protected function getExtensions(): array
     {
         return $this->db->safeFind("
 		SELECT
@@ -179,23 +179,24 @@ class AdminSettingsModel extends Model
     /**
      * Append
      */
-    protected function append(array &$data, int $total)
+    protected function append(array &$data, int $total): void
     {
         $i = 0;
         while ($total) {
             $name = 'new_' . (++$i);
+
             if (!isset($data['rows'][$name])) {
                 $data['rows'][$name] = [
-                    'label'                => $name,
-                    'group'                => 99,
-                    'ordering'            => 99,
-                    'type'                => 'text',
-                    'help'                => '',
-                    'history'            => [],
-                    'autoload'            => 1,
-                    'translate'            => 0,
-                    'reload_on_change'    => 0,
-                    'status'            => 1,
+                    'label'            => $name,
+                    'group'            => 99,
+                    'ordering'         => 99,
+                    'type'             => 'text',
+                    'help'             => '',
+                    'history'          => [],
+                    'autoload'         => 1,
+                    'translate'        => 0,
+                    'reload_on_change' => 0,
+                    'status'           => 1,
                 ];
                 --$total;
             }

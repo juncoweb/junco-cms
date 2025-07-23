@@ -48,6 +48,6 @@ class Button extends FormElement
             ? 'a'
             : (isset($attr['type']) ? 'button' : 'div');
 
-        $this->html = '<' . $tagName . $this->attr(['class' => 'btn'], $attr) . '>' . $label . '</' . $tagName . '>';
+        $this->content = '<' . $tagName . $this->attr(['class' => 'btn'], $attr) . '>' . $label . '</' . $tagName . '>';
     }
 }

@@ -36,12 +36,12 @@ class Textarea extends FormElement
             $attr['control-felem'] = (isset($attr['control-felem']) ? $attr['control-felem'] . ' ' : '') . 'auto-grow';
         }
 
-        $this->html = '<textarea' . $this->attr([
-            'name'            => $name,
-            'id'            => $name,
-            'rows'            => 8,
-            'placeholder'    => _t('Write') . '...',
-            'class'            => 'input-field',
+        $this->content = '<textarea' . $this->attr([
+            'name'        => $name,
+            'id'          => $name,
+            'rows'        => 8,
+            'placeholder' => _t('Write') . '...',
+            'class'       => 'input-field',
         ], $attr) . '>' . $value . '</textarea>';
     }
 }

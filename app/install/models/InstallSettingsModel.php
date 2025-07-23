@@ -12,13 +12,13 @@ use Junco\Users\UserHelper;
 class InstallSettingsModel extends Model
 {
     // vars
-    protected $db            = null;
-    protected $user_id        = null;
+    protected $db;
+    protected int $user_id;
     //
     protected $site_name    = null;
-    protected $site_url        = null;
-    protected $site_baseurl    = null;
-    protected $site_email    = null;
+    protected $site_url     = null;
+    protected $site_baseurl = null;
+    protected $site_email   = null;
 
 
     /**
@@ -26,8 +26,8 @@ class InstallSettingsModel extends Model
      */
     public function __construct()
     {
-        $this->db        = db();
-        $this->user_id    = config('install.admininstrator_user_id');
+        $this->db = db();
+        $this->user_id = config('install.admininstrator_user_id');
     }
 
     /**
@@ -45,9 +45,9 @@ class InstallSettingsModel extends Model
 		WHERE id = ?", $this->user_id)->fetch() ?: [];
 
         $values['site_name']    = config('site.name');
-        $values['site_url']        = config('site.url');
-        $values['site_baseurl']    = config('site.baseurl');
-        $values['site_email']    = config('site.email');
+        $values['site_url']     = config('site.url');
+        $values['site_baseurl'] = config('site.baseurl');
+        $values['site_email']   = config('site.email');
 
         if (!$values['site_url']) {
             $values['site_url']    = $this->calculeUrl();
@@ -66,15 +66,15 @@ class InstallSettingsModel extends Model
     {
         // data
         $this->filter(POST, [
-            'site_name'        => '',
-            'site_url'        => '',
-            'site_baseurl'    => 'text',
-            'site_email'    => 'email',
+            'site_name'    => '',
+            'site_url'     => '',
+            'site_baseurl' => 'text',
+            'site_email'   => 'email',
             //
-            'fullname'        => 'text',
-            'username'        => 'text',
-            'password'        => '',
-            'email'            => 'email',
+            'fullname'     => 'text',
+            'username'     => 'text',
+            'password'     => '',
+            'email'        => 'email',
         ]);
 
         $this->extract('site_name', 'site_url', 'site_baseurl', 'site_email');
@@ -135,10 +135,10 @@ class InstallSettingsModel extends Model
          * This was pending of "extensions", because it needs the constants.
          */
         $this->db->safeExec("INSERT INTO `#__users_roles_labels_map` (??) VALUES (??) ON DUPLICATE KEY UPDATE ??", [
-            'id'         => 1,
-            'role_id'    => $role_id,
-            'label_id'    => $label_id,
-            'status'    => 1
+            'id'       => 1,
+            'role_id'  => $role_id,
+            'label_id' => $label_id,
+            'status'   => 1
         ]);
     }
 

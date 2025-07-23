@@ -1,6 +1,7 @@
 {
     "title": "System",
     "description": "",
+    "descriptions": [],
     "groups": [
         "General",
         "Statement",
@@ -11,14 +12,13 @@
         "Paths",
         "Snippets"
     ],
-    "descriptions": [],
     "rows": {
         "developer_mode": {
             "label": "Developer mode",
             "type": "boolean",
             "group": 0,
             "ordering": 1,
-            "default_value": 0,
+            "default_value": false,
             "help": "With this option, some extensions offer additional tools for developers.",
             "history": [],
             "autoload": 1,

@@ -10,8 +10,8 @@ use Junco\Mvc\Model;
 class MyNotificationsModel extends Model
 {
     // vars
-    protected $db = null;
-    protected int $user_id = 0;
+    protected $db;
+    protected int $user_id;
 
     /**
      * Constructor
@@ -52,6 +52,7 @@ class MyNotificationsModel extends Model
         if ($pagi->num_rows) {
             foreach ($pagi->fetchAll() as $row) {
                 $row['created_at'] = new Date($row['created_at']);
+
                 $rows[] = $row;
             }
 
@@ -69,6 +70,9 @@ class MyNotificationsModel extends Model
      */
     public function getShowData()
     {
+        //
+        $this->markAsRead();
+
         // query
         $pagi = $this->db->paginate("
 		SELECT [
@@ -79,9 +83,6 @@ class MyNotificationsModel extends Model
 		]* FROM `#__notifications`
 		WHERE user_id = ?
 		AND read_at IS NULL", $this->user_id);
-
-        //
-        $this->markAsRead();
 
         $num_notifications = 0;
         $rows = [];
@@ -104,7 +105,7 @@ class MyNotificationsModel extends Model
     /**
      * 
      */
-    protected function setUrl(array &$rows)
+    protected function setUrl(array &$rows): void
     {
         $url = [];
 
@@ -113,9 +114,7 @@ class MyNotificationsModel extends Model
             $url[$type] ??= Plugin::get('notification', 'url', $type)?->run() ?? '';
 
             $rows[$i]['url'] = $url[$type]
-                ? strtr($url[$type], [
-                    '{id}' => $row['notification_id']
-                ])
+                ? strtr($url[$type], ['{id}' => $row['notification_id']])
                 : '';
         }
     }

@@ -10,8 +10,7 @@ use Junco\Mvc\Model;
 class NotificationsModel extends Model
 {
     // vars
-    protected $db = null;
-    protected $notification_id = null;
+    protected $db;
 
     /**
      * Constructor
@@ -22,7 +21,7 @@ class NotificationsModel extends Model
     }
 
     /**
-     * Toggle
+     * Status
      */
     public function status()
     {

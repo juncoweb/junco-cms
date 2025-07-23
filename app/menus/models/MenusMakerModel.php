@@ -10,15 +10,15 @@ use Junco\Mvc\Model;
 class MenusMakerModel extends Model
 {
     // vars
-    protected $db = null;
+    protected $db;
     protected array $keys = [
-        'backend'    => 'backend-Default',
-        'frontend'    => 'frontend-Main',
-        'dashboard'    => 'dashboard',
-        'my'         => 'my-Default',
-        'audit'        => 'my-Default',
-        'settings'    => 'settings-Default',
-        'sitemap'    => 'sitemap-Default',
+        'backend'   => 'backend-Default',
+        'frontend'  => 'frontend-Main',
+        'dashboard' => 'dashboard',
+        'my'        => 'my-Default',
+        'audit'     => 'my-Default',
+        'settings'  => 'settings-Default',
+        'sitemap'   => 'sitemap-Default',
     ];
     protected array $folders = [
         'Contents',
@@ -46,10 +46,10 @@ class MenusMakerModel extends Model
     public function getConfirmData()
     {
         return [
-            'values' => $this->data,
+            'values'     => $this->data,
             'extensions' => $this->getExtensions(),
-            'folders' => $this->getFolders(),
-            'keys' => $this->getKeys()
+            'folders'    => $this->getFolders(),
+            'keys'       => $this->getKeys()
         ];
     }
 
@@ -60,11 +60,11 @@ class MenusMakerModel extends Model
     {
         // data
         $this->filter(POST, [
-            'extension_id'        => 'id|required',
+            'extension_id'      => 'id|required',
             'menu_title'        => '',
-            'menu_subcomponent'    => '',
-            'menu_keys'            => 'array|required',
-            'menu_folder'        => 'in:Contents,Media,More,Security,Site spaces,System,Templates,Tools,User spaces,Usys|required:abort',
+            'menu_subcomponent' => '',
+            'menu_keys'         => 'array|required',
+            'menu_folder'       => 'in:Contents,Media,More,Security,Site spaces,System,Templates,Tools,User spaces,Usys|required:abort',
             'menu_image'        => 'text',
         ]);
 
@@ -94,14 +94,14 @@ class MenusMakerModel extends Model
         $data = [];
         foreach ($this->data['menu_keys'] as $key) {
             $data[] = [
-                'menu_key'        => $this->getKey($key),
-                'menu_path'        => $this->getPath($key, $this->data['menu_folder'], $this->data['menu_title']),
-                'menu_order'    => $this->getOrder($key),
-                'menu_url'        => $this->getUrl($key, $component),
-                'menu_image'    => $this->getImage($key, $this->data['menu_image']),
-                'menu_hash'        => $menu_hash,
-                'menu_params'    => '',
-                'status'        => 1
+                'menu_key'    => $this->getKey($key),
+                'menu_path'   => $this->getPath($key, $this->data['menu_folder'], $this->data['menu_title']),
+                'menu_order'  => $this->getOrder($key),
+                'menu_url'    => $this->getUrl($key, $component),
+                'menu_image'  => $this->getImage($key, $this->data['menu_image']),
+                'menu_hash'   => $menu_hash,
+                'menu_params' => '',
+                'status'      => 1
             ];
         }
 

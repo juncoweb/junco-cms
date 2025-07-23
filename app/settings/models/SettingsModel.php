@@ -10,9 +10,8 @@ use Junco\Mvc\Model;
 class SettingsModel extends Model
 {
     // vars
-    protected $db  = null;
-    protected $key = null;
-
+    protected $db;
+    protected string $key = '';
 
     /**
      * Constructor
@@ -40,14 +39,14 @@ class SettingsModel extends Model
         $settings->security() or abort();
 
         // vars
-        $data                = $settings->getData();
-        $__data                = request()->getParsedBody(); // It's a horror!
-        $rows                = [];
-        $set_autoload        = false;
-        $save_data            = false;
-        $reload_on_change    = false;
-        $translate            = [];
-        $developer_mode        = SYSTEM_DEVELOPER_MODE;
+        $data             = $settings->getData();
+        $__data           = request()->getParsedBody(); // It's a horror!
+        $rows             = [];
+        $set_autoload     = false;
+        $save_data        = false;
+        $reload_on_change = false;
+        $translate        = [];
+        $developer_mode   = SYSTEM_DEVELOPER_MODE;
 
         //
         foreach (array_keys($data['rows']) as $k) {
@@ -172,26 +171,26 @@ class SettingsModel extends Model
     {
         // data
         $this->filterArray(POST, [
-            'id'                => '',
-            'name'                => '',
-            'label'                => 'text|required',
-            'type'                => '',
-            'group'                => 'int',
-            'ordering'            => 'int',
-            'help'                => 'text',
-            'history'            => 'text',
-            'autoload'            => 'int',
-            'translate'            => 'int',
-            'reload_on_change'    => 'int',
-            'status'            => 'int',
-            'delete'            => 'int',
+            'id'               => '',
+            'name'             => '',
+            'label'            => 'text|required',
+            'type'             => '',
+            'group'            => 'int',
+            'ordering'         => 'int',
+            'help'             => 'text',
+            'history'          => 'text',
+            'autoload'         => 'int',
+            'translate'        => 'int',
+            'reload_on_change' => 'int',
+            'status'           => 'int',
+            'delete'           => 'int',
         ]);
 
         $this->filter(POST, [
-            'key'            => '',
-            'title'         => 'text',
-            'description'    => 'text',
-            'groups'        => 'text',
+            'key'         => 'text',
+            'title'       => 'text',
+            'description' => 'text',
+            'groups'      => 'text',
         ]);
 
         // validate
@@ -237,18 +236,18 @@ class SettingsModel extends Model
 
             $old_row = $data['rows'][$row['id']] ?? false;
             $new_row = [
-                'label'                => $row['label'],
-                'type'                => $row['type'],
-                'group'                => $row['group'],
-                'ordering'            => $row['ordering'],
-                'value'                => $old_row['value'] ?? '',
-                'default_value'        => $old_row['default_value'] ?? '',
-                'help'                => $row['help'],
-                'history'            => $row['history'],
-                'autoload'            => $row['autoload'],
-                'translate'            => $row['translate'],
-                'reload_on_change'    => $row['reload_on_change'],
-                'status'            => $row['status'],
+                'label'            => $row['label'],
+                'type'             => $row['type'],
+                'group'            => $row['group'],
+                'ordering'         => $row['ordering'],
+                'value'            => $old_row['value'] ?? '',
+                'default_value'    => $old_row['default_value'] ?? '',
+                'help'             => $row['help'],
+                'history'          => $row['history'],
+                'autoload'         => $row['autoload'],
+                'translate'        => $row['translate'],
+                'reload_on_change' => $row['reload_on_change'],
+                'status'           => $row['status'],
             ];
 
             // translate

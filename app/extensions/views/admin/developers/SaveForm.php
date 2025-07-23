@@ -20,7 +20,7 @@ $form->input('webstore_token')
     ->setHelp(_t('It is used to distribute extensions from this site. Manage a token in the webstore.'));
 $form->separate(_t('Webstore'));
 //
-$form->addRow(['help' => _t('These values are used by default when creating new extensions.')]);
+$form->element(_t('These values are used by default when creating new extensions.'));
 $form->input('default_credits')->setLabel(_t('Credits'))->setRequired();
 $form->input('default_license')->setLabel(_t('License'))->setRequired();
 $form->separate(_t('Defaults'));

@@ -13,7 +13,7 @@ use Junco\Users\UserHelper;
 class UsysPasswordModel extends Model
 {
     // vars
-    protected $db = null;
+    protected $db;
 
     /**
      * Constructor
@@ -29,24 +29,20 @@ class UsysPasswordModel extends Model
     public function sentToken()
     {
         // data
-        $this->filter(POST, ['email_username'    => '']);
+        $this->filter(POST, ['email_username' => '']);
 
         $user = UserHelper::getUserFromInput($this->data['email_username']);
 
         if (!$user) {
             throw new Exception(_t('Invalid email/username.'));
         }
+
         if (!UserStatus::active->isEqual($user['status'])) {
             return Xjs::redirectTo(url('/usys/message', ['op' => 'login']));
         }
 
         // token
-        $result = UserActivityToken::generateAndSend(
-            'savepwd',
-            $user['id'],
-            $user['email'],
-            $user['fullname']
-        );
+        $result = UserActivityToken::generateAndSend('savepwd', $user['id'], $user['email'], $user['fullname']);
 
         if (!$result) {
             throw new Exception(_t('An error has occurred in the mail server. Please, try again later.'));

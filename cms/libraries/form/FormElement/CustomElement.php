@@ -15,10 +15,8 @@ class CustomElement extends FormElement
      * @param string  $name
      * @param array	  $attr
      */
-    public function __construct(
-        protected string $name,
-        string $content
-    ) {
-        $this->html = $content;
+    public function __construct(protected string $name, string $content = '')
+    {
+        $this->content = $content;
     }
 }

@@ -106,60 +106,68 @@ interface FormElementsInterface
     /**
      * Enter
      *
-     * @param string	$label
-     * @param array		$attr
+     * @param string $label
+     * @param array	 $attr
      */
     public function enter(string $label = '', array $attr = []): FormElementInterface;
 
     /**
      * Radio
      *
-     * @param string		$name
-     * @param array			$options
-     * @param array			$attr
+     * @param string $name
+     * @param array	 $options
+     * @param array  $attr
      */
     public function radio(string $name, array $options, array $attr = []): FormElementInterface;
 
     /**
      * Select
      *
-     * @param string		$name
-     * @param array			$options
-     * @param array			$attr
+     * @param string $name
+     * @param array  $options
+     * @param array  $attr
      */
     public function select(string $name, array $options, array $attr = []): FormElementInterface;
 
     /**
      * Suite
      *
-     * @param string		$name
-     * @param array			$options
-     * @param array			$attr
+     * @param string $name
+     * @param array  $options
+     * @param array  $attr
      */
     public function suite(string $name, array $options, array $attr = []): FormElementInterface;
 
     /**
      * Textarea
      *
-     * @param string	$name
-     * @param array		$attr
+     * @param string $name
+     * @param array  $attr
      */
     public function textarea(string $name, array $attr = []): FormElementInterface;
 
     /**
      * Editor
      *
-     * @param string  $name
+     * @param string $name
      */
     public function editor(string $name): FormElementInterface;
 
     /**
      * Collection
      *
-     * @param string  $control - The control-felem value
-     * @param string  $name
+     * @param string $control - The control-felem value
+     * @param string $name
      */
     public function collection(string $control, string $name): FormElementInterface;
+
+    /**
+     * Element
+     *
+     * @param string $content
+     * @param string $name
+     */
+    public function element(string $content, string $name = ''): FormElementInterface;
 
     /**
      * Group

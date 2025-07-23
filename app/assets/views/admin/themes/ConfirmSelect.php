@@ -11,9 +11,9 @@ $form->setValues($values);
 $form->hidden('id');
 //
 if ($is_used) {
-    $form->addRow(['content' => sprintf(_t('Confirm unselect the theme «%s» on the frontend.'), $theme)]);
+    $form->element(sprintf(_t('Confirm unselect the theme «%s» on the frontend.'), $theme));
 } else {
-    $form->addRow(['content' => sprintf(_t('Confirm select the theme «%s» on the frontend.'), $theme)]);
+    $form->element(sprintf(_t('Confirm select the theme «%s» on the frontend.'), $theme));
 }
 
 if ($explain_is_active) {

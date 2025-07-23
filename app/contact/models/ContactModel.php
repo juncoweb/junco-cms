@@ -23,7 +23,7 @@ class ContactModel extends Model
     }
 
     /**
-     * Toggle
+     * Status
      */
     public function status()
     {

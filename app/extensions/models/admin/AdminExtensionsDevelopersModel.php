@@ -10,8 +10,7 @@ use Junco\Mvc\Model;
 class AdminExtensionsDevelopersModel extends Model
 {
     // vars
-    protected $db = null;
-
+    protected $db;
 
     /**
      * Constructor
@@ -83,21 +82,30 @@ class AdminExtensionsDevelopersModel extends Model
         $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // security
-        $security = $this->db->safeFind("
+        $data = $this->getDeveloperData($this->data['id']) or abort();
+
+        if ($data['total']) {
+            throw new Exception(_t('You are trying to delete a protected item.'));
+        }
+
+        if ($data['num_extensions']) {
+            throw new Exception(_t('Please, remove all extensions from this developer.'));
+        }
+
+        return $this->data;
+    }
+
+    /**
+     * Get
+     */
+    protected function getDeveloperData(int $developer_id): array|false
+    {
+        return $this->db->safeFind("
 		SELECT
 		 COUNT(*) AS total,
 		 (SELECT COUNT(*) FROM `#__extensions` WHERE developer_id = d.id) AS num_extensions
 		FROM `#__extensions_developers` d
 		WHERE d.id = ?
-		AND d.is_protected = 1", $this->data['id'])->fetch();
-
-        if ($security['total']) {
-            throw new Exception(_t('You are trying to delete a protected item.'));
-        }
-        if ($security['num_extensions']) {
-            throw new Exception(_t('Please, remove all extensions from this developer.'));
-        }
-
-        return $this->data;
+		AND d.is_protected = 1", $developer_id)->fetch();
     }
 }

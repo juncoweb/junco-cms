@@ -28,8 +28,9 @@ class form_master_default_elements implements FormElementsInterface
 {
     // vars
     protected ?array $values    = null;
-    protected string $deep_name    = '';
-    protected array  $rows        = [];
+    protected string $deep_name = '';
+    protected array  $rows      = [];
+    protected int    $counter   = 0;
 
     /**
      * Set Values
@@ -54,8 +55,8 @@ class form_master_default_elements implements FormElementsInterface
     /**
      * Call
      *
-     * @param string  $plugin
-     * @param array   $attr
+     * @param string $plugin
+     * @param array  $attr
      * 
      * @return FormElementInterface
      */
@@ -167,8 +168,8 @@ class form_master_default_elements implements FormElementsInterface
     /**
      * Enter
      *
-     * @param string	$label
-     * @param array		$attr
+     * @param string $label
+     * @param array  $attr
      */
     public function enter(string $label = '', array $attr = []): FormElementInterface
     {
@@ -194,11 +195,8 @@ class form_master_default_elements implements FormElementsInterface
      * @param array  $options
      * @param array  $attr
      */
-    public function select(
-        string  $name,
-        array   $options,
-        array   $attr = []
-    ): FormElementInterface {
+    public function select(string $name, array $options, array $attr = []): FormElementInterface
+    {
         return $this->addElement(new Select($name . $this->deep_name, $this->values[$name] ?? '', $options, $attr));
     }
 
@@ -209,11 +207,8 @@ class form_master_default_elements implements FormElementsInterface
      * @param array  $options
      * @param array  $attr
      */
-    public function suite(
-        string  $name,
-        array   $options,
-        array   $attr = []
-    ): FormElementInterface {
+    public function suite(string $name, array $options, array $attr = []): FormElementInterface
+    {
         return $this->addElement(new Suite($name . $this->deep_name, $this->values[$name] ?? [], $options, $attr));
     }
 
@@ -250,6 +245,21 @@ class form_master_default_elements implements FormElementsInterface
     }
 
     /**
+     * Element
+     *
+     * @param string $content
+     * @param string $name
+     */
+    public function element(string $content, string $name = ''): FormElementInterface
+    {
+        if (!$name) {
+            $name = 'element' . (++$this->counter);
+        }
+
+        return $this->addElement(new CustomElement($name . $this->deep_name, $content));
+    }
+
+    /**
      * Group
      * 
      * @param FormElementInterface[]
@@ -258,17 +268,21 @@ class form_master_default_elements implements FormElementsInterface
      */
     public function group(FormElementInterface ...$elements): FormElementInterface
     {
-        $content    = '';
-        $label        = null;
-        $required    = '';
-        $help        = '';
+        $content  = '';
+        $label    = null;
+        $required = '';
+        $help     = '';
 
         foreach ($elements as $element) {
-            array_pop($this->rows);
+            $this->extractElement($element);
 
             $html = $element->render();
 
-            if ($element::class === 'Junco\Form\FormElement\Checkbox') {
+            if (
+                $element::class === Checkbox::class
+                || $element::class === Radio::class
+                || $element::class === Toggle::class
+            ) {
                 $html = '<div class="btn input-auto">' . $html . '</div>';
             }
 
@@ -287,7 +301,7 @@ class form_master_default_elements implements FormElementsInterface
             }
         }
 
-        $element = new CustomElement('', '<div class="input-group">' . $content . '</div>');
+        $element = $this->element('<div class="input-group">' . $content . '</div>');
 
         if ($label !== null) {
             $element->setLabel($label);
@@ -301,7 +315,7 @@ class form_master_default_elements implements FormElementsInterface
             $element->setHelp($help);
         }
 
-        return $this->addElement($element);
+        return $element;
     }
 
     /**
@@ -318,5 +332,20 @@ class form_master_default_elements implements FormElementsInterface
     protected function addHidden(HiddenInterface $element): HiddenInterface
     {
         return $element;
+    }
+
+    /**
+     * 
+     */
+    protected function extractElement(FormElementInterface $element): bool
+    {
+        $index = array_search($element, $this->rows);
+
+        if ($index !== false) {
+            unset($this->rows[$index]);
+            return true;
+        }
+
+        return false;
     }
 }

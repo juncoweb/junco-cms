@@ -58,6 +58,15 @@ interface FormElementInterface
     public function getHelp(): string;
 
     /**
+     * Set
+     * 
+     * @param array $attr
+     * 
+     * @return self
+     */
+    public function setAction(array $attr): self;
+
+    /**
      * Get
      * 
      * @return string

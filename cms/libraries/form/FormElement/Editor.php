@@ -23,6 +23,6 @@ class Editor extends FormElement
             $value = htmlentities($value);
         }
 
-        $this->html = '<textarea name="' . $name . '" control-felem="editor" class="input-field">' . $value . '</textarea>';
+        $this->content = '<textarea name="' . $name . '" control-felem="editor" class="input-field">' . $value . '</textarea>';
     }
 }

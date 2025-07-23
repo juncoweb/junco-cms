@@ -210,7 +210,7 @@ class ExtensionsModel extends Model
     /**
      * Compile
      */
-    public function compileAll()
+    public function compile()
     {
         // data
         $this->filter(POST, [
@@ -236,7 +236,7 @@ class ExtensionsModel extends Model
     /**
      * DB History
      */
-    public function db_history()
+    public function dbHistory()
     {
         // data
         $this->filter(POST, [
@@ -355,9 +355,9 @@ class ExtensionsModel extends Model
         }
 
         foreach ($drop as $Type => $Names) {
-            $Names = implode(',', $Names);
-
-            $this->db->safeExec("DROP $Type IF EXISTS $Names");
+            foreach ($Names as $Name) {
+                $this->db->safeExec("DROP $Type IF EXISTS `$Name`");
+            }
         }
     }
 

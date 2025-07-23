@@ -17,10 +17,9 @@ use Junco\Users\UserActivityToken;
 class UsysModel extends Model
 {
     // vars
-    protected $db = null;
-    //
-    protected $legal    = null;
-    protected $verified    = null;
+    protected $db;
+    protected string $verified = '';
+    protected bool   $legal    = false;
 
     /**
      * Constructor
@@ -37,12 +36,12 @@ class UsysModel extends Model
     {
         // data
         $this->filter(POST, [
-            'fullname'    => '',
-            'username'    => 'text',
-            'email'        => 'email',
-            'password'    => 'required',
-            'verified'    => '',
-            'legal'        => 'bool',
+            'fullname' => '',
+            'username' => 'text',
+            'email'    => 'email',
+            'password' => 'required',
+            'verified' => 'text',
+            'legal'    => 'bool',
         ]);
 
         //
@@ -82,10 +81,10 @@ class UsysModel extends Model
     {
         // data
         $this->filter(POST, [
-            'email_username'    => 'text',
-            'password'            => '',
-            'not_expire'        => 'bool',
-            'redirect'            => ''
+            'email_username' => 'text',
+            'password'       => '',
+            'not_expire'     => 'bool',
+            'redirect'       => ''
         ]);
 
         try {

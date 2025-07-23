@@ -38,11 +38,13 @@ class Plugins
      *
      * @return    Object plugin or null in case of not finding plugins
      */
-    public static function get(string $name, string $hook, string|array $plugins)
+    public static function get(string $name, string $hook, string|array $plugins): ?self
     {
         if (!$plugins) {
-            return;
-        } elseif (!is_array($plugins)) {
+            return null;
+        }
+
+        if (!is_array($plugins)) {
             $plugins = explode(',', $plugins);
         }
 
@@ -55,9 +57,10 @@ class Plugins
                 $self->listeners[$plugin_key] = system_import($file);
             }
         }
-        if ($self->listeners) {
-            return $self;
-        }
+
+        return $self->listeners
+            ? $self
+            : null;
     }
 
     /**
@@ -66,7 +69,7 @@ class Plugins
      * @param mixed &$ref      Variable passed by reference to be modified.
      * @param mixed ...$args   Other params.
      */
-    public function run(&$ref = null, ...$args)
+    public function run(mixed &$ref = null, mixed ...$args): void
     {
         $pass_key = is_object($ref) && method_exists($ref, 'setPluginKey');
         $args     = array_merge([&$ref], $args);
@@ -75,6 +78,7 @@ class Plugins
             if ($pass_key) {
                 $ref->setPluginKey($key);
             }
+
             call_user_func_array($func, $args);
         }
     }

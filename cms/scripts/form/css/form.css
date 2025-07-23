@@ -1,4 +1,4 @@
-/* --- form-group ----------------------------------------- */
+/* --- form ----------------------------------------- */
 .form-wrapper {
   max-width: 1200px;
   margin-bottom: 2rem;
@@ -9,6 +9,22 @@
   margin-right: auto;
 }
 
+.form-columns {
+  display: flex;
+  gap: 1rem;
+}
+.form-columns > div {
+  flex: auto;
+}
+
+@media (max-width: 770px) {
+  .form-columns {
+    display: block;
+  }
+  .form-columns > div ~ div {
+    margin-top: 1rem;
+  }
+}
 .form-group ~ .form-group {
   margin-top: 1rem;
 }
@@ -20,20 +36,8 @@
   font-weight: bold;
 }
 
-.form-button {
-  white-space: nowrap;
-}
-
 .form-help {
   color: var(--regular-subtle-font-color);
-}
-
-.form-content {
-  display: flex;
-  gap: 1rem;
-}
-.form-content .form-ct {
-  flex: auto;
 }
 
 .form-header {
@@ -57,6 +61,10 @@
   border-top: 1px solid var(--regular-border-color);
   padding: 1rem;
   display: none;
+}
+
+.form-fieldset > :last-child {
+  margin-bottom: 0;
 }
 
 div.form-fieldset.expanded .fh-toggle i {

@@ -10,7 +10,7 @@ use Junco\Mvc\Model;
 class AdminJobsModel extends Model
 {
     // vars
-    protected $db = null;
+    protected $db;
 
     /**
      * Constructor
@@ -50,7 +50,7 @@ class AdminJobsModel extends Model
 
             foreach ($pagi->fetchAll() as $row) {
                 $row['available_at'] = new Date($row['available_at']);
-                $row['failure_url'] = sprintf($failure_url, $row['id']);
+                $row['failure_url']  = sprintf($failure_url, $row['id']);
 
                 $rows[] = $row;
             }

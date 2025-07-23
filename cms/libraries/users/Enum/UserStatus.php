@@ -71,6 +71,14 @@ enum UserStatus
     /**
      * Get
      */
+    public static function get(string $name): self
+    {
+        return self::{$name};
+    }
+
+    /**
+     * Get
+     */
     public static function getList(bool $public = false): array
     {
         if ($public) {

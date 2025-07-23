@@ -14,7 +14,7 @@ use Junco\Extensions\Maintenance;
 class AdminExtensionsInstallerModel extends Model
 {
     // vars
-    protected $db = null;
+    protected $db;
 
     /**
      * Constructor
@@ -55,16 +55,16 @@ class AdminExtensionsInstallerModel extends Model
 
         // query 2
         $dirpath    = (new Carrier)->getTargetPath();
-        $extensions    = ['zip', 'rar'];
+        $extensions = ['zip', 'rar'];
 
         foreach ($this->scandir($dirpath) as $element) {
             if (is_dir($dirpath . $element)) {
                 $index = $indexes[$element] ?? null;
                 $row = [
-                    'id'            => $element,
-                    'caption'        => $element,
-                    'step'            => 2,
-                    'has_failed'    => 0,
+                    'id'         => $element,
+                    'caption'    => $element,
+                    'step'       => 2,
+                    'has_failed' => 0,
                 ];
 
                 if ($index !== null) {
@@ -77,10 +77,10 @@ class AdminExtensionsInstallerModel extends Model
                 $info = pathinfo($element);
                 $index = $indexes[$info['filename']] ?? null;
                 $row = [
-                    'id'            => $element,
-                    'caption'        => $element,
-                    'step'            => 1,
-                    'has_failed'    => 0,
+                    'id'         => $element,
+                    'caption'    => $element,
+                    'step'       => 1,
+                    'has_failed' => 0,
                 ];
 
                 if ($index !== null) {

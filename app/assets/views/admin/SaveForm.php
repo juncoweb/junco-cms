@@ -33,7 +33,7 @@ $tabs->tab(_t('Default'), $html_2);
 $form->select('extension_alias', $extensions)->setLabel(_t('Extension'))->setRequired();
 $form->input('name')->setLabel(_t('Name'));
 $form->radio('type', ['css' => 'Css', 'js' => 'Js'])->setLabel(_t('Type'));
-$form->addRow(['content' => $tabs->render()]);
+$form->element($tabs->render());
 
 // modal
 $modal = Modal::get();

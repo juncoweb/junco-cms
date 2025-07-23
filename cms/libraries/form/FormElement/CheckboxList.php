@@ -33,10 +33,12 @@ class CheckboxList extends FormElement
         ], $attr);
 
         foreach ($options as $value => $label) {
-            $html .= '<label class="input-label' . $class . '"><input' . $attr . ' value="' . $value . '" class="input-checkbox"' . (in_array($value, $default) ? ' checked' : '') . '/> ' . $label . '</label>';
+            $html .= '<label class="input-label' . $class . '">'
+                . '<input' . $attr . ' value="' . $value . '" class="input-checkbox"' . (in_array($value, $default) ? ' checked' : '') . '/> '
+                .  $label
+                . '</label>';
         }
 
-
-        $this->html  = $html;
+        $this->content = $html;
     }
 }

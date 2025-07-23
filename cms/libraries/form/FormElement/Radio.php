@@ -25,16 +25,19 @@ class Radio extends FormElement
     ) {
         $class = $this->extract($attr, 'inline', true) ? '' : ' input-block';
         $attr  = $this->attr([
-            'type'    => 'radio',
-            'name'    => $name,
-            'class'    => 'input-radio'
+            'type'  => 'radio',
+            'name'  => $name,
+            'class' => 'input-radio'
         ], $attr);
         $html  = '';
 
         foreach ($options as $value => $caption) {
-            $html .= '<label class="input-label' . $class . '"><input' . $attr . ' value="' . $value . '"' . ($value == $default ? ' checked' : '') . '/> ' . $caption . '</label>';
+            $html .= '<label class="input-label' . $class . '">'
+                . '<input' . $attr . ' value="' . $value . '"' . ($value == $default ? ' checked' : '') . '/> '
+                .  $caption
+                . '</label>';
         }
 
-        $this->html = $html;
+        $this->content = $html;
     }
 }

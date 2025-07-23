@@ -436,6 +436,27 @@ textarea.input-field[control-felem=auto-grow] {
   padding-left: 1.75rem;
 }
 
+.input-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.input-actions > :first-child {
+  flex: auto;
+}
+
+.checkbox-hidden input[type=checkbox] {
+  display: none;
+}
+
+input:checked ~ .d-on-not-checked {
+  display: none;
+}
+
+input:not(:checked) ~ .d-on-checked {
+  display: none;
+}
+
 /* --- colors ---------------------------------------------------------- */
 .btn .btn, .btn.btn {
   color: var(--regular-font-color);

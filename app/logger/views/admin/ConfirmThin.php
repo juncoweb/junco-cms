@@ -8,7 +8,7 @@
 // form
 $form = Form::get();
 $form->setValues(['delete' => true]);
-$form->addRow(['content' => _t('Please, confirm the action.')]);
+$form->element(_t('Please, confirm the action.'));
 $form->checkbox('delete')->setLabel(_t('Remove repeated'));
 
 // modal

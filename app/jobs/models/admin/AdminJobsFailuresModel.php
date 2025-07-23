@@ -10,7 +10,7 @@ use Junco\Mvc\Model;
 class AdminJobsFailuresModel extends Model
 {
     // vars
-    protected $db = null;
+    protected $db;
 
     /**
      * Constructor
@@ -51,6 +51,7 @@ class AdminJobsFailuresModel extends Model
         $rows = [];
         foreach ($pagi->fetchAll() as $row) {
             $row['created_at'] = new Date($row['created_at']);
+
             $rows[] = $row;
         }
 

@@ -23,16 +23,16 @@ class Input extends FormElement
     ) {
         $icon = $this->extract($attr, 'icon');
         $html = '<input' . $this->attr([
-            'type'    => 'text',
-            'name'    => $name,
+            'type'  => 'text',
+            'name'  => $name,
             'id'    => $name,
-            'value'    => $value,
-            'class'    => 'input-field'
+            'value' => $value,
+            'class' => 'input-field'
         ], $attr) . '/>';
 
         if ($icon) {
-            $tagName   = 'span';
-            $position  = 'left';
+            $tagName  = 'span';
+            $position = 'left';
 
             if (is_array($icon)) {
                 $iconClass = $this->extract($icon, 'name');
@@ -47,7 +47,7 @@ class Input extends FormElement
             }
 
             $icon = '<' . $tagName . $this->attr([
-                'class'    => 'input-icon'
+                'class' => 'input-icon'
             ], $icon) . '><i class="' . $iconClass . '"></i></' . $tagName . '>';
 
             if ($position === 'right') {
@@ -59,6 +59,6 @@ class Input extends FormElement
             $html = '<div class="input-icon-group">' . $html . '</div>';
         }
 
-        $this->html = $html;
+        $this->content = $html;
     }
 }

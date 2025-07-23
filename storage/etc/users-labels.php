@@ -23,7 +23,6 @@ define('L_FOODSERVICES', 44);
 define('L_FORMS', 34);
 define('L_GOODS', 18);
 define('L_GOODS_PRECEPTOR', 19);
-define('L_GROUPS', 31);
 define('L_INVOICES', 16);
 define('L_INVOICES_AUDITOR', 17);
 define('L_NOTIFICATIONS', 48);

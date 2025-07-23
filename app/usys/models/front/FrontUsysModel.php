@@ -13,7 +13,7 @@ use Junco\Usys\LoginWidgetCollector;
 class FrontUsysModel extends Model
 {
     // vars
-    protected $db = null;
+    protected $db;
 
     /**
      * Constructor
@@ -48,9 +48,9 @@ class FrontUsysModel extends Model
             $user = $this->getUserFromToken($token);
 
             if ($user) {
-                $data['user']            = $user;
-                $data['token']            = $token;
-                $data['login_plugins']    = '';
+                $data['user']          = $user;
+                $data['token']         = $token;
+                $data['login_plugins'] = '';
             }
         }
 
@@ -76,10 +76,10 @@ class FrontUsysModel extends Model
         $plugins = config('usys.login_plugins');
 
         return $this->data + [
-            'options'        => config('usys.login_options'),
-            'not_expire'    => config('users.not_expire'),
-            'user'            => $this->getUserFromSession(),
-            'widgets'        => ($plugins ? (new LoginWidgetCollector)->getAll($plugins) : [])
+            'options'    => config('usys.login_options'),
+            'not_expire' => config('users.not_expire'),
+            'user'       => $this->getUserFromSession(),
+            'widgets'    => ($plugins ? (new LoginWidgetCollector)->getAll($plugins) : [])
         ];
     }
 

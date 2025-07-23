@@ -12,12 +12,12 @@ use Junco\Form\Contract\HiddenInterface;
 class Hidden implements HiddenInterface
 {
     //
-    protected string  $html = '';
+    protected string $content = '';
 
     /**
      * Constructor
      */
-    public function __construct(string $name, $value = null)
+    public function __construct(string $name, mixed $value = '')
     {
         if (!$value) {
             return;
@@ -28,9 +28,10 @@ class Hidden implements HiddenInterface
             foreach ($value as $key => $v) {
                 $html .= '<input type="hidden" name="' . $name . '[' . $key . ']" value="' . $v . '"/>';
             }
-            $this->html = $html;
+
+            $this->content = $html;
         } else {
-            $this->html = '<input type="hidden" name="' . $name . '" value="' . $value . '"/>';
+            $this->content = '<input type="hidden" name="' . $name . '" value="' . $value . '"/>';
         }
     }
 
@@ -41,7 +42,7 @@ class Hidden implements HiddenInterface
      */
     public function render(): string
     {
-        return $this->html;
+        return $this->content;
     }
 
     /**
@@ -51,6 +52,6 @@ class Hidden implements HiddenInterface
      */
     public function __toString(): string
     {
-        return $this->html;
+        return $this->content;
     }
 }

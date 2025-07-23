@@ -12,7 +12,7 @@ use Junco\Extensions\Installer\Installer;
 class ExtensionsWebstoreModel extends Model
 {
     // vars
-    protected $db = null;
+    protected $db;
 
     /**
      * Constructor
@@ -58,7 +58,10 @@ class ExtensionsWebstoreModel extends Model
             }
         }
 
-        return $this->data + ['pagi' => $pagi, 'rows' => $rows];
+        return $this->data + [
+            'pagi' => $pagi,
+            'rows' => $rows
+        ];
     }
 
     /**
@@ -75,13 +78,13 @@ class ExtensionsWebstoreModel extends Model
             'is_close' => $data['is_close'],
             'title' => $data['extension_name'],
             'values' => [
-                'extension_id'        => $this->data['extension_id'],
-                'extension_alias'    => $data['extension_alias'],
-                'download_url'        => $data['download_url'],
-                'extension_key'        => $data['extension_key'],
-                '_extension_key'    => $data['extension_key'],
-                'is_close'            => 1,
-                'install'            => true
+                'extension_id'    => $this->data['extension_id'],
+                'extension_alias' => $data['extension_alias'],
+                'download_url'    => $data['download_url'],
+                'extension_key'   => $data['extension_key'],
+                '_extension_key'  => $data['extension_key'],
+                'is_close'        => 1,
+                'install'         => true
             ]
         ];
     }
@@ -93,11 +96,11 @@ class ExtensionsWebstoreModel extends Model
     {
         // data
         $this->filter(POST, [
-            'download_url'        => '',
-            'is_close'            => '',
-            'install'            => '',
-            'extension_key'        => '',
-            'extension_alias'    => '',
+            'download_url'    => '',
+            'is_close'        => '',
+            'install'         => '',
+            'extension_key'   => '',
+            'extension_alias' => '',
         ]);
 
         // vars
@@ -114,9 +117,10 @@ class ExtensionsWebstoreModel extends Model
             $installer->install(pathinfo($filename, PATHINFO_FILENAME));
 
             if ($this->data['is_close']) {
-                $this->db->safeExec("UPDATE `#__extensions` SET ?? WHERE extension_alias = ?", [
-                    'extension_key' => $this->data['extension_key']
-                ], $this->data['extension_alias']);
+                $this->db->safeExec("
+                UPDATE `#__extensions`
+                SET extension_key = ?
+                WHERE extension_alias = ?", $this->data['extension_key'], $this->data['extension_alias']);
             }
         }
     }

@@ -12,7 +12,7 @@ use Junco\Users\UserHelper;
 class UsysAccountModel extends Model
 {
     // vars
-    protected $db = null;
+    protected $db;
 
     /**
      * Constructor
@@ -29,11 +29,11 @@ class UsysAccountModel extends Model
     {
         // data
         $this->filter(POST, [
-            'fullname'        => 'text',
-            'username'        => '',
-            '__password'    => '',
-            'password'        => '',
-            'email'            => 'email',
+            'fullname'   => 'text',
+            'username'   => '',
+            '__password' => '',
+            'password'   => '',
+            'email'      => 'email',
         ]);
 
         $curuser = curuser();

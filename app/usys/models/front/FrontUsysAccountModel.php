@@ -10,7 +10,7 @@ use Junco\Mvc\Model;
 class FrontUsysAccountModel extends Model
 {
     // vars
-    protected $db = null;
+    protected $db;
 
     /**
      * Constructor

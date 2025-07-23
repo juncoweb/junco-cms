@@ -307,3 +307,23 @@ textarea.input-field {
         padding-left: $small-font-size * 2;
     }
 }
+
+// actions
+.input-actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing * 0.5;
+
+    > :first-child {
+        flex: auto;
+    }
+}
+.checkbox-hidden input[type="checkbox"] {
+    display: none;
+}
+input:checked ~ .d-on-not-checked {
+    display: none;
+}
+input:not(:checked) ~ .d-on-checked {
+    display: none;
+}

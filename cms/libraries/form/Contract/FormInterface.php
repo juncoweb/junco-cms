@@ -34,13 +34,13 @@ interface FormInterface extends FormElementsInterface
     public function separate(array|string|null $attr = null): void;
 
     /**
-     * Adds a row
+     * Columns
      * 
-     * @param array $attr
+     * @param FormElementInterface[]
      * 
      * @return void
      */
-    public function addRow(array $attr): void;
+    public function columns(FormElementInterface ...$elements): void;
 
     /**
      * Adds a block

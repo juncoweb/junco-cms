@@ -26,13 +26,10 @@ foreach ($queries as $row) {
     $form->input($key)->setLabel(_t('History'));
 
     if (!empty($db_history[$Type][$Name]['Fields'])) {
-        $form->addRow([
-            'label' => _t('Fields'),
-            'content' => var_export($db_history[$Type][$Name]['Fields'], true)
-        ]);
+        $form->element(var_export($db_history[$Type][$Name]['Fields'], true))->setLabel(_t('Fields'));
     }
 
-    $form->addRow(['content' => '<hr />']);
+    $form->element('<hr />');
 
     foreach ($Fields as $key => $Field) {
         $form->input($key)->setLabel($Field);

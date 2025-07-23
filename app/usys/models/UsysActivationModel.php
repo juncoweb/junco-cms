@@ -13,7 +13,7 @@ use Junco\Users\UserHelper;
 class UsysActivationModel extends Model
 {
     // vars
-    protected $db = null;
+    protected $db;
 
     /**
      * Constructor

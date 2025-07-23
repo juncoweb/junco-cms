@@ -8,9 +8,13 @@ const FormRow = function (el) {
         return null;
     }
 
+    function isRow(el) {
+        return el.classList.contains('form-group');
+    }
+
     function getRow(el) {
         while (el.tagName !== 'BODY') {
-            if (el.classList.contains('form-group')) {
+            if (isRow(el)) {
                 return el;
             }
             el = el.parentNode;
