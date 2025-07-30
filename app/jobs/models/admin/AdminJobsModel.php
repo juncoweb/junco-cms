@@ -71,7 +71,7 @@ class AdminJobsModel extends Model
         $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // query
-        $data = $this->db->safeFind("
+        $data = $this->db->query("
 		SELECT
 		 id,
 		 job_queue ,

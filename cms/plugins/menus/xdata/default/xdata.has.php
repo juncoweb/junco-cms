@@ -15,7 +15,7 @@
  */
 return function ($extension_id, $extension_alias) {
     // query
-    return db()->safeFind("
+    return db()->query("
 	SELECT COUNT(*)
 	FROM `#__menus`
 	WHERE extension_id = $extension_id

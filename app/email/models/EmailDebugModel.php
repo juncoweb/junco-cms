@@ -12,21 +12,18 @@ class EmailDebugModel extends Model
     /**
      * 
      */
-    public function take()
+    public function take(): array
     {
         $this->filter(POST, [
-            'transport'        => 'text',
-            'subject'        => 'text',
+            'transport'     => 'text',
+            'subject'       => 'text',
             'to'            => 'text',
-            'message_type'    => 'text',
+            'message_type'  => 'text',
             'message_plain' => 'text',
-            'message_html'    => '',
+            'message_html'  => '',
         ]);
 
-        if (
-            $this->data['transport'] != 'null'
-            && app('system')->isDemo()
-        ) {
+        if (!$this->isAvailable($this->data['transport'])) {
             return [
                 'code' => _t('This task is not allowed in demos.'),
                 'debug' => _t('This task is not allowed in demos.')
@@ -34,24 +31,37 @@ class EmailDebugModel extends Model
         }
 
         return [
-            'code' => $this->getCode(),
-            'debug' => $this->getDebugOutput()
+            'code' => $this->getCode($this->data['transport'], $this->data['message_type']),
+            'debug' => $this->getDebugOutput(
+                $this->data['transport'],
+                $this->data['to'],
+                $this->data['subject'],
+                $this->data['message_html'],
+                $this->data['message_plain']
+            )
         ];
+    }
+
+    /**
+     * 
+     */
+    public function isAvailable(string $transport): bool
+    {
+        return $transport == 'null' || !app('system')->isDemo();
     }
 
     /**
      * Get
      */
-    protected function getCode()
+    protected function getCode(string $transport, string $message_type): string
     {
         $lines = [];
 
-        if ($this->data['transport']) {
+        if ($transport) {
             $lines[] = "//";
-            $transport = $this->getTransportClass($this->data['transport']);
-            $lines[] = "\$transport = $transport;";
+            $lines[] = "\$transport = " . $this->getTransportClass($transport) . ";";
 
-            if ($this->data['transport'] == 'smtp') {
+            if ($transport == 'smtp') {
                 $lines[] = "\$transport->smtp_host = \$smtp_host;";
                 $lines[] = "\$transport->smtp_port = \$smtp_port;";
                 $lines[] = "\$transport->smtp_timeout = \$smtp_timeout;";
@@ -68,7 +78,7 @@ class EmailDebugModel extends Model
 
         $lines[] = "\$email->to(\$to)";
         $lines[] = "\$email->subject(\$subject)";
-        $lines[] = $this->getMessageCode();
+        $lines[] = $this->getMessageCode($message_type);
         $lines[] = "\$email->send();";
 
         return '<textarea class="input-field" style="height: 1200px;">'
@@ -79,9 +89,9 @@ class EmailDebugModel extends Model
     /**
      * Get
      */
-    protected function getMessageCode()
+    protected function getMessageCode(string $message_type): string
     {
-        switch ($this->data['message_type']) {
+        switch ($message_type) {
             case 'html':
                 return "\$email->message(\$message_html, Email::MESSAGE_IS_HTML);";
             case 'plain':
@@ -91,12 +101,14 @@ class EmailDebugModel extends Model
             case 'html+to-plain':
                 return "\$email->message(\$message_html, Email::MESSAGE_ALTER_PLAIN);";
         }
+
+        return '?';
     }
 
     /**
      * Get
      */
-    protected function getTransportClass($transport)
+    protected function getTransportClass(string $transport): string
     {
         switch ($transport) {
             case 'null':
@@ -106,35 +118,42 @@ class EmailDebugModel extends Model
             case 'smtp':
                 return 'new Junco\Email\Transport\SmtpTransport';
         }
+
+        return '?';
     }
 
     /**
      * Get
      */
-    protected function getDebugOutput()
-    {
-        $transport = $this->getTransport($this->data['transport']);
+    protected function getDebugOutput(
+        string $transport,
+        string $to,
+        string $subject,
+        string $message_html,
+        string $message_plain
+    ): string {
+        $transport = $this->getTransport($transport);
         $transport->debug();
 
         $email = new Email($transport);
-        $email->to($this->data['to']);
-        $email->subject($this->data['subject']);
+        $email->to($to);
+        $email->subject($subject);
 
         switch ($this->data['message_type']) {
             case 'html':
-                $email->message($this->data['message_html'], Email::MESSAGE_IS_HTML);
+                $email->message($message_html, Email::MESSAGE_IS_HTML);
                 break;
 
             case 'plain':
-                $email->message($this->data['message_plain'], Email::MESSAGE_IS_PLAIN);
+                $email->message($message_plain, Email::MESSAGE_IS_PLAIN);
                 break;
 
             case 'html+plain':
-                $email->message($this->data['message_html'], $this->data['message_plain']);
+                $email->message($message_html, $message_plain);
                 break;
 
             case 'html+to-plain':
-                $email->message($this->data['message_html'], Email::MESSAGE_ALTER_PLAIN);
+                $email->message($message_html, Email::MESSAGE_ALTER_PLAIN);
                 break;
         }
         $email->send();
@@ -147,7 +166,7 @@ class EmailDebugModel extends Model
     /**
      * Get
      */
-    protected function getTransport($transport)
+    protected function getTransport(string $transport)
     {
         if (!$transport) {
             $transport = config('email.transport');
@@ -161,5 +180,7 @@ class EmailDebugModel extends Model
             case 'smtp':
                 return new Junco\Email\Transport\SmtpTransport();
         }
+
+        return null;
     }
 }

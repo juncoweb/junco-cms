@@ -29,11 +29,11 @@ var UsysActivation = (function () {
     function form(route) {
         var $form = JsForm().request({
             url: JsUrl(route),
-            onSuccess: function (message, code) {
-                if (code == 5) {
-                    toggle(message);// reset
-                } else if (message) {
-                    $form.notify(message);
+            onSuccess: function (res) {
+                if (res.code == 5) {
+                    toggle(res.message);// reset
+                } else if (res.message) {
+                    $form.notify(res.message);
                 }
             }
         });

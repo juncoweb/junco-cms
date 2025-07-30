@@ -117,7 +117,7 @@ class ExtensionsWebstoreModel extends Model
             $installer->install(pathinfo($filename, PATHINFO_FILENAME));
 
             if ($this->data['is_close']) {
-                $this->db->safeExec("
+                $this->db->exec("
                 UPDATE `#__extensions`
                 SET extension_key = ?
                 WHERE extension_alias = ?", $this->data['extension_key'], $this->data['extension_alias']);
@@ -131,7 +131,7 @@ class ExtensionsWebstoreModel extends Model
     protected function getInstalledExtensions(?array $extension_id = null)
     {
         // query
-        return $this->db->safeFind("
+        return $this->db->query("
 		SELECT extension_alias
 		FROM `#__extensions`
 		WHERE extension_alias IN (?..)", $extension_id)->fetchAll(Database::FETCH_COLUMN);

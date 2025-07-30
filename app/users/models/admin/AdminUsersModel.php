@@ -121,7 +121,7 @@ class AdminUsersModel extends Model
         // data
         $this->filter(POST, ['id' => 'id|array:first']);
 
-        $data = $this->db->safeFind("
+        $data = $this->db->query("
 		SELECT
 		 id AS user_id,
 		 fullname ,
@@ -162,7 +162,7 @@ class AdminUsersModel extends Model
         if ($this->data['q']) {
             $this->db->where("fullname LIKE %?", $this->data['q']);
         }
-        $rows = $this->db->safeFind("
+        $rows = $this->db->query("
 		SELECT id, fullname, email
 		FROM `#__users`
 		[WHERE]
@@ -189,7 +189,7 @@ class AdminUsersModel extends Model
         if ($this->data['q']) {
             $this->db->where("role_name LIKE %?", $this->data['q']);
         }
-        $rows = $this->db->safeFind("
+        $rows = $this->db->query("
 		SELECT id, role_name
 		FROM `#__users_roles`
 		[WHERE]
@@ -206,7 +206,7 @@ class AdminUsersModel extends Model
      */
     protected function getRoles(array $base = []): array
     {
-        return $this->db->safeFind("
+        return $this->db->query("
 		SELECT id, role_name
 		FROM `#__users_roles`
 		ORDER BY role_name")->fetchAll(Database::FETCH_COLUMN, [0 => 1], $base);
@@ -218,7 +218,7 @@ class AdminUsersModel extends Model
     protected function setRoles(array $rows): array
     {
         if ($rows) {
-            $roles = $this->db->safeFind("
+            $roles = $this->db->query("
 			SELECT 
 			 m.user_id, 
 			 m.role_id, 

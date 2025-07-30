@@ -22,11 +22,11 @@ use \Closure;
 class Runner extends RequestHandler
 {
     // vars
-    protected Container    $container;
-    protected ?Router    $router                    = null;
-    protected bool        $isInspectable            = false;
-    protected int        $step                    = -1;
-    protected Closure|array|false $controller    = false;
+    protected Container $container;
+    protected ?Router   $router               = null;
+    protected bool      $isInspectable        = false;
+    protected int       $step                 = -1;
+    protected Closure|array|false $controller = false;
 
     /**
      * Constructor
@@ -61,19 +61,24 @@ class Runner extends RequestHandler
             if (!$this->middlewares) {
                 if ($this->step === 0) {
                     $this->findMiddlewareInAccessPoint();
+
                     if ($this->middlewares) {
                         return $this->handle($request);
                     }
                 }
+
                 if ($this->step === 1) {
                     $this->findMiddlewareInController();
+
                     if ($this->middlewares) {
                         return $this->handle($request);
                     }
                 }
+
                 if ($this->controller === false) {
-                    throw new \SystemException(404);
+                    alert(404);
                 }
+
                 while (!$response = $this->runController()) {
                     return $this->handle($request);
                 }
@@ -104,8 +109,8 @@ class Runner extends RequestHandler
      */
     protected function findMiddlewareInController()
     {
-        $this->step          = 2;
-        $this->controller    = $this->router->getController();
+        $this->step       = 2;
+        $this->controller = $this->router->getController();
 
         if (is_array($this->controller)) {
             if (is_string($this->controller[0])) {
@@ -131,13 +136,11 @@ class Runner extends RequestHandler
         $response = $this->container->call($this->controller);
 
         if ($response === true && $this->isInspectable) {
-            // Middleware has been loaded.
-            return false;
+            return false; // Middleware has been loaded.
         }
 
         if ($response instanceof ResponseInterface) {
             if ($this->getOutputBuffer()) {
-                // Response originators MUST manage the output buffer.
                 app('logger')->alert('There is output buffering after the response has been created');
             }
 
@@ -185,7 +188,7 @@ class Runner extends RequestHandler
             $content = json_encode($content);
         } else {
             if ($content === 1) {
-                $content = '';
+                $content = ''; // hack
             }
 
             if ($buffer = $this->getOutputBuffer()) {

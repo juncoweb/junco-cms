@@ -31,7 +31,7 @@ class ContactModel extends Model
         $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // query
-        $this->db->safeExec("UPDATE `#__contact` SET status = IF(status > 0, 0, 1) WHERE id IN (?..)", $this->data['id']);
+        $this->db->exec("UPDATE `#__contact` SET status = IF(status > 0, 0, 1) WHERE id IN (?..)", $this->data['id']);
     }
 
     /**
@@ -47,21 +47,26 @@ class ContactModel extends Model
         ]);
 
         if (!$this->verifyCaptcha()) {
-            throw new Exception(_t('The captcha has not been resolved correctly.'));
+            return $this->unprocessable(_t('The captcha has not been resolved correctly.'));
         }
 
         if (!$this->data['contact_message']) {
-            throw new Exception(_t('Please, fill in the message.'));
+            return $this->unprocessable(_t('Please, fill in the message.'));
         }
 
         $this->data['user_ip'] = curuser()->getIpAsBinary();
         $this->data['user_id'] = curuser()->id;
 
-        // security
-        $this->floodcontrol($this->data['user_ip']);
+        // flood control
+        if ($max = $this->exceededMax($this->data['user_ip'])) {
+            $message = '<b>' . _t('Your message has not been sent.') . '</b> ';
+            $message .= sprintf(_t('For safety, the site does not allow more than %d messages per hour.'), $max);
+
+            return $this->unprocessable($message);
+        }
 
         // query - insert
-        $this->db->safeExec("INSERT INTO `#__contact` (??) VALUES (??)", $this->data);
+        $this->db->exec("INSERT INTO `#__contact` (??) VALUES (??)", $this->data);
         $this->data['contact_id'] = $this->db->lastInsertId();
 
         // notify
@@ -77,7 +82,7 @@ class ContactModel extends Model
         $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // query
-        $this->db->safeExec("DELETE FROM `#__contact` WHERE id IN (?..)", $this->data['id']);
+        $this->db->exec("DELETE FROM `#__contact` WHERE id IN (?..)", $this->data['id']);
     }
 
     /**
@@ -93,27 +98,24 @@ class ContactModel extends Model
     }
 
     /**
-     * Flodcontrol
+     * 
      */
-    protected function floodcontrol($user_ip)
+    protected function exceededMax($user_ip): int
     {
         $max = (int)config('contact.floodcontrol');
 
         if (!$max) {
-            return;
+            return 0;
         }
 
-        $total = $this->db->safeFind("
+        $total = $this->db->query("
         SELECT COUNT(*)
         FROM `#__contact`
         WHERE user_ip = ?
         AND created_at > DATE_SUB(NOW(), INTERVAL 1 HOUR)", $user_ip)->fetchColumn();
 
-        if ($total >= $max) {
-            throw new Exception(
-                '<b>' . _t('Your message has not been sent.') . '</b>'
-                    . ' ' . sprintf(_t('For safety, the site does not allow more than %d messages per hour.'), $max)
-            );
-        }
+        return ($total >= $max)
+            ? $max
+            : 0;
     }
 }

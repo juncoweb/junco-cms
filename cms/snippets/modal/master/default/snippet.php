@@ -6,18 +6,19 @@
  */
 
 use Junco\Modal\ModalInterface;
+use Junco\Mvc\Result;
 use Junco\Responder\ResponderBase;
 use Psr\Http\Message\ResponseInterface;
 
 class modal_master_default_snippet extends ResponderBase implements ModalInterface
 {
     // vars
-    protected $json            = [];
-    protected $buttons        = [];
-    protected $hidden        = [];
+    protected array $json    = [];
+    protected array $buttons = [];
+    protected array $hidden  = [];
     //
-    public    $form            = null;
-    public    $content      = '';
+    public ?modal_form $form = null;
+    public string $content   = '';
 
     /**
      * Type
@@ -49,10 +50,10 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
         }
 
         $this->buttons[] = [
-            'type'        => 'button',
-            'control'    => $control,
-            'title'        => $title,
-            'caption'    => $caption ?: $title
+            'type'    => 'button',
+            'control' => $control,
+            'title'   => $title,
+            'caption' => $caption ?: $title
         ];
     }
 
@@ -69,9 +70,9 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
         }
 
         $this->buttons[] = [
-            'type'        => 'submit',
-            'title'        => $title,
-            'caption'    => $caption ?: $title
+            'type'    => 'submit',
+            'title'   => $title,
+            'caption' => $caption ?: $title
         ];
     }
 
@@ -88,9 +89,9 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
         }
 
         $this->buttons[] = [
-            'type'        => 'close',
-            'title'        => $title,
-            'caption'    => $caption ?: $title
+            'type'    => 'close',
+            'title'   => $title,
+            'caption' => $caption ?: $title
         ];
     }
 
@@ -128,7 +129,7 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
      */
     public function helpLink(string $url): void
     {
-        $this->json['help_url']    = $url;
+        $this->json['help_url'] = $url;
         $this->json['help_title'] = _t('Help');
     }
 
@@ -145,56 +146,42 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
     /**
      * Creates a simplified response with a message.
      * 
-     * @param string $message
-     * @param int    $code
+     * @param Result|string $message
+     * @param int $statusCode
+     * @param int $code
      * 
      * @return ResponseInterface
      */
-    public function message(string $message = '', int $code = 0): ResponseInterface
+    public function responseWithMessage(Result|string $message = '', int $statusCode = 0, int $code = 0): ResponseInterface
     {
+        if ($message instanceof Result) {
+            $statusCode = $message->getStatusCode();
+            $code       = $message->getCode();
+            $message    = $message->getMessage();
+        }
+
         if ($code) {
-            $message = "[$code] $message";
+            $message = sprintf('%d - %s', $code, $message);
         }
         if (strlen($message) > 120) {
             $this->size('large');
         }
         $this->close(_t('Close'));
-        $this->title(_t('Info'));
-        $this->content = $message;
-
-        return $this->response();
-    }
-
-    /**
-     * Creates a simplified response with an alert message.
-     * 
-     * @param string $message
-     * @param int    $code
-     * 
-     * return ResponseInterface
-     */
-    public function alert(string $message = '', int $code = 0): ResponseInterface
-    {
-        if (SYSTEM_HANDLE_ERRORS) {
-            $this->type('alert');
-        } else {
-            $this->size('large');
-            $message = sprintf('%d - %s', $code, $message);
-        }
-
-        $this->close(_t('Close'));
         $this->title(_t('Alert'));
         $this->content = $message;
 
-        return $this->response();
+        return $this->response($statusCode);
     }
 
     /**
      * Create a response.
      * 
+     * @param int $statusCode
+     * @param string $reasonPhrase
+     * 
      * @return ResponseInterface
      */
-    public function response(): ResponseInterface
+    public function response(int $statusCode = 200, string $reasonPhrase = ''): ResponseInterface
     {
         // profiler
         if (config('system.profiler')) {
@@ -215,7 +202,7 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
             $this->json['form'] = $this->form->json;
         }
 
-        return $this->createJsonResponse($this->json);
+        return $this->createJsonResponse($this->json, $statusCode, $reasonPhrase);
     }
 }
 

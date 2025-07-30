@@ -7,6 +7,7 @@
 
 use Junco\Filesystem\MimeHelper;
 use Junco\Http\Message\HttpFactory;
+use Junco\Mvc\Result;
 use Junco\Responder\ResponderBase;
 use Junco\Responder\Contract\HttpBlankInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -73,12 +74,7 @@ class responder_master_default_http_blank extends ResponderBase implements HttpB
 
         foreach ($rows as $row) {
             foreach ($row as $k => $value) {
-                if (
-                    $value
-                    && (false !== strpos($value, ';')
-                        || false !== strpos($value, '"')
-                    )
-                ) {
+                if ($value && (false !== strpos($value, ';') || false !== strpos($value, '"'))) {
                     $row[$k] = '"' . str_replace('"', '""', $row[$k]) . '"';
                 }
             }
@@ -113,49 +109,48 @@ class responder_master_default_http_blank extends ResponderBase implements HttpB
         if (!is_file($file)) {
             return false;
         }
-        $this->content            = (new HttpFactory)->createStreamFromFile($file);
-        $this->filename            = $filename ?: pathinfo($file, PATHINFO_BASENAME);
-        $this->ContentType        = (new MimeHelper)->getType($file);
-        $this->ContentLength    = filesize($file);
+        $this->content       = (new HttpFactory)->createStreamFromFile($file);
+        $this->filename      = $filename ?: pathinfo($file, PATHINFO_BASENAME);
+        $this->ContentType   = (new MimeHelper)->getType($file);
+        $this->ContentLength = filesize($file);
 
         return true;
     }
 
     /**
-     * Creates a simplified response with an alert message.
-     * 
-     * @param string $message
-     * @param int    $code
-     * 
-     * return ResponseInterface
-     */
-    public function alert(string $message = '', int $code = 0): ResponseInterface
-    {
-        return $this->message($message, $code);
-    }
-
-    /**
      * Creates a simplified response with a message.
      * 
-     * @param string $message
-     * @param int    $code
+     * @param Result|string $message
+     * @param int $statusCode
+     * @param int $code
      * 
      * @return ResponseInterface
      */
-    public function message(string $message = '', int $code = 0): ResponseInterface
+    public function responseWithMessage(Result|string $message = '', int $statusCode = 0, int $code = 0): ResponseInterface
     {
+        if ($message instanceof Result) {
+            $statusCode = $message->getStatusCode();
+            $code       = $message->getCode();
+            $message    = $message->getMessage();
+        }
+
         $factory = new HttpFactory;
         $stream = $factory->createStream(sprintf('%d - %s', $code, $message));
 
         return $factory
-            ->createResponse()
+            ->createResponse($statusCode)
             ->withBody($stream);
     }
 
     /**
-     * Response
+     * Create a response.
+     * 
+     * @param int $statusCode
+     * @param string $reasonPhrase
+     * 
+     * @return ResponseInterface
      */
-    public function response(): ResponseInterface
+    public function response(int $statusCode = 200, string $reasonPhrase = ''): ResponseInterface
     {
         $factory = new HttpFactory;
         $stream = $this->content;
@@ -166,7 +161,7 @@ class responder_master_default_http_blank extends ResponderBase implements HttpB
 
         // response
         $response = $factory
-            ->createResponse()
+            ->createResponse($statusCode, $reasonPhrase)
             ->withBody($stream);
 
         $headers['Pragma'] = 'public';

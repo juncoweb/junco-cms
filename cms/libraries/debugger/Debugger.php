@@ -5,7 +5,7 @@
  * @author: Junco CMS (tm)
  */
 
-use Junco\Http\Emitter\SapiEmitter;
+use Junco\Debugger\ThrowableHandler;
 
 class Debugger
 {
@@ -28,9 +28,9 @@ class Debugger
                 $level   = $this->codeToLevel($code);
                 $message = $this->codeToString($code) . ': ' . $message;
                 $context = [
-                    'code'        => $code,
-                    'file'        => $file,
-                    'line'        => $line,
+                    'code'      => $code,
+                    'file'      => $file,
+                    'line'      => $line,
                     'backtrace' => $this->getTraceAsString(debug_backtrace())
                 ];
 
@@ -43,87 +43,8 @@ class Debugger
 
         // exception handler
         set_exception_handler(function (Throwable $e) {
-            if ($e instanceof Error) {
-                $this->alert($this->handleThrowableError($e), $e->getCode());
-            } else {
-                $this->alert($e->getMessage(), $e->getCode());
-            }
+            (new ThrowableHandler)->emit($e);
         });
-    }
-
-    /**
-     * Returns a message from a numeric code
-     * 
-     * @param int $code
-     * 
-     * @return string
-     */
-    public function getMessageFromCode(int $code = 0): string
-    {
-        switch ($code) {
-            case 401:
-                return sprintf(
-                    _t('Please, you must %s or %s'),
-                    '<a href="' . url('/usys/login', ['redirect' => -1]) . '">' . _t('Log in') . '</a>',
-                    '<a href="' . url('/usys/signup') . '">' . _t('Sign Up') . '</a>'
-                );
-            case 403:
-                return _t('Access denied.');
-            case 404:
-                return _t('The requested was not found on this server.');
-            case 500:
-                return sprintf(
-                    _t('Fatal error in safety. Please help us to fix it by contacting the %sadministration%s.'),
-                    '<a href="' . url('/contact') . '" target="_blank">',
-                    '</a>'
-                );
-            default:
-                return _t('A fatal error or a security failure has occurred.');
-        }
-    }
-
-    /**
-     * Alert
-     * 
-     * @param string $message
-     * @param int $code
-     */
-    public function alert(string $message = '', int $code = 0)
-    {
-        try {
-            // I show the basic template.
-            if (router()->isFormat('template')) {
-                $response = snippet('template')->alert($message, $code);
-                (new SapiEmitter)->emit($response);
-                die;
-            }
-        } catch (Throwable $e) {
-        }
-
-        die(sprintf('%d - %s', $code, $message));
-    }
-
-    /**
-     * Get response from throwable
-     * 
-     * @param Throwable $e
-     */
-    public function getResponseFromThrowable(Throwable $e)
-    {
-        try {
-            $code = $e->getCode();
-
-            if ($e instanceof Error) {
-                $message = $this->handleThrowableError($e);
-                return System::getOutput()->alert($message, $code);
-            }
-
-            $message = $e->getMessage();
-            return System::getOutput()->message($message, $code);
-        } catch (Throwable $e) {
-        }
-
-        $this->alert($message, $code);
     }
 
     /**
@@ -175,18 +96,19 @@ class Debugger
                 case 'integer':
                 case 'double':
                     break;
+
                 case 'object':
                     $args[$i] = get_class($value);
                     break;
+
                 case 'string':
-                    if (strlen($value) > 17) {
-                        $args[$i] = substr($value, 0, 17) . '...';
-                    }
-                    $args[$i] = "'$value'";
+                    $args[$i] = "'" . $this->cutText($value) . "'";
                     break;
+
                 case 'boolean':
                     $args[$i] = $value ? 'true' : 'false';
                     break;
+
                 default:
                     $args[$i] = ucfirst($type);
                     break;
@@ -197,30 +119,18 @@ class Debugger
     }
 
     /**
-     * Handles captured errors
+     * Cut text
      * 
-     * @param Error $e
+     * @param string $value
+     * @param int    $max
      * 
      * @return string
      */
-    protected function handleThrowableError(Error $e): string
+    protected function cutText(string $value, int $max = 30): string
     {
-        if (SYSTEM_HANDLE_ERRORS) {
-            try {
-                app('logger')->alert(sprintf('%s: %s', get_class($e), $e->getMessage()), [
-                    'code'        => $e->getCode(),
-                    'file'        => $e->getFile(),
-                    'line'        => $e->getLine(),
-                    'backtrace' => $e->getTraceAsString()
-                ]);
-
-                return $this->getMessageFromCode($e->getCode());
-            } catch (Throwable $e) {
-                return 'A fatal error or a security failure has occurred.';
-            }
-        } else {
-            return str_replace("\n", '<br />', $e->__toString());
-        }
+        return (strlen($value) > $max)
+            ? substr($value, 0, $max) . '...'
+            : $value;
     }
 
     /**
@@ -249,21 +159,23 @@ class Debugger
                 return 'E_COMPILE_ERROR';
             case E_COMPILE_WARNING:
                 return 'E_COMPILE_WARNING';
+            case E_DEPRECATED:
+                return 'E_DEPRECATED';
             case E_USER_ERROR:
                 return 'E_USER_ERROR';
             case E_USER_WARNING:
                 return 'E_USER_WARNING';
             case E_USER_NOTICE:
                 return 'E_USER_NOTICE';
+            case E_USER_DEPRECATED:
+                return 'E_USER_DEPRECATED';
             case E_STRICT:
                 return 'E_STRICT';
             case E_RECOVERABLE_ERROR:
                 return 'E_RECOVERABLE_ERROR';
-            case E_DEPRECATED:
-                return 'E_DEPRECATED';
-            case E_USER_DEPRECATED:
-                return 'E_USER_DEPRECATED';
         }
+
+        return 'E_UNKNOW';
     }
 
     /**
@@ -302,5 +214,7 @@ class Debugger
             case E_USER_DEPRECATED:
                 return Logger::NOTICE;
         }
+
+        return Logger::DEBUG;
     }
 }

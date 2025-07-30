@@ -6,7 +6,7 @@
  */
 
 return function (&$xdata) {
-    $data = db()->safeFind("
+    $data = db()->query("
 	SELECT
 	 label_key ,
 	 label_name ,

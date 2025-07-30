@@ -32,16 +32,16 @@ $container = Container::getInstance();
 # profiler
 $profiler = null;
 if ($container->get('config')->get('system.profiler')) {
-	$profiler = new Profiler(true);
-	$profiler->mark('After including the libraries');
-	$container->set('profiler', $profiler);
+    $profiler = new Profiler(true);
+    $profiler->mark('After including the libraries');
+    $container->set('profiler', $profiler);
 }
 
 $container->get('system');
 $container->get('debugger');
 
 if ($profiler) {
-	$profiler->mark("After initialising the system");
+    $profiler->mark("After initialising the system");
 }
 
 /**
@@ -51,7 +51,7 @@ $request = (new ServerRequestFactory)->createServerRequest();
 $handler = new Runner();
 $handler->add('router');
 if ($profiler) {
-	$handler->add('profiler');
+    $handler->add('profiler');
 }
 $response = $handler->handle($request);
 

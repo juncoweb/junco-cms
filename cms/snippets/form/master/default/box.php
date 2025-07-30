@@ -10,9 +10,9 @@ use Junco\Form\Contract\FormBoxInterface;
 class form_master_default_box implements FormBoxInterface
 {
     // vars
-    protected string $id        = '';
-    protected array  $tabs        = [];
-    protected array  $panels    = [];
+    protected string $id     = '';
+    protected array  $tabs   = [];
+    protected array  $panels = [];
 
     /**
      * Constructor

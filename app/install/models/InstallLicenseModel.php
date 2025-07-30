@@ -14,13 +14,10 @@ class InstallLicenseModel extends Model
      */
     public function getData()
     {
-        $license = config('install.license');
-
-        if (is_file(SYSTEM_ABSPATH . $license)) {
-            $license = file_get_contents(SYSTEM_ABSPATH . $license);
-        } else {
-            $license = _t('Oops, they stole the license!');
-        }
+        $file = SYSTEM_ABSPATH . config('install.license');
+        $license = is_file($file)
+            ? file_get_contents($file)
+            : _t('Oops, they stole the license!');
 
         return [
             'license' => $license,

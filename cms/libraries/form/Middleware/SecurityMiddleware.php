@@ -34,7 +34,7 @@ class SecurityMiddleware implements MiddlewareInterface
     {
         if (!$this->verify()) {
             return System::getOutput()
-                ->alert(_t('The security token has expired. Refresh the page.'))
+                ->responseWithMessage(_t('The security token has expired. Refresh the page.'))
                 ->withStatus(403, 'Invalid CSRF Token');
         }
 

@@ -65,11 +65,11 @@ class System
     /**
      * Create and return an object instance for the view
      * 
-     * @param string $snippet
+     * @param bool $severe    If the output is a template, it will return the system's template.
      * 
      * @return object
      */
-    public static function getOutput()
+    public static function getOutput(bool $severe = false)
     {
         $format = router()->getFormat();
 
@@ -84,7 +84,9 @@ class System
                 return Responder::asAjaxJson();
 
             case 'template':
-                return Template::get();
+                return $severe
+                    ? snippet('template')
+                    : Template::get();
 
             default:
                 return snippet($format);

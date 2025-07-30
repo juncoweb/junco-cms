@@ -31,7 +31,7 @@ class _Database implements _DatabaseInterface
     public function getEngines(): array
     {
         return $this->db
-            ->safeFind("SHOW ENGINES")
+            ->query("SHOW ENGINES")
             ->fetchAll(\Database::FETCH_COLUMN, ['Engine' => 'Engine']);
     }
 
@@ -42,7 +42,7 @@ class _Database implements _DatabaseInterface
      */
     public function getCollations(): array
     {
-        return $this->db->safeFind("SHOW COLLATION")->fetchAll();
+        return $this->db->query("SHOW COLLATION")->fetchAll();
     }
 
     /**
@@ -52,8 +52,8 @@ class _Database implements _DatabaseInterface
      */
     public function showData(): array
     {
-        $db_name = $this->db->safeFind("SELECT DATABASE()")->fetchColumn();
-        $query = $this->db->safeFind("SHOW CREATE DATABASE `$db_name`")->fetchColumn(1);
+        $db_name = $this->db->query("SELECT DATABASE()")->fetchColumn();
+        $query = $this->db->query("SHOW CREATE DATABASE `$db_name`")->fetchColumn(1);
 
         return  [
             'Name'            => $db_name,

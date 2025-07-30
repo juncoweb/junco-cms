@@ -82,7 +82,7 @@ class AdminExtensionsChangesModel extends Model
         $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // query
-        $data = $this->db->safeFind("
+        $data = $this->db->query("
 		SELECT
 		 id ,
 		 extension_id ,
@@ -113,7 +113,7 @@ class AdminExtensionsChangesModel extends Model
      */
     protected function getExtensionData(int $extension_id): array|false
     {
-        return $this->db->safeFind("
+        return $this->db->query("
 		SELECT
 		 id ,
          extension_name, 

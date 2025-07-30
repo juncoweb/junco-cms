@@ -11,6 +11,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Junco\Debugger\ThrowableHandler;
 
 /**
  * Handles a server request and produces a response.
@@ -102,6 +103,6 @@ class RequestHandler implements RequestHandlerInterface
      */
     public function exceptionHandler(\Throwable $e): ResponseInterface
     {
-        return (new \Debugger)->getResponseFromThrowable($e);
+        return (new ThrowableHandler)->getResponse($e);
     }
 }

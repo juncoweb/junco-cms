@@ -32,7 +32,7 @@ class AdminExtensionsInstallerModel extends Model
         $indexes = [];
 
         // query
-        $rows = $this->db->safeFind("
+        $rows = $this->db->query("
 		SELECT
 		 u.id ,
 		 u.update_version ,
@@ -114,7 +114,7 @@ class AdminExtensionsInstallerModel extends Model
         $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // query
-        $update = $this->db->safeFind("
+        $update = $this->db->query("
 		SELECT
 		 u.id ,
 		 u.extension_id ,
@@ -152,7 +152,7 @@ class AdminExtensionsInstallerModel extends Model
         $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // query
-        $update = $this->db->safeFind("
+        $update = $this->db->query("
 		SELECT
 		 u.id ,
 		 u.extension_id ,
@@ -224,7 +224,7 @@ class AdminExtensionsInstallerModel extends Model
         }
         $this->db->where("status = ?", UpdateStatus::available);
 
-        $num_updates = $this->db->safeFind("
+        $num_updates = $this->db->query("
 		SELECT COUNT(*)
 		FROM `#__extensions_updates`
 		[WHERE]")->fetchColumn();
@@ -249,7 +249,7 @@ class AdminExtensionsInstallerModel extends Model
         $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // query
-        $data = $this->db->safeFind("
+        $data = $this->db->query("
 		SELECT
 		 u.failure_msg ,
 		 u.update_version ,

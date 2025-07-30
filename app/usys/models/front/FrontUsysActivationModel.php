@@ -26,7 +26,7 @@ class FrontUsysActivationModel extends Model
             $token = UserActivityToken::get(GET, 'activation')->destroy();
 
             // query
-            db()->safeExec("UPDATE `#__users` SET verified_email = 'yes', status = ? WHERE id = ?", UserStatus::active, $token->user_id);
+            db()->exec("UPDATE `#__users` SET verified_email = 'yes', status = ? WHERE id = ?", UserStatus::active, $token->user_id);
 
             // set
             curuser()->login($token->user_id);

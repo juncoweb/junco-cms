@@ -69,7 +69,7 @@ class AdminContactModel extends Model
         $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // query
-        $data = $this->db->safeFind("
+        $data = $this->db->query("
 		SELECT
 		 c.id,
 		 c.user_id,

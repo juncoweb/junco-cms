@@ -15,8 +15,8 @@ class BackendModel extends Model
     public function getMenusData()
     {
         // cache
-        $allow_cache    = SYSTEM_ALLOW_CACHE;
-        $json            = null;
+        $allow_cache = SYSTEM_ALLOW_CACHE;
+        $json        = null;
 
         if ($allow_cache) {
             $cache_key    = 'backend-search-menus#';
@@ -43,7 +43,7 @@ class BackendModel extends Model
         ];
 
         // query
-        $rows = db()->safeFind("
+        $rows = db()->query("
 		SELECT
 		 menu_key ,
 		 menu_url ,

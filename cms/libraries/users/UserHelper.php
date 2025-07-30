@@ -152,7 +152,7 @@ class UserHelper
     public static function isUniqueUsername(string $username, int $user_id = 0, bool $throw = true): bool
     {
         // query
-        $current_id = db()->safeFind("SELECT id FROM `#__users` WHERE username = ?", $username)->fetchColumn();
+        $current_id = db()->query("SELECT id FROM `#__users` WHERE username = ?", $username)->fetchColumn();
 
         if ($current_id && $current_id != $user_id) {
             if ($throw) {
@@ -178,7 +178,7 @@ class UserHelper
     public static function isUniqueEmail(string $email, int $user_id = 0, bool $throw = true): bool
     {
         // query
-        $current_id = db()->safeFind("SELECT id FROM `#__users` WHERE email = ?", $email)->fetchColumn();
+        $current_id = db()->query("SELECT id FROM `#__users` WHERE email = ?", $email)->fetchColumn();
 
         if ($current_id && $current_id != $user_id) {
             if ($throw) {
@@ -211,7 +211,7 @@ class UserHelper
     public static function rehash(string $password, int $user_id)
     {
         if (password_needs_rehash($password, PASSWORD_DEFAULT)) {
-            db()->safeExec("UPDATE `#__users` SET password = ? WHERE id = ?", self::hash($password), $user_id);
+            db()->exec("UPDATE `#__users` SET password = ? WHERE id = ?", self::hash($password), $user_id);
         }
     }
 
@@ -257,7 +257,7 @@ class UserHelper
             return null;
         }
 
-        return $db->safeFind("
+        return $db->query("
 		SELECT
 		 id ,
 		 fullname ,

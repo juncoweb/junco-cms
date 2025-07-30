@@ -23,7 +23,7 @@ return function (&$xdata) {
     $label_id    = [];
 
     // set
-    $current = $db->safeFind("
+    $current = $db->query("
 	SELECT
 	 CONCAT(extension_id, '-', label_key),
 	 id
@@ -57,16 +57,16 @@ return function (&$xdata) {
     }
 
     if ($update) {
-        $db->safeExecAll("UPDATE `#__users_roles_labels` SET ?? WHERE id = ?", $update, $label_id);
+        $db->execAll("UPDATE `#__users_roles_labels` SET ?? WHERE id = ?", $update, $label_id);
     }
     if ($insert) {
-        $db->safeExecAll("INSERT INTO `#__users_roles_labels` (??) VALUES (??)", $insert);
+        $db->execAll("INSERT INTO `#__users_roles_labels` (??) VALUES (??)", $insert);
     }
 
     $delete = array_values(array_diff($current, $label_id));
 
     if ($delete) {
-        $db->safeExec("DELETE FROM `#__users_roles_labels_map` WHERE label_id IN (?..)", $delete);
-        $db->safeExec("DELETE FROM `#__users_roles_labels` WHERE id IN (?..)", $delete);
+        $db->exec("DELETE FROM `#__users_roles_labels_map` WHERE label_id IN (?..)", $delete);
+        $db->exec("DELETE FROM `#__users_roles_labels` WHERE id IN (?..)", $delete);
     }
 };

@@ -39,18 +39,18 @@ class Tables implements TablesInterface
      */
     public function has(string $tbl_name): bool
     {
-        return (bool)$this->db->safeFind("SHOW TABLE STATUS WHERE Name = ?", $this->prefixer->forceLocalOnTableName($tbl_name))->fetch();
+        return (bool)$this->db->query("SHOW TABLE STATUS WHERE Name = ?", $this->prefixer->forceLocalOnTableName($tbl_name))->fetch();
     }
 
     /**
      * Get all tables
      * 
-     * @return array    A numeric array with all the tables in the database.
+     * @return array    An associative array of all tables.
      */
     public function list(): array
     {
         return $this->db
-            ->safeFind("SHOW TABLES")
+            ->query("SHOW TABLES")
             ->fetchAll(\Database::FETCH_COLUMN, [0 => 0]);
     }
 
@@ -75,7 +75,7 @@ class Tables implements TablesInterface
             }
         }
 
-        return $this->db->safeFind("SHOW TABLE STATUS [WHERE]")->fetchAll();
+        return $this->db->query("SHOW TABLE STATUS [WHERE]")->fetchAll();
     }
 
     /**
@@ -102,13 +102,13 @@ class Tables implements TablesInterface
         ];
 
         // query
-        $data['MysqlQuery'] = $this->db->safeFind("SHOW CREATE TABLE `$_tbl_name`")->fetchColumn(1);
+        $data['MysqlQuery'] = $this->db->query("SHOW CREATE TABLE `$_tbl_name`")->fetchColumn(1);
 
         if ($add_if_not_exists) {
-            $data['MysqlQuery'] = preg_replace('/^CREATE TABLE/', 'CREATE TABLE IF NOT EXISTS', $data['MysqlQuery']);
+            $data['MysqlQuery'] = $this->addIfNotExists($data['MysqlQuery']);
         }
         if (!$add_auto_increment) {
-            $data['MysqlQuery'] = preg_replace('/AUTO_INCREMENT=\d+ /', '', $data['MysqlQuery']);
+            $data['MysqlQuery'] = $this->removeAutoIncrement($data['MysqlQuery']);
         }
         if ($set_db_prefix) {
             $data['MysqlQuery'] = $this->prefixer->replaceWithUniversal($data['MysqlQuery'], $tbl_name);
@@ -118,7 +118,7 @@ class Tables implements TablesInterface
         }
 
         // query - fields
-        $rows = $this->db->safeFind("SHOW FULL FIELDS FROM `$_tbl_name`")->fetchAll();
+        $rows = $this->db->query("SHOW FULL FIELDS FROM `$_tbl_name`")->fetchAll();
 
         foreach ($rows as $row) {
             $Field = $row['Field'];
@@ -132,7 +132,7 @@ class Tables implements TablesInterface
         }
 
         // query - indexes
-        $rows = $this->db->safeFind("SHOW INDEX FROM `$_tbl_name`")->fetchAll();
+        $rows = $this->db->query("SHOW INDEX FROM `$_tbl_name`")->fetchAll();
 
         foreach ($rows as $row) {
             if (!isset($data['Indexes'][$row['Key_name']])) {
@@ -171,40 +171,40 @@ class Tables implements TablesInterface
         $Table['MysqlQuery'] ??= false;
         if ($Table['MysqlQuery']) {
             $Table['MysqlQuery'] = $this->prefixer->replaceWithLocal($Table['MysqlQuery']);
-            return $this->db->safeExec($Table['MysqlQuery']);
+            return $this->db->exec($Table['MysqlQuery']);
         }
 
-        $TableName    = $this->prefixer->forceLocalOnTableName($TableName);
-        $Fields        = $this->getFieldsStatement($Table['Fields']);
-        $Indexes    = $this->getIndexesStatement($Table['Indexes']);
-        $options    = $this->getTableOptionsStatement($Table);
+        $TableName = $this->prefixer->forceLocalOnTableName($TableName);
+        $Fields    = $this->getFieldsStatement($Table['Fields']);
+        $Indexes   = $this->getIndexesStatement($Table['Indexes']);
+        $options   = $this->getTableOptionsStatement($Table);
 
         if ($Indexes) {
             $Fields .= ", $Indexes";
         }
 
-        return $this->db->safeExec("CREATE TABLE IF NOT EXISTS $TableName ($Fields) $options");
+        return $this->db->exec("CREATE TABLE IF NOT EXISTS $TableName ($Fields) $options");
     }
 
     /**
      * Copy Table
      * 
-     * @param string $TableName
      * @param string $FromTableName
+     * @param string $ToTableName
      * @param bool   $CopyRegisters
      * 
      * @return int
      */
-    public function copy(string $TableName, string $FromTableName, bool $CopyRegisters = false): int
+    public function copy(string $FromTableName, string $ToTableName, bool $CopyRegisters = false): int
     {
         // security
-        $this->validateName($TableName);
+        $this->validateName($ToTableName);
 
         // copy
-        $result = $this->db->safeExec("CREATE TABLE `$TableName` LIKE `$FromTableName`");
+        $result = $this->db->exec("CREATE TABLE `$ToTableName` LIKE `$FromTableName`");
 
         if ($CopyRegisters) {
-            return $this->db->safeExec("INSERT INTO `$TableName` SELECT * FROM `$FromTableName`");
+            return $this->db->exec("INSERT INTO `$ToTableName` SELECT * FROM `$FromTableName`");
         }
         return $result;
     }
@@ -221,51 +221,60 @@ class Tables implements TablesInterface
     {
         $options = $this->getTableOptionsStatement($Table);
 
-        return $this->db->safeExec("ALTER TABLE `$TableName` $options");
+        return $this->db->exec("ALTER TABLE `$TableName` $options");
     }
 
     /**
      * Rename
      * 
-     * @param string $CurTableName
-     * @param string $NewTableName
+     * @param string $FromTableName
+     * @param string $ToTableName
+     * 
+     * @return int
      */
-    public function rename(string $CurTableName, string $NewTableName): void
+    public function rename(string $FromTableName, string $ToTableName): int
     {
         // security
-        $this->validateName($NewTableName);
+        $this->validateName($ToTableName);
 
-        $this->db->safeExec("RENAME TABLE `$CurTableName` TO `$NewTableName`");
+        return $this->db->exec("RENAME TABLE `$FromTableName` TO `$ToTableName`");
     }
 
     /**
      * Truncate
      * 
      * @param string|array $TableNames
+     * 
+     * @return int
      */
-    public function truncate(string|array $TableNames): void
+    public function truncate(string|array $TableNames): int
     {
         if (is_string($TableNames)) {
             $TableNames = [$TableNames];
         }
 
+        $total = 0;
         foreach ($TableNames as $TableName) {
-            $this->db->safeExec("TRUNCATE TABLE `$TableName`");
+            $total += $this->db->exec("TRUNCATE TABLE `$TableName`");
         }
+
+        return $total;
     }
 
     /**
      * Drop
      * 
      * @param string|array $TableNames
+     * 
+     * @return int
      */
-    public function drop(string|array $TableNames): void
+    public function drop(string|array $TableNames): int
     {
         if (is_array($TableNames)) {
-            $TableNames = implode('`, `', $TableNames);
+            $TableNames = implode("`, `", $TableNames);
         }
 
-        $this->db->safeExec("DROP TABLE IF EXISTS `$TableNames`");
+        return $this->db->exec("DROP TABLE IF EXISTS `$TableNames`");
     }
 
     /**
@@ -280,6 +289,30 @@ class Tables implements TablesInterface
         if (!preg_match('/^(#__)?[\w]+$/', $tbl_name)) {
             throw new \Exception(_t('The name is not correct.'));
         }
+    }
+
+    /**
+     * Add "create table if not exists"
+     * 
+     * @param string $sql
+     * 
+     * @return string
+     */
+    protected function addIfNotExists(string $sql): string
+    {
+        return preg_replace('/^CREATE TABLE/', 'CREATE TABLE IF NOT EXISTS', $sql);
+    }
+
+    /**
+     * Return AUTO_INCREMENT statement
+     * 
+     * @param string $sql
+     * 
+     * @return string
+     */
+    protected function removeAutoIncrement(string $sql): string
+    {
+        return preg_replace('/AUTO_INCREMENT=\d+ /', '', $sql);
     }
 
     /**

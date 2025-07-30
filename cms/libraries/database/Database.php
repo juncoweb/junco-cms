@@ -10,52 +10,48 @@ use Junco\Database\Adapter\StatementInterface;
 use Junco\Database\Adapter\ResultInterface;
 use Junco\Database\Schema\Interface\SchemaInterface;
 
-/**
- * Database
- * 			
- * @require <Language>, <Router>
- */
 class Database
 {
     // vars
-    protected $adapter            = null;
-    protected $profiler            = false;
-    protected $prefix            = '';
-    protected $last_query        = '';
-    protected $queries            = [];
+    protected AdapterInterface $adapter;
+    protected bool   $profiler;
+    protected string $prefix;
+    protected string $last_query = '';
+    protected array  $queries    = [];
     //
-    protected $params            = [];
-    protected $where            = [];
-    protected $having            = [];
-    protected $order            = '';
-    protected $sort                = '';
+    protected array  $params     = [];
+    protected array  $where      = [];
+    protected array  $having     = [];
+    protected string $order      = '';
+    protected string $sort       = '';
+
     // pagination
-    public    $cur_page            = 0;
-    public    $rows_per_page    = 0;
+    public int $cur_page      = 0;
+    public int $rows_per_page = 0;
 
     // constants
-    const FETCH_ASSOC            = MYSQLI_ASSOC;
-    const FETCH_NUM                = MYSQLI_NUM;
-    const FETCH_COLUMN            = -1;
-    //const FETCH_CLASS			= -2;
+    const FETCH_ASSOC  = MYSQLI_ASSOC;
+    const FETCH_NUM    = MYSQLI_NUM;
+    const FETCH_COLUMN = -1;
+
     //
-    protected $schema            = null;
-    protected $prefixer            = null;
+    protected $schema   = null;
+    protected $prefixer = null;
 
     /**
      * Constructor
      */
     public function __construct(array $config = [])
     {
-        $config    = array_merge(config('database'), $config);
+        $config = array_merge(config('database'), $config);
 
-        $this->profiler    = config('system.profiler');
+        $this->profiler = (bool)config('system.profiler');
         $this->adapter  = $this->getAdapter($config);
         $this->prefix   = $config['database.prefix'];
 
         if ($config['database.timezone']) {
             $tz = (new DateTime)->format('P');
-            $this->query("SET time_zone = '$tz'");
+            $this->__query("SET time_zone = '$tz'");
         }
     }
 
@@ -70,7 +66,11 @@ class Database
                 return new Junco\Database\Adapter\PdoAdapter($config);
 
             case 'pgsql':
-                //return new Junco\Database\Adapter\PgsqlAdapter($config);
+                return new Junco\Database\Adapter\PgsqlAdapter($config);
+
+            case 'sqlite':
+                $config['file'] ??= config('database-sqlite.file');
+                return new Junco\Database\Adapter\SqliteAdapter($config);
 
             case 'mock':
                 return new Junco\Database\Adapter\MockAdapter($config);
@@ -93,7 +93,7 @@ class Database
     /**
      * Set Param
      *
-     * @param mixed  $param
+     * @param mixed $param
      */
     public function setParam($param): void
     {
@@ -103,8 +103,8 @@ class Database
     /**
      * Where
      *
-     * @param string  $where
-     * @param mixed   $params
+     * @param string $where
+     * @param mixed  $params
      */
     public function where(string $where, ...$params): void
     {
@@ -131,8 +131,8 @@ class Database
     /**
      * Having
      *
-     * @param string  $having
-     * @param mixed   $params
+     * @param string $having
+     * @param mixed  $params
      */
     public function having(string $having, ...$params): void
     {
@@ -190,7 +190,7 @@ class Database
      *
      * @return ResultInterface
      */
-    public function safeFind(StatementInterface|string $stmt, ...$params): ResultInterface
+    public function query(StatementInterface|string $stmt, ...$params): ResultInterface
     {
         $this->transformParam($params);
 
@@ -198,7 +198,7 @@ class Database
             $query = $this->getQuery($stmt, $params);
 
             if (!$params) {
-                return $this->query($query);
+                return $this->__query($query);
             }
             $stmt = $this->prepare($query);
         }
@@ -221,7 +221,7 @@ class Database
         $query = $this->getQuery($query, $params);
 
         // pagination
-        $pagi            = new Pagination();
+        $pagi = new Pagination();
         $pagi->num_rows = $this->countRows($query, $params);
 
         // calculate
@@ -251,11 +251,11 @@ class Database
      * Executes a prepared query
      *
      * @param StatementInterface|string	$stmt    The StatementInterface object or a string with the query.
-     * @param array					        $params  An array with the values to pass.
+     * @param array					    $params  An array with the values to pass.
      *
      * @return int
      */
-    public function safeExec(StatementInterface|string $stmt, ...$params): int
+    public function exec(StatementInterface|string $stmt, ...$params): int
     {
         $this->transformParam($params);
 
@@ -263,7 +263,7 @@ class Database
             $query = $this->getQuery($stmt, $params);
 
             if (!$params) {
-                return $this->exec($query);
+                return $this->__exec($query);
             }
             $stmt = $this->prepare($query);
         }
@@ -276,17 +276,42 @@ class Database
      * Executes a prepared query
      *
      * @param StatementInterface|string $stmt     The StatementInterface object or a string with the query.
-     * @param array                       $_params  An array with the values to pass.
+     * @param array                     $_params  An array with the values to pass.
      */
-    public function safeExecAll(StatementInterface|string $stmt, ...$_params): void
+    public function execAll(StatementInterface|string $stmt, ...$_params): void
     {
         if (is_string($stmt)) {
             $query = $this->getQuery($stmt, $_params, true);
             $stmt = $this->prepare($query);
         }
+
         foreach ($_params as $params) {
             $stmt->execute($params);
         }
+    }
+
+    /**
+     * @deprecated
+     */
+    public function safeFind(StatementInterface|string $stmt, ...$params): ResultInterface
+    {
+        return $this->query($stmt, ...$params);
+    }
+
+    /**
+     * @deprecated
+     */
+    public function safeExec(StatementInterface|string $stmt, ...$params): int
+    {
+        return $this->exec($stmt, ...$params);
+    }
+
+    /**
+     * @deprecated
+     */
+    public function safeExecAll(StatementInterface|string $stmt, ...$_params): void
+    {
+        $this->execAll($stmt, ...$_params);
     }
 
     /**
@@ -306,8 +331,8 @@ class Database
     /**
      * Get
      *
-     * @param string   $query       The query string.
-     * @param array    $params
+     * @param string $query   The query string.
+     * @param array  $params
      *
      * @return string
      */
@@ -375,8 +400,8 @@ class Database
     /**
      * Replace
      *
-     * @param string   $query       The query string.
-     * @param array    $params
+     * @param string $query   The query string.
+     * @param array  $params
      *
      * @return string
      */
@@ -392,8 +417,8 @@ class Database
                 throw new Error('There can be no more than 3 placeholders in the query');
             }
             $placeholder['??'] = [
-                'process_on'    => ($num_holders == 1 ? 1 : 2),
-                'count'            => 0,
+                'process_on' => ($num_holders == 1 ? 1 : 2),
+                'count' => 0,
             ];
         }
         $offset = -1;
@@ -576,8 +601,10 @@ class Database
      * Query
      * 
      * @param string $query
+     * 
+     * @return ResultInterface
      */
-    protected function query(string $query): ResultInterface
+    protected function __query(string $query): ResultInterface
     {
         $this->last_query = str_replace('#__', $this->prefix, $query);
         if ($this->profiler) {
@@ -589,8 +616,11 @@ class Database
     /**
      * Exec
      * 
+     * @param string $query
+     * 
+     * @return int
      */
-    protected function exec(string $query): int
+    protected function __exec(string $query): int
     {
         $this->last_query = str_replace('#__', $this->prefix, $query);
         if ($this->profiler) {
@@ -610,7 +640,7 @@ class Database
     protected function simpleQuery(string $query, array $params): ResultInterface
     {
         if (!$params) {
-            return $this->query($query);
+            return $this->__query($query);
         }
         $stmt = $this->prepare($query);
         $stmt->execute($params);

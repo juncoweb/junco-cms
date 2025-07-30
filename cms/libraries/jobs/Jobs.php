@@ -107,7 +107,7 @@ class Jobs
         $job_payload    = $data['job_payload'];
         $job_error        = $error->__toString();
 
-        db()->safeExec("
+        db()->exec("
 		INSERT INTO `#__jobs_failures` (job_id, job_uuid, job_queue, job_payload, job_error)
 		VALUES (?, ?, ?, ?, ?)", $job_id, $job_uuid, $job_queue, $job_payload, $job_error);
     }

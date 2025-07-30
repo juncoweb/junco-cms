@@ -4,12 +4,12 @@ let Settings = (function () {
         return JsUrl('admin/settings/' + task, data);
     }
 
-    function callback(message, code) {
-        if (code) {
+    function callback(res) {
+        if (res.ok()) {
             if (target) {
                 target = target.close();
             }
-            if (code == 2) {
+            if (res.code == 2) {
                 setTimeout(function () {
                     window.location.reload();
                 }, 1000);
@@ -18,7 +18,7 @@ let Settings = (function () {
             }
         }
 
-        (target || $box).notify(message);
+        (target || $box).notify(res.message);
     }
 
     function _data() {

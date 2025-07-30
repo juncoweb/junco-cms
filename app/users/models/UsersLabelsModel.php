@@ -48,12 +48,12 @@ class UsersLabelsModel extends Model
                 $data['label_key'] = $this->sanitizeLabelKey($data['label_key']);
 
                 if (!$data['label_key']) {
-                    throw new Exception(_t('The key must be alphanumeric.') . sprintf(' (%d)', $i + 1));
+                    return $this->unprocessable(_t('The key must be alphanumeric.') . sprintf(' (%d)', $i + 1));
                 }
             }
 
             if (!$this->isUniqueLabelKey($data['extension_id'], $data['label_key'], $this->data['label_id'][$i] ?? 0)) {
-                throw new Exception(_t('The key is being used.') . sprintf(' (%d)', $i + 1));
+                return $this->unprocessable(_t('The key is being used.') . sprintf(' (%d)', $i + 1));
             }
 
             $this->data_array[$i] = $data;
@@ -61,9 +61,9 @@ class UsersLabelsModel extends Model
 
         // query
         if ($this->data['is_edit']) {
-            $this->db->safeExecAll("UPDATE `#__users_roles_labels` SET ?? WHERE id = ?", $this->data_array, $this->data['label_id']);
+            $this->db->execAll("UPDATE `#__users_roles_labels` SET ?? WHERE id = ?", $this->data_array, $this->data['label_id']);
         } else {
-            $this->db->safeExecAll("INSERT INTO `#__users_roles_labels` (??) VALUES (??)", $this->data_array);
+            $this->db->execAll("INSERT INTO `#__users_roles_labels` (??) VALUES (??)", $this->data_array);
         }
 
         // cache
@@ -82,8 +82,8 @@ class UsersLabelsModel extends Model
         $this->isProtectedFromLabelId($this->data['id']) and abort();
 
         // query
-        $this->db->safeExec("DELETE FROM `#__users_roles_labels` WHERE id IN (?..)", $this->data['id']);
-        $this->db->safeExec("DELETE FROM `#__users_roles_labels_map` WHERE label_id IN (?..)", $this->data['id']);
+        $this->db->exec("DELETE FROM `#__users_roles_labels` WHERE id IN (?..)", $this->data['id']);
+        $this->db->exec("DELETE FROM `#__users_roles_labels_map` WHERE label_id IN (?..)", $this->data['id']);
 
         // cache
         (new LabelsCache)->update();
@@ -104,7 +104,7 @@ class UsersLabelsModel extends Model
      */
     protected function isUniqueLabelKey(int $extension_id, string $label_key, int $label_id): bool
     {
-        $current_id = $this->db->safeFind("
+        $current_id = $this->db->query("
 		SELECT id
 		FROM `#__users_roles_labels`
 		WHERE extension_id = ?
@@ -118,7 +118,7 @@ class UsersLabelsModel extends Model
      */
     protected function isProtected(array $extension_id): bool
     {
-        return (bool)$this->db->safeFind("
+        return (bool)$this->db->query("
 		SELECT COUNT(*)
 		FROM `#__extensions` e
 		LEFT JOIN `#__extensions_developers` d ON (e.developer_id = d.id)
@@ -131,7 +131,7 @@ class UsersLabelsModel extends Model
      */
     protected function isProtectedFromLabelId(array $label_id): bool
     {
-        return (bool)$this->db->safeFind("
+        return (bool)$this->db->query("
 		SELECT COUNT(*)
 		FROM `#__users_roles_labels` l
 		LEFT JOIN `#__extensions` e ON (l.extension_id = e.id)

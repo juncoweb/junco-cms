@@ -15,12 +15,12 @@ function Contact() {
         toggle(0);
     });
 
-    _form.request(url, function (message, code) {
-        switch (code) {
+    _form.request(url, function (res) {
+        switch (res.code) {
             //case -1: window.location.reload();
             case 1: toggle(true); return;
             default:
-            case 0: _form.notify(message); return;
+            case 0: _form.notify(res.message); return;
         }
     });
 };

@@ -124,6 +124,6 @@ class MyNotificationsModel extends Model
      */
     protected function markAsRead()
     {
-        $this->db->safeExec("UPDATE `#__notifications` SET read_at = NOW() WHERE user_id = ? AND read_at IS NULL", $this->user_id);
+        $this->db->exec("UPDATE `#__notifications` SET read_at = NOW() WHERE user_id = ? AND read_at IS NULL", $this->user_id);
     }
 }

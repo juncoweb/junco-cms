@@ -38,9 +38,9 @@ class UsersRolesModel extends Model
 
         // query
         if ($this->role_id) {
-            $this->db->safeExec("UPDATE `#__users_roles` SET ?? WHERE id = ?", $this->data, $this->role_id);
+            $this->db->exec("UPDATE `#__users_roles` SET ?? WHERE id = ?", $this->data, $this->role_id);
         } else {
-            $this->db->safeExec("INSERT INTO `#__users_roles` (??) VALUES (??)", $this->data);
+            $this->db->exec("INSERT INTO `#__users_roles` (??) VALUES (??)", $this->data);
         }
     }
 
@@ -54,12 +54,12 @@ class UsersRolesModel extends Model
 
         // security
         if ($this->inUse($this->data['id'])) {
-            throw new Exception(_t('The record can not be deleted because it is being used.'));
+            return $this->unprocessable(_t('The record can not be deleted because it is being used.'));
         }
 
         // query
-        $this->db->safeExec("DELETE FROM `#__users_roles` WHERE id IN (?..)", $this->data['id']);
-        $this->db->safeExec("DELETE FROM `#__users_roles_labels_map` WHERE role_id IN (?..)", $this->data['id']);
+        $this->db->exec("DELETE FROM `#__users_roles` WHERE id IN (?..)", $this->data['id']);
+        $this->db->exec("DELETE FROM `#__users_roles_labels_map` WHERE role_id IN (?..)", $this->data['id']);
     }
 
     /**
@@ -67,7 +67,7 @@ class UsersRolesModel extends Model
      */
     protected function inUse(array $role_id): bool
     {
-        return (bool)$this->db->safeFind("
+        return (bool)$this->db->query("
 		SELECT 
 		 COUNT(*)
 		FROM `#__users_roles_map`

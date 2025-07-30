@@ -46,12 +46,12 @@ var Usys = (function () {
     function form(route) {
         var $form = JsForm().request({
             url: JsUrl(route),
-            onSuccess: function (message, code, data) {
-                if (data && data.lockExpires > 0) {
-                    UsysLock($form, data.lockExpires);
+            onSuccess: function (res) {
+                if (res.data && res.data.lockExpires > 0) {
+                    UsysLock($form, res.data.lockExpires);
                 }
-                if (message) {
-                    $form.notify(message);
+                if (res.message) {
+                    $form.notify(res.message);
                 }
             },
         });

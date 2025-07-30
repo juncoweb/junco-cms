@@ -5,6 +5,7 @@
  * @author: Junco CMS (tm)
  */
 
+use Junco\Mvc\Result;
 use Junco\Responder\Contract\AjaxJsonInterface;
 use Junco\Responder\ResponderBase;
 use Psr\Http\Message\ResponseInterface;
@@ -29,39 +30,37 @@ class responder_master_default_ajax_json extends ResponderBase implements AjaxJs
     /**
      * Creates a simplified response with a message.
      * 
-     * @param string $message
-     * @param int    $code
+     * @param Result|string $message
+     * @param int $statusCode
+     * @param int $code
      * 
      * @return ResponseInterface
      */
-    public function message(string $message = '', int $code = 0): ResponseInterface
+    public function responseWithMessage(Result|string $message = '', int $statusCode = 0, int $code = 0): ResponseInterface
     {
-        $this->content = ['__message' => $message, '__code' => $code];
+        if ($message instanceof Result) {
+            $statusCode = $message->getStatusCode();
+            $code       = $message->getCode();
+            $message    = $message->getMessage();
+        }
 
-        return $this->response();
-    }
+        $this->content = [
+            '__message' => $message,
+            '__code' => $code
+        ];
 
-    /**
-     * Creates a simplified response with an alert message.
-     * 
-     * @param string $message
-     * @param int    $code
-     * 
-     * return ResponseInterface
-     */
-    public function alert(string $message = '', $code = 0): ResponseInterface
-    {
-        $this->content = ['__alert' => $message, '__code' => $code];
-
-        return $this->response();
+        return $this->response($statusCode);
     }
 
     /**
      * Create a response.
      * 
+     * @param int $statusCode
+     * @param string $reasonPhrase
+     * 
      * @return ResponseInterface
      */
-    public function response(): ResponseInterface
+    public function response(int $statusCode = 200, string $reasonPhrase = ''): ResponseInterface
     {
         // ob
         $buffer = ob_get_contents();
@@ -71,6 +70,6 @@ class responder_master_default_ajax_json extends ResponderBase implements AjaxJs
             $this->content['error'] ??= $buffer;
         }
 
-        return $this->createJsonResponse($this->content);
+        return $this->createJsonResponse($this->content, $statusCode, $reasonPhrase);
     }
 }

@@ -45,7 +45,7 @@ class DbHandler implements \SessionHandlerInterface
      */
     public function read(string $session_id): string|false
     {
-        return $this->db->safeFind("
+        return $this->db->query("
 		SELECT `session_data`
 		FROM `#__session`
 		WHERE session_id = ?", $session_id)->fetchColumn() ?: '';
@@ -62,7 +62,7 @@ class DbHandler implements \SessionHandlerInterface
     public function write(string $session_id, string $data): bool
     {
         if ($session_id) {
-            $this->db->safeExec("REPLACE INTO `#__session` SET session_id = ?, session_data = ?", $session_id, $data);
+            $this->db->exec("REPLACE INTO `#__session` SET session_id = ?, session_data = ?", $session_id, $data);
         }
 
         return true;
@@ -77,7 +77,7 @@ class DbHandler implements \SessionHandlerInterface
      */
     public function destroy(string $session_id): bool
     {
-        $this->db->safeExec("DELETE FROM `#__session` WHERE session_id = ?", $session_id);
+        $this->db->exec("DELETE FROM `#__session` WHERE session_id = ?", $session_id);
 
         return true;
     }
@@ -91,6 +91,6 @@ class DbHandler implements \SessionHandlerInterface
      */
     public function gc(int $maxlifetime): int|false
     {
-        return $this->db->safeExec("DELETE FROM `#__session` WHERE DATE_ADD(created_at, INTERVAL $maxlifetime SECOND) < NOW()");
+        return $this->db->exec("DELETE FROM `#__session` WHERE DATE_ADD(created_at, INTERVAL $maxlifetime SECOND) < NOW()");
     }
 }

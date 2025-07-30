@@ -4,9 +4,9 @@ var UsysPassword = (function () {
     function form(route) {
         var $form = JsForm().request({
             url: JsUrl(route),
-            onSuccess: function (message, code) {
-                if (message) {
-                    $form.notify(message);
+            onSuccess: function (res) {
+                if (res.message) {
+                    $form.notify(res.message);
                 }
             },
         });

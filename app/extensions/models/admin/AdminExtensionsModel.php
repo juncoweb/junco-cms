@@ -160,7 +160,7 @@ class AdminExtensionsModel extends Model
         $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // query
-        $data = $this->db->safeFind("
+        $data = $this->db->query("
 		SELECT
 		 id ,
 		 developer_id ,
@@ -232,7 +232,7 @@ class AdminExtensionsModel extends Model
         $data = $this->getExtensionData($this->data['id']) or abort();
 
         // query
-        $rows = $this->db->safeFind("
+        $rows = $this->db->query("
 		SELECT
 		 id,
 		 extension_name ,
@@ -343,7 +343,7 @@ class AdminExtensionsModel extends Model
         $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // query
-        $extension = $this->db->safeFind("
+        $extension = $this->db->query("
 		SELECT
 		 extension_alias AS alias,
 		 extension_name AS name,
@@ -465,7 +465,7 @@ class AdminExtensionsModel extends Model
      */
     protected function getListDevelopers()
     {
-        return $this->db->safeFind("
+        return $this->db->query("
 		SELECT id, developer_name
 		FROM `#__extensions_developers`
 		ORDER BY developer_name")->fetchAll(Database::FETCH_COLUMN, [0 => 1], [_t('All developers')]);
@@ -476,7 +476,7 @@ class AdminExtensionsModel extends Model
      */
     protected function getDevelopers()
     {
-        return $this->db->safeFind("
+        return $this->db->query("
 		SELECT id, developer_name
 		FROM `#__extensions_developers`
 		WHERE is_protected = 0
@@ -488,7 +488,7 @@ class AdminExtensionsModel extends Model
      */
     protected function getSince()
     {
-        return $this->db->safeFind("
+        return $this->db->query("
 		SELECT extension_version
 		FROM `#__extensions`
 		WHERE extension_alias = 'system'")->fetchColumn();
@@ -499,7 +499,7 @@ class AdminExtensionsModel extends Model
      */
     protected function getExtensionData(int $extension_id): array|false
     {
-        return $this->db->safeFind("
+        return $this->db->query("
 		SELECT
 		 id ,
 		 developer_id ,

@@ -30,7 +30,7 @@ class UsersReport
         $data = $this->getEmptyData($date, [/* _t('Month') */'', _t('Users')], $total);
 
         // query
-        $rows = $this->db->safeFind("
+        $rows = $this->db->query("
 		SELECT
 		 COUNT(*) AS total,
 		 MAX(created_at) AS created_at
@@ -54,7 +54,7 @@ class UsersReport
      */
     public function getData(): array
     {
-        $data = $this->db->safeFind("
+        $data = $this->db->query("
 		SELECT
 		 created_at ,
 		 (SELECT COUNT(*) FROM `#__users`) AS num_users

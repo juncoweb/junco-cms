@@ -39,9 +39,9 @@ class ExtensionsChangesModel extends Model
 
         // query
         if ($this->id) {
-            $this->db->safeExec("UPDATE `#__extensions_changes` SET ?? WHERE id = ? AND status = 0", $this->data, $this->id);
+            $this->db->exec("UPDATE `#__extensions_changes` SET ?? WHERE id = ? AND status = 0", $this->data, $this->id);
         } else {
-            $this->db->safeExec("INSERT INTO `#__extensions_changes` (??) VALUES (??)", $this->data);
+            $this->db->exec("INSERT INTO `#__extensions_changes` (??) VALUES (??)", $this->data);
         }
     }
 
@@ -55,6 +55,6 @@ class ExtensionsChangesModel extends Model
         $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // query
-        $this->db->safeExec("DELETE FROM `#__extensions_changes` WHERE id IN (?..) AND status = 0", $this->data['id']);
+        $this->db->exec("DELETE FROM `#__extensions_changes` WHERE id IN (?..) AND status = 0", $this->data['id']);
     }
 }

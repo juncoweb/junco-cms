@@ -73,18 +73,18 @@ class LoggerModel extends Model
     {
         // data
         $this->filter(POST, [
-            'id'         => 'id|array',
-            'message'    => '',
+            'id'      => 'id|array',
+            'message' => '',
         ]);
 
         if (strlen($this->data['message']) > 600) {
-            throw new Exception(_t('The text is too long.'));
+            return $this->unprocessable(_t('The text is too long.'));
         }
 
         $reports = $this->manager->getReports($this->data['id']);
 
         if (!$reports) {
-            throw new Exception(_t('Please, select at least one element.'));
+            return $this->unprocessable(_t('Please, select at least one element.'));
         }
 
         $data = [
@@ -102,7 +102,7 @@ class LoggerModel extends Model
             ->getBody();
 
         if (!$code) {
-            throw new Exception(_t('Error! the task has not been realized.'));
+            return $this->unprocessable(_t('Error! the task has not been realized.'));
         }
     }
 
@@ -113,7 +113,7 @@ class LoggerModel extends Model
      */
     protected function getSystemVersion(): string
     {
-        return db()->safeFind("
+        return db()->query("
 		SELECT extension_version
 		FROM `#__extensions`
 		WHERE extension_alias = 'system'")->fetchColumn();

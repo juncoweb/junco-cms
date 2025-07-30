@@ -13,28 +13,28 @@ class DatabaseExporter
     // vars
     protected $schema = null;
     protected $processes = [
-        'hearder'    => '',
-        'database'    => '',
-        'routines'    => [],
-        'tables'    => [],
-        'triggers'    => [],
+        'hearder'  => '',
+        'database' => '',
+        'routines' => [],
+        'tables'   => [],
+        'triggers' => [],
     ];
 
     //
-    public    bool   $set_db_prefix            = false;    // (Boolean) only for the methods: routine, table, inserts
-    protected ?array $set_db_prefix_tables    = null;
+    public    bool   $set_db_prefix        = false;    // (Boolean) only for the methods: routine, table, inserts
+    protected ?array $set_db_prefix_tables = null;
     //
-    public    bool   $add_drop_database        = true;
-    public    bool   $add_drop_routine        = true;
-    public    bool   $add_drop_trigger        = true;
+    public    bool   $add_drop_database    = true;
+    public    bool   $add_drop_routine     = true;
+    public    bool   $add_drop_trigger     = true;
     // tables
-    public    bool   $add_drop_table         = true;        // insert multiple records at once
-    public    bool   $add_if_not_exists     = true;     // in create table add..
-    public    bool   $add_auto_increment     = true;        // in create table add..
+    public    bool   $add_drop_table       = true;        // insert multiple records at once
+    public    bool   $add_if_not_exists    = true;     // in create table add..
+    public    bool   $add_auto_increment   = true;        // in create table add..
     // registers
-    public    bool   $use_ignore            = false;    // use insert ignore
-    public    bool   $extended_inserts         = true;        // insert multiple records at once
-    public    int    $max_query_size         = 50000;    // maximum length of values string in insert clause
+    public    bool   $use_ignore           = false;    // use insert ignore
+    public    bool   $extended_inserts     = true;        // insert multiple records at once
+    public    int    $max_query_size       = 50000;    // maximum length of values string in insert clause
 
     /**
      * Constructor
@@ -72,7 +72,7 @@ class DatabaseExporter
     /**
      * Get all tables
      * 
-     * @return array    A numeric array with all the tables in the database.
+     * @return array    An associative array of all tables.
      */
     public function getTables(): array
     {

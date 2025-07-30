@@ -7,6 +7,7 @@
 
 namespace Junco\Responder\Contract;
 
+use Junco\Mvc\Result;
 use Psr\Http\Message\ResponseInterface;
 
 interface ResponderInterface
@@ -14,34 +15,21 @@ interface ResponderInterface
     /**
      * Creates a simplified response with a message.
      * 
-     * @param string $message
-     * @param int    $code
+     * @param Result|string $message
+     * @param int $statusCode
+     * @param int $code
      * 
      * @return ResponseInterface
      */
-    public function message(string $message = '', int $code = 0): ResponseInterface;
-
-    /**
-     * Creates a simplified response with an alert message.
-     * 
-     * @param string $message
-     * @param int    $code
-     * 
-     * return ResponseInterface
-     */
-    public function alert(string $message = '', int $code = 0): ResponseInterface;
-
-    /**
-     * Creates a response from the execution of an clousure function.
-     * 
-     * @return ResponseInterface
-     */
-    public function wrapper(callable $fn): ResponseInterface;
+    public function responseWithMessage(Result|string $message = '', int $statusCode = 0, int $code = 0): ResponseInterface;
 
     /**
      * Create a response.
      * 
+     * @param int $statusCode
+     * @param string $reasonPhrase
+     * 
      * @return ResponseInterface
      */
-    public function response(): ResponseInterface;
+    public function response(int $statusCode = 200, string $reasonPhrase = ''): ResponseInterface;
 }

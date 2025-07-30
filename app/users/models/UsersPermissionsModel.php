@@ -33,7 +33,13 @@ class UsersPermissionsModel extends Model
         ]);
 
         // security
-        $this->security($this->data['id'], $this->data['role_id']);
+        if ($this->isMyPermission($this->data['id'], $this->data['role_id'])) {
+            return $this->unprocessable(_t('You cannot modify your administration permission.'));
+        }
+
+        if ($this->isDefaultRole($this->data['role_id'])) {
+            return $this->unprocessable(_t('The default role cannot modify the administration permission.'));
+        }
 
         $status = match ($this->data['status']) {
             1 => 0,
@@ -48,7 +54,7 @@ class UsersPermissionsModel extends Model
 		ON DUPLICATE KEY UPDATE status = $status");
 
         foreach ($this->data['id'] as $label_id) {
-            $this->db->safeExec($stmt, $this->data['role_id'], $label_id);
+            $this->db->exec($stmt, $this->data['role_id'], $label_id);
         }
 
         $cache_key = config('usys-system.permissions_q');
@@ -58,19 +64,18 @@ class UsersPermissionsModel extends Model
     }
 
     /**
-     * Security
+     * Is
      */
-    protected function security(array $label_id, int $role_id): void
+    protected function isMyPermission(array $label_id, int $role_id): bool
     {
         $admin_label_id = L_SYSTEM_ADMIN;
 
         if (!in_array($admin_label_id, $label_id)) {
-            return;
+            return false;
         }
 
-        // Administration permission
         $user_id = curuser()->id;
-        $total = $this->db->safeFind("
+        return !$this->db->query("
 		SELECT COUNT(*)
 		FROM `#__users_roles_labels_map`
 		WHERE label_id = ?
@@ -81,14 +86,13 @@ class UsersPermissionsModel extends Model
 			AND role_id <> ?
 		)
 		AND status = 1", $admin_label_id, $user_id, $role_id)->fetchColumn();
+    }
 
-        if (!$total) {
-            throw new Exception(_t('You cannot modify your administration permission.'));
-        }
-
-        // Default Role
-        if ($role_id == config('users.default_ucid')) {
-            throw new Exception(_t('The default role cannot modify the administration permission.'));
-        }
+    /**
+     * Is
+     */
+    protected function isDefaultRole(int $role_id): bool
+    {
+        return $role_id == config('users.default_ucid');
     }
 }

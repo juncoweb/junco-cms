@@ -26,9 +26,6 @@ use Junco\Database\Schema\Mysql\Tables;
 use Junco\Database\Schema\Mysql\Triggers;
 use Database;
 
-/**
- * Database Schema Mysqli Adapter
- */
 class MysqlSchema implements SchemaInterface
 {
     //

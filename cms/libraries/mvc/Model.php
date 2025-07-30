@@ -95,4 +95,30 @@ class Model
             unset($this->data[$name]);
         }
     }
+
+    /**
+     * Result
+     * 
+     * @param int    $statusCode
+     * @param string $message
+     * @param int    $code
+     * 
+     * @return Result
+     */
+    protected function result(int $statusCode = 0, string $message = '', int $code = 0, mixed $data = null): Result
+    {
+        return new Result($statusCode, $message, $code, $data);
+    }
+
+    /**
+     * Unprocessable
+     * 
+     * @param string $message
+     * 
+     * @return Result
+     */
+    protected function unprocessable(string $message): Result
+    {
+        return new Result(422, $message);
+    }
 }

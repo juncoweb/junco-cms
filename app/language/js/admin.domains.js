@@ -5,14 +5,14 @@
         return JsUrl('admin/language.domains/' + task);
     }
 
-    function callback(message, code) {
-        if (code) {
+    function callback(res) {
+        if (res.ok()) {
             if (target_2) {
                 target_2 = target_2.close();
             }
             _backlist.refresh();
         }
-        (target_2 || target).notify(message);
+        (target_2 || target).notify(res.message);
     }
 
     var target_2;

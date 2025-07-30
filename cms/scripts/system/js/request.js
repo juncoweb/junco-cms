@@ -16,7 +16,6 @@ const JsRequest = (function () {
         }
 
         return type.toLowerCase();
-
     }
 
     function toQueryArray(data, esc) {
@@ -258,7 +257,7 @@ const JsRequest = (function () {
 
         http: function (options, forceOptions) {
             options = Object.assign({}, options, forceOptions);
-            var data = parseUrlData(options.url);
+            let data = parseUrlData(options.url);
 
             if (getType(options.data) == 'form') {
                 var f = options.data;
@@ -304,8 +303,8 @@ const JsRequest = (function () {
             }
 
             // data
-            let data = getType(options.data) == 'array' ? options.data : [options.data];
-            let fetchOptions = {};
+            const data = getType(options.data) == 'array' ? options.data : [options.data];
+            const fetchOptions = {};
 
             // spinner
             if (options.spinner !== false) {
@@ -343,51 +342,44 @@ const JsRequest = (function () {
                     }
                 });
 
+            let _response;
             fetch(options.url, fetchOptions)
                 .then(function (response) {
+                    _response = response.clone();
                     if (options.spinner) {
                         options.spinner(false);
                     }
-                    /* if (!response.ok) {
-                        throw new Error(response.statusText);
-                    } */
 
                     return response[options.responseType]();
                 })
-                .then(function (data) { // filters
-                    switch (options.responseType) {
-                        case 'json':
-                            if (data.__error) {
-                                throw new Error(data.__error);
-                            }
-                            if (data.__alert) {
-                                Modal(data.__alert);
-                            }
-                            if (data.__profiler) {
-                                JsConsole.log(data.__profiler);
-                            }
-                            break;
-
-                        case 'text':
-                            let log = JsConsole.getTextData(data);
-                            if (log) {
-                                JsConsole.log(log);
-                            }
-                            break;
+                .then(function (data) {
+                    if (options.responseType == 'json') {
+                        if (data.__error) {
+                            throw new Error(data.__error);
+                        }
+                        if (data.__alert) {
+                            Modal(data.__alert);
+                        }
+                        if (data.__profiler) {
+                            JsConsole.log(data.__profiler);
+                        }
+                    } else if (options.responseType == 'text') {
+                        const log = JsConsole.getTextData(data);
+                        if (log) {
+                            JsConsole.log(log);
+                        }
                     }
 
                     return data;
                 })
                 .then(function (data) {
                     if (typeof options.onSuccess == 'function') {
-                        options.onSuccess.call(options, data);
+                        options.onSuccess.call(options, data, _response);
                     }
                 })
                 .catch(function (e) {
-                    JsToast({
-                        message: `${e.name}: ${e.message}.`,
-                        type: 'danger'
-                    });
+                    console.log(e);
+                    JsToast({ message: e, type: 'danger' });
                 });
         },
     };

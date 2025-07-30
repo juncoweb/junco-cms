@@ -36,7 +36,7 @@ class InstallSettingsModel extends Model
     public function getData()
     {
         // query
-        $values = $this->db->safeFind("
+        $values = $this->db->query("
 		SELECT
 		 fullname ,
 		 username ,
@@ -81,25 +81,25 @@ class InstallSettingsModel extends Model
 
         // validate
         if (!$this->site_name) {
-            throw new Exception(_t('Please, fill in the name.'));
+            return $this->unprocessable(_t('Please, fill in the name.'));
         }
         if (!$this->site_url) {
-            throw new Exception(_t('Please, verify the site url.'));
+            return $this->unprocessable(_t('Please, verify the site url.'));
         }
         if (!$this->site_email) {
-            throw new Exception(_t('Please, fill in with a valid email.'));
+            return $this->unprocessable(_t('Please, fill in with a valid email.'));
         }
 
         //
         if (!$this->data['fullname']) {
-            throw new Exception(_t('Please, fill in the name.'));
+            return $this->unprocessable(_t('Please, fill in the name.'));
         }
 
         UserHelper::validateUsername($this->data['username']);
         UserHelper::validatePassword($this->data['password']);
 
         if (!$this->data['email']) {
-            throw new Exception(_t('Please, fill in with a valid email.'));
+            return $this->unprocessable(_t('Please, fill in with a valid email.'));
         }
 
         // query: settings
@@ -117,7 +117,7 @@ class InstallSettingsModel extends Model
         $label_id = L_SYSTEM_ADMIN;
 
         // query
-        $this->db->safeExec("INSERT INTO `#__users` (??) VALUES (??) ON DUPLICATE KEY UPDATE ??", $this->data + [
+        $this->db->exec("INSERT INTO `#__users` (??) VALUES (??) ON DUPLICATE KEY UPDATE ??", $this->data + [
             'id'     => $this->user_id,
             'status' => UserStatus::active
         ]);
@@ -125,7 +125,7 @@ class InstallSettingsModel extends Model
         /**
          * Assig user role
          */
-        $this->db->safeExec("INSERT IGNORE INTO `#__users_roles_map` (??) VALUES (??)", [
+        $this->db->exec("INSERT IGNORE INTO `#__users_roles_map` (??) VALUES (??)", [
             'user_id' => $this->user_id,
             'role_id' => $role_id,
         ]);
@@ -134,7 +134,7 @@ class InstallSettingsModel extends Model
          * Set admin permission
          * This was pending of "extensions", because it needs the constants.
          */
-        $this->db->safeExec("INSERT INTO `#__users_roles_labels_map` (??) VALUES (??) ON DUPLICATE KEY UPDATE ??", [
+        $this->db->exec("INSERT INTO `#__users_roles_labels_map` (??) VALUES (??) ON DUPLICATE KEY UPDATE ??", [
             'id'       => 1,
             'role_id'  => $role_id,
             'label_id' => $label_id,

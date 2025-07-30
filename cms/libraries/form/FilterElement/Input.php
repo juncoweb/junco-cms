@@ -23,11 +23,11 @@ class Input extends FilterElement
     ) {
         $icon = $this->extract($attr, 'icon');
         $html = '<input' . $this->attr([
-            'type'    => 'text',
-            'name'    => $name,
+            'type'  => 'text',
+            'name'  => $name,
             'id'    => $name,
-            'value'    => $value,
-            'class'    => 'btn'
+            'value' => $value,
+            'class' => 'btn'
         ], $attr) . '/>';
 
         if ($icon) {

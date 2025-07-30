@@ -8,7 +8,7 @@
 use Junco\Router\ReplacesHelper;
 
 return function (&$rows) {
-    $rows['front_default_component']['options'] = db()->safeFind("
+    $rows['front_default_component']['options'] = db()->query("
 	SELECT
 	 extension_alias ,
 	 extension_name

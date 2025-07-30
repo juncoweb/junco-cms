@@ -11,7 +11,7 @@
         > span {
             color: $notify-color;
             position: absolute;
-            bottom: -3px;
+            top: $notify-top;
             padding: 0.625rem 1rem;
             background: $notify-bg-color;
             border-radius: $medium-border-radius;
@@ -30,11 +30,11 @@
 @keyframes notify {
     from {
         opacity: 0;
-        bottom: 40px;
+        top: $notify-top - 40px;
     }
 
     to {
         opacity: 1;
-        bottom: -3px;
+        top: $notify-top;
     }
 }

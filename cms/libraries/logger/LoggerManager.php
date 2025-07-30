@@ -119,12 +119,12 @@ class LoggerManager
             $this->extractFromContext($row, ['file', 'line', 'backtrace']);
 
             $reports[] = [
-                'level'            => $row['level'],
-                'message'        => $this->shortenFile($row['message']),
-                'file'            => $row['file'],
-                'line'            => $row['line'],
-                'backtrace'     => $row['backtrace'],
-                'created_at'    => $row['created_at'],
+                'level'      => $row['level'],
+                'message'    => $this->shortenFile($row['message']),
+                'file'       => $row['file'],
+                'line'       => $row['line'],
+                'backtrace'  => $row['backtrace'],
+                'created_at' => $row['created_at'],
             ];
         }
 

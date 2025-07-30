@@ -34,7 +34,7 @@ return function (&$xdata = null, $cdata = null) {
     $db            = db();
 
     // set
-    $has = $db->safeFind("
+    $has = $db->query("
 	SELECT CONCAT(menu_key, '||', menu_default_path), id
 	FROM `#__menus`
 	WHERE extension_id = $extension_id
@@ -77,13 +77,13 @@ return function (&$xdata = null, $cdata = null) {
     }
 
     if ($updates) {
-        $db->safeExecAll("UPDATE `#__menus` SET ?? WHERE id = ?", $updates, $menu_id);
+        $db->execAll("UPDATE `#__menus` SET ?? WHERE id = ?", $updates, $menu_id);
     }
     if ($inserts) {
-        $db->safeExecAll("INSERT INTO `#__menus` (??) VALUES (??)", $inserts);
+        $db->execAll("INSERT INTO `#__menus` (??) VALUES (??)", $inserts);
     }
     if ($cdata === null && $has) {
-        $db->safeExec("DELETE FROM `#__menus` WHERE id IN (?..)", array_values($has));
+        $db->exec("DELETE FROM `#__menus` WHERE id IN (?..)", array_values($has));
     }
 
     (new LanguageHelper())->translate('menus.' . $extension_alias, $translate);

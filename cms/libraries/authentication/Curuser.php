@@ -10,27 +10,26 @@ namespace Junco\Authentication;
 use Authentication;
 use Database;
 use Junco\Users\Enum\UserStatus;
-use SystemException;
 
 class Curuser
 {
     // vars
     protected ?Authentication $authentication = null;
     //
-    protected int     $id            = 0;
-    protected string  $username        = '';
-    protected string  $user_slug    = '';
-    protected string  $fullname        = '';
-    protected string  $email        = '';
-    protected string  $password        = '';
-    protected int     $avatar_id    = 0;
-    protected string  $avatar_file    = '';
-    protected string  $status        = '';
+    protected int     $id          = 0;
+    protected string  $username    = '';
+    protected string  $user_slug   = '';
+    protected string  $fullname    = '';
+    protected string  $email       = '';
+    protected string  $password    = '';
+    protected int     $avatar_id   = 0;
+    protected string  $avatar_file = '';
+    protected string  $status      = '';
     //
-    protected ?bool   $is_admin        = null;
-    protected ?string $ip            = null;
-    protected ?array  $roles        = null;
-    protected ?array  $permissions    = null;
+    protected ?bool   $is_admin    = null;
+    protected ?string $ip          = null;
+    protected ?array  $roles       = null;
+    protected ?array  $permissions = null;
 
     /**
      * Constructor
@@ -45,7 +44,7 @@ class Curuser
         }
 
         if ($user_id > 0) {
-            $data = db()->safeFind("
+            $data = db()->query("
 			SELECT
 			 id ,
 			 username ,
@@ -191,7 +190,7 @@ class Curuser
 
             if ($permissions === null) {
                 // query
-                $rows = db()->safeFind("
+                $rows = db()->query("
 				SELECT
 				 role_id ,
 				 label_id
@@ -218,7 +217,7 @@ class Curuser
             $roles = $this->getRoles();
 
             if ($roles) {
-                $this->permissions = db()->safeFind("
+                $this->permissions = db()->query("
 				SELECT label_id
 				FROM `#__users_roles_labels_map`
 				WHERE role_id IN ( ?.. )
@@ -245,21 +244,21 @@ class Curuser
     {
         if (!$label_id || in_array(0, $label_id)) {
             if (!$this->id) {
-                throw new SystemException(401);
+                alert(401);
             }
         } elseif (in_array(-1, $label_id)) {
             if ($this->id) {
-                throw new SystemException(_t('This section is only for anonymous users'), 403);
+                alert(403, _t('This section is only for anonymous users'));
             }
         } else {
             if (!$this->getRoles()) {
-                throw new SystemException(401);
+                alert(401);
             }
             if (SYSTEM_DEVELOPER_MODE && $this->isAdmin()) {
                 return;
             }
             if (!array_intersect($label_id, $this->getPermissions())) {
-                throw new SystemException(403);
+                alert(403);
             }
         }
     }
@@ -343,7 +342,7 @@ class Curuser
     {
         if ($this->roles === null) {
             if ($this->id) {
-                $this->roles = db()->safeFind("
+                $this->roles = db()->query("
 				SELECT role_id
 				FROM `#__users_roles_map`
 				WHERE user_id = ?", $this->id)->fetchAll(Database::FETCH_COLUMN);

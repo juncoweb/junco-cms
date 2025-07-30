@@ -33,7 +33,7 @@ class DatabaseChannel implements ChannelInterface
         $id      = $notification->getId();
         $message = $notification->toDatabase();
 
-        $this->db->safeExec("INSERT INTO `#__notifications` (user_id, notification_type, notification_id, notification_message) 
+        $this->db->exec("INSERT INTO `#__notifications` (user_id, notification_type, notification_id, notification_message) 
 		VALUES (?, ?, ?, ?)", $user_id, $type, $id, $message);
     }
 }

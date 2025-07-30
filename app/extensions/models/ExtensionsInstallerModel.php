@@ -68,7 +68,7 @@ class ExtensionsInstallerModel extends Model
                 : _t('No updates available.');
         }
 
-        throw new Exception($message, 1);
+        return $this->result(200, $message, 1);
     }
 
     /**
@@ -150,11 +150,8 @@ class ExtensionsInstallerModel extends Model
             'before_at' => 'bool'
         ]);
 
-        $result = (new Updater)->updateAll($this->data);
-
-        if (!$result) {
-            throw new Exception(_t('Error! the task has not been realized.'));
-        }
+        (new Updater)->updateAll($this->data)
+            or alert(422, _t('Error! the task has not been realized.'));
     }
 
     /**
@@ -246,7 +243,7 @@ class ExtensionsInstallerModel extends Model
     protected function getBadgeMessage()
     {
         // query
-        $rows = $this->db->safeFind("
+        $rows = $this->db->query("
 		SELECT
 		 u.update_version ,
 		 e.extension_alias ,
@@ -291,7 +288,7 @@ class ExtensionsInstallerModel extends Model
      */
     protected function updateExtensionKey(string $extension_key, int $update_id)
     {
-        $this->db->safeExec("
+        $this->db->exec("
 		UPDATE `#__extensions` 
 		SET extension_key = ? 
 		WHERE id = (SELECT extension_id FROM `#__extensions_updates` WHERE id = ?)", $extension_key, $update_id);

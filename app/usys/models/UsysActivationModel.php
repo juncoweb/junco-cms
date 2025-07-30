@@ -41,15 +41,15 @@ class UsysActivationModel extends Model
         $user = UserHelper::getUserFromInput($this->data['email_username']);
 
         if (!$user) {
-            throw new Exception(_t('Invalid email/username.'));
+            return $this->unprocessable(_t('Invalid email/username.'));
         }
 
         if (UserStatus::active->isEqual($user['status'])) {
-            throw new Exception(_t('Your account is active. Please, enter from the login.'));
+            return $this->unprocessable(_t('Your account is active. Please, enter from the login.'));
         }
 
         if ($this->data['option'] == 1) {
-            throw new Exception($this->obfuscateEmail($user['email']), 5);
+            return $this->unprocessable($this->obfuscateEmail($user['email']), 5);
         }
 
         /**
@@ -68,7 +68,7 @@ class UsysActivationModel extends Model
             UserHelper::isUniqueEmail($user['email'], $user['id']);
 
             // query
-            $this->db->safeExec("UPDATE `#__users` SET email = ? WHERE id = ?", $user['email'], $user['id']);
+            $this->db->exec("UPDATE `#__users` SET email = ? WHERE id = ?", $user['email'], $user['id']);
         }
 
         // token
@@ -84,10 +84,10 @@ class UsysActivationModel extends Model
         );
 
         if (!$result) {
-            throw new Exception(_t('An error has occurred in the mail server. Please, try again later.'));
+            return $this->unprocessable(_t('An error has occurred in the mail server. Please, try again later.'));
         }
 
-        return Xjs::redirectTo(url('/usys/message', ['op' => 'reset-act']));
+        return $this->result()->redirectTo(url('/usys/message', ['op' => 'reset-act']));
     }
 
     /**
@@ -101,6 +101,7 @@ class UsysActivationModel extends Model
     protected function obfuscateEmail(string $email, int $n = 1): string
     {
         $partial = explode('@', $email, 2);
+
         return substr($partial[0], 0, $n) . str_repeat('*', strlen($partial[0]) - $n) . '@' . $partial[1];
     }
 }

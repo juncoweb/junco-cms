@@ -158,10 +158,7 @@ class Filter
         foreach ($rules as $rule => $value) {
             if (isset($this->classes[$rule])) {
                 if ($filter !== null) {
-                    throw new Exception(sprintf(
-                        'Rules cannot have more than one filter for the variable «%s»',
-                        $var_name
-                    ));
+                    throw new FilterError(sprintf('Rules cannot have more than one filter for the variable «%s»', $var_name));
                 }
                 $filter = new $this->classes[$rule]($value);
             } else {
@@ -187,10 +184,7 @@ class Filter
     protected function parseRules(string $var_name, string $rules): array
     {
         if (!preg_match_all('#([^|^:]+)(?::([^|]*))?#', $rules, $matches, PREG_SET_ORDER)) {
-            throw new Exception(sprintf(
-                'An error occurred when reading the filter rules for the variable «%s»',
-                $var_name
-            ));
+            throw new FilterError(sprintf('An error occurred when reading the filter rules for the variable «%s»', $var_name));
         }
 
         $rules = [];
@@ -315,6 +309,10 @@ class Filter
     /**
      * Retrieve data
      * 
+     * @param int $type
+     * 
+     * @throws FilterError
+     * 
      * @return array
      */
     protected function retrieveData(int $type): array
@@ -325,7 +323,8 @@ class Filter
             case POST:
                 return request()->getParsedBody() ?? [];
         }
-        throw new Exception('The type of data to be filtered is incorrect');
+
+        throw new FilterError('The type of data to be filtered is incorrect');
     }
 
     /**
@@ -363,10 +362,10 @@ class Filter
      * @param int    $index,
      * @param string $var_name
      * 
-     * @throws FilterAbortError
-     * @throws Exception
+     * @throws FilterError
+     * @throws FilterException
      */
-    protected function validateRequired(int $index, string $var_name)
+    protected function validateRequired(int $index, string $var_name): void
     {
         $value = $this->data[$index][$var_name];
 
@@ -375,10 +374,7 @@ class Filter
             || ($this->filters[$var_name]->isArray && in_array(false, $value)) // partially empty
         ) {
             if ($this->filters[$var_name]->required === 'abort') {
-                throw new FilterAbortError(sprintf(
-                    'The variable «%s» has generated an error in the filter',
-                    $var_name
-                ));
+                throw new FilterError(sprintf('The variable «%s» has generated an error in the filter', $var_name));
             }
 
             $message = $this->getMessage($var_name);
@@ -386,7 +382,7 @@ class Filter
                 $message .= sprintf(' (%d)', $index + 1);
             }
 
-            throw new Exception($message);
+            throw new FilterException($message);
         }
     }
 

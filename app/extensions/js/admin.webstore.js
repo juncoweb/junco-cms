@@ -12,14 +12,15 @@ let Webstore = (function () {
                 //size: 'medium',
                 onLoad: function () {
                     target = this;
-                    JsForm({ btn: this }).request($U('download'), function (message, code) {
-                        if (code) {
+                    JsForm({ btn: this }).request($U('download'), function (res) {
+                        if (res.ok()) {
                             if (target) {
                                 target = target.close();
                             }
                             _backlist.refresh();
                         }
-                        (target || _backlist).notify(message);
+
+                        (target || _backlist).notify(res.message);
                     });
                 }
             }

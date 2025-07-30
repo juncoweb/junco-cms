@@ -5,6 +5,7 @@
  * @author: Junco CMS (tm)
  */
 
+use Junco\Mvc\Result;
 use Junco\Responder\ResponderBase;
 use Psr\Http\Message\ResponseInterface;
 
@@ -16,53 +17,41 @@ class xjs_master_default_snippet extends ResponderBase
     /**
      * Creates a simplified response with a message.
      * 
-     * @param string $message
-     * @param int    $code
+     * @param Result|string $message
+     * @param int $statusCode
+     * @param int $code
      * 
      * @return ResponseInterface
      */
-    public function message(string $message = '', int $code = 0, $data = null): ResponseInterface
+    public function responseWithMessage(Result|string $message = '', int $statusCode = 0, int $code = 0): ResponseInterface
     {
+        if ($message instanceof Result) {
+            $this->json = $message->render();
+            return $this->response($message->getStatusCode());
+        }
+
+        if ($statusCode > 499) {
+            return $this->alert($message, $statusCode, $code);
+        }
         if ($message) {
             $this->json['message'] = $message;
         }
         if ($code) {
             $this->json['code'] = $code;
         }
-        if ($data !== null) {
-            $this->json['data'] = $data;
-        }
 
-        return $this->response();
-    }
-
-    /**
-     * Creates a simplified response with an alert message.
-     * 
-     * @param string $message
-     * @param int    $code
-     * 
-     * return ResponseInterface
-     */
-    public function alert(string $message = '', $code = 0): ResponseInterface
-    {
-        $this->json['__alert'] = [
-            'size'        => SYSTEM_HANDLE_ERRORS ? 'medium' : 'large',
-            'title'        => _t('Alert'),
-            'content'    => $message,
-            'code'        => $code,
-            'buttons'    => [['caption' => _t('Close'), 'type' => 'close']],
-        ];
-
-        return $this->response();
+        return $this->response($statusCode);
     }
 
     /**
      * Create a response.
      * 
+     * @param int $statusCode
+     * @param string $reasonPhrase
+     * 
      * @return ResponseInterface
      */
-    public function response(): ResponseInterface
+    public function response(int $statusCode = 200, string $reasonPhrase = ''): ResponseInterface
     {
         if (config('system.profiler')) {
             $this->json['__profiler'] = app('profiler')->render(true);
@@ -79,6 +68,28 @@ class xjs_master_default_snippet extends ResponderBase
             }
         }
 
-        return $this->createJsonResponse($this->json);
+        return $this->createJsonResponse($this->json, $statusCode, $reasonPhrase);
+    }
+
+    /**
+     * Creates a simplified response with an alert message.
+     * 
+     * @param string $message
+     * @param int    $statusCode
+     * @param int    $code
+     * 
+     * return ResponseInterface
+     */
+    protected function alert(string $message = '', int $statusCode = 0, int $code = 0): ResponseInterface
+    {
+        $this->json['__alert'] = [
+            'size'    => SYSTEM_HANDLE_ERRORS ? 'medium' : 'large',
+            'title'   => _t('Alert'),
+            'content' => $message,
+            'code'    => $code,
+            'buttons' => [['caption' => _t('Close'), 'type' => 'close']],
+        ];
+
+        return $this->response($statusCode);
     }
 }

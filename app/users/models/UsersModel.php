@@ -43,10 +43,11 @@ class UsersModel extends Model
 
         // validate
         if (!$this->data['fullname']) {
-            throw new Exception(_t('Please, fill in the name.'));
+            return $this->unprocessable(_t('Please, fill in the name.'));
         }
+
         if (!$this->data['username']) {
-            throw new Exception(_t('Please, fill in the username.'));
+            return $this->unprocessable(_t('Please, fill in the username.'));
         }
         UserHelper::validateUsername($this->data['username']);
 
@@ -57,7 +58,7 @@ class UsersModel extends Model
         } elseif ($this->user_id) {
             unset($this->data['password']);
         } else {
-            throw new Exception(_t('Please, fill in the password.'));
+            return $this->unprocessable(_t('Please, fill in the password.'));
         }
 
         // username
@@ -69,14 +70,14 @@ class UsersModel extends Model
         } elseif ($this->user_id) {
             unset($this->data['email']);
         } else {
-            throw new Exception(_t('Please, fill in with a valid email.'));
+            return $this->unprocessable(_t('Please, fill in with a valid email.'));
         }
 
         // query
         if ($this->user_id) {
-            $this->db->safeExec("UPDATE `#__users` SET ?? WHERE id = ?", $this->data, $this->user_id);
+            $this->db->exec("UPDATE `#__users` SET ?? WHERE id = ?", $this->data, $this->user_id);
         } else {
-            $this->db->safeExec("INSERT INTO `#__users` (??) VALUES (??)", $this->data);
+            $this->db->exec("INSERT INTO `#__users` (??) VALUES (??)", $this->data);
             $this->user_id = $this->db->lastInsertId();
         }
 
@@ -96,14 +97,14 @@ class UsersModel extends Model
 
         // validate
         if ($this->isCurUser($this->data['id'])) {
-            throw new Exception(_t('Your account is not editable.'));
+            return $this->unprocessable(_t('Your account is not editable.'));
         }
 
         // query
         if ($this->data['status']) {
-            $this->db->safeExec("UPDATE `#__users` SET status = ? WHERE id IN (?..)", $this->data['status'], $this->data['id']);
+            $this->db->exec("UPDATE `#__users` SET status = ? WHERE id IN (?..)", $this->data['status'], $this->data['id']);
         } else {
-            $this->db->safeExec("
+            $this->db->exec("
             UPDATE `#__users`
             SET status = IF(status = 'active', 'inactive', 'active')
             WHERE id IN (?..)", $this->data['id']);
@@ -119,8 +120,8 @@ class UsersModel extends Model
         $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // query
-        $this->db->safeExec("DELETE FROM `#__users_roles_map` WHERE user_id IN (?..)", $this->data['id']);
-        $this->db->safeExec("DELETE FROM `#__users` WHERE id IN (?..)", $this->data['id']);
+        $this->db->exec("DELETE FROM `#__users_roles_map` WHERE user_id IN (?..)", $this->data['id']);
+        $this->db->exec("DELETE FROM `#__users` WHERE id IN (?..)", $this->data['id']);
     }
 
     /**

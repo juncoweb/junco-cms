@@ -180,7 +180,7 @@ class CookieGuard implements GuardInterface
         }
 
         // query
-        $data = $this->db->safeFind("
+        $data = $this->db->query("
 		SELECT
 		 id ,
 		 user_id,
@@ -203,7 +203,7 @@ class CookieGuard implements GuardInterface
                 return 0;
             }
 
-            $this->db->safeExec("
+            $this->db->exec("
             UPDATE `#__usys_sessions` 
             SET
              accessed_at = NOW(),
@@ -224,14 +224,14 @@ class CookieGuard implements GuardInterface
         do {
             $token        = $this->generateToken();
             $selector    = $this->getSelector($token);
-            $total        = $this->db->safeFind("
+            $total        = $this->db->query("
 			SELECT COUNT(*)
 			FROM `#__usys_sessions`
 			WHERE session_selector = ?", $selector)->fetchColumn();
         } while ($total);
 
         // query
-        $this->db->safeExec("INSERT INTO `#__usys_sessions` (??, accessed_at) VALUES (??, NOW())", [
+        $this->db->exec("INSERT INTO `#__usys_sessions` (??, accessed_at) VALUES (??, NOW())", [
             'user_id'            => $user_id,
             'session_selector'    => $selector,
             'session_validator' => $this->getValidator($token),
@@ -254,7 +254,7 @@ class CookieGuard implements GuardInterface
             return false;
         }
 
-        $this->db->safeExec("DELETE FROM `#__usys_sessions` WHERE session_selector = ?", $this->getSelector($token));
+        $this->db->exec("DELETE FROM `#__usys_sessions` WHERE session_selector = ?", $this->getSelector($token));
         $this->setCookie();
 
         return true;

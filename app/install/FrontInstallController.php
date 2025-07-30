@@ -5,7 +5,6 @@
  * @author: Junco CMS (tm)
  */
 
-use Junco\Extensions\Installer\Installer;
 use Junco\Mvc\Controller;
 
 class FrontInstallController extends Controller
@@ -75,9 +74,7 @@ class FrontInstallController extends Controller
     public function takeExtensions()
     {
         return $this->middleware('install.database.exists')
-            ?: $this->wrapper(function () {
-                (new Installer(true))->install();
-            });
+            ?: $this->wrapper(fn() => (new InstallExtensionsModel)->install());
     }
 
     /**

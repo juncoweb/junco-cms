@@ -7,7 +7,7 @@
 
 return function (&$rows) {
     // query
-    $rows['default_ucid']['options'] = db()->safeFind("
+    $rows['default_ucid']['options'] = db()->query("
 	SELECT id, role_name
 	FROM `#__users_roles`
 	WHERE id NOT IN (

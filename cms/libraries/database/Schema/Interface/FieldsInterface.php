@@ -50,9 +50,9 @@ interface FieldsInterface
      * Drop
      * 
      * @param string		$TableName
-     * @param string|array	$FieldName
+     * @param string|array	$FieldNames
      * 
      * @return int
      */
-    public function drop(string $TableName, string|array $FieldName): int;
+    public function drop(string $TableName, string|array $FieldNames): int;
 }

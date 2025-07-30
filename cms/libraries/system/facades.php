@@ -7,6 +7,9 @@
 
 use Junco\Authentication\Curuser;
 use Junco\Container\Container;
+use Junco\Filesystem\MediaStorage;
+use Junco\Http\Exception\HttpError;
+use Junco\Http\Exception\HttpException;
 use Junco\Http\Message\Response;
 
 /**
@@ -24,11 +27,27 @@ function app(string $id = ''): object
 /**
  * Abort
  * 
- * @param int $code
+ * @param int    $statusCode
+ * @param string $message
+ * 
+ * @throws HttpError
  */
-function abort(int $code = 0)
+function abort(int $statusCode = 0, string $message = '')
 {
-    throw new DebuggerAbortError('Logical error and abrupt abort', $code);
+    throw new HttpError($statusCode, $message);
+}
+
+/**
+ * Alert
+ * 
+ * @param int    $statusCode
+ * @param string $message
+ * 
+ * @throws HttpException
+ */
+function alert(int $statusCode = 0, string $message = '')
+{
+    throw new HttpException($statusCode, $message);
 }
 
 /**
@@ -98,7 +117,7 @@ function media_path(string $path = ''): string
 {
     static $media;
     if ($media === null) {
-        $media = app(Junco\Filesystem\MediaStorage::class);
+        $media = app(MediaStorage::class);
     }
 
     return $media->getPath($path);
@@ -113,7 +132,7 @@ function media_url(string $path = '', bool $absolute = false): string
 {
     static $media;
     if ($media === null) {
-        $media = app(Junco\Filesystem\MediaStorage::class);
+        $media = app(MediaStorage::class);
     }
 
     return $media->getUrl($path, $absolute);

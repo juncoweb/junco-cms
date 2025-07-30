@@ -56,8 +56,6 @@ class CacheModel extends Model
         // data
         $this->filter(POST, ['keys' => 'array|required:abort']);
 
-        if (!cache()->deleteMultiple($this->data['keys'])) {
-            throw new Exception(_t('Error! the task has not been realized.'));
-        }
+        cache()->deleteMultiple($this->data['keys']);
     }
 }

@@ -32,14 +32,14 @@ let Installer = (function () {
         }
     }
 
-    function callback(message, code) {
-        if (code) {
+    function callback(res) {
+        if (res.ok()) {
             if (target) {
                 target = target.close();
             }
             _backlist.refresh();
         }
-        (target || _backlist).notify(message);
+        (target || _backlist).notify(res.message);
     }
 
     let _backlist, target;
@@ -167,17 +167,18 @@ let Installer = (function () {
         return JsUrl('admin/extensions.installer/' + task);
     }
 
-    function callback(message, code) {
+    function callback(res) {
         if (!_backlist) {
             _backlist = Extensions.List();
         }
-        if (code) {
+        if (res.ok()) {
             if (target) {
                 target = target.close();
             }
             _backlist.refresh();
         }
-        (target || _backlist).notify(message);
+
+        (target || _backlist).notify(res.message);
     };
 
     Extensions.setControls({

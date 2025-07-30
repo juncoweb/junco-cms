@@ -38,7 +38,7 @@ class DatabaseDriver implements DriverInterface
         $job_payload = serialize($job);
         $delay = $job->delay ?? 0;
 
-        $this->db->safeExec("
+        $this->db->exec("
 		INSERT INTO `#__jobs` (job_queue, job_payload, available_at)
 		VALUES (?, ?, DATE_ADD(NOW(), INTERVAL ? SECOND))", $queue, $job_payload, $delay);
     }
@@ -59,7 +59,7 @@ class DatabaseDriver implements DriverInterface
         $this->db->where("available_at < NOW()");
         $this->db->where("reserved_at IS NULL");
 
-        $data = $this->db->safeFind("
+        $data = $this->db->query("
 		SELECT
 		 id ,
 		 job_queue ,
@@ -70,7 +70,7 @@ class DatabaseDriver implements DriverInterface
 		LIMIT 1", $queue ?: $this->default_queue)->fetch();
 
         if ($data) {
-            $this->db->safeExec("UPDATE `#__jobs` SET num_attempts = num_attempts + 1, reserved_at = NOW() WHERE id = ?", $data['id']);
+            $this->db->exec("UPDATE `#__jobs` SET num_attempts = num_attempts + 1, reserved_at = NOW() WHERE id = ?", $data['id']);
         }
 
         return $data ?: null;
@@ -85,9 +85,9 @@ class DatabaseDriver implements DriverInterface
     public function terminate(array $data, bool $status): void
     {
         if ($status) {
-            $this->db->safeExec("DELETE FROM `#__jobs` WHERE id = ?", $data['id']);
+            $this->db->exec("DELETE FROM `#__jobs` WHERE id = ?", $data['id']);
         } else {
-            $this->db->safeExec("UPDATE `#__jobs` SET reserved_at = NULL WHERE id = ?", $data['id']);
+            $this->db->exec("UPDATE `#__jobs` SET reserved_at = NULL WHERE id = ?", $data['id']);
         }
     }
 }

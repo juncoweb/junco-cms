@@ -38,7 +38,7 @@ class AutoSignup
         }
 
         // query
-        $user = $this->db->safeFind("
+        $user = $this->db->query("
 		SELECT
 		 id ,
 		 fullname ,
@@ -59,7 +59,7 @@ class AutoSignup
             }
 
             // query
-            $this->db->safeExec("INSERT INTO `#__users` (??) VALUES (??)", [
+            $this->db->exec("INSERT INTO `#__users` (??) VALUES (??)", [
                 'fullname'       => $fullname,
                 'username'       => $username,
                 'email'          => $email,
@@ -69,7 +69,7 @@ class AutoSignup
             $user_id = $this->db->lastInsertId();
 
             // query - role
-            $this->db->safeExec("INSERT INTO `#__users_roles_map` (user_id, role_id) VALUES (?, ?)", $user_id, $role_id);
+            $this->db->exec("INSERT INTO `#__users_roles_map` (user_id, role_id) VALUES (?, ?)", $user_id, $role_id);
 
             // Email
             if ($send_token) {
@@ -112,7 +112,7 @@ class AutoSignup
      */
     protected function isUniqueUsername(string $username)
     {
-        return !$this->db->safeFind("SELECT COUNT(*) FROM `#__users` WHERE username = ?", $username)->fetchColumn();
+        return !$this->db->query("SELECT COUNT(*) FROM `#__users` WHERE username = ?", $username)->fetchColumn();
     }
 
     /**

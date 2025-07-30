@@ -51,7 +51,7 @@ class Menus
         }
 
         // query
-        $rows = db()->safeFind("
+        $rows = db()->query("
 		SELECT
 		 id ,
 		 menu_path ,

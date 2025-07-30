@@ -37,7 +37,7 @@ interface TablesInterface
     /**
      * List
      * 
-     * @return array    A numeric array with all the tables in the database.
+     * @return array    An associative array of all tables.
      */
     public function list(): array;
 
@@ -72,13 +72,13 @@ interface TablesInterface
     /**
      * Copy Table
      * 
-     * @param string $TableName
      * @param string $FromTableName
+     * @param string $ToTableName
      * @param bool   $CopyRegisters
      * 
      * @return int
      */
-    public function copy(string $TableName, string $FromTableName, bool $CopyRegisters = false): int;
+    public function copy(string $FromTableName, string $ToTableName, bool $CopyRegisters = false): int;
 
     /**
      * Alter Table
@@ -93,24 +93,30 @@ interface TablesInterface
     /**
      * Rename
      * 
-     * @param string $CurTableName
-     * @param string $NewTableName
+     * @param string $FromTableName
+     * @param string $ToTableName
+     * 
+     * @return int
      */
-    public function rename(string $CurTableName, string $NewTableName): void;
+    public function rename(string $FromTableName, string $ToTableName): int;
 
     /**
      * Truncate
      * 
      * @param string|array $TableNames
+     * 
+     * @return int
      */
-    public function truncate(string|array $TableNames): void;
+    public function truncate(string|array $TableNames): int;
 
     /**
      * Drop
      * 
      * @param string|array $TableNames
+     * 
+     * @return int
      */
-    public function drop(string|array $TableNames): void;
+    public function drop(string|array $TableNames): int;
 
     /**
      * Validate Table Name

@@ -159,7 +159,7 @@ class AdminAssetsModel extends Model
      */
     protected function getExtensions()
     {
-        return db()->safeFind("
+        return db()->query("
 		SELECT extension_alias, extension_name
 		FROM `#__extensions`
 		ORDER BY extension_name")->fetchAll(Database::FETCH_COLUMN, [0 => 1], ['--- ' . _t('Select') . ' ---']);

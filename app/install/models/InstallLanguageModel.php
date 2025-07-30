@@ -21,7 +21,7 @@ class InstallLanguageModel extends Model
         $result = (new LanguageHelper)->change($this->data['lang']);
 
         if (!$result) {
-            throw new Exception(_t('Error! the task has not been realized.'));
+            return $this->unprocessable(_t('Error! the task has not been realized.'));
         }
     }
 }

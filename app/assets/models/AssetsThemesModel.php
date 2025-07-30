@@ -23,7 +23,7 @@ class AssetsThemesModel extends Model
 
         // validate
         if (!$this->data['extension_alias']) {
-            throw new Exception(_t('Please, fill in the extension.'));
+            return $this->unprocessable(_t('Please, fill in the extension.'));
         }
 
         $key    = $this->data['extension_alias'] . '-' . ($this->data['name'] ?: 'default');
@@ -33,7 +33,7 @@ class AssetsThemesModel extends Model
             $themes->copy($this->data['from'], $key);
         } else {
             if ($themes->has($key)) {
-                throw new Exception(_t('The theme already exists.'));
+                return $this->unprocessable(_t('The theme already exists.'));
             }
 
             $themes->save($key);
@@ -88,7 +88,7 @@ class AssetsThemesModel extends Model
             $themes = (new AssetsThemes)->scanAll();
 
             if (!array_key_exists($this->data['id'], $themes)) {
-                throw new Exception(_t('The theme does not exist.'));
+                return $this->unprocessable(_t('The theme does not exist.'));
             }
         }
 
@@ -97,6 +97,7 @@ class AssetsThemesModel extends Model
                 'explain_assets' => false
             ]);
         }
+
         (new Settings('frontend'))->update([
             'theme' => $this->data['id']
         ]);

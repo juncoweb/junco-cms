@@ -1,11 +1,11 @@
 
 /* --- Language --------------------------------- */
 window.addEventListener('load', function () {
-    let f = JsForm('#language-form').request(JsUrl('/language/change'), function (message, code) {
-        if (code) {
+    let f = JsForm('#language-form').request(JsUrl('/language/change'), function (res) {
+        if (res.ok()) {
             window.location.reload();
         } else {
-            alert(message);
+            alert(res.message);
         }
     });
 

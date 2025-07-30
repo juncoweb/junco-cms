@@ -71,7 +71,7 @@ class SignupTractor
         $password = UserHelper::hash($password);
 
         if ($user_id > 0) {
-            $this->db->safeExec("
+            $this->db->exec("
 			UPDATE `#__users` 
 			SET fullname = ?, username = ?, password = ?, status = ?
 			WHERE id = ?", $fullname, $username, $password, UserStatus::active, $user_id);
@@ -80,11 +80,11 @@ class SignupTractor
         }
 
         // query - insert
-        $this->db->safeExec("INSERT INTO `#__users` (fullname, username, email, password) VALUES (?, ?, ?, ?)", $fullname, $username, $email, $password);
+        $this->db->exec("INSERT INTO `#__users` (fullname, username, email, password) VALUES (?, ?, ?, ?)", $fullname, $username, $email, $password);
         $user_id = $this->db->lastInsertId();
 
         // query - role
-        $this->db->safeExec("INSERT INTO `#__users_roles_map` (user_id, role_id) VALUES (?, ?)", $user_id, $role_id);
+        $this->db->exec("INSERT INTO `#__users_roles_map` (user_id, role_id) VALUES (?, ?)", $user_id, $role_id);
 
         // token
         $result = UserActivityToken::generateAndSend('activation', $user_id, $email, $fullname);

@@ -261,7 +261,7 @@ class Installer extends Unpackager
      */
     protected function storeDeveloper(): void
     {
-        $this->db->safeExec("INSERT INTO `#__extensions_developers` (??) VALUES (??)", $this->developer);
+        $this->db->exec("INSERT INTO `#__extensions_developers` (??) VALUES (??)", $this->developer);
         $this->developer_id = $this->db->lastInsertId();
     }
 
@@ -270,7 +270,7 @@ class Installer extends Unpackager
      */
     protected function updateDeveloper(): void
     {
-        $this->db->safeExec(
+        $this->db->exec(
             "UPDATE `#__extensions_developers` SET ?? WHERE id = ?",
             $this->developer,
             $this->developer_id
@@ -283,7 +283,7 @@ class Installer extends Unpackager
     protected function storeExtensions(): void
     {
         foreach ($this->extensions as $row) {
-            $this->db->safeExec("INSERT INTO `#__extensions` (??) VALUES (??) ON DUPLICATE KEY UPDATE ??", [
+            $this->db->exec("INSERT INTO `#__extensions` (??) VALUES (??) ON DUPLICATE KEY UPDATE ??", [
                 'extension_alias'       => $row['extension_alias'],
                 'developer_id'          => $this->developer_id,
                 'extension_name'        => $row['extension_name'],
@@ -305,7 +305,7 @@ class Installer extends Unpackager
     protected function storeAdminRole(): void
     {
         $role_id = config('install.admininstrator_role_id') ?: 1;
-        $this->db->safeExec("INSERT INTO `#__users_roles` (??) VALUES (??) ON DUPLICATE KEY UPDATE ??", [
+        $this->db->exec("INSERT INTO `#__users_roles` (??) VALUES (??) ON DUPLICATE KEY UPDATE ??", [
             'id'        => $role_id,
             'role_name' => 'Administrator'
         ]);

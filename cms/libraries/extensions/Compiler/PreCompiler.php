@@ -146,7 +146,7 @@ class PreCompiler
     protected function getPackageData(int $package_id): void
     {
         // query
-        $data = $this->db->safeFind("
+        $data = $this->db->query("
 		SELECT
 		 id ,
 		 developer_id ,
@@ -227,7 +227,7 @@ class PreCompiler
      */
     protected function getAllChanges(): array
     {
-        return $this->db->safeFind("
+        return $this->db->query("
 		SELECT
 		 e.extension_alias ,
 		 e.extension_version ,
@@ -247,7 +247,7 @@ class PreCompiler
     public function getExtensions(): void
     {
         // query - extensions
-        $extensions = $this->db->safeFind(
+        $extensions = $this->db->query(
             "
 		SELECT
 		 id ,
@@ -333,7 +333,7 @@ class PreCompiler
     protected function verifyUpdateVersions(): void
     {
         // query - new versions
-        $updates = $this->db->safeFind("
+        $updates = $this->db->query("
 		SELECT
 		 extension_id ,
 		 MIN(is_compatible)
@@ -380,7 +380,7 @@ class PreCompiler
             }
         }
 
-        $this->db->safeExec("
+        $this->db->exec("
 		UPDATE `#__extensions_changes`
 		SET status = status + 1
 		WHERE extension_id IN (?..) 
@@ -527,7 +527,7 @@ class PreCompiler
         }
 
         // query - I am looking for the version of the requires
-        return $this->db->safeFind("
+        return $this->db->query("
 		SELECT
 		 extension_alias ,
 		 extension_version
@@ -562,7 +562,7 @@ class PreCompiler
 		INSERT INTO `#__extensions_changes` (extension_id, change_description, is_compatible, status)
 		VALUES (?, ?, ?, ?)");
 
-        $this->db->safeExec($this->stmtIC, $extension_id, $description, $is_compatible, $status);
+        $this->db->exec($this->stmtIC, $extension_id, $description, $is_compatible, $status);
     }
 
     /**
@@ -589,7 +589,7 @@ class PreCompiler
 		SET extension_version = ?, extension_require = ?, components = ?, db_queries  = ?, xdata = ?
 		WHERE id = ?");
 
-        $this->db->safeExec(
+        $this->db->exec(
             $this->stmtUE,
             $set['extension_version'] ?? $this->extensions[$id]['extension_version'],
             $set['extension_require'] ?? $this->extensions[$id]['extension_require'],

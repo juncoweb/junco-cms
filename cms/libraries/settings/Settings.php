@@ -90,7 +90,7 @@ class Settings
      */
     public function security(): bool
     {
-        return $this->key && db()->safeFind("
+        return $this->key && db()->query("
 		SELECT id
 		FROM `#__extensions`
 		WHERE extension_alias = ?", $this->alias)->fetchColumn();

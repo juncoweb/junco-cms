@@ -42,7 +42,7 @@ class UsysAccountModel extends Model
         UserHelper::verifyPassword($this->data['__password'], $curuser->password);
 
         if (!$this->data['fullname']) {
-            throw new Exception(_t('Please, fill in the name.'));
+            return $this->unprocessable(_t('Please, fill in the name.'));
         }
         UserHelper::validateUsername($this->data['username']);
 
@@ -69,7 +69,7 @@ class UsysAccountModel extends Model
         unset($this->data['__password']);
 
         // query
-        $this->db->safeExec("UPDATE `#__users` SET ?? WHERE id = ?", $this->data, $curuser->id);
+        $this->db->exec("UPDATE `#__users` SET ?? WHERE id = ?", $this->data, $curuser->id);
 
         // token
         if (isset($this->data['email'])) {

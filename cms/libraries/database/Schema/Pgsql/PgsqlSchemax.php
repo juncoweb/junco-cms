@@ -45,7 +45,7 @@ class PgsqlSchema implements SchemaInterface
     public function getEngines(): array
     {
         return $this->db
-            ->safeFind("SHOW ENGINES")
+            ->query("SHOW ENGINES")
             ->fetchAll(\Database::FETCH_COLUMN, ['Engine' => 'Engine']);
     }
 
@@ -56,7 +56,7 @@ class PgsqlSchema implements SchemaInterface
      */
     public function getCollations(): array
     {
-        $collations = $this->db->safeFind("SELECT * FROM pg_collation")->fetchAll();
+        $collations = $this->db->query("SELECT * FROM pg_collation")->fetchAll();
 
         foreach ($collations as $i => $row) {
             $collations[$i] = [
@@ -75,27 +75,14 @@ class PgsqlSchema implements SchemaInterface
      * 
      * @return bool
      */
-    public function hasTable(string $tbl_name): bool
-    {
-        return (bool)$this->db->safeFind("
-		SELECT EXISTS (
-			SELECT 1
-			FROM information_schema.tables
-			WHERE table_name = ?
-		) AS table_existence", $this->prefixer->forceLocalOnTableName($tbl_name))->fetchColumn();
-    }
+    public function hasTable(string $tbl_name): bool {}
 
     /**
      * Get all tables
      * 
-     * @return array    A numeric array with all the tables in the database.
+     * @return array    An associative array of all tables.
      */
-    public function getTables(): array
-    {
-        return $this->db
-            ->safeFind("SELECT * FROM pg_catalog.pg_tables")
-            ->fetchAll(\Database::FETCH_COLUMN);
-    }
+    public function getTables(): array {}
 
     /**
      * Show tables
@@ -118,7 +105,7 @@ class PgsqlSchema implements SchemaInterface
             }
         }
 
-        return $this->db->safeFind("SHOW TABLE STATUS [WHERE]")->fetchAll();
+        return $this->db->query("SHOW TABLE STATUS [WHERE]")->fetchAll();
     }
 
     /**
@@ -141,7 +128,7 @@ class PgsqlSchema implements SchemaInterface
             }
         }
 
-        return $this->db->safeFind("DESCRIBE `$TableName` [WHERE]")->fetchAll(\Database::FETCH_COLUMN, [0 => 0]);
+        return $this->db->query("DESCRIBE `$TableName` [WHERE]")->fetchAll(\Database::FETCH_COLUMN, [0 => 0]);
     }
 
     /**
@@ -167,7 +154,7 @@ class PgsqlSchema implements SchemaInterface
             }
         }
 
-        return $this->db->safeFind("SHOW FULL FIELDS FROM `$TableName` [WHERE]")->fetchAll();
+        return $this->db->query("SHOW FULL FIELDS FROM `$TableName` [WHERE]")->fetchAll();
     }
 
     /**
@@ -190,7 +177,7 @@ class PgsqlSchema implements SchemaInterface
             }
         }
 
-        return $this->db->safeFind("SHOW INDEX FROM `$TableName` [WHERE]")->fetchAll();
+        return $this->db->query("SHOW INDEX FROM `$TableName` [WHERE]")->fetchAll();
     }
 
     /**
@@ -203,7 +190,7 @@ class PgsqlSchema implements SchemaInterface
     public function showTriggers(array $where = []): array
     {
         $Triggers = [];
-        $rows = $this->db->safeFind("SHOW TRIGGERS")->fetchAll();
+        $rows = $this->db->query("SHOW TRIGGERS")->fetchAll();
 
         foreach ($rows as $row) {
             $Triggers[$row['Table']][] = $row['Trigger'];
@@ -224,7 +211,7 @@ class PgsqlSchema implements SchemaInterface
 
 
 
-        return $this->db->safeFind("SHOW PROCEDURE STATUS [WHERE]")->fetchAll();
+        return $this->db->query("SHOW PROCEDURE STATUS [WHERE]")->fetchAll();
     }
 
     /**
@@ -234,8 +221,8 @@ class PgsqlSchema implements SchemaInterface
      */
     public function getDatabaseData(): array
     {
-        $db_name = $this->db->safeFind("SELECT DATABASE()")->fetchColumn();
-        $query = $this->db->safeFind("SHOW CREATE DATABASE `$db_name`")->fetchColumn(1);
+        $db_name = $this->db->query("SELECT DATABASE()")->fetchColumn();
+        $query = $this->db->query("SHOW CREATE DATABASE `$db_name`")->fetchColumn(1);
 
         return  [
             'Name'            => $db_name,
@@ -266,7 +253,7 @@ class PgsqlSchema implements SchemaInterface
         ];
 
         // query
-        $data['MysqlQuery'] = $this->db->safeFind("SHOW CREATE TABLE `$tbl_name`")->fetchColumn(1);
+        $data['MysqlQuery'] = $this->db->query("SHOW CREATE TABLE `$tbl_name`")->fetchColumn(1);
 
         if ($add_if_not_exists) {
             $data['MysqlQuery'] = preg_replace('/^CREATE TABLE/', 'CREATE TABLE IF NOT EXISTS', $data['MysqlQuery']);
@@ -282,7 +269,7 @@ class PgsqlSchema implements SchemaInterface
         }
 
         // query - fields
-        $rows = $this->db->safeFind("SHOW FULL FIELDS FROM `$tbl_name`")->fetchAll();
+        $rows = $this->db->query("SHOW FULL FIELDS FROM `$tbl_name`")->fetchAll();
 
         foreach ($rows as $row) {
             $Field = $row['Field'];
@@ -296,7 +283,7 @@ class PgsqlSchema implements SchemaInterface
         }
 
         // query - indexes
-        $rows = $this->db->safeFind("SHOW INDEX FROM `$tbl_name`")->fetchAll();
+        $rows = $this->db->query("SHOW INDEX FROM `$tbl_name`")->fetchAll();
 
         foreach ($rows as $row) {
             if (!isset($Indexes[$row['Key_name']])) {
@@ -330,7 +317,7 @@ class PgsqlSchema implements SchemaInterface
     public function getRegistersData(string $tbl_name, bool $set_db_prefix = false): array
     {
         // query
-        $rows = $this->db->safeFind("SELECT * FROM `$tbl_name`")->fetchAll();
+        $rows = $this->db->query("SELECT * FROM `$tbl_name`")->fetchAll();
 
         if ($set_db_prefix) {
             $tbl_name = $this->prefixer->putUniversalOnTableName($tbl_name);
@@ -350,7 +337,7 @@ class PgsqlSchema implements SchemaInterface
      */
     public function getTriggerData(string $Trigger, array $db_prefix_tables = []): array
     {
-        $query = $this->db->safeFind("SHOW CREATE TRIGGER `$Trigger`")->fetchColumn(2);
+        $query = $this->db->query("SHOW CREATE TRIGGER `$Trigger`")->fetchColumn(2);
         $query = preg_replace('@^CREATE (.*?) TRIGGER@', 'CREATE TRIGGER', $query);
 
         if ($db_prefix_tables) {
@@ -372,7 +359,7 @@ class PgsqlSchema implements SchemaInterface
     public function getRoutineData(string $Type = '', string $Name = '', array $db_prefix_tables = []): array
     {
         // query
-        $query = $this->db->safeFind("SHOW CREATE $Type `$Name`")->fetchColumn(2);
+        $query = $this->db->query("SHOW CREATE $Type `$Name`")->fetchColumn(2);
         $query = preg_replace('/^CREATE (.*?) PROCEDURE/', 'CREATE PROCEDURE', $query);
 
         if ($db_prefix_tables) {
@@ -402,7 +389,7 @@ class PgsqlSchema implements SchemaInterface
         $Table['PgsqlQuery'] ??= false;
         if ($Table['PgsqlQuery']) {
             $Table['PgsqlQuery'] = $this->prefixer->replaceWithLocal($Table['PgsqlQuery']);
-            return $this->db->safeExec($Table['MysqlQuery']);
+            return $this->db->exec($Table['MysqlQuery']);
         }
 
         $TableName    = $this->prefixer->forceLocalOnTableName($TableName);
@@ -414,7 +401,7 @@ class PgsqlSchema implements SchemaInterface
             $Fields .= ", $Indexes";
         }
 
-        return $this->db->safeExec("CREATE TABLE IF NOT EXISTS $TableName ($Fields)");
+        return $this->db->exec("CREATE TABLE IF NOT EXISTS $TableName ($Fields)");
     }
 
     /**
@@ -432,10 +419,10 @@ class PgsqlSchema implements SchemaInterface
         $this->validateTableName($TableName);
 
         // copy
-        $result = $this->db->safeExec("CREATE TABLE `$TableName` LIKE `$FromTableName`");
+        $result = $this->db->exec("CREATE TABLE `$TableName` LIKE `$FromTableName`");
 
         if ($CopyRegisters) {
-            return $this->db->safeExec("INSERT INTO `$TableName` SELECT * FROM `$FromTableName`");
+            return $this->db->exec("INSERT INTO `$TableName` SELECT * FROM `$FromTableName`");
         }
         return $result;
     }
@@ -452,7 +439,7 @@ class PgsqlSchema implements SchemaInterface
     {
         //$options = $this->getTableOptionsStatement($Table);
 
-        //return $this->db->safeExec("ALTER TABLE `$TableName` $options");
+        //return $this->db->exec("ALTER TABLE `$TableName` $options");
         return 0;
     }
 
@@ -464,7 +451,7 @@ class PgsqlSchema implements SchemaInterface
      */
     public function renameTable(string $CurTableName, string $NewTableName): void
     {
-        $this->db->safeExec("RENAME TABLE `$CurTableName` TO `$NewTableName`");
+        $this->db->exec("RENAME TABLE `$CurTableName` TO `$NewTableName`");
     }
 
     /**
@@ -479,7 +466,7 @@ class PgsqlSchema implements SchemaInterface
         }
 
         foreach ($TableNames as $TableName) {
-            $this->db->safeExec("TRUNCATE TABLE `$TableName`");
+            $this->db->exec("TRUNCATE TABLE `$TableName`");
         }
     }
 
@@ -494,7 +481,7 @@ class PgsqlSchema implements SchemaInterface
             $TableNames = implode('`, `', $TableNames);
         }
 
-        $this->db->safeExec("DROP TABLE IF EXISTS `$TableNames`");
+        $this->db->exec("DROP TABLE IF EXISTS `$TableNames`");
     }
 
     /**
@@ -521,7 +508,7 @@ class PgsqlSchema implements SchemaInterface
         }
         $sql = implode(', ', $sql);
 
-        return $this->db->safeExec("ALTER TABLE `$TableName` $sql");
+        return $this->db->exec("ALTER TABLE `$TableName` $sql");
     }
 
     /**
@@ -534,7 +521,7 @@ class PgsqlSchema implements SchemaInterface
      */
     public function dropFields(string $TableName, string|array $FieldName): int
     {
-        return $this->db->safeExec("ALTER TABLE `$TableName` DROP COLUMN `$FieldName`");
+        return $this->db->exec("ALTER TABLE `$TableName` DROP COLUMN `$FieldName`");
     }
 
     /**
@@ -555,7 +542,7 @@ class PgsqlSchema implements SchemaInterface
         }
         $Columns = implode("`,`", $Index['Columns']);
 
-        return $this->db->safeExec("ALTER TABLE `$TableName` ADD $IndexName (`$Columns`)");
+        return $this->db->exec("ALTER TABLE `$TableName` ADD $IndexName (`$Columns`)");
     }
 
     /**
@@ -570,10 +557,10 @@ class PgsqlSchema implements SchemaInterface
     public function dropIndex(string $TableName, string $IndexName, array $Index = []): int
     {
         if ($IndexName == 'PRIMARY') {
-            return $this->db->safeExec("ALTER TABLE `$TableName` DROP PRIMARY KEY");
+            return $this->db->exec("ALTER TABLE `$TableName` DROP PRIMARY KEY");
         }
 
-        $this->db->safeExec("ALTER TABLE `$TableName` DROP $Index[Type] `$IndexName`");
+        $this->db->exec("ALTER TABLE `$TableName` DROP $Index[Type] `$IndexName`");
     }
 
     /**
@@ -589,7 +576,7 @@ class PgsqlSchema implements SchemaInterface
      */
     public function createTrigger(string $Trigger, string $Timing, string $Event, string $Table, string $Statement): int
     {
-        return $this->db->safeExec("CREATE TRIGGER `$Trigger` $Timing $Event ON `$Table` FOR EACH ROW $Statement");
+        return $this->db->exec("CREATE TRIGGER `$Trigger` $Timing $Event ON `$Table` FOR EACH ROW $Statement");
     }
 
     /**
@@ -605,7 +592,7 @@ class PgsqlSchema implements SchemaInterface
             $TriggerName = implode('`, `', $TriggerName);
         }
 
-        return $this->db->safeExec("DROP TRIGGER IF EXISTS `$TriggerName`");
+        return $this->db->exec("DROP TRIGGER IF EXISTS `$TriggerName`");
     }
 
     /**
@@ -621,8 +608,8 @@ class PgsqlSchema implements SchemaInterface
     {
         $Routine['MysqlQuery'] = $this->prefixer->replaceWithLocal($Routine['MysqlQuery']);
 
-        $this->db->safeExec("DROP $Type IF EXISTS `$RoutineName`");
-        $this->db->safeExec($Routine['MysqlQuery']);
+        $this->db->exec("DROP $Type IF EXISTS `$RoutineName`");
+        $this->db->exec($Routine['MysqlQuery']);
     }
 
     /**

@@ -11,7 +11,6 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use SystemException;
 
 class BounceMiddleware implements MiddlewareInterface
 {
@@ -33,7 +32,7 @@ class BounceMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        throw new SystemException($this->code);
+        alert($this->code);
         //return $handler->handle($request);
     }
 }

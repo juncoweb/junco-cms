@@ -42,9 +42,9 @@ class ExtensionsDevelopersModel extends Model
 
         // query
         if ($this->id) {
-            $this->db->safeExec("UPDATE `#__extensions_developers` SET ?? WHERE id = ? AND is_protected = 0", $this->data, $this->id);
+            $this->db->exec("UPDATE `#__extensions_developers` SET ?? WHERE id = ? AND is_protected = 0", $this->data, $this->id);
         } else {
-            $this->db->safeExec("INSERT INTO `#__extensions_developers` (??, is_protected) VALUES (??, 0)", $this->data);
+            $this->db->exec("INSERT INTO `#__extensions_developers` (??, is_protected) VALUES (??, 0)", $this->data);
         }
     }
 
@@ -57,6 +57,6 @@ class ExtensionsDevelopersModel extends Model
         $this->filter(POST, ['developer_id' => 'id|required:abort']);
 
         // query
-        $this->db->safeExec("DELETE FROM `#__extensions_developers` WHERE id = ? AND is_protected = 0", $this->data['developer_id']);
+        $this->db->exec("DELETE FROM `#__extensions_developers` WHERE id = ? AND is_protected = 0", $this->data['developer_id']);
     }
 }

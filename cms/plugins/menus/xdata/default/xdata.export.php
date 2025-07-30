@@ -6,7 +6,7 @@
  */
 
 return function (&$xdata) {
-    $data = db()->safeFind("
+    $data = db()->query("
 	SELECT
 	 menu_key ,
 	 menu_default_path AS menu_path ,

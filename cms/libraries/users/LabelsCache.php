@@ -17,7 +17,7 @@ class LabelsCache
     public static function update()
     {
         // query - autoload
-        $rows  = db()->safeFind("
+        $rows  = db()->query("
 		SELECT
 		 l.id ,
 		 l.extension_id ,

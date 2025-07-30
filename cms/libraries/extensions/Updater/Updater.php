@@ -43,7 +43,7 @@ class Updater extends Carrier
         $synchronize = [];
 
         // query - extensions
-        $extensions = $this->db->safeFind("
+        $extensions = $this->db->query("
 		SELECT
 		 e.id ,
 		 e.developer_id ,
@@ -160,7 +160,7 @@ class Updater extends Carrier
             $id = [$id];
         }
 
-        $this->db->safeExec("DELETE FROM `#__extensions_updates` WHERE id IN ( ?.. )", $id);
+        $this->db->exec("DELETE FROM `#__extensions_updates` WHERE id IN ( ?.. )", $id);
     }
 
     /**
@@ -185,7 +185,7 @@ class Updater extends Carrier
             $update_id = [$update_id];
         }
 
-        $this->db->safeExec("
+        $this->db->exec("
         UPDATE `#__extensions_updates`
         SET status = ?
         WHERE id IN (?..)", UpdateStatus::installed, $update_id);
@@ -204,7 +204,7 @@ class Updater extends Carrier
 
                 // query
                 $stmt ??= $this->db->prepare("UPDATE `#__extensions_updates` SET has_failed = 1, failure_msg = ? WHERE id = ?");
-                $this->db->safeExec($stmt, $update['failure_msg'], $update['id']);
+                $this->db->exec($stmt, $update['failure_msg'], $update['id']);
 
                 // log
                 app('logger')->alert($update['failure_msg']);
@@ -227,7 +227,7 @@ class Updater extends Carrier
         }
         $this->db->where("u.status = ?", UpdateStatus::available);
 
-        $rows = $this->db->safeFind("
+        $rows = $this->db->query("
 		SELECT
          u.id ,
          u.update_version ,
@@ -376,7 +376,7 @@ class Updater extends Carrier
     protected function storeUpdates(array $updates): void
     {
         // query
-        $has = $this->db->safeFind("
+        $has = $this->db->query("
 		SELECT extension_id, id
 		FROM `#__extensions_updates`
 		WHERE extension_id IN (?..)
@@ -387,13 +387,13 @@ class Updater extends Carrier
 
             if ($update_id) {
                 $stmt_1 ??= $this->db->prepare("UPDATE `#__extensions_updates` SET update_version = ?, released_at = ? WHERE id = ?");
-                $this->db->safeExec($stmt_1, $update['update_version'], $update['released_at'], $update_id);
+                $this->db->exec($stmt_1, $update['update_version'], $update['released_at'], $update_id);
             } else {
                 $stmt_2 ??= $this->db->prepare("
 				INSERT INTO `#__extensions_updates` (extension_id, update_version, released_at, status) 
 				VALUES (?, ?, ?, ?)");
 
-                $this->db->safeExec($stmt_2, $update['extension_id'], $update['update_version'], $update['released_at'], UpdateStatus::available);
+                $this->db->exec($stmt_2, $update['extension_id'], $update['update_version'], $update['released_at'], UpdateStatus::available);
             }
         }
     }
@@ -406,7 +406,7 @@ class Updater extends Carrier
         $stmt = $this->db->prepare("UPDATE `#__extensions` SET status = ? WHERE id = ?");
 
         foreach ($extensions as $data) {
-            $this->db->safeExec($stmt, $data);
+            $this->db->exec($stmt, $data);
         }
     }
 }

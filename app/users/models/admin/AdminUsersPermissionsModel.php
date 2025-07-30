@@ -87,7 +87,7 @@ class AdminUsersPermissionsModel extends Model
      */
     protected function getRoles()
     {
-        return $this->db->safeFind("
+        return $this->db->query("
 		SELECT id, role_name
 		FROM `#__users_roles`
 		ORDER BY role_name")->fetchAll(Database::FETCH_COLUMN, [0 => 1]);

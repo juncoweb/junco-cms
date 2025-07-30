@@ -104,11 +104,11 @@ class Response extends Message implements ResponseInterface
      * @param string|null                          $reason  Reason phrase (when empty a default will be used based on the status code)
      */
     public function __construct(
-        ?int                $status = null,
-        array                $headers = [],
-        ?StreamInterface    $stream = null,
-        ?string                $version = null,
-        string                $reasonPhrase = ''
+        ?int             $status = null,
+        array            $headers = [],
+        ?StreamInterface $stream = null,
+        ?string          $version = null,
+        string           $reasonPhrase = ''
     ) {
         if ($status) {
             $this->statusCode = $this->filterStatusCode($status);

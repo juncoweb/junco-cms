@@ -170,7 +170,7 @@ class AdminSettingsModel extends Model
      */
     protected function getExtensions(): array
     {
-        return $this->db->safeFind("
+        return $this->db->query("
 		SELECT
 		 extension_alias
 		FROM `#__extensions`")->fetchAll(Database::FETCH_COLUMN, [0 => 0]);

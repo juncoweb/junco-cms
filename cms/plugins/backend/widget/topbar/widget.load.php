@@ -23,7 +23,7 @@ return function (&$widget) {
 
 
     if ($user_id) {
-        $total = db()->safeFind("
+        $total = db()->query("
 		SELECT COUNT(*)
 		FROM `#__notifications`
 		WHERE user_id = ?

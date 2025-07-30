@@ -36,7 +36,7 @@ class UserActivity
     public function verify($type)
     {
         // query
-        $data = $this->db->safeFind("
+        $data = $this->db->query("
 		SELECT 
 		 id ,
 		 lock_counter ,
@@ -68,7 +68,7 @@ class UserActivity
     public function record(string $type, int $code, int $user_id = 0, array $context = [])
     {
 
-        $this->db->safeExec("INSERT INTO `#__users_activities` (??) VALUES (??)", [
+        $this->db->exec("INSERT INTO `#__users_activities` (??) VALUES (??)", [
             'user_id'            => $user_id,
             'user_ip'            => $this->user_ip,
             'activity_type'        => $type,
@@ -109,21 +109,21 @@ class UserActivity
         $lifetime = $this->getLifetime($locks_level, $this->counter + 1);
 
         if ($this->lock_id) {
-            $this->db->safeExec("
+            $this->db->exec("
 			UPDATE `#__users_activities_locks`
 			SET
 			 lock_counter = lock_counter + 1,
 			 expires_at = NOW() + INTERVAL $lifetime SECOND
 			WHERE id = ?", $this->lock_id);
         } else {
-            $this->db->safeExec("
+            $this->db->exec("
 			INSERT INTO `#__users_activities_locks` (user_ip, lock_type, expires_at)
 			VALUES (?, ?, NOW() + INTERVAL $lifetime SECOND)", $this->user_ip, $type);
             $this->lock_id = $this->db->lastInsertId();
         }
 
         $this->expires_at = strtotime(
-            $this->db->safeFind("SELECT expires_at FROM `#__users_activities_locks` WHERE id = ?", $this->lock_id)->fetchColumn()
+            $this->db->query("SELECT expires_at FROM `#__users_activities_locks` WHERE id = ?", $this->lock_id)->fetchColumn()
         );
     }
 
@@ -132,7 +132,7 @@ class UserActivity
      */
     protected function unlock(): void
     {
-        $this->db->safeExec("DELETE FROM `#__users_activities_locks` WHERE id = ?", $this->lock_id);
+        $this->db->exec("DELETE FROM `#__users_activities_locks` WHERE id = ?", $this->lock_id);
     }
 
     /**

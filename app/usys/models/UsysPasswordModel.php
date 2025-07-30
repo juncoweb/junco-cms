@@ -34,21 +34,21 @@ class UsysPasswordModel extends Model
         $user = UserHelper::getUserFromInput($this->data['email_username']);
 
         if (!$user) {
-            throw new Exception(_t('Invalid email/username.'));
+            return $this->unprocessable(_t('Invalid email/username.'));
         }
 
         if (!UserStatus::active->isEqual($user['status'])) {
-            return Xjs::redirectTo(url('/usys/message', ['op' => 'login']));
+            return $this->result()->redirectTo(url('/usys/message', ['op' => 'login']));
         }
 
         // token
         $result = UserActivityToken::generateAndSend('savepwd', $user['id'], $user['email'], $user['fullname']);
 
         if (!$result) {
-            throw new Exception(_t('An error has occurred in the mail server. Please, try again later.'));
+            return $this->unprocessable(_t('An error has occurred in the mail server. Please, try again later.'));
         }
 
-        return Xjs::redirectTo(url('/usys/message', ['op' => 'reset-pwd']));
+        return $this->result()->redirectTo(url('/usys/message', ['op' => 'reset-pwd']));
     }
 
     /**
@@ -66,18 +66,18 @@ class UsysPasswordModel extends Model
         $token = UserActivityToken::get(POST, 'savepwd');
 
         if ($this->data['password'] !== $this->data['verified']) {
-            throw new Exception(_t('Passwords do not match.'));
+            return $this->unprocessable(_t('Passwords do not match.'));
         }
 
         UserHelper::validatePassword($this->data['password']);
         $this->data['password'] = UserHelper::hash($this->data['password']);
 
         // query
-        $this->db->safeExec("UPDATE `#__users` SET password = ? WHERE id = ?", $this->data['password'], $token->user_id);
+        $this->db->exec("UPDATE `#__users` SET password = ? WHERE id = ?", $this->data['password'], $token->user_id);
 
         $token->destroy();
         curuser()->login($token->user_id);
 
-        return Xjs::redirectTo(url('/usys/message', ['op' => 'savepwd']));
+        return $this->result()->redirectTo(url('/usys/message', ['op' => 'savepwd']));
     }
 }

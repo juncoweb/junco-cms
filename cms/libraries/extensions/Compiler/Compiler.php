@@ -80,12 +80,12 @@ class Compiler
         $this->is_system = ($this->package['extension_alias'] == 'system');
         $this->is_installer = ($this->is_system && $this->get_install_package);
         $this->json = [
-            'developer'         => $this->getDeveloper($this->package['developer_id']),
-            'package_alias'     => $this->package['extension_alias'],
-            'min_php_version'   => $this->config['extensions.min_php_version'],
-            'max_php_version'   => $this->config['extensions.max_php_version'],
-            'summary'           => [],
-            'extensions'        => []
+            'developer'       => $this->getDeveloper($this->package['developer_id']),
+            'package_alias'   => $this->package['extension_alias'],
+            'min_php_version' => $this->config['extensions.min_php_version'],
+            'max_php_version' => $this->config['extensions.max_php_version'],
+            'summary'         => [],
+            'extensions'      => []
         ];
 
         // extensions
@@ -121,7 +121,7 @@ class Compiler
      */
     protected function getPackage(int $package_id): array
     {
-        $package = $this->db->safeFind("
+        $package = $this->db->query("
 		SELECT
 		 id ,
 		 developer_id ,
@@ -143,7 +143,7 @@ class Compiler
      */
     protected function getDeveloper(int $developer_id): array
     {
-        $developer = $this->db->safeFind("
+        $developer = $this->db->query("
 		SELECT
 		 developer_name ,
 		 project_url ,
@@ -165,13 +165,13 @@ class Compiler
     protected function getExtensions(int $package_id, int $developer_id): array
     {
         $summary = [
-            'extension_version'    => [],
-            'extension_credits'    => [],
-            'extension_license'    => [],
-            'extension_require'    => [],
+            'extension_version' => [],
+            'extension_credits' => [],
+            'extension_license' => [],
+            'extension_require' => [],
         ];
 
-        $extensions = $this->db->safeFind("
+        $extensions = $this->db->query("
 		SELECT
 		 id ,
 		 extension_alias ,
@@ -369,10 +369,10 @@ class Compiler
     protected function compileDatabase(string $db_queries, string $extension_alias, string $db_history): void
     {
         $export = new DatabaseExporter();
-        $export->set_db_prefix        = true;
-        $export->add_drop_routine     = true;
+        $export->set_db_prefix      = true;
+        $export->add_drop_routine   = true;
         $export->add_drop_table     = false;
-        $export->add_if_not_exists     = true;
+        $export->add_if_not_exists  = true;
         $export->add_auto_increment = false;
         $export->use_ignore         = true;
 
@@ -441,7 +441,7 @@ class Compiler
      */
     protected function compileSystem(): void
     {
-        $system    = $this->str2Arr($this->config['extensions.system_extra']);
+        $system = $this->str2Arr($this->config['extensions.system_extra']);
 
         foreach ($system as $node) {
             $this->fs->copy($this->abspath . $node, $this->syspath . $node);
@@ -476,7 +476,7 @@ class Compiler
     protected function saveChangelog(): void
     {
         // query -> changelog
-        $rows = $this->db->safeFind("
+        $rows = $this->db->query("
 		SELECT
 		 extension_id ,
 		 change_description
@@ -619,9 +619,9 @@ class Compiler
         if ($this->is_installer) {
             $archive->compress($file, $this->dstpath);
         } else {
-            $info    = pathinfo($file);
+            $info   = pathinfo($file);
             $dir    = $info['dirname'] . '/';
-            $folder    = $info['filename'];
+            $folder = $info['filename'];
 
             $archive->compress($file, $dir, [$folder]);
         }

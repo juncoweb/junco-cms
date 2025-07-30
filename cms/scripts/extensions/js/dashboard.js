@@ -4,9 +4,9 @@ window.addEventListener('load', function () {
     JsRequest.xjs({
         url: JsUrl('admin/extensions.installer/find_updates'),
         data: el.querySelector('form'),
-        onSuccess: function (html, code) {
-            if (el && code && html != 'null') {
-                el.innerHTML = html;
+        onSuccess: function (res) {
+            if (el && res.code && res.message != 'null') {
+                el.innerHTML = res.message;
             } else {
                 el.parentNode.removeChild(el);
             }

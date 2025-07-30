@@ -70,7 +70,7 @@ class AssetsModel extends Model
 
         // validate
         if (!$this->extension_alias) {
-            throw new Exception(_t('Please, fill in the extension.'));
+            return $this->unprocessable(_t('Please, fill in the extension.'));
         }
 
         // store
@@ -90,7 +90,7 @@ class AssetsModel extends Model
         $this->filter(POST, ['contents' => '']);
 
         if (!(new JsOptions)->put($this->data['contents'])) {
-            throw new Exception(_t('Error! the task has not been realized.'));
+            return $this->unprocessable(_t('Error! the task has not been realized.'));
         }
     }
 

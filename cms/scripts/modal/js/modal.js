@@ -26,9 +26,8 @@
  * - JsNotify
  */
 
-var Modal = function (options) {
+const Modal = function (options) {
 
-    // vars
     options = JsMergeOptions({
         target: undefined,
         overlay: true,
@@ -51,7 +50,7 @@ var Modal = function (options) {
         //onClose: null,
     }, options);
 
-    let controls = JsControls({
+    const controls = JsControls({
         modal: {
             close: function () {
                 that.close()
@@ -271,7 +270,7 @@ var Modal = function (options) {
     }
 
     // element
-    var _element = element = JsElement('div.modal-' + options.size, {
+    let _element = element = JsElement('div.modal-' + options.size, {
         html: render(Modal.countFixed),
         'data-modal': 1,
     });
@@ -340,14 +339,15 @@ var Modal = function (options) {
 
 Modal.countFixed = 0;
 
-
-
 /*
  * Implement framework methods
  */
 JsRequest.implement({
     modal: function (options) {
-        var mo = typeof options.modalOptions == 'object' ? options.modalOptions : null;
+        let mo = typeof options.modalOptions == 'object'
+            ? options.modalOptions
+            : null;
+
         return this.ajax(options, {
             format: 'modal',
             responseType: 'json',

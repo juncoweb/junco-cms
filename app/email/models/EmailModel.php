@@ -16,23 +16,20 @@ class EmailModel extends Model
     {
         // data
         $this->filter(POST, [
-            'email_to'        => 'email|required',
-            'email_subject'    => 'text|required',
-            'email_message'    => '',
+            'email_to'      => 'email|required',
+            'email_subject' => 'text|required',
+            'email_message' => '',
         ]);
-
-        // extract
-        extract($this->data);
 
         // email
         $email = new Email();
-        $email->to($email_to);
-        $email->subject($email_subject);
-        $email->message($email_message, Email::MESSAGE_ALTER_PLAIN);
+        $email->to($this->data['email_to']);
+        $email->subject($this->data['email_subject']);
+        $email->message($this->data['email_message'], Email::MESSAGE_ALTER_PLAIN);
         $result = $email->send();
 
         if (!$result) {
-            throw new Exception('Error!');
+            return $this->unprocessable('Error!');
         }
     }
 }

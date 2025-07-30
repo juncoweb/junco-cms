@@ -36,13 +36,13 @@ class MysqlImporter
      */
     public function import(string $buffer): void
     {
-        $queries                = [];
-        $i_start                = 0;
-        $i_end                    = 0;
-        $delimiter_keyword_esc    = ';';
-        $delimiter_keyword        = ';';
-        $delimiter_length        = 1;
-        $quit_comments            = 1;
+        $queries               = [];
+        $i_start               = 0;
+        $i_end                 = 0;
+        $delimiter_keyword_esc = ';';
+        $delimiter_keyword     = ';';
+        $delimiter_length      = 1;
+        $quit_comments         = 1;
 
         do {
             $regexp = '%\'|"|`|#|--(?=\s)|\/\*|DELIMITER |' . $delimiter_keyword_esc . '%';
@@ -80,12 +80,12 @@ class MysqlImporter
 
                     case 'DELIMITER ':
                         preg_match('%DELIMITER ([^\s]+)%', $buffer, $matches_, PREG_OFFSET_CAPTURE, $matches[0][1]);
-                        $delimiter_keyword        = $matches_[1][0];
-                        $delimiter_keyword_esc    = preg_quote($delimiter_keyword, '%');
-                        $delimiter_length        = strlen($delimiter_keyword);
-                        $i_start                =                                         // here a security is necessary
-                            $i_end                = $matches_[1][1] + $delimiter_length;
-                        $quit_comments            = $quit_comments ? 0 : 1;
+                        $delimiter_keyword     = $matches_[1][0];
+                        $delimiter_keyword_esc = preg_quote($delimiter_keyword, '%');
+                        $delimiter_length      = strlen($delimiter_keyword);
+                        $i_start               =                                         // here a security is necessary
+                            $i_end             = $matches_[1][1] + $delimiter_length;
+                        $quit_comments         = $quit_comments ? 0 : 1;
                         break;
 
                     case $delimiter_keyword:
@@ -94,8 +94,8 @@ class MysqlImporter
                             $queries[] = $this->prefixer->replaceWithLocal($query);
                         }
 
-                        $i_start    =
-                            $i_end    = $matches[0][1] + $delimiter_length;
+                        $i_start   =
+                            $i_end = $matches[0][1] + $delimiter_length;
                         break;
                 }
             }
@@ -107,7 +107,7 @@ class MysqlImporter
         }
 
         foreach ($queries as $query) {
-            $this->db->safeExec($query);
+            $this->db->exec($query);
         }
     }
 }

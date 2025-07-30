@@ -105,7 +105,7 @@ JsNotify.creator = function (object, before) {
 
         object.notify = function (options) {
             if (typeof options == 'string') {
-                options = { 'message': options };
+                options = { message: options };
             }
             options.target = _target;
             JsNotify(options);

@@ -220,7 +220,7 @@ class Carrier
      */
     protected function getDefaultWebstoreUrlData(): array
     {
-        $data = db()->safeFind("
+        $data = db()->query("
 		SELECT
 		 d.webstore_url
 		FROM `#__extensions` e
@@ -235,7 +235,7 @@ class Carrier
      */
     protected function getExtensionKey(string $extension_alias): string
     {
-        return db()->safeFind("SELECT extension_key FROM `#__extensions` e WHERE extension_alias = ?", $extension_alias)->fetchColumn();
+        return db()->query("SELECT extension_key FROM `#__extensions` e WHERE extension_alias = ?", $extension_alias)->fetchColumn();
     }
 
     /**

@@ -151,7 +151,7 @@ class FrontUsysModel extends Model
      */
     protected function getUserFromToken($token): ?array
     {
-        $user = $this->db->safeFind("
+        $user = $this->db->query("
 		SELECT
 		 fullname ,
 		 username ,
@@ -181,7 +181,7 @@ class FrontUsysModel extends Model
             return null;
         }
 
-        return $this->db->safeFind("
+        return $this->db->query("
 		SELECT
 		 username AS email_username,
 		 fullname 

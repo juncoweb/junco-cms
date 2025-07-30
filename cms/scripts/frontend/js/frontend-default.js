@@ -35,11 +35,11 @@ Frontend.attachAll({
                 JsRequest.xjs({
                     url: JsUrl('language/change'),
                     data: { lang },
-                    onSuccess: function (message, code) {
-                        if (code) {
+                    onSuccess: function (res) {
+                        if (res.ok()) {
                             window.location.reload();
                         } else {
-                            alert(message);
+                            alert(res.message);
                         }
                     },
                 });

@@ -6,14 +6,14 @@
     }
 
     function List(target) {
-        function callback(message, code) {
-            if (code) {
+        function callback(res) {
+            if (res.ok()) {
                 if (target_2) {
                     target_2 = target_2.close();
                 }
                 _backlist.refresh();
             }
-            (target_2 || _backlist).notify(message);
+            (target_2 || _backlist).notify(res.message);
         }
 
         let target_2;

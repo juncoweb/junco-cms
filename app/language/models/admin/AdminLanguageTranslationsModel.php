@@ -31,7 +31,7 @@ class AdminLanguageTranslationsModel extends Model
         // data
         $this->filter(POST, [
             'search' => 'text',
-            'page'     => 'id',
+            'page'   => 'id',
         ]);
 
         // vars
@@ -41,9 +41,11 @@ class AdminLanguageTranslationsModel extends Model
         if ($this->data['search']) {
             $args['search'] = $this->data['search'];
         }
+
         if ($this->data['page']) {
             $args['page'] = $this->data['page'];
         }
+
         try {
             $content = (new Client)
                 ->get($url, ['data' => $args])
@@ -57,13 +59,17 @@ class AdminLanguageTranslationsModel extends Model
         } catch (Exception $e) {
             return ['error' => $e->getMessage() ?: 'Error!'];
         }
+
         // query
         $pagi = new Pagination();
         $pagi->num_rows = $json['num_rows'];
         $pagi->rows_per_page = $json['rows_per_page'];
         $pagi->calculate();
 
-        return $this->data + ['pagi' => $pagi, 'rows' => $json['rows']];
+        return $this->data + [
+            'pagi' => $pagi,
+            'rows' => $json['rows']
+        ];
     }
 
     /**

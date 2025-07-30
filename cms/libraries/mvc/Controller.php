@@ -7,8 +7,12 @@
 
 namespace Junco\Mvc;
 
+use Junco\Debugger\ThrowableHandler;
+use Junco\Http\Exception\HttpError;
+use Junco\Http\Exception\HttpException;
 use Junco\Http\Server\RequestHandler;
 use Psr\Http\Message\ResponseInterface;
+use Throwable;
 
 class Controller
 {
@@ -155,7 +159,7 @@ class Controller
         $filepath = SYSTEM_ABSPATH . 'app/' . $component . '/views/' . strtolower(implode('/', $path)) . '/' . $filename . '.php';
 
         if (!is_file($filepath)) {
-            throw new \Exception(sprintf('Error! The view has not been found: %s.', $filepath));
+            throw new HttpException(500, sprintf('Error! The view has not been found: %s.', $filepath));
         }
 
         return $filepath;
@@ -166,10 +170,56 @@ class Controller
      * 
      * @param callable $fn
      * 
-     * @return string|array|ResponseInterface|void
+     * @return Psr\Http\Message\ResponseInterface | Junco\Console\Output\OutputInterface
      */
-    final protected function wrapper(?callable $fn = null): mixed
+    final protected function wrapper(callable $fn): mixed
     {
-        return \System::getOutput()?->wrapper($fn);
+        try {
+            $result = $fn();
+
+            if ($result === null) {
+                $result = new Result(200, _t('The task has been completed successfully.'), 1);
+            } elseif ($result instanceof ResponseInterface) { // legacy
+                app('logger')->notice('The controller wrapper should not return a ResponseInterface object.');
+                return $result;
+            } elseif (!$result instanceof Result) {
+                app('logger')->notice('The controller wrapper should return a Result object.');
+                $result = $this->getLegacyResult($result); // legacy
+            }
+
+            return \System::getOutput()->responseWithMessage($result);
+        } catch (HttpException | HttpError $e) { // new features
+            return (new ThrowableHandler)->getResponse($e);
+        } catch (\Exception $e) { // legacy
+            return \System::getOutput()->responseWithMessage($e->getMessage(), 422, $e->getCode());
+        }
+    }
+
+    /**
+     * Get
+     */
+    protected function getLegacyResult(mixed $result): Result
+    {
+        $code    = 1;
+        $message = '';
+        $data    = null;
+
+        if (is_numeric($result)) {
+            $code = $result;
+        } elseif (is_array($result)) {
+            $message = $result[0] ?? null;
+            $code    = $result[1] ?? 0;
+            $data    = $result[2] ?? null;
+        } else {
+            $message = $result;
+        }
+
+        if ($message === '') {
+            $message = _t('The task has been completed successfully.');
+        } elseif (!$message) {
+            $message = '';
+        }
+
+        return new Result(200, $message, $code, $data);
     }
 }

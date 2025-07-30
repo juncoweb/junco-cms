@@ -26,7 +26,7 @@ class FrontUsysAccountModel extends Model
     public function getIndexData()
     {
         // query
-        $data = $this->db->safeFind("
+        $data = $this->db->query("
 		SELECT
 		 id ,
 		 fullname ,

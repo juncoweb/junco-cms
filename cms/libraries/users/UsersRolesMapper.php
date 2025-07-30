@@ -24,7 +24,7 @@ class UsersRolesMapper
     public function get(int $user_id): array
     {
         if ($user_id) {
-            return $this->db->safeFind("
+            return $this->db->query("
 			SELECT
 			 m.role_id,
 			 r.role_name
@@ -53,11 +53,11 @@ class UsersRolesMapper
         if ($role_id) {
             $this->db->where("role_id NOT IN (?..)", $role_id);
         }
-        $this->db->safeExec("DELETE FROM `#__users_roles_map` [WHERE]");
+        $this->db->exec("DELETE FROM `#__users_roles_map` [WHERE]");
 
         // query - insert
         if ($role_id) {
-            $this->db->safeExec("INSERT IGNORE INTO `#__users_roles_map` (user_id, role_id)
+            $this->db->exec("INSERT IGNORE INTO `#__users_roles_map` (user_id, role_id)
 			SELECT ?, id
 			FROM `#__users_roles`
 			WHERE id IN (?..)", $user_id, $role_id);
@@ -75,7 +75,7 @@ class UsersRolesMapper
             return false;
         }
 
-        return (bool)$this->db->safeFind("
+        return (bool)$this->db->query("
 		SELECT COUNT(*)
 		FROM `#__users_roles_labels_map`
 		WHERE role_id IN (?..)

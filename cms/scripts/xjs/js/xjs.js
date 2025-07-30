@@ -9,7 +9,7 @@ JsRequest.implement({
             responseType: 'json',
             update: false,
             onSuccess: (function (fn) {
-                return function (json) {
+                return function (json, response) {
                     if (typeof json.data == 'object') {
                         if (json.data.__reloadPage) {
                             window.location.reload();
@@ -22,9 +22,27 @@ JsRequest.implement({
                         }
                     }
 
-                    fn.call(options, json.message, json.code, json.data);
+                    fn.call(options, JsResult(json, response));
                 }
             })(options.onSuccess),
         });
     },
 });
+
+const JsResult = function (json, response) {
+    json.ok = function () {
+        if (json.code) {
+            if (!response.ok) {
+                console.log('Error in the http status code.');
+            }
+            return true;
+        }
+        if (response.ok) {
+            console.log('The status "unprosesable" must be returned via http.');
+        }
+
+        return false;
+    };
+
+    return json;
+};

@@ -77,7 +77,7 @@ class UserActivityToken
             }
 
             // query
-            $data = db()->safeFind("
+            $data = db()->query("
 			SELECT
 			 a.id ,
 			 a.user_id ,
@@ -137,7 +137,7 @@ class UserActivityToken
      */
     public function destroy()
     {
-        db()->safeExec("UPDATE `#__users_activities_tokens` SET status = 1 WHERE activity_id = ?", $this->id);
+        db()->exec("UPDATE `#__users_activities_tokens` SET status = 1 WHERE activity_id = ?", $this->id);
         return $this;
     }
 
@@ -158,21 +158,21 @@ class UserActivityToken
 
 
         // query - I disable previous tokens 
-        $db->safeExec("
+        $db->exec("
 		UPDATE `#__users_activities_tokens`
 		SET status = -1
 		WHERE status = 0
 		AND activity_id IN (SELECT id FROM `#__users_activities` WHERE user_id = ? AND activity_type = ?)", $user_id, $type);
 
         // query - I record activity
-        $db->safeExec("INSERT INTO `#__users_activities` (??) VALUES (??)", [
+        $db->exec("INSERT INTO `#__users_activities` (??) VALUES (??)", [
             'user_id'            => $user_id,
             'user_ip'            => curuser()->getIpAsBinary(),
             'activity_type'        => $type,
         ]);
 
         // query - save the token
-        $db->safeExec("INSERT INTO `#__users_activities_tokens` (??) VALUES (??)", [
+        $db->exec("INSERT INTO `#__users_activities_tokens` (??) VALUES (??)", [
             'activity_id'        => $db->lastInsertId(),
             'token_selector'    => $selector,
             'token_validator'    => $validator,

@@ -14,78 +14,41 @@ use Psr\Http\Message\ResponseInterface;
 abstract class ResponderBase implements ResponderInterface
 {
     /**
-     * Creates a response from the execution of an clousure function.
-     * 
-     * @param callable $fn
-     * 
-     * @return ResponseInterface
-     */
-    public function wrapper(callable $fn): ResponseInterface
-    {
-        try {
-            $code    = 1;
-            $message = '';
-            $data    = null;
-            $result  = $fn();
-
-            if ($result) {
-                if (is_numeric($result)) {
-                    $code = $result;
-                } elseif (is_array($result)) {
-                    $message = $result[0] ?? null;
-                    $code    = $result[1] ?? 0;
-                    $data    = $result[2] ?? null;
-                } elseif ($result instanceof ResponseInterface) {
-                    return $result;
-                } else {
-                    $message = $result;
-                }
-            }
-
-            if ($message === '') {
-                $message = _t('The task has been completed successfully.');
-            } elseif (!$message) {
-                $message = '';
-            }
-
-            return $this->message($message, $code, $data);
-        } catch (\Exception $e) {
-            return $this->message($e->getMessage(), $e->getCode());
-        }
-    }
-
-    /**
      * Create a full-bodied response from a string.
      * 
-     * @param string &$content
+     * @param string $content
+     * @param int    $statusCode
+     * @param string $reasonPhrase
      * 
      * @return ResponseInterface
      */
-    protected function createTextResponse(string $content): ResponseInterface
+    protected function createTextResponse(string $content, int $statusCode = 0, string $reasonPhrase = ''): ResponseInterface
     {
         $factory = new HttpFactory;
         $stream = $factory->createStream($content);
 
         return $factory
-            ->createResponse()
+            ->createResponse($statusCode, $reasonPhrase)
             ->withBody($stream);
     }
 
     /**
      * Create a full-bodied response from a array.
      * 
-     * @param array &$content
+     * @param array  $content
+     * @param int    $statusCode
+     * @param string $reasonPhrase
      * 
      * @return ResponseInterface
      */
-    protected function createJsonResponse(array $content): ResponseInterface
+    protected function createJsonResponse(array $content, int $statusCode = 0, string $reasonPhrase = ''): ResponseInterface
     {
         $content = json_encode($content);
         $factory = new HttpFactory;
-        $stream = $factory->createStream($content);
+        $stream  = $factory->createStream($content);
 
         return $factory
-            ->createResponse()
+            ->createResponse($statusCode, $reasonPhrase)
             ->withHeader('Content-Type', 'application/json; charset=utf-8')
             ->withBody($stream);
     }

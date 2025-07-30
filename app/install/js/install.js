@@ -40,11 +40,11 @@ var Install = (function () {
                 JsRequest.xjs({
                     url: $U('take_' + wizart(0)),
                     data: document.getElementById('js-form'),
-                    onSuccess: function (message, code) {
-                        if (code == 1) {
+                    onSuccess: function (res) {
+                        if (res.code == 1) {
                             _next();
                         } else {
-                            _notify(message);
+                            _notify(res.message);
                         }
                     },
                 });
@@ -54,11 +54,11 @@ var Install = (function () {
                 JsRequest.xjs({
                     url: $U('take_language'),
                     data: { 'lang': el.getAttribute('data-value') },
-                    onSuccess: function (message, code) {
-                        if (code) {
+                    onSuccess: function (res) {
+                        if (res.ok()) {
                             setTimeout('window.location.reload();', 2000);
                         }
-                        _notify(message);
+                        _notify(res.message);
                     },
                 });
             },

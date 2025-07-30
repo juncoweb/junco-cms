@@ -413,7 +413,7 @@ class Unpackager
 
         if ($security) {
             // query - developers
-            $developer = $this->db->safeFind("
+            $developer = $this->db->query("
 			SELECT
 			 id ,
 			 project_url ,
@@ -434,7 +434,7 @@ class Unpackager
             }
 
             // query - extensions
-            $rows = $this->db->safeFind("
+            $rows = $this->db->query("
 			SELECT extension_alias, developer_id
 			FROM `#__extensions`
 			WHERE extension_alias IN (?..)", array_keys($this->extensions_1))->fetchAll(Database::FETCH_COLUMN, [0 => 1]);
@@ -458,7 +458,7 @@ class Unpackager
             return [];
         }
 
-        return $this->db->safeFind("
+        return $this->db->query("
 		SELECT extension_alias, extension_version
 		FROM `#__extensions`")->fetchAll(Database::FETCH_COLUMN, [0 => 1]);
     }
@@ -472,7 +472,7 @@ class Unpackager
             return;
         }
 
-        $rows = $this->db->safeFind("
+        $rows = $this->db->query("
 		SELECT
 		 extension_alias ,
 		 extension_name ,

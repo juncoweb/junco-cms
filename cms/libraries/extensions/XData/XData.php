@@ -221,7 +221,7 @@ class XData
     protected function getExtensions(): array
     {
         return db()
-            ->safeFind("SELECT extension_alias, id FROM `#__extensions`")
+            ->query("SELECT extension_alias, id FROM `#__extensions`")
             ->fetchAll(\Database::FETCH_COLUMN, [0 => 1]);
     }
 

@@ -37,7 +37,7 @@ class LanguageModel extends Model
 
         // validate
         if (!$this->data['language_to']) {
-            throw new Exception(_t('Please, fill in the key.'));
+            return $this->unprocessable(_t('Please, fill in the key.'));
         }
 
         // vars
@@ -45,7 +45,7 @@ class LanguageModel extends Model
         $fs = new Filesystem($locale);
 
         if (!$fs->copy($this->data['language'], $this->data['language_to'])) {
-            throw new Exception(_t('Error! the task has not been realized.'));
+            return $this->unprocessable(_t('Error! the task has not been realized.'));
         }
 
         $fs->rename(
@@ -101,7 +101,7 @@ class LanguageModel extends Model
         $buffer = json_encode($this->data, JSON_PRETTY_PRINT);
 
         if (false === file_put_contents($file, $buffer)) {
-            throw new Exception(_t('Error! the task has not been realized.'));
+            return $this->unprocessable(_t('Error! the task has not been realized.'));
         }
     }
 
@@ -143,7 +143,7 @@ class LanguageModel extends Model
 
         // security
         if ($this->data['id'] == app('language')->getCurrent()) {
-            throw new Exception(_t('The key is being used.'));
+            return $this->unprocessable(_t('The key is being used.'));
         }
 
         $availables = config('language.availables') ?: [];
@@ -166,13 +166,13 @@ class LanguageModel extends Model
 
         $config = config('language-distribute');
         if (!$config['language-distribute.token']) {
-            throw new Exception(_t('The distribution system requires a token.'));
+            return $this->unprocessable(_t('The distribution system requires a token.'));
         }
         if (!$config['language-distribute.url']) {
-            throw new Exception(_t('The distribution system requires a url.'));
+            return $this->unprocessable(_t('The distribution system requires a url.'));
         }
         if (!set_time_limit(0)) { // set time limit
-            throw new Exception('Error (time_limit)');
+            return $this->unprocessable('Error (time_limit)');
         }
 
         // vars
@@ -194,7 +194,7 @@ class LanguageModel extends Model
         unlink($file);
 
         if (!$code) {
-            throw new Exception(_t('Error! the task has not been realized.'));
+            return $this->unprocessable(_t('Error! the task has not been realized.'));
         }
     }
 

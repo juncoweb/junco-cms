@@ -376,6 +376,7 @@ $dialog-border-width: 0 0 0 5px !default;
 $notify-color: var(--solid-primary-font-color) !default;
 $notify-bg-color: rgba(var(--solid-primary-surface-rgb-color), 0.75) !default;
 $notify-zindex: $zindex-loading;
+$notify-top: -30px;
 
 // lightbox
 // -----------------------------------------------

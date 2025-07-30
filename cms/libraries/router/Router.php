@@ -44,7 +44,7 @@ class Router
      * @param string $method
      * @param array  $queryParams
      */
-    public function __construct(string $method, array $queryParams)
+    public function __construct(string $method = '', array $queryParams = [])
     {
         $config               = config('router');
         $this->route_key      = $config['router.route_key'] ?? 'goto';
@@ -620,9 +620,9 @@ class Router
         ];
 
         if ($route) {
-            $route            = explode('/', $route, 2);
-            $access_point    = $route[0];
-            $goto            = $route[1] ?? '';
+            $route        = explode('/', $route, 2);
+            $access_point = $route[0];
+            $goto         = $route[1] ?? '';
 
             if ($access_point) {
                 $url['action'] = $access_point . '/' . $url['action'];
@@ -641,6 +641,7 @@ class Router
                 $url['hidden'] .= '<input type="hidden" name="' . $key . '" value="' . $value . '"/>';
             }
         }
+
         $url['action'] = ($absolute ? $this->site_url : $this->site_baseurl) . $url['action'];
 
         return $url;

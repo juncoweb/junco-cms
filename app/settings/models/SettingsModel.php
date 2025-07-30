@@ -28,7 +28,7 @@ class SettingsModel extends Model
     {
         // data
         $this->filter(POST, [
-            '__key' => '',
+            '__key'  => '',
             'unlock' => 'array',
         ]);
 
@@ -103,7 +103,7 @@ class SettingsModel extends Model
                         $value = json_decode($value, true);
 
                         if (null === $value) {
-                            throw new Exception(sprintf('The value «%s» is not a valid Json.', $k));
+                            return $this->unprocessable(sprintf('The value «%s» is not a valid Json.', $k));
                         }
                     }
                     break;
@@ -161,7 +161,7 @@ class SettingsModel extends Model
             $settings->translate($translate, true);
         }
 
-        return $reload_on_change ? 2 : 1;
+        return $this->result()->setCode($reload_on_change ? 2 : 1);
     }
 
     /**
@@ -195,7 +195,7 @@ class SettingsModel extends Model
 
         // validate
         if (!$this->data_array) {
-            throw new Exception(_t('Please, add a row before proceeding.'));
+            return $this->unprocessable(_t('Please, add a row before proceeding.'));
         }
 
         // extract

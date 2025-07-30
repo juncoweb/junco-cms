@@ -207,7 +207,7 @@ class template_frontend_default_snippet extends Template
      */
     protected function getNotifications(): int
     {
-        return db()->safeFind("
+        return db()->query("
 		SELECT COUNT(*)
 		FROM `#__notifications`
 		WHERE user_id = ?

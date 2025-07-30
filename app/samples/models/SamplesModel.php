@@ -49,9 +49,8 @@ class SamplesModel extends Model
 
         $file = $this->samples->getFileFromKey($this->data['key']);
 
-        if (!is_file($file)) {
-            throw new Exception('File not found: ' . $file);
-        }
+        is_file($file)
+            or alert('File not found: ' . $file);
 
         return include $file;
     }

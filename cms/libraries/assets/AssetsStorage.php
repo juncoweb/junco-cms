@@ -113,7 +113,7 @@ class AssetsStorage extends AssetsBasic
      */
     protected function isDev(string $key): bool
     {
-        return SYSTEM_DEVELOPER_MODE && db()->safeFind("
+        return SYSTEM_DEVELOPER_MODE && db()->query("
 		SELECT
 		 COUNT(*)
 		FROM `#__extensions` e

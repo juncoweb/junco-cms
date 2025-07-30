@@ -5,14 +5,14 @@ let Language = (function () {
         return JsUrl('admin/language/' + task, {}, format);
     }
 
-    function callback(message, code) {
-        if (code) {
+    function callback(res) {
+        if (res.ok()) {
             if (target) {
                 target = target.close();
             }
             _backlist.refresh();
         }
-        (target || _backlist).notify(message);
+        (target || _backlist).notify(res.message);
     }
 
     let _backlist, target;
@@ -46,11 +46,11 @@ let Language = (function () {
                 modalOptions: {
                     onLoad: function () {
                         target = this;
-                        JsForm({ btn: this }).request($U('select'), function (message, code) {
-                            if (code) {
+                        JsForm({ btn: this }).request($U('select'), function (res) {
+                            if (res.ok()) {
                                 window.location.reload();
                             } else {
-                                (target || _backlist).notify(message);
+                                (target || _backlist).notify(res.message);
                             }
                         });
                     },

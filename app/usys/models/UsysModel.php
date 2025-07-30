@@ -59,7 +59,7 @@ class UsysModel extends Model
                 $user_id
             );
         } catch (UserValidationException $e) {
-            return Xjs::response($e->getMessage(), $e->getCode());
+            return $this->unprocessable($e->getMessage());
         } catch (Throwable $e) {
             app('logger')->critical($e->getMessage());
             throw $e;
@@ -68,10 +68,10 @@ class UsysModel extends Model
         if ($result) {
             $token->destroy();
             curuser()->login($user_id);
-            return Xjs::reloadPage();
+            return $this->result()->reloadPage();
         }
 
-        return Xjs::redirectTo(url('/usys/message', ['op' => 'signup']));
+        return $this->result()->redirectTo(url('/usys/message', ['op' => 'signup']));
     }
 
     /**
@@ -100,28 +100,24 @@ class UsysModel extends Model
                 $tractor->preLogin($this->data['not_expire']);
                 $url = UsysHelper::getUrl($mfa_url, $this->data['redirect']);
 
-                return Xjs::redirectTo($url);
+                return $this->result()->redirectTo($url);
             }
 
             $tractor->login($this->data['not_expire']);
 
             if ($this->data['redirect'] == -1) {
-                return Xjs::goBack();
+                return $this->result()->goBack();
             }
 
             if ($this->data['redirect']) {
-                return Xjs::redirectTo($this->data['redirect']);
+                return $this->result()->redirectTo($this->data['redirect']);
             }
 
-            return Xjs::reloadPage();
+            return $this->result()->reloadPage();
         } catch (UserNotActiveException $e) {
-            return Xjs::redirectTo(url('/usys/message', ['op' => 'login']));
+            return $this->result()->redirectTo(url('/usys/message', ['op' => 'login']));
         } catch (UserNotFoundException | UserActivityException $e) {
-            return Xjs::response(
-                $e->getMessage(),
-                $e->getCode(),
-                $tractor->getResponseData()
-            );
+            return $this->unprocessable($e->getMessage())->setData($tractor->getResponseData());
         } catch (Throwable $e) {
             app('logger')->critical($e->getMessage());
             throw $e;

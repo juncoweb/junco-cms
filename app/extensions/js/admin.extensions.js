@@ -5,14 +5,14 @@ let Extensions = (function () {
         return JsUrl('admin/extensions/' + task);
     }
 
-    function callback(message, code) {
-        if (code) {
+    function callback(res) {
+        if (res.ok()) {
             if (target) {
                 target = target.close();
             }
             _backlist.refresh();
         }
-        (target || _backlist).notify(message);
+        (target || _backlist).notify(res.message);
     }
 
     function compile(_target) {

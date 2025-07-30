@@ -54,27 +54,27 @@ class InstallDatabaseModel extends Model
     {
         // data
         $this->filter(POST, [
-            'db_adapter'    => '',
-            'use_pdo'        => '',
-            'db_server'        => '',
-            'db_username'    => '',
-            'db_password'    => '',
-            'db_port'        => 'id',
-            'db_database'    => '',
-            'db_prefix'        => '',
-            'db_collation'    => '',
-            'email'            => 'email',
+            'db_adapter'   => '',
+            'use_pdo'      => '',
+            'db_server'    => '',
+            'db_username'  => '',
+            'db_password'  => '',
+            'db_port'      => 'id',
+            'db_database'  => '',
+            'db_prefix'    => '',
+            'db_collation' => '',
+            'email'        => 'email',
         ]);
 
         // validate
         if (!$this->data['db_server']) {
-            throw new Exception(_t('Please, fill in the host.'));
+            return $this->unprocessable(_t('Please, fill in the host.'));
         }
         if (!$this->data['db_username']) {
-            throw new Exception(_t('Please, fill in the user.'));
+            return $this->unprocessable(_t('Please, fill in the user.'));
         }
         if (!$this->data['db_database']) {
-            throw new Exception(_t('Please, fill in the name of the database.'));
+            return $this->unprocessable(_t('Please, fill in the name of the database.'));
         }
 
         // vars
@@ -90,19 +90,23 @@ class InstallDatabaseModel extends Model
             $pdo_adapter = '';
         }
 
-        $this->connect();
+        if (!$this->connect()) {
+            //return $this->unprocessable($e->getMessage());
+            return $this->unprocessable(_t('The database could not be found or created.'));
+        }
+
 
         // update settings
         (new Settings('database'))->update([
-            'adapter'    => $this->data['db_adapter'],
+            'adapter'   => $this->data['db_adapter'],
             'server'    => $this->data['db_server'],
-            'username'    => $this->data['db_username'],
-            'password'    => $this->data['db_password'],
-            'port'        => $this->data['db_port'],
-            'database'    => $this->data['db_database'],
+            'username'  => $this->data['db_username'],
+            'password'  => $this->data['db_password'],
+            'port'      => $this->data['db_port'],
+            'database'  => $this->data['db_database'],
             'prefix'    => $this->data['db_prefix'],
-            'collation'    => $this->data['db_collation'],
-            'charset'    => $this->data['db_charset'],
+            'collation' => $this->data['db_collation'],
+            'charset'   => $this->data['db_charset'],
         ]);
         if ($pdo_adapter) {
             (new Settings('database-pdo'))->update([
@@ -114,7 +118,7 @@ class InstallDatabaseModel extends Model
     /**
      * Connect
      */
-    protected function connect()
+    protected function connect(): Junco\Database\Adapter\AdapterInterface|null
     {
         switch ($this->data['db_adapter']) {
             case 'pdo':
@@ -130,19 +134,19 @@ class InstallDatabaseModel extends Model
 
         try {
             $db = new $class([
-                'database.adapter'    => 'mysql',
-                'database.server'    => $this->data['db_server'],
-                'database.username'    => $this->data['db_username'],
-                'database.password'    => $this->data['db_password'],
-                'database.database'    => $this->data['db_database'],
-                'database.port'        => $this->data['db_port'],
-                'database.charset'    => $this->data['db_charset'],
+                'database.adapter'  => 'mysql',
+                'database.server'   => $this->data['db_server'],
+                'database.username' => $this->data['db_username'],
+                'database.password' => $this->data['db_password'],
+                'database.database' => $this->data['db_database'],
+                'database.port'     => $this->data['db_port'],
+                'database.charset'  => $this->data['db_charset'],
             ]);
         } catch (Throwable $e) {
-            //throw new Exception($e->getMessage());
-            throw new Exception(_t('The database could not be found or created.'));
+            return null;
         }
 
+        return $db;
 
 
         /*

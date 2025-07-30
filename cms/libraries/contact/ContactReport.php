@@ -30,7 +30,7 @@ class ContactReport
         $data = $this->getEmptyData($date, [/* _t('Month') */'', _t('Messages')], $total);
 
         // query
-        $rows = $this->db->safeFind("
+        $rows = $this->db->query("
 		SELECT
 		 COUNT(*) AS total,
 		 MAX(created_at) AS created_at
@@ -54,7 +54,7 @@ class ContactReport
      */
     public function getData(): array
     {
-        $data = $this->db->safeFind("
+        $data = $this->db->query("
 		SELECT
 		 created_at ,
 		 (SELECT COUNT(*) FROM `#__contact` WHERE status = 0) AS num_messages

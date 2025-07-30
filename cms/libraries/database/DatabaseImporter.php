@@ -8,11 +8,11 @@
 class DatabaseImporter
 {
     // vars
-    protected  $adapter    = [];
+    protected array $adapter = [];
 
     // settings
-    public     $abspath                        = '';
-    public     $drop_nonexistent_columns    = false; // only jschema
+    public $abspath = '';
+    public $drop_nonexistent_columns = false; // only jschema
 
     /**
      * Import from directory
@@ -72,7 +72,9 @@ class DatabaseImporter
     protected function scandir(string $dir): array
     {
         $rows = [];
-        $cdir = is_readable($dir) ? scandir($dir) : false;
+        $cdir = is_readable($dir)
+            ? scandir($dir)
+            : false;
 
         if ($cdir) {
             $dir = rtrim($dir, '\\/') . '/';

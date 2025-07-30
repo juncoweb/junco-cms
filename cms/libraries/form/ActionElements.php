@@ -14,9 +14,9 @@ use Junco\Form\ActionElement\Dropdown;
 abstract class ActionElements implements ActionElementsInterface
 {
     // vars
-    protected string $controlName    = 'control-form';
-    protected string $btn_caption    = '';
-    protected string $label_tag        = '';
+    protected string $controlName = 'control-form';
+    protected string $btn_caption = '';
+    protected string $label_tag   = '';
 
     /**
      * Constructor
@@ -110,9 +110,9 @@ abstract class ActionElements implements ActionElementsInterface
      */
     protected function getLabel(array &$attr, bool $showCaption = true): string
     {
-        $icon        = $this->extract($attr, 'icon');
-        $label        = $this->extract($attr, 'label', '{{ icon }}{{ caption }}');
-        $caption    = $showCaption ? ($icon ? sprintf($this->label_tag, $attr['title']) : $attr['title']) : '';
+        $icon    = $this->extract($attr, 'icon');
+        $label   = $this->extract($attr, 'label', '{{ icon }}{{ caption }}');
+        $caption = $showCaption ? ($icon ? sprintf($this->label_tag, $attr['title']) : $attr['title']) : '';
 
         if ($icon) {
             $icon = '<i class="' . $icon . '" aria-hidden="true"></i>' . ($caption ? ' ' : '');
@@ -144,6 +144,7 @@ abstract class ActionElements implements ActionElementsInterface
     {
         return !$control || (bool)preg_match('/^[a-z\-_]+$/', $control);
     }
+
     /**
      * Render the dropdown menu.
      *

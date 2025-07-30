@@ -5,6 +5,7 @@
  * @author: Junco CMS (tm)
  */
 
+use Junco\Mvc\Result;
 use Junco\Responder\ResponderBase;
 use Psr\Http\Message\ResponseInterface;
 
@@ -38,6 +39,7 @@ class Template extends ResponderBase implements TemplateInterface
                 $snippet = config('template.frontend_default_snippet');
             }
         }
+
         return snippet('template', $snippet);
     }
 
@@ -97,7 +99,7 @@ class Template extends ResponderBase implements TemplateInterface
         $html = '';
 
         foreach ($meta as $attr) {
-            $html .= "\t" . '<meta' . $this->merge_attributes($attr) . ' />' . "\n";
+            $html .= "\t" . '<meta' . $this->attr($attr) . ' />' . "\n";
         }
 
         return $html . "\n";
@@ -172,7 +174,7 @@ class Template extends ResponderBase implements TemplateInterface
                 if (substr($attr['href'], 0, 4) != 'http') {
                     $attr['href'] = $this->site->baseurl . $attr['href'];
                 }
-                $html .= "\t" . '<link' . $this->merge_attributes($attr) . '/>' . "\n";
+                $html .= "\t" . '<link' . $this->attr($attr) . '/>' . "\n";
             }
             $css = [];
         }
@@ -236,7 +238,7 @@ class Template extends ResponderBase implements TemplateInterface
                 }
             }
 
-            $html .= "\t" . '<script' . $this->merge_attributes($attr) . '>' . $content . '</script>' . "\n";
+            $html .= "\t" . '<script' . $this->attr($attr) . '>' . $content . '</script>' . "\n";
         }
 
         return $html;
@@ -393,7 +395,7 @@ class Template extends ResponderBase implements TemplateInterface
      * 
      * @return string
      */
-    protected function merge_attributes(array $attr): string
+    protected function attr(array $attr): string
     {
         $html = '';
         foreach ($attr as $k => $v) {
@@ -406,56 +408,51 @@ class Template extends ResponderBase implements TemplateInterface
     /**
      * Creates a simplified response with a message.
      * 
-     * @param string $message
-     * @param int    $code
+     * @param Result|string $message
+     * @param int $statusCode
+     * @param int $code
      * 
      * @return ResponseInterface
      */
-    public function message(string $message = '', int $code = 0): ResponseInterface
+    public function responseWithMessage(Result|string $message = '', int $statusCode = 0, int $code = 0): ResponseInterface
     {
+        if ($message instanceof Result) {
+            $statusCode = $message->getStatusCode();
+            $code       = $message->getCode();
+            $message    = $message->getMessage();
+        }
+
         // 401 Unauthorized - The user must login. I display the login page in the current template.
         // 403 Forbidden - The user has insufficient permissions.
         // 404 Not Found - I display the message in the current template.
         // 500 Internal Server Error.
-        if ($code == 401) {
+        if ($statusCode == 401) {
             redirect(401); // login
         }
 
-        if ($code == 403) {
-            return (new Debugger)->alert($message, $code);
+        if ($statusCode == 403) {
+            return snippet('template')->responseWithMessage($message, $statusCode);
         }
 
-        $this->title($code ? sprintf(_t('%d. That’s an error.'), $code) : _t('Error'));
-        $this->content    = '<div class="mt-8 mb-8 italic"><p>' . $message . '</p>';
+        $title = $statusCode > 299
+            ? sprintf(_t('%d. That’s an error.'), $statusCode)
+            : _t('Alert');
 
-        $response = $this->response();
+        $this->title($title);
+        $this->content = '<div class="mt-8 mb-8 italic"><p>' . $message . '</p>';
 
-        if ($code >= 100 && $code <= 599) {
-            $response = $response->withStatus($code);
-        }
-
-        return $response;
-    }
-
-    /**
-     * Creates a simplified response with an alert message.
-     * 
-     * @param string $message
-     * @param int    $code
-     * 
-     * return ResponseInterface
-     */
-    public function alert(string $message = '', int $code = 0): ResponseInterface
-    {
-        return $this->message($message, $code);
+        return $this->response($statusCode);
     }
 
     /**
      * Create a response.
      * 
+     * @param int $statusCode
+     * @param string $reasonPhrase
+     * 
      * @return ResponseInterface
      */
-    public function response(): ResponseInterface
+    public function response(int $statusCode = 200, string $reasonPhrase = ''): ResponseInterface
     {
         # plugins
         $on_display = $this->assets->getOption('on_display');
@@ -495,6 +492,6 @@ class Template extends ResponderBase implements TemplateInterface
             $this->content = $this->getOutputBuffer() . $content;
         }
 
-        return $this->createTextResponse($this->content);
+        return $this->createTextResponse($this->content, $statusCode, $reasonPhrase);
     }
 }

@@ -24,14 +24,8 @@ class PgsqlAdapter implements AdapterInterface
     /**
      * Constructor
      */
-    public function __construct(
-        string $server,
-        string $username,
-        string $password,
-        string $database,
-        string $port = '',
-        string $charset = ''
-    ) {
+    public function __construct(array $config)
+    {
         if (!$port) {
             $port = '5432';
         }
@@ -155,9 +149,9 @@ class PgsqlAdapter implements AdapterInterface
         $collation = pg_fetch_row($result)[0];
         return [
             'client'    => pg_version($this->connection),
-            'host'        => pg_host($this->connection),
-            'charset'    => explode('_', $collation)[0],
-            'collation'    => $collation,
+            'host'      => pg_host($this->connection),
+            'charset'   => explode('_', $collation)[0],
+            'collation' => $collation,
         ];
     }
 

@@ -5,14 +5,14 @@ var AssetsVariables = (function () {
         return JsUrl('admin/assets.variables/' + task);
     }
 
-    function callback(message, code) {
-        if (code) {
+    function callback(res) {
+        if (res.ok()) {
             if (target) {
                 target = target.close();
             }
             _backlist.refresh();
         }
-        (target || _backlist).notify(message);
+        (target || _backlist).notify(res.message);
     }
 
     var target;

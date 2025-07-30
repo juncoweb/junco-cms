@@ -11,5 +11,5 @@
  * @param object $xdata
  */
 return function (&$xdata) {
-    db()->safeExec("DELETE FROM `#__menus` WHERE extension_id = ?", $xdata->extension_id);
+    db()->exec("DELETE FROM `#__menus` WHERE extension_id = ?", $xdata->extension_id);
 };

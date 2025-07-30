@@ -71,7 +71,7 @@ class MenusMakerModel extends Model
         $extension = $this->getExtension($this->data['extension_id']) or abort();
 
         if (!$this->validateSubcomponent($this->data['menu_subcomponent'])) {
-            throw new Exception(sprintf(_t('The «%s» is incorrect.'), _t('Component')));
+            return $this->unprocessable(sprintf(_t('The «%s» is incorrect.'), _t('Component')));
         }
 
         if (!$this->data['menu_title']) {
@@ -121,7 +121,7 @@ class MenusMakerModel extends Model
     protected function getExtensions()
     {
         // extensions
-        return $this->db->safeFind("
+        return $this->db->query("
 		SELECT id, extension_name
 		FROM `#__extensions`
 		ORDER BY extension_name")->fetchAll(Database::FETCH_COLUMN, [0 => 1], ['--- ' . _t('Select') . ' ---']);
@@ -132,7 +132,7 @@ class MenusMakerModel extends Model
      */
     protected function getExtension(int $extension_id): false|array
     {
-        return $this->db->safeFind("
+        return $this->db->query("
 		SELECT
 		 id,
 		 extension_alias AS alias,

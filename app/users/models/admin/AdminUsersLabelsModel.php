@@ -90,7 +90,7 @@ class AdminUsersLabelsModel extends Model
         $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // query
-        $rows = $this->db->safeFind("
+        $rows = $this->db->query("
 		SELECT
 		 id AS label_id,
 		 extension_id ,
@@ -128,7 +128,7 @@ class AdminUsersLabelsModel extends Model
      */
     protected function getExtensions(): array
     {
-        return $this->db->safeFind("
+        return $this->db->query("
 		SELECT e.id, e.extension_name
 		FROM `#__extensions` e
 		LEFT JOIN `#__extensions_developers` d ON (e.developer_id = d.id)

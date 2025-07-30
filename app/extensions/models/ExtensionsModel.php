@@ -48,14 +48,14 @@ class ExtensionsModel extends Model
 
         // validate
         if (!Extensions::validate($this->data['extension_alias'])) {
-            throw new Exception(sprintf(_t('The extension alias «%s» is invalid.'), $this->data['extension_alias']));
+            return $this->unprocessable(sprintf(_t('The extension alias «%s» is invalid.'), $this->data['extension_alias']));
         }
         if (!$this->data['extension_name']) {
             $this->data['extension_name'] = ucfirst($this->data['extension_alias']);
         }
 
         // security
-        $row = $this->db->safeFind("
+        $row = $this->db->query("
 		SELECT
 		 default_credits,
 		 default_license
@@ -76,10 +76,10 @@ class ExtensionsModel extends Model
 
         // query
         if ($this->id) {
-            $this->db->safeExec("UPDATE `#__extensions` SET ?? WHERE id = ?", $this->data, $this->id);
+            $this->db->exec("UPDATE `#__extensions` SET ?? WHERE id = ?", $this->data, $this->id);
         } else {
             $this->data['extension_version'] = '0.1';
-            $this->db->safeExec("INSERT INTO `#__extensions` (??) VALUES (??)", $this->data);
+            $this->db->exec("INSERT INTO `#__extensions` (??) VALUES (??)", $this->data);
         }
     }
 
@@ -95,7 +95,7 @@ class ExtensionsModel extends Model
         ]);
 
         // query
-        $rows = $this->db->safeFind("
+        $rows = $this->db->query("
 		SELECT
 		 e.status ,
 		 e.extension_alias ,
@@ -138,12 +138,12 @@ class ExtensionsModel extends Model
 
             if (!(int)$response) {
                 echo $response;
-                throw new Exception('Error!');
+                return $this->unprocessable('Error!');
             }
         }
 
         // query
-        $this->db->safeExec("UPDATE `#__extensions` SET status = ? WHERE id IN (?..)", $this->data['status'], $this->data['id']);
+        $this->db->exec("UPDATE `#__extensions` SET status = ? WHERE id IN (?..)", $this->data['status'], $this->data['id']);
     }
 
     /**
@@ -158,7 +158,7 @@ class ExtensionsModel extends Model
         ]);
 
         // query
-        $rows = $this->db->safeFind("
+        $rows = $this->db->query("
 		SELECT id, extension_alias
 		FROM `#__extensions`
 		WHERE id IN (?..)", $this->data['id'])->fetchAll();
@@ -179,7 +179,7 @@ class ExtensionsModel extends Model
         }
 
         // delete
-        $this->db->safeExec("DELETE FROM `#__extensions` WHERE id IN (?..)", $this->data['id']);
+        $this->db->exec("DELETE FROM `#__extensions` WHERE id IN (?..)", $this->data['id']);
     }
 
     /**
@@ -194,14 +194,14 @@ class ExtensionsModel extends Model
         ]);
 
         // query - remove
-        $this->db->safeExec("
+        $this->db->exec("
 		UPDATE `#__extensions` 
 		SET package_id = 0 
 		WHERE package_id = ? 
 		AND id NOT IN (?..)", $this->data['id'], $this->data['extensions']);
 
         // query - add
-        $this->db->safeExec("
+        $this->db->exec("
 		UPDATE `#__extensions` 
 		SET package_id = ? 
 		WHERE id IN (?..)", $this->data['id'], $this->data['extensions']);
@@ -245,7 +245,7 @@ class ExtensionsModel extends Model
         ]);
 
         // query
-        $this->db->safeExec("UPDATE `#__extensions` SET ?? WHERE id = ?", [
+        $this->db->exec("UPDATE `#__extensions` SET ?? WHERE id = ?", [
             'db_history' => $this->getDbHistory()
         ], $this->data['id']);
     }
@@ -271,8 +271,12 @@ class ExtensionsModel extends Model
 
     /**
      * Distribute
+     * 
+     * @throws Exception
+     * 
+     * @return array
      */
-    public function distribute()
+    public function distribute(): array
     {
         // data
         $this->filter(GET, ['id' => 'id|array:first|required:abort']);
@@ -356,7 +360,7 @@ class ExtensionsModel extends Model
 
         foreach ($drop as $Type => $Names) {
             foreach ($Names as $Name) {
-                $this->db->safeExec("DROP $Type IF EXISTS `$Name`");
+                $this->db->exec("DROP $Type IF EXISTS `$Name`");
             }
         }
     }
@@ -367,7 +371,7 @@ class ExtensionsModel extends Model
     protected function validatePackageId()
     {
         if ($this->id) {
-            $package_id = $this->db->safeFind("
+            $package_id = $this->db->query("
 			SELECT package_id 
 			FROM `#__extensions`
 			WHERE id = ?", $this->id)->fetchColumn();
@@ -413,7 +417,7 @@ class ExtensionsModel extends Model
      */
     protected function getExtensionData(int $extension_id): array|false
     {
-        return $this->db->safeFind("
+        return $this->db->query("
         SELECT
          e.extension_alias AS alias,
          e.extension_name AS name,

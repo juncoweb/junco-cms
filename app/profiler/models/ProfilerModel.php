@@ -18,8 +18,8 @@ class ProfilerModel extends Model
         $this->filter(GET, ['frame' => '']);
 
         return $this->data + [
-            'title'        => _t('Console'),
-            'base_url'    => config('site.baseurl')
+            'title'    => _t('Console'),
+            'base_url' => config('site.baseurl')
         ];
     }
 }

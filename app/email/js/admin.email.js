@@ -12,11 +12,11 @@ var Email = (function () {
                     url: $U('form'),
                     onLoad: function () {
                         var $form = JsForm();
-                        $form.request($U('send'), function (message, code) {
-                            if (code) {
+                        $form.request($U('send'), function (res) {
+                            if (res.ok()) {
                                 $form.reset();
                             }
-                            _FormBox.notify(message);
+                            _FormBox.notify(res.message);
                         });
                     },
                 })

@@ -9,11 +9,20 @@
 $modal = Modal::get();
 $modal->type('alert');
 $modal->title($_text = _t('Delete'), 'fa-solid fa-trash-can');
-$modal->enter($_text);
+if (!$warning) {
+    $modal->enter($_text);
+}
 $modal->close();
 //
-$modal->form();
-$modal->form->question($id);
-$modal->form->hidden('developer_id', $id);
+if ($warning) {
+    foreach ($warning as $message) {
+        $modal->content .= '<p class="dialog dialog-warning">' . $message . '</p>';
+    }
+} else {
+    $modal->form();
+    $modal->form->question($id);
+    $modal->form->hidden('developer_id', $id);
+}
+
 
 return $modal->response();

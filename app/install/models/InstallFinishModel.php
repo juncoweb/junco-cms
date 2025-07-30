@@ -90,7 +90,7 @@ class InstallFinishModel extends Model
      */
     protected function getUserData(int $user_id): array|false
     {
-        return $this->db->safeFind("
+        return $this->db->query("
         SELECT
          id ,
          fullname
@@ -114,7 +114,7 @@ class InstallFinishModel extends Model
      */
     protected function removeInstallExtension(): void
     {
-        $extension_id = $this->db->safeFind("
+        $extension_id = $this->db->query("
         SELECT
          id 
         FROM `#__extensions`

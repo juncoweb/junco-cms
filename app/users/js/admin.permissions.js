@@ -7,11 +7,11 @@ var Permissions = (function () {
 
     return {
         List: function () {
-            function callback(message, code) {
-                if (code) {
+            function callback(res) {
+                if (res.ok()) {
                     _backlist.refresh();
                 }
-                _backlist.notify(message);
+                _backlist.notify(res.message);
             };
             let _backlist = Backlist()
                 .url($U)

@@ -35,7 +35,7 @@ class UserNotifiable extends Notifiable
     public function getData(string $name)
     {
         if ($this->data === null) {
-            $this->data = db()->safeFind("
+            $this->data = db()->query("
 			SELECT
 			 id ,
 			 fullname ,
@@ -79,7 +79,7 @@ class UserNotifiable extends Notifiable
             $labels = [$labels];
         }
 
-        $users = db()->safeFind("
+        $users = db()->query("
 		SELECT
 		 u.id ,
 		 u.fullname ,

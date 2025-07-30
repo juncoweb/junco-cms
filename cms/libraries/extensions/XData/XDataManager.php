@@ -151,7 +151,7 @@ class XDataManager
         // query - alias
         if (!$extension_alias_client) {
             if ($extension_id_client > 0) {
-                $extension_alias_client = db()->safeFind("
+                $extension_alias_client = db()->query("
 				SELECT extension_alias
 				FROM `#__extensions`
 				WHERE id = ?", $extension_id_client)->fetchColumn();

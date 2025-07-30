@@ -108,7 +108,7 @@ class AdminMenusModel extends Model
         $this->filter(POST, ['id' => 'array|required:abort']);
 
         // query
-        $data = $this->db->safeFind("
+        $data = $this->db->query("
 		SELECT
 		 id ,
 		 extension_id ,
@@ -142,7 +142,7 @@ class AdminMenusModel extends Model
         $this->filter(POST, ['id' => 'array|required:abort']);
 
         // query
-        $data = $this->db->safeFind("
+        $data = $this->db->query("
 		SELECT
 		 extension_id ,
 		 menu_key ,
@@ -182,7 +182,7 @@ class AdminMenusModel extends Model
      */
     protected function getMenuKeys(): array
     {
-        return $this->db->safeFind("
+        return $this->db->query("
 		SELECT menu_key
 		FROM `#__menus`
 		GROUP BY menu_key
@@ -194,7 +194,7 @@ class AdminMenusModel extends Model
      */
     protected function getExtensions(): array
     {
-        return $this->db->safeFind("
+        return $this->db->query("
 		SELECT id, extension_name
 		FROM `#__extensions`
 		ORDER BY extension_name")->fetchAll(Database::FETCH_COLUMN, [0 => 1], ['--- ' . _t('Select') . ' ---']);
