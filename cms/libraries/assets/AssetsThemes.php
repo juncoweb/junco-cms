@@ -26,8 +26,8 @@ class AssetsThemes extends AssetsBasic
                     if (is_dir($dir . '/' . $name)) {
                         $rows[] = [
                             'alias' => $alias,
-                            'name'    => $name,
-                            'key'    => $alias .    ($name !== 'default' ? '-' . $name : '')
+                            'name'  => $name,
+                            'key'   => $alias . ($name !== 'default' ? '-' . $name : '')
                         ];
                     }
                 }
@@ -230,8 +230,8 @@ class AssetsThemes extends AssetsBasic
 
         return [
             'alias' => $alias,
-            'name' => $name,
-            'key' => $alias . ($name != 'default' ? '-' . $name : '')
+            'name'  => $name,
+            'key'   => $alias . ($name != 'default' ? '-' . $name : '')
         ];
     }
 

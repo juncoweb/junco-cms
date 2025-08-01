@@ -10,9 +10,9 @@ return function (&$dashboard) {
     $html        = '';
 
     if ($allow_cache) {
-        $cache_key    = 'usys-ha#';
-        $cache        = cache();
-        $html        = $cache->get($cache_key);
+        $cache_key = 'usys-ha#';
+        $cache     = cache();
+        $html      = $cache->get($cache_key);
     }
 
     // cache

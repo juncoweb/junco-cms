@@ -78,7 +78,7 @@ class UsersReport
      */
     protected function getStartDate(int $total = 12): Datetime
     {
-        return (new Datetime)->sub(new DateInterval("P{$total}M"));
+        return (new DateTime('first day of this month'))->sub(new DateInterval("P{$total}M"));
     }
 
     /**
@@ -86,16 +86,16 @@ class UsersReport
      */
     protected function getEmptyData(Datetime $date, array $head, int $total = 12): array
     {
-        $data   = [];
+        $data = [];
         $data[] = $head;
-        $row    = array_fill(0, count($head), 0);
+        $base_row = array_fill(0, count($head), 0);
         //
         $date = clone $date;
         $interval = new DateInterval('P1M');
 
         for ($i = 0; $i < $total; $i++) {
             $index = $date->format($this->monthFormat);
-            $data[$index]    = $row;
+            $data[$index]    = $base_row;
             $data[$index][0] = $index;
             $date->add($interval);
         }

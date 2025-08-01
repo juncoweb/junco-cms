@@ -11,13 +11,13 @@ use Junco\Assets\Compilation\JsCompiler;
 class AssetsBasic
 {
     // vars
-    protected array            $config;
-    protected string        $abspath;
-    protected string        $dataPath;
-    protected string        $themesPath;
-    protected string        $minifyFile;
-    protected ?JsCompiler    $jsCompiler = null;
-    protected ?CssCompiler    $cssCompiler = null;
+    protected array        $config;
+    protected string       $abspath;
+    protected string       $dataPath;
+    protected string       $themesPath;
+    protected string       $minifyFile;
+    protected ?JsCompiler  $jsCompiler = null;
+    protected ?CssCompiler $cssCompiler = null;
 
     /**
      * Constructor
@@ -26,15 +26,15 @@ class AssetsBasic
     {
         $this->config = config('assets');
         if ($abspath) {
-            $this->abspath        = $abspath;
-            $this->minifyFile    = 'assets/%s.min.%s';
-            $this->dataPath        = $abspath . 'storage/assets/data/';
-            $this->themesPath    = $abspath . 'storage/assets/themes/';
+            $this->abspath    = $abspath;
+            $this->minifyFile = 'assets/%s.min.%s';
+            $this->dataPath   = $abspath . 'storage/assets/data/';
+            $this->themesPath = $abspath . 'storage/assets/themes/';
         } else {
-            $this->abspath         = SYSTEM_ABSPATH;
-            $this->minifyFile    = $this->config['assets.minify_file'];
-            $this->dataPath        = SYSTEM_STORAGE . $this->config['assets.data_path'];
-            $this->themesPath    = SYSTEM_STORAGE . 'assets/themes/';
+            $this->abspath    = SYSTEM_ABSPATH;
+            $this->minifyFile = $this->config['assets.minify_file'];
+            $this->dataPath   = SYSTEM_STORAGE . $this->config['assets.data_path'];
+            $this->themesPath = SYSTEM_STORAGE . 'assets/themes/';
         }
     }
 
@@ -55,12 +55,12 @@ class AssetsBasic
 
         $info = pathinfo($key);
         return [
-            'key'                => $key,
-            'name'                => $info['filename'],
-            'type'                => $info['extension'],
-            'assets'            => $data['assets'] ?? '',
-            'default_assets'    => $data['default_assets'] ?? '',
-            'to_verify'            => $data['to_verify'] ?? 0,
+            'key'            => $key,
+            'name'           => $info['filename'],
+            'type'           => $info['extension'],
+            'assets'         => $data['assets'] ?? '',
+            'default_assets' => $data['default_assets'] ?? '',
+            'to_verify'      => $data['to_verify'] ?? 0,
         ];
     }
 
@@ -140,9 +140,9 @@ class AssetsBasic
         int    $precompile,
         array  $themes = []
     ): bool {
-        $files        = $this->getAllFilesFromSheet($sheet, true);
-        $target        = $this->getMinifyFile($key, false);
-        $extension    = pathinfo($target, PATHINFO_EXTENSION);
+        $files     = $this->getAllFilesFromSheet($sheet, true);
+        $target    = $this->getMinifyFile($key, false);
+        $extension = pathinfo($target, PATHINFO_EXTENSION);
 
         if ($extension == 'js') {
             $this->jsCompiler ??= new JsCompiler($this->abspath);
@@ -381,7 +381,9 @@ class AssetsBasic
      */
     protected function scandir(string $dir): array
     {
-        $cdir = is_readable($dir) ? scandir($dir) : false;
+        $cdir = is_readable($dir)
+            ? scandir($dir)
+            : false;
 
         if (!$cdir) {
             return [];
@@ -420,9 +422,9 @@ class AssetsBasic
     protected function sanitizeData(array $data): array
     {
         return array_intersect_key($data, [
-            'assets'            => null,
-            'default_assets'    => null,
-            'to_verify'            => null
+            'assets'         => null,
+            'default_assets' => null,
+            'to_verify'      => null
         ]);
     }
 }

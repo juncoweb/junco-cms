@@ -15,23 +15,23 @@ class CssCompiler
 {
     // vars
     protected string        $abspath;
-    protected Filesystem     $fs;
-    protected ?UrlFixer        $urlFixer        = null;
-    protected ?ScssCompiler    $scssCompiler    = null;
-    protected ?Plugin        $minifier        = null;
+    protected Filesystem    $fs;
+    protected ?UrlFixer     $urlFixer     = null;
+    protected ?ScssCompiler $scssCompiler = null;
+    protected ?Plugin       $minifier     = null;
     //protected ?cssVarParser	$cssCompiler	= null;
-    protected ?AssetsThemes    $themes            = null;
-    protected ?array        $themesList        = null;
+    protected ?AssetsThemes $themes       = null;
+    protected ?array        $themesList   = null;
 
     /**
      * Constructor
      */
     public function __construct(?string $abspath = null)
     {
-        $this->abspath         = $abspath ?? SYSTEM_ABSPATH;
-        $this->fs              = new Filesystem($this->abspath);
-        $this->scssCompiler    = new ScssCompiler($this->abspath);
-        $this->urlFixer        = new UrlFixer;
+        $this->abspath      = $abspath ?? SYSTEM_ABSPATH;
+        $this->fs           = new Filesystem($this->abspath);
+        $this->scssCompiler = new ScssCompiler($this->abspath);
+        $this->urlFixer     = new UrlFixer;
     }
 
     /**
@@ -144,7 +144,7 @@ class CssCompiler
         bool   $minify,
         int    $fixurl
     ): bool {
-        $buffer    = '';
+        $buffer = '';
 
         foreach ($rows as $row) {
             if ($row['scss']) {
@@ -192,9 +192,9 @@ class CssCompiler
         }
 
         foreach ($themes as $theme) {
-            $newTarget    = $this->themes->getThemeTarget($target, $theme['key']);
-            $varContent    = $this->themes->getScssVarContent($theme['key']);
-            $buffer        = '';
+            $newTarget  = $this->themes->getThemeTarget($target, $theme['key']);
+            $varContent = $this->themes->getScssVarContent($theme['key']);
+            $buffer     = '';
 
             foreach ($rows as $row) {
                 $file    = $row['scss'] ?? $row['css'];

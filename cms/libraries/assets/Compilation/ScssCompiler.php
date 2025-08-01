@@ -14,9 +14,9 @@ require_once SYSTEM_ABSPATH . 'cms/libraries/scssphp/scss.inc.php';
 class ScssCompiler
 {
     // const
-    const DISABLE        = -1;
-    const ENABLE        = 1;
-    const ENABLE_ALL    = 2;
+    const DISABLE    = -1;
+    const ENABLE     = 1;
+    const ENABLE_ALL = 2;
 
     // vars
     protected string   $abspath;
@@ -104,9 +104,9 @@ class ScssCompiler
     public static function getOptions(): array
     {
         return [
-            self::DISABLE        => _t('Disable'),
-            self::ENABLE        => _t('Enable'),
-            self::ENABLE_ALL    => _t('Enable') . ' + ' . _t('Themes')
+            self::DISABLE    => _t('Disable'),
+            self::ENABLE     => _t('Enable'),
+            self::ENABLE_ALL => _t('Enable') . ' + ' . _t('Themes')
         ];
     }
 

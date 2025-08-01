@@ -125,6 +125,14 @@ class LoginTractor
     /**
      * Get
      */
+    public function getUserId(): int
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * Get
+     */
     protected function getActivityCode(string $status)
     {
         if (UserStatus::inactive->isEqual($status)) {

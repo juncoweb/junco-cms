@@ -13,10 +13,10 @@ class CssVarParser
 {
     // vars
     protected string $abspath;
-    protected string $basepath    = '';
-    protected array  $variables    = [];
+    protected string $basepath  = '';
+    protected array  $variables = [];
     protected int    $offset    = 0;
-    protected string $content    = '';
+    protected string $content   = '';
     protected string $buffer    = '';
 
     /**
@@ -236,10 +236,10 @@ class CssVarParser
     {
         $unexpected = $this->getNextString();
         $content    = substr($this->content, 0, $this->offset);
-        $lines        = preg_split('/\n/', $content);
-        $line        = count($lines);
-        $position    = strlen($lines[$line - 1]);
-        $replaces    = [
+        $lines      = preg_split('/\n/', $content);
+        $line       = count($lines);
+        $position   = strlen($lines[$line - 1]);
+        $replaces   = [
             "\s" => '\s',
             "\r" => '\r',
             "\n" => '\n',

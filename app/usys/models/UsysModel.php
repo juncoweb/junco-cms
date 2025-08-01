@@ -84,7 +84,7 @@ class UsysModel extends Model
             'email_username' => 'text',
             'password'       => '',
             'not_expire'     => 'bool',
-            'redirect'       => ''
+            'redirect'       => 'text'
         ]);
 
         try {
@@ -94,13 +94,12 @@ class UsysModel extends Model
                 $this->data['password'] ?? ''
             );
 
-            $mfa_url = config('usys.mfa_url');
+            $mfa_url = $this->getNextUrl($tractor->getUserId(), $this->data['redirect']);
 
             if ($mfa_url) {
                 $tractor->preLogin($this->data['not_expire']);
-                $url = UsysHelper::getUrl($mfa_url, $this->data['redirect']);
 
-                return $this->result()->redirectTo($url);
+                return $this->result()->redirectTo($mfa_url);
             }
 
             $tractor->login($this->data['not_expire']);
@@ -130,5 +129,23 @@ class UsysModel extends Model
     public function logout()
     {
         curuser()->logout();
+    }
+
+    /**
+     * Get
+     */
+    protected function getNextUrl(int $user_id, string $redirect): string
+    {
+        $plugins = config('usys.mfa_plugins');
+
+        foreach ($plugins as $plugin) {
+            $url = Plugin::get('mfa', 'status', $plugin)?->run($user_id, $redirect);
+
+            if ($url) {
+                return $url;
+            }
+        }
+
+        return '';
     }
 }

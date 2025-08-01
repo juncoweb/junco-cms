@@ -73,13 +73,17 @@ class FrontUsysModel extends Model
         // data
         $this->filter(GET, ['redirect' => 'text']);
 
-        $plugins = config('usys.login_plugins');
+        $user_id = curuser()->getPreLoginUserId();
+
+        if ($user_id) {
+            $this->proccessPreLogin($user_id, $this->data['redirect']);
+        }
 
         return $this->data + [
             'options'    => config('usys.login_options'),
             'not_expire' => config('users.not_expire'),
             'user'       => $this->getUserFromSession(),
-            'widgets'    => ($plugins ? (new LoginWidgetCollector)->getAll($plugins) : [])
+            'widgets'    => $this->getWidgets()
         ];
     }
 
@@ -149,6 +153,33 @@ class FrontUsysModel extends Model
     /**
      * Get
      */
+    protected function proccessPreLogin(int $user_id, string $redirect): void
+    {
+        $mfa_url = $this->getNextUrl($user_id, $redirect);
+
+        if ($mfa_url) {
+            redirect($mfa_url);
+        }
+
+        curuser()->takePreLogin();
+        redirect($redirect, true);
+    }
+
+    /**
+     * Get
+     */
+    protected function getWidgets(): array
+    {
+        $plugins = config('usys.login_plugins');
+
+        return $plugins
+            ? (new LoginWidgetCollector)->getAll($plugins)
+            : [];
+    }
+
+    /**
+     * Get
+     */
     protected function getUserFromToken($token): ?array
     {
         $user = $this->db->query("
@@ -187,5 +218,25 @@ class FrontUsysModel extends Model
 		 fullname 
 		FROM `#__users`
 		WHERE id = ?", $user_id)->fetch() ?: null;
+    }
+
+    /**
+     * Get
+     * 
+     * @ Is equal to UsysModel.php
+     */
+    protected function getNextUrl(int $user_id, string $redirect): string
+    {
+        $plugins = config('usys.mfa_plugins');
+
+        foreach ($plugins as $plugin) {
+            $url = Plugin::get('mfa', 'status', $plugin)?->run($user_id, $redirect);
+
+            if ($url) {
+                return $url;
+            }
+        }
+
+        return '';
     }
 }

@@ -62,13 +62,13 @@
             "reload_on_change": 0,
             "status": 1
         },
-        "mfa_url": {
-            "label": "Next",
-            "type": "select-text",
+        "mfa_plugins": {
+            "label": "List",
+            "type": "plugins",
             "group": 2,
             "ordering": 1,
             "default_value": "",
-            "help": "Url builder pointing to another authentication factor. Format: \/component\/task,key=value,...",
+            "help": "",
             "history": [],
             "autoload": 1,
             "translate": 0,

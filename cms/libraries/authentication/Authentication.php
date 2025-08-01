@@ -105,6 +105,7 @@ class Authentication
             }
         }
 
+        // default guard
         return new Junco\Usys\Guard\CookieGuard();
     }
 }

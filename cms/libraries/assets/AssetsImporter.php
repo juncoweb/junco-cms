@@ -23,7 +23,7 @@ class AssetsImporter extends AssetsBasic
      */
     public function import(string $basepath, array $aliases): void
     {
-        $this->from    = new AssetsBasic($basepath);
+        $this->from = new AssetsBasic($basepath);
         $this->fs   = new Filesystem('');
 
         $this->importThemes();
@@ -58,11 +58,11 @@ class AssetsImporter extends AssetsBasic
 
         if ($srcKeys) {
             $precompile     = (int)$this->config['assets.precompile'];
-            $mustBeCompiled    = ScssCompiler::isEnabled($precompile);
+            $mustBeCompiled = ScssCompiler::isEnabled($precompile);
 
             foreach ($srcKeys as $key) {
-                $compile    = $mustBeCompiled;
-                $isUpdate    = $this->hasDataFile($key);
+                $compile  = $mustBeCompiled;
+                $isUpdate = $this->hasDataFile($key);
 
                 if ($compile || $isUpdate) {
                     $newData = $this->from->fetch($key);
@@ -108,9 +108,9 @@ class AssetsImporter extends AssetsBasic
         $curData = $this->fetch($key);
 
         if ($curData['assets'] != $curData['default_assets']) {
-            $compile     = false;
-            $replace    = [];
-            $usrAssets    = [];
+            $compile   = false;
+            $replace   = [];
+            $usrAssets = [];
 
             // The user modified the assets. I look for what he added!
             $curDefaultAssets = array_column($this->explodeAssets($curData['default_assets']), 0);

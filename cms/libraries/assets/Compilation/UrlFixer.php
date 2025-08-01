@@ -10,7 +10,7 @@ namespace Junco\Assets\Compilation;
 class UrlFixer
 {
     // const
-    const DISABLE = -1;
+    const DISABLE  = -1;
     const RELATIVE = 0;
     const ABSOLUTE = 1;
 
@@ -148,6 +148,7 @@ class UrlFixer
             if ('.' == $part) {
                 continue;
             }
+
             if ('..' == $part) {
                 array_pop($absolutes);
             } elseif ($part) {
@@ -168,10 +169,10 @@ class UrlFixer
      */
     protected function getRelativePath(string $from, string $to): string
     {
-        $from    = explode('/', $from);
-        $to        = explode('/', $to);
-        $total    = count($to);
-        $min    = min($total, count($from)) - 1;
+        $from  = explode('/', $from);
+        $to    = explode('/', $to);
+        $total = count($to);
+        $min   = min($total, count($from)) - 1;
 
         for (
             $i = 0;

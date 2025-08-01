@@ -33,7 +33,7 @@ return [
 	/**
 	 * Multi-Factor Authentication
 	 */
-	'mfa_url' => '',
+	'mfa_plugins' => '',
 
 	/**
 	 * Account

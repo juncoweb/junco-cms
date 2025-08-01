@@ -64,7 +64,11 @@ class AdminAssetsModel extends Model
         }
 
         // vars
-        $types = [_t('All'), 'css' => 'Css', 'js' => 'Js'];
+        $types = [
+            ''    => _t('All'),
+            'css' => 'Css',
+            'js'  => 'Js'
+        ];
 
         if ($type && !isset($types[$type])) {
             $type = false;
@@ -86,7 +90,7 @@ class AdminAssetsModel extends Model
 
         return $this->data + [
             'types' => $types,
-            'pagi' => $pagi,
+            'pagi'  => $pagi,
         ];
     }
 
@@ -96,10 +100,10 @@ class AdminAssetsModel extends Model
     public function getCreateData()
     {
         return [
-            'title' => _t('Create'),
-            'values' => ['status' => true],
+            'title'      => _t('Create'),
+            'values'     => ['status' => true],
             'extensions' => $this->getExtensions(),
-            'is_edit' => false,
+            'is_edit'    => false,
         ];
     }
 
@@ -122,10 +126,10 @@ class AdminAssetsModel extends Model
         }
 
         return [
-            'title' => _t('Edit'),
-            'values' => $data,
+            'title'      => _t('Edit'),
+            'values'     => $data,
             'extensions' => $this->getExtensions(),
-            'is_edit' => true,
+            'is_edit'    => true,
         ];
     }
 

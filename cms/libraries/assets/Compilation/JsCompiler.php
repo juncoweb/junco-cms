@@ -39,7 +39,7 @@ class JsCompiler
      */
     public function compile(string $target, array $files, bool $minify = false): bool
     {
-        $buffer    = '';
+        $buffer = '';
 
         foreach ($files as $file) {
             if ($this->isJsFile($file)) {

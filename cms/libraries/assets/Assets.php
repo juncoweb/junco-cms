@@ -8,12 +8,12 @@
 class Assets
 {
     // vars
-    protected $options    = null;
-    protected $meta        = [];
-    protected $css        = [];
-    protected $head_js    = [];
-    protected $js        = [];
-    protected $domready    = [];
+    protected $options  = null;
+    protected $meta     = [];
+    protected $css      = [];
+    protected $head_js  = [];
+    protected $js       = [];
+    protected $domready = [];
 
     /**
      * Constructor
@@ -38,12 +38,12 @@ class Assets
      */
     public function clear(): void
     {
-        $this->options    = null;
-        $this->meta        = [];
-        $this->css        = [];
-        $this->head_js    = [];
-        $this->js        = [];
-        $this->domready    = [];
+        $this->options  = null;
+        $this->meta     = [];
+        $this->css      = [];
+        $this->head_js  = [];
+        $this->js       = [];
+        $this->domready = [];
     }
 
     /**
@@ -150,10 +150,9 @@ class Assets
      */
     public function getJs(bool $inHead = false): array
     {
-        if ($inHead) {
-            return $this->head_js;
-        }
-        return $this->js;
+        return $inHead
+            ? $this->head_js
+            : $this->js;
     }
 
     /**

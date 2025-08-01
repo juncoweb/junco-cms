@@ -44,11 +44,11 @@ class AssetsInspector extends AssetsBasic
         $target = $this->getMinifyFile($data['key']);
 
         if (is_file($target)) {
-            $data['assets']        = str_replace($this->compiled_file_not_found, '', $data['assets']);
-            $data['to_verify']    = 0;
+            $data['assets']    = str_replace($this->compiled_file_not_found, '', $data['assets']);
+            $data['to_verify'] = 0;
         } else {
-            $data['assets']        = $this->compiled_file_not_found . "\n" . $data['assets'];
-            $data['to_verify']    = 1;
+            $data['assets']    = $this->compiled_file_not_found . "\n" . $data['assets'];
+            $data['to_verify'] = 1;
         }
     }
 
@@ -95,7 +95,7 @@ class AssetsInspector extends AssetsBasic
      */
     protected function seekOtherAssets(array &$data): void
     {
-        $assets    = $this->scan($data);
+        $assets = $this->scan($data);
 
         foreach ($assets as $index => $asset) {
             if (false !== strpos($data['assets'], $asset)) {

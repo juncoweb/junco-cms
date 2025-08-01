@@ -222,9 +222,9 @@ class CookieGuard implements GuardInterface
     protected function start($user_id)
     {
         do {
-            $token        = $this->generateToken();
-            $selector    = $this->getSelector($token);
-            $total        = $this->db->query("
+            $token    = $this->generateToken();
+            $selector = $this->getSelector($token);
+            $total    = $this->db->query("
 			SELECT COUNT(*)
 			FROM `#__usys_sessions`
 			WHERE session_selector = ?", $selector)->fetchColumn();
@@ -232,10 +232,10 @@ class CookieGuard implements GuardInterface
 
         // query
         $this->db->exec("INSERT INTO `#__usys_sessions` (??, accessed_at) VALUES (??, NOW())", [
-            'user_id'            => $user_id,
-            'session_selector'    => $selector,
+            'user_id'           => $user_id,
+            'session_selector'  => $selector,
             'session_validator' => $this->getValidator($token),
-            'session_hash'        => $this->session->getHash(),
+            'session_hash'      => $this->session->getHash(),
             'session_ip'        => $_SERVER['REMOTE_ADDR'] ?? '',
             'session_ua'        => $_SERVER['HTTP_USER_AGENT'] ?? ''
         ]);
@@ -268,7 +268,7 @@ class CookieGuard implements GuardInterface
      */
     protected function setCookie(string $token = '', int $expire = 0): void
     {
-        $config    = config('system');
+        $config = config('system');
         setcookie(
             $this->rm_key,
             $token,
