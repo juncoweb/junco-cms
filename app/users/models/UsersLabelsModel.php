@@ -27,43 +27,43 @@ class UsersLabelsModel extends Model
     public function save()
     {
         // data
-        $this->filterArray(POST, [
+        $data_array = $this->filterArray(POST, [
             'extension_id'      => 'id|required',
             'label_key'         => 'text',
             'label_name'        => 'text',
             'label_description' => 'text',
         ]) or abort();
 
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'is_edit' => '',
             'label_id' => 'id|array|only_if:is_edit|required:abort'
         ]);
 
         // security
-        $this->isProtected(array_unique(array_column($this->data_array, 'extension_id'))) and abort();
+        $this->isProtected(array_unique(array_column($data_array, 'extension_id'))) and abort();
 
         // validate
-        foreach ($this->data_array as $i => $data) {
-            if ($data['label_key']) {
-                $data['label_key'] = $this->sanitizeLabelKey($data['label_key']);
+        foreach ($data_array as $i => $row) {
+            if ($row['label_key']) {
+                $row['label_key'] = $this->sanitizeLabelKey($row['label_key']);
 
-                if (!$data['label_key']) {
+                if (!$row['label_key']) {
                     return $this->unprocessable(_t('The key must be alphanumeric.') . sprintf(' (%d)', $i + 1));
                 }
             }
 
-            if (!$this->isUniqueLabelKey($data['extension_id'], $data['label_key'], $this->data['label_id'][$i] ?? 0)) {
+            if (!$this->isUniqueLabelKey($row['extension_id'], $row['label_key'], $data['label_id'][$i] ?? 0)) {
                 return $this->unprocessable(_t('The key is being used.') . sprintf(' (%d)', $i + 1));
             }
 
-            $this->data_array[$i] = $data;
+            $data_array[$i] = $row;
         }
 
         // query
-        if ($this->data['is_edit']) {
-            $this->db->execAll("UPDATE `#__users_roles_labels` SET ?? WHERE id = ?", $this->data_array, $this->data['label_id']);
+        if ($data['is_edit']) {
+            $this->db->execAll("UPDATE `#__users_roles_labels` SET ?? WHERE id = ?", $data_array, $data['label_id']);
         } else {
-            $this->db->execAll("INSERT INTO `#__users_roles_labels` (??) VALUES (??)", $this->data_array);
+            $this->db->execAll("INSERT INTO `#__users_roles_labels` (??) VALUES (??)", $data_array);
         }
 
         // cache
@@ -76,14 +76,14 @@ class UsersLabelsModel extends Model
     public function delete()
     {
         // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
+        $data = $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // security
-        $this->isProtectedFromLabelId($this->data['id']) and abort();
+        $this->isProtectedFromLabelId($data['id']) and abort();
 
         // query
-        $this->db->exec("DELETE FROM `#__users_roles_labels` WHERE id IN (?..)", $this->data['id']);
-        $this->db->exec("DELETE FROM `#__users_roles_labels_map` WHERE label_id IN (?..)", $this->data['id']);
+        $this->db->exec("DELETE FROM `#__users_roles_labels` WHERE id IN (?..)", $data['id']);
+        $this->db->exec("DELETE FROM `#__users_roles_labels_map` WHERE label_id IN (?..)", $data['id']);
 
         // cache
         (new LabelsCache)->update();

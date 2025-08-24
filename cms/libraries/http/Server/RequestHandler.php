@@ -101,7 +101,7 @@ class RequestHandler implements RequestHandlerInterface
      *
      * @return ResponseInterface
      */
-    public function exceptionHandler(\Throwable $e): ResponseInterface
+    protected function exceptionHandler(\Throwable $e): ResponseInterface
     {
         return (new ThrowableHandler)->getResponse($e);
     }

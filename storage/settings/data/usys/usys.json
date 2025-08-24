@@ -1,13 +1,13 @@
 {
     "title": "Usys",
     "description": "",
+    "descriptions": [],
     "groups": [
         "General",
         "Log in",
         "Multi-Factor Authentication",
         "Account"
     ],
-    "descriptions": [],
     "rows": {
         "options": {
             "label": "Options",
@@ -67,7 +67,7 @@
             "type": "plugins",
             "group": 2,
             "ordering": 1,
-            "default_value": "",
+            "default_value": [],
             "help": "",
             "history": [],
             "autoload": 1,

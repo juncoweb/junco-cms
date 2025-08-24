@@ -5,27 +5,15 @@
  * @author: Junco CMS (tm)
  */
 
-namespace Junco\Authentication;
+namespace Junco\Users;
 
-use Authentication;
-use Database;
+use Junco\Users\Entity\User;
 use Junco\Users\Enum\UserStatus;
+use Database;
 
-class Curuser
+class Curuser extends User
 {
     // vars
-    protected ?Authentication $authentication = null;
-    //
-    protected int     $id          = 0;
-    protected string  $username    = '';
-    protected string  $user_slug   = '';
-    protected string  $fullname    = '';
-    protected string  $email       = '';
-    protected string  $password    = '';
-    protected int     $avatar_id   = 0;
-    protected string  $avatar_file = '';
-    protected string  $status      = '';
-    //
     protected ?bool   $is_admin    = null;
     protected ?string $ip          = null;
     protected ?array  $roles       = null;
@@ -39,8 +27,7 @@ class Curuser
     public function __construct(int $user_id = 0)
     {
         if (!$user_id) {
-            $this->authentication ??= new Authentication();
-            $user_id = $this->authentication->getCurrentUserId();
+            $user_id = auth()->getUserId();
         }
 
         if ($user_id > 0) {
@@ -51,24 +38,18 @@ class Curuser
 			 fullname ,
 			 email ,
 			 password ,
-			 user_slug ,
-			 avatar_id ,
-			 avatar_file ,
-			 status
+             status
 			FROM `#__users`
 			WHERE id = ?
 			AND status = ?", $user_id, UserStatus::active)->fetch();
 
             if ($data) {
-                $this->id          = $data['id'];
-                $this->username    = $data['username'];
-                $this->fullname    = $data['fullname'];
-                $this->email       = $data['email'];
-                $this->password    = $data['password'];
-                $this->user_slug   = $data['user_slug'];
-                $this->avatar_id   = $data['avatar_id'];
-                $this->avatar_file = $data['avatar_file'];
-                $this->status      = $data['status'];
+                $this->id       = $data['id'];
+                $this->username = $data['username'];
+                $this->fullname = $data['fullname'];
+                $this->email    = $data['email'];
+                $this->password = $data['password'];
+                $this->status   = UserStatus::active;
             }
         }
     }
@@ -78,16 +59,18 @@ class Curuser
      */
     public function __get(string $name)
     {
+        $trace = debug_backtrace();
+        trigger_error(
+            'Deprecated property via __get(): ' . $name . ' in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'],
+            E_USER_DEPRECATED
+        );
+
         switch ($name) {
             case 'id':
             case 'username':
-            case 'status':
-            case 'user_slug':
             case 'fullname':
             case 'email':
             case 'password':
-            case 'avatar_id':
-            case 'avatar_file':
                 return $this->{$name};
         }
 
@@ -99,69 +82,9 @@ class Curuser
     }
 
     /**
-     * Get
-     * 
-     * @return int
-     */
-    public function getPreLoginUserId(): int
-    {
-        if ($this->id) {
-            return 0;
-        }
-
-        return $this->authentication?->getPreLoginUserId();
-    }
-
-    /**
-     * PreLogin
-     * 
-     * @param int $user_id
-     * 
-     * @return mixed
-     */
-    public function preLogin(int $user_id, bool $not_expire = false, ?array &$data = null): mixed
-    {
-        return $this->authentication?->preLogin($user_id, $not_expire, $data);
-    }
-
-    /**
-     * Take Login
-     * 
-     * @return mixed
-     */
-    public function takePreLogin(?array &$data = null): mixed
-    {
-        return $this->authentication?->takePreLogin($data);
-    }
-
-    /**
-     * Login
-     * 
-     * @param int $user_id
-     * 
-     * @return mixed
-     */
-    public function login(int $user_id, bool $not_expire = false, ?array &$data = null): mixed
-    {
-        return $this->authentication?->login($user_id, $not_expire, $data);
-    }
-
-    /**
-     * Logout
-     * 
-     * @param int $user_id
-     * 
-     * @return bool
-     */
-    public function logout(): bool
-    {
-        return (bool)$this->authentication?->logout();
-    }
-
-    /**
      * Is Admin
      */
-    public function isAdmin()
+    public function isAdmin(): bool
     {
         if ($this->is_admin === null) {
             $this->is_admin = in_array(L_SYSTEM_ADMIN, $this->getPermissions());
@@ -173,40 +96,27 @@ class Curuser
     /**
      * Permissions
      *
-     * @return array  All user permissions
+     * @return array  All current user permissions.
      */
-    public function getPermissions()
+    public function getPermissions(): array
     {
         if ($this->permissions !== null) {
             return $this->permissions;
         }
 
         $this->permissions = [];
+        $roles = $this->getRoles();
+
+        if (!$roles) {
+            return $this->permissions;
+        }
+
         $cache_key = config('usys-system.permissions_q');
 
         if ($cache_key) {
-            $cache = cache();
-            $permissions = $cache->get($cache_key);
+            $permissions = $this->getAllPermissionsFromCache($cache_key);
 
-            if ($permissions === null) {
-                // query
-                $rows = db()->query("
-				SELECT
-				 role_id ,
-				 label_id
-				FROM `#__users_roles_labels_map`
-				WHERE status > 0")->fetchAll();
-
-                $permissions = [];
-                foreach ($rows as $row) {
-                    $permissions[$row['role_id']][] = $row['label_id'];
-                }
-
-                $cache->set($cache_key, $permissions);
-            }
-
-
-            foreach ($this->getRoles() as $role_id) {
+            foreach ($roles as $role_id) {
                 if (isset($permissions[$role_id])) {
                     foreach ($permissions[$role_id] as $label_id) {
                         $this->permissions[] = $label_id;
@@ -214,15 +124,11 @@ class Curuser
                 }
             }
         } else {
-            $roles = $this->getRoles();
-
-            if ($roles) {
-                $this->permissions = db()->query("
-				SELECT label_id
-				FROM `#__users_roles_labels_map`
-				WHERE role_id IN ( ?.. )
-				AND status = 1", $roles)->fetchAll(Database::FETCH_COLUMN);
-            }
+            $this->permissions = db()->query("
+            SELECT label_id
+            FROM `#__users_roles_labels_map`
+            WHERE role_id IN ( ?.. )
+            AND status = 1", $roles)->fetchAll(Database::FETCH_COLUMN);
         }
 
         return $this->permissions;
@@ -251,7 +157,7 @@ class Curuser
                 alert(403, _t('This section is only for anonymous users'));
             }
         } else {
-            if (!$this->getRoles()) {
+            if (!$this->id) {
                 alert(401);
             }
             if (SYSTEM_DEVELOPER_MODE && $this->isAdmin()) {
@@ -281,13 +187,13 @@ class Curuser
                 return false;
             }
         } else {
-            if (!$this->getRoles()) {
+            if (!$this->id) {
                 return false;
             }
 
             if (
                 !array_intersect($label_id, $this->getPermissions())
-                && !($this->isAdmin() && SYSTEM_DEVELOPER_MODE)
+                && !(SYSTEM_DEVELOPER_MODE && $this->isAdmin())
             ) {
                 return false;
             }
@@ -318,7 +224,7 @@ class Curuser
     /**
      * Returns the current Ip as a binary
      * 
-     * @return binary
+     * @return string
      */
     public function getIpAsBinary(): string
     {
@@ -338,17 +244,48 @@ class Curuser
     /**
      * Get
      */
-    protected function getRoles()
+    protected function getAllPermissionsFromCache(string $cache_key): array
+    {
+        $cache = cache();
+        $permissions = $cache->get($cache_key);
+
+        if ($permissions === null) {
+            $permissions = $this->queryPermissions();
+            $cache->set($cache_key, $permissions);
+        }
+
+        return $permissions;
+    }
+
+    /**
+     * Query
+     */
+    protected function queryPermissions(): array
+    {
+        $rows = db()->query("
+        SELECT
+         role_id ,
+         label_id
+        FROM `#__users_roles_labels_map`
+        WHERE status > 0")->fetchAll();
+
+        $permissions = [];
+        foreach ($rows as $row) {
+            $permissions[$row['role_id']][] = $row['label_id'];
+        }
+
+        return $permissions;
+    }
+
+    /**
+     * Get
+     */
+    protected function getRoles(): array
     {
         if ($this->roles === null) {
-            if ($this->id) {
-                $this->roles = db()->query("
-				SELECT role_id
-				FROM `#__users_roles_map`
-				WHERE user_id = ?", $this->id)->fetchAll(Database::FETCH_COLUMN);
-            } else {
-                $this->roles = [];
-            }
+            $this->roles = $this->id
+                ? db()->query("SELECT role_id FROM `#__users_roles_map` WHERE user_id = ?", $this->id)->fetchAll(Database::FETCH_COLUMN)
+                : [];
         }
 
         return $this->roles;

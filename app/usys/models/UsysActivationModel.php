@@ -6,9 +6,11 @@
  */
 
 use Junco\Mvc\Model;
+use Junco\Users\Enum\ActivityType;
 use Junco\Users\Enum\UserStatus;
 use Junco\Users\UserActivityToken;
 use Junco\Users\UserHelper;
+use Junco\Usys\UsysToken;
 
 class UsysActivationModel extends Model
 {
@@ -44,44 +46,37 @@ class UsysActivationModel extends Model
             return $this->unprocessable(_t('Invalid email/username.'));
         }
 
-        if (UserStatus::active->isEqual($user['status'])) {
+        if ($user->isActive()) {
             return $this->unprocessable(_t('Your account is active. Please, enter from the login.'));
         }
 
         if ($this->data['option'] == 1) {
-            return $this->unprocessable($this->obfuscateEmail($user['email']), 5);
+            return $this->unprocessable($this->obfuscateEmail($user->getEmail()), 5);
         }
 
         /**
          * Instance 2
          */
-        // validate
+        $user_id     = $user->getId();
+        $email       = $user->getEmail();
+        $is_inactive = $user->getStatus() === UserStatus::inactive;
+
+        // update email
         if (
-            UserStatus::inactive->isEqual($user['status'])
+            $is_inactive
             && $this->data['new_email']
-            && $this->data['new_email'] !== $user['email']
+            && $this->data['new_email'] !== $email
         ) {
-            // vars
-            $user['email'] = $this->data['new_email'];
-
-            UserHelper::validateEmail($user['email']);
-            UserHelper::isUniqueEmail($user['email'], $user['id']);
-
-            // query
-            $this->db->exec("UPDATE `#__users` SET email = ? WHERE id = ?", $user['email'], $user['id']);
+            $email = $this->updateEmail($this->data['new_email'], $user_id);
         }
 
         // token
-        $type = UserStatus::inactive->isEqual($user['status'])
-            ? 'activation'
-            : 'signup';
+        $type = $is_inactive
+            ? ActivityType::activation
+            : ActivityType::signup;
 
-        $result = UserActivityToken::generateAndSend(
-            $type,
-            $user['id'],
-            $user['email'],
-            $user['fullname']
-        );
+        $token = UserActivityToken::generate($type, $user_id, $email);
+        $result = (new UsysToken)->send($token, $user->getName());
 
         if (!$result) {
             return $this->unprocessable(_t('An error has occurred in the mail server. Please, try again later.'));
@@ -103,5 +98,23 @@ class UsysActivationModel extends Model
         $partial = explode('@', $email, 2);
 
         return substr($partial[0], 0, $n) . str_repeat('*', strlen($partial[0]) - $n) . '@' . $partial[1];
+    }
+
+    /**
+     * Update
+     * 
+     * @throws Exception
+     * 
+     * @return string
+     */
+    protected function updateEmail(string $email, int $user_id): string
+    {
+        UserHelper::validateEmail($email);
+        UserHelper::isUniqueEmail($email, $user_id);
+
+        // query
+        $this->db->exec("UPDATE `#__users` SET email = ? WHERE id = ?", $email, $user_id);
+
+        return $email;
     }
 }

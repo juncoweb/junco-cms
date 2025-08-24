@@ -5,14 +5,16 @@
  * @author: Junco CMS (tm)
  */
 
-namespace Junco\Users\Tractor;
+namespace Junco\Users\Service;
 
+use Junco\Users\Enum\ActivityType;
 use Junco\Users\Enum\UserStatus;
 use Junco\Users\Exception\UserValidationException;
 use Junco\Users\UserActivityToken;
 use Junco\Users\UserHelper;
+use Junco\Usys\UsysToken;
 
-class SignupTractor
+class Signup
 {
     // vars
     protected $db;
@@ -87,7 +89,8 @@ class SignupTractor
         $this->db->exec("INSERT INTO `#__users_roles_map` (user_id, role_id) VALUES (?, ?)", $user_id, $role_id);
 
         // token
-        $result = UserActivityToken::generateAndSend('activation', $user_id, $email, $fullname);
+        $token = UserActivityToken::generate(ActivityType::activation, $user_id, $email);
+        $result = (new UsysToken)->send($token, $fullname);
 
         if (!$result) {
             throw new UserValidationException(_t('Your account has been created correctly. However, an error occurred when sending the activation message.'));

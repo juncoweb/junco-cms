@@ -14,7 +14,7 @@ return [
 	/**
 	 * Log in
 	 */
-	'not_expire' => 1,
+	'remember' => 1,
 	'autologin' => 0,
 	'locks_level' => 0,
 

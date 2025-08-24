@@ -7,6 +7,7 @@
 
 namespace Junco\Users;
 
+use Junco\Users\Entity\User;
 use Junco\Users\Exception\UserValidationException;
 
 class UserHelper
@@ -216,36 +217,13 @@ class UserHelper
     }
 
     /**
-     *	Verify password
-     *
-     * @param string $password
-     * @param string $current
-     * @param bool   $throw
-
-     * @return bool
-     * 
-     * @throws Exception
-     */
-    public static function verifyPassword(string $password, string $current, bool $throw = true): bool
-    {
-        if (!password_verify($password, $current)) {
-            if ($throw) {
-                throw new UserValidationException(_t('The current password is incorrect'));
-            }
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
      * Get
      * 
      * @param string $input
      * 
-     * @return ?array
+     * @return ?User
      */
-    public static function getUserFromInput(string $input): ?array
+    public static function getUserFromInput(string $input): ?User
     {
         $db = db();
 
@@ -257,14 +235,28 @@ class UserHelper
             return null;
         }
 
-        return $db->query("
+        $data = $db->query("
 		SELECT
 		 id ,
+		 username ,
 		 fullname ,
          email ,
 		 password ,
 		 status
 		FROM `#__users`
-		[WHERE]")->fetch() ?: null;
+		[WHERE]")->fetch();
+
+        if (!$data) {
+            return null;
+        }
+
+        return new User(
+            $data['id'],
+            $data['username'],
+            $data['fullname'],
+            $data['email'],
+            $data['password'],
+            $data['status']
+        );
     }
 }

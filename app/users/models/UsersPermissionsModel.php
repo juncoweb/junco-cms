@@ -26,22 +26,22 @@ class UsersPermissionsModel extends Model
     public function status()
     {
         // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'id'      => 'id|array|required:abort',
             'role_id' => 'id|required:abort',
             'status'  => 'int',
         ]);
 
         // security
-        if ($this->isMyPermission($this->data['id'], $this->data['role_id'])) {
+        if ($this->isMyPermission($data['id'], $data['role_id'])) {
             return $this->unprocessable(_t('You cannot modify your administration permission.'));
         }
 
-        if ($this->isDefaultRole($this->data['role_id'])) {
+        if ($this->isDefaultRole($data['role_id'])) {
             return $this->unprocessable(_t('The default role cannot modify the administration permission.'));
         }
 
-        $status = match ($this->data['status']) {
+        $status = match ($data['status']) {
             1 => 0,
             2 => 1,
             default => "IF(status > 0, 0, 1)"
@@ -53,8 +53,8 @@ class UsersPermissionsModel extends Model
 		VALUES (?, ?, 1)
 		ON DUPLICATE KEY UPDATE status = $status");
 
-        foreach ($this->data['id'] as $label_id) {
-            $this->db->exec($stmt, $this->data['role_id'], $label_id);
+        foreach ($data['id'] as $label_id) {
+            $this->db->exec($stmt, $data['role_id'], $label_id);
         }
 
         $cache_key = config('usys-system.permissions_q');
@@ -74,7 +74,7 @@ class UsersPermissionsModel extends Model
             return false;
         }
 
-        $user_id = curuser()->id;
+        $user_id = curuser()->getId();
         return !$this->db->query("
 		SELECT COUNT(*)
 		FROM `#__users_roles_labels_map`

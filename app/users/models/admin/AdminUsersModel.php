@@ -35,7 +35,7 @@ class AdminUsersModel extends Model
     public function getListData()
     {
         // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'search'  => 'text',
             'field'   => 'id',
             'role_id' => 'id',
@@ -45,36 +45,36 @@ class AdminUsersModel extends Model
 
         // query
         $sql_join = '';
-        if ($this->data['role_id']) {
-            $this->db->where("m.role_id = ?", $this->data['role_id']);
+        if ($data['role_id']) {
+            $this->db->where("m.role_id = ?", $data['role_id']);
             $sql_join = "LEFT JOIN `#__users_roles_map` m ON ( m.user_id = u.id )";
         }
-        if ($this->data['search']) {
-            switch ($this->data['field']) {
+        if ($data['search']) {
+            switch ($data['field']) {
                 default:
                 case 1:
-                    $this->db->where("u.fullname LIKE %?", $this->data['search']);
-                    $this->data['field'] = 1;
+                    $this->db->where("u.fullname LIKE %?", $data['search']);
+                    $data['field'] = 1;
                     break;
 
                 case 2:
-                    if (is_numeric($this->data['search'])) {
-                        $this->db->where("u.id = ?", (int)$this->data['search']);
+                    if (is_numeric($data['search'])) {
+                        $this->db->where("u.id = ?", (int)$data['search']);
                     } else {
-                        $this->db->where("u.username LIKE %?", $this->data['search']);
+                        $this->db->where("u.username LIKE %?", $data['search']);
                     }
                     break;
 
                 case 3:
-                    $this->db->where("u.email LIKE %?", $this->data['search']);
+                    $this->db->where("u.email LIKE %?", $data['search']);
                     break;
             }
         }
-        $this->db->order($this->data['order'], [
+        $this->db->order($data['order'], [
             1 => 'u.fullname',
             2 => 'u.created_at',
         ], 2);
-        $this->db->sort($this->data['sort'], 'desc');
+        $this->db->sort($data['sort'], 'desc');
         $pagi = $this->db->paginate("
 		SELECT [
 		 u.id ,
@@ -95,7 +95,7 @@ class AdminUsersModel extends Model
             $rows[$row['id']] = $row;
         }
 
-        return $this->data + [
+        return $data + [
             'rows' => $this->setRoles($rows),
             'pagi' => $pagi,
             'roles' => $this->getRoles([_t('All roles')]),
@@ -119,8 +119,9 @@ class AdminUsersModel extends Model
     public function getEditData()
     {
         // data
-        $this->filter(POST, ['id' => 'id|array:first']);
+        $data = $this->filter(POST, ['id' => 'id|array:first']);
 
+        // query
         $data = $this->db->query("
 		SELECT
 		 id AS user_id,
@@ -128,7 +129,7 @@ class AdminUsersModel extends Model
 		 username ,
 		 email
 		FROM `#__users`
-		WHERE id = ?", $this->data['id'])->fetch() or abort();
+		WHERE id = ?", $data['id'])->fetch() or abort();
 
         return [
             'title' => _t('Edit'),
@@ -142,9 +143,7 @@ class AdminUsersModel extends Model
     public function getConfirmDeleteData()
     {
         // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
-
-        return $this->data;
+        return $this->filter(POST, ['id' => 'id|array|required:abort']);
     }
 
     /**
@@ -153,14 +152,12 @@ class AdminUsersModel extends Model
     public function getUsersData()
     {
         // data
-        $this->filter(POST, ['q' => 'text']);
-
-        // vars
+        $data = $this->filter(POST, ['q' => 'text']);
         $limit = 48;
 
         // query
-        if ($this->data['q']) {
-            $this->db->where("fullname LIKE %?", $this->data['q']);
+        if ($data['q']) {
+            $this->db->where("fullname LIKE %?", $data['q']);
         }
         $rows = $this->db->query("
 		SELECT id, fullname, email
@@ -180,14 +177,12 @@ class AdminUsersModel extends Model
     public function getRolesData()
     {
         // data
-        $this->filter(POST, ['q' => 'text']);
-
-        // vars
+        $data = $this->filter(POST, ['q' => 'text']);
         $limit = 48;
 
         // query
-        if ($this->data['q']) {
-            $this->db->where("role_name LIKE %?", $this->data['q']);
+        if ($data['q']) {
+            $this->db->where("role_name LIKE %?", $data['q']);
         }
         $rows = $this->db->query("
 		SELECT id, role_name

@@ -430,10 +430,6 @@ class Template extends ResponderBase implements TemplateInterface
             redirect(401); // login
         }
 
-        if ($statusCode == 403) {
-            return snippet('template')->responseWithMessage($message, $statusCode);
-        }
-
         $title = $statusCode > 299
             ? sprintf(_t('%d. That’s an error.'), $statusCode)
             : _t('Alert');

@@ -26,11 +26,11 @@ class AdminUsersRolesModel extends Model
     public function getListData()
     {
         // data
-        $this->filter(POST, ['search' => 'text']);
+        $data = $this->filter(POST, ['search' => 'text']);
 
         // query
-        if ($this->data['search']) {
-            $this->db->where("role_name LIKE %?", $this->data['search']);
+        if ($data['search']) {
+            $this->db->where("role_name LIKE %?", $data['search']);
         }
         $pagi = $this->db->paginate("
 		SELECT [
@@ -45,7 +45,7 @@ class AdminUsersRolesModel extends Model
             $rows[] = $row;
         }
 
-        return $this->data + [
+        return $data + [
             'rows' => $rows,
             'pagi' => $pagi
         ];
@@ -71,7 +71,7 @@ class AdminUsersRolesModel extends Model
     public function getEditData()
     {
         // data
-        $this->filter(POST, ['id' => 'id|array:first|required:abort']);
+        $data = $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // query
         $data = $this->db->query("
@@ -80,7 +80,7 @@ class AdminUsersRolesModel extends Model
 		 role_name ,
 		 role_description
 		FROM `#__users_roles`
-		WHERE id = ?", $this->data['id'])->fetch() or abort();
+		WHERE id = ?", $data['id'])->fetch() or abort();
 
         return [
             'title' => _t('Edit'),
@@ -94,8 +94,6 @@ class AdminUsersRolesModel extends Model
     public function getConfirmDeleteData()
     {
         // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
-
-        return $this->data;
+        return $this->filter(POST, ['id' => 'id|array|required:abort']);
     }
 }

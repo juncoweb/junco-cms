@@ -117,7 +117,7 @@ class template_frontend_default_snippet extends Template
         foreach ($this->options->topbar as $option) {
             switch ($option) {
                 case 'login':
-                    if ($this->user->id) {
+                    if ($this->user->getId()) {
                         $li = '';
 
                         if (config('system.statement') == 21) {
@@ -133,8 +133,9 @@ class template_frontend_default_snippet extends Template
                         }
 
                         $li .= '<li><a href="javascript:void(0)" control-tpl="logout">' . _t('Log out') . '</a></li>';
+                        $name = $this->user->getName();
                         $html .= '<div class="btn-group">'
-                            . '<button type="button" control-felem="dropdown" role="caret" class="th-btn"><span data-select-label><i class="capital" aria-hidden="true">' . $this->user->fullname[0] . '</i>' . $this->user->fullname . '</span></button>'
+                            . '<button type="button" control-felem="dropdown" role="caret" class="th-btn"><span data-select-label><i class="capital" aria-hidden="true">' . $name[0] . '</i>' . $name . '</span></button>'
                             . '<div role="drop-menu" class="dropdown-menu" style="display: none;">'
                             .   '<ul>' . $li . '</ul>'
                             . '</div>'
@@ -211,7 +212,7 @@ class template_frontend_default_snippet extends Template
 		SELECT COUNT(*)
 		FROM `#__notifications`
 		WHERE user_id = ?
-		AND read_at IS NULL", $this->user->id)->fetchColumn();
+		AND read_at IS NULL", $this->user->getId())->fetchColumn();
     }
 
     /**

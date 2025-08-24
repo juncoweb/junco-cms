@@ -14,7 +14,7 @@ class FrontUsysController extends Controller
      */
     public function signup()
     {
-        curuser()->id and redirect();
+        curuser()->getId() and redirect();
 
         return $this->view(null, (new FrontUsysModel)->getSignupData());
     }
@@ -32,9 +32,19 @@ class FrontUsysController extends Controller
     /**
      * Login
      */
+    public function resolve()
+    {
+        curuser()->getId() and redirect();
+
+        return (new FrontUsysModel)->getResolveData();
+    }
+
+    /**
+     * Login
+     */
     public function login()
     {
-        curuser()->id and redirect();
+        curuser()->getId() and redirect();
 
         return $this->view(null, (new FrontUsysModel)->getLoginData());
     }

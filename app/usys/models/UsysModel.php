@@ -6,12 +6,13 @@
  */
 
 use Junco\Mvc\Model;
+use Junco\Users\Enum\ActivityType;
 use Junco\Users\Exception\UserActivityException;
 use Junco\Users\Exception\UserNotActiveException;
 use Junco\Users\Exception\UserNotFoundException;
 use Junco\Users\Exception\UserValidationException;
-use Junco\Users\Tractor\LoginTractor;
-use Junco\Users\Tractor\SignupTractor;
+use Junco\Users\Service\Login;
+use Junco\Users\Service\Signup;
 use Junco\Users\UserActivityToken;
 
 class UsysModel extends Model
@@ -36,7 +37,8 @@ class UsysModel extends Model
     {
         // data
         $this->filter(POST, [
-            'fullname' => '',
+            'token'    => 'text',
+            'fullname' => 'text',
             'username' => 'text',
             'email'    => 'email',
             'password' => 'required',
@@ -46,10 +48,19 @@ class UsysModel extends Model
 
         //
         try {
-            $token   = UserActivityToken::get(POST, 'signup', true);
-            $user_id = $token ? $token->user_id : 0;
-            $tractor = new SignupTractor();
-            $result  = $tractor->signup(
+            $user_id = 0;
+            $token   = null;
+
+            if ($this->data['token']) {
+                $token = UserActivityToken::from($this->data['token'], ActivityType::signup);
+
+                if ($token) {
+                    $user_id = $token->getUserId();
+                }
+            }
+
+            $service = new Signup();
+            $result  = $service->signup(
                 $this->data['fullname'],
                 $this->data['username'],
                 $this->data['email'],
@@ -66,9 +77,9 @@ class UsysModel extends Model
         }
 
         if ($result) {
-            $token->destroy();
-            curuser()->login($user_id);
-            return $this->result()->reloadPage();
+            $token?->destroy();
+            auth()->setDeferredLogin($user_id);
+            return $this->result()->redirectTo(url('/usys/resolve'));
         }
 
         return $this->result()->redirectTo(url('/usys/message', ['op' => 'signup']));
@@ -83,26 +94,26 @@ class UsysModel extends Model
         $this->filter(POST, [
             'email_username' => 'text',
             'password'       => '',
-            'not_expire'     => 'bool',
+            'remember'       => 'bool',
             'redirect'       => 'text'
         ]);
 
         try {
-            $tractor = new LoginTractor;
-            $tractor->validateCredencial(
+            $service = new Login;
+            $service->validateCredencial(
                 $this->data['email_username'],
                 $this->data['password'] ?? ''
             );
 
-            $mfa_url = $this->getNextUrl($tractor->getUserId(), $this->data['redirect']);
+            $mfa_url = $this->getNextUrl($service->getUserId(), $this->data['redirect']);
 
             if ($mfa_url) {
-                $tractor->preLogin($this->data['not_expire']);
+                $service->setDeferredLogin($this->data['remember']);
 
                 return $this->result()->redirectTo($mfa_url);
             }
 
-            $tractor->login($this->data['not_expire']);
+            $service->login($this->data['remember']);
 
             if ($this->data['redirect'] == -1) {
                 return $this->result()->goBack();
@@ -116,7 +127,7 @@ class UsysModel extends Model
         } catch (UserNotActiveException $e) {
             return $this->result()->redirectTo(url('/usys/message', ['op' => 'login']));
         } catch (UserNotFoundException | UserActivityException $e) {
-            return $this->unprocessable($e->getMessage())->setData($tractor->getResponseData());
+            return $this->unprocessable($e->getMessage())->setData($service->getResponseData());
         } catch (Throwable $e) {
             app('logger')->critical($e->getMessage());
             throw $e;
@@ -128,7 +139,7 @@ class UsysModel extends Model
      */
     public function logout()
     {
-        curuser()->logout();
+        auth()->logout();
     }
 
     /**

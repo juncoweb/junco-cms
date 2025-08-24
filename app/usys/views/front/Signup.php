@@ -9,13 +9,13 @@
 if (!empty($error)) {
     $html = '<p class="dialog dialog-warning">' . _t('This option is not available.') . '</p>';
 } else {
-    $email_opt    = ['type' => 'email'];
+    $email_opt = ['type' => 'email'];
 
     // form
     $form = Form::get();
     if ($user) {
         $form->setValues($user);
-        $form->hidden($token->key, $token->value);
+        $form->hidden('token', $token);
         $email_opt['readonly'] = 'readonly';
     }
 

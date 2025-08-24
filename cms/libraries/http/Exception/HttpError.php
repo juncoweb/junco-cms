@@ -12,7 +12,7 @@ use Throwable;
 
 class HttpError extends Error implements HttpThrowableInterface
 {
-    protected $statusCode = 0;
+    protected int $statusCode = 0;
 
     /**
      * Constructor

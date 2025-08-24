@@ -5,8 +5,6 @@
  * @author: Junco CMS (tm)
  */
 
-use Junco\Users\UserActivityHelper;
-
 // list
 $bls = Backlist::get();
 
@@ -26,33 +24,27 @@ $bls->th(_t('Type'), ['priority' => 2, 'width' => 90]);
 $bls->th(_t('Code'), ['priority' => 2, 'width' => 60, 'class' => 'text-center']);
 $bls->th(_t('Description'), ['priority' => 2]);
 $bls->th(_t('Name'));
-$bls->th(_t('Added'), ['priority' => 2, 'width' => 140]);
+$bls->th(_t('Created'), ['priority' => 2]);
 
-foreach ($pagi->fetchAll() as $row) {
-    $date = new Date($row['created_at']);
-    $row['created_at'] = $date->format(_t('Y-m-d H:i:s'));
-
-    if (!$row['fullname']) {
-        $row['fullname'] = inet_ntop($row['user_ip']);
+foreach ($rows as $row) {
+    if ($row['activity_context']) {
+        $row['fullname'] .= '<div class="color-light">' . $row['activity_context'] . '</div>';
     }
 
     if ($row['token_selector']) {
         $row['fullname'] .= '<div class="color-light">' . $row['token_selector'] . ' / ' . $row['status'] . '</div>';
-        if ($row['modified_at']) {
-            $row['created_at'] .= '<div class="color-light">' . $date->formatInterval($row['modified_at']) . '</div>';
-        }
     }
 
-    if ($row['activity_context']) {
-        $row['fullname'] .= '<div class="color-light">' . $row['activity_context'] . '</div>';
+    if ($row['modified_at']) {
+        $row['modified_at'] = '<div class="color-light">' . $row['modified_at'] . '</div>';
     }
 
     $bls->check($row['id']);
     $bls->td($row['activity_type']);
     $bls->td($row['activity_code']);
-    $bls->td(UserActivityHelper::getCodeMessages($row['activity_type'], $row['activity_code']));
+    $bls->td($row['message']);
     $bls->td($row['fullname']);
-    $bls->td($row['created_at']);
+    $bls->td($row['created_at']->format($d ??= _t('Y-m-d H:i:s')) . $row['modified_at']);
 }
 
 return $bls->render($pagi);

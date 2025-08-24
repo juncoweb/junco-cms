@@ -26,7 +26,7 @@ class AdminUsersPermissionsModel extends Model
     public function getListData()
     {
         // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'role_id' => 'id',
             'search' => 'text',
         ]);
@@ -35,16 +35,16 @@ class AdminUsersPermissionsModel extends Model
         $roles = $this->getRoles();
 
         //
-        if (empty($roles[$this->data['role_id']])) {
-            $this->data['role_id'] = array_key_first($roles);
+        if (empty($roles[$data['role_id']])) {
+            $data['role_id'] = array_key_first($roles);
         }
 
         // query
         $this->db->rows_per_page = 9999;
-        $this->db->setParam($this->data['role_id']);
+        $this->db->setParam($data['role_id']);
 
-        if ($this->data['search']) {
-            $this->db->where("e.extension_name LIKE %?|l.label_key LIKE %?|l.label_name LIKE %?", $this->data['search']);
+        if ($data['search']) {
+            $this->db->where("e.extension_name LIKE %?|l.label_key LIKE %?|l.label_name LIKE %?", $data['search']);
         }
         $pagi = $this->db->paginate("
 		SELECT
@@ -76,7 +76,7 @@ class AdminUsersPermissionsModel extends Model
             $rows[$row['id']] = $row;
         }
 
-        return $this->data + [
+        return $data + [
             'roles' => $roles,
             'rows' => $rows
         ];

@@ -6,8 +6,10 @@
  */
 
 use Junco\Mvc\Model;
+use Junco\Users\Enum\ActivityType;
 use Junco\Users\UserActivityToken;
 use Junco\Users\UserHelper;
+use Junco\Usys\UsysToken;
 
 class UsysAccountModel extends Model
 {
@@ -39,7 +41,9 @@ class UsysAccountModel extends Model
         $curuser = curuser();
 
         //
-        UserHelper::verifyPassword($this->data['__password'], $curuser->password);
+        if (!$curuser->verifyPassword($this->data['__password'])) {
+            return $this->unprocessable(_t('The current password is incorrect'));
+        }
 
         if (!$this->data['fullname']) {
             return $this->unprocessable(_t('Please, fill in the name.'));
@@ -47,12 +51,12 @@ class UsysAccountModel extends Model
         UserHelper::validateUsername($this->data['username']);
 
         // username
-        if ($this->data['username'] != $curuser->username) {
+        if ($this->data['username'] != $curuser->getUsername()) {
             UserHelper::isUniqueUsername($this->data['username']);
         }
 
         // email
-        if ($this->data['email'] && $this->data['email'] != $curuser->email) {
+        if ($this->data['email'] && $this->data['email'] != $curuser->getEmail()) {
             UserHelper::isUniqueEmail($this->data['email']);
         } else {
             unset($this->data['email']);
@@ -69,11 +73,13 @@ class UsysAccountModel extends Model
         unset($this->data['__password']);
 
         // query
-        $this->db->exec("UPDATE `#__users` SET ?? WHERE id = ?", $this->data, $curuser->id);
+        $this->db->exec("UPDATE `#__users` SET ?? WHERE id = ?", $this->data, $curuser->getId());
 
         // token
         if (isset($this->data['email'])) {
-            UserActivityToken::generateAndSend('savemail', $curuser->id, $this->data['email'], $curuser->fullname);
+            $token = UserActivityToken::generate(ActivityType::savemail, $curuser->getId(), $this->data['email']);
+
+            (new UsysToken)->send($token, $curuser->getName());
         }
     }
 }

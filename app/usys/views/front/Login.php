@@ -5,6 +5,15 @@
  * @author: Junco CMS (tm)
  */
 
+$message = '';
+
+if ($user_id) {
+    $message = '<p class="dialog dialog-warning">'
+        . _t('There is an open session.')
+        . ' <a href="' . $resolve_url . '" class="btn btn-small btn-warning">' . _t('Continue') . '</a>'
+        . '</p>';
+}
+
 // form
 $form = Form::get();
 
@@ -17,8 +26,8 @@ $form->input('email_username', ['placeholder' => _t('Email/Username'), 'icon' =>
 $form->input('password', ['type' => 'password', 'placeholder' => _t('Password'), 'icon' => 'fa-solid fa-key']);
 
 $element = '';
-if ($not_expire) {
-    $form->checkbox('not_expire')->setLabel(_t('Stay logged in'));
+if ($remember) {
+    $form->checkbox('remember')->setLabel(_t('Stay logged in'));
     $element = $form->getLastElement();
 }
 
@@ -45,7 +54,7 @@ if (router()->isFormat('modal')) {
     // modal
     $modal = Modal::get();
     $modal->title(_t('Log in'));
-    $modal->content = '<div class="usys-modal">' . $html . '</div>';
+    $modal->content = $message . '<div class="usys-modal">' . $html . '</div>';
     return $modal->response();
 } else {
     // template
@@ -53,6 +62,6 @@ if (router()->isFormat('modal')) {
     $tpl->options($options);
     $tpl->domready('Usys.load()');
     $tpl->title(_t('Log in'));
-    $tpl->content = '<div class="panel mb-4 usys-wrapper usys-login"><div class="panel-body">' . $html . '</div></div>';
+    $tpl->content = $message . '<div class="panel mb-4 usys-wrapper usys-login"><div class="panel-body">' . $html . '</div></div>';
     return $tpl->response();
 }

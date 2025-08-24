@@ -15,7 +15,7 @@ if ($plugins) {
 }
 
 $tpl->options($options);
-$tpl->title([curuser()->fullname, _t('My space')]);
+$tpl->title([curuser()->getName(), _t('My space')]);
 $tpl->content = $dashboard->render();
 
 return $tpl->response();

@@ -12,7 +12,6 @@ use Junco\Http\Exception\HttpError;
 use Junco\Http\Exception\HttpException;
 use Junco\Http\Server\RequestHandler;
 use Psr\Http\Message\ResponseInterface;
-use Throwable;
 
 class Controller
 {

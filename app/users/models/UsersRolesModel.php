@@ -11,7 +11,6 @@ class UsersRolesModel extends Model
 {
     // vars
     protected $db;
-    protected int $role_id = 0;
 
     /**
      * Constructor
@@ -27,20 +26,20 @@ class UsersRolesModel extends Model
     public function save()
     {
         // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'role_id'          => 'id',
             'role_name'        => 'text|required',
             'role_description' => 'text',
         ]);
 
-        // extract
-        $this->extract('role_id');
+        // slice
+        $role_id = $this->slice($data, 'role_id');
 
         // query
-        if ($this->role_id) {
-            $this->db->exec("UPDATE `#__users_roles` SET ?? WHERE id = ?", $this->data, $this->role_id);
+        if ($role_id) {
+            $this->db->exec("UPDATE `#__users_roles` SET ?? WHERE id = ?", $data, $role_id);
         } else {
-            $this->db->exec("INSERT INTO `#__users_roles` (??) VALUES (??)", $this->data);
+            $this->db->exec("INSERT INTO `#__users_roles` (??) VALUES (??)", $data);
         }
     }
 
@@ -50,16 +49,16 @@ class UsersRolesModel extends Model
     public function delete()
     {
         // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
+        $data = $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // security
-        if ($this->inUse($this->data['id'])) {
+        if ($this->inUse($data['id'])) {
             return $this->unprocessable(_t('The record can not be deleted because it is being used.'));
         }
 
         // query
-        $this->db->exec("DELETE FROM `#__users_roles` WHERE id IN (?..)", $this->data['id']);
-        $this->db->exec("DELETE FROM `#__users_roles_labels_map` WHERE role_id IN (?..)", $this->data['id']);
+        $this->db->exec("DELETE FROM `#__users_roles` WHERE id IN (?..)", $data['id']);
+        $this->db->exec("DELETE FROM `#__users_roles_labels_map` WHERE role_id IN (?..)", $data['id']);
     }
 
     /**

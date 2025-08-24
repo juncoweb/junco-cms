@@ -1,20 +1,4 @@
 
-Database v5.1
+Users v0.1
 =======================================================
-- The safeFind and safeExec methods were replaced by query and exec respectively.
-
-Debugger v2.5
-=======================================================
-- The ThrowableHandler class was added.
-
-MVC v0.1
-=======================================================
-- The model uses the Result class as a response to the wrapper method.
-
-System v14.0
-=======================================================
-- Added the “alert” facade that throws an HttpException.
-
-XJs v2.3
-=======================================================
-- Now, the callback has an object as a single parameter.
+- Performance has been improved.

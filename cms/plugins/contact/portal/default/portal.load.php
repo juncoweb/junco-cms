@@ -19,8 +19,8 @@ return function (&$portal) {
     $curuser = curuser();
     $html = '<div id="contact">'
         . '<form id="contact-form" class="contact-form">'
-        .   '<p><input type="text" name="contact_name" value="' . $curuser->fullname . '" class="input-field input-large" placeholder="' . _t('Name') . '" required /></p>'
-        .   '<p><input type="email" name="contact_email" value="' . $curuser->email . '" class="input-field input-large" placeholder="' . _t('Email') . '" required /></p>'
+        .   '<p><input type="text" name="contact_name" value="' . $curuser->getName() . '" class="input-field input-large" placeholder="' . _t('Name') . '" required /></p>'
+        .   '<p><input type="email" name="contact_email" value="' . $curuser->getEmail() . '" class="input-field input-large" placeholder="' . _t('Email') . '" required /></p>'
         .   '<p><textarea placeholder="Mensaje" name="contact_message" class="input-field input-large" control-felem="auto-grow" data-min-height="84px" required></textarea></p>'
         .   '<button type="submit" class="btn btn-primary btn-solid btn-large">' . _t('Enter') . '</button>'
         . FormSecurity::getToken()

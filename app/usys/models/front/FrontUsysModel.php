@@ -6,6 +6,7 @@
  */
 
 use Junco\Mvc\Model;
+use Junco\Users\Enum\ActivityType;
 use Junco\Users\Enum\UserStatus;
 use Junco\Users\UserActivityToken;
 use Junco\Usys\LoginWidgetCollector;
@@ -42,20 +43,23 @@ class FrontUsysModel extends Model
             return $data + ['error' => true];
         }
 
-        $token = UserActivityToken::get(GET, 'signup', true);
+        // data
+        $this->filter(GET, ['token' => 'text']);
+
+        $token = UserActivityToken::from($this->data['token'], ActivityType::signup);
 
         if ($token) {
             $user = $this->getUserFromToken($token);
 
             if ($user) {
                 $data['user']          = $user;
-                $data['token']         = $token;
+                $data['token']         = $this->data['token'];
                 $data['login_plugins'] = '';
             }
         }
 
         if ($data['legal_url']) {
-            $data['legal_url'] = UsysHelper::getUrl($data['legal_url']);
+            $data['legal_url'] = $this->getUrl($data['legal_url']);
         }
 
         if ($data['login_plugins']) {
@@ -68,23 +72,50 @@ class FrontUsysModel extends Model
     /**
      * Get
      */
+    public function getResolveData()
+    {
+        // data
+        $this->filter(GET, ['redirect' => 'text']);
+
+        $user_id = auth()->getDeferredUserId();
+
+        if (!$user_id) {
+            return redirect(
+                url('/usys/login', array_filter(['redirect' => $this->data['redirect']]))
+            );
+        }
+
+        $mfa_url = $this->getNextUrl($user_id, $this->data['redirect']);
+
+        if ($mfa_url) {
+            return redirect($mfa_url);
+        }
+
+        auth()->execDeferredLogin();
+        return redirect($this->data['redirect'], true);
+    }
+
+    /**
+     * Get
+     */
     public function getLoginData()
     {
         // data
         $this->filter(GET, ['redirect' => 'text']);
 
-        $user_id = curuser()->getPreLoginUserId();
+        $data = $this->data + [
+            'user_id'     => auth()->getDeferredUserId(),
+            'options'     => config('usys.login_options'),
+            'remember'    => config('users.remember'),
+            'user'        => $this->getUserFromSession(),
+            'widgets'     => $this->getWidgets()
+        ];
 
-        if ($user_id) {
-            $this->proccessPreLogin($user_id, $this->data['redirect']);
+        if ($data['user_id']) {
+            $data['resolve_url'] = url('/usys/resolve');
         }
 
-        return $this->data + [
-            'options'    => config('usys.login_options'),
-            'not_expire' => config('users.not_expire'),
-            'user'       => $this->getUserFromSession(),
-            'widgets'    => $this->getWidgets()
-        ];
+        return $data;
     }
 
     /**
@@ -92,9 +123,18 @@ class FrontUsysModel extends Model
      */
     public function getAutologinData()
     {
+        // data
+        $this->filter(GET, ['token' => 'text']);
+
         try {
-            $token = UserActivityToken::get(GET, 'autologin')->destroy();
-            curuser()->login($token->user_id);
+            $token = UserActivityToken::from($this->data['token'], ActivityType::autologin);
+
+            if (!$token) {
+                throw new Exception(_t('The code used is invalid or has expired.'));
+            }
+            $token->destroy();
+
+            auth()->login($token->getUserId());
         } catch (Exception $e) {
             return ['options' => config('usys.options')];
         }
@@ -153,21 +193,6 @@ class FrontUsysModel extends Model
     /**
      * Get
      */
-    protected function proccessPreLogin(int $user_id, string $redirect): void
-    {
-        $mfa_url = $this->getNextUrl($user_id, $redirect);
-
-        if ($mfa_url) {
-            redirect($mfa_url);
-        }
-
-        curuser()->takePreLogin();
-        redirect($redirect, true);
-    }
-
-    /**
-     * Get
-     */
     protected function getWidgets(): array
     {
         $plugins = config('usys.login_plugins');
@@ -180,7 +205,7 @@ class FrontUsysModel extends Model
     /**
      * Get
      */
-    protected function getUserFromToken($token): ?array
+    protected function getUserFromToken(UserActivityToken $token): ?array
     {
         $user = $this->db->query("
 		SELECT
@@ -189,7 +214,7 @@ class FrontUsysModel extends Model
 		 email ,
 		 status
 		FROM `#__users`
-		WHERE id = ?", $token->user_id)->fetch();
+		WHERE id = ?", $token->getUserId())->fetch();
 
         // security
         if ($user && UserStatus::autosignup->isEqual($user['status'])) {
@@ -203,10 +228,29 @@ class FrontUsysModel extends Model
     /**
      * Get
      */
+    protected function getUrl(string $url): string
+    {
+        if (strpos($url, ',') === false) {
+            return $url;
+        }
+
+        $url     = str_replace(' ', '', $url);
+        $partial = explode(',', $url, 2);
+        $args    = [];
+
+        empty($partial[1])
+            or parse_str($partial[1], $args);
+
+        return url($partial[0], $args, true);
+    }
+
+    /**
+     * Get
+     */
     protected function getUserFromSession(): ?array
     {
         return null;
-        //$user_id = curuser()->getPossibleUserId();
+        //$user_id = auth()->getDeferredUserId();
 
         if (!$user_id) {
             return null;

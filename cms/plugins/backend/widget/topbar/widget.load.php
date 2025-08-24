@@ -6,7 +6,7 @@
  */
 
 return function (&$widget) {
-    $user_id = curuser()->id;
+    $user_id = curuser()->getId();
     $html = '<a href="' . url('/') . '" class="th-btn" title="' . ($t = _t('View site')) . '" aria-label="' . $t . '"><i class="fa-solid fa-globe"></i></a>';
 
     // theme

@@ -20,6 +20,10 @@ class UsersRolesMapper
 
     /**
      * Get
+     * 
+     * @param int $user_id
+     * 
+     * @return array
      */
     public function get(int $user_id): array
     {
@@ -38,11 +42,16 @@ class UsersRolesMapper
 
     /**
      * Set
+     * 
+     * @param int $user_id
+     * @param array $role_id
+     * 
+     * @return void
      */
     public function set(int $user_id, array $role_id): void
     {
         if (
-            $user_id == curuser()->id
+            $user_id == curuser()->getId()
             && !$this->security($role_id)
         ) {
             return;
@@ -68,6 +77,8 @@ class UsersRolesMapper
      * Security
      * 
      * @param array $role_id
+     * 
+     * @return bool
      */
     protected function security(array $role_id): bool
     {

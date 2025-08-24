@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `#__users_activities` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int unsigned NOT NULL,
   `user_ip` varbinary(16) NOT NULL,
-  `activity_type` enum('signup','activation','login','autologin','savepwd','savemail','token','validation') COLLATE utf8mb4_general_ci NOT NULL,
+  `activity_type` enum('signup','activation','login','autologin','savepwd','savemail','validation') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `activity_code` smallint NOT NULL DEFAULT '0',
   `activity_context` text COLLATE utf8mb4_general_ci,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,

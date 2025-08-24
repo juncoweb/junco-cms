@@ -62,9 +62,9 @@ class CookieGuard implements GuardInterface
      *
      * @return int
      */
-    public function getPreLoginUserId(): int
+    public function getDeferredUserId(): int
     {
-        $login = $this->getPreLoginUser();
+        $login = $this->getDeferredUserData();
 
         if (!$login) {
             return 0;
@@ -74,22 +74,23 @@ class CookieGuard implements GuardInterface
     }
 
     /**
-     * Login
+     * Set deferred log in
      * 
-     * @param int  $user_id       If it is zero, log out.
-     * @param bool $not_expire
+     * @param int    $user_id
+     * @param bool   $remember
+     * @param ?array &$data
      * 
-     * @return bool
+     * @return bool  Returns false if an error occurs; otherwise returns true.
      */
-    public function preLogin(int $user_id = 0, bool $not_expire = false, ?array &$data = []): bool
+    public function setDeferredLogin(int $user_id = 0, bool $remember = false, ?array &$data = []): bool
     {
         if (!($user_id > 0)) {
             return false;
         }
 
         $this->session->set('__mfa_' . $this->user_key, [
-            'user_id' => $user_id,
-            'not_expire' => $not_expire,
+            'user_id'    => $user_id,
+            'remember'   => $remember,
             'expires_at' => time() + config('usys.mfa_lifetime') ?: 300
         ]);
 
@@ -97,13 +98,15 @@ class CookieGuard implements GuardInterface
     }
 
     /**
-     * PreLogin
+     * Execute a deferred login.
      * 
-     * @return bool
+     * @param ?array &$data
+     * 
+     * @return bool  Returns false if an error occurs; otherwise returns true.
      */
-    public function takePreLogin(array &$data = []): bool
+    public function execDeferredLogin(array &$data = []): bool
     {
-        $login = $this->getPreLoginUser();
+        $login = $this->getDeferredUserData();
 
         if (!$login) {
             return false;
@@ -111,24 +114,25 @@ class CookieGuard implements GuardInterface
 
         $this->session->unset('__mfa_' . $this->user_key);
 
-        return $this->login($login['user_id'], $login['not_expire'], $data);
+        return $this->login($login['user_id'], $login['remember'], $data);
     }
 
     /**
      * Login
      * 
-     * @param int  $user_id       If it is zero, log out.
-     * @param bool $not_expire
+     * @param int    $user_id       If it is zero, log out.
+     * @param bool   $remember
+     * @param ?array &$data
      * 
-     * @return bool
+     * @return bool  Returns false if an error occurs; otherwise returns true.
      */
-    public function login(int $user_id = 0, bool $not_expire = false, array &$data = []): bool
+    public function login(int $user_id = 0, bool $remember = false, array &$data = []): bool
     {
         if (!($user_id > 0)) {
             return false;
         }
 
-        if ($not_expire) {
+        if ($remember) {
             $this->setCookie($this->start($user_id), 0x7fffffff);
         } else {
             $this->destroy();
@@ -141,6 +145,8 @@ class CookieGuard implements GuardInterface
 
     /**
      * Logout
+     * 
+     * @return bool  Returns false if an error occurs; otherwise returns true.
      */
     public function logout(): bool
     {
@@ -154,10 +160,9 @@ class CookieGuard implements GuardInterface
      *
      * @return array
      */
-    protected function getPreLoginUser(): ?array
+    protected function getDeferredUserData(): ?array
     {
         $data = $this->session->get('__mfa_' . $this->user_key);
-
 
         if (!$data || $data['expires_at'] > time()) {
             return null;
@@ -322,6 +327,18 @@ class CookieGuard implements GuardInterface
      * @return string
      */
     protected function getValidator($token): string
+    {
+        return hash('sha256', substr($token, -self::VALIDATOR_LENGTH));
+    }
+
+    /**
+     * Get
+     *
+     * @param string $token
+     * 
+     * @return string
+     */
+    protected function validate($token): string
     {
         return hash('sha256', substr($token, -self::VALIDATOR_LENGTH));
     }

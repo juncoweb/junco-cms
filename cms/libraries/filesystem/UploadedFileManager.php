@@ -184,7 +184,7 @@ class UploadedFileManager
 
             switch ($rename) {
                 case self::CURUSER_NAME:
-                    $this->userToken ??= \curuser()->id . '-' . date('YmdHis');
+                    $this->userToken ??= \curuser()->getId() . '-' . date('YmdHis');
                     $basename = $this->userToken . ($i ? '-' . $i : '');
                     break;
 

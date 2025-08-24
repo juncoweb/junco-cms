@@ -37,16 +37,16 @@ class Model
      * @param int   $type
      * @param array $rules
      * 
-     * @return void
+     * @return array
      */
-    final protected function filter(int $type, array $rules): void
+    final protected function filter(int $type, array $rules): array
     {
         if ($this->__data !== null) {
             $type = $this->__data;
             $this->__data = null;
         }
 
-        $this->data = Filter::all($type, $rules);
+        return $this->data = Filter::all($type, $rules);
     }
 
     /**
@@ -69,16 +69,16 @@ class Model
      * @param int   $type
      * @param array $rules
      * 
-     * @return bool
+     * @return ?array
      */
-    final protected function filterArray(int $type, array $rules): bool
+    final protected function filterArray(int $type, array $rules): ?array
     {
         if ($this->__data_array !== null) {
             $type = $this->__data_array;
             $this->__data_array = null;
         }
 
-        return (bool)$this->data_array = Filter::all($type, $rules, true);
+        return $this->data_array = Filter::all($type, $rules, true);
     }
 
     /**
@@ -94,6 +94,26 @@ class Model
             $this->$name = $this->data[$name];
             unset($this->data[$name]);
         }
+    }
+
+    /**
+     * Slice
+     * 
+     * @param array  &$data
+     * @param string $key
+     * 
+     * @return mixed
+     */
+    final public function slice(array &$data, string $key): mixed
+    {
+        if (!array_key_exists($key, $data)) {
+            return null;
+        }
+
+        $value = $data[$key];
+        unset($data[$key]);
+
+        return $value;
     }
 
     /**

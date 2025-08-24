@@ -32,7 +32,7 @@ class ThrowableHandler
         }
 
         http_response_code(500);
-        die(sprintf('%d - %s', $x->getCode(), $x->getTraceAsString()));
+        die(sprintf('%d - %s', $e->getCode(), $e->getTraceAsString()));
     }
 
     /**
@@ -46,18 +46,29 @@ class ThrowableHandler
      */
     public function getResponse(Throwable $e, bool $severe = false)
     {
-        $statusCode = $e instanceof HttpThrowableInterface
-            ? $e->getStatusCode()
-            : 0;
+        $statusCode = 0;
+
+        if ($e instanceof HttpThrowableInterface) {
+            $statusCode = $e->getStatusCode();
+
+            if (!$severe && $statusCode == 403) {
+                $severe = true; // Force the basic template.
+            }
+        }
 
         $message = $e instanceof Error
             ? $this->handleThrowableError($e, $statusCode)
             : $e->getMessage();
 
+        if (!$message) {
+            $message = $this->getMessageFromCode($statusCode);
+        }
+
         $code = $e->getCode();
 
         return System::getOutput($severe)->responseWithMessage($message, $statusCode, $code);
     }
+
     /**
      * Returns a message from a numeric code
      * 

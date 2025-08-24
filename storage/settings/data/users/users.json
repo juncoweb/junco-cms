@@ -35,14 +35,16 @@
             "reload_on_change": 0,
             "status": 1
         },
-        "not_expire": {
-            "label": "Not expire",
+        "remember": {
+            "label": "Remember",
             "type": "boolean",
             "group": 2,
             "ordering": 1,
             "default_value": 1,
             "help": "Log in with \u00abRemember me\u00bb option.",
-            "history": [],
+            "history": [
+                "not_expire"
+            ],
             "autoload": 1,
             "translate": 0,
             "reload_on_change": 0,

@@ -174,19 +174,19 @@ class Session
 
         $user_agent = strtolower($user_agent);
         $result = [
-            'platform'    => 'Unknown',
-            'browser'    => 'Unknown',
-            'version'    => ''
+            'platform' => 'Unknown',
+            'browser'  => 'Unknown',
+            'version'  => ''
         ];
 
         // platform
         $_platforms    = [
-            'android'    => 'android',
-            'linux'        => 'linux',
-            'macintosh'    => 'mac',
-            'mac os x'    => 'mac',
-            'windows'    => 'windows',
-            'win32'        => 'windows',
+            'android'   => 'android',
+            'linux'     => 'linux',
+            'macintosh' => 'mac',
+            'mac os x'  => 'mac',
+            'windows'   => 'windows',
+            'win32'     => 'windows',
         ];
 
         foreach ($_platforms as $needle => $value) {
@@ -234,7 +234,7 @@ class Session
      */
     public function isSafeToContinue(string $hash): bool
     {
-        if ($hash != $this->getHash()) {
+        if ($hash !== $this->getHash()) {
             return false;
         }
 

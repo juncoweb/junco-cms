@@ -21,70 +21,72 @@ class Authentication
     }
 
     /**
-     * Returns the current user ID or zero
+     * Returns the user ID retrieved from storage.
      *
-     * @param string $token
+     * @return int
      */
-    public function getCurrentUserId(): int
+    public function getUserId(): int
     {
         return $this->guard->getUserId();
     }
 
     /**
-     * Returns the current user ID or zero
+     * Returns the user ID retrieved from storage.
      *
-     * @param string $token
+     * @return int
      */
-    public function getPreLoginUserId(): int
+    public function getDeferredUserId(): int
     {
-        return $this->guard->getPreLoginUserId();
+        return $this->guard->getDeferredUserId();
     }
 
     /**
-     * PreLogin
+     * Set deferred log in
      * 
-     * @param int   $user_id
-     * @param bool  $not_expire
-     * @param array $data
+     * @param int    $user_id
+     * @param bool   $remember
+     * @param ?array &$data
      * 
-     * @return bool
+     * @return bool  Returns false if an error occurs; otherwise returns true.
      */
-    public function preLogin(int $user_id = 0, bool $not_expire = false, ?array &$data = null): bool
+    public function setDeferredLogin(int $user_id = 0, bool $remember = false, ?array &$data = null): bool
     {
         $data ??= [];
-        return $this->guard->preLogin($user_id, $not_expire, $data);
+        return $this->guard->setDeferredLogin($user_id, $remember, $data);
+    }
+
+    /**
+     * Execute a deferred login.
+     * 
+     * @param ?array &$data
+     * 
+     * @return bool  Returns false if an error occurs; otherwise returns true.
+     */
+    public function execDeferredLogin(?array &$data = null): bool
+    {
+        $data ??= [];
+        return $this->guard->execDeferredLogin($data);
     }
 
     /**
      * Login
      * 
-     * @param array $data
+     * @param int    $user_id       If it is zero, log out.
+     * @param bool   $remember
+     * @param ?array &$data
      * 
-     * @return bool
+     * @return bool  Returns false if an error occurs; otherwise returns true.
      */
-    public function takePreLogin(?array &$data = null): bool
+    public function login(int $user_id = 0, bool $remember = false, ?array &$data = null): bool
     {
         $data ??= [];
-        return $this->guard->takePreLogin($data);
-    }
-
-    /**
-     * Login
-     * 
-     * @param int   $user_id
-     * @param bool  $not_expire
-     * @param array $data
-     * 
-     * @return bool
-     */
-    public function login(int $user_id = 0, bool $not_expire = false, ?array &$data = null): bool
-    {
-        $data ??= [];
-        return $this->guard->login($user_id, $not_expire, $data);
+        return $this->guard->login($user_id, $remember, $data);
     }
 
     /**
      * Logout
+     * 
+     * @return bool  Returns false if an error occurs; otherwise returns true.
      */
     public function logout(): bool
     {

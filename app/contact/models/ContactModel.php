@@ -55,7 +55,7 @@ class ContactModel extends Model
         }
 
         $this->data['user_ip'] = curuser()->getIpAsBinary();
-        $this->data['user_id'] = curuser()->id;
+        $this->data['user_id'] = curuser()->getId();
 
         // flood control
         if ($max = $this->exceededMax($this->data['user_ip'])) {

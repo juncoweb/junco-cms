@@ -7,9 +7,12 @@
 
 namespace Junco\Users;
 
-use Junco\Users\UserHelper;
-use Exception;
+use Junco\Users\Entity\User;
 use Junco\Users\Enum\UserStatus;
+use Junco\Users\Enum\ActivityType;
+use Junco\Users\UserHelper;
+use Junco\Usys\UsysToken;
+use Exception;
 
 class AutoSignup
 {
@@ -32,61 +35,76 @@ class AutoSignup
         string $fullname = '',
         bool   $send_token = false,
         bool   $verified_email = false
-    ) {
+    ): User {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new Exception(_t('Please, fill in with a valid email.'));
         }
 
         // query
-        $user = $this->db->query("
+        $data = $this->db->query("
 		SELECT
 		 id ,
 		 fullname ,
 		 username ,
 		 email ,
-		 status ,
-		 ( FALSE ) AS is_created
+         password ,
+		 status
 		FROM `#__users`
 		WHERE email = ?", $email)->fetch();
 
-        if (!$user) {
-            $role_id  = config('users.default_ucid') or abort();
-            $username = $this->getValidUsername($email);
-            $status   = UserStatus::autosignup;
-
-            if (!$fullname) {
-                $fullname = $username;
-            }
-
-            // query
-            $this->db->exec("INSERT INTO `#__users` (??) VALUES (??)", [
-                'fullname'       => $fullname,
-                'username'       => $username,
-                'email'          => $email,
-                'verified_email' => $verified_email ? 'yes' : 'no',
-                'status'         => $status
-            ]);
-            $user_id = $this->db->lastInsertId();
-
-            // query - role
-            $this->db->exec("INSERT INTO `#__users_roles_map` (user_id, role_id) VALUES (?, ?)", $user_id, $role_id);
-
-            // Email
-            if ($send_token) {
-                UserActivityToken::generateAndSend('signup', $user_id, $email, $fullname);
-            }
-
-            $user = [
-                'id'         => $user_id,
-                'fullname'   => $fullname,
-                'username'   => $username,
-                'email'      => $email,
-                'status'     => $status->name,
-                'is_created' => true
-            ];
+        if ($data) {
+            return new User(
+                $data['id'],
+                $data['username'],
+                $data['fullname'],
+                $data['email'],
+                $data['password'],
+                $data['status']
+            );
         }
 
-        return $user;
+        return $this->newUser($email, $fullname, $send_token, $verified_email);
+    }
+
+    /**
+     * 
+     */
+    protected function newUser(
+        string $email,
+        string $fullname,
+        bool $send_token,
+        bool $verified_email
+    ): User {
+        $role_id        = config('users.default_ucid') or abort();
+        $username       = $this->getValidUsername($email);
+        $status         = UserStatus::autosignup;
+        $verified_email = $verified_email ? 'yes' : 'no';
+
+        if (!$fullname) {
+            $fullname = $username;
+        }
+
+        // query
+        $this->db->exec("
+        INSERT INTO `#__users` (
+         fullname,
+         username,
+         email,
+         verified_email, 
+         status
+        ) VALUES (?, ?, ?, ?, ?)", $fullname, $username, $email, $verified_email, $status);
+        $user_id = $this->db->lastInsertId();
+
+        // query
+        $this->db->exec("INSERT INTO `#__users_roles_map` (user_id, role_id) VALUES (?, ?)", $user_id, $role_id);
+
+        // Email
+        if ($send_token) {
+            $token = UserActivityToken::generate(ActivityType::signup, $user_id, $email);
+            (new UsysToken)->send($token, $fullname);
+        }
+
+        return (new User($user_id, $username, $fullname, $email, '', $status))->setCreation();
     }
 
     /**

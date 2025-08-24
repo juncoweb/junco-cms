@@ -1705,7 +1705,7 @@
             'To activate your account and begin using the website, click on the link below:' => 'Para activar su cuenta y comenzar a utilizar el sitio, haga clic en el enlace de abajo:',
             'To reset the password, click on the link:' => 'Para restablecer la contraseña, haga clic en el enlace:',
             'Help to re-enter on %s' => 'Ayuda para volver a entrar en %s',
-            'We\'re sorry you had trouble getting into your %s account.' => 'Sentimos que haya tenido problemas para entrar en su cuenta %s.',
+            'We are sorry you had trouble getting into your %s account.' => 'Sentimos que haya tenido problemas para entrar en su cuenta %s.',
             'New Email' => 'Nuevo correo electrónico',
             'To validate the new email, follow the link below:' => 'Para validar el nuevo correo electrónico, siga el siguiente enlace:',
             'Please, choose a username with 6 to 24 characters, using only letters and numbers.' => 'Por favor, elija un usuario de 6 a 24 caracteres, sólo con letras y números.',

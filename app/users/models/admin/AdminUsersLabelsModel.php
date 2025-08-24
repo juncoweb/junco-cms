@@ -26,11 +26,11 @@ class AdminUsersLabelsModel extends Model
     public function getListData()
     {
         // data
-        $this->filter(POST, ['search' => 'text']);
+        $data = $this->filter(POST, ['search' => 'text']);
 
         // query
-        if ($this->data['search']) {
-            $this->db->where("e.extension_name LIKE %?", $this->data['search']);
+        if ($data['search']) {
+            $this->db->where("e.extension_name LIKE %?", $data['search']);
         }
         $pagi = $this->db->paginate("
 		SELECT [
@@ -59,7 +59,7 @@ class AdminUsersLabelsModel extends Model
             $rows[] = $row;
         }
 
-        return $this->data + [
+        return $data + [
             'rows' => $rows,
             'pagi' => $pagi
         ];
@@ -71,13 +71,13 @@ class AdminUsersLabelsModel extends Model
     public function getCreateData()
     {
         // data
-        $this->filter(POST, ['num_rows' => 'int|min:1|default:1']);
+        $data = $this->filter(POST, ['num_rows' => 'int|min:1|default:1']);
 
         return [
-            'title' => _t('Create'),
-            'values' => array_fill(0, $this->data['num_rows'], null),
+            'title'      => _t('Create'),
+            'values'     => array_fill(0, $data['num_rows'], null),
             'extensions' => $this->getExtensions(),
-            'is_edit' => false,
+            'is_edit'    => false,
         ];
     }
 
@@ -87,7 +87,7 @@ class AdminUsersLabelsModel extends Model
     public function getEditData()
     {
         // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
+        $data = $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // query
         $rows = $this->db->query("
@@ -98,17 +98,17 @@ class AdminUsersLabelsModel extends Model
 		 label_name ,
 		 label_description
 		FROM `#__users_roles_labels`
-		WHERE id IN ( ?.. )", $this->data['id'])->fetchAll();
+		WHERE id IN ( ?.. )", $data['id'])->fetchAll();
 
         foreach ($rows as $i => $row) {
             $rows[$i] = $row;
         }
 
         return [
-            'title' => _t('Edit'),
-            'values' => $rows,
+            'title'      => _t('Edit'),
+            'values'     => $rows,
             'extensions' => $this->getExtensions(),
-            'is_edit' => true,
+            'is_edit'    => true,
         ];
     }
 
@@ -118,9 +118,7 @@ class AdminUsersLabelsModel extends Model
     public function getConfirmDeleteData()
     {
         // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
-
-        return $this->data;
+        return $this->filter(POST, ['id' => 'id|array|required:abort']);
     }
 
     /**

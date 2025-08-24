@@ -5,16 +5,19 @@
  * @author: Junco CMS (tm)
  */
 
-namespace Junco\Users\Tractor;
+namespace Junco\Users\Service;
 
+use Junco\Users\Entity\User;
+use Junco\Users\Enum\ActivityType;
 use Junco\Users\Enum\UserStatus;
 use Junco\Users\Exception\UserNotActiveException;
 use Junco\Users\Exception\UserNotFoundException;
 use Junco\Users\UserActivity;
 use Junco\Users\UserActivityToken;
 use Junco\Users\UserHelper;
+use Junco\Usys\UsysToken;
 
-class LoginTractor
+class Login
 {
     // vars
     protected $db;
@@ -28,7 +31,7 @@ class LoginTractor
     public function __construct()
     {
         $this->db = db();
-        $this->activity = new UserActivity;
+        $this->activity = new UserActivity(ActivityType::login);
     }
 
     /**
@@ -52,48 +55,51 @@ class LoginTractor
             throw new UserNotFoundException(_t('Please, fill in the password.'));
         }
 
-        $config = config('users');
-
         // security
-        $config['users.locks_level']
-            and $this->activity->verify('login');
+        $this->activity->verify();
 
         $user = UserHelper::getUserFromInput($email_username);
 
         if (!$user) {
-            $this->activity->record('login', -1, 0, ['enter' => $email_username]);
+            $this->activity->record(UserActivity::USER_NOT_FOUND, 0, ['enter' => $email_username]);
             throw new UserNotFoundException(_t('Invalid username/password'));
         }
 
-        if (!UserStatus::active->isEqual($user['status'])) {
-            $this->activity->record('login', $this->getActivityCode($user['status']), $user['id']);
+        if (!$user->isActive()) {
+            $this->activity->record(UserActivity::USER_NOT_ACTIVE, $user->getId());
             throw new UserNotActiveException();
         }
 
-        if (!password_verify($password, $user['password'])) {
-            $config['users.autologin']
+        if (!$user->verifyPassword($password)) {
+            config('users.autologin')
                 and $this->sendAutoLoginEmail($user);
 
-            $this->activity->record('login', -7, $user['id']);
+            $this->activity->record(UserActivity::INVALID_PASSWORD, $user->getId());
             throw new UserNotFoundException(_t('Invalid username/password'));
         }
 
-        $config['users.password_rehash']
-            and UserHelper::rehash($password, $user['id']);
+        config('users.password_rehash')
+            and UserHelper::rehash($password, $user->getId());
 
-        $this->user_id = $user['id'];
+        $this->user_id = $user->getId();
     }
 
     /**
-     * Login
+     * Set deferred log in
+     * 
+     * @param int    $user_id
+     * @param bool   $remember
+     * @param ?array &$data
+     * 
+     * @return bool  Returns false if an error occurs; otherwise returns true.
      */
-    public function preLogin(bool $not_expire = false): array
+    public function setDeferredLogin(bool $remember = false): array
     {
-        if (!config('users.not_expire')) {
-            $not_expire = false;
+        if (!config('users.remember')) {
+            $remember = false;
         }
 
-        curuser()->preLogin($this->user_id, $not_expire, $data);
+        auth()->setDeferredLogin($this->user_id, $remember, $data);
 
         return $data;
     }
@@ -101,14 +107,14 @@ class LoginTractor
     /**
      * Login
      */
-    public function login(bool $not_expire = false): array
+    public function login(bool $remember = false): array
     {
-        if (!config('users.not_expire')) {
-            $not_expire = false;
+        if (!config('users.remember')) {
+            $remember = false;
         }
 
-        if (curuser()->login($this->user_id, $not_expire, $data)) {
-            $this->activity->record('login', 0, $this->user_id);
+        if (auth()->login($this->user_id, $remember, $data)) {
+            $this->activity->record(UserActivity::OK, $this->user_id);
         }
 
         return $data;
@@ -131,30 +137,11 @@ class LoginTractor
     }
 
     /**
-     * Get
-     */
-    protected function getActivityCode(string $status)
-    {
-        if (UserStatus::inactive->isEqual($status)) {
-            return -2;
-        }
-        if (UserStatus::autosignup->isEqual($status)) {
-            return -3;
-        }
-
-        abort();
-    }
-
-    /**
      * Send auto-login email
      */
-    protected function sendAutoLoginEmail(array $user)
+    protected function sendAutoLoginEmail(User $user): void
     {
-        UserActivityToken::generateAndSend(
-            'autologin',
-            $user['id'],
-            $user['email'],
-            $user['fullname']
-        );
+        $token = UserActivityToken::generate(ActivityType::autologin, $user->getId(), $user->getEmail());
+        (new UsysToken)->send($token, $user->getName());
     }
 }

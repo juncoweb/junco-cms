@@ -500,10 +500,10 @@ class Router
         }
 
         // vars
-        $route            = explode('/', $route, 3);
-        $access_point    = $route[0];
-        $component        = $route[1] ?? '';
-        $task            = $route[2] ?? '';
+        $route        = explode('/', $route, 3);
+        $access_point = $route[0];
+        $component    = $route[1] ?? '';
+        $task         = $route[2] ?? '';
 
         // replace rules
         if ($this->route_replaces) {
@@ -663,7 +663,7 @@ class Router
                 $url = $this->site_url;
             }
         } elseif ($url == 401) {
-            $url = $this->getUrl('/usys/login', ['redirect' => urlencode($this->getCurrentUrl(true))], $absolute);
+            $url = $this->getUrl('/usys/login', ['redirect' => $this->getCurrentUrl(true)], $absolute);
         } elseif ($url == 404) {
             $url = $this->getUrl('/system/404', [], $absolute);
         } elseif (is_array($url)) {
@@ -675,7 +675,7 @@ class Router
         }
 
         header("Location: $url");
-        die;
+        exit;
     }
 
     /**

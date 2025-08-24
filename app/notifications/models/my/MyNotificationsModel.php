@@ -19,7 +19,7 @@ class MyNotificationsModel extends Model
     public function __construct()
     {
         $this->db = db();
-        $this->user_id = curuser()->id;
+        $this->user_id = curuser()->getId();
     }
 
     /**
@@ -70,9 +70,6 @@ class MyNotificationsModel extends Model
      */
     public function getShowData()
     {
-        //
-        $this->markAsRead();
-
         // query
         $pagi = $this->db->paginate("
 		SELECT [
@@ -94,6 +91,7 @@ class MyNotificationsModel extends Model
 
             $rows = $pagi->fetchAll();
             $this->setUrl($rows);
+            $this->markAsRead();
         }
 
         return [

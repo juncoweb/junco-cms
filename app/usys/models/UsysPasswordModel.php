@@ -6,9 +6,11 @@
  */
 
 use Junco\Mvc\Model;
+use Junco\Users\Enum\ActivityType;
 use Junco\Users\Enum\UserStatus;
 use Junco\Users\UserActivityToken;
 use Junco\Users\UserHelper;
+use Junco\Usys\UsysToken;
 
 class UsysPasswordModel extends Model
 {
@@ -37,12 +39,13 @@ class UsysPasswordModel extends Model
             return $this->unprocessable(_t('Invalid email/username.'));
         }
 
-        if (!UserStatus::active->isEqual($user['status'])) {
+        if (!$user->isActive()) {
             return $this->result()->redirectTo(url('/usys/message', ['op' => 'login']));
         }
 
         // token
-        $result = UserActivityToken::generateAndSend('savepwd', $user['id'], $user['email'], $user['fullname']);
+        $token = UserActivityToken::generate(ActivityType::savepwd, $user->getId(), $user->getEmail());
+        $result = (new UsysToken)->send($token, $user->getName());
 
         if (!$result) {
             return $this->unprocessable(_t('An error has occurred in the mail server. Please, try again later.'));
@@ -58,12 +61,19 @@ class UsysPasswordModel extends Model
     {
         // data
         $this->filter(POST, [
+            'token'    => 'text',
             'password' => 'required',
             'verified' => 'required',
         ]);
 
         // vars
-        $token = UserActivityToken::get(POST, 'savepwd');
+        $token = UserActivityToken::from($this->data['token'], ActivityType::savepwd);
+
+        if (!$token) {
+            return $this->unprocessable(_t('The code used is invalid or has expired.'));
+        }
+
+        $user_id = $token->getUserId();
 
         if ($this->data['password'] !== $this->data['verified']) {
             return $this->unprocessable(_t('Passwords do not match.'));
@@ -73,10 +83,10 @@ class UsysPasswordModel extends Model
         $this->data['password'] = UserHelper::hash($this->data['password']);
 
         // query
-        $this->db->exec("UPDATE `#__users` SET password = ? WHERE id = ?", $this->data['password'], $token->user_id);
+        $this->db->exec("UPDATE `#__users` SET password = ? WHERE id = ?", $this->data['password'], $user_id);
 
         $token->destroy();
-        curuser()->login($token->user_id);
+        auth()->login($user_id);
 
         return $this->result()->redirectTo(url('/usys/message', ['op' => 'savepwd']));
     }

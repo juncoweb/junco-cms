@@ -163,9 +163,11 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
         if ($code) {
             $message = sprintf('%d - %s', $code, $message);
         }
-        if (strlen($message) > 120) {
+
+        if (strlen($message) > 240) {
             $this->size('large');
         }
+
         $this->close(_t('Close'));
         $this->title(_t('Alert'));
         $this->content = $message;

@@ -21,37 +21,43 @@ interface GuardInterface
      *
      * @return int
      */
-    public function getPreLoginUserId(): int;
+    public function getDeferredUserId(): int;
 
     /**
-     * PreLogin
+     * Set deferred log in
      * 
-     * @param int  $user_id
-     * @param bool $not_expire
+     * @param int    $user_id
+     * @param bool   $remember
+     * @param ?array &$data
      * 
-     * @return bool
+     * @return bool  Returns false if an error occurs; otherwise returns true.
      */
-    public function preLogin(int $user_id = 0, bool $not_expire = false, ?array &$data = []): bool;
+    public function setDeferredLogin(int $user_id = 0, bool $remember = false, ?array &$data = []): bool;
 
     /**
-     * PreLogin
+     * Execute a deferred login.
      * 
-     * @return bool
+     * @param ?array &$data
+     * 
+     * @return bool  Returns false if an error occurs; otherwise returns true.
      */
-    public function takePreLogin(array &$data = []): bool;
+    public function execDeferredLogin(array &$data = []): bool;
 
     /**
      * Login
      * 
-     * @param int  $user_id
-     * @param bool $not_expire
+     * @param int    $user_id       If it is zero, log out.
+     * @param bool   $remember
+     * @param ?array &$data
      * 
-     * @return bool
+     * @return bool  Returns false if an error occurs; otherwise returns true.
      */
-    public function login(int $user_id = 0, bool $not_expire = false, array &$data = []): bool;
+    public function login(int $user_id = 0, bool $remember = false, array &$data = []): bool;
 
     /**
      * Logout
+     * 
+     * @return bool  Returns false if an error occurs; otherwise returns true.
      */
     public function logout(): bool;
 }

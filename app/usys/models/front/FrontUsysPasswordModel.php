@@ -6,6 +6,7 @@
  */
 
 use Junco\Mvc\Model;
+use Junco\Users\Enum\ActivityType;
 use Junco\Users\UserActivityToken;
 
 class FrontUsysPasswordModel extends Model
@@ -25,9 +26,16 @@ class FrontUsysPasswordModel extends Model
      */
     public function getEditData()
     {
+        // data
+        $this->filter(GET, ['token' => 'text']);
+
+        $token = UserActivityToken::from($this->data['token'], ActivityType::savepwd)
+            ? $this->data['token']
+            : '';
+
         return [
             'options' => config('usys.options'),
-            'token' => UserActivityToken::get(GET, 'savepwd', true)
+            'token' => $token
         ];
     }
 }

@@ -35,8 +35,8 @@ $domready = "
 // form
 $form = Form::get();
 $form->setValues([
-    'user_id'    => $curuser->id,
-    '__user_id' => $curuser->fullname,
+    'user_id'    => $curuser->getId(),
+    '__user_id' => $curuser->getName(),
     'label_id'    => [0 => 'Hola', 1 => 'Chau'],
 ]);
 $form->collection('userpicker', 'user_id')->setLabel('Select');

@@ -5,12 +5,12 @@
  * @author: Junco CMS (tm)
  */
 
-use Junco\Authentication\Curuser;
 use Junco\Container\Container;
 use Junco\Filesystem\MediaStorage;
 use Junco\Http\Exception\HttpError;
 use Junco\Http\Exception\HttpException;
 use Junco\Http\Message\Response;
+use Junco\Users\Curuser;
 
 /**
  * App
@@ -48,6 +48,21 @@ function abort(int $statusCode = 0, string $message = '')
 function alert(int $statusCode = 0, string $message = '')
 {
     throw new HttpException($statusCode, $message);
+}
+
+/**
+ * Authentication
+ * 
+ * @return Authentication
+ */
+function auth(): Authentication
+{
+    static $auth;
+    if ($auth === null) {
+        $auth = app('authentication');
+    }
+
+    return $auth;
 }
 
 /**
@@ -209,7 +224,7 @@ function redirect($url = null, bool $absolute = true): void
 /**
  * Session
  */
-function session(): object
+function session(): Session
 {
     static $session;
     if ($session === null) {

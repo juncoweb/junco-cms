@@ -6,6 +6,8 @@
  */
 
 use Junco\Mvc\Model;
+use Junco\Users\Enum\ActivityType;
+use Junco\Users\UserActivity;
 
 class AdminUsersActivitiesModel extends Model
 {
@@ -26,35 +28,33 @@ class AdminUsersActivitiesModel extends Model
     public function getListData()
     {
         // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'search' => 'text',
-            'field' => '',
-            'type' => '',
+            'field'  => '',
+            'type'   => 'enum:users.activity_type',
         ]);
 
-        $types = [_t('All'), 'signup', 'activation', 'login', 'autologin', 'savepwd', 'savemail', 'token'];
-
         // query
-        if ($this->data['search']) {
-            switch ($this->data['field']) {
+        if ($data['search']) {
+            switch ($data['field']) {
                 default:
                 case 1:
-                    $this->db->where("u.fullname LIKE %?", $this->data['search']);
+                    $this->db->where("u.fullname LIKE %?", $data['search']);
                     break;
                 case 2:
-                    if (is_numeric($this->data['search'])) {
-                        $this->db->where("u.id = ?", (int)$this->data['search']);
+                    if (is_numeric($data['search'])) {
+                        $this->db->where("u.id = ?", (int)$data['search']);
                     } else {
-                        $this->db->where("u.username LIKE %?", $this->data['search']);
+                        $this->db->where("u.username LIKE %?", $data['search']);
                     }
                     break;
                 case 3:
-                    $this->db->where("u.email LIKE %?", $this->data['search']);
+                    $this->db->where("u.email LIKE %?", $data['search']);
                     break;
             }
         }
-        if ($this->data['type'] && isset($types[$this->data['type']])) {
-            $this->db->where("a.activity_type = ?", $types[$this->data['type']]);
+        if ($data['type']) {
+            $this->db->where("a.activity_type = ?", $data['type']);
         }
         $pagi = $this->db->paginate("
 		SELECT [
@@ -74,9 +74,30 @@ class AdminUsersActivitiesModel extends Model
 		[WHERE]
 		[ORDER BY a.created_at DESC]");
 
-        return $this->data + [
-            'types' => $types,
-            'pagi' => $pagi
+        $rows = [];
+        foreach ($pagi->fetchAll() as $row) {
+            if (!$row['fullname']) {
+                $row['fullname'] = inet_ntop($row['user_ip']);
+            }
+
+            $row['created_at']  = new Date($row['created_at']);
+            $row['modified_at'] = $row['modified_at']
+                ? $row['created_at']->formatInterval($row['modified_at'])
+                : '';
+            $row['message'] = $messages[$row['activity_code']] ??= UserActivity::getMessage($row['activity_code']);
+            /* $row['activity_type'] = $row['activity_type']
+                ? ($types[$row['activity_type']] ??= ActivityType::get($row['activity_type']))->title()
+                : null; */
+
+            $rows[$row['id']] = $row;
+        }
+
+        return [
+            ...$data,
+            'type'  => $this->data['type']?->name,
+            'types' => ActivityType::getList([_t('All')]),
+            'pagi'  => $pagi,
+            'rows'  => $rows
         ];
     }
 }

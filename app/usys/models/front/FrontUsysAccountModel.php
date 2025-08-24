@@ -33,7 +33,7 @@ class FrontUsysAccountModel extends Model
 		 username ,
 		 email
 		FROM `#__users`
-		WHERE id = ?", curuser()->id)->fetch();
+		WHERE id = ?", curuser()->getId())->fetch();
 
         return [
             'values' => $data,

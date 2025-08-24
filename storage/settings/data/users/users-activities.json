@@ -6,19 +6,6 @@
     ],
     "descriptions": [],
     "rows": {
-        "token_key": {
-            "label": "Key",
-            "type": "input-text",
-            "group": 0,
-            "ordering": 1,
-            "default_value": "token",
-            "help": "The name for the variable that stores the token.",
-            "history": [],
-            "autoload": 1,
-            "translate": 0,
-            "reload_on_change": 0,
-            "status": 0
-        },
         "token_lifetime": {
             "label": "Lifetime",
             "type": "input-integer",

@@ -16,10 +16,10 @@ class contact_master_default_snippet
 
         $curuser = curuser();
         $felem   = Form::getElements();
-        if ($curuser->id) {
+        if ($curuser->getId()) {
             $felem->setValues([
-                'contact_name' => $curuser->fullname,
-                'contact_email' => $curuser->email,
+                'contact_name' => $curuser->getName(),
+                'contact_email' => $curuser->getEmail(),
             ]);
         }
 
