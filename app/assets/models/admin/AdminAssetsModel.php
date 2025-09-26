@@ -20,18 +20,16 @@ class AdminAssetsModel extends Model
      */
     public function getConfirmCompileData()
     {
-        // data
-        $this->filter(POST, ['id' => 'array|required:abort']);
+        $data = $this->filter(POST, ['id' => 'array|required:abort']);
 
-        $config = config('assets');
         return [
             'fixurl_options' => UrlFixer::getOptions(),
             'precompile_options' => ScssCompiler::getOptions(),
             'values' => [
-                'minify'     => $config['assets.minify'],
-                'fixurl'     => $config['assets.fixurl'],
-                'precompile' => $config['assets.precompile'],
-                'keys'       => $this->data['id'],
+                'minify'     => config('assets.minify'),
+                'fixurl'     => config('assets.fixurl'),
+                'precompile' => config('assets.precompile'),
+                'keys'       => $data['id'],
             ]
         ];
     }
@@ -41,46 +39,30 @@ class AdminAssetsModel extends Model
      */
     public function getListData()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'search'  => 'text',
             'type'    => '',
             'verify'  => 'bool',
             'compare' => 'bool'
         ]);
 
-        // extract
-        extract($this->data);
-
-        if (
-            $search
-            && '#' != $search
-            && '#' == substr($search, 0, 1)
-        ) {
-            $find   = substr($search, 1);
-            $search = null;
-        } else {
-            $find   = '';
-        }
+        extract($data);
 
         // vars
-        $types = [
-            ''    => _t('All'),
-            'css' => 'Css',
-            'js'  => 'Js'
-        ];
+        $find = $this->getFindFromSearch($search);
+        $types = $this->getTypes();
 
         if ($type && !isset($types[$type])) {
             $type = false;
         }
 
-        $rows = (new AssetsBasic)->fetchAll(function ($data) use ($search, $type, $compare, $verify, $find) {
+        $rows = (new AssetsBasic)->fetchAll(function ($row) use ($search, $type, $compare, $verify, $find) {
             return !(
-                ($search && false === strpos($data['name'], $search))
-                || ($type && $type != $data['type'])
-                || ($compare && $data['assets'] == $data['default_assets'])
-                || ($verify && !$data['to_verify'])
-                || ($find && false === strpos($data['assets'], $find))
+                ($search && false === strpos($row['name'], $search))
+                || ($type && $type != $row['type'])
+                || ($compare && $row['assets'] == $row['default_assets'])
+                || ($verify && !$row['to_verify'])
+                || ($find && false === strpos($row['assets'], $find))
             );
         });
 
@@ -88,7 +70,7 @@ class AdminAssetsModel extends Model
         $pagi = new Pagination();
         $pagi->slice($rows);
 
-        return $this->data + [
+        return $data + [
             'types' => $types,
             'pagi'  => $pagi,
         ];
@@ -112,17 +94,13 @@ class AdminAssetsModel extends Model
      */
     public function getEditData()
     {
-        // data
-        $this->filter(POST, ['id' => 'array:first|required:abort']);
+        $data = $this->filter(POST, ['id' => 'array:first|required:abort']);
 
-        $data = (new AssetsBasic)->fetch($this->data['id']);
+        //
+        $data = (new AssetsBasic)->fetch($data['id']) or abort();
 
         if ($data) {
-            $name = explode('-', $data['name'], 2);
-            $data = array_merge($data, [
-                'extension_alias' => $name[0],
-                'name'            => $name[1] ?? ''
-            ]);
+            $data = $this->explodeName($data);
         }
 
         return [
@@ -152,10 +130,34 @@ class AdminAssetsModel extends Model
      */
     public function getConfirmDeleteData()
     {
-        // data
-        $this->filter(POST, ['id' => 'array|required:abort']);
+        return $this->filter(POST, ['id' => 'array|required:abort']);
+    }
 
-        return $this->data;
+    /**
+     * Get
+     */
+    protected function getTypes(): array
+    {
+        return [
+            ''    => _t('All'),
+            'css' => 'Css',
+            'js'  => 'Js'
+        ];
+    }
+
+    /**
+     * Get
+     */
+    protected function getFindFromSearch(string &$search): string
+    {
+        if (!$search || $search[0] != '#') {
+            return '';
+        }
+
+        $find = substr($search, 1);
+        $search = '';
+
+        return $find;
     }
 
     /**
@@ -167,5 +169,18 @@ class AdminAssetsModel extends Model
 		SELECT extension_alias, extension_name
 		FROM `#__extensions`
 		ORDER BY extension_name")->fetchAll(Database::FETCH_COLUMN, [0 => 1], ['--- ' . _t('Select') . ' ---']);
+    }
+
+    /**
+     * Get
+     */
+    protected function explodeName(array $data): array
+    {
+        $name = explode('-', $data['name'], 2);
+
+        return array_merge($data, [
+            'extension_alias' => $name[0],
+            'name'            => $name[1] ?? ''
+        ]);
     }
 }

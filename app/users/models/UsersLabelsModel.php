@@ -26,7 +26,6 @@ class UsersLabelsModel extends Model
      */
     public function save()
     {
-        // data
         $data_array = $this->filterArray(POST, [
             'extension_id'      => 'id|required',
             'label_key'         => 'text',
@@ -75,7 +74,6 @@ class UsersLabelsModel extends Model
      */
     public function delete()
     {
-        // data
         $data = $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // security

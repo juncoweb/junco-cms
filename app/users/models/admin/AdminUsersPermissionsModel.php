@@ -25,7 +25,6 @@ class AdminUsersPermissionsModel extends Model
      */
     public function getListData()
     {
-        // data
         $data = $this->filter(POST, [
             'role_id' => 'id',
             'search' => 'text',

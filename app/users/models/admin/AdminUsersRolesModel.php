@@ -25,7 +25,6 @@ class AdminUsersRolesModel extends Model
      */
     public function getListData()
     {
-        // data
         $data = $this->filter(POST, ['search' => 'text']);
 
         // query
@@ -56,9 +55,6 @@ class AdminUsersRolesModel extends Model
      */
     public function getCreateData()
     {
-        // data
-        $this->filter(POST, ['num_rows' => 'int|min:1|default:1']);
-
         return [
             'title' => _t('Create'),
             'values' => ['autoload' => true]
@@ -70,7 +66,6 @@ class AdminUsersRolesModel extends Model
      */
     public function getEditData()
     {
-        // data
         $data = $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // query
@@ -93,7 +88,6 @@ class AdminUsersRolesModel extends Model
      */
     public function getConfirmDeleteData()
     {
-        // data
         return $this->filter(POST, ['id' => 'id|array|required:abort']);
     }
 }

@@ -32,6 +32,7 @@ class MenusMakerModel extends Model
         'User spaces',
         'Usys'
     ];
+
     /**
      * Constructor
      */
@@ -46,7 +47,7 @@ class MenusMakerModel extends Model
     public function getConfirmData()
     {
         return [
-            'values'     => $this->data,
+            'values'     => [],
             'extensions' => $this->getExtensions(),
             'folders'    => $this->getFolders(),
             'keys'       => $this->getKeys()
@@ -58,8 +59,7 @@ class MenusMakerModel extends Model
      */
     public function store()
     {
-        // data
-        $this->filter(POST, [
+        $input = $this->filter(POST, [
             'extension_id'      => 'id|required',
             'menu_title'        => '',
             'menu_subcomponent' => '',
@@ -68,37 +68,37 @@ class MenusMakerModel extends Model
             'menu_image'        => 'text',
         ]);
 
-        $extension = $this->getExtension($this->data['extension_id']) or abort();
+        $extension = $this->getExtension($input['extension_id']) or abort();
 
-        if (!$this->validateSubcomponent($this->data['menu_subcomponent'])) {
+        if (!$this->validateSubcomponent($input['menu_subcomponent'])) {
             return $this->unprocessable(sprintf(_t('The «%s» is incorrect.'), _t('Component')));
         }
 
-        if (!$this->data['menu_title']) {
-            $this->data['menu_title'] = $extension['name'] ?: $extension['alias'];
+        if (!$input['menu_title']) {
+            $input['menu_title'] = $extension['name'] ?: $extension['alias'];
         }
 
-        if (!$this->data['menu_image']) {
-            $this->data['menu_image'] = 'fa-solid fa-file-lines';
+        if (!$input['menu_image']) {
+            $input['menu_image'] = 'fa-solid fa-file-lines';
         }
 
         $component = $extension['alias'];
         $menu_hash = $extension['alias'];
 
-        if ($this->data['menu_subcomponent']) {
-            $component .= '.' . $this->data['menu_subcomponent'];
-            $menu_hash .= '-' . $this->data['menu_subcomponent'];
+        if ($input['menu_subcomponent']) {
+            $component .= '.' . $input['menu_subcomponent'];
+            $menu_hash .= '-' . $input['menu_subcomponent'];
         }
 
         //
         $data = [];
-        foreach ($this->data['menu_keys'] as $key) {
+        foreach ($input['menu_keys'] as $key) {
             $data[] = [
                 'menu_key'    => $this->getKey($key),
-                'menu_path'   => $this->getPath($key, $this->data['menu_folder'], $this->data['menu_title']),
+                'menu_path'   => $this->getPath($key, $input['menu_folder'], $input['menu_title']),
                 'menu_order'  => $this->getOrder($key),
                 'menu_url'    => $this->getUrl($key, $component),
-                'menu_image'  => $this->getImage($key, $this->data['menu_image']),
+                'menu_image'  => $this->getImage($key, $input['menu_image']),
                 'menu_hash'   => $menu_hash,
                 'menu_params' => '',
                 'status'      => 1

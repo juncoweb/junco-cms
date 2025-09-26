@@ -25,15 +25,14 @@ class AdminJobsFailuresModel extends Model
      */
     public function getListData()
     {
-        // data
-        $this->filter(POST, ['search' => 'text']);
+        $data = $this->filter(POST, ['search' => 'text']);
 
         // query
-        if ($this->data['search']) {
-            if (is_numeric($this->data['search'])) {
-                $this->db->where("job_id = ?", (int)$this->data['search']);
+        if ($data['search']) {
+            if (is_numeric($data['search'])) {
+                $this->db->where("job_id = ?", (int)$data['search']);
             } else {
-                $this->db->where("job_queue LIKE %?", $this->data['search']);
+                $this->db->where("job_queue LIKE %?", $data['search']);
             }
         }
         $pagi = $this->db->paginate("
@@ -55,7 +54,7 @@ class AdminJobsFailuresModel extends Model
             $rows[] = $row;
         }
 
-        return $this->data + [
+        return $data + [
             'rows' => $rows,
             'pagi' => $pagi
         ];
@@ -66,8 +65,7 @@ class AdminJobsFailuresModel extends Model
      */
     public function getShowData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array:first|required:abort']);
+        $input = $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // query
         $data = $this->db->query("
@@ -80,7 +78,7 @@ class AdminJobsFailuresModel extends Model
 		 job_error ,
 		 created_at
 		FROM `#__jobs_failures`
-		WHERE id = ?", $this->data['id'])->fetch() or abort();
+		WHERE id = ?", $input['id'])->fetch() or abort();
 
         $data['created_at'] = new Date($data['created_at']);
 
@@ -92,9 +90,6 @@ class AdminJobsFailuresModel extends Model
      */
     public function getConfirmDeleteData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
-
-        return $this->data;
+        return $this->filter(POST, ['id' => 'id|array|required:abort']);
     }
 }

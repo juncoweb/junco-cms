@@ -25,10 +25,7 @@ class AdminSettingsModel extends Model
      */
     public function getIndexData()
     {
-        // data
-        $this->filter(GET, ['key' => '']);
-
-        return $this->data;
+        return $this->filter(GET, ['key' => '']);
     }
 
     /**
@@ -36,10 +33,10 @@ class AdminSettingsModel extends Model
      */
     public function getPrepareData()
     {
-        // data
-        $this->filter(POST, ['key' => '']);
+        $data = $this->filter(POST, ['key' => '']);
 
-        $extension = explode('-', $this->data['key'], 2);
+        //
+        $extension = explode('-', $data['key'], 2);
 
         return [
             'extensions' => $this->getExtensions(),
@@ -56,34 +53,34 @@ class AdminSettingsModel extends Model
      */
     public function getEditData()
     {
-        // data
-        $this->filter(POST, [
+        $input = $this->filter(POST, [
             'key'           => '',
             'extension'     => '',
             'sub_extension' => '',
             'add_rows'      => 'int',
         ]);
 
-        if (!$this->data['key']) {
-            $this->data['key'] = $this->data['extension'];
-            if ($this->data['sub_extension']) {
-                $this->data['key'] .= '-' . $this->data['sub_extension'];
+        if (!$input['key']) {
+            $input['key'] = $input['extension'];
+            if ($input['sub_extension']) {
+                $input['key'] .= '-' . $input['sub_extension'];
             }
         }
 
         // vars
-        $settings = new Settings($this->data['key']);
+        $settings = new Settings($input['key']);
 
         // security
         $settings->security() or abort();
 
         //
         $data = $settings->getData();
-        if ($this->data['add_rows']) {
-            $this->append($data, $this->data['add_rows']);
+
+        if ($input['add_rows']) {
+            $this->append($data, $input['add_rows']);
         }
 
-        $data['key']    = $this->data['key'];
+        $data['key']    = $input['key'];
         $data['groups'] = implode('|', $data['groups']);
         array_unshift($data['descriptions'], $data['description']);
         $data['description'] = implode("\n|", $data['descriptions']);
@@ -102,19 +99,18 @@ class AdminSettingsModel extends Model
      */
     public function getJsonData()
     {
-        // data
-        $this->filter(POST, [
+        $input = $this->filter(POST, [
             'options' => '',
             'json' => 'json:decode_a',
         ]);
 
         // vars
-        $json    = $this->data['json'];
+        $json    = $input['json'];
         $is_edit = !empty($json);
 
-        if ($this->data['options']) {
-            if (is_string($this->data['options'])) {
-                $this->data['options'] = explode(',', $this->data['options']);
+        if ($input['options']) {
+            if (is_string($input['options'])) {
+                $input['options'] = explode(',', $input['options']);
             }
             $count = 0;
 
@@ -124,7 +120,7 @@ class AdminSettingsModel extends Model
                     $json[$index]['values'] = ['__id' => $index];
                     //$json[$index]['name'] = is_numeric($index) ? "[$index]" : $index;
 
-                    foreach ($this->data['options'] as $option) {
+                    foreach ($input['options'] as $option) {
                         if (isset($row[$option])) {
                             $json[$index]['values'][$option] = $row[$option];
                         }
@@ -150,7 +146,7 @@ class AdminSettingsModel extends Model
             'title'   => $is_edit ? _t('Edit') : _t('Create'),
             'is_edit' => $is_edit,
             'json'    => $json,
-            'options' => $this->data['options'],
+            'options' => $input['options'],
         ];
     }
 
@@ -159,10 +155,7 @@ class AdminSettingsModel extends Model
      */
     public function getConfirmDeleteData()
     {
-        // data
-        $this->filter(POST, ['key' => '']);
-
-        return ['key' => $this->data['key']];
+        return $this->filter(POST, ['key' => '']);
     }
 
     /**

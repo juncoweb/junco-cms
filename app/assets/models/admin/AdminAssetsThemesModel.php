@@ -35,18 +35,17 @@ class AdminAssetsThemesModel extends Model
      */
     public function getCopyData()
     {
-        // data
-        $this->filter(POST, ['id' => 'array:first|required:abort']);
+        $data = $this->filter(POST, ['id' => 'array:first|required:abort']);
 
         //
-        $part = explode('-', $this->data['id']);
+        $part = explode('-', $data['id']);
 
         return [
             'title' => _t('Copy'),
             'values' => [
                 'extension_alias' => $part[0],
                 'name'            => $part[1] ?? '',
-                'from'            => $this->data['id'],
+                'from'            => $data['id'],
             ],
             'extensions' => $this->getExtensions(),
         ];
@@ -69,15 +68,13 @@ class AdminAssetsThemesModel extends Model
      */
     public function getConfirmCompileData()
     {
-        // data
-        $this->filter(POST, ['id' => 'array:first|required:abort']);
-        $config = config('assets');
+        $data = $this->filter(POST, ['id' => 'array:first|required:abort']);
 
         return [
             'fixurl_options' => UrlFixer::getOptions(),
-            'values' => $this->data + [
-                'minify' => $config['assets.minify'],
-                'fixurl' => $config['assets.fixurl'],
+            'values' => $data + [
+                'minify' => config('assets.minify'),
+                'fixurl' => config('assets.fixurl'),
             ]
         ];
     }
@@ -87,23 +84,16 @@ class AdminAssetsThemesModel extends Model
      */
     public function getConfirmSelectData()
     {
-        // data
-        $this->filter(POST, [
-            'id' => 'text|array:first|required:abort',
-        ]);
+        $data = $this->filter(POST, ['id' => 'text|array:first|required:abort']);
 
-        $id = explode('-', $this->data['id'], 2);
-        if (count($id) == 1) {
-            $id[] = 'default';
-        }
-        $id = implode('/', $id);
+        $id = $this->normalizeThemeId($data['id']);
 
         return [
             'values' => [
                 'id' => $id,
                 'disable_explanation' => true,
             ],
-            'theme' => $this->data['id'],
+            'theme' => $data['id'],
             'is_used' => ($id == config('frontend.theme')),
             'explain_is_active' => config('template.explain_assets')
         ];
@@ -114,10 +104,7 @@ class AdminAssetsThemesModel extends Model
      */
     public function getConfirmDeleteData()
     {
-        // data
-        $this->filter(POST, ['id' => 'text|array|required:abort']);
-
-        return $this->data;
+        return $this->filter(POST, ['id' => 'text|array|required:abort']);
     }
 
     /**
@@ -129,5 +116,19 @@ class AdminAssetsThemesModel extends Model
 		SELECT extension_alias, extension_name
 		FROM `#__extensions`
 		ORDER BY extension_name")->fetchAll(Database::FETCH_COLUMN, [0 => 1], ['--- ' . _t('Select') . ' ---']);
+    }
+
+    /**
+     * Get
+     */
+    protected function normalizeThemeId(string $theme_id): string
+    {
+        $part = explode('-', $theme_id, 2);
+
+        if (count($part) == 1) {
+            $part[] = 'default';
+        }
+
+        return implode('/', $part);
     }
 }

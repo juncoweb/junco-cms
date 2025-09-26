@@ -30,8 +30,7 @@ class UsysActivationModel extends Model
      */
     public function sendToken()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'option'         => '',
             'email_username' => '',
             'new_email'      => ''
@@ -40,7 +39,7 @@ class UsysActivationModel extends Model
         /**
          * Instance 1
          */
-        $user = UserHelper::getUserFromInput($this->data['email_username']);
+        $user = UserHelper::getUserFromInput($data['email_username']);
 
         if (!$user) {
             return $this->unprocessable(_t('Invalid email/username.'));
@@ -50,7 +49,7 @@ class UsysActivationModel extends Model
             return $this->unprocessable(_t('Your account is active. Please, enter from the login.'));
         }
 
-        if ($this->data['option'] == 1) {
+        if ($data['option'] == 1) {
             return $this->unprocessable($this->obfuscateEmail($user->getEmail()), 5);
         }
 
@@ -64,10 +63,10 @@ class UsysActivationModel extends Model
         // update email
         if (
             $is_inactive
-            && $this->data['new_email']
-            && $this->data['new_email'] !== $email
+            && $data['new_email']
+            && $data['new_email'] !== $email
         ) {
-            $email = $this->updateEmail($this->data['new_email'], $user_id);
+            $email = $this->updateEmail($data['new_email'], $user_id);
         }
 
         // token

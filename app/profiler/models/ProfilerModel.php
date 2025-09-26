@@ -14,10 +14,9 @@ class ProfilerModel extends Model
      */
     public function getIndexData()
     {
-        // data
-        $this->filter(GET, ['frame' => '']);
+        $data = $this->filter(GET, ['frame' => '']);
 
-        return $this->data + [
+        return $data + [
             'title'    => _t('Console'),
             'base_url' => config('site.baseurl')
         ];

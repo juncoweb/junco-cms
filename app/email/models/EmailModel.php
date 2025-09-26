@@ -14,8 +14,7 @@ class EmailModel extends Model
      */
     public function send()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'email_to'      => 'email|required',
             'email_subject' => 'text|required',
             'email_message' => '',
@@ -23,9 +22,9 @@ class EmailModel extends Model
 
         // email
         $email = new Email();
-        $email->to($this->data['email_to']);
-        $email->subject($this->data['email_subject']);
-        $email->message($this->data['email_message'], Email::MESSAGE_ALTER_PLAIN);
+        $email->to($data['email_to']);
+        $email->subject($data['email_subject']);
+        $email->message($data['email_message'], Email::MESSAGE_ALTER_PLAIN);
         $result = $email->send();
 
         if (!$result) {

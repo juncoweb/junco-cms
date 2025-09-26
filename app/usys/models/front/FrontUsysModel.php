@@ -43,17 +43,16 @@ class FrontUsysModel extends Model
             return $data + ['error' => true];
         }
 
-        // data
-        $this->filter(GET, ['token' => 'text']);
+        $input = $this->filter(GET, ['token' => 'text']);
 
-        $token = UserActivityToken::from($this->data['token'], ActivityType::signup);
+        $token = UserActivityToken::from($input['token'], ActivityType::signup);
 
         if ($token) {
             $user = $this->getUserFromToken($token);
 
             if ($user) {
                 $data['user']          = $user;
-                $data['token']         = $this->data['token'];
+                $data['token']         = $input['token'];
                 $data['login_plugins'] = '';
             }
         }
@@ -74,25 +73,25 @@ class FrontUsysModel extends Model
      */
     public function getResolveData()
     {
-        // data
-        $this->filter(GET, ['redirect' => 'text']);
+        $input = $this->filter(GET, ['redirect' => 'text']);
 
+        //
         $user_id = auth()->getDeferredUserId();
 
         if (!$user_id) {
             return redirect(
-                url('/usys/login', array_filter(['redirect' => $this->data['redirect']]))
+                url('/usys/login', array_filter(['redirect' => $input['redirect']]))
             );
         }
 
-        $mfa_url = $this->getNextUrl($user_id, $this->data['redirect']);
+        $mfa_url = $this->getNextUrl($user_id, $input['redirect']);
 
         if ($mfa_url) {
             return redirect($mfa_url);
         }
 
         auth()->execDeferredLogin();
-        return redirect($this->data['redirect'], true);
+        return redirect($input['redirect'], true);
     }
 
     /**
@@ -100,10 +99,9 @@ class FrontUsysModel extends Model
      */
     public function getLoginData()
     {
-        // data
-        $this->filter(GET, ['redirect' => 'text']);
+        $input = $this->filter(GET, ['redirect' => 'text']);
 
-        $data = $this->data + [
+        $data = $input + [
             'user_id'     => auth()->getDeferredUserId(),
             'options'     => config('usys.login_options'),
             'remember'    => config('users.remember'),
@@ -123,11 +121,10 @@ class FrontUsysModel extends Model
      */
     public function getAutologinData()
     {
-        // data
-        $this->filter(GET, ['token' => 'text']);
+        $input = $this->filter(GET, ['token' => 'text']);
 
         try {
-            $token = UserActivityToken::from($this->data['token'], ActivityType::autologin);
+            $token = UserActivityToken::from($input['token'], ActivityType::autologin);
 
             if (!$token) {
                 throw new Exception(_t('The code used is invalid or has expired.'));
@@ -147,10 +144,9 @@ class FrontUsysModel extends Model
      */
     public function getMessageData()
     {
-        // data
-        $this->filter(GET, ['op' => '']);
+        $input = $this->filter(GET, ['op' => '']);
 
-        switch ($this->data['op']) {
+        switch ($input['op']) {
             case 'signup':
                 $title     = _t('Registration complete!');
                 $message   = _t('Your account has been successfully created and an activation message has been sent to your email.');

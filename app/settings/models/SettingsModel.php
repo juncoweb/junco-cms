@@ -11,7 +11,6 @@ class SettingsModel extends Model
 {
     // vars
     protected $db;
-    protected string $key = '';
 
     /**
      * Constructor
@@ -26,14 +25,13 @@ class SettingsModel extends Model
      */
     public function set()
     {
-        // data
-        $this->filter(POST, [
+        $input = $this->filter(POST, [
             '__key'  => '',
             'unlock' => 'array',
         ]);
 
         // vars
-        $settings = new Settings($this->data['__key']);
+        $settings = new Settings($input['__key']);
 
         // security
         $settings->security() or abort();
@@ -54,7 +52,7 @@ class SettingsModel extends Model
         }
 
         # plugins
-        Plugins::get('settings', 'update', str_replace('-', '.', $this->data['__key']))?->run($rows);
+        Plugins::get('settings', 'update', str_replace('-', '.', $input['__key']))?->run($rows);
 
         foreach ($rows as $k => $value) {
             // security
@@ -133,9 +131,9 @@ class SettingsModel extends Model
             // unlock
             if (
                 $developer_mode
-                && $this->data['unlock']
+                && $input['unlock']
                 && $data['rows'][$k]['default_value'] != $value
-                && in_array($k, $this->data['unlock'])
+                && in_array($k, $input['unlock'])
             ) {
                 $data['rows'][$k]['default_value'] = $value;
                 $save_data = true;
@@ -169,8 +167,7 @@ class SettingsModel extends Model
      */
     public function save()
     {
-        // data
-        $this->filterArray(POST, [
+        $data_array = $this->filterArray(POST, [
             'id'               => '',
             'name'             => '',
             'label'            => 'text|required',
@@ -186,7 +183,7 @@ class SettingsModel extends Model
             'delete'           => 'int',
         ]);
 
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'key'         => 'text',
             'title'       => 'text',
             'description' => 'text',
@@ -194,37 +191,37 @@ class SettingsModel extends Model
         ]);
 
         // validate
-        if (!$this->data_array) {
+        if (!$data_array) {
             return $this->unprocessable(_t('Please, add a row before proceeding.'));
         }
 
-        // extract
-        $this->extract('key');
+        // slice
+        $key = $this->slice($data, 'key');
 
-        $settings = new Settings($this->key);
+        $settings = new Settings($key);
         $settings->security() or abort();
 
         //
-        $data = $settings->getData();
-        $this->data['groups']        = $this->parseArray($this->data['groups'], '|');
-        $this->data['descriptions'] = $this->getDescriptions($this->data['description']);
-        $this->data['rows']            = [];
+        $cur_data = $settings->getData();
+        $data['groups']       = $this->parseArray($data['groups'], '|');
+        $data['descriptions'] = $this->getDescriptions($data['description']);
+        $data['rows']         = [];
 
         // translate
-        $translate = $this->data['groups'] ?: [];
+        $translate = $data['groups'] ?: [];
         foreach (['title', 'description'] as $k) {
-            if ($this->data[$k]) {
-                $translate[] = $this->data[$k];
+            if ($data[$k]) {
+                $translate[] = $data[$k];
             }
         }
-        foreach ($this->data['descriptions'] as $value) {
+        foreach ($data['descriptions'] as $value) {
             if ($value) {
                 $translate[] = $value;
             }
         }
 
         //
-        foreach ($this->data_array as $row) {
+        foreach ($data_array as $row) {
             $row['id'] or abort();
 
             if ($row['delete']) {
@@ -234,7 +231,7 @@ class SettingsModel extends Model
             $row['name']    = $this->sanitizeName($row['name'] ?: $row['label']);
             $row['history'] = $this->getHistory($row);
 
-            $old_row = $data['rows'][$row['id']] ?? false;
+            $old_row = $cur_data['rows'][$row['id']] ?? null;
             $new_row = [
                 'label'            => $row['label'],
                 'type'             => $row['type'],
@@ -257,11 +254,11 @@ class SettingsModel extends Model
                 }
             }
 
-            $this->data['rows'][$row['name']] = $new_row;
+            $data['rows'][$row['name']] = $new_row;
         }
 
-        $settings->save($this->data);
-        $settings->set($this->data);
+        $settings->save($data);
+        $settings->set($data);
         $settings->translate($translate);
     }
 
@@ -270,10 +267,9 @@ class SettingsModel extends Model
      */
     public function delete()
     {
-        // data
-        $this->filter(POST, ['key' => 'text|required:abort']);
+        $data = $this->filter(POST, ['key' => 'text|required:abort']);
 
-        (new Settings($this->data['key']))->delete();
+        (new Settings($data['key']))->delete();
     }
 
     /**

@@ -35,8 +35,7 @@ class UsysModel extends Model
      */
     public function signup()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'token'    => 'text',
             'fullname' => 'text',
             'username' => 'text',
@@ -51,8 +50,8 @@ class UsysModel extends Model
             $user_id = 0;
             $token   = null;
 
-            if ($this->data['token']) {
-                $token = UserActivityToken::from($this->data['token'], ActivityType::signup);
+            if ($data['token']) {
+                $token = UserActivityToken::from($data['token'], ActivityType::signup);
 
                 if ($token) {
                     $user_id = $token->getUserId();
@@ -61,12 +60,12 @@ class UsysModel extends Model
 
             $service = new Signup();
             $result  = $service->signup(
-                $this->data['fullname'],
-                $this->data['username'],
-                $this->data['email'],
-                $this->data['password'],
-                $this->data['verified'],
-                $this->data['legal'],
+                $data['fullname'],
+                $data['username'],
+                $data['email'],
+                $data['password'],
+                $data['verified'],
+                $data['legal'],
                 $user_id
             );
         } catch (UserValidationException $e) {
@@ -90,8 +89,7 @@ class UsysModel extends Model
      */
     public function login()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'email_username' => 'text',
             'password'       => '',
             'remember'       => 'bool',
@@ -101,26 +99,26 @@ class UsysModel extends Model
         try {
             $service = new Login;
             $service->validateCredencial(
-                $this->data['email_username'],
-                $this->data['password'] ?? ''
+                $data['email_username'],
+                $data['password'] ?? ''
             );
 
-            $mfa_url = $this->getNextUrl($service->getUserId(), $this->data['redirect']);
+            $mfa_url = $this->getNextUrl($service->getUserId(), $data['redirect']);
 
             if ($mfa_url) {
-                $service->setDeferredLogin($this->data['remember']);
+                $service->setDeferredLogin($data['remember']);
 
                 return $this->result()->redirectTo($mfa_url);
             }
 
-            $service->login($this->data['remember']);
+            $service->login($data['remember']);
 
-            if ($this->data['redirect'] == -1) {
+            if ($data['redirect'] == -1) {
                 return $this->result()->goBack();
             }
 
-            if ($this->data['redirect']) {
-                return $this->result()->redirectTo($this->data['redirect']);
+            if ($data['redirect']) {
+                return $this->result()->redirectTo($data['redirect']);
             }
 
             return $this->result()->reloadPage();

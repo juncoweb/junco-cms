@@ -14,15 +14,14 @@ class AdminLanguageDomainsModel extends Model
      */
     public function getIndexData()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'id' => 'array:first|required:abort',
             'search' => 'text'
         ]);
 
         return [
-            'title' => $this->data['id'],
-            'data' => $this->data + ['language' => $this->data['id']]
+            'title' => $data['id'],
+            'data' => $data + ['language' => $data['id']]
         ];
     }
 
@@ -31,33 +30,41 @@ class AdminLanguageDomainsModel extends Model
      */
     public function getListData()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'language' => 'required:abort',
             'search' => 'text'
         ]);
 
-        if ($this->data['search'] && preg_match('@[\w_]+@', preg_quote($this->data['search'], '@'))) {
-            $filter = '@' . $this->data['search'] . '@i';
-        } else {
-            $filter = '';
-        }
+        $dir  = (new LanguageHelper())->getLocale() . $data['language'] . '/LC_MESSAGES/';
+        $filter = $data['search']
+            ? '/' . preg_quote($data['search']) . '/i'
+            : '';
 
-        $dir  = (new LanguageHelper())->getLocale() . $this->data['language'] . '/LC_MESSAGES/';
-        $cdir = is_readable($dir) ? scandir($dir) : [];
+        return $data + ['rows' => $this->getAll($dir, $filter)];
+    }
+
+    /**
+     * Get
+     */
+    protected function getAll(string $dir, string $filter): array
+    {
         $rows = [];
+        $cdir = is_readable($dir)
+            ? scandir($dir)
+            : [];
 
-        foreach ($cdir as $has) {
+        foreach ($cdir as $elem) {
             if (
-                $has != '.'
-                && $has != '..'
-                //&& is_file($dir . $has)
-                && (pathinfo($dir . $has, PATHINFO_EXTENSION) == 'po')
-                && (!$filter || preg_match($filter, $has))
+                $elem != '.'
+                && $elem != '..'
+                //&& is_file($dir . $elem)
+                && (pathinfo($dir . $elem, PATHINFO_EXTENSION) == 'po')
+                && (!$filter || preg_match($filter, $elem))
             ) {
-                $rows[$has] = $has;
+                $rows[$elem] = $elem;
             }
         }
-        return $this->data + ['rows' => $rows];
+
+        return $rows;
     }
 }

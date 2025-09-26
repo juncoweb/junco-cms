@@ -26,8 +26,7 @@ class AdminLoggerModel extends Model
      */
     public function getListData()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'status' => 'int',
             'level' => 'id|max:8',
         ]);
@@ -46,12 +45,12 @@ class AdminLoggerModel extends Model
         ];
 
         $where = [];
-        if ($this->data['level']) {
-            $where['level'] = $levels[$this->data['level']];
+        if ($data['level']) {
+            $where['level'] = $levels[$data['level']];
         }
 
-        if ($this->data['status']) {
-            $where['status'] = $this->data['status'] - 1;
+        if ($data['status']) {
+            $where['status'] = $data['status'] - 1;
         }
 
         $rows = $this->manager->fetchAll($where);
@@ -75,7 +74,7 @@ class AdminLoggerModel extends Model
             $rows[] = $row;
         }
 
-        return $this->data + [
+        return $data + [
             'levels' => $levels,
             'rows' => $rows,
             'pagi' => $pagi
@@ -87,11 +86,10 @@ class AdminLoggerModel extends Model
      */
     public function getShowData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array:first|required:abort']);
+        $input = $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // vars
-        $data = $this->manager->fetch($this->data['id']) or abort();
+        $data = $this->manager->fetch($input['id']) or abort();
         $this->manager->extractFromContext($data, ['file', 'line', 'backtrace']);
 
 
@@ -110,10 +108,7 @@ class AdminLoggerModel extends Model
      */
     public function getConfirmDeleteData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
-
-        return $this->data;
+        return $this->filter(POST, ['id' => 'id|array|required:abort']);
     }
 
     /**
@@ -121,12 +116,11 @@ class AdminLoggerModel extends Model
      */
     public function getConfirmReportData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array']);
+        $data = $this->filter(POST, ['id' => 'id|array']);
 
-        return $this->data + [
-            'total'  => count($this->data['id']),
-            'values' => $this->data,
+        return $data + [
+            'total'  => count($data['id']),
+            'values' => $data,
         ];
     }
 }

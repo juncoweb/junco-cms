@@ -25,25 +25,24 @@ class AdminMenusModel extends Model
      */
     public function getListData()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'search'   => 'text',
             'field'    => 'int|min:1|max:2|default:1',
             'menu_key' => '',
         ]);
 
         // query
-        if ($this->data['menu_key']) {
-            $this->db->where("m.menu_key = ?", $this->data['menu_key']);
+        if ($data['menu_key']) {
+            $this->db->where("m.menu_key = ?", $data['menu_key']);
             $this->db->rows_per_page = 999;
         }
-        if ($this->data['search']) {
-            switch ($this->data['field']) {
+        if ($data['search']) {
+            switch ($data['field']) {
                 case 1:
-                    $this->db->where("m.menu_path LIKE %?", $this->data['search']);
+                    $this->db->where("m.menu_path LIKE %?", $data['search']);
                     break;
                 case 2:
-                    $this->db->where("e.extension_alias LIKE %?|e.extension_name LIKE %?", $this->data['search']);
+                    $this->db->where("e.extension_alias LIKE %?|e.extension_name LIKE %?", $data['search']);
                     break;
             }
         }
@@ -72,11 +71,11 @@ class AdminMenusModel extends Model
             $rows[] = $row;
         }
 
-        if ($this->data['menu_key']) {
+        if ($data['menu_key']) {
             $rows = Nestedset::sort($rows);
         }
 
-        return $this->data + [
+        return $data + [
             'menu_keys' => $this->getMenuKeys(),
             'pagi' => $pagi,
             'rows' => $rows
@@ -88,12 +87,11 @@ class AdminMenusModel extends Model
      */
     public function getCreateData()
     {
-        // data
-        $this->filter(POST, ['num_rows' => 'int|min:1|default:1']);
+        $data = $this->filter(POST, ['num_rows' => 'int|min:1|default:1']);
 
         return [
             'title'      => _t('Create'),
-            'values'     => array_fill(0, $this->data['num_rows'], null),
+            'values'     => array_fill(0, $data['num_rows'], null),
             'extensions' => $this->getExtensions(),
             'is_edit'    => false,
         ];
@@ -104,8 +102,7 @@ class AdminMenusModel extends Model
      */
     public function getEditData()
     {
-        // data
-        $this->filter(POST, ['id' => 'array|required:abort']);
+        $input = $this->filter(POST, ['id' => 'array|required:abort']);
 
         // query
         $data = $this->db->query("
@@ -123,7 +120,7 @@ class AdminMenusModel extends Model
 		 is_distributed
 		FROM `#__menus`
 		WHERE id IN (?..)
-		ORDER BY menu_path, menu_order", $this->data['id'])->fetchAll() or abort();
+		ORDER BY menu_path, menu_order", $input['id'])->fetchAll() or abort();
 
         return [
             'title'      => _t('Edit'),
@@ -138,8 +135,7 @@ class AdminMenusModel extends Model
      */
     public function getCopyData()
     {
-        // data
-        $this->filter(POST, ['id' => 'array|required:abort']);
+        $input = $this->filter(POST, ['id' => 'array|required:abort']);
 
         // query
         $data = $this->db->query("
@@ -156,7 +152,7 @@ class AdminMenusModel extends Model
 		 is_distributed
 		FROM `#__menus`
 		WHERE id IN (?..)
-		ORDER BY menu_path, menu_order", $this->data['id'])->fetchAll() or abort();
+		ORDER BY menu_path, menu_order", $input['id'])->fetchAll() or abort();
 
         return [
             'title'      => _t('Copy'),
@@ -171,10 +167,7 @@ class AdminMenusModel extends Model
      */
     public function getConfirmDeleteData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
-
-        return $this->data;
+        return $this->filter(POST, ['id' => 'id|array|required:abort']);
     }
 
     /**

@@ -25,12 +25,11 @@ class AdminContactModel extends Model
      */
     public function getListData()
     {
-        // data
-        $this->filter(POST, ['search' => 'text']);
+        $data = $this->filter(POST, ['search' => 'text']);
 
         // query
-        if ($this->data['search']) {
-            $this->db->where("contact_name LIKE %?|contact_message LIKE %?", $this->data['search']);
+        if ($data['search']) {
+            $this->db->where("contact_name LIKE %?|contact_message LIKE %?", $data['search']);
         }
         $pagi = $this->db->paginate("
 		SELECT [
@@ -54,7 +53,7 @@ class AdminContactModel extends Model
             $rows[] = $row;
         }
 
-        return $this->data + [
+        return $data + [
             'rows' => $rows,
             'pagi' => $pagi
         ];
@@ -65,8 +64,7 @@ class AdminContactModel extends Model
      */
     public function getShowData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
+        $input = $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // query
         $data = $this->db->query("
@@ -82,7 +80,7 @@ class AdminContactModel extends Model
 		 u.fullname
 		FROM `#__contact` c
 		LEFT JOIN `#__users` u ON ( c.user_id = u.id )
-		WHERE c.id = ?", $this->data['id'])->fetch() or abort();
+		WHERE c.id = ?", $input['id'])->fetch() or abort();
 
         $data['contact_message'] = nl2br($data['contact_message']);
         $data['user_ip']         = inet_ntop($data['user_ip']);
@@ -100,9 +98,6 @@ class AdminContactModel extends Model
      */
     public function getConfirmDeleteData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
-
-        return $this->data;
+        return $this->filter(POST, ['id' => 'id|array|required:abort']);
     }
 }

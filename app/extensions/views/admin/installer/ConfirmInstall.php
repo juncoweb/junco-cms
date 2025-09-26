@@ -35,9 +35,9 @@ if ($readme) {
 if (!$error_fatal) {
     // Developer
     $translate = [
-        'developer_name'    => _t('Name'),
-        'project_url'        => _t('Project URL'),
-        'webstore_url'        => _t('Update URL'),
+        'developer_name' => _t('Name'),
+        'project_url'    => _t('Project URL'),
+        'webstore_url'   => _t('Update URL'),
     ];
 
     $html = '';
@@ -51,24 +51,24 @@ if (!$error_fatal) {
 
     // Extensions
     $legend_tag = '<label for="extensions%s"><input type="checkbox" id="extensions%d" name="extension_alias[]" value="%s"%s class="input-checkbox"/> %s</label>';
-    $html        = '';
-    $count         = 0;
+    $html       = '';
+    $count      = 0;
     $statuses = [
         -1 => [' checked', 'success', 'Install'],
         0 => [' disabled', 'danger', 'Denied'],
         1 => [' checked', 'info', 'Update'],
     ];
     $translate = [
-        'extension_alias'        => _t('Alias'),
-        'extension_abstract'    => _t('Abstract'),
-        'components'            => _t('Components'),
-        'db_queries'            => _t('SQL queries'),
-        'xdata'                    => 'XDATA',
-        'extension_version'        => _t('Version'),
-        'extension_credits'        => _t('Credits'),
-        'extension_license'        => _t('License'),
-        'extension_require'        => _t('Requirements'),
-        'status'                => _t('Status'),
+        'extension_alias'    => _t('Alias'),
+        'extension_abstract' => _t('Abstract'),
+        'components'         => _t('Components'),
+        'db_queries'         => _t('SQL queries'),
+        'xdata'              => 'XDATA',
+        'extension_version'  => _t('Version'),
+        'extension_credits'  => _t('Credits'),
+        'extension_license'  => _t('License'),
+        'extension_require'  => _t('Requirements'),
+        'status'             => _t('Status'),
     ];
 
     // summary
@@ -113,15 +113,9 @@ if (!$error_fatal) {
 
     // Cleaner
     if ($cleaner_paths) {
-        $html = '';
-        foreach ($cleaner_paths as $path) {
-            $html .= '<div><label><input type="checkbox" name="clean_paths[]" value="' . $path . '" checked /> ' . $path . '</label></div>';
-        }
-
-        $html = '<div class="ei-clean">'
-            . '<label><input type="checkbox" id="clean-all" checked/> <b>' . _t('Select all') . '</b></label>'
-            .  $html
-            . '</div>';
+        $felem = Form::getElements();
+        $felem->setValues(['clean_paths' => $cleaner_paths]);
+        $html = $felem->checkboxList('clean_paths', array_combine($cleaner_paths, $cleaner_paths), ['check-all' => true]);
 
         $tabs->tab(_t('Cleaner'), $html);
     }
@@ -129,11 +123,11 @@ if (!$error_fatal) {
     // Settings
     $form = Form::get('', false);
     $form->setValues([
-        'copy_files'         => true,
-        'db_import'         => 1,
-        'execute_before'    => true,
-        'execute_after'        => true,
-        'remove_package'    => true,
+        'copy_files'     => true,
+        'db_import'      => 1,
+        'execute_before' => true,
+        'execute_after'  => true,
+        'remove_package' => true,
     ]);
     //
     $form->toggle('copy_files')->setLabel(_t('Copy'));

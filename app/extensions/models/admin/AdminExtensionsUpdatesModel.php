@@ -25,12 +25,11 @@ class AdminExtensionsUpdatesModel extends Model
      */
     public function getListData()
     {
-        // data
-        $this->filter(POST, ['search' => 'text']);
+        $data = $this->filter(POST, ['search' => 'text']);
 
         // query
-        if ($this->data['search']) {
-            $this->db->where("e.extension_alias LIKE %?|e.extension_name LIKE %?", $this->data['search']);
+        if ($data['search']) {
+            $this->db->where("e.extension_alias LIKE %?|e.extension_name LIKE %?", $data['search']);
         }
         $this->db->where("u.status IN ( ?.. )", UpdateStatus::getActives());
 
@@ -59,7 +58,7 @@ class AdminExtensionsUpdatesModel extends Model
             $rows[] = $row;
         }
 
-        return $this->data + [
+        return $data + [
             'rows' => $rows,
             'pagi' => $pagi
         ];

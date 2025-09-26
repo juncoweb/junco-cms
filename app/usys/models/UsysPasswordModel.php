@@ -30,10 +30,9 @@ class UsysPasswordModel extends Model
      */
     public function sentToken()
     {
-        // data
-        $this->filter(POST, ['email_username' => '']);
+        $data = $this->filter(POST, ['email_username' => '']);
 
-        $user = UserHelper::getUserFromInput($this->data['email_username']);
+        $user = UserHelper::getUserFromInput($data['email_username']);
 
         if (!$user) {
             return $this->unprocessable(_t('Invalid email/username.'));
@@ -59,15 +58,14 @@ class UsysPasswordModel extends Model
      */
     public function update()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'token'    => 'text',
             'password' => 'required',
             'verified' => 'required',
         ]);
 
         // vars
-        $token = UserActivityToken::from($this->data['token'], ActivityType::savepwd);
+        $token = UserActivityToken::from($data['token'], ActivityType::savepwd);
 
         if (!$token) {
             return $this->unprocessable(_t('The code used is invalid or has expired.'));
@@ -75,15 +73,15 @@ class UsysPasswordModel extends Model
 
         $user_id = $token->getUserId();
 
-        if ($this->data['password'] !== $this->data['verified']) {
+        if ($data['password'] !== $data['verified']) {
             return $this->unprocessable(_t('Passwords do not match.'));
         }
 
-        UserHelper::validatePassword($this->data['password']);
-        $this->data['password'] = UserHelper::hash($this->data['password']);
+        UserHelper::validatePassword($data['password']);
+        $data['password'] = UserHelper::hash($data['password']);
 
         // query
-        $this->db->exec("UPDATE `#__users` SET password = ? WHERE id = ?", $this->data['password'], $user_id);
+        $this->db->exec("UPDATE `#__users` SET password = ? WHERE id = ?", $data['password'], $user_id);
 
         $token->destroy();
         auth()->login($user_id);

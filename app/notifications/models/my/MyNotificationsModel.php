@@ -27,14 +27,13 @@ class MyNotificationsModel extends Model
      */
     public function getListData()
     {
-        // data
-        $this->filter(POST, ['search' => 'text']);
+        $data = $this->filter(POST, ['search' => 'text']);
 
         // query
         $this->db->where("user_id = ?", $this->user_id);
 
-        if ($this->data['search']) {
-            $this->db->where("notification_message LIKE %?", $this->data['search']);
+        if ($data['search']) {
+            $this->db->where("notification_message LIKE %?", $data['search']);
         }
         $pagi = $this->db->paginate("
 		SELECT [
@@ -59,7 +58,7 @@ class MyNotificationsModel extends Model
             $this->setUrl($rows);
         }
 
-        return $this->data + [
+        return $data + [
             'rows' => $rows,
             'pagi' => $pagi
         ];

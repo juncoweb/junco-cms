@@ -29,8 +29,7 @@ class InstallFinishModel extends Model
      */
     public function getData()
     {
-        // data
-        $this->filter(GET, [
+        $data = $this->filter(GET, [
             'take'     => '',
             'remove_r' => '',
             'remove_e' => '',
@@ -38,21 +37,21 @@ class InstallFinishModel extends Model
             'goto'     => '',
         ]);
 
-        if ($this->data['take']) {
-            return $this->take();
+        if ($data['take']) {
+            return $this->take($data);
         }
 
-        $data = $this->getUserData(config('install.admininstrator_user_id')) or redirect();
+        $user = $this->getUserData(config('install.admininstrator_user_id')) or redirect();
 
         return [
-            'fullname' => $data['fullname'],
+            'fullname' => $user['fullname'],
             'site_name' => config('site.name'),
             'values' => [
                 'remove_r' => true,
                 'remove_e' => true,
                 'redirect' => 1,
                 'take'     => 1,
-                'goto'     => $this->data['goto'],
+                'goto'     => $data['goto'],
             ],
             'bootstrap_is_writable' => is_writable($this->bootstrap_file),
             'install_is_writable' => is_writable($this->install_file),
@@ -62,22 +61,22 @@ class InstallFinishModel extends Model
     /**
      * Take
      */
-    public function take()
+    public function take(array $data): void
     {
         try {
-            if ($this->data['remove_r']) {
+            if ($data['remove_r']) {
                 $this->removeRedirection();
             }
 
-            if ($this->data['remove_e']) {
+            if ($data['remove_e']) {
                 $this->removeInstallExtension();
             }
 
-            if ($this->data['redirect'] == 1) {
+            if ($data['redirect'] == 1) {
                 redirect();
             }
 
-            if ($this->data['redirect'] == 2) {
+            if ($data['redirect'] == 2) {
                 redirect(['admin/']);
             }
         } catch (Exception $e) {

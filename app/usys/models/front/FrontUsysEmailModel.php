@@ -17,15 +17,14 @@ class FrontUsysEmailModel extends Model
      */
     public function getSaveData()
     {
-        // data
-        $this->filter(GET, ['token' => 'text']);
+        $input = $this->filter(GET, ['token' => 'text']);
 
         try {
             $data = [
                 'error' => 0,
                 'options' => config('usys.options')
             ];
-            $token = UserActivityToken::from($this->data['token'], ActivityType::savemail);
+            $token = UserActivityToken::from($input['token'], ActivityType::savemail);
 
             if (!$token) {
                 throw new Exception(_t('The code used is invalid or has expired.'));

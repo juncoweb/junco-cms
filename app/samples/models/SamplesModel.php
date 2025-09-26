@@ -10,14 +10,13 @@ use Junco\Mvc\Model;
 class SamplesModel extends Model
 {
     // vars
-    protected $samples = null;
+    protected $samples;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        // data
         $this->samples = new Samples;
     }
 
@@ -26,14 +25,13 @@ class SamplesModel extends Model
      */
     public function getListData()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'search' => 'text',
             'field' => 'id|max:2',
         ]);
 
-        return $this->data + [
-            'rows' => $this->samples->fetchAll($this->data['search'], $this->data['field'])
+        return $data + [
+            'rows' => $this->samples->fetchAll($data['search'], $data['field'])
         ];
     }
 
@@ -42,16 +40,15 @@ class SamplesModel extends Model
      */
     public function getShowData()
     {
-        // data
-        $this->filter(GET, ['key' => 'required:abort']);
+        $data = $this->filter(GET, ['key' => 'required:abort']);
 
-        define('IS_TEST', true);
-
-        $file = $this->samples->getFileFromKey($this->data['key']);
+        //
+        $file = $this->samples->getFileFromKey($data['key']);
 
         is_file($file)
             or alert('File not found: ' . $file);
 
+        define('IS_TEST', true);
         return include $file;
     }
 
@@ -60,11 +57,10 @@ class SamplesModel extends Model
      */
     public function getEditData()
     {
-        // data
-        $this->filter(POST, ['id' => 'array:first']);
+        $data = $this->filter(POST, ['id' => 'array:first']);
 
         return [
-            'values' => $this->samples->fetch($this->data['id'])
+            'values' => $this->samples->fetch($data['id'])
         ];
     }
 
@@ -73,14 +69,13 @@ class SamplesModel extends Model
      */
     public function update()
     {
-        // data
-        $this->filter(POST, [
-            'key'            => '',
-            'title'            => 'text',
-            'description'    => 'multiline',
-            'image'            => 'text',
+        $data = $this->filter(POST, [
+            'key'         => '',
+            'title'       => 'text',
+            'description' => 'multiline',
+            'image'       => 'text',
         ]);
 
-        $this->samples->save($this->data['key'], $this->data);
+        $this->samples->save($data['key'], $data);
     }
 }

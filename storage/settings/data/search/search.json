@@ -1,12 +1,11 @@
 {
     "title": "Search",
     "description": "",
-    "descriptions": [],
     "groups": [
         "General",
-        "Template",
-        "Engine"
+        "Template"
     ],
+    "descriptions": [],
     "rows": {
         "engines_plugins": {
             "label": "Enginers",

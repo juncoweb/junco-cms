@@ -8,25 +8,25 @@
 class Settings
 {
     // vars
-    protected string $key        = '';
+    protected string $key = '';
     protected string $alias;
     protected string $dirpath;
     protected string $valFile;
     protected string $dataPath;
     protected string $dataFile;
     protected array  $baseRow = [
-        'label'                => '',
-        'type'                => 'text',
-        'group'                => 0,
-        'ordering'            => 99,
-        'value'                => null,
-        'default_value'        => '',
-        'help'                => '',
-        'history'            => [],
-        'autoload'            => 0,
-        'translate'            => 0,
-        'reload_on_change'    => 0,
-        'status'            => 1
+        'label'            => '',
+        'type'             => 'text',
+        'group'            => 0,
+        'ordering'         => 99,
+        'value'            => null,
+        'default_value'    => '',
+        'help'             => '',
+        'history'          => [],
+        'autoload'         => 0,
+        'translate'        => 0,
+        'reload_on_change' => 0,
+        'status'           => 1
     ];
     protected string $EOL = PHP_EOL;
 
@@ -75,7 +75,7 @@ class Settings
     public function setKey(string $key): self
     {
         $this->alias    = explode('-', $key, 2)[0];
-        $this->key        = $key;
+        $this->key      = $key;
         $this->valFile  = $this->dirpath . $this->key . '.php';
         $this->dataPath = $this->dirpath . 'data/' . $this->alias . '/';
         $this->dataFile = $this->dataPath . $this->key . '.json';
@@ -107,12 +107,12 @@ class Settings
     {
         // data
         $data = [
-            'title'            => '',
-            'description'    => '',
-            'descriptions'    => [],
-            'groups'        => [],
-            'rows'            => [],
-            'warning'        => [],
+            'title'        => '',
+            'description'  => '',
+            'descriptions' => [],
+            'groups'       => [],
+            'rows'         => [],
+            'warning'      => [],
         ];
 
         if (!$this->readData($data)) {
@@ -242,9 +242,9 @@ class Settings
     {
         // vars
         $data = [
-            'descriptions'    => [],
-            'groups'        => [],
-            'rows'            => [],
+            'descriptions' => [],
+            'groups'       => [],
+            'rows'         => [],
         ];
 
         if (!$this->readData($data)) {
@@ -375,7 +375,7 @@ class Settings
             }
 
             $data['rows'][$key]['value']    = $value;
-            $data['rows'][$key]['autoload']    = 1;
+            $data['rows'][$key]['autoload'] = 1;
         }
 
         return true;
@@ -526,11 +526,10 @@ class Settings
      */
     protected function mkdir(): void
     {
-        is_dir($this->dataPath) or mkdir($this->dataPath, self::MKDIR_MODE, true);
+        is_dir($this->dataPath)
+            or mkdir($this->dataPath, self::MKDIR_MODE, true);
     }
 }
-
-
 
 /**
  * Import

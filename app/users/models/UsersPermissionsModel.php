@@ -25,7 +25,6 @@ class UsersPermissionsModel extends Model
      */
     public function status()
     {
-        // data
         $data = $this->filter(POST, [
             'id'      => 'id|array|required:abort',
             'role_id' => 'id|required:abort',

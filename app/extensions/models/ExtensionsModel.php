@@ -17,8 +17,6 @@ class ExtensionsModel extends Model
 {
     // vars
     protected $db;
-    protected int  $id         = 0;
-    protected bool $is_package = false;
 
     /**
      * Constructor
@@ -33,8 +31,7 @@ class ExtensionsModel extends Model
      */
     public function save()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'id'                 => 'id',
             'developer_id'       => 'id|required',
             'extension_alias'    => 'required',
@@ -47,39 +44,35 @@ class ExtensionsModel extends Model
         ]);
 
         // validate
-        if (!Extensions::validate($this->data['extension_alias'])) {
-            return $this->unprocessable(sprintf(_t('The extension alias «%s» is invalid.'), $this->data['extension_alias']));
+        if (!Extensions::validate($data['extension_alias'])) {
+            return $this->unprocessable(sprintf(_t('The extension alias «%s» is invalid.'), $data['extension_alias']));
         }
-        if (!$this->data['extension_name']) {
-            $this->data['extension_name'] = ucfirst($this->data['extension_alias']);
+        if (!$data['extension_name']) {
+            $data['extension_name'] = ucfirst($data['extension_alias']);
         }
 
         // security
-        $row = $this->db->query("
-		SELECT
-		 default_credits,
-		 default_license
-		FROM `#__extensions_developers`
-		WHERE id = ?
-		AND is_protected = 0", $this->data['developer_id'])->fetch() or abort();
+        $developer = $this->getDeveloperData($data['developer_id']) or abort();
 
-        if (!$this->data['extension_credits']) {
-            $this->data['extension_credits'] = $row['default_credits'];
+        if (!$data['extension_credits']) {
+            $data['extension_credits'] = $developer['default_credits'];
         }
-        if (!$this->data['extension_license']) {
-            $this->data['extension_license'] = $row['default_license'];
+        if (!$data['extension_license']) {
+            $data['extension_license'] = $developer['default_license'];
         }
 
-        // extract
-        $this->extract('id', 'is_package');
-        $this->validatePackageId();
+        // slice
+        $extension_id = $this->slice($data, 'id');
+        $is_package   = $this->slice($data, 'is_package');
+
+        $data['package_id'] = $this->getValidPackageId($extension_id, $is_package);
 
         // query
-        if ($this->id) {
-            $this->db->exec("UPDATE `#__extensions` SET ?? WHERE id = ?", $this->data, $this->id);
+        if ($extension_id) {
+            $this->db->exec("UPDATE `#__extensions` SET ?? WHERE id = ?", $data, $extension_id);
         } else {
-            $this->data['extension_version'] = '0.1';
-            $this->db->exec("INSERT INTO `#__extensions` (??) VALUES (??)", $this->data);
+            $data['extension_version'] = '0.1';
+            $this->db->exec("INSERT INTO `#__extensions` (??) VALUES (??)", $data);
         }
     }
 
@@ -88,8 +81,7 @@ class ExtensionsModel extends Model
      */
     public function status()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'id'     => 'id|array|required:abort',
             'status' => 'enum:extensions.extension_status|required:abort',
         ]);
@@ -106,7 +98,7 @@ class ExtensionsModel extends Model
 		 d.is_protected
 		FROM `#__extensions` e
 		LEFT JOIN `#__extensions_developers` d ON ( e.developer_id = d.id )
-		WHERE e.id IN ( ?.. )", $this->data['id'])->fetchAll() or abort();
+		WHERE e.id IN ( ?.. )", $data['id'])->fetchAll() or abort();
 
         $servers = [];
         foreach ($rows as $row) {
@@ -126,7 +118,7 @@ class ExtensionsModel extends Model
         }
 
         $carrier = new Carrier;
-        $status  = $this->data['status']->name;
+        $status  = $data['status']->name;
 
         foreach ($servers as $server) {
             $response = $carrier->changeStatus(
@@ -143,7 +135,7 @@ class ExtensionsModel extends Model
         }
 
         // query
-        $this->db->exec("UPDATE `#__extensions` SET status = ? WHERE id IN (?..)", $this->data['status'], $this->data['id']);
+        $this->db->exec("UPDATE `#__extensions` SET status = ? WHERE id IN (?..)", $data['status'], $data['id']);
     }
 
     /**
@@ -151,8 +143,7 @@ class ExtensionsModel extends Model
      */
     public function delete()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'id'     => 'id|array|required:abort',
             'option' => 'array',
         ]);
@@ -161,25 +152,25 @@ class ExtensionsModel extends Model
         $rows = $this->db->query("
 		SELECT id, extension_alias
 		FROM `#__extensions`
-		WHERE id IN (?..)", $this->data['id'])->fetchAll();
+		WHERE id IN (?..)", $data['id'])->fetchAll();
 
         // files
-        if (!empty($this->data['option']['files'])) {
+        if (!empty($data['option']['files'])) {
             $this->removeFiles($rows);
         }
 
         // data
-        if (!empty($this->data['option']['data'])) {
+        if (!empty($data['option']['data'])) {
             $this->removeData($rows);
         }
 
         // database
-        if (!empty($this->data['option']['db'])) {
+        if (!empty($data['option']['db'])) {
             $this->removeDatabase($rows);
         }
 
         // delete
-        $this->db->exec("DELETE FROM `#__extensions` WHERE id IN (?..)", $this->data['id']);
+        $this->db->exec("DELETE FROM `#__extensions` WHERE id IN (?..)", $data['id']);
     }
 
     /**
@@ -187,8 +178,7 @@ class ExtensionsModel extends Model
      */
     public function append()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'id'         => 'id|required:abort',
             'extensions' => 'id|array',
         ]);
@@ -198,13 +188,13 @@ class ExtensionsModel extends Model
 		UPDATE `#__extensions` 
 		SET package_id = 0 
 		WHERE package_id = ? 
-		AND id NOT IN (?..)", $this->data['id'], $this->data['extensions']);
+		AND id NOT IN (?..)", $data['id'], $data['extensions']);
 
         // query - add
         $this->db->exec("
 		UPDATE `#__extensions` 
 		SET package_id = ? 
-		WHERE id IN (?..)", $this->data['id'], $this->data['extensions']);
+		WHERE id IN (?..)", $data['id'], $data['extensions']);
     }
 
     /**
@@ -212,8 +202,7 @@ class ExtensionsModel extends Model
      */
     public function compile()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'id'                    => 'id|array|required:abort',
             'get_install_package'   => 'bool',
             'package_name_format'   => 'int',
@@ -223,12 +212,12 @@ class ExtensionsModel extends Model
 
         // compiler
         $compiler = new Compiler();
-        $compiler->get_install_package = $this->data['get_install_package'];
-        $compiler->package_name_format = $this->data['package_name_format'];
-        $compiler->output              = $this->data['output'];
-        $compiler->plugins             = array_keys($this->data['plugins']);
+        $compiler->get_install_package = $data['get_install_package'];
+        $compiler->package_name_format = $data['package_name_format'];
+        $compiler->output              = $data['output'];
+        $compiler->plugins             = array_keys($data['plugins']);
 
-        foreach ($this->data['id'] as $package_id) {
+        foreach ($data['id'] as $package_id) {
             $compiler->compile($package_id);
         }
     }
@@ -238,16 +227,15 @@ class ExtensionsModel extends Model
      */
     public function dbHistory()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'id'         => 'id|required:abort',
             'db_history' => 'array',
         ]);
 
+        $data['db_history'] = $this->getDbHistory($data['db_history']);
+
         // query
-        $this->db->exec("UPDATE `#__extensions` SET ?? WHERE id = ?", [
-            'db_history' => $this->getDbHistory()
-        ], $this->data['id']);
+        $this->db->exec("UPDATE `#__extensions` SET db_history = ? WHERE id = ?", $data['db_history'], $data['id']);
     }
 
     /**
@@ -255,18 +243,17 @@ class ExtensionsModel extends Model
      */
     public function updateReadme()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'alias'  => 'text|required:abort',
             'readme' => '',
         ]);
 
         // vars
-        $dir  = SYSTEM_STORAGE . sprintf('readme/%s/', $this->data['alias']);
+        $dir  = SYSTEM_STORAGE . sprintf('readme/%s/', $data['alias']);
         $file = $dir . 'README.html';
 
         is_dir($dir) or mkdir($dir);
-        file_put_contents($file, $this->data['readme']);
+        file_put_contents($file, $data['readme']);
     }
 
     /**
@@ -278,8 +265,7 @@ class ExtensionsModel extends Model
      */
     public function distribute(): array
     {
-        // data
-        $this->filter(GET, ['id' => 'id|array:first|required:abort']);
+        $data = $this->filter(GET, ['id' => 'id|array:first|required:abort']);
 
         $messages = [];
         try {
@@ -288,7 +274,7 @@ class ExtensionsModel extends Model
             }
 
             //
-            $extension = $this->getExtensionData($this->data['id']) or abort();
+            $extension = $this->getExtensionData($data['id']) or abort();
 
             if (!$extension['webstore_token']) {
                 throw new Exception(_t('The distribution system requires a token.'));
@@ -368,48 +354,65 @@ class ExtensionsModel extends Model
     /**
      * Get
      */
-    protected function validatePackageId()
+    protected function getDeveloperData(int $developer_id): array|false
     {
-        if ($this->id) {
-            $package_id = $this->db->query("
-			SELECT package_id 
-			FROM `#__extensions`
-			WHERE id = ?", $this->id)->fetchColumn();
-
-            if ($package_id > 0) {
-                return;
-            }
-        }
-
-        $this->data['package_id'] = $this->is_package ? -1 : 0;
+        return $this->db->query("
+		SELECT
+         id ,
+		 default_credits,
+		 default_license
+		FROM `#__extensions_developers`
+		WHERE id = ?
+		AND is_protected = 0", $developer_id)->fetch();
     }
 
     /**
      * Get
      */
-    protected function getDbHistory()
+    protected function getValidPackageId(int $extension_id, bool $is_package): int
+    {
+        if ($extension_id) {
+            $package_id = $this->db->query("
+			SELECT package_id 
+			FROM `#__extensions`
+			WHERE id = ?", $extension_id)->fetchColumn();
+
+            if ($package_id > 0) {
+                return $package_id;
+            }
+        }
+
+        return $is_package ? -1 : 0;
+    }
+
+    /**
+     * Get
+     */
+    protected function getDbHistory(array $db_history): string
     {
         $json = [];
-        foreach ($this->data['db_history'] as $Type => $rows) {
-            if ($Type == 'TABLE') {
-                foreach ($rows as $Name => $Table) {
-                    if ($Table['History']) {
-                        $json[$Type][$Name]['History'] = array_map('trim', explode(',', $Table['History']));
-                    }
-                    foreach ($Table['Fields'] as $Field_Name => $Field) {
-                        if ($Field['History']) {
-                            $json[$Type][$Name]['Fields'][$Field_Name]['History'] = array_map('trim', explode(',', $Field['History']));
-                        }
+
+        foreach ($db_history as $Type => $rows) {
+            if ($Type != 'TABLE') {
+                continue;
+            }
+
+            foreach ($rows as $Name => $Table) {
+                if ($Table['History']) {
+                    $json[$Type][$Name]['History'] = array_map('trim', explode(',', $Table['History']));
+                }
+
+                foreach ($Table['Fields'] as $Field_Name => $Field) {
+                    if ($Field['History']) {
+                        $json[$Type][$Name]['Fields'][$Field_Name]['History'] = array_map('trim', explode(',', $Field['History']));
                     }
                 }
             }
         }
 
-        if ($json) {
-            return json_encode($json);
-        }
-
-        return '';
+        return $json
+            ? json_encode($json)
+            : '';
     }
 
     /**

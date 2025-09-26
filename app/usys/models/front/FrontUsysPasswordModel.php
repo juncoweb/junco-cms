@@ -26,11 +26,10 @@ class FrontUsysPasswordModel extends Model
      */
     public function getEditData()
     {
-        // data
-        $this->filter(GET, ['token' => 'text']);
+        $data = $this->filter(GET, ['token' => 'text']);
 
-        $token = UserActivityToken::from($this->data['token'], ActivityType::savepwd)
-            ? $this->data['token']
+        $token = UserActivityToken::from($data['token'], ActivityType::savepwd)
+            ? $data['token']
             : '';
 
         return [

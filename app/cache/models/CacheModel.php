@@ -14,18 +14,17 @@ class CacheModel extends Model
      */
     public function getListData()
     {
-        // data
-        $this->filter(POST, ['search' => 'text']);
+        $data = $this->filter(POST, ['search' => 'text']);
 
         // vars
         $keys = cache()->getKeys();
 
         if (
             $keys
-            && $this->data['search']
-            && preg_match('@[\w-]+@', preg_quote($this->data['search'], '@'))
+            && $data['search']
+            && preg_match('@[\w-]+@', preg_quote($data['search'], '@'))
         ) {
-            $filter = '@' . $this->data['search'] . '@i';
+            $filter = '@' . $data['search'] . '@i';
 
             foreach ($keys as $index => $has) {
                 if (!preg_match($filter, $has)) {
@@ -34,7 +33,7 @@ class CacheModel extends Model
             }
         }
 
-        return $this->data + ['keys' => $keys];
+        return $data + ['keys' => $keys];
     }
 
     /**
@@ -42,10 +41,7 @@ class CacheModel extends Model
      */
     public function getConfirmDeleteData()
     {
-        // data
-        $this->filter(POST, ['id' => 'array|required:abort']);
-
-        return $this->data;
+        return $this->filter(POST, ['id' => 'array|required:abort']);
     }
 
     /**
@@ -53,9 +49,8 @@ class CacheModel extends Model
      */
     public function delete()
     {
-        // data
-        $this->filter(POST, ['keys' => 'array|required:abort']);
+        $data = $this->filter(POST, ['keys' => 'array|required:abort']);
 
-        cache()->deleteMultiple($this->data['keys']);
+        cache()->deleteMultiple($data['keys']);
     }
 }

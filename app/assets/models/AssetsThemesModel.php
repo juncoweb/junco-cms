@@ -14,23 +14,22 @@ class AssetsThemesModel extends Model
      */
     public function save()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'extension_alias' => '',
             'name' => '',
             'from' => '',
         ]);
 
         // validate
-        if (!$this->data['extension_alias']) {
+        if (!$data['extension_alias']) {
             return $this->unprocessable(_t('Please, fill in the extension.'));
         }
 
-        $key    = $this->data['extension_alias'] . '-' . ($this->data['name'] ?: 'default');
+        $key    = $data['extension_alias'] . '-' . ($data['name'] ?: 'default');
         $themes = new AssetsThemes;
 
-        if ($this->data['from']) {
-            $themes->copy($this->data['from'], $key);
+        if ($data['from']) {
+            $themes->copy($data['from'], $key);
         } else {
             if ($themes->has($key)) {
                 return $this->unprocessable(_t('The theme already exists.'));
@@ -45,17 +44,16 @@ class AssetsThemesModel extends Model
      */
     public function compile()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'id'     => 'required:abort',
             'minify' => 'bool',
             'fixurl' => 'int'
         ]);
 
         (new AssetsThemes)->compileTheme(
-            $this->data['id'],
-            $this->data['minify'],
-            $this->data['fixurl']
+            $data['id'],
+            $data['minify'],
+            $data['fixurl']
         );
     }
 
@@ -64,10 +62,9 @@ class AssetsThemesModel extends Model
      */
     public function delete()
     {
-        // data
-        $this->filter(POST, ['themes' => 'array|required:abort']);
+        $data = $this->filter(POST, ['themes' => 'array|required:abort']);
 
-        (new AssetsThemes)->delete($this->data['themes']);
+        (new AssetsThemes)->delete($data['themes']);
     }
 
     /**
@@ -75,31 +72,30 @@ class AssetsThemesModel extends Model
      */
     public function select()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'id' => 'text|required:abort',
             'disable_explanation' => 'bool'
         ]);
 
         // verify
-        if ($this->data['id'] == config('frontend.theme')) {
-            $this->data['id'] = '';
+        if ($data['id'] == config('frontend.theme')) {
+            $data['id'] = '';
         } else {
             $themes = (new AssetsThemes)->scanAll();
 
-            if (!array_key_exists($this->data['id'], $themes)) {
+            if (!array_key_exists($data['id'], $themes)) {
                 return $this->unprocessable(_t('The theme does not exist.'));
             }
         }
 
-        if ($this->data['disable_explanation']) {
+        if ($data['disable_explanation']) {
             (new Settings('template'))->update([
                 'explain_assets' => false
             ]);
         }
 
         (new Settings('frontend'))->update([
-            'theme' => $this->data['id']
+            'theme' => $data['id']
         ]);
     }
 }

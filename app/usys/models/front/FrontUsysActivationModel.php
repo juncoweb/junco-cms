@@ -17,8 +17,7 @@ class FrontUsysActivationModel extends Model
      */
     public function getIndexData()
     {
-        // data
-        $this->filter(GET, ['token' => 'text']);
+        $input = $this->filter(GET, ['token' => 'text']);
 
         try {
             $data = [
@@ -26,7 +25,7 @@ class FrontUsysActivationModel extends Model
                 'options' => config('usys.options')
             ];
 
-            $token = UserActivityToken::from($this->data['token'], ActivityType::activation);
+            $token = UserActivityToken::from($input['token'], ActivityType::activation);
 
             if (!$token) {
                 throw new Exception(_t('The code used is invalid or has expired.'));

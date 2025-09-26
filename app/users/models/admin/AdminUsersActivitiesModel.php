@@ -27,7 +27,6 @@ class AdminUsersActivitiesModel extends Model
      */
     public function getListData()
     {
-        // data
         $data = $this->filter(POST, [
             'search' => 'text',
             'field'  => '',
@@ -94,7 +93,7 @@ class AdminUsersActivitiesModel extends Model
 
         return [
             ...$data,
-            'type'  => $this->data['type']?->name,
+            'type'  => $data['type']?->name,
             'types' => ActivityType::getList([_t('All')]),
             'pagi'  => $pagi,
             'rows'  => $rows

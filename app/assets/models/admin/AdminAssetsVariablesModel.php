@@ -14,14 +14,13 @@ class AdminAssetsVariablesModel extends Model
      */
     public function getIndexData()
     {
-        // data
-        $this->filter(GET, ['key' => 'text|required:abort']);
+        $data = $this->filter(GET, ['key' => 'text|required:abort']);
 
         // security
-        (new AssetsVariables)->isTheme($this->data['key']) or redirect(['admin/assets.themes']);
+        (new AssetsVariables)->isTheme($data['key']) or redirect(['admin/assets.themes']);
 
-        return $this->data + [
-            'title' => $this->data['key']
+        return $data + [
+            'title' => $data['key']
         ];
     }
 
@@ -30,14 +29,13 @@ class AdminAssetsVariablesModel extends Model
      */
     public function getListData()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'key' => 'required:abort',
             'search' => 'text',
         ]);
 
-        return $this->data + [
-            'rows' => (new AssetsVariables)->getSources($this->data['search'])
+        return $data + [
+            'rows' => (new AssetsVariables)->getSources($data['search'])
         ];
     }
 
@@ -46,20 +44,19 @@ class AdminAssetsVariablesModel extends Model
      */
     public function getEditData()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'key' => 'required:abort',
             'id' => 'array:first',
         ]);
 
         // vars
         $variables = (new AssetsVariables)->getData(
-            $this->data['id'],
-            $this->data['key']
+            $data['id'],
+            $data['key']
         );
         $values = [
-            'key' => $this->data['key'],
-            'file' => $this->data['id']
+            'key' => $data['key'],
+            'file' => $data['id']
         ];
 
         //
@@ -85,17 +82,16 @@ class AdminAssetsVariablesModel extends Model
      */
     public function update()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'key'       => 'text|required:abort',
             'file'      => 'text|required:abort',
             'variables' => 'array',
         ]);
 
         (new AssetsVariables)->update(
-            $this->data['key'],
-            $this->data['file'],
-            $this->data['variables']
+            $data['key'],
+            $data['file'],
+            $data['variables']
         ) or abort();
     }
 

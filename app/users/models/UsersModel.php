@@ -26,7 +26,6 @@ class UsersModel extends Model
      */
     public function save()
     {
-        // data
         $data = $this->filter(POST, [
             'user_id'  => 'id',
             'fullname' => 'text',
@@ -88,7 +87,6 @@ class UsersModel extends Model
      */
     public function status()
     {
-        // data
         $data = $this->filter(POST, [
             'id'     => 'id|array|required:abort',
             'status' => 'enum:users.user_status',
@@ -115,7 +113,6 @@ class UsersModel extends Model
      */
     public function delete()
     {
-        // data
         $data = $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // query

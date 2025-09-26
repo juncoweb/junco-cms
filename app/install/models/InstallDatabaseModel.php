@@ -52,8 +52,7 @@ class InstallDatabaseModel extends Model
      */
     public function save()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'db_adapter'   => '',
             'use_pdo'      => '',
             'db_server'    => '',
@@ -67,30 +66,30 @@ class InstallDatabaseModel extends Model
         ]);
 
         // validate
-        if (!$this->data['db_server']) {
+        if (!$data['db_server']) {
             return $this->unprocessable(_t('Please, fill in the host.'));
         }
-        if (!$this->data['db_username']) {
+        if (!$data['db_username']) {
             return $this->unprocessable(_t('Please, fill in the user.'));
         }
-        if (!$this->data['db_database']) {
+        if (!$data['db_database']) {
             return $this->unprocessable(_t('Please, fill in the name of the database.'));
         }
 
         // vars
-        $this->data['db_charset'] = substr($this->data['db_collation'], 0, strpos($this->data['db_collation'], '_'));
-        if ($this->data['db_prefix'] && substr($this->data['db_prefix'], -1) != '_') {
-            $this->data['db_prefix'] .= '_';
+        $data['db_charset'] = substr($data['db_collation'], 0, strpos($data['db_collation'], '_'));
+        if ($data['db_prefix'] && substr($data['db_prefix'], -1) != '_') {
+            $data['db_prefix'] .= '_';
         }
 
-        if ($this->data['use_pdo']) {
-            $pdo_adapter = $this->data['db_adapter'];
-            $this->data['db_adapter'] = 'pdo';
+        if ($data['use_pdo']) {
+            $pdo_adapter = $data['db_adapter'];
+            $data['db_adapter'] = 'pdo';
         } else {
             $pdo_adapter = '';
         }
 
-        if (!$this->connect()) {
+        if (!$this->connect($data)) {
             //return $this->unprocessable($e->getMessage());
             return $this->unprocessable(_t('The database could not be found or created.'));
         }
@@ -98,15 +97,15 @@ class InstallDatabaseModel extends Model
 
         // update settings
         (new Settings('database'))->update([
-            'adapter'   => $this->data['db_adapter'],
-            'server'    => $this->data['db_server'],
-            'username'  => $this->data['db_username'],
-            'password'  => $this->data['db_password'],
-            'port'      => $this->data['db_port'],
-            'database'  => $this->data['db_database'],
-            'prefix'    => $this->data['db_prefix'],
-            'collation' => $this->data['db_collation'],
-            'charset'   => $this->data['db_charset'],
+            'adapter'   => $data['db_adapter'],
+            'server'    => $data['db_server'],
+            'username'  => $data['db_username'],
+            'password'  => $data['db_password'],
+            'port'      => $data['db_port'],
+            'database'  => $data['db_database'],
+            'prefix'    => $data['db_prefix'],
+            'collation' => $data['db_collation'],
+            'charset'   => $data['db_charset'],
         ]);
         if ($pdo_adapter) {
             (new Settings('database-pdo'))->update([
@@ -118,9 +117,9 @@ class InstallDatabaseModel extends Model
     /**
      * Connect
      */
-    protected function connect(): Junco\Database\Adapter\AdapterInterface|null
+    protected function connect(array $data): Junco\Database\Adapter\AdapterInterface|null
     {
-        switch ($this->data['db_adapter']) {
+        switch ($data['db_adapter']) {
             case 'pdo':
                 $class = Junco\Database\Adapter\PdoAdapter::class;
                 break;
@@ -135,12 +134,12 @@ class InstallDatabaseModel extends Model
         try {
             $db = new $class([
                 'database.adapter'  => 'mysql',
-                'database.server'   => $this->data['db_server'],
-                'database.username' => $this->data['db_username'],
-                'database.password' => $this->data['db_password'],
-                'database.database' => $this->data['db_database'],
-                'database.port'     => $this->data['db_port'],
-                'database.charset'  => $this->data['db_charset'],
+                'database.server'   => $data['db_server'],
+                'database.username' => $data['db_username'],
+                'database.password' => $data['db_password'],
+                'database.database' => $data['db_database'],
+                'database.port'     => $data['db_port'],
+                'database.charset'  => $data['db_charset'],
             ]);
         } catch (Throwable $e) {
             return null;
@@ -152,9 +151,9 @@ class InstallDatabaseModel extends Model
         /*
 		// create database
 		$db->getSchema()->database()->create(
-			$this->data['db_database'],
-			$this->data['db_charset'],
-			$this->data['db_collation']
+			$data['db_database'],
+			$data['db_charset'],
+			$data['db_collation']
 		); */
     }
 }

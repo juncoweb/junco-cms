@@ -99,10 +99,7 @@ class AdminExtensionsInstallerModel extends Model
      */
     public function getConfirmDeleteData()
     {
-        // data
-        $this->filter(POST, ['id' => 'array|required:abort']);
-
-        return $this->data;
+        return $this->filter(POST, ['id' => 'array|required:abort']);
     }
 
     /**
@@ -110,8 +107,7 @@ class AdminExtensionsInstallerModel extends Model
      */
     public function getConfirmDownloadData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array:first|required:abort']);
+        $data = $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // query
         $update = $this->db->query("
@@ -126,7 +122,7 @@ class AdminExtensionsInstallerModel extends Model
 		FROM `#__extensions_updates` u
 		LEFT JOIN `#__extensions` e ON ( u.extension_id = e.id )
 		LEFT JOIN `#__extensions_developers` d ON ( e.developer_id = d.id )
-		WHERE u.id = ?", $this->data['id'])->fetch() or abort();
+		WHERE u.id = ?", $data['id'])->fetch() or abort();
 
         $json = (new Carrier)->getServerData($update);
 
@@ -148,8 +144,7 @@ class AdminExtensionsInstallerModel extends Model
      */
     public function getConfirmUpdateData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array:first|required:abort']);
+        $data = $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // query
         $update = $this->db->query("
@@ -167,7 +162,7 @@ class AdminExtensionsInstallerModel extends Model
 		WHERE u.extension_id = ?
 		AND u.status = ?
 		ORDER BY u.released_at
-		LIMIT 1", $this->data['id'], UpdateStatus::available)->fetch() or abort();
+		LIMIT 1", $data['id'], UpdateStatus::available)->fetch() or abort();
 
         $json = (new Carrier)->getServerData($update);
 
@@ -187,14 +182,13 @@ class AdminExtensionsInstallerModel extends Model
      */
     public function getConfirmInstallData()
     {
-        // data
-        $this->filter(POST, ['id' => 'array:first|required:abort']);
+        $data = $this->filter(POST, ['id' => 'array:first|required:abort']);
 
         // installer
         $installer = new Unpackager();
         $installer->debug = true;
 
-        return $this->data + $installer->getData($this->data['id']) + [
+        return $data + $installer->getData($data['id']) + [
             'token' => FormSecurity::getToken()
         ];
     }
@@ -204,10 +198,7 @@ class AdminExtensionsInstallerModel extends Model
      */
     public function getConfirmUnzipData()
     {
-        // data
-        $this->filter(POST, ['id' => 'array:first|required:abort']);
-
-        return $this->data;
+        return $this->filter(POST, ['id' => 'array:first|required:abort']);
     }
 
     /**
@@ -215,12 +206,11 @@ class AdminExtensionsInstallerModel extends Model
      */
     public function getConfirmUpdateAllData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array']);
+        $data = $this->filter(POST, ['id' => 'id|array']);
 
         // query
-        if ($this->data['id']) {
-            $this->db->where("id IN (?..)", $this->data['id']);
+        if ($data['id']) {
+            $this->db->where("id IN (?..)", $data['id']);
         }
         $this->db->where("status = ?", UpdateStatus::available);
 
@@ -229,7 +219,7 @@ class AdminExtensionsInstallerModel extends Model
 		FROM `#__extensions_updates`
 		[WHERE]")->fetchColumn();
 
-        return $this->data + ['num_updates' => $num_updates];
+        return $data + ['num_updates' => $num_updates];
     }
 
     /**
@@ -245,8 +235,7 @@ class AdminExtensionsInstallerModel extends Model
      */
     public function getShowFailureData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
+        $input = $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // query
         $data = $this->db->query("
@@ -257,7 +246,7 @@ class AdminExtensionsInstallerModel extends Model
 		 e.extension_name
 		FROM `#__extensions_updates` u
 		LEFT JOIN `#__extensions` e ON ( u.extension_id = e.id )
-		WHERE u.id = ?", $this->data['id'])->fetch() or abort();
+		WHERE u.id = ?", $input['id'])->fetch() or abort();
 
         return $data;
     }

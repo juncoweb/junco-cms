@@ -25,11 +25,10 @@ class JobsFailuresModel extends Model
      */
     public function status()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
+        $data = $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // query
-        $this->db->exec("UPDATE `#__jobs_failures` SET status = IF(status > 0, 0, 1) WHERE id IN (?..)", $this->data['id']);
+        $this->db->exec("UPDATE `#__jobs_failures` SET status = IF(status > 0, 0, 1) WHERE id IN (?..)", $data['id']);
     }
 
     /**
@@ -37,10 +36,9 @@ class JobsFailuresModel extends Model
      */
     public function delete()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
+        $data = $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // query
-        $this->db->exec("DELETE FROM `#__jobs_failures` WHERE id IN (?..)", $this->data['id']);
+        $this->db->exec("DELETE FROM `#__jobs_failures` WHERE id IN (?..)", $data['id']);
     }
 }

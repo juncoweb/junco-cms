@@ -25,10 +25,9 @@ class FrontContactModel extends Model
      */
     public function getIndexData()
     {
-        $config = config('contact');
         return [
-            'snippet' => $config['contact.snippet'],
-            'options' => $config['contact.options']
+            'snippet' => config('contact.snippet'),
+            'options' => config('contact.options')
         ];
     }
 

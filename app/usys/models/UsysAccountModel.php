@@ -29,8 +29,7 @@ class UsysAccountModel extends Model
      */
     public function update()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'fullname'   => 'text',
             'username'   => '',
             '__password' => '',
@@ -41,43 +40,43 @@ class UsysAccountModel extends Model
         $curuser = curuser();
 
         //
-        if (!$curuser->verifyPassword($this->data['__password'])) {
+        if (!$curuser->verifyPassword($data['__password'])) {
             return $this->unprocessable(_t('The current password is incorrect'));
         }
 
-        if (!$this->data['fullname']) {
+        if (!$data['fullname']) {
             return $this->unprocessable(_t('Please, fill in the name.'));
         }
-        UserHelper::validateUsername($this->data['username']);
+        UserHelper::validateUsername($data['username']);
 
         // username
-        if ($this->data['username'] != $curuser->getUsername()) {
-            UserHelper::isUniqueUsername($this->data['username']);
+        if ($data['username'] != $curuser->getUsername()) {
+            UserHelper::isUniqueUsername($data['username']);
         }
 
         // email
-        if ($this->data['email'] && $this->data['email'] != $curuser->getEmail()) {
-            UserHelper::isUniqueEmail($this->data['email']);
+        if ($data['email'] && $data['email'] != $curuser->getEmail()) {
+            UserHelper::isUniqueEmail($data['email']);
         } else {
-            unset($this->data['email']);
+            unset($data['email']);
         }
 
         // password
-        if ($this->data['password'] && $this->data['password'] !== $this->data['__password']) {
-            UserHelper::validatePassword($this->data['password']);
+        if ($data['password'] && $data['password'] !== $data['__password']) {
+            UserHelper::validatePassword($data['password']);
 
-            $this->data['password'] = UserHelper::hash($this->data['password']);
+            $data['password'] = UserHelper::hash($data['password']);
         } else {
-            unset($this->data['password']);
+            unset($data['password']);
         }
-        unset($this->data['__password']);
+        unset($data['__password']);
 
         // query
-        $this->db->exec("UPDATE `#__users` SET ?? WHERE id = ?", $this->data, $curuser->getId());
+        $this->db->exec("UPDATE `#__users` SET ?? WHERE id = ?", $data, $curuser->getId());
 
         // token
-        if (isset($this->data['email'])) {
-            $token = UserActivityToken::generate(ActivityType::savemail, $curuser->getId(), $this->data['email']);
+        if (isset($data['email'])) {
+            $token = UserActivityToken::generate(ActivityType::savemail, $curuser->getId(), $data['email']);
 
             (new UsysToken)->send($token, $curuser->getName());
         }

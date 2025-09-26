@@ -11,7 +11,6 @@ class ExtensionsDevelopersModel extends Model
 {
     // vars
     protected $db;
-    protected int $id = 0;
 
     /**
      * Constructor
@@ -26,8 +25,7 @@ class ExtensionsDevelopersModel extends Model
      */
     public function save()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'id'              => 'id',
             'developer_name'  => 'text|required',
             'project_url'     => '',
@@ -37,14 +35,14 @@ class ExtensionsDevelopersModel extends Model
             'default_license' => 'required',
         ]);
 
-        // extract
-        $this->extract('id');
+        // slice
+        $developer_id = $this->slice($data, 'id');
 
         // query
-        if ($this->id) {
-            $this->db->exec("UPDATE `#__extensions_developers` SET ?? WHERE id = ? AND is_protected = 0", $this->data, $this->id);
+        if ($developer_id) {
+            $this->db->exec("UPDATE `#__extensions_developers` SET ?? WHERE id = ? AND is_protected = 0", $data, $developer_id);
         } else {
-            $this->db->exec("INSERT INTO `#__extensions_developers` (??, is_protected) VALUES (??, 0)", $this->data);
+            $this->db->exec("INSERT INTO `#__extensions_developers` (??, is_protected) VALUES (??, 0)", $data);
         }
     }
 
@@ -53,10 +51,9 @@ class ExtensionsDevelopersModel extends Model
      */
     public function delete()
     {
-        // data
-        $this->filter(POST, ['developer_id' => 'id|required:abort']);
+        $data = $this->filter(POST, ['developer_id' => 'id|required:abort']);
 
         // query
-        $this->db->exec("DELETE FROM `#__extensions_developers` WHERE id = ? AND is_protected = 0", $this->data['developer_id']);
+        $this->db->exec("DELETE FROM `#__extensions_developers` WHERE id = ? AND is_protected = 0", $data['developer_id']);
     }
 }

@@ -25,7 +25,6 @@ class AdminUsersLabelsModel extends Model
      */
     public function getListData()
     {
-        // data
         $data = $this->filter(POST, ['search' => 'text']);
 
         // query
@@ -70,7 +69,6 @@ class AdminUsersLabelsModel extends Model
      */
     public function getCreateData()
     {
-        // data
         $data = $this->filter(POST, ['num_rows' => 'int|min:1|default:1']);
 
         return [
@@ -86,7 +84,6 @@ class AdminUsersLabelsModel extends Model
      */
     public function getEditData()
     {
-        // data
         $data = $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // query
@@ -117,7 +114,6 @@ class AdminUsersLabelsModel extends Model
      */
     public function getConfirmDeleteData()
     {
-        // data
         return $this->filter(POST, ['id' => 'id|array|required:abort']);
     }
 

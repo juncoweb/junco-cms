@@ -14,12 +14,6 @@ class InstallSettingsModel extends Model
     // vars
     protected $db;
     protected int $user_id;
-    //
-    protected $site_name    = null;
-    protected $site_url     = null;
-    protected $site_baseurl = null;
-    protected $site_email   = null;
-
 
     /**
      * Constructor
@@ -50,10 +44,10 @@ class InstallSettingsModel extends Model
         $values['site_email']   = config('site.email');
 
         if (!$values['site_url']) {
-            $values['site_url']    = $this->calculeUrl();
+            $values['site_url'] = $this->calculeUrl();
         }
         if (!$values['site_baseurl']) {
-            $values['site_baseurl']    = $this->calculeBaseUrl();
+            $values['site_baseurl'] = $this->calculeBaseUrl();
         }
 
         return ['values' => $values];
@@ -64,8 +58,7 @@ class InstallSettingsModel extends Model
      */
     public function save()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'site_name'    => '',
             'site_url'     => '',
             'site_baseurl' => 'text',
@@ -77,47 +70,51 @@ class InstallSettingsModel extends Model
             'email'        => 'email',
         ]);
 
-        $this->extract('site_name', 'site_url', 'site_baseurl', 'site_email');
+        // slice
+        $site_name    = $this->slice($data, 'site_name');
+        $site_url     = $this->slice($data, 'site_url');
+        $site_baseurl = $this->slice($data, 'site_baseurl');
+        $site_email   = $this->slice($data, 'site_email');
 
         // validate
-        if (!$this->site_name) {
+        if (!$site_name) {
             return $this->unprocessable(_t('Please, fill in the name.'));
         }
-        if (!$this->site_url) {
+        if (!$site_url) {
             return $this->unprocessable(_t('Please, verify the site url.'));
         }
-        if (!$this->site_email) {
+        if (!$site_email) {
             return $this->unprocessable(_t('Please, fill in with a valid email.'));
         }
 
         //
-        if (!$this->data['fullname']) {
+        if (!$data['fullname']) {
             return $this->unprocessable(_t('Please, fill in the name.'));
         }
 
-        UserHelper::validateUsername($this->data['username']);
-        UserHelper::validatePassword($this->data['password']);
+        UserHelper::validateUsername($data['username']);
+        UserHelper::validatePassword($data['password']);
 
-        if (!$this->data['email']) {
+        if (!$data['email']) {
             return $this->unprocessable(_t('Please, fill in with a valid email.'));
         }
 
         // query: settings
         (new Settings('site'))->update([
-            'name'    => $this->site_name,
-            'url'     => $this->sanitizeUrl($this->site_url),
-            'baseurl' => $this->sanitizeBaseUrl($this->site_baseurl),
-            'email'   => $this->site_email
+            'name'    => $site_name,
+            'url'     => $this->sanitizeUrl($site_url),
+            'baseurl' => $this->sanitizeBaseUrl($site_baseurl),
+            'email'   => $site_email
         ]);
 
         // query: admin
-        $this->data['password'] = UserHelper::hash($this->data['password']);
+        $data['password'] = UserHelper::hash($data['password']);
 
         $role_id = config('install.admininstrator_role_id') ?: 1;
         $label_id = L_SYSTEM_ADMIN;
 
         // query
-        $this->db->exec("INSERT INTO `#__users` (??) VALUES (??) ON DUPLICATE KEY UPDATE ??", $this->data + [
+        $this->db->exec("INSERT INTO `#__users` (??) VALUES (??) ON DUPLICATE KEY UPDATE ??", $data + [
             'id'     => $this->user_id,
             'status' => UserStatus::active
         ]);

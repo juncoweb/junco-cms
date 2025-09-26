@@ -29,14 +29,13 @@ class LanguageModel extends Model
      */
     public function duplicate()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'language'    => 'text|required:abort',
             'language_to' => 'text',
         ]);
 
         // validate
-        if (!$this->data['language_to']) {
+        if (!$data['language_to']) {
             return $this->unprocessable(_t('Please, fill in the key.'));
         }
 
@@ -44,13 +43,13 @@ class LanguageModel extends Model
         $locale = (new LanguageHelper)->getLocale();
         $fs = new Filesystem($locale);
 
-        if (!$fs->copy($this->data['language'], $this->data['language_to'])) {
+        if (!$fs->copy($data['language'], $data['language_to'])) {
             return $this->unprocessable(_t('Error! the task has not been realized.'));
         }
 
         $fs->rename(
-            $this->data['language_to'] . '/' . $this->data['language'] . '.json',
-            $this->data['language_to'] . '/' . $this->data['language_to'] . '.json'
+            $data['language_to'] . '/' . $data['language'] . '.json',
+            $data['language_to'] . '/' . $data['language_to'] . '.json'
         );
     }
 
@@ -59,10 +58,9 @@ class LanguageModel extends Model
      */
     public function export()
     {
-        // data
-        $this->filter(GET, ['id' => 'array:first|required:abort']);
+        $data = $this->filter(GET, ['id' => 'array:first|required:abort']);
 
-        return $this->getArchiveFile($this->data['id']);
+        return $this->getArchiveFile($data['id']);
     }
 
     /**
@@ -70,11 +68,10 @@ class LanguageModel extends Model
      */
     public function import()
     {
-        // data
-        $this->filter(POST, ['file' => 'archive|required']);
+        $data = $this->filter(POST, ['file' => 'archive|required']);
 
         $locale = (new LanguageHelper)->getLocale();
-        $this->data['file']
+        $data['file']
             ->setBasedir()
             ->moveTo($locale, UploadedFileManager::DEFAULT_NAME, true)
             ->extract(true);
@@ -87,8 +84,7 @@ class LanguageModel extends Model
      */
     public function save()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'language' => 'text|required:abort',
             'name'     => 'text|required',
         ]);
@@ -98,7 +94,7 @@ class LanguageModel extends Model
 
         $locale = (new LanguageHelper)->getLocale();
         $file   = $locale . $this->language . '/' . $this->language . '.json';
-        $buffer = json_encode($this->data, JSON_PRETTY_PRINT);
+        $buffer = json_encode($data, JSON_PRETTY_PRINT);
 
         if (false === file_put_contents($file, $buffer)) {
             return $this->unprocessable(_t('Error! the task has not been realized.'));
@@ -110,14 +106,13 @@ class LanguageModel extends Model
      */
     public function delete()
     {
-        // data
-        $this->filter(POST, ['language' => 'array|required:abort']);
+        $data = $this->filter(POST, ['language' => 'array|required:abort']);
 
         // vars
         $locale = (new LanguageHelper)->getLocale();
         $fs     = new Filesystem($locale);
 
-        foreach ($this->data['language'] as $language) {
+        foreach ($data['language'] as $language) {
             $fs->remove($language);
         }
     }
@@ -127,10 +122,9 @@ class LanguageModel extends Model
      */
     public function select()
     {
-        // data
-        $this->filter(POST, ['lang' => 'text']);
+        $data = $this->filter(POST, ['lang' => 'text']);
 
-        (new LanguageHelper)->change($this->data['lang']);
+        (new LanguageHelper)->change($data['lang']);
     }
 
     /**
@@ -138,19 +132,18 @@ class LanguageModel extends Model
      */
     public function status()
     {
-        // data
-        $this->filter(POST, ['id' => 'array:first|required:abort']);
+        $data = $this->filter(POST, ['id' => 'array:first|required:abort']);
 
         // security
-        if ($this->data['id'] == app('language')->getCurrent()) {
+        if ($data['id'] == app('language')->getCurrent()) {
             return $this->unprocessable(_t('The key is being used.'));
         }
 
         $availables = config('language.availables') ?: [];
-        if (in_array($this->data['id'], $availables)) {
-            $availables = array_diff($availables, [$this->data['id']]);
+        if (in_array($data['id'], $availables)) {
+            $availables = array_diff($availables, [$data['id']]);
         } else {
-            $availables[] = $this->data['id'];
+            $availables[] = $data['id'];
         }
 
         (new Settings('language'))->update(['availables' => array_values($availables)]);
@@ -161,9 +154,9 @@ class LanguageModel extends Model
      */
     public function distribute()
     {
-        // data
-        $this->filter(POST, ['language' => 'text|required:abort']);
+        $data = $this->filter(POST, ['language' => 'text|required:abort']);
 
+        //
         $config = config('language-distribute');
         if (!$config['language-distribute.token']) {
             return $this->unprocessable(_t('The distribution system requires a token.'));
@@ -176,7 +169,7 @@ class LanguageModel extends Model
         }
 
         // vars
-        $archive  = $this->getArchiveFile($this->data['language']);
+        $archive  = $this->getArchiveFile($data['language']);
         $url      = $config['language-distribute.url'];
         $file     = $archive['file'];
 
@@ -212,6 +205,9 @@ class LanguageModel extends Model
         (new Archive(''))->compress($file, $locale, [$language]);
 
         // return
-        return ['file' => $file, 'filename' => $filename];
+        return [
+            'file' => $file,
+            'filename' => $filename
+        ];
     }
 }

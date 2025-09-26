@@ -27,14 +27,13 @@ class ExtensionsWebstoreModel extends Model
      */
     public function getListData()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'search' => 'text',
             'page'   => 'id',
         ]);
 
         try {
-            $json = (new Carrier)->getListData($this->data['search'], $this->data['page']);
+            $json = (new Carrier)->getListData($data['search'], $data['page']);
         } catch (Exception $e) {
             return ['error' => $e->getMessage() ?: 'Error!'];
         }
@@ -58,7 +57,7 @@ class ExtensionsWebstoreModel extends Model
             }
         }
 
-        return $this->data + [
+        return $data + [
             'pagi' => $pagi,
             'rows' => $rows
         ];
@@ -69,20 +68,19 @@ class ExtensionsWebstoreModel extends Model
      */
     public function getConfirmDownloadData()
     {
-        // data
-        $this->filter(POST, ['extension_id' => 'id|required:abort']);
+        $data = $this->filter(POST, ['extension_id' => 'id|required:abort']);
 
         //
-        $data = (new Carrier)->getServerData($this->data['extension_id']);
+        $server = (new Carrier)->getServerData($data['extension_id']);
         return [
-            'is_close' => $data['is_close'],
-            'title' => $data['extension_name'],
+            'is_close' => $server['is_close'],
+            'title' => $server['extension_name'],
             'values' => [
-                'extension_id'    => $this->data['extension_id'],
-                'extension_alias' => $data['extension_alias'],
-                'download_url'    => $data['download_url'],
-                'extension_key'   => $data['extension_key'],
-                '_extension_key'  => $data['extension_key'],
+                'extension_id'    => $data['extension_id'],
+                'extension_alias' => $server['extension_alias'],
+                'download_url'    => $server['download_url'],
+                'extension_key'   => $server['extension_key'],
+                '_extension_key'  => $server['extension_key'],
                 'is_close'        => 1,
                 'install'         => true
             ]
@@ -94,8 +92,7 @@ class ExtensionsWebstoreModel extends Model
      */
     public function download()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'download_url'    => '',
             'is_close'        => '',
             'install'         => '',
@@ -105,10 +102,10 @@ class ExtensionsWebstoreModel extends Model
 
         // vars
         $carrier  = new Carrier;
-        $filename = $carrier->download($this->data);
+        $filename = $carrier->download($data);
 
         // extract archive
-        if ($this->data['install']) {
+        if ($data['install']) {
             $carrier->extract($filename);
 
             // installer
@@ -116,11 +113,11 @@ class ExtensionsWebstoreModel extends Model
             $installer->remove_package = true;
             $installer->install(pathinfo($filename, PATHINFO_FILENAME));
 
-            if ($this->data['is_close']) {
+            if ($data['is_close']) {
                 $this->db->exec("
                 UPDATE `#__extensions`
                 SET extension_key = ?
-                WHERE extension_alias = ?", $this->data['extension_key'], $this->data['extension_alias']);
+                WHERE extension_alias = ?", $data['extension_key'], $data['extension_alias']);
             }
         }
     }
@@ -128,9 +125,8 @@ class ExtensionsWebstoreModel extends Model
     /**
      * Get
      */
-    protected function getInstalledExtensions(?array $extension_id = null)
+    protected function getInstalledExtensions(?array $extension_id = null): array
     {
-        // query
         return $this->db->query("
 		SELECT extension_alias
 		FROM `#__extensions`

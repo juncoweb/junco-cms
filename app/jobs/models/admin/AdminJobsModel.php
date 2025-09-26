@@ -25,12 +25,11 @@ class AdminJobsModel extends Model
      */
     public function getListData()
     {
-        // data
-        $this->filter(POST, ['search' => 'text']);
+        $data = $this->filter(POST, ['search' => 'text']);
 
         // query
-        if ($this->data['search']) {
-            $this->db->where("job_queue LIKE %?", $this->data['search']);
+        if ($data['search']) {
+            $this->db->where("job_queue LIKE %?", $data['search']);
         }
         $pagi = $this->db->paginate("
 		SELECT [
@@ -56,7 +55,7 @@ class AdminJobsModel extends Model
             }
         }
 
-        return $this->data + [
+        return $data + [
             'rows' => $rows,
             'pagi' => $pagi
         ];
@@ -67,8 +66,7 @@ class AdminJobsModel extends Model
      */
     public function getShowData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array:first|required:abort']);
+        $input = $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // query
         $data = $this->db->query("
@@ -81,7 +79,7 @@ class AdminJobsModel extends Model
 		 available_at ,
 		 created_at
 		FROM `#__jobs`
-		WHERE id = ?", $this->data['id'])->fetch() or abort();
+		WHERE id = ?", $input['id'])->fetch() or abort();
 
         $data['available_at'] = new Date($data['available_at']);
         $data['created_at']   = new Date($data['created_at']);

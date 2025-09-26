@@ -27,11 +27,10 @@ class ContactModel extends Model
      */
     public function status()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
+        $data = $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // query
-        $this->db->exec("UPDATE `#__contact` SET status = IF(status > 0, 0, 1) WHERE id IN (?..)", $this->data['id']);
+        $this->db->exec("UPDATE `#__contact` SET status = IF(status > 0, 0, 1) WHERE id IN (?..)", $data['id']);
     }
 
     /**
@@ -39,8 +38,7 @@ class ContactModel extends Model
      */
     public function take()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'contact_name'    => 'text|required',
             'contact_email'   => 'email|required',
             'contact_message' => '',
@@ -50,15 +48,15 @@ class ContactModel extends Model
             return $this->unprocessable(_t('The captcha has not been resolved correctly.'));
         }
 
-        if (!$this->data['contact_message']) {
+        if (!$data['contact_message']) {
             return $this->unprocessable(_t('Please, fill in the message.'));
         }
 
-        $this->data['user_ip'] = curuser()->getIpAsBinary();
-        $this->data['user_id'] = curuser()->getId();
+        $data['user_ip'] = curuser()->getIpAsBinary();
+        $data['user_id'] = curuser()->getId();
 
         // flood control
-        if ($max = $this->exceededMax($this->data['user_ip'])) {
+        if ($max = $this->exceededMax($data['user_ip'])) {
             $message = '<b>' . _t('Your message has not been sent.') . '</b> ';
             $message .= sprintf(_t('For safety, the site does not allow more than %d messages per hour.'), $max);
 
@@ -66,11 +64,11 @@ class ContactModel extends Model
         }
 
         // query - insert
-        $this->db->exec("INSERT INTO `#__contact` (??) VALUES (??)", $this->data);
-        $this->data['contact_id'] = $this->db->lastInsertId();
+        $this->db->exec("INSERT INTO `#__contact` (??) VALUES (??)", $data);
+        $data['contact_id'] = $this->db->lastInsertId();
 
         // notify
-        UserNotifiable::notifyByLabel(L_SYSTEM_ADMIN, new ContactNotification($this->data));
+        UserNotifiable::notifyByLabel(L_SYSTEM_ADMIN, new ContactNotification($data));
     }
 
     /**
@@ -78,11 +76,10 @@ class ContactModel extends Model
      */
     public function delete()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
+        $data = $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // query
-        $this->db->exec("DELETE FROM `#__contact` WHERE id IN (?..)", $this->data['id']);
+        $this->db->exec("DELETE FROM `#__contact` WHERE id IN (?..)", $data['id']);
     }
 
     /**

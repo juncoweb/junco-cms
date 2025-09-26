@@ -14,15 +14,14 @@ class SearchModel extends Model
      */
     public function getIndexData()
     {
-        // data
-        $this->filter(GET, [
+        $data = $this->filter(GET, [
             'q'      => 'text',
             'engine' => ''
         ]);
 
         return [
-            'engines' => new SearchEngines($this->data['engine']),
-            'search' => $this->data['q'],
+            'engines' => new SearchEngines($data['engine']),
+            'search' => $data['q'],
             'options' => config('search.options')
         ];
     }

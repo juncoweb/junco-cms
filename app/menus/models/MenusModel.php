@@ -25,8 +25,7 @@ class MenusModel extends Model
      */
     public function save()
     {
-        // data
-        $this->filterArray(POST, [
+        $data_array = $this->filterArray(POST, [
             'extension_id' => 'id',
             'menu_key'     => 'text',
             'menu_path'    => 'text',
@@ -38,13 +37,13 @@ class MenusModel extends Model
             'status'       => 'bool:0/1',
         ]) or abort();
 
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'is_edit' => '',
             'id'      => 'id|array|only_if:is_edit|required:abort',
         ]);
 
         // validate
-        foreach ($this->data_array as $i => $row) {
+        foreach ($data_array as $i => $row) {
             if (!$row['extension_id']) {
                 return $this->unprocessable(_t('Please, fill in the extension.') . sprintf(' (%d)', ++$i));
             }
@@ -57,19 +56,19 @@ class MenusModel extends Model
         }
 
         // query
-        if ($this->data['is_edit']) {
-            $menu_path    = [];
-            foreach ($this->data_array as $i => $row) {
+        if ($data['is_edit']) {
+            $menu_path = [];
+            foreach ($data_array as $i => $row) {
                 $menu_path[] = $row['menu_path'];
             }
 
-            $this->db->execAll("UPDATE `#__menus` SET ??, menu_default_path = IF(is_distributed = 1, ?, menu_default_path) WHERE id = ?", $this->data_array, $menu_path, $this->data['id']);
+            $this->db->execAll("UPDATE `#__menus` SET ??, menu_default_path = IF(is_distributed = 1, ?, menu_default_path) WHERE id = ?", $data_array, $menu_path, $data['id']);
         } else {
-            $this->db->execAll("INSERT INTO `#__menus` (??, menu_default_path) VALUES (??, menu_path)", $this->data_array);
+            $this->db->execAll("INSERT INTO `#__menus` (??, menu_default_path) VALUES (??, menu_path)", $data_array);
         }
 
         // translate
-        $translates = $this->getTranslates(array_column($this->data_array, 'extension_id'));
+        $translates = $this->getTranslates(array_column($data_array, 'extension_id'));
 
         foreach ($translates as $alias => $translate) {
             (new LanguageHelper)->translate('menus.' . $alias, $translate);
@@ -81,11 +80,10 @@ class MenusModel extends Model
      */
     public function status()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
+        $data = $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // query
-        $this->db->exec("UPDATE `#__menus` SET status = IF(status > 0, 0, 1) WHERE id IN (?..)", $this->data['id']);
+        $this->db->exec("UPDATE `#__menus` SET status = IF(status > 0, 0, 1) WHERE id IN (?..)", $data['id']);
     }
 
     /**
@@ -93,11 +91,10 @@ class MenusModel extends Model
      */
     public function delete()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
+        $data = $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // query
-        $this->db->exec("DELETE FROM `#__menus` WHERE id IN (?..)", $this->data['id']);
+        $this->db->exec("DELETE FROM `#__menus` WHERE id IN (?..)", $data['id']);
     }
 
     /**
@@ -105,8 +102,7 @@ class MenusModel extends Model
      */
     public function lock()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
+        $data = $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // security
         $this->db->query("
@@ -115,10 +111,10 @@ class MenusModel extends Model
 		LEFT JOIN `#__extensions` e ON ( m.extension_id = e.id )
 		LEFT JOIN `#__extensions_developers` d ON ( e.developer_id = d.id )
 		WHERE m.id IN (?..)
-		AND d.is_protected <> 0", $this->data['id'])->fetchColumn() and abort();
+		AND d.is_protected <> 0", $data['id'])->fetchColumn() and abort();
 
         // query
-        $this->db->exec("UPDATE `#__menus` SET is_distributed = IF(is_distributed > 0, 0, 1) WHERE id IN ( ?.. )", $this->data['id']);
+        $this->db->exec("UPDATE `#__menus` SET is_distributed = IF(is_distributed > 0, 0, 1) WHERE id IN ( ?.. )", $data['id']);
     }
 
     /**

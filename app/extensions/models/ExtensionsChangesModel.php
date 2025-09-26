@@ -11,7 +11,6 @@ class ExtensionsChangesModel extends Model
 {
     // vars
     protected $db;
-    protected int $id = 0;
 
     /**
      * Constructor
@@ -26,22 +25,21 @@ class ExtensionsChangesModel extends Model
      */
     public function save()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'id'                 => 'id',
             'change_description' => 'text|required',
             'is_compatible'      => 'bool:0/1',
             'extension_id'       => 'id|only_if_not:id|required:abort'
         ]);
 
-        // extract
-        $this->extract('id');
+        // slice
+        $change_id = $this->slice($data, 'id');
 
         // query
-        if ($this->id) {
-            $this->db->exec("UPDATE `#__extensions_changes` SET ?? WHERE id = ? AND status = 0", $this->data, $this->id);
+        if ($change_id) {
+            $this->db->exec("UPDATE `#__extensions_changes` SET ?? WHERE id = ? AND status = 0", $data, $change_id);
         } else {
-            $this->db->exec("INSERT INTO `#__extensions_changes` (??) VALUES (??)", $this->data);
+            $this->db->exec("INSERT INTO `#__extensions_changes` (??) VALUES (??)", $data);
         }
     }
 
@@ -51,10 +49,9 @@ class ExtensionsChangesModel extends Model
      */
     public function delete()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
+        $data = $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // query
-        $this->db->exec("DELETE FROM `#__extensions_changes` WHERE id IN (?..) AND status = 0", $this->data['id']);
+        $this->db->exec("DELETE FROM `#__extensions_changes` WHERE id IN (?..) AND status = 0", $data['id']);
     }
 }

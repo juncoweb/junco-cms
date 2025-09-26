@@ -14,7 +14,7 @@ class EmailDebugModel extends Model
      */
     public function take(): array
     {
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'transport'     => 'text',
             'subject'       => 'text',
             'to'            => 'text',
@@ -23,7 +23,7 @@ class EmailDebugModel extends Model
             'message_html'  => '',
         ]);
 
-        if (!$this->isAvailable($this->data['transport'])) {
+        if (!$this->isAvailable($data['transport'])) {
             return [
                 'code' => _t('This task is not allowed in demos.'),
                 'debug' => _t('This task is not allowed in demos.')
@@ -31,13 +31,14 @@ class EmailDebugModel extends Model
         }
 
         return [
-            'code' => $this->getCode($this->data['transport'], $this->data['message_type']),
+            'code' => $this->getCode($data['transport'], $data['message_type']),
             'debug' => $this->getDebugOutput(
-                $this->data['transport'],
-                $this->data['to'],
-                $this->data['subject'],
-                $this->data['message_html'],
-                $this->data['message_plain']
+                $data['transport'],
+                $data['to'],
+                $data['subject'],
+                $data['message_type'],
+                $data['message_html'],
+                $data['message_plain']
             )
         ];
     }
@@ -129,6 +130,7 @@ class EmailDebugModel extends Model
         string $transport,
         string $to,
         string $subject,
+        string $message_type,
         string $message_html,
         string $message_plain
     ): string {
@@ -139,7 +141,7 @@ class EmailDebugModel extends Model
         $email->to($to);
         $email->subject($subject);
 
-        switch ($this->data['message_type']) {
+        switch ($message_type) {
             case 'html':
                 $email->message($message_html, Email::MESSAGE_IS_HTML);
                 break;

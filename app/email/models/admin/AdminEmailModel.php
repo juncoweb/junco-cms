@@ -14,12 +14,12 @@ class AdminEmailModel extends Model
      */
     public function getMessageData()
     {
-        // data
-        $this->filter(GET, ['layout' => 'text|default:default']);
+        $data = $this->filter(GET, ['layout' => 'text|default:default']);
 
+        //
         $url     = url('admin/email/message', ['layout' => '%s']);
         $layouts = SystemHelper::scanSnippets('email');
-        $this->data += [
+        $data += [
             'message' => null
         ];
 
@@ -27,21 +27,21 @@ class AdminEmailModel extends Model
             $layouts[$name] = ['url' => sprintf($url, $name), 'caption' => $caption];
         }
 
-        if ($this->data['layout']) {
-            if (isset($layouts[$this->data['layout']])) {
+        if ($data['layout']) {
+            if (isset($layouts[$data['layout']])) {
                 // message
-                $message = Email::getMessage($this->data['layout']);
+                $message = Email::getMessage($data['layout']);
                 $message->legend('This is a <a href="www.example.com">legend</a>');
                 $message->line('Lorem ipsum dolor <a href="www.example.com">sit amet</a>, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.');
                 $message->codelink('#codelink');
                 $message->legal();
-                $this->data['message'] = [$message->getHtml(), $message->getPlain()];
+                $data['message'] = [$message->getHtml(), $message->getPlain()];
             } else {
-                $this->data['layout'] = '';
+                $data['layout'] = '';
             }
         }
 
-        return $this->data + ['layouts' => $layouts];
+        return $data + ['layouts' => $layouts];
     }
 
     /**
@@ -49,7 +49,6 @@ class AdminEmailModel extends Model
      */
     public function getDebugData()
     {
-        // data
         //$this->filter(GET, ['layout' => 'text|default:default']);
 
         return [

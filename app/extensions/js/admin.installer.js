@@ -5,33 +5,6 @@ let Installer = (function () {
         return JsUrl('admin/extensions.installer/' + task);
     }
 
-    function setCleanerEvents(clean) {
-        let a = clean.querySelector('#clean-all');
-        let b = clean.querySelectorAll('input[name="clean_paths[]"]');
-        let L = b.length;
-        a.addEventListener('change', function () {
-            for (let i = 0; i < L; i++) {
-                b[i].checked = a.checked;
-            }
-        });
-
-        for (let i = 0; i < L; i++) {
-            b[i].addEventListener('change', function () {
-                if (this.checked) {
-                    let x = 0;
-                    for (let i = 0; i < L; i++) {
-                        if (b[i].checked == true) {
-                            x++;
-                        }
-                    }
-                    a.checked = L == x;
-                } else {
-                    a.checked = false;
-                }
-            });
-        }
-    }
-
     function callback(res) {
         if (res.ok()) {
             if (target) {
@@ -50,11 +23,6 @@ let Installer = (function () {
                 onLoad: function () {
                     target = this;
                     JsTabs('#installer-tabs')?.select();
-
-                    let clean = target.getElement().querySelector('.ei-clean');
-                    if (clean) {
-                        setCleanerEvents(clean);
-                    }
                     JsForm({ btn: this }).request($U('install'), callback);
                 },
             },

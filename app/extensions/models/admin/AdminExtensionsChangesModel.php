@@ -25,11 +25,10 @@ class AdminExtensionsChangesModel extends Model
      */
     public function getIndexData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array:first|required:abort']);
+        $input = $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         //
-        $data = $this->getExtensionData($this->data['id']) or abort();
+        $data = $this->getExtensionData($input['id']) or abort();
 
         return [
             'title' => $data['extension_name'] ?: $data['extension_alias'],
@@ -42,18 +41,17 @@ class AdminExtensionsChangesModel extends Model
      */
     public function getListData()
     {
-        // data
-        $this->filter(POST, ['extension_id' => 'id|required:abort']);
+        $data = $this->filter(POST, ['extension_id' => 'id|required:abort']);
 
         // query
-        $this->db->where("extension_id = ?", $this->data['extension_id']);
+        $this->db->where("extension_id = ?", $data['extension_id']);
         $pagi = $this->db->paginate("
 		SELECT [id, change_description, created_at, status]*
 		FROM `#__extensions_changes`
 		[WHERE]
 		[ORDER BY created_at DESC]");
 
-        return $this->data + ['pagi' => $pagi];
+        return $data + ['pagi' => $pagi];
     }
 
     /**
@@ -61,14 +59,13 @@ class AdminExtensionsChangesModel extends Model
      */
     public function getCreateData()
     {
-        // data
-        $this->filter(POST, ['extension_id' => 'id|required:abort']);
+        $data = $this->filter(POST, ['extension_id' => 'id|required:abort']);
 
         return [
             'title' => _t('Create'),
             'values' => [
                 'is_compatible' => true,
-                'extension_id' => $this->data['extension_id']
+                'extension_id' => $data['extension_id']
             ],
         ];
     }
@@ -78,8 +75,7 @@ class AdminExtensionsChangesModel extends Model
      */
     public function getEditData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array:first|required:abort']);
+        $input = $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // query
         $data = $this->db->query("
@@ -89,7 +85,7 @@ class AdminExtensionsChangesModel extends Model
 		 change_description ,
 		 is_compatible
 		FROM `#__extensions_changes`
-		WHERE id = ?", $this->data['id'])->fetch() or abort();
+		WHERE id = ?", $input['id'])->fetch() or abort();
 
         return [
             'title' => _t('Edit'),
@@ -102,10 +98,7 @@ class AdminExtensionsChangesModel extends Model
      */
     public function getConfirmDeleteData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
-
-        return $this->data['id'];
+        return $this->filter(POST, ['id' => 'id|array|required:abort']);
     }
 
     /**

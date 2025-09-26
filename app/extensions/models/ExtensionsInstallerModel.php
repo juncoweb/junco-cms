@@ -31,17 +31,16 @@ class ExtensionsInstallerModel extends Model
      */
     public function upload()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'delete' => 'bool',
             'file'   => 'archive|required',
         ]);
 
         // file
-        $this->data['file']
+        $data['file']
             ->setBasedir('')
             ->moveTo((new Carrier)->getTargetPath(), UploadedFileManager::DEFAULT_NAME, true)
-            ->extract($this->data['delete']);
+            ->extract($data['delete']);
     }
 
     /**
@@ -49,18 +48,17 @@ class ExtensionsInstallerModel extends Model
      */
     public function findUpdates()
     {
-        // data
-        $this->filter(POST, ['option' => 'id']);
+        $data = $this->filter(POST, ['option' => 'id']);
 
         //
         $num_updates = (new Updater)->findUpdates();
 
         // response
-        if ($this->data['option'] === 2) {
+        if ($data['option'] === 2) {
             return $this->getBadgeMessage();
         }
 
-        if ($this->data['option'] === 1) {
+        if ($data['option'] === 1) {
             $message = $this->getBadgeMessage();
         } else {
             $message = $num_updates
@@ -76,8 +74,7 @@ class ExtensionsInstallerModel extends Model
      */
     public function download()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'update_id'      => 'id|required:abort',
             'download_url'   => '',
             'is_close'       => '',
@@ -88,21 +85,21 @@ class ExtensionsInstallerModel extends Model
         ]);
 
         // key
-        if ($this->data['is_close'] && $this->data['extension_key'] !== $this->data['_extension_key']) {
-            $this->updateExtensionKey($this->data['extension_key'], $this->data['update_id']);
+        if ($data['is_close'] && $data['extension_key'] !== $data['_extension_key']) {
+            $this->updateExtensionKey($data['extension_key'], $data['update_id']);
         }
 
         //
         $updater  = new Updater;
-        $filename = $updater->download($this->data);
+        $filename = $updater->download($data);
 
         // clear
-        if ($this->data['clear']) {
-            $updater->isInstalled($this->data['update_id']);
+        if ($data['clear']) {
+            $updater->isInstalled($data['update_id']);
         }
 
         // decompress
-        if ($this->data['decompress']) {
+        if ($data['decompress']) {
             $updater->extract($filename);
         }
     }
@@ -112,8 +109,7 @@ class ExtensionsInstallerModel extends Model
      */
     public function update()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'update_id'      => 'id|required:abort',
             'download_url'   => '',
             'is_close'       => '',
@@ -122,15 +118,15 @@ class ExtensionsInstallerModel extends Model
         ]);
 
         // key
-        if ($this->data['is_close'] && $this->data['extension_key'] !== $this->data['_extension_key']) {
-            $this->updateExtensionKey($this->data['extension_key'], $this->data['update_id']);
+        if ($data['is_close'] && $data['extension_key'] !== $data['_extension_key']) {
+            $this->updateExtensionKey($data['extension_key'], $data['update_id']);
         }
 
         //
         $updater  = new Updater;
-        $filename = $updater->download($this->data);
+        $filename = $updater->download($data);
         //
-        $updater->isInstalled($this->data['update_id']);
+        $updater->isInstalled($data['update_id']);
         $updater->extract($filename);
 
         // installer
@@ -144,13 +140,12 @@ class ExtensionsInstallerModel extends Model
      */
     public function updateAll()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'id'        => 'id|array',
             'before_at' => 'bool'
         ]);
 
-        (new Updater)->updateAll($this->data)
+        (new Updater)->updateAll($data)
             or alert(422, _t('Error! the task has not been realized.'));
     }
 
@@ -159,10 +154,9 @@ class ExtensionsInstallerModel extends Model
      */
     public function unzip()
     {
-        // data
-        $this->filter(POST, ['file' => '']);
+        $data = $this->filter(POST, ['file' => '']);
 
-        (new Carrier)->extract($this->data['file']);
+        (new Carrier)->extract($data['file']);
     }
 
     /**
@@ -170,8 +164,7 @@ class ExtensionsInstallerModel extends Model
      */
     public function install()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'extension_alias' => 'array',
             'package'         => 'text',
             'copy_files'      => 'bool',
@@ -186,15 +179,15 @@ class ExtensionsInstallerModel extends Model
         $installer                      = new Installer();
         $installer->only_selected_alias = true;
         $installer->clean_everything    = false;
-        $installer->copy_files          = $this->data['copy_files'];
-        $installer->remove_package      = $this->data['remove_package'];
-        $installer->db_import           = $this->data['db_import'];
-        $installer->execute_before      = $this->data['execute_before'];
-        $installer->execute_after       = $this->data['execute_after'];
+        $installer->copy_files          = $data['copy_files'];
+        $installer->remove_package      = $data['remove_package'];
+        $installer->db_import           = $data['db_import'];
+        $installer->execute_before      = $data['execute_before'];
+        $installer->execute_after       = $data['execute_after'];
         $installer->install(
-            $this->data['package'],
-            $this->data['extension_alias'],
-            $this->data['clean_paths']
+            $data['package'],
+            $data['extension_alias'],
+            $data['clean_paths']
         );
     }
 
@@ -203,13 +196,12 @@ class ExtensionsInstallerModel extends Model
      */
     public function delete()
     {
-        // data
-        $this->filter(POST, ['id' => 'array|required:abort']);
+        $data = $this->filter(POST, ['id' => 'array|required:abort']);
 
         $updater = new Updater;
         $update_id = [];
 
-        foreach ($this->data['id'] as $id) {
+        foreach ($data['id'] as $id) {
             if (is_numeric($id)) {
                 $update_id[] = (int)$id;
             } else {
@@ -227,13 +219,12 @@ class ExtensionsInstallerModel extends Model
      */
     public function maintenance()
     {
-        // data
-        $this->filter(POST, ['status' => 'bool']);
+        $data = $this->filter(POST, ['status' => 'bool']);
 
         $maintenance = new Maintenance;
 
-        if ($this->data['status'] !== $maintenance->getStatus()) {
-            $maintenance->toggleStatus($this->data['status']);
+        if ($data['status'] !== $maintenance->getStatus()) {
+            $maintenance->toggleStatus($data['status']);
         }
     }
 

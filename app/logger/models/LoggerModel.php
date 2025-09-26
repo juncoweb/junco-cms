@@ -27,11 +27,10 @@ class LoggerModel extends Model
      */
     public function status()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
+        $data = $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         //
-        $this->manager->status($this->data['id']);
+        $this->manager->status($data['id']);
     }
 
     /**
@@ -39,11 +38,10 @@ class LoggerModel extends Model
      */
     public function delete()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
+        $data = $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         //
-        $this->manager->deleteMultiple($this->data['id']);
+        $this->manager->deleteMultiple($data['id']);
     }
 
     /**
@@ -51,11 +49,10 @@ class LoggerModel extends Model
      */
     public function thin()
     {
-        // data
-        $this->filter(POST, ['delete' => 'bool']);
+        $data = $this->filter(POST, ['delete' => 'bool']);
 
         //
-        $this->manager->thin($this->data['delete']);
+        $this->manager->thin($data['delete']);
     }
 
     /**
@@ -71,17 +68,16 @@ class LoggerModel extends Model
      */
     public function report()
     {
-        // data
-        $this->filter(POST, [
+        $input = $this->filter(POST, [
             'id'      => 'id|array',
             'message' => '',
         ]);
 
-        if (strlen($this->data['message']) > 600) {
+        if (strlen($input['message']) > 600) {
             return $this->unprocessable(_t('The text is too long.'));
         }
 
-        $reports = $this->manager->getReports($this->data['id']);
+        $reports = $this->manager->getReports($input['id']);
 
         if (!$reports) {
             return $this->unprocessable(_t('Please, select at least one element.'));
@@ -92,7 +88,7 @@ class LoggerModel extends Model
             'php_os'         => PHP_OS,
             'php_os_family'  => PHP_OS_FAMILY,
             'system_version' => $this->getSystemVersion(),
-            'message'        => $this->data['message'],
+            'message'        => $input['message'],
             'reports'        => json_encode($reports)
         ];
 

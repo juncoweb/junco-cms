@@ -34,7 +34,6 @@ class AdminUsersModel extends Model
      */
     public function getListData()
     {
-        // data
         $data = $this->filter(POST, [
             'search'  => 'text',
             'field'   => 'id',
@@ -118,7 +117,6 @@ class AdminUsersModel extends Model
      */
     public function getEditData()
     {
-        // data
         $data = $this->filter(POST, ['id' => 'id|array:first']);
 
         // query
@@ -142,7 +140,6 @@ class AdminUsersModel extends Model
      */
     public function getConfirmDeleteData()
     {
-        // data
         return $this->filter(POST, ['id' => 'id|array|required:abort']);
     }
 
@@ -151,7 +148,6 @@ class AdminUsersModel extends Model
      */
     public function getUsersData()
     {
-        // data
         $data = $this->filter(POST, ['q' => 'text']);
         $limit = 48;
 
@@ -176,7 +172,6 @@ class AdminUsersModel extends Model
      */
     public function getRolesData()
     {
-        // data
         $data = $this->filter(POST, ['q' => 'text']);
         $limit = 48;
 

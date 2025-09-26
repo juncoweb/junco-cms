@@ -319,9 +319,9 @@ class Filter
     {
         switch ($type) {
             case GET:
-                return request()->getQueryParams();
+                return request()?->getQueryParams() ?? [];
             case POST:
-                return request()->getParsedBody() ?? [];
+                return request()?->getParsedBody() ?? [];
         }
 
         throw new FilterError('The type of data to be filtered is incorrect');

@@ -1,4 +1,4 @@
 
-Users v0.1
+MVC v0.1
 =======================================================
-- Performance has been improved.
+- Now, the filter returns the data instead of storing it in the &quot;data&quot; property.

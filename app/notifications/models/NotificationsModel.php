@@ -25,11 +25,10 @@ class NotificationsModel extends Model
      */
     public function status()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
+        $data = $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // query
-        $this->db->exec("UPDATE `#__notifications` SET status = IF(status > 0, 0, 1) WHERE id IN (?..)", $this->data['id']);
+        $this->db->exec("UPDATE `#__notifications` SET status = IF(status > 0, 0, 1) WHERE id IN (?..)", $data['id']);
     }
 
     /**
@@ -37,10 +36,9 @@ class NotificationsModel extends Model
      */
     public function delete()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
+        $data = $this->filter(POST, ['id' => 'id|array|required:abort']);
 
         // query
-        $this->db->exec("DELETE FROM `#__notifications` WHERE id IN (?..)", $this->data['id']);
+        $this->db->exec("DELETE FROM `#__notifications` WHERE id IN (?..)", $data['id']);
     }
 }

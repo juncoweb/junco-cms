@@ -12,21 +12,19 @@ class AdminSettingsFormModel extends Model
     // vars
     protected array $snippets = [];
     protected array $plugins  = [];
-    protected array $row      = [];
 
     /**
      * Get
      */
     public function getFormData()
     {
-        // data
-        $this->filter(GET, ['key' => 'text']);
+        $input = $this->filter(GET, ['key' => 'text']);
 
         //
-        $settings = new Settings($this->data['key']);
+        $settings = new Settings($input['key']);
 
         if (!$settings->security()) {
-            if ($this->data['key']) {
+            if ($input['key']) {
                 return ['error' => true];
             }
 
@@ -34,16 +32,16 @@ class AdminSettingsFormModel extends Model
         }
 
         //
-        $data = $settings->getData(true);
+        $data           = $settings->getData(true);
         $developer_mode = SYSTEM_DEVELOPER_MODE;
-        $this->data['__key'] = $this->data['key'];
-        $this->data += [
+        $input['__key'] = $input['key'];
+        $input += [
             'developer_mode' => $developer_mode,
-            'title'          => $data['title'] ? _t($data['title']) : ucfirst($this->data['key']),
+            'title'          => $data['title'] ? _t($data['title']) : ucfirst($input['key']),
             'description'    => $data['description'],
             'warning'        => $data['warning'],
-            'keys'           => $this->getKeys($settings, $this->data['key']),
-            'values'         => $this->data,
+            'keys'           => $this->getKeys($settings, $input['key']),
+            'values'         => $input,
             'groups'         => [],
         ];
         $restore = [];
@@ -78,7 +76,6 @@ class AdminSettingsFormModel extends Model
             }
 
             $row['name'] = $name;
-            $this->row = $row;
 
             // help
             if (!empty($row['alter_help'])) {
@@ -89,7 +86,9 @@ class AdminSettingsFormModel extends Model
 
             switch ($row['type']) {
                 case 'snippet';
-                    $row['options'] = $this->getSnippets();
+                    $row['options'] = $this->getSnippets(
+                        $this->resolveName($row['snippets'] ?? null, $row['name'], $input['key'])
+                    );
 
                     if (!$row['help']) {
                         $row['help'] = _t('Select a snippet to display.');
@@ -97,7 +96,9 @@ class AdminSettingsFormModel extends Model
                     break;
 
                 case 'plugin':
-                    $row['options'] = $this->getPlugin();
+                    $row['options'] = $this->getPlugin(
+                        $this->resolveName($row['plugin'] ?? null, $row['name'], $input['key'])
+                    );
 
                     if (!$row['help']) {
                         $row['help'] = _t('The plugins allow additional functions.');
@@ -105,7 +106,9 @@ class AdminSettingsFormModel extends Model
                     break;
 
                 case 'plugins':
-                    $row['options'] = $this->getPlugins();
+                    $row['options'] = $this->getPlugins(
+                        $this->resolveName($row['plugins'] ?? null, $row['name'], $input['key'])
+                    );
 
                     if (!$row['help']) {
                         $row['help'] = _t('The plugins allow additional functions.');
@@ -159,16 +162,16 @@ class AdminSettingsFormModel extends Model
                 $row['restore'] = false;
             }
 
-            $this->data['groups'][$row['group']] ??= [
+            $input['groups'][$row['group']] ??= [
                 'legend'      => !empty($data['groups'][$row['group']]) ? _t($data['groups'][$row['group']]) : '',
                 'description' => !empty($data['descriptions'][$row['group']]) ? _t($data['descriptions'][$row['group']]) : '',
                 'rows'        => []
             ];
-            $this->data['groups'][$row['group']]['rows'][] = $row;
-            $this->data['values'][$row['name']] = $row['value'];
+            $input['groups'][$row['group']]['rows'][] = $row;
+            $input['values'][$row['name']] = $row['value'];
         }
 
-        return $this->data + [
+        return $input + [
             'restore' => $restore ? json_encode($restore) : ''
         ];
     }
@@ -200,20 +203,16 @@ class AdminSettingsFormModel extends Model
     /**
      * Get
      */
-    protected function getSnippets(): array
+    protected function getSnippets(string $name): array
     {
-        $name = $this->resolveName('snippet');
-        $this->snippets[$name] ??= SystemHelper::scanSnippets($name);
-
-        return $this->snippets[$name];
+        return $this->snippets[$name] ??= SystemHelper::scanSnippets($name);
     }
 
     /**
      * Get
      */
-    protected function getPlugin(): array
+    protected function getPlugin(string $name): array
     {
-        $name = $this->resolveName('plugin');
         $this->plugins[$name] ??= SystemHelper::scanPlugins($name);
 
         return array_merge(['' => _t('None')], $this->plugins[$name]);
@@ -222,31 +221,29 @@ class AdminSettingsFormModel extends Model
     /**
      * Get
      */
-    protected function getPlugins(): array
+    protected function getPlugins(string $name): array
     {
-        $name = $this->resolveName('plugins');
-        $this->plugins[$name] ??= SystemHelper::scanPlugins($name);
-
-        return $this->plugins[$name];
+        return $this->plugins[$name] ??= SystemHelper::scanPlugins($name);
     }
 
     /**
      * Get
      */
-    protected function resolveName(string $resolve): string
+    protected function resolveName(?string $customName, string $name, string $key): string
     {
-        if (!empty($this->row[$resolve])) {
-            return $this->row[$resolve];
-        } elseif ($this->row['name'] == $resolve) {
-            return $this->data['key'];
-        } else {
-            $pos = strpos($this->row['name'], '_');
-            if ($pos) {
-                return substr($this->row['name'], 0, $pos);
-            }
+        if ($customName) {
+            return $customName;
         }
 
-        return $this->row['name'];
+        if ($name == $customName) {
+            return $key;
+        }
+
+        $pos = strpos($name, '_');
+
+        return $pos
+            ? substr($name, 0, $pos)
+            : $name;
     }
 
     /**

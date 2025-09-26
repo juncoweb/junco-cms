@@ -25,12 +25,11 @@ class AdminExtensionsDevelopersModel extends Model
      */
     public function getListData()
     {
-        // data
-        $this->filter(POST, ['search' => 'text']);
+        $data = $this->filter(POST, ['search' => 'text']);
 
         // query
-        if ($this->data['search']) {
-            $this->db->where("developer_name LIKE %?", $this->data['search']);
+        if ($data['search']) {
+            $this->db->where("developer_name LIKE %?", $data['search']);
         }
         $pagi = $this->db->paginate("
 		SELECT
@@ -41,7 +40,7 @@ class AdminExtensionsDevelopersModel extends Model
 		[WHERE]
 		[ORDER BY developer_name]");
 
-        return $this->data + ['pagi' => $pagi];
+        return $data + ['pagi' => $pagi];
     }
 
     /**
@@ -49,8 +48,7 @@ class AdminExtensionsDevelopersModel extends Model
      */
     public function getEditData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array:first|required:abort']);
+        $input = $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // query
         $data = $this->db->query("
@@ -64,7 +62,7 @@ class AdminExtensionsDevelopersModel extends Model
 		 default_license ,
 		 is_protected
 		FROM `#__extensions_developers`
-		WHERE id = ?", $this->data['id'])->fetch() or abort();
+		WHERE id = ?", $input['id'])->fetch() or abort();
 
         return [
             'title' => _t('Edit'),
@@ -78,11 +76,10 @@ class AdminExtensionsDevelopersModel extends Model
      */
     public function getDeleteData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array:first|required:abort']);
+        $input = $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // security
-        $data = $this->getDeveloperData($this->data['id']) or abort();
+        $data = $this->getDeveloperData($input['id']) or abort();
         $data['warning'] = [];
 
         if ($data['is_protected']) {

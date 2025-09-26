@@ -15,11 +15,10 @@ class AdminLanguageTranslationsModel extends Model
      */
     public function getIndexData()
     {
-        // data
-        $this->filter(POST, ['id' => 'array:first']);
+        $data = $this->filter(POST, ['id' => 'array:first']);
 
         return [
-            'data' => ['search' => $this->data['id']]
+            'data' => ['search' => $data['id']]
         ];
     }
 
@@ -28,34 +27,13 @@ class AdminLanguageTranslationsModel extends Model
      */
     public function getListData()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'search' => 'text',
             'page'   => 'id',
         ]);
 
-        // vars
-        $url  = 'https://www.juncoweb.com/index.php';
-        $args = ['goto' => 'translations/json', 'format' => 'json'];
-
-        if ($this->data['search']) {
-            $args['search'] = $this->data['search'];
-        }
-
-        if ($this->data['page']) {
-            $args['page'] = $this->data['page'];
-        }
-
         try {
-            $content = (new Client)
-                ->get($url, ['data' => $args])
-                ->getBody();
-
-            $json = json_decode($content, true);
-
-            if (!empty($json['__alert'])) {
-                throw new Exception($json['__alert']);
-            }
+            $json = $this->query($data);
         } catch (Exception $e) {
             return ['error' => $e->getMessage() ?: 'Error!'];
         }
@@ -66,7 +44,7 @@ class AdminLanguageTranslationsModel extends Model
         $pagi->rows_per_page = $json['rows_per_page'];
         $pagi->calculate();
 
-        return $this->data + [
+        return $data + [
             'pagi' => $pagi,
             'rows' => $json['rows']
         ];
@@ -77,12 +55,7 @@ class AdminLanguageTranslationsModel extends Model
      */
     public function getDownloadData()
     {
-        // data
-        $this->filter(POST, [
-            'id' => 'id|array:first|required:abort',
-        ]);
-
-        return $this->data;
+        return $this->filter(POST, ['id' => 'id|array:first|required:abort']);
     }
 
     /**
@@ -90,12 +63,11 @@ class AdminLanguageTranslationsModel extends Model
      */
     public function download()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|required:abort']);
+        $data = $this->filter(POST, ['id' => 'id|required:abort']);
 
         // vars
-        $locale    = (new LanguageHelper)->getLocale();
-        $url    = sprintf('https://www.juncoweb.com/translations/download?id=%d&format=blank', $this->data['id']);
+        $locale = (new LanguageHelper)->getLocale();
+        $url    = sprintf('https://www.juncoweb.com/translations/download?id=%d&format=blank', $data['id']);
 
         (new Client)
             ->get($url)
@@ -103,5 +75,37 @@ class AdminLanguageTranslationsModel extends Model
 
         (new Archive($locale))->extract($filename, '', true);
         (new LanguageHelper)->refresh();
+    }
+
+    /**
+     * Get
+     */
+    protected function query(array $data): array
+    {
+        $url  = 'https://www.juncoweb.com/index.php';
+        $args = [
+            'goto' => 'translations/json',
+            'format' => 'json'
+        ];
+
+        if ($data['search']) {
+            $args['search'] = $data['search'];
+        }
+
+        if ($data['page']) {
+            $args['page'] = $data['page'];
+        }
+
+        $content = (new Client)
+            ->get($url, ['data' => $args])
+            ->getBody();
+
+        $json = json_decode($content, true);
+
+        if (!empty($json['__alert'])) {
+            throw new Exception($json['__alert']);
+        }
+
+        return $json;
     }
 }

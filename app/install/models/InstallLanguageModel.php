@@ -14,11 +14,10 @@ class InstallLanguageModel extends Model
      */
     public function change()
     {
-        // data
-        $this->filter(POST, ['lang' => 'text']);
+        $data = $this->filter(POST, ['lang' => 'text']);
 
         // vars
-        $result = (new LanguageHelper)->change($this->data['lang']);
+        $result = (new LanguageHelper)->change($data['lang']);
 
         if (!$result) {
             return $this->unprocessable(_t('Error! the task has not been realized.'));

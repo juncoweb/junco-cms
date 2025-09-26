@@ -43,8 +43,7 @@ class AdminExtensionsModel extends Model
      */
     public function getListData()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'search'        => 'text',
             'status'        => 'enum:extensions.extension_status',
             'developer_id'  => 'id',
@@ -53,14 +52,14 @@ class AdminExtensionsModel extends Model
 
         // query
         $this->db->setParam(UpdateStatus::available);
-        if ($this->data['option'] == 1) {
+        if ($data['option'] == 1) {
             $this->db->where("u.has_update IS NOT NULL");
         }
-        if ($this->data['option'] == 2) {
+        if ($data['option'] == 2) {
             $this->db->where("e.package_id = -1");
         }
         $sql_table = '';
-        if ($this->data['option'] == 3) {
+        if ($data['option'] == 3) {
             $sql_table = "LEFT JOIN (
 				SELECT COUNT(*) AS total, extension_id
 				FROM `#__extensions_changes`
@@ -69,14 +68,14 @@ class AdminExtensionsModel extends Model
 			) AS c ON (c.extension_id = e.id)";
             $this->db->where("c.total > 0");
         }
-        if ($this->data['search']) {
-            $this->db->where("e.extension_alias LIKE %?|e.extension_name LIKE %?", $this->data['search']);
+        if ($data['search']) {
+            $this->db->where("e.extension_alias LIKE %?|e.extension_name LIKE %?", $data['search']);
         }
-        if ($this->data['developer_id']) {
-            $this->db->where("e.developer_id = ?", $this->data['developer_id']);
+        if ($data['developer_id']) {
+            $this->db->where("e.developer_id = ?", $data['developer_id']);
         }
-        if ($this->data['status']) {
-            $this->db->where("e.status = ?", $this->data['status']);
+        if ($data['status']) {
+            $this->db->where("e.status = ?", $data['status']);
         }
         $pagi = $this->db->paginate("
 		SELECT [
@@ -121,8 +120,8 @@ class AdminExtensionsModel extends Model
         }
 
         return [
-            ...$this->data,
-            'status' => $this->data['status']?->name,
+            ...$data,
+            'status' => $data['status']?->name,
             'developers' => $this->getListDevelopers(),
             'developer_mode' => SYSTEM_DEVELOPER_MODE,
             'statuses' => ExtensionStatus::getList(['' => _t('All status')]),
@@ -156,8 +155,7 @@ class AdminExtensionsModel extends Model
      */
     public function getEditData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array:first|required:abort']);
+        $input = $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // query
         $data = $this->db->query("
@@ -178,7 +176,7 @@ class AdminExtensionsModel extends Model
 			WHERE e.package_id = a.id
 		 ), NULL) AS annexed_to,
 		 (SELECT is_protected FROM `#__extensions_developers` d WHERE developer_id = d.id) AS is_protected
-		FROM `#__extensions` e WHERE id = ?", $this->data['id'])->fetch() or abort();
+		FROM `#__extensions` e WHERE id = ?", $input['id'])->fetch() or abort();
 
         return [
             'title' => _t('Edit'),
@@ -196,16 +194,15 @@ class AdminExtensionsModel extends Model
      */
     public function getConfirmStatusData()
     {
-        // data
-        $this->filter(POST, [
+        $data = $this->filter(POST, [
             'id' => 'id|array|required:abort',
             'status' => 'enum:extensions.extension_status|required:abort'
         ]);
 
         return [
-            ...$this->data,
-            'status' => $this->data['status']->name,
-            'status_title' => $this->data['status']->title(),
+            ...$data,
+            'status' => $data['status']->name,
+            'status_title' => $data['status']->title(),
         ];
     }
 
@@ -214,10 +211,7 @@ class AdminExtensionsModel extends Model
      */
     public function getConfirmDeleteData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array|required:abort']);
-
-        return $this->data;
+        return $this->filter(POST, ['id' => 'id|array|required:abort']);
     }
 
     /**
@@ -225,11 +219,10 @@ class AdminExtensionsModel extends Model
      */
     public function getConfirmAppendData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array:first|required:abort']);
+        $input = $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // security
-        $data = $this->getExtensionData($this->data['id']) or abort();
+        $data = $this->getExtensionData($input['id']) or abort();
 
         // query
         $rows = $this->db->query("
@@ -267,8 +260,7 @@ class AdminExtensionsModel extends Model
      */
     public function getConfirmCompileData()
     {
-        // data
-        $this->filter(POST, [
+        $input = $this->filter(POST, [
             'id'              => 'id|array|required:abort',
             'update_versions' => 'text|in:no,yes',
             'update_requires' => 'text|in:no,yes',
@@ -276,15 +268,15 @@ class AdminExtensionsModel extends Model
 
         // compiler
         $compiler = new PreCompiler(
-            $this->data['update_versions'],
-            $this->data['update_requires']
+            $input['update_versions'],
+            $input['update_requires']
         );
         $data = [
             'enter'  => true,
             'status' => -3,
         ];
 
-        foreach ($this->data['id'] as $package_id) {
+        foreach ($input['id'] as $package_id) {
             $status = $compiler->getPackage($package_id);
 
             if ($data['status'] < $status) {
@@ -304,7 +296,7 @@ class AdminExtensionsModel extends Model
                     'changes' => $compiler->getChanges(),
                     'values' => [
                         'update_requires' => 'yes',
-                        'id' => $this->data['id']
+                        'id' => $input['id']
                     ],
                 ];
 
@@ -313,8 +305,8 @@ class AdminExtensionsModel extends Model
                     'updates' => $compiler->getUpdates(),
                     'values' => [
                         'update_versions' => 'yes',
-                        'update_requires' => $this->data['update_requires'],
-                        'id' => $this->data['id']
+                        'update_requires' => $input['update_requires'],
+                        'id' => $input['id']
                     ],
                 ];
 
@@ -328,7 +320,7 @@ class AdminExtensionsModel extends Model
                     'values' => [
                         'package_name_format' => Compiler::DISTRIBUTION_NAME_FORMAT,
                         'output' => Compiler::OUTPUT_FILE,
-                        'id' => $this->data['id'],
+                        'id' => $input['id'],
                     ],
                 ];
         }
@@ -339,8 +331,7 @@ class AdminExtensionsModel extends Model
      */
     public function getConfirmDbHistoryData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array:first|required:abort']);
+        $data = $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // query
         $extension = $this->db->query("
@@ -350,7 +341,7 @@ class AdminExtensionsModel extends Model
 		 db_history ,
 		 (SELECT is_protected FROM `#__extensions_developers` d WHERE developer_id = d.id) AS is_protected
 		FROM `#__extensions`
-        WHERE id = ?", $this->data['id'])->fetch();
+        WHERE id = ?", $data['id'])->fetch();
 
         // vars
         $db_history = $extension['db_history']
@@ -383,7 +374,7 @@ class AdminExtensionsModel extends Model
                         $value = '';
                     }
 
-                    $this->data[$key] = $value;
+                    $data[$key] = $value;
                     $Fields[$key] = $Field;
                 }
 
@@ -391,7 +382,7 @@ class AdminExtensionsModel extends Model
                 if (isset($db_history[$Type][$Name]['History'])) {
                     $value = $db_history[$Type][$Name]['History'];
                     unset($db_history[$Type][$Name]['History']);
-                    $this->data[$key] = is_array($value) ? implode(',', $value) : $value;
+                    $data[$key] = is_array($value) ? implode(',', $value) : $value;
                 }
 
                 $queries[] = [
@@ -405,7 +396,7 @@ class AdminExtensionsModel extends Model
 
         return [
             'title'        => $extension['name'] ?: $extension['alias'],
-            'values'       => $this->data,
+            'values'       => $data,
             'queries'      => $queries,
             'db_history'   => $db_history,
             'is_protected' => $extension['is_protected']
@@ -417,11 +408,10 @@ class AdminExtensionsModel extends Model
      */
     public function getEditReadmeData()
     {
-        // data
-        $this->filter(POST, ['id' => 'id|array:first|required:abort']);
+        $input = $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         //
-        $data   = $this->getExtensionData($this->data['id']) or abort();
+        $data   = $this->getExtensionData($input['id']) or abort();
         $file   = $this->getReadmeFile($data['extension_alias']);
         $readme = is_file($file)
             ? file_get_contents($file)
