@@ -33,14 +33,16 @@
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: var(--regular-border-color);
+}
+.modal-header .modal-title-group {
   display: flex;
   gap: 0.5rem;
 }
-.modal-header, .modal-header h3 {
+.modal-header .modal-title-group, .modal-header .modal-title-group h3 {
   font-size: 1.5rem;
   margin: 0;
 }
-.modal-header .modal-title {
+.modal-header .modal-title-group .modal-title {
   flex: auto;
 }
 .modal-body {

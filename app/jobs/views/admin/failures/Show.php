@@ -5,19 +5,22 @@
  * @author: Junco CMS (tm)
  */
 
-$html = '<table class="table table-bordered"><tbody>'
-    . '<tr><th>' . _t('Date') . '</th><td>' . $created_at->format(_t('Y-m-d')) . ' <span class="color-light">' . $created_at->format('H:i:s') . '</span></td></tr>'
-    . '<tr><th>' . _t('Queue') . '</th><td>' . $job_queue . '</td></tr>'
-    . '<tr><th>' . _t('Id') . '</th><td>' . $job_id . '</td></tr>'
-    . '<tr><th>' . _t('Uuid') . '</th><td>' . $job_uuid . '</td></tr>'
-    //. '<tr><th>' . _t('Payload') . '</th><td>' . $job_payload . '</td></tr>'
-    . '<tr><th>' . _t('Error') . '</th><td>' . nl2br($job_error) . '</td></tr>'
-    . '</tbody></table>';
+$zoom = Zoom::get();
+$zoom->columns(
+    $zoom->date($created_at)->setLabel(_t('Created')),
+    $zoom->group($job_queue)->setLabel(_t('Queue'))
+);
+$zoom->columns(
+    $zoom->group($job_id)->setLabel(_t('Id')),
+    $zoom->group($job_uuid)->setLabel(_t('Uuid'))
+);
+//$zoom->group($job_payload)->setLabel(_t('Payload'));
+$zoom->group(nl2br($job_error))->setLabel(_t('Error'));
 
 // modal
 $modal = Modal::get();
 $modal->close();
 $modal->title(_t('Failure'));
-$modal->content = $html;
+$modal->content = $zoom->render();
 
 return $modal->response();

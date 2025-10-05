@@ -752,6 +752,9 @@ function Backlist(ID) {
                         click: function (event) {
                             event.stopPropagation();
                         },
+                        focus: function () {
+                            this.select();
+                        },
                         keydown: function (event) {
                             if (event.key == 'Enter') {
                                 event.preventDefault();

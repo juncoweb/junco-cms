@@ -13,12 +13,12 @@ use Junco\Tabs\TabsInterface;
 abstract class ShowcaseBase implements ShowcaseInterface
 {
     // vars
-    protected ?TabsInterface $tabs    = null;
-    protected string $tabs_snippet    = '';
-    protected array  $data            = [];
+    protected ?TabsInterface $tabs = null;
+    protected string $tabs_snippet = '';
+    protected array  $data         = [];
     //
-    private   array  $options        = [];
-    private   bool   $assets        = false;
+    private   array  $options      = [];
+    private   bool   $assets       = false;
 
     /**
      * Sets the internal options.

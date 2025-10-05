@@ -22,6 +22,10 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
 
     /**
      * Type
+     * 
+     * @param string $type
+     * 
+     * @return void
      */
     public function type(string $type): void
     {
@@ -42,6 +46,8 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
      * @param string $control
      * @param string $title
      * @param string $caption
+     * 
+     * @return void
      */
     public function button(string $control = '', string $title = '', string $caption = ''): void
     {
@@ -62,6 +68,8 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
      * 
      * @param string $title
      * @param string $caption
+     * 
+     * @return void
      */
     public function enter(string $title = '', string $caption = ''): void
     {
@@ -81,6 +89,8 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
      * 
      * @param string $title
      * @param string $caption
+     * 
+     * @return void
      */
     public function close(string $title = '', string $caption = ''): void
     {
@@ -99,6 +109,8 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
      * Form
      * 
      * @param string $id
+     * 
+     * @return modal_form
      */
     public function form(string $id = ''): modal_form
     {
@@ -106,10 +118,24 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
     }
 
     /**
+     * Set the pathway of the page
+     *
+     * @param string|array $value
+     * 
+     * @return void
+     */
+    public function pathway(string|array $value): void
+    {
+        $this->json['pathway'] = $value;
+    }
+
+    /**
      * Set the title
      *
      * @param string|array $title
      * @param string       $icon
+     * 
+     * @return void
      */
     public function title($title, string $icon = ''): void
     {
@@ -126,6 +152,8 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
      * Help link
      *
      * @param string $url
+     * 
+     * @return void
      */
     public function helpLink(string $url): void
     {
@@ -137,6 +165,8 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
      * Footer
      *
      * @param string $html
+     * 
+     * @return void
      */
     public function footer(string $html = ''): void
     {
@@ -250,7 +280,9 @@ class modal_form
      */
     public function question($count = 1)
     {
-        $count = is_array($count) ? count($count) : (int)$count;
+        $count = is_array($count)
+            ? count($count)
+            : (int)$count;
 
         echo '<p>'
             . sprintf(_nt('Are you sure you want to delete the selected item?', 'Are you sure you want to delete the %d selected items?', $count), $count)

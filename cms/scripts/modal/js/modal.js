@@ -200,6 +200,15 @@ const Modal = function (options) {
             if (options.help_url) {
                 header += '<div><a href="' + options.help_url + '" target="_blank" title="' + options.help_title + '"><i class="fa-solid fa-circle-question"></i></a></div>';
             }
+            header = '<div class="modal-title-group">' + header + '</div>';
+
+            if (options.pathway) {
+                if (Array.isArray(options.pathway)) {
+                    options.pathway = options.pathway.join(' / ');
+                }
+                header = '<div class="modal-pathway">' + options.pathway + '</div>' + header;
+            }
+
             header = '<div class="modal-header">' + header + '</div>';
         }
 

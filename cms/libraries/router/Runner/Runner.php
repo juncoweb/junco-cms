@@ -189,6 +189,8 @@ class Runner extends RequestHandler
         } else {
             if ($content === 1) {
                 $content = ''; // hack
+            } elseif ($content === null) {
+                $content = '';
             }
 
             if ($buffer = $this->getOutputBuffer()) {

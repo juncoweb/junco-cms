@@ -15,7 +15,7 @@
     gap: $spacing;
 
     > div {
-        flex: auto;
+        flex: 1;
     }
 }
 @media (max-width: $screen-medium) {

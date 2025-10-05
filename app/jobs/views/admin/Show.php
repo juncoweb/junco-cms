@@ -5,28 +5,23 @@
  * @author: Junco CMS (tm)
  */
 
-if ($reserved_at) {
-    $reserved_at = $reserved_at->format(_t('Y-m-d'))
-        . ' <span class="color-light">'
-        . $reserved_at->format('H:i:s')
-        . '</span>';
-} else {
-    $reserved_at = '<span class="badge badge-warning">' . _t('Waiting') . '</span>';
-}
+$zoom = Zoom::get();
+$zoom->date($available_at)->setLabel(_t('Available'));
+$zoom->date($created_at)->setLabel(_t('Created'));
 
-$html = '<table class="table table-bordered"><tbody>'
-    . '<tr><th>' . _t('Available') . '</th><td>' . $available_at->format(_t('Y-m-d')) . ' <span class="color-light">' . $available_at->format('H:i:s') . '</span></td></tr>'
-    . '<tr><th>' . _t('Created') . '</th><td>' . $created_at->format(_t('Y-m-d')) . ' <span class="color-light">' . $created_at->format('H:i:s') . '</span></td></tr>'
-    . '<tr><th>' . _t('Reserved') . '</th><td>' . $reserved_at . '</td></tr>'
-    . '<tr><th>' . _t('Queue') . '</th><td>' . $job_queue . '</td></tr>'
-    . '<tr><th>' . _t('Attempts') . '</th><td>' . $num_attempts . '</td></tr>'
-    //. '<tr><th>' . _t('Payload') . '</th><td>' . $job_payload . '</td></tr>'
-    . '</tbody></table>';
+if ($reserved_at) {
+    $zoom->date($reserved_at)->setLabel(_t('Reserved'));
+} else {
+    $zoom->group('<span class="badge badge-warning">' . _t('Waiting') . '</span>')->setLabel(_t('Reserved'));
+}
+$zoom->group($job_queue)->setLabel(_t('Queue'));
+$zoom->group($num_attempts)->setLabel(_t('Attempts'));
+//$zoom->group($job_payload)->setLabel(_t('Payload'));
 
 // modal
 $modal = Modal::get();
 $modal->close();
 $modal->title(_t('Failure'));
-$modal->content = $html;
+$modal->content = $zoom->render();
 
 return $modal->response();

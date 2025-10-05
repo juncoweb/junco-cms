@@ -11,19 +11,19 @@ class showcase_master_default_snippet extends ShowcaseBase
 {
     // vars
     protected array $data = [
-        'id'            => '',
-        'url'            => '',
-        'image'            => '',
-        'image_html'    => '',
-        'title'            => '',
-        'description'    => '',
-        'date'            => '',
-        'author_name'    => '',
-        'author_url'    => '',
-        'edit_url'        => '',
-        'button'        => '',
-        'info'            => [],
-        'labels'        => [],
+        'id'          => '',
+        'url'         => '',
+        'image'       => '',
+        'image_html'  => '',
+        'title'       => '',
+        'description' => '',
+        'date'        => '',
+        'author_name' => '',
+        'author_url'  => '',
+        'edit_url'    => '',
+        'button'      => '',
+        'info'        => [],
+        'labels'      => [],
     ];
 
     /**

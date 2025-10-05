@@ -27,7 +27,7 @@ $form->group(
     $form->button(['title' => _t('Cancel'), 'icon' => 'fa-solid fa-xmark'])
 );
 
-$form->enter();
+//$form->enter();
 
 // template
 $tpl = Template::get();

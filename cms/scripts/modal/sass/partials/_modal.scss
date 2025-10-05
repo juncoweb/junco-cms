@@ -42,17 +42,20 @@
         border-bottom-width: $border-width;
         border-bottom-style: $border-style;
         border-bottom-color: var(--regular-border-color);
-        display: flex;
-        gap: 0.5rem;
 
-        &,
-        & h3 {
-            font-size: map-get($heading-sizes, "h3");
-            margin: 0;
-        }
+        .modal-title-group {
+            display: flex;
+            gap: 0.5rem;
 
-        .modal-title {
-            flex: auto;
+            &,
+            & h3 {
+                font-size: map-get($heading-sizes, "h3");
+                margin: 0;
+            }
+
+            .modal-title {
+                flex: auto;
+            }
         }
     }
 
