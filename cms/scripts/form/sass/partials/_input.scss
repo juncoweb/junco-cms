@@ -1,3 +1,15 @@
+// datetime input fix
+input::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+}
+input::-webkit-datetime-edit-day-field,
+input::-webkit-datetime-edit-month-field,
+input::-webkit-datetime-edit-year-field,
+input::-webkit-datetime-edit-hour-field,
+input::-webkit-datetime-edit-minute-field {
+    padding: 0 1px;
+}
+
 /* -------- input ---------------------- */
 .input-field {
     font-size: $font-size;
@@ -21,8 +33,6 @@
 
     &[type="file"] {
         overflow: hidden;
-        -webkit-appearance: none;
-        -moz-appearance: none;
         appearance: none;
 
         &:not(:disabled):not([readonly]) {
@@ -69,8 +79,6 @@ select.input-field {
     background-size: $font-size;
     background-position: center right 0.75rem;
     background-repeat: no-repeat;
-    -webkit-appearance: none;
-    -moz-appearance: none;
     appearance: none;
 
     &[size],

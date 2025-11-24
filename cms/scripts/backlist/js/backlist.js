@@ -360,6 +360,10 @@ function Backlist(ID) {
                 callback();
             },
 
+            submit: function () {
+                JsFelem.submit($form);
+            },
+
             setBox: function (el) {
                 el = el.querySelector('[backlist-actions]');
                 $box = el.firstChild.nextSibling;
@@ -391,6 +395,7 @@ function Backlist(ID) {
 
                 // I create the form
                 $form = $filters.querySelector('form');
+
                 $form.addEventListener('submit', function (event) {
                     callback(event, $form)
                 });
@@ -1030,6 +1035,10 @@ function Backlist(ID) {
 
         notify: function (options) {
             $box.notify(options);
+        },
+
+        filter: function () {
+            return _filters.submit();
         },
     };
 

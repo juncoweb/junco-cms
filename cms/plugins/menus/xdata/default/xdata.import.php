@@ -17,21 +17,21 @@ use Junco\Extensions\XData\MalformedDataException;
 return function (&$xdata = null, $cdata = null) {
     // vars
     if ($xdata) {
-        $data                = $xdata->getData();
-        $extension_id        = $xdata->extension_id;
-        $extension_alias    = $xdata->extension_alias;
+        $data            = $xdata->getData();
+        $extension_id    = $xdata->extension_id;
+        $extension_alias = $xdata->extension_alias;
     } else {
-        $data                = $cdata['data'];
-        $extension_id        = $cdata['extension_id'];
-        $extension_alias    = $cdata['extension_alias'];
+        $data            = $cdata['data'];
+        $extension_id    = $cdata['extension_id'];
+        $extension_alias = $cdata['extension_alias'];
     }
 
     $has        = [];
     $inserts    = [];
     $updates    = [];
     $menu_id    = [];
-    $translate    = [];
-    $db            = db();
+    $translate  = [];
+    $db         = db();
 
     // set
     $has = $db->query("
@@ -66,10 +66,10 @@ return function (&$xdata = null, $cdata = null) {
             $menu_id[] = $has[$key];
             unset($has[$key]);
         } else {
-            $row['extension_id']    = $extension_id;
-            $row['menu_path']        = $row['menu_default_path'];
-            $row['status']            = $r['status'] ? 1 : 0;
-            $inserts[]                = $row;
+            $row['extension_id'] = $extension_id;
+            $row['menu_path']    = $row['menu_default_path'];
+            $row['status']       = $r['status'] ? 1 : 0;
+            $inserts[]           = $row;
         }
 
         $path = explode('|', $row['menu_default_path']);

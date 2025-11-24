@@ -80,8 +80,6 @@ class AdminJobsFailuresModel extends Model
 		FROM `#__jobs_failures`
 		WHERE id = ?", $input['id'])->fetch() or abort();
 
-        $data['created_at'] = new Date($data['created_at']);
-
         return $data;
     }
 

@@ -19,11 +19,12 @@ interface ZoomInterface
     /**
      * Status
      * 
-     * @param $status
+     * @param string $status
+     * @param string $color
      * 
      * @return ZoomGroup
      */
-    public function status($status): ZoomGroup;
+    public function status(mixed $status, string $color = ''): ZoomGroup;
 
     /**
      * Date
@@ -32,7 +33,7 @@ interface ZoomInterface
      * 
      * @return ZoomGroup
      */
-    public function date(Date $date): ZoomGroup;
+    public function date(Date|string|null $date): ZoomGroup;
 
     /**
      * Group

@@ -4,10 +4,6 @@ button::-moz-focus-inner {
   padding: 0;
 }
 
-input::-webkit-datetime-edit-fields-wrapper {
-  vertical-align: middle;
-}
-
 /* --- button ---- */
 a.btn,
 .btn {
@@ -168,6 +164,18 @@ a.btn.btn-outline,
   border-radius: 0.25rem;
 }
 
+input::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+}
+
+input::-webkit-datetime-edit-day-field,
+input::-webkit-datetime-edit-month-field,
+input::-webkit-datetime-edit-year-field,
+input::-webkit-datetime-edit-hour-field,
+input::-webkit-datetime-edit-minute-field {
+  padding: 0 1px;
+}
+
 /* -------- input ---------------------- */
 .input-field {
   font-size: 1rem;
@@ -190,8 +198,6 @@ a.btn.btn-outline,
 }
 .input-field[type=file] {
   overflow: hidden;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
 }
 .input-field[type=file]:not(:disabled):not([readonly]) {
@@ -227,8 +233,6 @@ select.input-field {
   background-size: 1rem;
   background-position: center right 0.75rem;
   background-repeat: no-repeat;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
 }
 select.input-field[size], select.input-field[multiple] {

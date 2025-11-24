@@ -81,13 +81,6 @@ class AdminJobsModel extends Model
 		FROM `#__jobs`
 		WHERE id = ?", $input['id'])->fetch() or abort();
 
-        $data['available_at'] = new Date($data['available_at']);
-        $data['created_at']   = new Date($data['created_at']);
-
-        if ($data['reserved_at']) {
-            $data['reserved_at'] = new Date($data['reserved_at']);
-        }
-
         return $data;
     }
 }

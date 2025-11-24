@@ -124,7 +124,7 @@ class AdminExtensionsModel extends Model
             'status' => $data['status']?->name,
             'developers' => $this->getListDevelopers(),
             'developer_mode' => SYSTEM_DEVELOPER_MODE,
-            'statuses' => ExtensionStatus::getList(['' => _t('All status')]),
+            'statuses' => ExtensionStatus::getList(['' => _t('All statuses')]),
             'rows' => $rows,
             'pagi' => $pagi
         ];

@@ -92,8 +92,6 @@ class AdminLoggerModel extends Model
         $data = $this->manager->fetch($input['id']) or abort();
         $this->manager->extractFromContext($data, ['file', 'line', 'backtrace']);
 
-
-        $data['created_at']    = new Date($data['created_at']);
         $data['backtrace'] = explode("\n", $data['backtrace']);
 
         if ($data['line']) {

@@ -87,7 +87,7 @@ class AdminSettingsFormModel extends Model
             switch ($row['type']) {
                 case 'snippet';
                     $row['options'] = $this->getSnippets(
-                        $this->resolveName($row['snippets'] ?? null, $row['name'], $input['key'])
+                        $this->resolveName($row['snippet'] ?? null, $row['name'], $input['key'])
                     );
 
                     if (!$row['help']) {

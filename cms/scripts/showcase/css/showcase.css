@@ -25,6 +25,9 @@
 .article-info {
   color: var(--regular-subtle-font-color);
 }
+.article-summary {
+  color: var(--regular-subtle-font-color);
+}
 .article-description img {
   padding: 1px;
   border: 4px solid var(--regular-border-color);

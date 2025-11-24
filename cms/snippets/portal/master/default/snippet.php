@@ -15,22 +15,22 @@ class portal_master_default_snippet
      * 
      * @param array $section
      */
-    public function section(array $section)
+    public function section(array $section): void
     {
         $this->rows[] = array_merge([
-            'title'            => '',
-            'caption'        => '',
-            'content'        => '',
-            'css'            => '',
-            'attr'            => [],
-            'container'        => true
+            'title'     => '',
+            'caption'   => '',
+            'content'   => '',
+            'css'       => '',
+            'attr'      => [],
+            'container' => true
         ], $section);
     }
 
     /**
      * Render
      */
-    public function render()
+    public function render(): string
     {
         $html = '';
 
@@ -70,7 +70,7 @@ class portal_master_default_snippet
                 $row['container'] = 'container';
             }
 
-            $html .= "\n\t" . '<section' . $this->toStringAttr($attr) . '>'
+            $html .= "\n\t" . '<section' . $this->attr($attr) . '>'
                 . '<div' . ($row['container'] ? ' class="' . $row['container'] . '"' : '') . '>'
                 . $header
                 . $row['content']
@@ -82,9 +82,9 @@ class portal_master_default_snippet
     }
 
     /**
-     * Merge attributes
+     * Attr
      */
-    protected function toStringAttr(array $attr)
+    protected function attr(array $attr): string
     {
         $html  = '';
         foreach ($attr as $key => $value) {

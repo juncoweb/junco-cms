@@ -23,9 +23,9 @@ enum ActivityType
     public function title(): string
     {
         return match ($this) {
-            self::signup     => _t('Signup'),
+            self::signup     => _t('Sign up'),
             self::activation => _t('Activation'),
-            self::login      => _t('Login'),
+            self::login      => _t('Log in'),
             self::autologin  => _t('Autologin'),
             self::savepwd    => _t('Savepwd'),
             self::savemail   => _t('Savemail'),

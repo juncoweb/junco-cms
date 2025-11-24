@@ -13,7 +13,7 @@ class UploadedImageManager extends UploadedFileManager
 {
     // vars
     protected $resizes_path = '';
-    protected $resizes        = [];
+    protected $resizes      = [];
     protected $save_orig    = true;
 
     // see later

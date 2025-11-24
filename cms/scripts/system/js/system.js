@@ -4,8 +4,8 @@
 function JsMergeOptions(base, options, force) {
     options = Object.assign(base, options, force);
 
-    var events = {};
-    for (var i in options) {
+    const events = {};
+    for (let i in options) {
         if (
             i.substring(0, 2) == 'on'
             && typeof options[i] == 'function'
@@ -19,7 +19,7 @@ function JsMergeOptions(base, options, force) {
         if (events[name]) {
             return events[name].apply(scope, ...args);
         }
-    }
+    };
 
     return options;
 }

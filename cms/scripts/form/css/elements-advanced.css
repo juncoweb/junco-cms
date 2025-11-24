@@ -85,7 +85,8 @@
 }
 
 /* --- date ------------------------------ */
-.fe-date {
+.input-date {
+  font-size: 0.875rem;
   line-height: normal;
   text-align: center;
   max-width: 250px;
@@ -96,64 +97,69 @@
   border-radius: 0.375rem;
   box-shadow: 1px 1px 2px rgba(var(--solid-surface-rgb-color), 0.075);
 }
-.fe-date table {
+.input-date table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
 }
-.fe-date th {
+.input-date th {
   font-weight: bold;
   padding: 0.375rem;
+  overflow: hidden;
 }
-.fe-date td {
+.input-date td {
   padding: 0.375rem;
   cursor: pointer;
+  overflow: hidden;
 }
-.fe-date td:hover {
+.input-date td:hover {
   color: var(--regular-active-font-color);
   background: var(--regular-active-bg-color);
 }
-.fe-date .header {
+.input-date .header {
   font-weight: bold;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: var(--regular-border-color);
 }
-.fe-date .ext {
+.input-date .ext {
   color: var(--regular-disabled-font-color);
 }
-.fe-date .today {
-  color: var(--regular-secondary-color-color) !important;
+.input-date .today {
+  text-decoration: underline;
 }
-.fe-date .selected {
+.input-date .marked {
+  border: 1px solid var(--regular-border-color);
+}
+.input-date .selected {
   background: var(--regular-active-bg-color);
 }
-.fe-date .nav {
+.input-date .nav {
   margin-top: 1px;
   border-top-width: 1px;
   border-top-style: solid;
   border-top-color: var(--regular-border-color);
   cursor: pointer;
 }
-.fe-date .nav td {
+.input-date .nav td {
   padding: 0.525rem 0;
 }
-.fe-date .s-minutes td {
+.input-date .s-minutes td {
   padding: 0.75rem 0.375rem;
 }
-.fe-date .s-months td,
-.fe-date .s-time td {
+.input-date .s-months td,
+.input-date .s-time td {
   padding: 1.125rem 0.375rem;
 }
-.fe-date .s-days,
-.fe-date .s-months,
-.fe-date .s-years,
-.fe-date .s-time,
-.fe-date .s-hours,
-.fe-date .s-minutes {
+.input-date .s-days,
+.input-date .s-months,
+.input-date .s-years,
+.input-date .s-time,
+.input-date .s-hours,
+.input-date .s-minutes {
   display: none;
 }
-.fe-date.x0 .s-days, .fe-date.x1 .s-months, .fe-date.x2 .s-years, .fe-date.x3 .s-time, .fe-date.x4 .s-hours, .fe-date.x5 .s-minutes {
+.input-date.x0 .s-days, .input-date.x1 .s-months, .input-date.x2 .s-years, .input-date.x3 .s-time, .input-date.x4 .s-hours, .input-date.x5 .s-minutes {
   display: block;
 }
 

@@ -11,19 +11,22 @@ class showcase_master_default_snippet extends ShowcaseBase
 {
     // vars
     protected array $data = [
-        'id'          => '',
-        'url'         => '',
-        'image'       => '',
-        'image_html'  => '',
-        'title'       => '',
-        'description' => '',
-        'date'        => '',
-        'author_name' => '',
-        'author_url'  => '',
-        'edit_url'    => '',
-        'button'      => '',
-        'info'        => [],
-        'labels'      => [],
+        'id'           => '',
+        'url'          => '',
+        'edit_url'     => '',
+        'title'        => '',
+        'image'        => '',
+        'image_html'   => '',
+        'date'         => '',
+        'summary'      => '',
+        'description'  => '',
+        'button'       => '',
+        'info'         => [],
+        'labels'       => [],
+        'authors'      => [],
+        'avg_ratings'  => null,
+        'num_visits'   => -1,
+        'num_comments' => -1,
     ];
 
     /**
@@ -35,10 +38,10 @@ class showcase_master_default_snippet extends ShowcaseBase
         $this->data = []; // free memory
         $this->assets(['css' => 'assets/showcase.min.css']);
         $this->getOption('plugins')?->run(
-            $data['body'],
+            $data['description'],
             $data['url'],
             $data['title'],
-            $data['intro'] ?: $data['body'],
+            $data['summary'] ?: $data['description'],
             $data['image']
         );
 
@@ -52,14 +55,33 @@ class showcase_master_default_snippet extends ShowcaseBase
             $info[] = '<div class="article-date">' . $data['date']->format(_t('Y-M-d')) . '</div>';
         }
 
-        if ($data['author_name']) {
-            $info[] = '<div class="article-author">' . sprintf(_t('By %s'), '<a href="' . $data['author_url'] . '">' . $data['author_name'] . '</a>') . '</div>';
+        if ($data['authors']) {
+            $info[] = '<div class="article-author">'
+                . sprintf(_t('By %s'), $this->renderLinks($data['authors']))
+                . '</div>';
         }
 
         if ($data['labels']) {
-            $info[] = '<div class="article-labels">' . sprintf(_t('Labels %s'), implode(', ', array_map(function ($label) {
-                return sprintf('<a href="%s">%s</a>', $label['url'], $label['name']);
-            }, $data['labels']))) . '</div>';
+            $info[] = '<div class="article-labels">'
+                . sprintf(_t('Labels %s'), $this->renderLinks($data['labels']))
+                . '</div>';
+        }
+
+        $line = [];
+        if ($data['avg_ratings'] !== null) {
+            $line[] = snippet('rating', 'utils')->render($data['avg_ratings'], ['color' => 'warning']);
+        }
+
+        if ($data['num_visits'] > -1) {
+            $line[] = sprintf(_t('%d visits'), $data['num_visits']);
+        }
+
+        if ($data['num_comments'] != -1) {
+            $line[] = sprintf(_t('%d comments'), $data['num_comments']);
+        }
+
+        if ($line) {
+            $data['info'][] = implode(' | ', $line);
         }
 
         if ($data['info']) {
@@ -67,8 +89,10 @@ class showcase_master_default_snippet extends ShowcaseBase
                 $info[] = '<div>' . $value . '</div>';
             }
         }
+
+        $title = $data['title'];
         if ($data['url']) {
-            $data['title'] = '<a href="' . $data['url'] . '">' . $data['title'] . '</a>';
+            $title = '<a href="' . $data['url'] . '">' . $title . '</a>';
         }
         if ($data['edit_url']) {
             $data['edit_url'] = ' <a href="' . $data['edit_url'] . '" class="edit" title="' . _t('Edit') . '"><i class="fa-solid fa-pencil font-small"></i></a>';
@@ -79,11 +103,11 @@ class showcase_master_default_snippet extends ShowcaseBase
         if ($data['button']) {
             $content .= "\t\t" . '<div class="float-right">' . $data['button'] . '</div>' . "\n";
         }
-        $content .= "\t\t" . '<div class="article-title"><h1>' . $data['title'] . $data['edit_url'] . '</h1></div>' . "\n";
+        $content .= "\t\t" . '<div class="article-title"><h1>' . $title . $data['edit_url'] . '</h1></div>' . "\n";
         if ($info) {
             $content .= "\t\t" . '<div class="article-info">' . implode($info) . "\n\t\t" . '</div>' . "\n";
         }
-        $content .= "\t\t" . '<div class="article-description">' . $data['description'] . "\n\t\t" . '</div>' . "\n";
+        $content .= "\t\t" . '<div class="article-summary">' . $data['summary'] . "\n\t\t" . '</div>' . "\n";
 
         // html
         $html = "\t" . '<div class="article-wrapper">' . "\n";
@@ -95,6 +119,7 @@ class showcase_master_default_snippet extends ShowcaseBase
         }
         $html .= "\t\t" . '<div class="article-content">' . $content . '</div>' . "\n";
         $html .= "\t" . '</div>' . "\n";
+        $html .= "\t" . '<div class="article-description">' . $data['description'] . "\n\t\t" . '</div>' . "\n";
 
         // tabs
         if ($this->tabs) {

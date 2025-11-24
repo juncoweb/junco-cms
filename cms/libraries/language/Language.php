@@ -33,8 +33,8 @@ class Language
         $this->config = config('language');
 
         if ($this->config['language.availables']) {
-            $this->availables        = $this->config['language.availables'];
-            $this->num_availables    = count($this->availables);
+            $this->availables     = $this->config['language.availables'];
+            $this->num_availables = count($this->availables);
 
             if ($this->num_availables == 1) {
                 $language = $this->availables[0];
@@ -44,10 +44,10 @@ class Language
                 $language = $this->findInCookie();
             }
             if (!$domain) {
-                $domain    = $this->config['language.default_domain'];
+                $domain = $this->config['language.default_domain'];
             }
             if (!$locale) {
-                $locale    = $this->config['language.locale'];
+                $locale = $this->config['language.locale'];
             }
 
             if ($this->config['language.use_gettext'] && function_exists('gettext')) {

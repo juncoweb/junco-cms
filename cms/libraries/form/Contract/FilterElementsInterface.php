@@ -81,11 +81,11 @@ interface FilterElementsInterface
      * Checkbox
      * 
      * @param string       $name
-     * @param array|string $label
+     * @param array|string $attr
      * 
      * @return FilterElement
      */
-    public function checkbox(string $name = '', array|string $label = ''): Checkbox;
+    public function checkbox(string $name = '', array|string $attr = []): Checkbox;
 
     /**
      * Group

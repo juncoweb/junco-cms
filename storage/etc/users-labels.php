@@ -30,6 +30,7 @@ define('L_OUTDOORS', 7);
 define('L_PERSONS', 8);
 define('L_PERSONS_LEVEL_0', 10);
 define('L_PERSONS_LEVEL_1', 9);
+define('L_PLANNERS_AUDIT', 61);
 define('L_PRODUCTS', 42);
 define('L_SALES', 43);
 define('L_SUBSCRIPTIONS', 20);

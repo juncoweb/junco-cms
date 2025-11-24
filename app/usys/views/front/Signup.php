@@ -33,7 +33,7 @@ if (!empty($error)) {
         ));
     }
 
-    $form->enter(_t('Sign Up'));
+    $form->enter(_t('Sign up'));
     $html = $form->render();
 
     // plugins
@@ -53,7 +53,7 @@ if (!empty($error)) {
 $tpl = Template::get();
 $tpl->options($options);
 $tpl->domready('Usys.signup()');
-$tpl->title(_t('Sign Up'));
+$tpl->title(_t('Sign up'));
 $tpl->content = $html;
 
 return $tpl->response();

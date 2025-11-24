@@ -83,7 +83,7 @@ class ThrowableHandler
                 return sprintf(
                     _t('Please, you must %s or %s'),
                     '<a href="' . url('/usys/login', ['redirect' => -1]) . '">' . _t('Log in') . '</a>',
-                    '<a href="' . url('/usys/signup') . '">' . _t('Sign Up') . '</a>'
+                    '<a href="' . url('/usys/signup') . '">' . _t('Sign up') . '</a>'
                 );
             case 403:
                 return _t('Access denied.');

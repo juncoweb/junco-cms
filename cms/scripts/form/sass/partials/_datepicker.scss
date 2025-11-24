@@ -1,5 +1,6 @@
 /* --- date ------------------------------ */
-.fe-date {
+.input-date {
+    font-size: $small-font-size;
     line-height: normal;
     text-align: center;
     max-width: 250px;
@@ -19,11 +20,13 @@
     th {
         font-weight: bold;
         padding: $date-cell-padding;
+        overflow: hidden;
     }
 
     td {
         padding: $date-cell-padding;
         cursor: pointer;
+        overflow: hidden;
 
         &:hover {
             color: var(--regular-active-font-color);
@@ -44,7 +47,11 @@
     }
 
     .today {
-        color: var(--regular-secondary-color-color) !important;
+        text-decoration: underline;
+    }
+
+    .marked {
+        border: 1px solid var(--regular-border-color);
     }
 
     .selected {

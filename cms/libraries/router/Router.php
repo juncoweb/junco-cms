@@ -506,7 +506,7 @@ class Router
         $task         = $route[2] ?? '';
 
         // replace rules
-        if ($this->route_replaces) {
+        if ($this->route_replaces && $access_point == 'front') {
             if ($task && isset($this->route_replaces['task'][$component][$task])) {
                 $task = $this->route_replaces['task'][$component][$task];
             }
