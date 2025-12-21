@@ -42,7 +42,7 @@ if ($developer_mode) {
     $fac->dropdown([
         ['control' => 'prepare', 'label' => _t('Create'), 'icon' => 'fa-solid fa-plus'],
         ['control' => 'edit', 'label' => _t('Edit'), 'icon' => 'fa-solid fa-pencil'],
-        ['control' => 'delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash-can'],
+        ['control' => 'delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash'],
     ]);
 }
 

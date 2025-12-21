@@ -14,7 +14,7 @@ $bac->create();
 $bac->button('copy', _t('Copy'), 'fa-solid fa-copy');
 $bac->button('confirm_compile', _t('Compile'), 'fa-solid fa-gears');
 $bac->dropdown([
-    ['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash-can'],
+    ['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash'],
     [],
     ['control' => 'confirm_select', 'label' => _t('Select'), 'icon' => 'fa-solid fa-star'],
 ]);

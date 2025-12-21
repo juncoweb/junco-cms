@@ -19,46 +19,46 @@ use Junco\Filesystem\MimeHelper;
 class Email
 {
     // vars
-    protected $transport        = null; // mail || smtp
-    protected $no_reply            = null;
+    protected $transport       = null; // mail || smtp
+    protected $no_reply        = null;
 
     // header
-    protected $from                = [];
-    protected $return_path        = [];
-    protected $reply_to            = [];
-    protected $to                = [];
-    protected $cc                = [];
-    protected $bcc                = [];
-    protected $batches            = [];
-    protected $custom_header    = [];
-    public    $message_id        = '';
-    public    $x_mailer            = null;
-    public    $priority            = 0;
-    protected $subject            = '';
-    protected $entities            = null;
+    protected $from            = [];
+    protected $return_path     = [];
+    protected $reply_to        = [];
+    protected $to              = [];
+    protected $cc              = [];
+    protected $bcc             = [];
+    protected $batches         = [];
+    protected $custom_header   = [];
+    public    $message_id      = '';
+    public    $x_mailer        = null;
+    public    $priority        = 0;
+    protected $subject         = '';
+    protected $entities        = null;
 
-    public    $h_charset        = null; // iso-8859-1 || utf-8
-    public    $h_enconding        = null; // Q || B
+    public    $h_charset       = null; // iso-8859-1 || utf-8
+    public    $h_enconding     = null; // Q || B
 
     // message
-    public    $m_charset        = null; // iso-8859-1 || utf-8
-    public    $m_encoding        = null;  // 8bit || 7bit || quoted-printable
-    public    $word_wrap        = 70;
-    protected $message            = [];
+    public    $m_charset       = null; // iso-8859-1 || utf-8
+    public    $m_encoding      = null;  // 8bit || 7bit || quoted-printable
+    public    $word_wrap       = 70;
+    protected $message         = [];
 
     // attachment
-    protected $attachment        = [];
-    public    $attachment_base    = false;
+    protected $attachment      = [];
+    public    $attachment_base = false;
 
     // more
-    protected $CRLF                = "\r\n";
-    protected $unique_id        = '';
-    protected $counter            = 0;
+    protected $CRLF            = "\r\n";
+    protected $unique_id       = '';
+    protected $counter         = 0;
 
     // const
-    const MESSAGE_IS_PLAIN        = -1;
-    const MESSAGE_IS_HTML         = false;
-    const MESSAGE_ALTER_PLAIN     = true;
+    const MESSAGE_IS_PLAIN    = -1;
+    const MESSAGE_IS_HTML     = false;
+    const MESSAGE_ALTER_PLAIN = true;
 
     /**
      * Get message snippet
@@ -77,15 +77,15 @@ class Email
     {
         $config = config('email');
         //
-        $this->no_reply            = $config['email.no_reply'];
+        $this->no_reply    = $config['email.no_reply'];
         // header
-        $this->x_mailer            = $config['email.x_mailer'];
-        $this->h_charset        = $config['email.charset'];
-        $this->h_enconding        = $config['email.header_encoding'];
+        $this->x_mailer    = $config['email.x_mailer'];
+        $this->h_charset   = $config['email.charset'];
+        $this->h_enconding = $config['email.header_encoding'];
         // message
-        $this->m_charset        = $config['email.charset'];
-        $this->m_encoding        = $config['email.message_encoding'];
-        $this->transport        = $transport ?? $this->getTransport($config['email.transport']);
+        $this->m_charset   = $config['email.charset'];
+        $this->m_encoding  = $config['email.message_encoding'];
+        $this->transport   = $transport ?? $this->getTransport($config['email.transport']);
     }
 
     /**
@@ -377,38 +377,38 @@ class Email
         }
 
         $header = [
-            'MIME-Version'    => '1.0',
-            'Date'            => date(DATE_RFC2822),
-            'Message-ID'    => $this->message_id,
-            'From'            => $this->batches['from'],
-            'ReplyTo'        => $this->batches['reply_to'] ?: $this->batches['from']
+            'MIME-Version' => '1.0',
+            'Date'         => date(DATE_RFC2822),
+            'Message-ID'   => $this->message_id,
+            'From'         => $this->batches['from'],
+            'ReplyTo'      => $this->batches['reply_to'] ?: $this->batches['from']
         ];
 
         if ($this->return_path) {
-            $header['Return-Path']    = $this->batches['return_path'];
+            $header['Return-Path'] = $this->batches['return_path'];
         }
         if ($this->cc) {
-            $header['CC']            = $this->batches['cc'];
+            $header['CC'] = $this->batches['cc'];
         }
         if ($this->transport instanceof Junco\Email\Transport\MailTransport) {
             if ($this->bcc) {
-                $header['BCC']        = $this->batches['bcc'];
+                $header['BCC'] = $this->batches['bcc'];
             }
         } else {
             if ($this->to) {
-                $header['To']        = $this->batches['to'];
+                $header['To'] = $this->batches['to'];
             }
             if ($this->subject) {
-                $header['Subject']    = $this->encode_header($this->subject, true, 9);
+                $header['Subject'] = $this->encode_header($this->subject, true, 9);
             }
         }
 
         // Others
         if ($this->x_mailer) {
-            $header['X-Mailer']        = $this->x_mailer;
+            $header['X-Mailer'] = $this->x_mailer;
         }
         if ($this->priority) {
-            $header['X-Priority']    = $this->priority;
+            $header['X-Priority'] = $this->priority;
         }
         if ($this->custom_header) {
             $header += $this->custom_header;
@@ -456,10 +456,10 @@ class Email
         foreach ($this->message as $row) {
             $entities[] = [
                 'header' => $this->to_string_mime_header([
-                    'Content-Type'                => $row['type'] . '; charset=' . $this->m_charset,
-                    'Content-Transfer-Encoding'    => $this->m_encoding
+                    'Content-Type'              => $row['type'] . '; charset=' . $this->m_charset,
+                    'Content-Transfer-Encoding' => $this->m_encoding
                 ]),
-                'body'    => $this->encode_string($row['content'], $this->m_encoding)
+                'body' => $this->encode_string($row['content'], $this->m_encoding)
             ];
         }
 
@@ -473,20 +473,20 @@ class Email
             if (!in_array($row['filename'], $attached)) {
                 $attached[] = $row['filename'];
                 $header = [
-                    'Content-Type'                => $row['type'] . '; name="' . $row['name'] . '"',
-                    'Content-Disposition'        => $row['disposition'] . '; filename="' . $row['name'] . '"',
+                    'Content-Type'              => $row['type'] . '; name="' . $row['name'] . '"',
+                    'Content-Disposition'       => $row['disposition'] . '; filename="' . $row['name'] . '"',
                     'Content-Transfer-Encoding' => $row['encoding'],
                 ];
 
                 if ($row['disposition'] == 'inline') {
-                    $header['Content-ID']    = '<' . $row['cid'] . '>';
-                    $is_related                = true;
+                    $header['Content-ID'] = '<' . $row['cid'] . '>';
+                    $is_related           = true;
                 }
 
-                $buffer        = @file_get_contents($row['filename']);
+                $buffer = @file_get_contents($row['filename']);
                 $entities[] = [
                     'header' => $this->to_string_mime_header($header),
-                    'body'     => $this->encode_string($buffer, $row['encoding'])
+                    'body' => $this->encode_string($buffer, $row['encoding'])
                 ];
             }
         }

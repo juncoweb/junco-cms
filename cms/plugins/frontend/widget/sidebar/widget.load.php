@@ -6,11 +6,11 @@
  */
 
 return function (&$widget) {
-    $allow_cache    = SYSTEM_ALLOW_CACHE;
-    $key            = config('frontend-sidebar.key');
-    $html             = '';
-    $rows            = null;
-    $uri            = $_SERVER['REQUEST_URI'];
+    $allow_cache = SYSTEM_ALLOW_CACHE;
+    $key         = config('frontend-sidebar.key');
+    $html        = '';
+    $rows        = null;
+    $uri         = request()->getUri()->getPath();
 
     if ($allow_cache) {
         $cache = cache();

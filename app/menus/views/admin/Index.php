@@ -18,7 +18,7 @@ $bac->toggle();
 $bac->dropdown([
     ['control' => 'edit', 'label' => _t('Edit'), 'icon' => 'fa-solid fa-pencil'],
     ['control' => 'copy', 'label' => _t('Copy'), 'icon' => 'fa-solid fa-copy'],
-    ['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash-can'],
+    ['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash'],
     [],
     ['control' => 'confirm_maker', 'label' => _t('Maker'), 'icon' => 'fa-solid fa-hammer'],
 ]);

@@ -190,7 +190,8 @@ class CookieGuard implements GuardInterface
 		 id ,
 		 user_id,
 		 session_validator ,
-		 session_hash
+		 session_hash ,
+         session_ua
 		FROM `#__usys_sessions`
 		WHERE session_selector = ?", $this->getSelector($token))->fetch();
 
@@ -204,7 +205,7 @@ class CookieGuard implements GuardInterface
         }
 
         if ($security) {
-            if (!$this->session->isSafeToContinue($data['session_hash'])) {
+            if (!$this->session->isSafeToContinue($data['session_hash'], $data['session_ua'])) {
                 return 0;
             }
 
@@ -212,8 +213,9 @@ class CookieGuard implements GuardInterface
             UPDATE `#__usys_sessions` 
             SET
              accessed_at = NOW(),
-             session_hash = ?  
-            WHERE id = ?", $this->session->getHash(), $data['id']);
+             session_hash = ?,
+             session_ua = ?
+            WHERE id = ?", $this->session->getHash(), (string)$this->session->getUserAgent(), $data['id']);
         }
 
         return $data['user_id'];
@@ -241,8 +243,8 @@ class CookieGuard implements GuardInterface
             'session_selector'  => $selector,
             'session_validator' => $this->getValidator($token),
             'session_hash'      => $this->session->getHash(),
-            'session_ip'        => $_SERVER['REMOTE_ADDR'] ?? '',
-            'session_ua'        => $_SERVER['HTTP_USER_AGENT'] ?? ''
+            'session_ip'        => $this->session->getUserIp(),
+            'session_ua'        => $this->session->getUserAgent()->__toString()
         ]);
 
         return $token;

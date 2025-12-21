@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JuncoCMS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-19 08:25-0300\n"
-"PO-Revision-Date: 2025-10-19 08:25-0300\n"
+"POT-Creation-Date: 2025-12-07 10:59-0300\n"
+"PO-Revision-Date: 2025-12-07 11:04-0300\n"
 "Last-Translator: mpasciulla@hotmail.com\n"
 "Language-Team: contact@juncoweb.com\n"
 "Language: es_AR\n"
@@ -24,7 +24,7 @@ msgstr ""
 #: app/afip/models/AfipTaxpayersModel.php:83
 #: app/certifications/models/CertificationsCallsModel.php:62
 #: app/certifications/models/CertificationsExaminersModel.php:92
-#: app/certifications/models/CertificationsSchedulesModel.php:188
+#: app/certifications/models/CertificationsSchedulesModel.php:182
 #: app/forms/models/FormsElementsModel.php:67
 #: app/goods/models/GoodsCategoriesModel.php:66
 #: app/goods/models/GoodsStatusesModel.php:58
@@ -188,9 +188,11 @@ msgstr "No hay ningún diseño seleccionado donde mostrar el comprobante."
 #: app/persons/models/audit/AuditPersonsModel.php:87
 #: app/persons/models/audit/AuditPersonsTiesModel.php:79
 #: app/persons/models/my/MyPersonsModel.php:91
-#: app/planners/models/audit/AuditPlannersModel.php:113
+#: app/planners/models/admin/AdminPlannersCategoriesModel.php:68
+#: app/planners/models/audit/AuditPlannersModel.php:126
 #: app/planners/models/audit/AuditPlannersRolesModel.php:90
-#: app/planners/models/audit/AuditPlannersSchedulesModel.php:142
+#: app/planners/views/audit/schedules/Create.php:45
+#: app/planners/views/audit/schedules/Index.php:27
 #: app/policies/models/admin/AdminPoliciesModel.php:61
 #: app/portfolios/models/admin/AdminPortfoliosImagesModel.php:75
 #: app/portfolios/models/admin/AdminPortfoliosModel.php:61
@@ -217,7 +219,7 @@ msgstr "No hay ningún diseño seleccionado donde mostrar el comprobante."
 #: app/subscriptions/models/admin/AdminSubscriptionsVariationsModel.php:72
 #: app/subscriptions/views/admin/layouts/Prepare.php:17
 #: app/subscriptions/views/admin/masters/Create.php:18
-#: app/subscriptions/views/audit/subscribers/Create.php:55
+#: app/subscriptions/views/audit/subscribers/Create.php:54
 #: app/subscriptions/views/audit/trajectories/Create.php:56
 #: app/tickets/models/admin/AdminTicketsCategoriesModel.php:51
 #: app/tickets/models/audit/AuditTicketsModel.php:76
@@ -384,11 +386,13 @@ msgstr "Crear"
 #: app/persons/models/audit/AuditPersonsTiesModel.php:111
 #: app/persons/models/my/MyPersonsModel.php:155
 #: app/persons/views/audit/ties/Index.php:16 app/persons/views/my/Index.php:14
-#: app/planners/models/audit/AuditPlannersModel.php:142
+#: app/planners/models/admin/AdminPlannersCategoriesModel.php:91
+#: app/planners/models/audit/AuditPlannersModel.php:159
 #: app/planners/models/audit/AuditPlannersRolesModel.php:126
-#: app/planners/models/audit/AuditPlannersSchedulesModel.php:174
-#: app/planners/views/audit/Index.php:27
-#: app/planners/views/audit/schedules/Index.php:31
+#: app/planners/views/admin/categories/Index.php:23
+#: app/planners/views/audit/Index.php:25
+#: app/planners/views/audit/schedules/Edit.php:33
+#: app/planners/views/audit/schedules/Index.php:34
 #: app/policies/models/admin/AdminPoliciesModel.php:85
 #: app/policies/views/admin/Index.php:20
 #: app/portfolios/models/admin/AdminPortfoliosImagesModel.php:102
@@ -509,7 +513,7 @@ msgstr "Diseños"
 #: app/careers/views/audit/courses/Show.php:50
 #: app/careers/views/audit/enrollments/Show.php:48
 #: app/careers/views/audit/students/Show.php:43
-#: app/careers/views/audit/studies/Show.php:53
+#: app/careers/views/audit/studies/Show.php:49
 #: app/certifications/views/audit/Show.php:36
 #: app/certifications/views/audit/applicants/Show.php:44
 #: app/certifications/views/audit/examiners/Show.php:20
@@ -527,6 +531,9 @@ msgstr "Diseños"
 #: app/invoices/views/audit/Info.php:35
 #: app/newsletters/views/admin/Dashboard.php:16
 #: app/persons/views/audit/SaveForm.php:47 app/persons/views/my/SaveForm.php:61
+#: app/planners/views/admin/Dashboard.php:14
+#: app/planners/views/audit/Show.php:48
+#: app/planners/views/audit/schedules/Show.php:48
 #: app/products/views/admin/Dashboard.php:14
 #: app/reviews/views/admin/Dashboard.php:15
 #: app/socialnetworks/views/admin/Dashboard.php:13
@@ -587,6 +594,7 @@ msgstr "Servicios"
 #: app/outdoors/views/audit/participants/ConfirmExport.php:21
 #: app/persons/views/admin/Index.php:20
 #: app/persons/views/audit/ConfirmExport.php:13
+#: app/planners/views/admin/Dashboard.php:20
 #: app/portfolios/views/admin/SaveForm.php:24
 #: app/products/views/admin/Dashboard.php:20
 #: app/redlink/views/admin/SaveForm.php:24
@@ -622,6 +630,7 @@ msgstr "Configuraciones"
 #: app/forms/views/admin/Dashboard.php:21 app/invoices/views/admin/Index.php:29
 #: app/newsletters/views/admin/Dashboard.php:31
 #: app/persons/views/admin/Index.php:22
+#: app/planners/views/admin/Dashboard.php:22
 #: app/products/views/admin/Dashboard.php:22
 #: app/reviews/views/admin/Dashboard.php:23
 #: app/settings/views/admin/Form.php:26
@@ -674,6 +683,7 @@ msgstr "Afip"
 #: app/mercadopago/views/admin/SaveForm.php:21
 #: app/outdoors/views/audit/SaveForm.php:14
 #: app/outdoors/views/audit/forms/SaveForm.php:21
+#: app/planners/views/admin/categories/SaveForm.php:21
 #: app/portfolios/views/admin/SaveForm.php:21
 #: app/portfolios/views/admin/images/SaveForm.php:24
 #: app/products/views/admin/categories/SaveForm.php:25
@@ -806,7 +816,7 @@ msgstr "Para"
 #: app/contents/views/admin/Index.php:34
 #: app/contents/views/admin/labels/ConfirmDelete.php:11
 #: app/contents/views/admin/sections/ConfirmDelete.php:11
-#: app/contents/views/my/ConfirmDelete.php:24
+#: app/contents/views/my/ConfirmDelete.php:28
 #: app/contents/views/my/Index.php:27
 #: app/contents/views/my/files/ConfirmDelete.php:11
 #: app/dbmanager/views/admin/backups/ConfirmDelete.php:10
@@ -883,12 +893,14 @@ msgstr "Para"
 #: app/persons/views/admin/types/ConfirmDelete.php:11
 #: app/persons/views/audit/ties/ConfirmDelete.php:11
 #: app/persons/views/audit/ties/Index.php:17
+#: app/planners/views/admin/categories/ConfirmDelete.php:11
+#: app/planners/views/admin/categories/Index.php:24
 #: app/planners/views/audit/ConfirmDelete.php:11
-#: app/planners/views/audit/Index.php:28
+#: app/planners/views/audit/Index.php:26
 #: app/planners/views/audit/roles/ConfirmDelete.php:11
 #: app/planners/views/audit/roles/Index.php:14
 #: app/planners/views/audit/schedules/ConfirmDelete.php:11
-#: app/planners/views/audit/schedules/Index.php:32
+#: app/planners/views/audit/schedules/Index.php:35
 #: app/policies/views/admin/ConfirmDelete.php:11
 #: app/policies/views/admin/Index.php:21
 #: app/portfolios/views/admin/ConfirmDelete.php:11
@@ -1136,6 +1148,7 @@ msgstr "Eliminar"
 #: app/persons/views/audit/AssignUserForm.php:46
 #: app/persons/views/audit/List.php:30 app/persons/views/audit/SaveForm.php:14
 #: app/persons/views/audit/ties/List.php:18
+#: app/planners/views/admin/categories/List.php:18
 #: app/planners/views/audit/roles/List.php:18
 #: app/portfolios/views/admin/List.php:18
 #: app/products/views/admin/categories/List.php:24
@@ -1276,8 +1289,9 @@ msgstr "Nombre"
 #: app/mercadopago/views/admin/SaveForm.php:20
 #: app/outdoors/views/audit/SaveForm.php:13
 #: app/outdoors/views/audit/forms/SaveForm.php:20
+#: app/planners/views/admin/categories/SaveForm.php:20
 #: app/planners/views/audit/List.php:18
-#: app/planners/views/audit/SaveForm.php:12
+#: app/planners/views/audit/SaveForm.php:13
 #: app/policies/views/admin/List.php:18
 #: app/policies/views/admin/SaveForm.php:20
 #: app/portfolios/views/admin/SaveForm.php:20
@@ -1348,6 +1362,7 @@ msgstr "Puntos de venta"
 #: app/afip/views/admin/outlets/List.php:19
 #: app/afip/views/admin/outlets/SaveForm.php:22
 #: app/bingos/views/my/board/Index.php:28 app/docs/views/front/Show.php:23
+#: app/planners/views/audit/schedules/List.php:20
 #: app/subscriptions/views/admin/SaveForm.php:27
 #: cms/snippets/form/master/default/actions.php:59
 #: cms/snippets/install/template/default/snippet.php:55
@@ -1357,6 +1372,7 @@ msgstr "Siguiente"
 
 #: app/afip/views/admin/outlets/SaveForm.php:16
 #: app/afip/views/admin/vouchers/List.php:19
+#: app/subscriptions/views/audit/subscribers/Create.php:30
 #: app/subscriptions/views/audit/subscribers/Edit.php:13
 #: app/subscriptions/views/audit/trajectories/Index.php:23
 #: cms/libraries/codemanager/EndpointHelper.php:19
@@ -1381,7 +1397,7 @@ msgstr "El número que se asignará al siguiente comprobante."
 
 #: app/afip/views/admin/taxpayers/SaveForm.php:14
 #: app/afip/views/admin/vouchers/List.php:20
-#: app/books/views/audit/SaveForm.php:31
+#: app/books/views/audit/SaveForm.php:34
 #: app/codemanager/models/admin/AdminCodemanagerModel.php:114
 #: app/email/views/admin/Debug.php:41 app/email/views/admin/Debug.php:50
 #: app/goods/models/audit/AuditGoodsModel.php:395
@@ -1580,8 +1596,7 @@ msgstr "Vencimiento"
 #: app/careers/views/audit/enrollments/Show.php:37
 #: app/careers/views/audit/forms/List.php:22
 #: app/careers/views/audit/students/Show.php:33
-#: app/careers/views/audit/studies/Show.php:11
-#: app/careers/views/audit/studies/Show.php:43
+#: app/careers/views/audit/studies/Show.php:39
 #: app/careers/views/my/forms/List.php:29
 #: app/certifications/models/my/MyCertificationsModel.php:189
 #: app/certifications/views/audit/Show.php:26
@@ -1599,7 +1614,7 @@ msgstr "Vencimiento"
 #: app/contents/views/admin/List.php:51 app/debates/views/admin/List.php:47
 #: app/downloads/views/admin/List.php:48
 #: app/extensions/views/admin/changes/List.php:20
-#: app/extensions/views/admin/updates/List.php:29
+#: app/extensions/views/admin/updates/List.php:28
 #: app/invoices/models/my/MyInvoicesModel.php:111
 #: app/invoices/models/my/MyInvoicesModel.php:112
 #: app/invoices/views/admin/viewer/List.php:28
@@ -1614,9 +1629,12 @@ msgstr "Vencimiento"
 #: app/outdoors/views/audit/forms/List.php:22
 #: app/outdoors/views/front/Show.php:16
 #: app/persons/models/PersonsHistoriesModel.php:49
-#: app/planners/views/audit/schedules/List.php:31
+#: app/planners/models/audit/AuditPlannersSchedulesModel.php:320
+#: app/planners/views/audit/Show.php:38
+#: app/planners/views/audit/schedules/List.php:49
+#: app/planners/views/audit/schedules/Show.php:38
 #: app/policies/views/admin/List.php:26 app/reviews/views/front/List.php:14
-#: app/subscriptions/models/audit/AuditSubscriptionsTrajectoriesModel.php:155
+#: app/subscriptions/models/audit/AuditSubscriptionsTrajectoriesModel.php:156
 #: app/subscriptions/views/audit/forms/List.php:22
 #: app/subscriptions/views/audit/subscribers/Logs.php:20
 #: app/subscriptions/views/audit/trajectories/List.php:35
@@ -1632,7 +1650,7 @@ msgstr "Vencimiento"
 #: app/webstore/views/admin/downloads/List.php:53
 #: app/webstore/views/admin/referers/List.php:50
 #: app/workshops/models/audit/AuditWorkshopsAttendancesModel.php:36
-#: app/workshops/models/my/MyWorkshopsAttendancesModel.php:42
+#: app/workshops/models/my/MyWorkshopsAttendancesModel.php:43
 #: app/workshops/models/my/MyWorkshopsLessonsModel.php:137
 #: app/workshops/views/audit/attendances/Logs.php:18
 #: app/workshops/views/audit/enrollments/Show.php:43
@@ -1701,7 +1719,7 @@ msgstr "Terminó"
 #: app/careers/views/audit/courses/Show.php:33
 #: app/careers/views/audit/enrollments/Show.php:29
 #: app/careers/views/audit/students/Show.php:26
-#: app/careers/views/audit/studies/Show.php:36
+#: app/careers/views/audit/studies/Show.php:32
 #: app/certifications/views/audit/Show.php:19
 #: app/certifications/views/audit/applicants/Show.php:27
 #: app/certifications/views/audit/schedules/Create.php:16
@@ -1718,8 +1736,10 @@ msgstr "Terminó"
 #: app/jobs/views/admin/failures/List.php:21 app/logger/views/admin/List.php:24
 #: app/outdoors/views/audit/List.php:18
 #: app/outdoors/views/audit/SaveForm.php:20
-#: app/outdoors/views/front/Show.php:16
-#: app/planners/views/audit/schedules/List.php:19
+#: app/outdoors/views/front/Show.php:16 app/planners/views/audit/Show.php:32
+#: app/planners/views/audit/schedules/Edit.php:16
+#: app/planners/views/audit/schedules/List.php:27
+#: app/planners/views/audit/schedules/Show.php:31
 #: app/subscriptions/views/audit/subscribers/Edit.php:15
 #: app/subscriptions/views/audit/subscribers/Logs.php:11
 #: app/subscriptions/views/audit/trajectories/ConfirmDelete.php:24
@@ -1873,7 +1893,7 @@ msgstr "El tema no existe."
 #: app/webstore/views/admin/addresses/List.php:15
 #: app/webstore/views/admin/referers/List.php:15
 #: app/webstore/views/my/List.php:16
-#: app/workshops/models/audit/AuditWorkshopsEnrollmentsModel.php:79
+#: app/workshops/models/audit/AuditWorkshopsEnrollmentsModel.php:80
 #: app/workshops/models/audit/AuditWorkshopsStudentsModel.php:111
 #: cms/libraries/balances/BalancesExport.php:392
 #: cms/libraries/books/Enum/BookStatus.php:79
@@ -1896,9 +1916,9 @@ msgstr "Todo"
 #: app/careers/models/admin/AdminCareersModel.php:121
 #: app/careers/models/admin/AdminCareersModel.php:134
 #: app/careers/models/admin/AdminCareersPinsModel.php:136
-#: app/careers/models/audit/AuditCareersCoursesModel.php:234
-#: app/careers/models/audit/AuditCareersCoursesModel.php:262
-#: app/careers/models/audit/AuditCareersEnrollmentsModel.php:219
+#: app/careers/models/audit/AuditCareersCoursesModel.php:249
+#: app/careers/models/audit/AuditCareersCoursesModel.php:277
+#: app/careers/models/audit/AuditCareersEnrollmentsModel.php:232
 #: app/careers/views/admin/types/SaveForm.php:9
 #: app/certifications/models/audit/AuditCertificationsModel.php:192
 #: app/codemanager/models/admin/AdminCodemanagerEndpointsModel.php:369
@@ -1924,15 +1944,16 @@ msgstr "Todo"
 #: app/outdoors/models/audit/AuditOutdoorsParticipantsModel.php:299
 #: app/outdoors/models/audit/AuditOutdoorsParticipantsModel.php:363
 #: app/outdoors/views/audit/participants/ConfirmCertificate.php:18
+#: app/planners/models/audit/AuditPlannersModel.php:237
 #: app/reviews/models/admin/AdminReviewsCredentialsModel.php:108
 #: app/smileys/models/admin/AdminSmileysModel.php:155
 #: app/socials/models/admin/AdminSocialsSuitesModel.php:130
-#: app/subscriptions/models/SubscriptionsVariationsMapModel.php:135
+#: app/subscriptions/models/SubscriptionsVariationsMapModel.php:136
 #: app/users/models/admin/AdminUsersLabelsModel.php:130
 #: app/webstore/models/my/MyWebstoreKeysModel.php:175
 #: app/workshops/models/admin/AdminWorkshopsCalendarsModel.php:126
 #: app/workshops/models/admin/AdminWorkshopsGroupsModel.php:135
-#: app/workshops/models/audit/AuditWorkshopsEnrollmentsModel.php:128
+#: app/workshops/models/audit/AuditWorkshopsEnrollmentsModel.php:129
 #: app/workshops/models/my/MyWorkshopsStudentsModel.php:176
 #: cms/libraries/forms/Enum/ElementType.php:36
 #: cms/libraries/outdoors/OutdoorsImportCollector.php:57
@@ -2071,9 +2092,9 @@ msgstr "Edite el archivo de configuración de Javascript."
 #: storage/settings/data/bingos/translate.bingos.php:22
 #: storage/settings/data/books/translate.books.php:11
 #: storage/settings/data/books/translate.books.php:13
-#: storage/settings/data/buildings/translate.buildings-rooms.php:7
-#: storage/settings/data/buildings/translate.buildings.php:10
-#: storage/settings/data/buildings/translate.buildings.php:12
+#: storage/settings/data/buildings/translate.buildings-rooms.php:8
+#: storage/settings/data/buildings/translate.buildings.php:11
+#: storage/settings/data/buildings/translate.buildings.php:14
 #: storage/settings/data/careers/translate.careers.php:6
 #: storage/settings/data/careers/translate.careers.php:12
 #: storage/settings/data/challenge/translate.challenge.php:5
@@ -2221,12 +2242,14 @@ msgstr "Archivo"
 #: app/outdoors/views/audit/participants/ConfirmExport.php:18
 #: app/persons/views/audit/ConfirmExport.php:10
 #: app/persons/views/audit/ties/SaveForm.php:19
-#: app/planners/views/audit/List.php:22
-#: app/planners/views/audit/SaveForm.php:15
-#: app/planners/views/audit/Show.php:14
+#: app/planners/views/audit/SaveForm.php:22
+#: app/planners/views/audit/Show.php:12
+#: app/planners/views/audit/schedules/Create.php:23
+#: app/planners/views/audit/schedules/Edit.php:22
+#: app/planners/views/audit/schedules/Show.php:15
 #: app/subscriptions/views/admin/layouts/Prepare.php:13
 #: app/subscriptions/views/audit/subscribers/ConfirmExport.php:16
-#: app/subscriptions/views/audit/subscribers/Create.php:36
+#: app/subscriptions/views/audit/subscribers/Create.php:35
 #: app/subscriptions/views/audit/trajectories/Create.php:39
 #: app/subscriptions/views/audit/trajectories/List.php:11
 #: app/users/views/admin/activities/List.php:23
@@ -2272,8 +2295,8 @@ msgstr "Actual"
 #: storage/settings/data/balances/translate.balances.php:17
 #: storage/settings/data/bingos/translate.bingos.php:26
 #: storage/settings/data/books/translate.books.php:16
-#: storage/settings/data/buildings/translate.buildings-rooms.php:11
-#: storage/settings/data/buildings/translate.buildings.php:16
+#: storage/settings/data/buildings/translate.buildings-rooms.php:12
+#: storage/settings/data/buildings/translate.buildings.php:18
 #: storage/settings/data/careers/translate.careers.php:19
 #: storage/settings/data/contents/translate.contents.php:20
 #: storage/settings/data/docs/translate.docs.php:19
@@ -2454,7 +2477,7 @@ msgstr "Cambiar"
 #: app/invoices/views/admin/roles/Index.php:20
 #: app/outdoors/views/audit/Index.php:21
 #: app/outdoors/views/audit/roles/Index.php:24
-#: app/planners/views/audit/Index.php:30
+#: app/planners/views/audit/Index.php:28
 #: app/planners/views/audit/roles/Index.php:22
 #: app/planners/views/audit/roles/List.php:26
 #: app/planners/views/audit/roles/SaveForm.php:22
@@ -2526,6 +2549,7 @@ msgstr "Privado"
 #: app/mercadopago/views/admin/SaveForm.php:27
 #: app/outdoors/views/audit/forms/SaveForm.php:22
 #: app/outdoors/views/audit/roles/SaveForm.php:22
+#: app/planners/views/admin/categories/SaveForm.php:22
 #: app/policies/views/admin/Index.php:16
 #: app/portfolios/views/admin/SaveForm.php:27
 #: app/products/views/audit/Index.php:20 app/products/views/audit/List.php:16
@@ -2694,6 +2718,7 @@ msgstr "Formatear moneda."
 #: app/documents/views/admin/Dashboard.php:27
 #: app/fees/views/admin/Dashboard.php:26 app/forms/views/admin/Dashboard.php:26
 #: app/newsletters/views/admin/Dashboard.php:36
+#: app/planners/views/admin/Dashboard.php:27
 #: app/products/views/admin/Dashboard.php:27
 #: app/reviews/views/admin/Dashboard.php:28
 #: app/socialnetworks/views/admin/Dashboard.php:25
@@ -2730,10 +2755,10 @@ msgstr "Escritorio"
 #: app/jobs/views/admin/failures/List.php:20
 #: app/newsletters/views/admin/unsubscriptions/Index.php:16
 #: app/newsletters/views/admin/unsubscriptions/List.php:20
-#: app/planners/views/audit/Index.php:26 app/planners/views/audit/List.php:20
-#: app/planners/views/audit/schedules/Index.php:30
-#: app/planners/views/audit/schedules/Index.php:35
-#: app/planners/views/audit/schedules/List.php:21
+#: app/planners/views/audit/Index.php:24 app/planners/views/audit/List.php:20
+#: app/planners/views/audit/schedules/Index.php:33
+#: app/planners/views/audit/schedules/Index.php:39
+#: app/planners/views/audit/schedules/List.php:29
 #: app/webstore/views/admin/addresses/List.php:29
 #: app/webstore/views/admin/downloads/List.php:36
 #: app/webstore/views/my/keys/Index.php:15
@@ -2750,7 +2775,7 @@ msgstr "Ver"
 #: app/balances/views/my/entries/List.php:14
 #: app/balances/views/my/labels/Index.php:23
 #: app/balances/views/my/labels/SaveForm.php:20
-#: app/books/views/audit/Index.php:26 app/books/views/audit/SaveForm.php:36
+#: app/books/views/audit/Index.php:26 app/books/views/audit/SaveForm.php:39
 #: app/books/views/audit/labels/Index.php:19
 #: app/books/views/audit/labels/SaveForm.php:19
 #: app/codemanager/models/admin/AdminCodemanagerModel.php:101
@@ -2789,7 +2814,7 @@ msgstr "Resumen de etiquetas"
 msgid "My balances"
 msgstr "Mis balances"
 
-#: app/balances/views/my/SaveForm.php:14 app/books/views/audit/SaveForm.php:34
+#: app/balances/views/my/SaveForm.php:14 app/books/views/audit/SaveForm.php:41
 #: app/careers/views/audit/courses/SaveForm.php:35
 #: app/contents/views/admin/sections/SaveForm.php:22
 #: app/goods/views/audit/ConfirmStatus2.php:24
@@ -2972,7 +2997,7 @@ msgstr "Balance"
 
 #: app/balances/views/my/entries/SaveForm.php:24
 #: app/bingos/views/my/games/SaveForm.php:19
-#: app/subscriptions/views/audit/subscribers/Create.php:43
+#: app/subscriptions/views/audit/subscribers/Create.php:42
 #: app/subscriptions/views/audit/trajectories/ConfirmDelete.php:25
 #: app/workshops/views/my/groups/lessons/SaveForm.php:17
 #: cms/plugins/subscriptions/persons-signup/default/persons-signup.attach.php:71
@@ -2982,7 +3007,7 @@ msgstr "La fecha u hora predeterminada es la actual."
 #: app/balances/views/my/entries/SaveForm.php:35
 #: app/outdoors/views/audit/participants/Create.php:24
 #: app/persons/views/audit/SaveForm.php:110
-#: app/subscriptions/views/audit/subscribers/Create.php:52
+#: app/subscriptions/views/audit/subscribers/Create.php:51
 #: app/workshops/views/audit/enrollments/Create.php:19
 #: app/workshops/views/my/groups/lessons/SaveForm.php:30
 msgid "Continue Adding"
@@ -3044,6 +3069,9 @@ msgstr "Cuerpo"
 #: app/persons/views/audit/ConfirmUnify.php:13
 #: app/persons/views/audit/ties/SaveForm.php:14
 #: app/planners/views/audit/roles/SaveForm.php:16
+#: app/planners/views/audit/schedules/ConfirmReservation.php:15
+#: app/planners/views/audit/schedules/Create.php:33
+#: app/planners/views/audit/schedules/List.php:33
 #: app/subscriptions/views/audit/subscribers/Create.php:29
 #: app/subscriptions/views/audit/trajectories/Index.php:24
 #: app/tickets/views/audit/Info.php:20
@@ -3184,7 +3212,7 @@ msgstr "Oscuro"
 #: app/bingos/views/front/Reserve.php:14 app/bingos/views/my/SaveForm.php:44
 #: app/bingos/views/my/games/SaveForm.php:28
 #: app/bingos/views/my/roles/SaveForm.php:21
-#: app/books/views/audit/SaveForm.php:29 app/extensions/views/admin/List.php:43
+#: app/books/views/audit/SaveForm.php:31 app/extensions/views/admin/List.php:43
 #: app/extensions/views/admin/SaveForm.php:19
 #: app/extensions/views/admin/developers/SaveForm.php:24
 #: app/extensions/views/admin/installer/ConfirmInstall.php:68
@@ -3250,6 +3278,7 @@ msgstr "Tableros"
 #: app/filemanager/views/admin/Index.php:44
 #: app/forms/views/admin/Dashboard.php:17 app/invoices/views/admin/Index.php:25
 #: app/persons/views/admin/Index.php:18
+#: app/planners/views/admin/Dashboard.php:18
 #: app/planners/views/audit/roles/List.php:20
 #: app/products/views/admin/Dashboard.php:18
 #: app/reviews/views/admin/Dashboard.php:19
@@ -3272,6 +3301,7 @@ msgstr "Permisos"
 #: app/menus/views/admin/Index.php:32 app/menus/views/admin/SaveForm.php:35
 #: app/newsletters/views/admin/Dashboard.php:28
 #: app/persons/views/admin/Index.php:19
+#: app/planners/views/admin/Dashboard.php:19
 #: app/products/views/admin/Dashboard.php:19
 #: app/reviews/views/admin/Dashboard.php:20
 #: app/socialnetworks/views/admin/Dashboard.php:17
@@ -3334,6 +3364,7 @@ msgstr "Tema"
 #: app/persons/views/audit/AssignUserForm.php:58
 #: app/persons/views/audit/ConfirmStatus.php:12
 #: app/persons/views/audit/ties/SaveForm.php:24
+#: app/planners/views/audit/schedules/ConfirmStatus.php:10
 #: app/policies/views/admin/SaveForm.php:23
 #: app/portfolios/views/admin/SaveForm.php:27
 #: app/socialnetworks/views/admin/ConfirmImport.php:16
@@ -3570,8 +3601,11 @@ msgstr "El número máximo de cartones que se pueden pedir."
 #: app/debates/views/front/Index.php:31 app/debates/views/front/Reply.php:14
 #: app/demos/views/admin/SaveForm.php:34
 #: app/outdoors/views/audit/participants/ConfirmCertificate.php:22
-#: app/planners/views/audit/SaveForm.php:21
-#: app/planners/views/audit/schedules/SaveForm.php:23
+#: app/planners/views/audit/SaveForm.php:36
+#: app/planners/views/audit/schedules/ConfirmReservation.php:20
+#: app/planners/views/audit/schedules/Create.php:43
+#: app/planners/views/audit/schedules/Edit.php:31
+#: app/planners/views/audit/schedules/SaveForm.php:29
 #: app/products/views/admin/categories/SaveForm.php:34
 #: app/products/views/audit/SaveForm.php:13
 #: app/reviews/views/front/Reply.php:10 app/sales/views/audit/SaveForm.php:36
@@ -3667,7 +3701,7 @@ msgstr "Inicio"
 #: storage/settings/data/bingos/translate.bingos.php:15
 #: storage/settings/data/books/translate.books.php:2
 #: storage/settings/data/buildings/translate.buildings-rooms.php:6
-#: storage/settings/data/buildings/translate.buildings.php:6
+#: storage/settings/data/buildings/translate.buildings.php:7
 #: storage/settings/data/careers/translate.careers.php:8
 #: storage/settings/data/contents/translate.contents.php:22
 #: storage/settings/data/docs/translate.docs.php:1
@@ -3704,6 +3738,7 @@ msgid "Winners"
 msgstr "Ganadores"
 
 #: app/bingos/views/my/board/Index.php:26 app/docs/views/front/Show.php:29
+#: app/planners/views/audit/schedules/List.php:18
 #: cms/snippets/form/master/default/actions.php:58
 msgid "Previous"
 msgstr "Anterior"
@@ -3745,7 +3780,7 @@ msgstr "Aprobado"
 #: app/bingos/views/my/winners/List.php:30
 #: app/careers/views/audit/enrollments/Index.php:18
 #: app/careers/views/audit/studies/List.php:21
-#: app/careers/views/audit/studies/Show.php:29
+#: app/careers/views/audit/studies/Show.php:25
 #: app/subscriptions/views/audit/payments/List.php:30
 #: cms/libraries/careers/Enum/EnrollmentStatus.php:26
 #: cms/libraries/careers/Enum/StudentStatus.php:26
@@ -3757,7 +3792,6 @@ msgstr "Aprobado"
 #: cms/libraries/fees/Enum/PaymentStatus.php:27
 #: cms/libraries/invoices/Enum/InvoiceStatus.php:25
 #: cms/libraries/invoices/Enum/StampStatus.php:24
-#: cms/libraries/planners/Enum/ScheduleStatus.php:22
 #: cms/libraries/workshops/Enum/GroupStatus.php:24
 #: cms/plugins/xtools/sample/enums/sample.php:59
 msgid "Canceled"
@@ -3861,6 +3895,7 @@ msgstr "Activo"
 #: app/subscriptions/views/audit/payments/List.php:14
 #: app/subscriptions/views/my/List.php:14
 #: cms/libraries/certifications/Enum/ScheduleStatus.php:26
+#: cms/libraries/planners/Enum/ScheduleStatus.php:31
 msgid "Finalized"
 msgstr "Finalizado"
 
@@ -4083,6 +4118,7 @@ msgstr "Libros"
 #: app/documents/views/admin/Dashboard.php:17
 #: app/fees/views/admin/Dashboard.php:16 app/invoices/views/admin/Index.php:24
 #: app/persons/views/admin/Index.php:17
+#: app/planners/views/admin/Dashboard.php:17
 #: app/products/views/admin/Dashboard.php:17
 #: app/tickets/views/admin/Index.php:16
 #: app/workshops/views/admin/Dashboard.php:20
@@ -4095,7 +4131,7 @@ msgstr "Auditoría"
 #: app/careers/views/audit/enrollments/Show.php:21
 #: app/careers/views/audit/students/Show.php:18
 #: app/careers/views/audit/studies/List.php:20
-#: app/careers/views/audit/studies/Show.php:26
+#: app/careers/views/audit/studies/Show.php:22
 #: app/certifications/views/audit/Show.php:11
 #: app/certifications/views/audit/applicants/Show.php:19
 #: app/certifications/views/audit/examiners/Show.php:14
@@ -4112,8 +4148,8 @@ msgstr "Auditoría"
 #: app/newsletters/views/admin/unsubscriptions/List.php:23
 #: app/newsletters/views/admin/unsubscriptions/Show.php:16
 #: app/persons/models/PersonsHistoriesModel.php:154
-#: app/planners/views/audit/Show.php:18
-#: app/planners/views/audit/schedules/Show.php:19
+#: app/planners/views/audit/Show.php:23
+#: app/planners/views/audit/schedules/Show.php:22
 #: app/policies/views/admin/List.php:19
 #: app/subscriptions/views/audit/trajectories/Index.php:27
 #: app/users/views/admin/List.php:26
@@ -4150,38 +4186,28 @@ msgstr "Recursos"
 msgid "Synopsis"
 msgstr "Sinópsis"
 
-#: app/books/views/audit/SaveForm.php:27
+#: app/books/views/audit/SaveForm.php:28
 #: app/books/views/audit/authors/SaveForm.php:19
 #: app/books/views/front/Show.php:15
 #: storage/settings/data/site/translate.site.php:6
 msgid "Author"
 msgstr "Autor"
 
-#: app/books/views/audit/SaveForm.php:28
+#: app/books/views/audit/SaveForm.php:29
 #: app/books/views/audit/editorials/SaveForm.php:20
 #: app/books/views/front/Show.php:18
 msgid "Editorial"
 msgstr "Editorial"
 
-#: app/books/views/audit/SaveForm.php:32 app/books/views/front/Show.php:29
+#: app/books/views/audit/SaveForm.php:35 app/books/views/front/Show.php:29
 #: cms/snippets/frontlist/pagination/comments/snippet.php:39
 msgid "Pages"
 msgstr "Páginas"
 
-#: app/books/views/audit/SaveForm.php:33 app/books/views/front/Show.php:26
+#: app/books/views/audit/SaveForm.php:38 app/books/views/front/Show.php:26
 #: cms/libraries/contents/Enum/ContentStatus.php:25
 msgid "Published"
 msgstr "Publicado"
-
-#: app/books/views/audit/SaveForm.php:37
-#: app/goods/views/audit/ConfirmStatus2.php:22
-#: cms/libraries/codemanager/EndpointHelper.php:88
-#: cms/libraries/form/ActionElements.php:89
-#: cms/plugins/widgets/portal/features/portal.load.php:17
-#: storage/translate/menus.frontend.php:2
-#: storage/translate/menus.settings.php:11
-msgid "More"
-msgstr "Más"
 
 #: app/books/views/audit/resources/SaveForm.php:20
 #: app/links/views/admin/SaveForm.php:21 app/menus/views/admin/SaveForm.php:23
@@ -4264,12 +4290,12 @@ msgstr "Bugs"
 msgid "Level"
 msgstr "Nivel"
 
-#: app/bugs/views/admin/List.php:31 app/careers/views/audit/studies/Show.php:11
+#: app/bugs/views/admin/List.php:31
 #: app/certifications/models/my/MyCertificationsModel.php:190
 #: app/certifications/views/audit/schedules/List.php:43
 #: app/certifications/views/my/List.php:30
 #: app/certifications/views/my/Logs.php:14 app/outdoors/views/front/Show.php:17
-#: app/planners/views/audit/schedules/List.php:32
+#: app/planners/views/audit/schedules/List.php:50
 #: app/tickets/views/audit/Info.php:34 app/tickets/views/audit/List.php:34
 #: app/tickets/views/my/List.php:31
 #: app/webstore/views/admin/addresses/List.php:70
@@ -4331,6 +4357,8 @@ msgstr "Reportar"
 #: app/email/views/admin/Index.php:16
 #: app/logger/views/admin/ConfirmReport.php:24
 #: app/logger/views/admin/Show.php:23 app/notifications/views/my/List.php:18
+#: app/planners/views/audit/Show.php:34
+#: app/planners/views/audit/schedules/Show.php:33
 #: app/tickets/views/audit/Create.php:15
 #: app/tickets/views/audit/replies/Create.php:13
 #: app/tickets/views/my/Create.php:15
@@ -4355,14 +4383,14 @@ msgstr "Generado"
 #: app/bugs/views/admin/Show.php:36 app/careers/views/audit/courses/Show.php:26
 #: app/careers/views/audit/enrollments/Show.php:22
 #: app/careers/views/audit/students/Show.php:19
-#: app/careers/views/audit/studies/Show.php:27
+#: app/careers/views/audit/studies/Show.php:23
 #: app/certifications/views/audit/Show.php:12
 #: app/certifications/views/audit/applicants/Show.php:20
 #: app/certifications/views/audit/examiners/Show.php:15
 #: app/certifications/views/audit/examiners/Show.php:24
 #: app/certifications/views/audit/schedules/Show.php:17
-#: app/planners/views/audit/Show.php:19
-#: app/planners/views/audit/schedules/Show.php:20
+#: app/planners/views/audit/Show.php:24
+#: app/planners/views/audit/schedules/Show.php:23
 #: app/workshops/views/audit/enrollments/Show.php:28
 msgid "Updated"
 msgstr "Actualizado"
@@ -4404,7 +4432,8 @@ msgstr "Edificios"
 #: app/codemanager/views/admin/Index.php:13
 #: app/docs/views/admin/chapters/Form.php:34
 #: app/extensions/views/admin/installer/ConfirmInstall.php:83
-#: app/planners/views/audit/SaveForm.php:13
+#: app/planners/views/audit/SaveForm.php:16
+#: app/planners/views/audit/Show.php:26
 #: app/subscriptions/views/audit/subscribers/ConfirmSummary.php:26
 #: app/subscriptions/views/audit/subscribers/Index.php:30
 #: app/subscriptions/views/audit/subscribers/Summary.php:10
@@ -4439,14 +4468,14 @@ msgstr "Por favor, elimine las propuestas para continuar."
 
 #: app/careers/models/CareersCategoriesModel.php:66
 #: app/certifications/models/CertificationsExamsModel.php:72
-#: app/certifications/models/CertificationsModel.php:88
+#: app/certifications/models/CertificationsModel.php:87
 #: app/documents/models/DocumentsCredentialsModel.php:69
 #: app/fees/models/FeesConceptsModel.php:56
 #: app/invoices/models/InvoicesCredentialsModel.php:69
 #: app/invoices/models/InvoicesGatewaysModel.php:82
 #: app/invoices/models/InvoicesRolesModel.php:73
 #: app/mercadopago/models/MercadopagoApplicationsModel.php:71
-#: app/planners/models/PlannersModel.php:68
+#: app/planners/models/PlannersModel.php:94
 #: app/reviews/models/ReviewsCredentialsModel.php:58
 #: app/subscriptions/models/SubscriptionsTypesModel.php:95
 #: app/subscriptions/models/SubscriptionsVariationsModel.php:97
@@ -4458,11 +4487,11 @@ msgstr "Quite los registros que se están utilizando antes de continuar."
 msgid "Please, select at least one subject."
 msgstr "Por favor, seleccione al menos una materia."
 
-#: app/careers/models/CareersCoursesModel.php:178
+#: app/careers/models/CareersCoursesModel.php:161
 msgid "Please, delete the exams to continue."
 msgstr "Por favor, borre los exámenes para continuar."
 
-#: app/careers/models/CareersCoursesModel.php:228
+#: app/careers/models/CareersCoursesModel.php:225
 #, php-format
 msgid "The «%s» course cannot be deleted because it has students."
 msgstr "El curso \"%s\" no se puede eliminar porque tiene estudiantes."
@@ -4480,7 +4509,7 @@ msgid "Something's wrong. Enrollments overlap."
 msgstr "Algo esta mal. Las matriculaciones se superponen."
 
 #: app/careers/models/CareersEnrollmentsModel.php:81
-#: app/workshops/models/WorkshopsEnrollmentsModel.php:47
+#: app/workshops/models/WorkshopsEnrollmentsModel.php:48
 msgid "Please, activate all persons before continuing."
 msgstr "Por favor, activa todos los legajos antes de continuar."
 
@@ -4489,24 +4518,29 @@ msgstr "Por favor, activa todos los legajos antes de continuar."
 #: app/certifications/models/CertificationsCallsModel.php:54
 #: app/certifications/models/CertificationsCallsModel.php:58
 #: app/certifications/models/CertificationsCoursesModel.php:39
-#: app/certifications/models/CertificationsSchedulesModel.php:137
+#: app/certifications/models/CertificationsSchedulesModel.php:136
 #: app/fees/models/FeesBatchModel.php:63
 #: app/fees/models/FeesPaymentsModel.php:32
 #: app/persons/models/PersonsModel.php:367
+#: app/planners/models/PlannersSchedulesModel.php:126
+#: app/planners/models/PlannersSchedulesModel.php:160
+#: app/planners/models/PlannersSchedulesModel.php:195
+#: app/planners/models/PlannersSchedulesModel.php:236
+#: app/planners/models/PlannersSchedulesModel.php:326
 #: app/subscriptions/models/SubscriptionsPaymentsModel.php:180
 #: app/subscriptions/models/SubscriptionsPaymentsModel.php:206
-#: app/subscriptions/models/SubscriptionsVariationsMapModel.php:59
+#: app/subscriptions/models/SubscriptionsVariationsMapModel.php:60
 #: app/subscriptions/models/audit/AuditSubscriptionsPaymentsModel.php:123
 #: app/workshops/views/front/Enrollment.php:64
 #: cms/libraries/invoices/InvoicesGateways.php:235
-#: cms/libraries/subscriptions/SubscriptionsTrajectory.php:290
+#: cms/libraries/subscriptions/SubscriptionsTrajectory.php:291
 #: cms/plugins/test/generator/batch/src/app/__alias__/models/__ModelName__.php:64
 #: cms/plugins/test/generator/payments/src/app/__alias__/models/__ModelName__.php:58
 msgid "Something is wrong. Please, refresh the page and start over."
 msgstr "Algo va mal. Por favor, actualice la página y vuelva a empezar."
 
 #: app/careers/models/CareersEnrollmentsModel.php:91
-#: app/workshops/models/WorkshopsEnrollmentsModel.php:51
+#: app/workshops/models/WorkshopsEnrollmentsModel.php:52
 msgid "Please, revise all forms before continuing."
 msgstr "Por favor, revise todos los formularios antes de continuar."
 
@@ -4518,7 +4552,7 @@ msgstr "Primero debe cancelar el curso del estudiante."
 msgid "Enrollments with courses can only be canceled."
 msgstr "Las inscripciones a cursos sólo pueden cancelarse."
 
-#: app/careers/models/CareersEnrollmentsModel.php:242
+#: app/careers/models/CareersEnrollmentsModel.php:237
 #, php-format
 msgid ""
 "The enrollment of «%s» can not be deleted because it is registered to "
@@ -4608,7 +4642,7 @@ msgstr "Programa"
 #: app/goods/views/audit/statuses/List.php:17 app/jobs/views/admin/List.php:37
 #: app/jobs/views/admin/failures/List.php:29
 #: app/newsletters/views/front/List.php:27
-#: app/subscriptions/models/SubscriptionsSubscribersModel.php:267
+#: app/subscriptions/models/SubscriptionsSubscribersModel.php:268
 #: app/subscriptions/views/audit/subscribers/Print.php:17
 #: app/subscriptions/views/audit/subscribers/Print.php:21
 #: app/subscriptions/views/audit/trajectories/Index.php:27
@@ -4722,6 +4756,8 @@ msgstr "Materias"
 #: app/foodservices/views/audit/Index.php:19 app/goods/views/admin/Index.php:17
 #: app/goods/views/admin/categories/Index.php:20
 #: app/goods/views/admin/categories/SaveForm.php:29
+#: app/planners/views/admin/Dashboard.php:12
+#: app/planners/views/admin/categories/Index.php:34
 #: app/products/views/admin/Dashboard.php:12
 #: app/products/views/admin/categories/Index.php:27
 #: app/products/views/audit/SaveForm.php:36
@@ -4735,7 +4771,8 @@ msgstr "Categorías"
 
 #: app/careers/views/admin/SaveForm.php:25 app/docs/views/admin/List.php:19
 #: app/docs/views/admin/SaveForm.php:27 app/goods/views/audit/SaveForm.php:14
-#: app/goods/views/audit/Show.php:11 app/tickets/views/audit/Create.php:14
+#: app/goods/views/audit/Show.php:11 app/planners/views/audit/SaveForm.php:19
+#: app/planners/views/audit/Show.php:11 app/tickets/views/audit/Create.php:14
 #: app/tickets/views/my/Create.php:14
 msgid "Category"
 msgstr "Categoría"
@@ -4841,7 +4878,7 @@ msgstr "Regular"
 #: app/careers/views/audit/roles/SaveForm.php:19
 #: app/careers/views/audit/students/Export.php:23
 #: app/careers/views/audit/studies/Create.php:24
-#: app/careers/views/audit/studies/Show.php:16
+#: app/careers/views/audit/studies/Show.php:12
 #: app/certifications/views/audit/applicants/CreateAll.php:21
 #: app/certifications/views/audit/applicants/Show.php:10
 #: app/certifications/views/audit/calls/List.php:19
@@ -4881,7 +4918,7 @@ msgstr "Aranceles"
 #: app/careers/views/audit/enrollments/Create.php:19
 #: app/careers/views/audit/enrollments/Show.php:11
 #: app/careers/views/audit/students/Export.php:24
-#: app/careers/views/audit/studies/Show.php:20
+#: app/careers/views/audit/studies/Show.php:16
 #: app/careers/views/front/Enrollment.php:77
 #: app/careers/views/front/List.php:23
 #: app/certifications/views/audit/applicants/CreateAll.php:22
@@ -5036,8 +5073,8 @@ msgstr "Carrera"
 #: app/careers/views/audit/enrollments/Show.php:32
 #: app/careers/views/audit/students/Show.php:14
 #: app/careers/views/audit/students/Show.php:29
-#: app/careers/views/audit/studies/Show.php:22
-#: app/careers/views/audit/studies/Show.php:39
+#: app/careers/views/audit/studies/Show.php:18
+#: app/careers/views/audit/studies/Show.php:35
 #: app/certifications/views/audit/Show.php:9
 #: app/certifications/views/audit/Show.php:22
 #: app/certifications/views/audit/applicants/Show.php:15
@@ -5047,8 +5084,9 @@ msgstr "Carrera"
 #: app/certifications/views/audit/schedules/Show.php:27
 #: app/invoices/views/audit/ConfirmExtract.php:22
 #: app/invoices/views/audit/Info.php:10 app/invoices/views/audit/Info.php:29
-#: app/planners/views/audit/Show.php:10
-#: app/planners/views/audit/schedules/Show.php:15
+#: app/planners/views/audit/Show.php:19 app/planners/views/audit/Show.php:35
+#: app/planners/views/audit/schedules/Show.php:18
+#: app/planners/views/audit/schedules/Show.php:34
 #: app/subscriptions/views/audit/subscribers/Logs.php:13
 #: app/subscriptions/views/audit/trajectories/Logs.php:13
 #: app/subscriptions/views/audit/variations/Logs.php:15
@@ -5062,12 +5100,14 @@ msgstr "Notario"
 #: app/careers/views/audit/courses/Show.php:51
 #: app/careers/views/audit/enrollments/Show.php:49
 #: app/careers/views/audit/students/Show.php:44
-#: app/careers/views/audit/studies/Show.php:54
+#: app/careers/views/audit/studies/Show.php:50
 #: app/certifications/views/audit/Show.php:38
 #: app/certifications/views/audit/applicants/Show.php:45
 #: app/certifications/views/audit/schedules/Show.php:42
 #: app/certifications/views/my/Index.php:16
 #: app/dbmanager/views/admin/logs/Index.php:19
+#: app/planners/views/audit/Show.php:49
+#: app/planners/views/audit/schedules/Show.php:49
 #: app/subscriptions/views/audit/subscribers/Logs.php:32
 #: app/subscriptions/views/audit/trajectories/Index.php:28
 #: app/subscriptions/views/audit/trajectories/Logs.php:28
@@ -5088,6 +5128,7 @@ msgstr "Registros"
 #: app/forms/views/audit/ConfirmActive.php:14
 #: app/forms/views/audit/ConfirmOpened.php:14
 #: app/forms/views/audit/ConfirmRevised.php:14
+#: app/planners/views/audit/schedules/ConfirmStatus.php:13
 #: app/subscriptions/views/audit/variations/ConfirmStatus.php:13
 #, php-format
 msgid "Please, confirm change the status to «%s»."
@@ -5158,7 +5199,6 @@ msgstr "Concepto"
 #: cms/libraries/certifications/Enum/ScheduleStatus.php:24
 #: cms/libraries/forms/Enum/FormStatus.php:23
 #: cms/libraries/planners/Enum/PlannerType.php:21
-#: cms/libraries/planners/Enum/ScheduleStatus.php:21
 #: cms/libraries/workshops/Enum/GroupStatus.php:22
 #: cms/libraries/workshops/Enum/LessonStatus.php:26
 #: storage/settings/data/balances/translate.balances.php:7
@@ -5219,6 +5259,7 @@ msgstr "Campos"
 #: app/logger/views/admin/ConfirmClean.php:10
 #: app/logger/views/admin/ConfirmThin.php:16
 #: app/newsletters/views/front/unsubscribe/Index.php:17
+#: app/planners/views/audit/schedules/ConfirmStatus.php:11
 #: app/subscriptions/views/admin/fees/ConfirmGenerate.php:11
 #: app/subscriptions/views/admin/fees/ConfirmRevise.php:11
 #: app/subscriptions/views/admin/fees/ConfirmUnverified.php:10
@@ -5409,7 +5450,6 @@ msgstr "Nueva carrera"
 #: app/certifications/views/audit/exams/Index.php:27
 #: app/certifications/views/audit/roles/List.php:26
 #: app/certifications/views/my/Index.php:24
-#: app/planners/views/audit/roles/List.php:25
 #: storage/translate/menus.certifications.php:3
 #: storage/translate/menus.certifications.php:4
 msgid "Certifications"
@@ -5458,15 +5498,15 @@ msgstr "Este curso tiene llamadas. Por favor, elimínelas primero."
 msgid "Warning!"
 msgstr "¡Advertencia!"
 
-#: app/certifications/models/CertificationsSchedulesModel.php:144
+#: app/certifications/models/CertificationsSchedulesModel.php:143
 msgid "Schedules can only be closed once they have been made."
 msgstr "Los cronogramas sólo se pueden cerrar una vez realizados."
 
-#: app/certifications/models/CertificationsSchedulesModel.php:149
+#: app/certifications/models/CertificationsSchedulesModel.php:148
 msgid "Please complete all results before continuing."
 msgstr "Por favor, complete todos los resultados antes de continuar."
 
-#: app/certifications/models/CertificationsSchedulesModel.php:154
+#: app/certifications/models/CertificationsSchedulesModel.php:153
 msgid "You must complete all signatures before continuing."
 msgstr "Debe completar todas las firmas antes de continuar."
 
@@ -5602,6 +5642,7 @@ msgstr ""
 
 #: app/certifications/views/audit/courses/List.php:25
 #: app/contents/views/admin/Index.php:21 app/language/views/admin/List.php:29
+#: app/planners/views/admin/categories/Index.php:19
 #: app/socials/views/admin/items/ConfirmSynchronize.php:22
 #: app/socials/views/admin/items/Index.php:13
 #: app/socials/views/admin/items/List.php:17
@@ -5643,8 +5684,8 @@ msgstr "Firma"
 #: app/certifications/views/audit/schedules/Index.php:39
 #: app/planners/views/audit/roles/List.php:27
 #: app/planners/views/audit/roles/SaveForm.php:23
-#: app/planners/views/audit/schedules/Index.php:49
-#: app/planners/views/audit/schedules/Show.php:28
+#: app/planners/views/audit/schedules/Index.php:53
+#: app/planners/views/audit/schedules/Show.php:56
 #: storage/translate/menus.certifications.php:1
 msgid "Schedules"
 msgstr "Horarios"
@@ -6575,6 +6616,7 @@ msgid "Access denied."
 msgstr "Acceso denegado."
 
 #: app/contents/views/admin/Index.php:20 app/language/views/admin/List.php:30
+#: app/planners/views/admin/categories/Index.php:18
 #: app/socials/views/admin/items/ConfirmSynchronize.php:21
 #: app/socials/views/admin/items/Index.php:12
 #: app/socials/views/admin/items/List.php:16
@@ -6678,9 +6720,9 @@ msgstr "Reescribe las opciones predeterminadas."
 #: storage/settings/data/bingos/translate.bingos.php:23
 #: storage/settings/data/books/translate.books.php:12
 #: storage/settings/data/books/translate.books.php:14
-#: storage/settings/data/buildings/translate.buildings-rooms.php:8
-#: storage/settings/data/buildings/translate.buildings.php:11
-#: storage/settings/data/buildings/translate.buildings.php:13
+#: storage/settings/data/buildings/translate.buildings-rooms.php:9
+#: storage/settings/data/buildings/translate.buildings.php:12
+#: storage/settings/data/buildings/translate.buildings.php:15
 #: storage/settings/data/careers/translate.careers.php:13
 #: storage/settings/data/contact/translate.contact.php:5
 #: storage/settings/data/contents/translate.contents.php:24
@@ -6739,8 +6781,8 @@ msgstr ""
 
 #: app/contents/views/admin/sections/SaveForm.php:39
 #: app/portfolios/views/admin/SaveForm.php:26
-#: storage/settings/data/buildings/translate.buildings-rooms.php:13
-#: storage/settings/data/buildings/translate.buildings.php:18
+#: storage/settings/data/buildings/translate.buildings-rooms.php:14
+#: storage/settings/data/buildings/translate.buildings.php:20
 #: storage/settings/data/contents/translate.contents.php:54
 #: storage/settings/data/goods/translate.goods.php:20
 #: storage/settings/data/portfolios/translate.portfolios.php:5
@@ -6763,7 +6805,7 @@ msgstr "Reescribe el tamaño de imagen predeterminado."
 msgid "Section"
 msgstr "Sección"
 
-#: app/contents/views/my/ConfirmDelete.php:10
+#: app/contents/views/my/ConfirmDelete.php:11
 #: app/extensions/views/admin/ConfirmDelete.php:9
 #: cms/snippets/modal/master/default/snippet.php:288
 #, php-format
@@ -6772,7 +6814,7 @@ msgid_plural "Are you sure you want to delete the %d selected items?"
 msgstr[0] "¿Seguro que desea eliminar el elemento seleccionado?"
 msgstr[1] "¿Seguro que desea eliminar los %d elementos seleccionados?"
 
-#: app/contents/views/my/ConfirmDelete.php:16
+#: app/contents/views/my/ConfirmDelete.php:20
 msgid "Eliminate definitively."
 msgstr "Eliminar definitivamente."
 
@@ -6785,7 +6827,9 @@ msgstr "Cambiar la fecha de publicación."
 msgid "Tools"
 msgstr "Herramientas"
 
-#: app/contents/views/my/Form.php:45 cms/libraries/system/SystemHelper.php:74
+#: app/contents/views/my/Form.php:45
+#: cms/libraries/planners/Enum/ScheduleType.php:21
+#: cms/libraries/system/SystemHelper.php:74
 #: cms/plugins/contents/settings/portal/settings.load.php:12
 #: cms/plugins/dashboard/settings/shortcuts/settings.load.php:10
 msgid "Inherit"
@@ -6933,6 +6977,7 @@ msgstr "Backups"
 #: app/dbmanager/views/admin/backups/List.php:20
 #: app/jobs/views/admin/List.php:23 app/jobs/views/admin/failures/List.php:23
 #: app/logger/views/admin/List.php:25 app/outdoors/views/front/Show.php:17
+#: app/planners/views/audit/schedules/Edit.php:18
 #: cms/libraries/codemanager/EndpointHelper.php:42
 #: cms/libraries/utils/UtilsLayouts.php:55
 msgid "Time"
@@ -7310,7 +7355,8 @@ msgstr ""
 "permite más de %d comentarios en %d horas."
 
 #: app/debates/models/DebatesModel.php:224
-msgid "Please, select an option."
+#: app/planners/views/audit/SaveForm.php:20
+msgid "Please select an option."
 msgstr "Por favor, seleccione una opción."
 
 #: app/debates/models/DebatesModel.php:239
@@ -7594,7 +7640,7 @@ msgid "Downloads"
 msgstr "Descargas"
 
 #: app/downloads/views/admin/List.php:28 app/sales/views/audit/SaveForm.php:30
-#: app/subscriptions/views/audit/subscribers/Create.php:42
+#: app/subscriptions/views/audit/subscribers/Create.php:41
 #: app/subscriptions/views/audit/trajectories/List.php:12
 #: app/subscriptions/views/audit/variations/List.php:12
 #: cms/plugins/subscriptions/persons-signup/default/persons-signup.attach.php:71
@@ -8127,8 +8173,9 @@ msgid "Updates"
 msgstr "Actualizaciones"
 
 #: app/extensions/views/admin/updates/List.php:20
+#: cms/libraries/planners/Enum/ScheduleStatus.php:26
 msgid "Released"
-msgstr "Publicado en"
+msgstr "Publicado"
 
 #: app/extensions/views/admin/webstore/ConfirmDownload.php:28
 msgid ""
@@ -8959,6 +9006,15 @@ msgstr "Desvincular"
 msgid "You must enable the permission for this to work properly."
 msgstr "Debe habilitar el permiso para que esto funcione correctamente."
 
+#: app/goods/views/audit/ConfirmStatus2.php:22
+#: cms/libraries/codemanager/EndpointHelper.php:88
+#: cms/libraries/form/ActionElements.php:89
+#: cms/plugins/widgets/portal/features/portal.load.php:17
+#: storage/translate/menus.frontend.php:2
+#: storage/translate/menus.settings.php:11
+msgid "More"
+msgstr "Más"
+
 #: app/goods/views/audit/Export.php:15 app/goods/views/audit/Export.php:46
 msgid "Without category"
 msgstr "Sin categoría"
@@ -9428,6 +9484,7 @@ msgstr "Intentos"
 
 #: app/jobs/views/admin/List.php:31 app/jobs/views/admin/Show.php:13
 #: app/jobs/views/admin/Show.php:15
+#: cms/libraries/planners/Enum/ScheduleStatus.php:28
 msgid "Reserved"
 msgstr "Reservado"
 
@@ -9634,8 +9691,8 @@ msgstr "Fabricante"
 #: storage/settings/data/books/translate.books.php:15
 #: storage/settings/data/books/translate.books.php:20
 #: storage/settings/data/books/translate.books.php:21
-#: storage/settings/data/buildings/translate.buildings-rooms.php:9
-#: storage/settings/data/buildings/translate.buildings.php:14
+#: storage/settings/data/buildings/translate.buildings-rooms.php:10
+#: storage/settings/data/buildings/translate.buildings.php:16
 #: storage/settings/data/careers/translate.careers.php:25
 #: storage/settings/data/careers/translate.careers.php:29
 #: storage/settings/data/contents/translate.contents-files.php:5
@@ -10023,7 +10080,7 @@ msgstr ""
 
 #: app/newsletters/views/admin/unsubscriptions/List.php:18
 #: app/newsletters/views/admin/unsubscriptions/Show.php:10
-#: app/subscriptions/views/audit/subscribers/Create.php:55
+#: app/subscriptions/views/audit/subscribers/Create.php:54
 msgid "Subscriber"
 msgstr "Suscriptor"
 
@@ -10432,35 +10489,128 @@ msgstr ""
 msgid "I declare, under legal warning, to have the following tie."
 msgstr "Declaro bajo advertencia legal tener el siguiente vínculo."
 
-#: app/planners/views/audit/Index.php:42
+#: app/planners/models/audit/AuditPlannersSchedulesModel.php:321
+#, php-format
+msgid "%d schedules"
+msgstr "%d horarios"
+
+#: app/planners/views/audit/Index.php:40
+#: app/planners/views/audit/roles/List.php:25
 #: storage/settings/data/planners/translate.planners.php:3
 #: storage/translate/menus.planners.php:1
 #: storage/translate/menus.planners.php:2
+#: storage/translate/menus.planners.php:3
 msgid "Planners"
 msgstr "Agendas"
 
-#: app/planners/views/audit/SaveForm.php:16
+#: app/planners/views/audit/SaveForm.php:15
+msgid "The title will be visible to users."
+msgstr "El título será visible para los usuarios."
+
+#: app/planners/views/audit/SaveForm.php:23
+msgid "If the planner is open, users will be able to reserve schedules."
+msgstr ""
+"Si el planificador está abierto, los usuarios podrán reservar horarios."
+
+#: app/planners/views/audit/SaveForm.php:27
 #: app/planners/views/audit/Show.php:15
-#: app/planners/views/audit/schedules/List.php:25
-#: app/planners/views/audit/schedules/SaveForm.php:18
-#: app/planners/views/audit/schedules/Show.php:12
+#: app/planners/views/audit/schedules/Create.php:29
+#: app/planners/views/audit/schedules/Edit.php:25
+#: app/planners/views/audit/schedules/SaveForm.php:19
+#: app/planners/views/audit/schedules/Show.php:14
 msgid "Room"
 msgstr "Sala"
+
+#: app/planners/views/audit/SaveForm.php:28
+msgid "Default rooms for schedules."
+msgstr "Salas predeterminadas para los horarios."
+
+#: app/planners/views/audit/SaveForm.php:30
+#: app/planners/views/audit/Show.php:16
+msgid "Max. reservations"
+msgstr "Reservas máx."
+
+#: app/planners/views/audit/SaveForm.php:31
+msgid "Maximum number of reservations allowed per time slot."
+msgstr "Número máximo de reservas permitidas por franja horaria."
 
 #: app/planners/views/audit/roles/List.php:19
 #: app/planners/views/audit/roles/SaveForm.php:18
 msgid "Visibility"
 msgstr "Visibilidad"
 
-#: app/planners/views/audit/schedules/Index.php:49
-#: app/planners/views/audit/schedules/Show.php:9
+#: app/planners/views/audit/schedules/ConfirmReboot.php:12
+#: app/planners/views/audit/schedules/Index.php:24
+msgid "Reboot"
+msgstr "Reiniciar"
+
+#: app/planners/views/audit/schedules/ConfirmReboot.php:16
+#, php-format
+msgid "Are you sure you want to reboot the selected item?"
+msgid_plural "Are you sure you want to reboot the %d selected items?"
+msgstr[0] "¿Está seguro de que desea reiniciar el elemento seleccionado?"
+msgstr[1] "¿Seguro que quieres reiniciar los %d elementos seleccionados?"
+
+#: app/planners/views/audit/schedules/ConfirmRestore.php:12
+#: app/planners/views/audit/schedules/Index.php:36
+#: app/settings/views/admin/Form.php:164
+#: app/subscriptions/views/audit/payments/Index.php:20
+msgid "Restore"
+msgstr "Restaurar"
+
+#: app/planners/views/audit/schedules/ConfirmRestore.php:16
+#, php-format
+msgid "Are you sure you want to restore the selected item?"
+msgid_plural "Are you sure you want to restore the %d selected items?"
+msgstr[0] "¿Está seguro de que desea restaurar el elemento seleccionado?"
+msgstr[1] "¿Seguro que desea restaurar los %d elementos seleccionados?"
+
+#: app/planners/views/audit/schedules/Create.php:19
+#: app/planners/views/audit/schedules/SaveForm.php:16
+#: app/planners/views/audit/schedules/Show.php:10
+msgid "Scheduled"
+msgstr "Programado"
+
+#: app/planners/views/audit/schedules/Create.php:20
+msgid "The date and time of the schedule."
+msgstr "La fecha y hora del horario."
+
+#: app/planners/views/audit/schedules/Create.php:24
+#: app/planners/views/audit/schedules/Edit.php:23
+msgid "A closed schedule will not be visible to the user."
+msgstr "Un horario cerrado no será visible para el usuario."
+
+#: app/planners/views/audit/schedules/Create.php:30
+#: app/planners/views/audit/schedules/Edit.php:26
+msgid "The room to be used."
+msgstr "La sala que se va a utilizar."
+
+#: app/planners/views/audit/schedules/Create.php:34
+msgid "Person who made the reservation."
+msgstr "Persona que realizó la reserva."
+
+#: app/planners/views/audit/schedules/Index.php:28
+#: app/planners/views/audit/schedules/SaveForm.php:25
+msgid "Reservation"
+msgstr "Reservación"
+
+#: app/planners/views/audit/schedules/Index.php:53
+#: app/planners/views/audit/schedules/Show.php:11
 msgid "Planner"
 msgstr "Agenda"
 
-#: app/planners/views/audit/schedules/SaveForm.php:15
-#: app/planners/views/audit/schedules/Show.php:11
-msgid "Scheduled"
-msgstr "Programado"
+#: app/planners/views/audit/schedules/List.php:39
+#: app/tickets/views/audit/Info.php:27 app/tickets/views/audit/List.php:17
+#: app/tickets/views/audit/List.php:30 app/tickets/views/my/List.php:27
+#: cms/libraries/careers/Enum/CourseStatus.php:23
+#: cms/libraries/careers/Enum/CourseStatusOptions.php:26
+#: cms/libraries/certifications/Enum/ScheduleStatus.php:25
+#: cms/libraries/planners/Enum/PlannerType.php:22
+#: cms/libraries/planners/Enum/ScheduleType.php:22
+#: cms/libraries/workshops/Enum/LessonStatus.php:25
+#: cms/plugins/careers/settings/default/settings.load.php:11
+msgid "Closed"
+msgstr "Cerrado"
 
 #: app/policies/views/admin/Index.php:31
 #: cms/plugins/policies/widget/default/widget.load.php:28
@@ -10727,7 +10877,8 @@ msgid "Framework"
 msgstr "Framework"
 
 #: app/settings/views/admin/Edit.php:47
-#: storage/settings/data/buildings/translate.buildings.php:20
+#: storage/settings/data/buildings/translate.buildings-rooms.php:7
+#: storage/settings/data/buildings/translate.buildings.php:13
 #: storage/settings/data/contact/translate.contact.php:6
 #: storage/settings/data/contents/translate.contents.php:28
 #: storage/settings/data/contents/translate.contents.php:34
@@ -10765,11 +10916,6 @@ msgstr "Administrador"
 #: storage/translate/menus.usys.php:1
 msgid "Usys"
 msgstr "Sistema de usuarios"
-
-#: app/settings/views/admin/Form.php:164
-#: app/subscriptions/views/audit/payments/Index.php:20
-msgid "Restore"
-msgstr "Restaurar"
 
 #: app/settings/views/admin/Json.php:14
 msgid "Finish & save"
@@ -10914,24 +11060,24 @@ msgstr "Por favor, elimine todos los miembros a seguir."
 msgid "Only empty subscriptions can be deleted."
 msgstr "Sólo las suscripciones vacías se pueden eliminar."
 
-#: app/subscriptions/models/SubscriptionsSubscribersModel.php:78
+#: app/subscriptions/models/SubscriptionsSubscribersModel.php:79
 msgid "The trajectory must be active."
 msgstr "La trayectoria debe estar activa."
 
-#: app/subscriptions/models/SubscriptionsSubscribersModel.php:82
+#: app/subscriptions/models/SubscriptionsSubscribersModel.php:83
 msgid "Select a date less than or equal to the current one."
 msgstr "Seleccione una fecha menor o igual a la actual."
 
-#: app/subscriptions/models/SubscriptionsSubscribersModel.php:105
+#: app/subscriptions/models/SubscriptionsSubscribersModel.php:106
 #: cms/libraries/subscriptions/SubscriptionsSubscriber.php:96
 msgid "The subscription number already exists."
 msgstr "El número de suscripción ya existe."
 
-#: app/subscriptions/models/SubscriptionsSubscribersModel.php:136
+#: app/subscriptions/models/SubscriptionsSubscribersModel.php:137
 msgid "It is not possible to remove subscribers with paid fees."
 msgstr "No es posible eliminar suscriptores con tarifas pagadas."
 
-#: app/subscriptions/models/SubscriptionsSubscribersModel.php:140
+#: app/subscriptions/models/SubscriptionsSubscribersModel.php:141
 msgid "Remove all members before proceeding."
 msgstr "Quite todos los miembros antes de continuar."
 
@@ -10942,31 +11088,31 @@ msgid_plural "Currently, the subscriber has %d active variations."
 msgstr[0] "Actualmente, el suscriptor tiene una variación activa."
 msgstr[1] "Actualmente, el suscriptor tiene %d variaciones activas."
 
-#: app/subscriptions/models/audit/AuditSubscriptionsSubscribersModel.php:158
+#: app/subscriptions/models/audit/AuditSubscriptionsSubscribersModel.php:160
 msgid "The titular is not active."
 msgstr "El titular no está activo."
 
-#: app/subscriptions/models/audit/AuditSubscriptionsTrajectoriesModel.php:144
+#: app/subscriptions/models/audit/AuditSubscriptionsTrajectoriesModel.php:145
 msgid "Has fees in process that must be resolved."
 msgstr "Hay aranceles en proceso que deben ser resueltos."
 
-#: app/subscriptions/models/audit/AuditSubscriptionsTrajectoriesModel.php:149
+#: app/subscriptions/models/audit/AuditSubscriptionsTrajectoriesModel.php:150
 #, php-format
 msgid "To date, the subscriber owes a total of %d fees."
 msgstr "Hasta la fecha, el suscriptor debe un total de %d tarifas."
 
-#: app/subscriptions/models/audit/AuditSubscriptionsTrajectoriesModel.php:155
+#: app/subscriptions/models/audit/AuditSubscriptionsTrajectoriesModel.php:156
 #, php-format
 msgid "Has paid the fees to date «%s»."
 msgstr "Ha pagado las tasas hasta la fecha «%s»."
 
-#: app/subscriptions/models/audit/AuditSubscriptionsTrajectoriesModel.php:163
+#: app/subscriptions/models/audit/AuditSubscriptionsTrajectoriesModel.php:164
 #, php-format
 msgid "The trajectories of the «%d» members will also be closed."
 msgstr "Las trayectorias de «%d» miembros serán también cerradas."
 
-#: app/subscriptions/models/audit/AuditSubscriptionsTrajectoriesModel.php:167
-#: cms/libraries/subscriptions/SubscriptionsTrajectory.php:194
+#: app/subscriptions/models/audit/AuditSubscriptionsTrajectoriesModel.php:168
+#: cms/libraries/subscriptions/SubscriptionsTrajectory.php:195
 msgid "The trajectory is not active."
 msgstr "La trayectoria no está activa."
 
@@ -11218,7 +11364,7 @@ msgstr "El suscriptor será miembro de %s."
 msgid "The type of trajectory has not been defined."
 msgstr "No se ha definido el tipo de trayectoria."
 
-#: app/subscriptions/views/audit/subscribers/Create.php:44
+#: app/subscriptions/views/audit/subscribers/Create.php:43
 #: app/subscriptions/views/audit/trajectories/ConfirmDelete.php:37
 #: app/subscriptions/views/audit/trajectories/ConfirmSchedule.php:25
 #: app/subscriptions/views/audit/trajectories/Create.php:56
@@ -11364,17 +11510,6 @@ msgstr "Tickets"
 #: app/tickets/views/audit/Index.php:14 app/tickets/views/my/Index.php:15
 msgid "Open"
 msgstr "Abierto"
-
-#: app/tickets/views/audit/Info.php:27 app/tickets/views/audit/List.php:17
-#: app/tickets/views/audit/List.php:30 app/tickets/views/my/List.php:27
-#: cms/libraries/careers/Enum/CourseStatus.php:23
-#: cms/libraries/careers/Enum/CourseStatusOptions.php:26
-#: cms/libraries/certifications/Enum/ScheduleStatus.php:25
-#: cms/libraries/planners/Enum/PlannerType.php:22
-#: cms/libraries/workshops/Enum/LessonStatus.php:25
-#: cms/plugins/careers/settings/default/settings.load.php:11
-msgid "Closed"
-msgstr "Cerrado"
 
 #: app/tickets/views/audit/List.php:31 app/tickets/views/my/List.php:28
 #: cms/libraries/workshops/Enum/LessonStatus.php:23
@@ -12069,7 +12204,7 @@ msgstr "Mostrar título"
 msgid "Please, delete the groups to continue."
 msgstr "Por favor, elimine los grupos para continuar."
 
-#: app/workshops/models/WorkshopsEnrollmentsModel.php:84
+#: app/workshops/models/WorkshopsEnrollmentsModel.php:78
 msgid "A student with assists may not be dropped."
 msgstr "No se puede dar de baja a un alumno con asistencias."
 
@@ -12318,6 +12453,7 @@ msgstr "Constructor"
 
 #: cms/libraries/books/Enum/BookStatus.php:24
 #: cms/libraries/careers/Enum/CourseStatus.php:26
+#: cms/libraries/planners/Enum/ScheduleStatus.php:27
 msgid "Trashed"
 msgstr "Eliminado"
 
@@ -12327,13 +12463,6 @@ msgid "A bug has been reported."
 msgid_plural "A total of %s bugs have been reported."
 msgstr[0] "Se ha informado de un error."
 msgstr[1] "Es ha informado un total de %s errores."
-
-#: cms/libraries/careers/CareersLogger.php:116
-#: cms/libraries/subscriptions/SubscriptionsLogger.php:106
-#: cms/libraries/workshops/WorkshopsLogger.php:113
-#, php-format
-msgid "The changes were made: %s."
-msgstr "Se hicieron los cambios: %s."
 
 #: cms/libraries/careers/CareersStudents.php:59
 #: cms/libraries/careers/CareersStudents.php:125
@@ -13092,6 +13221,7 @@ msgstr "Vencido"
 
 #: cms/libraries/invoices/Enum/InvoiceStatus.php:28
 #: cms/libraries/invoices/Enum/StampStatus.php:27
+#: cms/libraries/planners/Enum/ScheduleStatus.php:29
 msgid "Voided"
 msgstr "Anulada"
 
@@ -13170,6 +13300,14 @@ msgstr "El tipo \"%s\" no tiene valor por defecto."
 #: cms/plugins/form/settings/default/settings.load.php:12
 msgid "Visible"
 msgstr "Visible"
+
+#: cms/libraries/planners/Enum/ScheduleStatus.php:30
+msgid "Announced"
+msgstr "Anunciado"
+
+#: cms/libraries/planners/Enum/ScheduleStatus.php:32
+msgid "Missed"
+msgstr "Perdido"
 
 #: cms/libraries/profiler/Profiler.php:112
 #: storage/settings/data/system/translate.system.php:12
@@ -13275,37 +13413,37 @@ msgid "The member subscriber is active."
 msgstr "El miembro suscriptor está activo."
 
 #: cms/libraries/subscriptions/SubscriptionsSubscriber.php:53
-#: cms/libraries/subscriptions/SubscriptionsTrajectory.php:75
-#: cms/libraries/subscriptions/SubscriptionsTrajectory.php:191
+#: cms/libraries/subscriptions/SubscriptionsTrajectory.php:76
+#: cms/libraries/subscriptions/SubscriptionsTrajectory.php:192
 #: cms/plugins/subscriptions/persons-signup/default/persons-signup.attach.php:38
 msgid "The subscription is not available."
 msgstr "Esta subscripción no está disponible."
 
-#: cms/libraries/subscriptions/SubscriptionsTrajectory.php:113
+#: cms/libraries/subscriptions/SubscriptionsTrajectory.php:114
 msgid "The type of trajectory is incorrect."
 msgstr "El tipo de trayectoria es incorrecto."
 
-#: cms/libraries/subscriptions/SubscriptionsTrajectory.php:297
+#: cms/libraries/subscriptions/SubscriptionsTrajectory.php:298
 msgid "The start date cannot be less than that of the titular."
 msgstr "La fecha de inicio no puede ser inferior a la del titular."
 
-#: cms/libraries/subscriptions/SubscriptionsTrajectory.php:319
+#: cms/libraries/subscriptions/SubscriptionsTrajectory.php:320
 msgid "The person requires the date of birth."
 msgstr "El legajo requiere la fecha de nacimiento."
 
-#: cms/libraries/subscriptions/SubscriptionsTrajectory.php:323
+#: cms/libraries/subscriptions/SubscriptionsTrajectory.php:324
 msgid "The person does not have the minimum age required."
 msgstr "La persona no tiene la edad mínima requerida."
 
-#: cms/libraries/subscriptions/SubscriptionsTrajectory.php:328
+#: cms/libraries/subscriptions/SubscriptionsTrajectory.php:329
 msgid "The person exceeds the maximum age requirement."
 msgstr "La persona supera el requisito de edad máxima."
 
-#: cms/libraries/subscriptions/SubscriptionsTrajectory.php:362
+#: cms/libraries/subscriptions/SubscriptionsTrajectory.php:363
 msgid "There is an active trajectory. You must close it to continue."
 msgstr "Hay una trayectoria activa. Debes cerrarla para continuar."
 
-#: cms/libraries/subscriptions/SubscriptionsTrajectory.php:380
+#: cms/libraries/subscriptions/SubscriptionsTrajectory.php:381
 msgid "There are debts, you must pay them off before continuing."
 msgstr "Hay deudas, debes pagarlas antes de continuar."
 
@@ -14533,7 +14671,7 @@ msgstr "Habilitar notas"
 #: storage/settings/data/balances/translate.balances.php:10
 #: storage/settings/data/billings/translate.billings.php:8
 #: storage/settings/data/books/translate.books.php:8
-#: storage/settings/data/buildings/translate.buildings.php:7
+#: storage/settings/data/buildings/translate.buildings.php:8
 #: storage/settings/data/careers/translate.careers.php:9
 #: storage/settings/data/debates/translate.debates.php:8
 #: storage/settings/data/docs/translate.docs.php:8
@@ -14560,7 +14698,7 @@ msgstr "Paginador"
 #: storage/settings/data/billings/translate.billings.php:9
 #: storage/settings/data/bingos/translate.bingos.php:16
 #: storage/settings/data/books/translate.books.php:9
-#: storage/settings/data/buildings/translate.buildings.php:8
+#: storage/settings/data/buildings/translate.buildings.php:9
 #: storage/settings/data/careers/translate.careers.php:10
 #: storage/settings/data/contents/translate.contents.php:25
 #: storage/settings/data/debates/translate.debates.php:9
@@ -14589,8 +14727,8 @@ msgid "Rows p/page"
 msgstr "Filas p/páginas"
 
 #: storage/settings/data/balances/translate.balances.php:18
-#: storage/settings/data/buildings/translate.buildings-rooms.php:12
-#: storage/settings/data/buildings/translate.buildings.php:17
+#: storage/settings/data/buildings/translate.buildings-rooms.php:13
+#: storage/settings/data/buildings/translate.buildings.php:19
 #: storage/settings/data/careers/translate.careers.php:20
 #: storage/settings/data/docs/translate.docs.php:20
 #: storage/settings/data/goods/translate.goods.php:18
@@ -14645,8 +14783,8 @@ msgstr "Ancho o alto máximo en píxeles."
 #: storage/settings/data/balances/translate.balances.php:22
 #: storage/settings/data/balances/translate.balances.php:28
 #: storage/settings/data/bingos/translate.bingos.php:32
-#: storage/settings/data/buildings/translate.buildings-rooms.php:10
-#: storage/settings/data/buildings/translate.buildings.php:15
+#: storage/settings/data/buildings/translate.buildings-rooms.php:11
+#: storage/settings/data/buildings/translate.buildings.php:17
 #: storage/settings/data/careers/translate.careers.php:26
 #: storage/settings/data/careers/translate.careers.php:30
 #: storage/settings/data/contents/translate.contents-files.php:6
@@ -14744,7 +14882,7 @@ msgstr "BBCode"
 #: storage/settings/data/billings/translate.billings.php:10
 #: storage/settings/data/bingos/translate.bingos.php:17
 #: storage/settings/data/books/translate.books.php:10
-#: storage/settings/data/buildings/translate.buildings.php:9
+#: storage/settings/data/buildings/translate.buildings.php:10
 #: storage/settings/data/careers/translate.careers.php:11
 #: storage/settings/data/contents/translate.contents.php:26
 #: storage/settings/data/debates/translate.debates.php:10
@@ -14811,12 +14949,16 @@ msgstr "Las descargas requieren legajo"
 msgid "To download the files you must have a person."
 msgstr "Para descargar los archivos debes tener un legajo."
 
-#: storage/settings/data/buildings/translate.buildings-rooms.php:14
-#: storage/settings/data/buildings/translate.buildings.php:19
+#: storage/settings/data/buildings/translate.buildings-rooms.php:15
+#: storage/settings/data/buildings/translate.buildings.php:21
 #: storage/settings/data/contents/translate.contents.php:55
 #: storage/settings/data/portfolios/translate.portfolios.php:6
 msgid "An object that stores the data of the resizes."
 msgstr "Un objeto que almacena los datos de las redimensiones."
+
+#: storage/settings/data/buildings/translate.buildings.php:6
+msgid "Use slugs"
+msgstr "Utilizar slugs"
 
 #: storage/settings/data/cache/translate.cache-memcached.php:2
 msgid "Memcached"
@@ -16573,6 +16715,33 @@ msgstr "Solo permite encontrar y ver los legajos."
 msgid "It allows to find, view and add the persons."
 msgstr "Permite buscar, ver y agregar las tarjetas."
 
+#~ msgid "Please, select an option."
+#~ msgstr "Por favor, seleccione una opción."
+
+#, fuzzy
+#~| msgid "Summary"
+#~ msgid "summary"
+#~ msgstr "Resumen"
+
+#~ msgid "Select default values in the schedule creation form."
+#~ msgstr ""
+#~ "Seleccione los valores predeterminados en el formulario de creación de la "
+#~ "programación."
+
+#, php-format
+#~ msgid "The changes were made: %s."
+#~ msgstr "Se hicieron los cambios: %s."
+
+#, fuzzy
+#~| msgid "Previous"
+#~ msgid "Previus"
+#~ msgstr "Anterior"
+
+#, fuzzy
+#~| msgid "Voided"
+#~ msgid "Void"
+#~ msgstr "Anulada"
+
 #, fuzzy
 #~| msgid "AutoLogin"
 #~ msgid "Login"
@@ -17283,9 +17452,6 @@ msgstr "Permite buscar, ver y agregar las tarjetas."
 
 #~ msgid "Modules"
 #~ msgstr "Módulos"
-
-#~ msgid "Default Module"
-#~ msgstr "Módulo por defecto"
 
 #~ msgid "Enrollment default status"
 #~ msgstr "Estado de inscripción por defecto"

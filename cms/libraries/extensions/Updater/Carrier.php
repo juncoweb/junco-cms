@@ -152,7 +152,7 @@ class Carrier
 
         (new Client)->get($data['download_url'], [
             'headers' => [
-                'Referer' => (config('site.url') ?: $_SERVER["HTTP_HOST"])
+                'Referer' => config('site.url')
             ]
         ])->moveTo($this->target, $filename);
 

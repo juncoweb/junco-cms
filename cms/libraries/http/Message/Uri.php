@@ -15,15 +15,15 @@ use Psr\Http\Message\UriInterface;
 class Uri implements UriInterface
 {
     // vars
-    protected string  $scheme        = '';
-    protected string  $userInfo        = '';
-    protected string  $host            = '';
-    protected ?int    $port            = null;
+    protected string  $scheme    = '';
+    protected string  $userInfo  = '';
+    protected string  $host      = '';
+    protected ?int    $port      = null;
     //
-    protected string  $path            = '';
-    protected string  $query        = '';
-    protected string  $fragment        = '';
-    protected ?string $uriString    = null;
+    protected string  $path      = '';
+    protected string  $query     = '';
+    protected string  $fragment  = '';
+    protected ?string $uriString = null;
     //
     protected $allowedSchemes = [
         'http' => 80,
@@ -73,11 +73,11 @@ class Uri implements UriInterface
             $parts = $uri;
         }
 
-        $this->scheme    = isset($parts['scheme']) ? $this->filterScheme($parts['scheme']) : '';
+        $this->scheme   = isset($parts['scheme']) ? $this->filterScheme($parts['scheme']) : '';
         $this->userInfo = isset($parts['user']) ? $this->filterUserInfoComponent($parts['user']) : '';
-        $this->host        = isset($parts['host']) ? $this->filterHost($parts['host']) : '';
-        $this->port        = isset($parts['port']) ? $this->filterPort($parts['port']) : null;
-        $this->path        = isset($parts['path']) ? $this->filterPath($parts['path']) : '';
+        $this->host     = isset($parts['host']) ? $this->filterHost($parts['host']) : '';
+        $this->port     = isset($parts['port']) ? $this->filterPort($parts['port']) : null;
+        $this->path     = isset($parts['path']) ? $this->filterPath($parts['path']) : '';
         $this->query    = isset($parts['query']) ? $this->filterQueryAndFragment($parts['query']) : '';
         $this->fragment = isset($parts['fragment']) ? $this->filterQueryAndFragment($parts['fragment']) : '';
 

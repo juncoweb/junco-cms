@@ -68,7 +68,7 @@ class ServerRequestFactory implements ServerRequestFactoryInterface
         $parts = [];
 
         // scheme
-        $parts['schema'] = !empty($server['HTTPS']) && $server['HTTPS'] !== 'off' ? 'https' : 'http';
+        $parts['scheme'] = !empty($server['HTTPS']) && $server['HTTPS'] !== 'off' ? 'https' : 'http';
 
         // host & port
         if (!empty($server['HTTP_HOST'])) {

@@ -10,6 +10,7 @@ use Junco\Filesystem\MediaStorage;
 use Junco\Http\Exception\HttpError;
 use Junco\Http\Exception\HttpException;
 use Junco\Http\Message\Response;
+use Junco\Http\Message\ServerRequest;
 use Junco\Users\Curuser;
 
 /**
@@ -156,7 +157,7 @@ function media_url(string $path = '', bool $absolute = false): string
 /**
  * Request
  */
-function request()
+function request(): ?ServerRequest
 {
     if (!app()->has('request')) {
         return null;

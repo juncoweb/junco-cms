@@ -17,7 +17,7 @@ $bac->edit();
 $bac->dropdown([
     //['control' => 'confirm_select', 'label' => _t('Select'), 'icon' => 'fa-solid fa-flag'],
     ['control' => 'confirm_duplicate', 'label' => _t('Duplicate'), 'icon' => 'fa-solid fa-copy'],
-    ['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash-can'],
+    ['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash'],
     [],
     ['control' => 'confirm_refresh', 'label' => _t('Refresh'), 'icon' => 'fa-solid fa-arrows-rotate'],
     [],

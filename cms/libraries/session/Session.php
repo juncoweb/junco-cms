@@ -5,13 +5,15 @@
  * @author: Junco CMS (tm)
  */
 
+use Junco\Session\UserAgent;
+
 class Session
 {
     // vars
-    protected array   $config;
-    protected string  $user_agent;
-    protected string  $user_ip;
-    protected ?string $hash;
+    protected array     $config;
+    protected UserAgent $userAgent;
+    protected string    $userIp;
+    protected ?string   $hash;
 
     // const
     const SAFE_PATH = SYSTEM_STORAGE . 'session';
@@ -43,31 +45,36 @@ class Session
         }
 
         session_start($options);
-        $this->user_agent = ($_SERVER['HTTP_USER_AGENT'] ?? '');
+
+        $server = request()->getServerParams();
+        $this->userAgent = new UserAgent($server['HTTP_USER_AGENT'] ?? '');
+        $this->userIp = ($server['REMOTE_ADDR'] ?? '');
 
         // security - I verify the user agent
-        if ($this->user_agent !== ($_SESSION['__user_agent'] ?? null)) {
+        if ($this->get('__user_agent') != $this->userAgent) {
             $this->destroy();
         }
 
         // security - session expires
         if ($this->config['session.expires']) {
             $time = time();
-            if (isset($_SESSION['__expires']) && $time > $_SESSION['__expires']) {
+            $expires = $this->get('__expires');
+
+            if ($expires && $time > $expires) {
                 $this->destroy();
             }
-            $_SESSION['__expires'] = $time + $this->config['session.expires'];
+            $this->set('__expires', $time + $this->config['session.expires']);
         }
 
         // security - verify ip
         if ($this->config['session.verify_ip']) {
-            $this->user_ip = ($_SERVER['REMOTE_ADDR'] ?? '');
+            $userIp = $this->get('__user_ip');
 
-            if (!isset($_SESSION['__user_ip'])) {
-                $_SESSION['__user_ip'] = $this->user_ip;
-            } elseif ($_SESSION['__user_ip'] !== $this->user_ip) {
+            if ($userIp === null) {
+                $this->set('__user_ip', $this->userIp);
+            } elseif ($userIp != $this->userIp) {
                 $this->destroy();
-                $_SESSION['__user_ip'] = $this->user_ip;
+                $this->set('__user_ip', $this->userIp);
             }
         }
     }
@@ -132,7 +139,7 @@ class Session
         session_start();
         session_regenerate_id(true);
 
-        $_SESSION['__user_agent'] = $this->user_agent;
+        $this->set('__user_agent', $this->userAgent->__toString());
     }
 
     /**
@@ -146,119 +153,62 @@ class Session
     }
 
     /**
+     * Get
+     * 
+     * @return UserAgent
+     */
+    public function getUserAgent(): UserAgent
+    {
+        return $this->userAgent;
+    }
+
+    /**
+     * Get
+     * 
+     * @return string
+     */
+    public function getUserIp(): string
+    {
+        return $this->userIp;
+    }
+
+    /**
      * @return string
      */
     protected function buildHash(): string
     {
-        $hash = $this->user_agent;
+        $hash = $this->userAgent->__toString();
 
         if ($this->config['session.verify_ip']) {
-            $hash .= $this->user_ip;
+            $hash .= $this->userIp;
         }
 
         return md5($hash);
     }
 
     /**
-     * Get browser
-     * 
-     * @param ?string $user_agent
-     * 
-     * @return array
-     */
-    public function getBrowser(?string $user_agent = null): array
-    {
-        if ($user_agent === null) {
-            $user_agent = $this->user_agent;
-        }
-
-        $user_agent = strtolower($user_agent);
-        $result = [
-            'platform' => 'Unknown',
-            'browser'  => 'Unknown',
-            'version'  => ''
-        ];
-
-        // platform
-        $_platforms    = [
-            'android'   => 'android',
-            'linux'     => 'linux',
-            'macintosh' => 'mac',
-            'mac os x'  => 'mac',
-            'windows'   => 'windows',
-            'win32'     => 'windows',
-        ];
-
-        foreach ($_platforms as $needle => $value) {
-            if (false !== strpos($user_agent, $needle)) {
-                $result['platform'] = $value;
-                break;
-            }
-        }
-
-        // browser
-        $_browsers = [
-            'opera'     => ['Opera', 'opera/'],
-            'opr/'      => ['Opera', 'opr/'],
-            'edge'      => ['Edge', 'edge/'],
-            'chrome'    => ['Chrome', 'chrome/'],
-            'safari'    => ['Safari', 'version/'],
-            'firefox'   => ['Firefox', 'firefox/'],
-            'msie'      => ['Internet Explorer', 'msie/'],
-            'trident/7' => ['Internet Explorer', 'rv:'],
-        ];
-
-        foreach ($_browsers as $needle => $value) {
-            if (false !== strpos($user_agent, $needle)) {
-                $result['browser'] = $value[0];
-                break;
-            }
-        }
-
-        // version
-        if (
-            $result['browser'] !== 'Unknown'
-            && (false !== ($i = strpos($user_agent, $value[1])))
-        ) {
-            $version = preg_split('#[^0-9.]#', substr($user_agent, $i + strlen($value[1])), 2);
-            $result['version'] = $version[0];
-        }
-
-        return $result;
-    }
-
-    /**
      * Is Safe To Continue
+     * 
+     * @param string $hash
+     * @param string $user_agent
      *
      * @return bool
      */
-    public function isSafeToContinue(string $hash): bool
+    public function isSafeToContinue(string $hash, string $user_agent): bool
     {
-        if ($hash !== $this->getHash()) {
+        if (
+            $this->config['session.verify_ip']
+            && $this->userIp != $this->get('__user_ip')
+        ) {
             return false;
         }
 
-        if ($this->config['session.verify_ip']) {
-            if (($_SESSION['__user_ip'] ?? '') !== $this->user_ip) {
-                return false;
-            }
-        }
-
-        $current = $this->getBrowser();
-        $saved   = $this->getBrowser($_SESSION['__user_agent']);
-
-        if (
-            $saved['platform'] == $current['platform']
-            && $saved['browser'] == $current['browser']
-            && $saved['version']
-            && $current['version']
-            && version_compare($saved['version'], $current['version'], '<=')
-        ) {
-            $_SESSION['__user_agent'] = $this->user_agent;
+        if ($hash == $this->getHash()) {
             return true;
         }
 
-        return false;
+        // if the hash fails, verify that the user_agent has been updated.
+        return $this->userAgent->compareTo(new UserAgent($user_agent), '>=');
     }
 
     /**

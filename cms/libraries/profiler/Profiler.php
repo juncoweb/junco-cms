@@ -8,10 +8,10 @@
 class Profiler
 {
     // vars
-    protected $itime    = null;
-    protected $imemory    = 0;
-    protected $marks    = [];
-    protected $router    = null;
+    protected $itime   = null;
+    protected $imemory = 0;
+    protected $marks   = [];
+    protected $router  = null;
 
     /**
      * Constructor

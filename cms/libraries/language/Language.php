@@ -215,10 +215,11 @@ class Language
     protected function negotiate()
     {
         // vars
-        $accept        = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '';
-        $negotiate    = $this->config['language.negotiate'] ?: [];
-        $bestlang    = '';
-        $bestqval    = 0;
+        $server    = request()->getServerParams();
+        $accept    = $server['HTTP_ACCEPT_LANGUAGE'] ?? '';
+        $negotiate = $this->config['language.negotiate'] ?: [];
+        $bestlang  = '';
+        $bestqval  = 0;
 
         // standard  for HTTP_ACCEPT_LANGUAGE is defined under
         // http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4

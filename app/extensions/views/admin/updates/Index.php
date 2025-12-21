@@ -20,7 +20,7 @@ $bac = $bbx->getActions();
 //$bac->delete();
 //$bac->button('button', _t('Button'), 'fa-solid fa-tag');
 /* $bac->dropdown([
-	['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash-can'],
+	['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash'],
 ]); */
 $bac->filters();
 $bac->refresh();

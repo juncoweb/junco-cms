@@ -24,6 +24,9 @@ class CustomSelect extends FilterElement
         array   $options = [],
         ?string $default = null
     ) {
+        if (!$options) {
+            $options = ['' => ''];
+        }
         if (!isset($options[$default])) {
             $default = array_key_first($options);
         }

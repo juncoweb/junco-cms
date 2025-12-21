@@ -25,7 +25,7 @@ $form->checkbox('option[db]')->setLabel('Delete DB');
 
 // modal
 $modal = Modal::get();
-$modal->title($_text = _t('Delete'), 'fa-solid fa-trash-can');
+$modal->title($_text = _t('Delete'), 'fa-solid fa-trash');
 $modal->enter($_text);
 $modal->close();
 $modal->content = '<p>' . $message . '</p>' . $form->render();

@@ -14,7 +14,7 @@ $bac->create();
 $bac->edit();
 $bac->button('confirm_compile', _t('Compile'), 'fa-solid fa-gears');
 $bac->dropdown([
-    ['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash-can'],
+    ['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash'],
     ['control' => 'inspect', 'label' => _t('Inspect'), 'icon' => 'fa-solid fa-code'],
     [],
     //['control' => 'themes', 'label' => _t('Themes'), 'icon' => 'fa-solid fa-gear'],

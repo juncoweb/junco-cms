@@ -21,15 +21,13 @@ $bls->th(_t('Released'));
 $bls->th(_t('Failed'));
 $bls->button_h(['control' => null, 'icon' => 'fa-solid fa-circle color-{{ color }}']);
 
-if ($rows) {
-    foreach ($rows as $row) {
-        $bls->check($row['id']);
-        $bls->td($row['extension_name']);
-        $bls->td($row['update_version']);
-        $bls->td($row['released_at']->format($d ??= _t('Y-M-d')));
-        $bls->td($row['has_failed']);
-        $bls->button($row['status']);
-    }
+foreach ($rows as $row) {
+    $bls->check($row['id']);
+    $bls->td($row['extension_name']);
+    $bls->td($row['update_version']);
+    $bls->td($row['released_at']->format($d ??= _t('Y-M-d')));
+    $bls->td($row['has_failed']);
+    $bls->button($row['status']);
 }
 
 return $bls->render($pagi);

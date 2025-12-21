@@ -18,7 +18,7 @@ $bac->toggle(array_map(fn($case) => [
 ], $statuses));
 $bac->dropdown([
     ['control' => 'edit', 'label' => _t('Edit'), 'icon' => 'fa-solid fa-pencil'],
-    ['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash-can'],
+    ['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash'],
 ]);
 $bac->filters();
 $bac->refresh();

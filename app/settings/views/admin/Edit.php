@@ -78,7 +78,7 @@ foreach ($data['rows'] as $row) {
     $form->input('ordering', ['maxlength' => 2, 'class' => 'input-inline', 'style' => 'width:50px']);
     $element_3 = $form->getLastElement();
 
-    $form->checkbox('delete')->setLabel('<i class="fa-solid fa-trash-can" aria-hidden="true"><div class="visually-hidden">' . $text['delete'] . '</div></i>');
+    $form->checkbox('delete')->setLabel('<i class="fa-solid fa-trash" aria-hidden="true"><div class="visually-hidden">' . $text['delete'] . '</div></i>');
     $element_4 = '<span title="' . $text['delete'] . '" class="ml-4">' . $form->getLastElement() . '</span>';
 
     $form->header(sprintf($header_tag, $i + 1, $element_1, $element_2, $element_3, $element_4), false);

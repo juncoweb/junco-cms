@@ -51,7 +51,7 @@ class frontlist_master_comments_snippet extends FrontlistBase
                 $btn .= '·<a href="javascript:void(0)" control-list="report" title="' . _t('Report') . '"><i class="fa-solid fa-flag"></i></a>';
             }
             if ($this->allow_delete) {
-                $btn .= '·<a href="javascript:void(0)" control-list="trash" title="' . _t('Trash') . '"><i class="fa-solid fa-trash-can"></i></a>';
+                $btn .= '·<a href="javascript:void(0)" control-list="trash" title="' . _t('Trash') . '"><i class="fa-solid fa-trash"></i></a>';
             }
 
             // loop

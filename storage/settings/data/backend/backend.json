@@ -1,12 +1,12 @@
 {
     "title": "Backend",
     "description": "",
+    "descriptions": [],
     "groups": [
         "General",
         "Mainbar",
         "Sidebar"
     ],
-    "descriptions": [],
     "rows": {
         "theme": {
             "label": "Theme",
@@ -30,8 +30,8 @@
                 "css": [
                     {
                         "rel": "stylesheet",
-                        "href": "https:\/\/use.fontawesome.com\/releases\/v6.2.1\/css\/all.css",
-                        "integrity": "sha384-twcuYPV86B3vvpwNhWJuaLdUSLF9+ttgM2A6M870UYXrOsxKfER2MKox5cirApyA",
+                        "href": "https:\/\/use.fontawesome.com\/releases\/v7.1.0\/css\/all.css",
+                        "integrity": "sha384-YgSbYtJcfPnMV\/aJ0UdQk84ctht\/ckX0MrfQwxOhw43RMBw2WSaDSMVh4gQwLdE4",
                         "crossorigin": "anonymous"
                     },
                     "assets\/system.min.css"

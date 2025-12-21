@@ -1,4 +1,8 @@
 
-Showcase v1.1
+Form v2.5
 =======================================================
-- Data entry methods have been added.
+- The date.js library is now datepicker.js
+
+Zoom v0.1
+=======================================================
+- Now the &quot;date&quot; method only accepts a date in string format.

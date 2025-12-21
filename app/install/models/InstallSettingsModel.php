@@ -144,9 +144,9 @@ class InstallSettingsModel extends Model
      */
     protected function calculeUrl()
     {
-        $protocol = ($_SERVER['HTTPS'] ?? false) ? 'https' : 'http';
+        $uri = request()->getUri();
 
-        return dirname($protocol . '://' . $_SERVER['SERVER_NAME'] . $_SERVER['SCRIPT_NAME']);
+        return dirname($uri->getScheme() . '://' . $uri->getHost() . $uri->getPath());
     }
 
     /**
@@ -154,7 +154,7 @@ class InstallSettingsModel extends Model
      */
     protected function calculeBaseUrl()
     {
-        return $this->sanitizeBaseUrl(dirname($_SERVER['SCRIPT_NAME']));
+        return $this->sanitizeBaseUrl(dirname(request()->getUri()->getHost()));
     }
 
     /**

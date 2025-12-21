@@ -98,7 +98,7 @@ class backlist_master_default_actions extends ActionElements implements ActionsI
      */
     public function delete()
     {
-        $this->addElement(parent::button('confirm_delete', _t('Delete'), 'fa-solid fa-trash-can'));
+        $this->addElement(parent::button('confirm_delete', _t('Delete'), 'fa-solid fa-trash'));
     }
 
     /**
