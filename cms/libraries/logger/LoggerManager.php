@@ -7,31 +7,20 @@
 
 namespace Junco\Logger;
 
-use Junco\Logger\Manager\ManagerInterface;
+use Junco\Logger\Enum\LogStatus;
+use Junco\Logger\Adapter\AdapterInterface;
+use Junco\Session\UserAgent;
 
 class LoggerManager
 {
-    protected ManagerInterface $adapter;
+    protected AdapterInterface $adapter;
 
     /**
      * Constructor
      */
-    public function __construct(?ManagerInterface $adapter = null)
+    public function __construct(?AdapterInterface $adapter = null)
     {
-        $this->adapter = $adapter ?? $this->getAdapter();
-    }
-
-    /**
-     * Get
-     */
-    protected function getAdapter()
-    {
-        return new Manager\FileManager;
-        /* switch (null) {
-			default:
-			case 'file':
-				return new Manager\FileManager;
-		} */
+        $this->adapter = $adapter ?? app('logger')->getAdapter();
     }
 
     /**
@@ -57,24 +46,12 @@ class LoggerManager
     }
 
     /**
-     * Thin
-     * 
-     * @param bool $delete
-     * 
-     * @return bool
-     */
-    public function thin(bool $delete = true): bool
-    {
-        return $this->adapter->thin($delete);
-    }
-
-    /**
      * Toggle the status of the registers.
      * 
-     * @param string[] $id
-     * @param ?bool    $status
+     * @param string[]   $id
+     * @param ?LogStatus $status
      */
-    public function status(array $id, ?bool $status = null): void
+    public function status(array $id, ?LogStatus $status = null): void
     {
         $this->adapter->status($id, $status);
     }
@@ -92,13 +69,27 @@ class LoggerManager
     }
 
     /**
+     * Thin
+     * 
+     * @param bool $delete
+     * 
+     * @return bool
+     */
+    public function thin(bool $delete = true): bool
+    {
+        return $this->adapter->storeAll(
+            $this->verifyDuplicates($this->adapter->fetchAll(), $delete)
+        );
+    }
+
+    /**
      * Clear
      *
      * @return bool
      */
     public function clear(): bool
     {
-        return $this->adapter->clear();
+        return $this->adapter->storeAll();
     }
 
     /**
@@ -111,7 +102,7 @@ class LoggerManager
     public function getReports(array $id = []): array
     {
         $reports = [];
-        $rows = $this->adapter->verifyDuplicates(
+        $rows = $this->verifyDuplicates(
             $this->adapter->fetchAll($id ? ['id' => $id] : [])
         );
 
@@ -119,7 +110,7 @@ class LoggerManager
             $this->extractFromContext($row, ['file', 'line', 'backtrace']);
 
             $reports[] = [
-                'level'      => $row['level'],
+                'level'      => $row['level']->name,
                 'message'    => $this->shortenFile($row['message']),
                 'file'       => $row['file'],
                 'line'       => $row['line'],
@@ -132,29 +123,49 @@ class LoggerManager
     }
 
     /**
+     * Compact
+     * 
+     * @param array $data
+     * @param array $extract_from_context    The keys to be extracted.
+     */
+    public function compact(array $data, array $extract_from_context = []): array
+    {
+        $data['message'] = $this->shortenFile($data['message']);
+
+        $extract_from_context
+            and $this->extractFromContext($data, $extract_from_context);
+
+        return $data;
+    }
+
+    /**
      * Extracts data from the context.
      * 
-     * @param string $row
-     * @param array  $extract    The keys to be extracted.
+     * @param array $data
+     * @param array $extract    The keys to be extracted.
      */
-    public function extractFromContext(array &$row, array $extract): void
+    protected function extractFromContext(array &$data, array $extract): void
     {
-        if (empty($row['context']) || empty($extract)) {
-            return;
-        }
-
-        $context = json_decode($row['context'], true);
-
         foreach ($extract as $key) {
-            if (isset($context[$key])) {
-                $row[$key] = $this->shortenFile($context[$key]);
-                unset($context[$key]);
+            if (isset($data['context'][$key])) {
+                $data[$key] = $this->shortenFile($data['context'][$key]);
+                unset($data['context'][$key]);
             } else {
-                $row[$key] = '';
+                $data[$key] = '';
             }
         }
 
-        $row['context'] = $context;
+        if (!empty($data['line'])) {
+            $data['file'] .= ':' . $data['line'];
+        }
+
+        if (!empty($data['backtrace'])) {
+            $data['backtrace'] = explode("\n", $data['backtrace']);
+        }
+
+        if ($value = $data['context']['user_agent'] ?? null) {
+            $data['context']['user_agent'] = $this->shortenUserAgent($value);
+        }
     }
 
     /**
@@ -163,5 +174,65 @@ class LoggerManager
     protected function shortenFile(string $file): string
     {
         return str_replace(SYSTEM_ABSPATH, '', $file);
+    }
+
+    /**
+     * Get
+     */
+    protected function shortenUserAgent(string $user_agent): string
+    {
+        $ua = new UserAgent($user_agent);
+
+        return implode('/', [
+            $ua->getPlatform(),
+            $ua->getBrowser(),
+            $ua->getVersion()
+        ]);
+    }
+
+    /**
+     * Verify
+     * 
+     * @param array $rows
+     * @param bool  $delete
+     * 
+     * @return array
+     */
+    public function verifyDuplicates(array $rows, bool $delete = true): array
+    {
+        $keys = [];
+
+        foreach ($rows as $i => $row) {
+            $key = $this->getInternalKey($row);
+
+            if (!in_array($key, $keys)) {
+                $keys[] = $key;
+            } elseif ($delete) {
+                unset($rows[$i]);
+            } else {
+                $rows[$i]['status'] = LogStatus::repeated;
+            }
+        }
+
+        return $rows;
+    }
+
+    /**
+     * Get
+     * 
+     * @param array $row
+     * 
+     * @return string
+     */
+    protected function getInternalKey(array $row): string
+    {
+        if (
+            isset($row['context']['file'])
+            && isset($row['context']['line'])
+        ) {
+            return $row['context']['file'] . ':' . $row['context']['line'];
+        }
+
+        return $row['message'];
     }
 }

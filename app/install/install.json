@@ -249,7 +249,7 @@
             "extension_credits": "Junco CMS (tm)",
             "extension_license": "GPLv3",
             "extension_abstract": "",
-            "components": "al",
+            "components": "alp",
             "xdata": "assets,menus,settings"
         },
         "menus": {

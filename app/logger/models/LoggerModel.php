@@ -27,10 +27,12 @@ class LoggerModel extends Model
      */
     public function status()
     {
-        $data = $this->filter(POST, ['id' => 'id|array|required:abort']);
+        $data = $this->filter(POST, [
+            'id' => 'id|array|required:abort',
+            'status' => 'enum:logger.log_status'
+        ]);
 
-        //
-        $this->manager->status($data['id']);
+        $this->manager->status($data['id'], $data['status']);
     }
 
     /**
@@ -40,7 +42,6 @@ class LoggerModel extends Model
     {
         $data = $this->filter(POST, ['id' => 'id|array|required:abort']);
 
-        //
         $this->manager->deleteMultiple($data['id']);
     }
 
@@ -51,7 +52,6 @@ class LoggerModel extends Model
     {
         $data = $this->filter(POST, ['delete' => 'bool']);
 
-        //
         $this->manager->thin($data['delete']);
     }
 

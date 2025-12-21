@@ -6,19 +6,20 @@
  */
 
 use Junco\Mvc\Model;
+use Junco\Logger\Enum\LogStatus;
+use Junco\Logger\Enum\LogLevel;
 use Junco\Logger\LoggerManager;
 
 class AdminLoggerModel extends Model
 {
-    // vars
-    protected $manager;
-
     /**
-     * Constructor
+     * Get
      */
-    public function __construct()
+    public function getIndexData()
     {
-        $this->manager = new LoggerManager;
+        return [
+            'statuses' => LogStatus::getActives()
+        ];
     }
 
     /**
@@ -27,33 +28,22 @@ class AdminLoggerModel extends Model
     public function getListData()
     {
         $data = $this->filter(POST, [
-            'status' => 'int',
-            'level' => 'id|max:8',
+            'status' => 'enum:logger.log_status',
+            'level'  => 'enum:logger.log_level',
         ]);
 
-        // vars
-        $levels = [
-            _t('All levels'),
-            'EMERGENCY',
-            'ALERT',
-            'CRITICAL',
-            'ERROR',
-            'WARNING',
-            'NOTICE',
-            'INFO',
-            'DEBUG'
-        ];
-
+        //trigger_error('test', E_USER_DEPRECATED);
         $where = [];
         if ($data['level']) {
-            $where['level'] = $levels[$data['level']];
+            $where['level'] = $data['level'];
         }
 
         if ($data['status']) {
-            $where['status'] = $data['status'] - 1;
+            $where['status'] = $data['status'];
         }
 
-        $rows = $this->manager->fetchAll($where);
+        $manager = new LoggerManager;
+        $rows    = $manager->fetchAll($where);
         if ($rows) {
             $rows = array_reverse($rows);
         }
@@ -64,20 +54,20 @@ class AdminLoggerModel extends Model
 
         $rows = [];
         foreach ($pagi->fetchAll() as $row) {
-            $this->manager->extractFromContext($row, ['file', 'line']);
+            $row['level']      = $row['level']->title();
+            $row['status']     = $row['status']->fetch();
+            $row['created_at'] = new Date($row['created_at']);
 
-            $row['created_at']    = new Date($row['created_at']);
-            if ($row['line']) {
-                $row['file'] .= ':' . $row['line'];
-            }
-
-            $rows[] = $row;
+            $rows[] = $manager->compact($row, ['file', 'line']);
         }
 
-        return $data + [
-            'levels' => $levels,
-            'rows' => $rows,
-            'pagi' => $pagi
+        return [
+            'level'    => $data['level']?->name,
+            'status'   => $data['status']?->name,
+            'levels'   => LogLevel::getList(['' => _t('All levels')]),
+            'statuses' => LogStatus::getList(['' => _t('All statuses')]),
+            'rows'     => $rows,
+            'pagi'     => $pagi
         ];
     }
 
@@ -88,17 +78,12 @@ class AdminLoggerModel extends Model
     {
         $input = $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
-        // vars
-        $data = $this->manager->fetch($input['id']) or abort();
-        $this->manager->extractFromContext($data, ['file', 'line', 'backtrace']);
+        //
+        $manager       = new LoggerManager;
+        $data          = $manager->fetch($input['id']) or abort();
+        $data['level'] = $data['level']->title();
 
-        $data['backtrace'] = explode("\n", $data['backtrace']);
-
-        if ($data['line']) {
-            $data['file'] .= ':' . $data['line'];
-        }
-
-        return $data;
+        return $manager->compact($data, ['file', 'line', 'backtrace']);
     }
 
     /**

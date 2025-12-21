@@ -8,6 +8,7 @@ return [
 	/**
 	 * General
 	 */
+	'adapter' => 'file',
 	'log_file' => 'error_log',
 
 	/**

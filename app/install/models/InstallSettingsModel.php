@@ -154,7 +154,9 @@ class InstallSettingsModel extends Model
      */
     protected function calculeBaseUrl()
     {
-        return $this->sanitizeBaseUrl(dirname(request()->getUri()->getHost()));
+        $uri = request()->getUri();
+
+        return $this->sanitizeBaseUrl(dirname($uri->getPath()));
     }
 
     /**

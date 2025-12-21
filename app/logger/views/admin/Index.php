@@ -10,7 +10,11 @@ $bbx = Backlist::getBox();
 
 // actions
 $bac = $bbx->getActions();
-$bac->toggle();
+$bac->toggle(array_map(fn($case) => [
+    'control' => 'status',
+    'value' => $case->name,
+    'label' => $case->title()
+], $statuses));
 $bac->delete();
 $bac->dropdown([
     ['control' => 'show', 'label' => _t('Info'), 'icon' => 'fa-solid fa-circle-info'],

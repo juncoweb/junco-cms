@@ -5,6 +5,10 @@
  * @author: Junco CMS (tm)
  */
 
+use Junco\Logger\Adapter\AdapterInterface;
+use Junco\Logger\Adapter\ArrayAdapter;
+use Junco\Logger\Adapter\FileAdapter;
+use Junco\Logger\Enum\LogLevel;
 use Psr\Log\LoggerInterface;
 
 class Logger implements LoggerInterface
@@ -18,17 +22,34 @@ class Logger implements LoggerInterface
     const NOTICE    = 'notice';
     const INFO      = 'info';
     const DEBUG     = 'debug';
+
     //
-    const LEVELS    = [
-        self::EMERGENCY => 'emergency',
-        self::ALERT     => 'alert',
-        self::CRITICAL  => 'critical',
-        self::ERROR     => 'error',
-        self::WARNING   => 'warning',
-        self::NOTICE    => 'notice',
-        self::INFO      => 'info',
-        self::DEBUG     => 'debug',
-    ];
+    protected ?AdapterInterface $adapter = null;
+
+    /**
+     * Constructor
+     */
+    public function __construct(?AdapterInterface $adapter = null)
+    {
+        $this->adapter = $adapter ?? $this->getAdapter();
+    }
+
+    /**
+     * Get
+     * 
+     * @return AdapterInterface
+     */
+    public function getAdapter(): AdapterInterface
+    {
+        if ($this->adapter === null) {
+            $this->adapter = match (config('logger.adapter')) {
+                'array' => new ArrayAdapter,
+                default => new FileAdapter
+            };
+        }
+
+        return $this->adapter;
+    }
 
     /**
      * Logs with an arbitrary level.
@@ -41,7 +62,16 @@ class Logger implements LoggerInterface
      */
     public function log($level, string|\Stringable $message, array $context = []): void
     {
-        if (!isset(self::LEVELS[$level])) {
+        if (!in_array($level, [
+            self::EMERGENCY,
+            self::ALERT,
+            self::CRITICAL,
+            self::ERROR,
+            self::WARNING,
+            self::NOTICE,
+            self::INFO,
+            self::DEBUG,
+        ])) {
             throw new InvalidArgumentException('Logging level is invalid');
         }
 
@@ -65,7 +95,7 @@ class Logger implements LoggerInterface
             $context['uri'] = $server['REQUEST_URI'];
         }
 
-        $this->store($level, $message, json_encode($context, JSON_UNESCAPED_SLASHES));
+        $this->adapter->log(LogLevel::get($level), $message, $context);
     }
 
     /**
@@ -182,42 +212,5 @@ class Logger implements LoggerInterface
         if (SYSTEM_HANDLE_ERRORS) {
             $this->log(self::DEBUG, $message, $context);
         }
-    }
-
-    /**
-     * Store the data.
-     *
-     * @param string $level
-     * @param string|\Stringable $message
-     * @param string $context
-     * 
-     * @return void
-     */
-    protected function store(string $level, string|\Stringable $message, string $context): void
-    {
-        $dir     = app('system')->getLogPath();
-        $file     = $dir . (config('logger.log_file') ?: 'error_log');
-
-        if (is_file($file)) {
-            $lines = file($file);
-        } else {
-            $lines = [];
-        }
-
-        $count     = count($lines);
-        $id      = ($count ? (int)$lines[$count - 1] : 0) + 1;
-        $added   = time();
-        $message = filter_var($message, FILTER_SANITIZE_SPECIAL_CHARS);
-        $data    = [
-            'id'      => $id,
-            'status'  => '0',
-            'added'   => $added,
-            'level'      => $level,
-            'message' => $message,
-            'context' => $context,
-        ];
-
-        is_dir($dir) or mkdir($dir, SYSTEM_MKDIR_MODE, true);
-        error_log(implode('|', $data) . PHP_EOL, 3, $file);
     }
 }
