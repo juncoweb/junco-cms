@@ -293,7 +293,7 @@ const JsDatepicker = (function () {
                     break;
             }
 
-            picker.className = 'input-date x' + opt;
+            picker.className = 'input-datepicker x' + opt;
         }
 
         function getWeekdays() {
@@ -307,7 +307,7 @@ const JsDatepicker = (function () {
         }
 
         // picker
-        const picker = JsElement('div.input-date', {
+        const picker = JsElement('div.input-datepicker', {
             html: '<div class="header"></div>'
                 + '<div class="s-days"><div class="days"></div><div class="nav"></div></div>'
                 + '<div class="s-months"></div>'

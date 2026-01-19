@@ -1,78 +1,49 @@
 /* --- Frontlist - three -------------------------------- */
 .frontlist-three article {
-  display: inline-block;
-  width: 30.36%;
-  margin: 0 4% 4% 0;
-  vertical-align: top;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.16);
+  border-radius: var(--rounded-md);
+  box-shadow: var(--box-shadow-sm);
   position: relative;
   overflow: hidden;
 }
-.frontlist-three article:before {
-  clear: both;
-}
-.frontlist-three article .fl-entry {
-  padding: 10px;
-}
-.frontlist-three article .fl-thumbnail {
+.frontlist-three article .article-media {
   position: relative;
   overflow: hidden;
 }
-.frontlist-three article .fl-thumbnail img {
+.frontlist-three article .article-media img {
   width: 100%;
   display: block;
 }
+.frontlist-three article .article-container {
+  padding: var(--spacing-3);
+}
 .frontlist-three article h3 {
-  font-size: 1.25rem;
+  font-size: var(--font-size-lg);
   margin: 0;
 }
 .frontlist-three article h3 a {
   color: var(--regular-font-color);
   text-decoration: none;
 }
-.frontlist-three article .fl-author,
-.frontlist-three article .fl-date {
+.frontlist-three article .article-author,
+.frontlist-three article .article-date {
   color: var(--regular-subtle-font-color);
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
 }
-.frontlist-three article .fl-description {
+.frontlist-three article .article-desc {
   color: #fff;
-  min-height: 30px;
-  padding: 5px 10px;
+  background-color: var(--overlay-color-1);
+  padding: var(--spacing-3);
   position: absolute;
+  inset: auto 0 0;
   transition: all 0.5s ease;
   transform: translateY(100%);
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.2);
 }
 .frontlist-three article:hover {
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.16) !important;
+  box-shadow: var(--box-shadow-lg) !important;
 }
-.frontlist-three article:hover .fl-description {
+.frontlist-three article:hover .article-desc {
   transform: translateY(0%);
 }
-.frontlist-three article .fl-button {
+.frontlist-three article .article-button {
   text-align: center;
-}
-
-@media only screen and (min-width: 990px) {
-  .frontlist-three article:nth-of-type(3n) {
-    margin-right: 0;
-  }
-}
-@media only screen and (max-width: 990px) {
-  .frontlist-three article {
-    width: 48%;
-  }
-  .frontlist-three article:nth-of-type(2n) {
-    margin-right: 0;
-  }
-}
-@media only screen and (max-width: 770px) {
-  .frontlist-three article {
-    width: 100%;
-    margin-right: 0;
-  }
 }

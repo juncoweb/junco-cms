@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -33,7 +33,7 @@ enum LogStatus: int
         return match ($this) {
             self::unchecked => 'red',
             self::checked   => 'green',
-            self::repeated  => 'light',
+            self::repeated  => 'subtle-default',
         };
     }
 

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -27,6 +27,7 @@ class frontlist_master_three_snippet extends FrontlistBase
                 if ($row['image']) {
                     $row['image_html'] = '<img src="' . $row['image'] . '" alt="' . $row['title'] . '" />';
                 }
+
                 if ($row['url']) {
                     if ($row['image_html']) {
                         $row['image_html'] = '<a href="' . $row['url'] . '" title="' . $row['title'] . '">' . $row['image_html'] . '</a>';
@@ -34,37 +35,42 @@ class frontlist_master_three_snippet extends FrontlistBase
                     $title = '<a href="' . $row['url'] . '" title="' . $row['title'] . '">' . $title . '</a>';
                 }
                 $html .= '<article control-row="' . $row['id'] . '">';
+
                 if ($row['image_html']) {
-                    $html .= '<div class="fl-thumbnail">'
-                        . $row['image_html']
-                        . ($row['description'] ? '<div class="fl-description">' . $row['description'] . '</div>' : '')
-                        . '</div>';
+                    if ($row['description']) {
+                        $row['image_html'] .= '<div class="article-desc">' . $row['description'] . '</div>';
+                    }
+
+                    $html .= '<div class="article-media">' . $row['image_html'] . '</div>';
                 }
-                $html .= '<div class="fl-entry">'
-                    . '<h3>' . $title . '</h3>';
+
+                $html .= '<div class="article-container">';
+                $html .= '<h3>' . $title . '</h3>';
 
                 if ($row['author']) {
-                    $html .= '<div class="fl-author">' . $row['author'] . '</div>';
+                    $html .= '<div class="article-author">' . $row['author'] . '</div>';
                 }
+
                 if ($row['date']) {
-                    $html .= '<div class="fl-date">' . $row['date'] . '</div>';
+                    $html .= '<div class="article-date">' . $row['date'] . '</div>';
                 }
+
                 if ($row['labels']) {
-                    $html .= '<div class="fl-footer">' . implode(' ', array_map(function ($label) {
-                        return '<a href="' . $label['url'] . '" class="badge badge-secondary">' . $label['name'] . '</a>';
-                    }, $row['labels'])) . '</div>';
+                    $html .= '<div class="article-footer">' . $this->renderLabels($row['labels']) . '</div>';
                 }
+
                 if ($row['footer'] || $row['rating']) {
-                    $html .= '<div class="fl-footer">' . $row['rating'] . $row['footer'] . '</div>';
+                    $html .= '<div class="article-footer">' . $row['rating'] . $row['footer'] . '</div>';
                 }
+
                 if ($row['button']) {
-                    $html .= '<div class="fl-button">' . $row['button'] . '</div>';
+                    $html .= '<div class="article-button">' . $row['button'] . '</div>';
                 }
 
                 $html .= '</div></article>';
             }
 
-            $html = '<div class="frontlist-three">' . $html . "\n" . '</div>' . "\n";
+            $html = '<div class="grid grid-3 grid-responsive frontlist-three">' . $html . "\n" . '</div>' . "\n";
             $this->rows = []; // freeing memory
         } else {
             $html = '<div class="empty-list">' . ($this->empty_list ?: _t('Empty list')) . '</div>' . "\n";
@@ -75,9 +81,19 @@ class frontlist_master_three_snippet extends FrontlistBase
         }
 
         if ($pagi) {
-            $html .= '<div class="fl-pagination">' . $pagi . '</div>' . "\n";
+            $html .= '<div class="article-pagination">' . $pagi . '</div>' . "\n";
         }
 
         return $html;
+    }
+
+    /**
+     * Has 
+     */
+    protected function renderLabels(array $labels): string
+    {
+        return implode(' ', array_map(function ($label) {
+            return '<a href="' . $label['url'] . '" class="badge badge-secondary">' . $label['name'] . '</a>';
+        }, $labels));
     }
 }

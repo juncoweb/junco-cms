@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -34,13 +34,15 @@ $form->separate(_t('Redirect'));
 $form->enter(_t('Finish'));
 $form->separate(_t('Finish'));
 
+$html = '<div class="dialog dialog-success">'
+    .   sprintf(_t('The Site %s has been installed correctly.'), '<b>' . $site_name . '</b>')
+    . '</div>'
+    . $form->render();
+
 // template
 $tpl = Template::get('install');
 $tpl->options(['hash' => 'finish']);
 $tpl->title(sprintf(_t('Thank you %s for choosing us!'), $fullname));
-$tpl->content = '<div class="dialog dialog-success">'
-    . sprintf(_t('The Site %s has been installed correctly.'), '<b>' . $site_name . '</b>')
-    . '</div>'
-    . $form->render();
+$tpl->content($html);
 
 return $tpl->response();

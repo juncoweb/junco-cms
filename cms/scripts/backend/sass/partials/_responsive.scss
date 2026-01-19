@@ -1,0 +1,45 @@
+/* --- responsive --- */
+@media (max-width: $screen-lg) {
+    .layout-sitename span:last-child {
+        display: none;
+    }
+}
+
+@media (max-width: $screen-sm) {
+    .navbar {
+        display: none;
+    }
+
+    .layout-sidebar {
+        display: none;
+    }
+
+    .layout-main {
+        margin-left: 0;
+    }
+
+    .layout-aside {
+        display: none;
+    }
+
+    .layout-capital {
+        display: inline-block;
+    }
+
+    .layout-sitename {
+        display: none;
+    }
+}
+
+@media (min-width: $screen-sm) {
+    .navbar-minimized {
+        .layout-main {
+            margin-left: $backend-navbar-minimized-width;
+        }
+
+        .navbar {
+            width: auto;
+            @include navbar-hover-title;
+        }
+    }
+}

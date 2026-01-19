@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -18,8 +18,8 @@ class Template extends ResponderBase implements TemplateInterface
     protected ?array $alter_options = null;
     protected object $site;
     //
-    protected $pathway              = null;
-    protected $title                = null;
+    protected array|string $pathway = '';
+    protected array|string $title   = '';
     protected array  $title_options = [];
     protected string $help_url      = '';
     public    $content              = null;
@@ -68,7 +68,7 @@ class Template extends ResponderBase implements TemplateInterface
      * @param string $description
      * @param string $keywords
      */
-    public function seo(string $description = '', string $keywords = '')
+    public function seo(string $description = '', string $keywords = ''): void
     {
         if ($description) {
             $this->assets->meta(['name' => 'description', 'content' => $description]);
@@ -83,7 +83,7 @@ class Template extends ResponderBase implements TemplateInterface
      *
      * @param array $attr An array with the attributes of the tag
      */
-    public function meta(array $attr)
+    public function meta(array $attr): void
     {
         $this->assets->meta($attr);
     }
@@ -247,20 +247,19 @@ class Template extends ResponderBase implements TemplateInterface
     /**
      * Render javascript of head
      */
-    protected function renderHeadJs()
+    protected function renderHeadJs(): string
     {
         $js = $this->assets->getJs(true);
-        if ($js) {
-            return $this->realRenderJs($js);
-        }
 
-        return '';
+        return $js
+            ? $this->realRenderJs($js)
+            : '';
     }
 
     /**
      * Render javascript
      */
-    protected function renderJs()
+    protected function renderJs(): string
     {
         $js       = $this->assets->getJs();
         $domready = $this->assets->getDomready();
@@ -279,9 +278,9 @@ class Template extends ResponderBase implements TemplateInterface
     /**
      * Load a set of values that will be passed to the template.
      *
-     * @param array|string|null $options A list of keys / values.
+     * @param ?array $options A list of keys / values.
      */
-    public function options(array|string|null $options = null): void
+    public function options(?array $options = null): void
     {
         $this->assets->options($options);
     }
@@ -299,7 +298,7 @@ class Template extends ResponderBase implements TemplateInterface
     /**
      * Get
      */
-    protected function getLang()
+    protected function getLang(): string
     {
         return explode('_', app('language')->getCurrent())[0];
     }
@@ -319,7 +318,7 @@ class Template extends ResponderBase implements TemplateInterface
      *
      * @param string $separator
      */
-    protected function getPathway(string $separator = ' / ')
+    protected function getPathway(string $separator = ' / '): string
     {
         return is_array($this->pathway) ? implode($separator, $this->pathway) : $this->pathway;
     }
@@ -343,11 +342,23 @@ class Template extends ResponderBase implements TemplateInterface
      *
      * @param string $separator
      */
-    protected function getTitle(string $separator = ' &gt; ')
+    protected function getTitle(string $separator = ' &gt; '): string
     {
         return is_array($this->title)
             ? implode($separator, $this->title)
             : $this->title;
+    }
+
+    /**
+     * Set the content of the page
+     *
+     * @param string $content
+     * 
+     * @return void
+     */
+    public function content(string $content): void
+    {
+        $this->content = $content;
     }
 
     /**

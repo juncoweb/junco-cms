@@ -4,7 +4,7 @@
     height: 4px;
     position: fixed;
     inset: 0 0 auto;
-    z-index: $zindex-loading;
+    z-index: var(--zindex-loading);
 
     &:after,
     &:before {
@@ -56,5 +56,5 @@
 .box-loading {
     text-align: center;
     background-color: var(--regular-bg-color);
-    padding: $spacing;
+    padding: var(--spacing-4);
 }

@@ -11,11 +11,11 @@
     }
 
     &.rating-large {
-        font-size: $large-font-size;
+        font-size: var(--font-size-lg);
     }
 
     &.rating-small {
-        font-size: $small-font-size;
+        font-size: var(--font-size-sm);
     }
 
     @each $name, $color in $theme-colors {
@@ -54,7 +54,7 @@
             display: flex;
             align-items: center;
             white-space: nowrap;
-            gap: $spacing;
+            gap: var(--spacing-4);
 
             > div:first-child {
                 flex: auto;

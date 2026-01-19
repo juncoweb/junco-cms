@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -13,9 +13,9 @@ use Junco\Frontlist\Contract\FrontlistInterface;
 abstract class FrontlistBase implements FrontlistInterface
 {
     // vars
+    protected FiltersInterface $filters;
     protected bool   $assets = false;
     protected string $filters_snippet = '';
-    protected FiltersInterface $filters;
     private   array  $options = [];
     //
     protected array $rows = [];

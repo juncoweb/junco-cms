@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -79,7 +79,6 @@ class AdminUsersActivitiesModel extends Model
                 $row['fullname'] = inet_ntop($row['user_ip']);
             }
 
-            $row['created_at']  = new Date($row['created_at']);
             $row['modified_at'] = $row['modified_at']
                 ? $row['created_at']->formatInterval($row['modified_at'])
                 : '';

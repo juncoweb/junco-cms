@@ -3,7 +3,7 @@
 use PhpParser\Node\Expr\Instanceof_;
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -63,25 +63,16 @@ abstract class ZoomBase implements ZoomInterface
      * 
      * @param ?string $date
      * 
-     * @return array
+     * @return ZoomGroup
      */
-    public function date(Date|string|null $date): ZoomGroup
+    public function date(?string $date): ZoomGroup
     {
         $content = '-';
         if ($date) {
-            if (is_string($date)) {
-                $date = new Date($date);
-            } else {
-                // @deprecated on v14.5
-                $trace = debug_backtrace();
-                trigger_error(
-                    'Deprecated property type "Date" for Zoom::date() in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'],
-                    E_USER_NOTICE
-                );
-            }
+            $date = new Date($date);
 
             $content = '<time datetime="' . $date->format('Y-m-d H:i:s') . '" class="text-nowrap">'
-                .   $date->format(_t('Y-M-d')) . ' <span class="color-light">' . $date->format('H:i:s') . '</span>'
+                .   $date->format(_t('Y-M-d')) . ' <span class="color-subtle-default">' . $date->format('H:i:s') . '</span>'
                 . '</time>';
         }
 

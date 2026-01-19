@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -25,8 +25,9 @@ class Checkbox extends FormElement
         $html = '<input' . $this->attr([
             'type'  => 'checkbox',
             'name'  => $name,
-            'value' => 1
-        ], $attr) . (empty($default) ? '' : ' checked') . ' class="input-checkbox"/>';
+            'value' => 1,
+            'class' => 'input-checkbox'
+        ], $attr) . (empty($default) ? '' : ' checked') . '/>';
 
         $this->content  = $html;
     }

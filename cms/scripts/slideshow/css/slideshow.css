@@ -70,7 +70,7 @@
   top: 45%;
   width: 3em;
   height: 3em;
-  border-radius: 50%;
+  border-radius: var(--rounded-full);
   cursor: pointer;
 }
 .slideshow .ss-prev:hover,
@@ -103,7 +103,7 @@
   height: 0.75em;
   margin: 0.375em;
   border: 2px solid #fff;
-  border-radius: 50%;
+  border-radius: var(--rounded-full);
   opacity: 0.8;
 }
 .slideshow .ss-nav ul li.selected div {

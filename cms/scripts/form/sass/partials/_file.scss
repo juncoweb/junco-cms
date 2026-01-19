@@ -51,11 +51,11 @@ $felem-file-wh: 5rem;
         position: absolute;
         bottom: 0;
         height: 3px;
-        background-color: $primary-color;
+        background-color: var(--solid-primary-surface-color);
     }
 
     &-title {
-        font-size: $small-font-size;
+        font-size: var(--font-size-sm);
         white-space: nowrap;
     }
 
@@ -68,8 +68,8 @@ $felem-file-wh: 5rem;
         width: 1.5rem;
         height: 1.5rem;
         line-height: 1.5rem;
-        background-color: rgba(var(--solid-surface-rgb-color), 0.4);
-        border-radius: 50%;
+        background-color: var(--overlay-color-1);
+        border-radius: var(--rounded-full);
         cursor: pointer;
     }
 
@@ -79,7 +79,7 @@ $felem-file-wh: 5rem;
 
     &-required {
         color: var(--regular-secondary-font-color);
-        font-size: 0.9em;
+        font-size: var(--font-size-sm);
         clear: both;
     }
 }

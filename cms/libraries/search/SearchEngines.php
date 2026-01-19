@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
 class SearchEngines
 {
-    private $engines    = [];
-    private $current    = '';
-    private $fn            = null;
-    public  $num_rows    = 0;
+    private array  $engines  = [];
+    private string $current  = '';
+    private $fn              = null;
+    public  int    $num_rows = 0;
 
     /**
      * Constructor
@@ -50,11 +50,13 @@ class SearchEngines
     /**
      * Render
      */
-    public function render()
+    public function render(): string
     {
         $html    = '';
         foreach ($this->engines as $row) {
-            $html .= '<label><input type="radio" name="engine" value="' . $row[0] . '" class="input-radio"' . ($row[0] == $this->current ? ' checked' : '') . ' /> ' . $row[1] . '</label>';
+            $html .= '<label><input type="radio" name="engine" value="' . $row[0] . '" class="input-radio"' . ($row[0] == $this->current ? ' checked' : '') . ' /> '
+                . $row[1]
+                . '</label>';
         }
 
         return $html;

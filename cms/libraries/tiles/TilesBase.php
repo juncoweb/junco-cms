@@ -1,23 +1,23 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
 abstract class TilesBase implements TilesInterface
 {
     // vars
-    protected array $lines    = [];
-    protected array $blocks    = [];
+    protected array $lines   = [];
+    protected array $blocks  = [];
     protected array $options = [];
     protected array $default_tile = [
-        'id'        => '',
-        'href'        => 'javascript:void(0)',
-        'icon'        => 'fa-solid fa-file',
-        'desc'        => '',
-        'caption'    => 'caption',
-        'badge'        => null,
+        'id'      => '',
+        'href'    => 'javascript:void(0)',
+        'icon'    => 'fa-solid fa-file',
+        'desc'    => '',
+        'caption' => 'caption',
+        'badge'   => null,
     ];
 
     /**
@@ -46,11 +46,11 @@ abstract class TilesBase implements TilesInterface
 
         foreach ($rows as $row) {
             $tiles[] = [
-                'id'        => $row['menu_hash'],
-                'href'        => $row['menu_url'],
-                'icon'        => $row['menu_image'],
-                'desc'        => '',
-                'caption'    => $row['menu_name'],
+                'id'      => $row['menu_hash'],
+                'href'    => $row['menu_url'],
+                'icon'    => $row['menu_image'],
+                'desc'    => '',
+                'caption' => $row['menu_name'],
             ];
         }
 
@@ -90,5 +90,17 @@ abstract class TilesBase implements TilesInterface
 
             $this->lines = [];
         }
+    }
+
+    /**
+     * Separate
+     * 
+     * @param string $legend
+     * 
+     * @return void
+     */
+    public function __toString(): string
+    {
+        return $this->render();
     }
 }

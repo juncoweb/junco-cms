@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -9,12 +9,14 @@
 $url = router()->getUrlForm('/search');
 
 // html
-$html = '<form id="search-form" action="' . $url['action'] . '">' . "\n"
-    . $url['hidden']
-    . "\t" . '<div class="input-icon-group input-large">'
+$input = '<div class="input-icon-group input-large">'
     . '<input type="text" id="search" name="q" value="' . $search . '" autocomplete="off" class="input-field"/>'
     . '<button type="submit" class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></button>'
-    . '</div>' . "\n"
+    . '</div>';
+
+$html = '<form id="search-form" action="' . $url['action'] . '">' . "\n"
+    . $url['hidden']
+    . "\t" . $input . "\n"
     . ($engines->num_rows > 1 ? '<div id="se-engines" class="se-engines">' . $engines->render() . '</div>' : '')
     . '</form>' . "\n";
 
@@ -30,6 +32,6 @@ $html .= "\t" . '<h2 class="se-title">' . _t('Results') . '</h2>' . "\n"
 $tpl = Template::get();
 $tpl->options($options);
 $tpl->title(_t('Search'));
-$tpl->content = $html;
+$tpl->content($html);
 
 return $tpl->response();

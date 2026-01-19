@@ -1,13 +1,15 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
-return function (&$row) {
+use Junco\Settings\PluginUpdater;
+
+return function (PluginUpdater $updater) {
     $cron_plugins = config('console.cron_plugins');
-    $is_cron      = ($row['worker'] == 'cron');
+    $is_cron      = $updater->getValue('worker') == 'cron';
 
     if ($is_cron != in_array('jobs', $cron_plugins)) {
         if ($is_cron) {

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -9,27 +9,38 @@
 $bls = Backlist::get();
 
 // filters
-$bft = $bls->getFilters();
-$bft->setValues($data);
-$bft->search();
+$filters = $bls->getFilters();
+$filters->setValues($data);
+$filters->search();
 
 // table
-$bls->check_h();
-$bls->link_h([
-    'control' => 'show',
-    'title' => _t('Show'),
-    'options' => ['content' => _t('Date'), 'width' => 80, 'class' => 'text-nowrap']
-]);
-$bls->th(_t('Time'), ['width' => 60, 'priority' => 2, 'class' => 'text-nowrap']);
-$bls->th(_t('Queue'));
-$bls->th(_t('Error'), ['priority' => 2]);
+if ($rows) {
+    foreach ($rows as $i => $row) {
+        $rows[$i]['job_error'] = Utils::cutText($row['job_error']);
+    }
 
-foreach ($rows as $row) {
-    $bls->check($row['id']);
-    $bls->link(['caption' => $row['created_at']->format($d ??= _t('Y-m-d'))]);
-    $bls->td($row['created_at']->format('H-i-s'));
-    $bls->td($row['job_queue']);
-    $bls->td(Utils::cutText($row['job_error']));
+    $bls->setRows($rows);
+    $bls->fixDate('created_at', _t('Y-M-d'), _t('H:i:s'));
 }
+//
+$bls->check();
+$bls->control('show')
+    ->setText(':created_at.date', _t('Show'))
+    ->setLabel(_t('Date'))
+    ->setWidth(80)
+    ->noWrap();
+
+$bls->column(':created_at.time')
+    ->setLabel(_t('Time'))
+    ->setWidth(60)
+    ->setSubtle()
+    ->noWrap();
+
+$bls->column(':job_queue')
+    ->setLabel(_t('Queue'));
+
+$bls->column(':job_error')
+    ->setLabel(_t('Error'))
+    ->setSubtle();
 
 return $bls->render($pagi);

@@ -1,19 +1,19 @@
 /* --- Tabs ----------------------------------------- */
 .tablist {
-  margin: 0 1rem;
+  margin: 0 var(--spacing-4);
   padding: 0;
 }
 .tablist li {
-  line-height: 1.5;
+  line-height: var(--line-height-base);
   margin: 0;
   padding: 0.375rem 0.875rem;
   list-style: none;
   display: inline-block;
   background-color: var(--regular-bg-color);
-  border-width: 1px;
-  border-style: solid;
+  border-width: var(--border-width);
+  border-style: var(--border-style);
   border-color: var(--regular-border-color);
-  border-radius: 0.375rem 0.375rem 0 0;
+  border-radius: var(--rounded-md) var(--rounded-md) 0 0;
   cursor: default;
 }
 .tablist li .on-small {
@@ -37,10 +37,10 @@
 
 .tabpanel-group {
   background: var(--regular-surface-color);
-  margin: -1px auto 1rem;
-  padding: 2rem 1rem;
-  border-top-width: 1px;
-  border-top-style: solid;
+  margin: calc(var(--border-width) * -1) auto var(--spacing-4);
+  padding: var(--spacing-8) var(--spacing-4);
+  border-top-width: var(--border-width);
+  border-top-style: var(--border-style);
   border-top-color: var(--regular-border-color);
 }
 .tabpanel-group > div {
@@ -51,12 +51,12 @@
 }
 
 .tab-large.tablist li {
-  font-size: 1.25rem;
+  font-size: var(--font-size-lg);
   padding: 0.625rem 1.125rem;
-  border-radius: 0.5rem 0.5rem 0 0;
+  border-radius: var(--rounded-lg) var(--rounded-lg) 0 0;
 }
 
-@media only screen and (max-width: 600px) {
+@media (max-width: 600px) {
   .tablist li:not(.selected) .on-small {
     display: inline-block;
   }

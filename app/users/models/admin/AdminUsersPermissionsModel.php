@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -64,6 +64,8 @@ class AdminUsersPermissionsModel extends Model
 
         $rows = [];
         foreach ($pagi->fetchAll() as $row) {
+            $row['status'] = (int)$row['status'];
+
             if (!$row['label_name']) {
                 $row['label_name'] = $row['extension_name'];
 

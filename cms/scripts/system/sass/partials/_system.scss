@@ -47,7 +47,7 @@
     }
 }
 
-@media (max-width: $screen-large) {
+@media (max-width: $screen-lg) {
     .visually-responsive-hidden {
         position: absolute !important;
         width: 1px !important;
@@ -79,7 +79,7 @@
     display: none;
 }
 
-@media (max-width: $screen-small) {
+@media (max-width: $screen-sm) {
     .only-on-small-screen {
         display: inherit;
     }
@@ -87,6 +87,18 @@
     .only-on-large-screen {
         display: none;
     }
+}
+
+.only-on-light:not(.mode-light .only-on-light) {
+    display: none;
+}
+
+.only-on-dark:not(.mode-dark .only-on-dark) {
+    display: none;
+}
+
+.only-on-auto:not(.mode-auto .only-on-auto) {
+    display: none;
 }
 
 /* --- overflow ---- */

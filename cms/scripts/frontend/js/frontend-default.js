@@ -46,10 +46,10 @@ Frontend.attachAll({
             });
         });
     },
-
     notifications: function (el) {
-        el.addEventListener('click', function (event) {
-            Notifications();
+        JsNotifications.load(el);
+        el.addEventListener('click', function () {
+            JsNotifications.show();
         });
     },
     search: (function () {
@@ -60,7 +60,7 @@ Frontend.attachAll({
                 if (!box) {
                     box = document.body.appendChild(JsElement('DIV.tpl-search', {
                         html: '<div><i class="fa-solid fa-xmark cursor-pointer"></i></div>'
-                            + '<form class="box-default p-8" action="' + el.href + '" method="GET">'
+                            + '<form class="box-default p-8 rounded-large" action="' + el.href + '" method="GET">'
                             + '<div class="input-group input-large">'
                             + '<input type="input" name="q" placeholder="" class="input-field input-primary">'
                             + '<button type="submit" class="btn btn-primary btn-solid"><i class="fa-solid fa-magnifying-glass"></i></button>'
@@ -91,18 +91,5 @@ window.addEventListener('DOMContentLoaded', function () {
     let h = document.body.querySelector('.tpl-header');
     if (h) {
         JsFelem.load(h);
-    }
-});
-
-window.addEventListener('load', function () {
-    var el = document.querySelector('#cookieconsent');
-    if (el) {
-        if (!JsCookie.get('cookieConsent')) {
-            el.classList.add('visible');
-            document.querySelector('#cc-btn').addEventListener('click', function () {
-                el.classList.remove('visible');
-                JsCookie.set('cookieConsent', 1);
-            });
-        }
     }
 });

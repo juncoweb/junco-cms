@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
 // vars
-$contact = snippet('contact', $snippet);
+$html = snippet('contact', $snippet)->render();
 
 // template
 $tpl = Template::get();
 $tpl->options($options);
 $tpl->title(_t('Contact'));
-$tpl->content = $contact->render();
+$tpl->content($html);
 
 return $tpl->response();

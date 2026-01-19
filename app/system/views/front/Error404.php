@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -14,6 +14,6 @@ $html = '<div class="m-8 italic">'
 $tpl = Template::get();
 //$tpl->options();
 $tpl->title(_t('404. That’s an error.'));
-$tpl->content = $html;
+$tpl->content($html);
 
 return $tpl->response();

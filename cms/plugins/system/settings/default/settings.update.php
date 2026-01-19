@@ -1,38 +1,17 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
-return function (&$row) {
-    if (isset($row['mkdir_mode'])) {
-        $row['mkdir_mode'] = octdec($row['mkdir_mode']);
-    }
+use Junco\Settings\PluginUpdater;
 
-    //
-    if (
-        isset($row['libraries'])
-        && !($row['libraries'] && is_file(SYSTEM_ABSPATH . $row['libraries']))
-    ) {
-        throw new Exception('The libraries are not found');
-    }
-
-    //
-    if (
-        !empty($row['profiler'])
-        && empty($row['developer_mode'])
-    ) {
-        $row['profiler'] = false;
-    }
-
-    //
-    if (isset($row['log_path'])) {
-        $fs = new Filesystem('');
-        $fs->sanitizeDir($row['log_path'], '/');
-
-        if (!$row['log_path']) {
-            $row['log_path'] = 'logs/';
-        }
-    }
+return function (PluginUpdater $updater) {
+    $updater->setValue('mkdir_mode', fn($value) => octdec($value), 755);
+    $updater->setValue('profiler', fn($value) => $updater->getValue('developer_mode'), false);
+    $updater->setValue('log_path', function ($value) {
+        (new Filesystem)->sanitizeDir($value, '/');
+        return $value;
+    }, 'logs/');
 };

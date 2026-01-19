@@ -76,10 +76,10 @@
     }
 
     td {
-        &.table-dimmed,
-        &.table-dimmed a,
-        .table-dimmed,
-        .table-dimmed a {
+        &.table-subtle-color,
+        &.table-subtle-color a,
+        .table-subtle-color,
+        .table-subtle-color a {
             color: var(--regular-subtle-font-color) !important;
         }
     }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -30,6 +30,6 @@ $tpl = Template::get();
 $tpl->js('assets/assets-admin.min.js');
 $tpl->domready('AdminAssets.List()');
 $tpl->title(_t('Assets'), 'fa-regular fa-circle');
-$tpl->content = $bbx->render();
+$tpl->content($bbx->render());
 
 return $tpl->response();

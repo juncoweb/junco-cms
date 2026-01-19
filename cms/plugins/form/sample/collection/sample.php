@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -56,6 +56,6 @@ $tpl->options([
     'thirdbar' => 'form.thirdbar'
 ]);
 $tpl->title(_t('Collection'));
-$tpl->content = '<div class="panel"><div class="panel-body">' . $html . '</div></div>';
+$tpl->content('<div class="panel"><div class="panel-body">' . $html . '</div></div>');
 
 return $tpl->response();

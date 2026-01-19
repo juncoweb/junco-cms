@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -21,6 +21,6 @@ $tpl = Template::get();
 $tpl->js('assets/users-admin.min.js');
 $tpl->domready('UsersRoles.List()');
 $tpl->title(_t('Roles'), 'fa-solid fa-user-gear');
-$tpl->content = $bbx->render();
+$tpl->content($bbx->render());
 
 return $tpl->response();

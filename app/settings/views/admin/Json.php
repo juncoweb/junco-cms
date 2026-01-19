@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -53,10 +53,12 @@ if ($options) {
     }
 }
 
+$html = '<form id="js-form">' . $form->render() . '</form>';
+
 // modal
 $modal = Modal::get();
 $modal->close();
 $modal->title([_t('JSON'), $title]);
-$modal->content = '<form id="js-form">' . $form->render() . '</form>';
+$modal->content($html);
 
 return $modal->response();

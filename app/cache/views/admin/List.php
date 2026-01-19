@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -9,19 +9,14 @@
 $bls = Backlist::get();
 
 // filters
-$bft = $bls->getFilters();
-$bft->setValues($data);
-$bft->search();
+$filters = $bls->getFilters();
+$filters->setValues($data);
+$filters->search();
 
 // table
-$bls->check_h();
-$bls->th(_t('File'));
-
-if ($keys) {
-    foreach ($keys as $key) {
-        $bls->check($key);
-        $bls->td($key);
-    }
-}
+$bls->setRows($rows);
+//
+$bls->check();
+$bls->column(':name')->setLabel(_t('File'));
 
 return $bls->render();

@@ -14,24 +14,24 @@
     }
 
     li {
-        border-bottom-width: $border-width;
-        border-bottom-style: $border-style;
+        border-bottom-width: var(--border-width);
+        border-bottom-style: var(--border-style);
         border-bottom-color: var(--regular-border-color);
         margin: 0;
         padding: 0;
         position: relative;
 
         & > a {
-            padding: ($spacing * 0.5) $spacing;
+            padding: var(--spacing-2) var(--spacing-4);
             display: block;
             transition: all ease 0.5s;
 
             &:hover {
-                padding-left: $spacing + $widget-list-displacement;
+                padding-left: calc(var(--spacing-4) + $widget-list-displacement);
             }
 
             & > i {
-                margin-right: 10px;
+                margin-right: var(--spacing-2);
             }
         }
 
@@ -40,13 +40,13 @@
         }
 
         & > div {
-            padding: ($spacing * 0.5) $spacing;
+            padding: var(--spacing-2) var(--spacing-4);
         }
     }
 }
 
 .widget-icon {
-    font-size: $large-font-size;
+    font-size: var(--font-size-lg);
 }
 
 .widget-badge {

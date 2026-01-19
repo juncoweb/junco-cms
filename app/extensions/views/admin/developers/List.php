@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -9,19 +9,26 @@
 $bls = Backlist::get();
 
 // filters
-$bft = $bls->getFilters();
-$bft->setValues($data);
-$bft->search();
+$filters = $bls->getFilters();
+$filters->setValues($data);
+$filters->search();
 
 // table
-$bls->check_h();
-$bls->th(_t('Name'));
-$bls->th(['priority' => 2, 'width' => 120]);
-
-foreach ($pagi->fetchAll() as $row) {
-    $bls->check($row['id']);
-    $bls->td($row['developer_name']);
-    $bls->td($row['is_protected'] ? _t('Protected') : false);
+if ($rows) {
+    $bls->setRows($rows);
+    $bls->setLabels('__labels');
+    $bls->fixEnum('is_protected', [
+        ['title' => ''],
+        ['title' => _t('Protected')],
+    ]);
 }
+//
+$bls->check();
+$bls->column(':developer_name')
+    ->setLabel(_t('Name'));
+
+$bls->column(':is_protected.title')
+    ->setSubtle()
+    ->setWidth(120);
 
 return $bls->render();

@@ -1,19 +1,19 @@
 /* --- Tabs ----------------------------------------- */
 .tablist {
-    margin: 0 $spacing;
+    margin: 0 var(--spacing-4);
     padding: 0;
 
     li {
-        line-height: $line-height;
+        line-height: var(--line-height-base);
         margin: 0;
         padding: $tablist-padding;
         list-style: none;
         display: inline-block;
         background-color: var(--regular-bg-color);
-        border-width: $border-width;
-        border-style: $border-style;
+        border-width: var(--border-width);
+        border-style: var(--border-style);
         border-color: var(--regular-border-color);
-        border-radius: $medium-border-radius $medium-border-radius 0 0;
+        border-radius: var(--rounded-md) var(--rounded-md) 0 0;
         cursor: default;
 
         .on-small {
@@ -42,10 +42,10 @@
 
 .tabpanel-group {
     background: var(--regular-surface-color);
-    margin: -$border-width auto $spacing;
-    padding: ($spacing * 2) $spacing;
-    border-top-width: $border-width;
-    border-top-style: $border-style;
+    margin: calc(var(--border-width) * -1) auto var(--spacing-4);
+    padding: var(--spacing-8) var(--spacing-4);
+    border-top-width: var(--border-width);
+    border-top-style: var(--border-style);
     border-top-color: var(--regular-border-color);
 
     & > div {
@@ -60,14 +60,14 @@
 // sizes
 .tab-large {
     &.tablist li {
-        font-size: $large-font-size;
+        font-size: var(--font-size-lg);
         padding: $tablist-large-padding;
-        border-radius: $large-border-radius $large-border-radius 0 0;
+        border-radius: var(--rounded-lg) var(--rounded-lg) 0 0;
     }
 }
 
 //
-@media only screen and (max-width: $screen-small) {
+@media (max-width: $screen-sm) {
     .tablist li:not(.selected) .on-small {
         display: inline-block;
     }

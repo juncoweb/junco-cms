@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -17,11 +17,13 @@ $form->input('password', ['type' => 'password'])->setLabel(_t('New password'));
 $form->input('email')->setLabel(_t('Email'));
 $form->enter();
 
+$html = '<div class="panel mb-4 usys-wrapper usys-account"><div class="panel-body">' . $form->render() . '</div></div>';
+
 // template
 $tpl = Template::get();
 $tpl->options($options);
 $tpl->domready('UsysAccount()');
 $tpl->title(_t('Account'));
-$tpl->content = '<div class="panel mb-4 usys-wrapper usys-account"><div class="panel-body">' . $form->render() . '</div></div>';
+$tpl->content($html);
 
 return $tpl->response();

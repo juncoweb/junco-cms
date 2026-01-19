@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -36,6 +36,6 @@ $tpl->editor();
 $tpl->js('assets/language-admin.min.js');
 $tpl->domready('Language.List()');
 $tpl->title(_t('Language'), 'fa-solid fa-flag');
-$tpl->content = $bbx->render();
+$tpl->content($bbx->render());
 
 return $tpl->response();

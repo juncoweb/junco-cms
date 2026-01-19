@@ -1,31 +1,23 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
-class portal_master_default_snippet
+use Junco\Portal\PortalBase;
+
+class portal_master_default_snippet extends PortalBase
 {
     // vars
-    protected $rows = [];
-
-    /**
-     * Section
-     * 
-     * @param array $section
-     */
-    public function section(array $section): void
-    {
-        $this->rows[] = array_merge([
-            'title'     => '',
-            'caption'   => '',
-            'content'   => '',
-            'css'       => '',
-            'attr'      => [],
-            'container' => true
-        ], $section);
-    }
+    protected array $section = [
+        'title'     => '',
+        'caption'   => '',
+        'content'   => '',
+        'css'       => '',
+        'attr'      => [],
+        'container' => true
+    ];
 
     /**
      * Render

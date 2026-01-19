@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -23,6 +23,6 @@ $tpl->editor();
 $tpl->js('assets/contact-admin.min.js');
 $tpl->domready('Contact.List()');
 $tpl->title(_t('Contact'), 'fa-solid fa-envelope');
-$tpl->content = $bbx->render();
+$tpl->content($bbx->render());
 
 return $tpl->response();

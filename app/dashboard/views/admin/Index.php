@@ -1,25 +1,22 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
 // template
 $tpl = Template::get();
 
-// vars
-$collector = snippet('dashboard', $snippet);
-
 # plugins
+$collector = snippet('dashboard', $snippet);
 if ($plugins) {
     Plugins::get('dashboard', 'load', $plugins)?->run($collector);
 }
+$html = $collector->render();
 
-if ($options) {
-    $tpl->options($options);
-}
+$tpl->options($options);
 $tpl->title(_t('Dashboard'), 'fa-solid fa-dashboard');
-$tpl->content = $collector->render();
+$tpl->content($html);
 
 return $tpl->response();

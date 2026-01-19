@@ -1,10 +1,10 @@
 /* --- form ----------------------------------------- */
 .form-wrapper {
-    max-width: $screen-x-large;
-    margin-bottom: $spacing * 2;
+    max-width: $screen-xl;
+    margin-bottom: var(--spacing-8);
 
     > div {
-        max-width: $screen-medium;
+        max-width: $screen-md;
         margin-left: auto;
         margin-right: auto;
     }
@@ -12,28 +12,28 @@
 
 .form-columns {
     display: flex;
-    gap: $spacing;
+    gap: var(--spacing-4);
 
     > div {
         flex: 1;
     }
 }
-@media (max-width: $screen-medium) {
+@media (max-width: $screen-md) {
     .form-columns {
         display: block;
         > div ~ div {
-            margin-top: $spacing;
+            margin-top: var(--spacing-4);
         }
     }
 }
 
 .form-group {
     & ~ & {
-        margin-top: $spacing;
+        margin-top: var(--spacing-4);
     }
 
     > div ~ div {
-        margin-top: ($spacing * 0.5);
+        margin-top: var(--spacing-2);
     }
 }
 
@@ -46,11 +46,11 @@
 }
 
 .form-header {
-    padding: ($spacing * 0.5) $spacing;
+    padding: var(--spacing-2) var(--spacing-4);
     //background: var(--regular-bg-color);
-    //border-radius: $medium-border-radius;
+    //border-radius: var(--rounded-md);
     display: flex;
-    gap: $spacing * 0.5;
+    gap: var(--spacing-2);
     vertical-align: bottom;
 
     & > div {
@@ -68,8 +68,8 @@
 }
 
 .form-body {
-    border-top: $border-width $border-style var(--regular-border-color);
-    padding: $spacing;
+    border-top: var(--border-width) var(--border-style) var(--regular-border-color);
+    padding: var(--spacing-4);
     display: none;
 }
 
@@ -89,13 +89,13 @@ div.form-fieldset.expanded {
 
 fieldset.form-fieldset {
     margin: 0;
-    padding: $spacing;
+    padding: var(--spacing-4);
     background-color: var(--regular-surface-color);
-    border-width: $border-width;
-    border-style: $border-style;
+    border-width: var(--border-width);
+    border-style: var(--border-style);
     border-color: var(--regular-border-color);
-    border-radius: $medium-border-radius;
-    box-shadow: $template-box-shadow;
+    border-radius: var(--rounded-md);
+    box-shadow: var(--box-shadow-template);
 
     > legend {
         color: var(--regular-subtle-font-color);
@@ -103,13 +103,13 @@ fieldset.form-fieldset {
 }
 
 .form-fieldset + .form-fieldset {
-    margin-top: ($spacing * 0.5);
+    margin-top: var(--spacing-2);
 }
 
 // actions
 .form-actions {
     display: flex;
-    margin-bottom: $spacing;
+    margin-bottom: var(--spacing-4);
 
     .form-col-1 {
         flex: auto;

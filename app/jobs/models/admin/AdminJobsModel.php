@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -48,8 +48,7 @@ class AdminJobsModel extends Model
             $failure_url = url('admin/jobs.failures') . '#/search=%d';
 
             foreach ($pagi->fetchAll() as $row) {
-                $row['available_at'] = new Date($row['available_at']);
-                $row['failure_url']  = sprintf($failure_url, $row['id']);
+                $row['failure_url'] = sprintf($failure_url, $row['id']);
 
                 $rows[] = $row;
             }

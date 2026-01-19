@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -40,11 +40,13 @@ foreach ($writables as $row) {
 }
 $form->separate(_t('Writable files'));
 
+$html = '<p>' . _t('The following are the minimum requirements needed to function properly the site.') . '</p>';
+$html .= $form->render();
+
 // template
 $tpl = Template::get('install');
 $tpl->options(['hash' => 'requirements']);
-$tpl->title(_t('System Requirements'));
-$tpl->content = '<p>' . _t('The following are the minimum requirements needed to function properly the site.') . '</p>'
-    . $form->render();
+$tpl->title(_t('Requirements'));
+$tpl->content($html);
 
 return $tpl->response();

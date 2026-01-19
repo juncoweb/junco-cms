@@ -1,13 +1,17 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
-use Junco\Filesystem\ImageHelper;
+use Junco\Settings\PluginLoader;
 
-return function (&$rows) {
-    $rows['system_registers']['options'] =
-        $rows['user_registers']['options'] = ['className', 'shared'];
+return function (PluginLoader $loader) {
+    $options = [
+        'className',
+        'shared'
+    ];
+    $loader->setOptions('system_registers', $options);
+    $loader->setOptions('user_registers', $options);
 };

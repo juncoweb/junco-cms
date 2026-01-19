@@ -1,23 +1,23 @@
 /* --- contact-info ---------------------------------------- */
 .widget-contact .ci-icon {
-  font-size: 1.25rem;
+  font-size: var(--font-size-lg);
 }
 .widget-contact .ci-links a {
+  font-size: var(--font-size-xl);
   color: var(--regular-font-color);
+  background-color: var(--regular-border-color);
   display: inline-block;
   text-align: center;
   vertical-align: middle;
-  font-size: 24px;
-  margin: 0 10px 0 0;
-  height: 48px;
-  width: 48px;
-  background-color: var(--regular-border-color);
-  border-radius: 50%;
+  margin: 0 10px 2px 0;
+  height: calc(var(--font-size-xl) * 2);
+  width: calc(var(--font-size-xl) * 2);
+  border-radius: var(--rounded-full);
 }
 .widget-contact .ci-links a:hover {
   color: var(--solid-font-color);
-  background-color: #009eff;
+  background-color: var(--solid-primary-bg-color);
 }
 .widget-contact .ci-links a i {
-  line-height: 48px;
+  line-height: calc(var(--font-size-xl) * 2);
 }

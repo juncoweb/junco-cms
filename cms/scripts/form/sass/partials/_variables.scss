@@ -4,10 +4,15 @@ $felem-btn-small-padding: 0.25rem 0.75rem !default;
 $felem-btn-large-padding: 0.5rem 1.125rem !default;
 
 // input
-$felem-input-check-size: $font-size * 1.125 !default;
+$felem-input-checkable-size: var(--font-size-lg) !default;
+$felem-input-toggle-width: calc($felem-input-checkable-size * 2) !default;
 $felem-input-padding: 0.375rem 0.875rem !default;
 $felem-input-small-padding: 0.25rem 0.75rem !default;
 $felem-input-large-padding: 0.625rem 1.125rem !default;
+//
+$felem-input-icon-width-md: 2rem;
+$felem-input-icon-width-sm: 1.75rem;
+$felem-input-icon-width-lg: 2.5rem;
 
-// date
-$date-cell-padding: 0.375rem;
+// datepicker
+$datepicker-cell-padding: 0.375rem;

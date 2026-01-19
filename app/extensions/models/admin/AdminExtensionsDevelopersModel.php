@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -40,7 +40,21 @@ class AdminExtensionsDevelopersModel extends Model
 		[WHERE]
 		[ORDER BY developer_name]");
 
-        return $data + ['pagi' => $pagi];
+        $rows = [];
+        foreach ($pagi->fetchAll() as $row) {
+            $row['__labels'] = [];
+
+            if (!$row['is_protected']) {
+                $row['__labels'][] = 'enabled';
+            }
+
+            $rows[] = $row;
+        }
+
+        return $data + [
+            'rows' => $rows,
+            'pagi' => $pagi
+        ];
     }
 
     /**

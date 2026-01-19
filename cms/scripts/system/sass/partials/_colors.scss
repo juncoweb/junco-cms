@@ -105,7 +105,15 @@
         @if ($name == "default") {
             color: var(--regular-font-color);
         } @else {
-            color: var(--regular#{$class}-surface-color);
+            color: var(--regular#{$class}-surface-color); // ?
+        }
+    }
+
+    .color-subtle-#{$name} {
+        color: var(--regular#{$class}-subtle-font-color);
+
+        &.color-solid {
+            color: var(--solid#{$class}-subtle-font-color);
         }
     }
 
@@ -124,10 +132,6 @@
         background-color: var(--solid#{$class}-bg-color);
         border-color: var(--solid#{$class}-border-color);
     }
-}
-
-.color-light {
-    color: var(--regular-subtle-font-color);
 }
 
 .outline-none.panel {

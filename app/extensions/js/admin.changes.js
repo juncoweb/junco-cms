@@ -35,10 +35,12 @@
 
                 edit: {
                     numRows: '1',
+                    onlyRows: 'enabled',
                     modalOptions: mo,
                 },
 
                 confirm_delete: {
+                    onlyRows: 'enabled',
                     modalOptions: {
                         target: target,
                         onLoad: function () {

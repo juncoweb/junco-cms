@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -63,6 +63,6 @@ $tpl->options([
     'submit' => !$can_connect
 ]);
 $tpl->title(_t('Create Database'));
-$tpl->content = $html;
+$tpl->content($html);
 
 return $tpl->response();

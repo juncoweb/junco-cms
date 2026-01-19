@@ -1,14 +1,16 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
-return function (&$rows) {
-    $rows['myspace_plugins']['plugins'] = 'dashboard';
-    $rows['myspace_snippet']['snippet'] = 'dashboard';
+use Junco\Settings\PluginLoader;
 
-    $rows['admin_plugins']['plugins'] = 'dashboard';
-    $rows['admin_snippet']['snippet'] = 'dashboard';
+return function (PluginLoader $loader) {
+    $loader->setPlugins('myspace_plugins', 'dashboard');
+    $loader->setSnippet('myspace_snippet', 'dashboard');
+
+    $loader->setPlugins('admin_plugins', 'dashboard');
+    $loader->setSnippet('admin_snippet', 'dashboard');
 };

@@ -1,17 +1,14 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
-/**
- * Import
- *
- * @param object $xdata
- *
- * @return void
- */
-return function (&$xdata) {
-    (new SettingsImporter($xdata->extension_alias))->import("{$xdata->basepath}storage/settings/");
+use Junco\Extensions\XData\XData;
+use Junco\Settings\Importer;
+
+return function (XData $xdata) {
+    (new Importer($xdata->extension_alias))
+        ->import("{$xdata->basepath}storage/settings/");
 };

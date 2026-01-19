@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -19,6 +19,6 @@ $tpl = Template::get();
 $tpl->js('assets/cache-admin.min.js');
 $tpl->domready('Cache.List()');
 $tpl->title(_t('Cache'), 'fa-solid fa-bolt');
-$tpl->content = $bbx->render();
+$tpl->content($bbx->render());
 
 return $tpl->response();

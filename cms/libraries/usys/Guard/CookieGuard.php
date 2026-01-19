@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -178,7 +178,7 @@ class CookieGuard implements GuardInterface
      */
     protected function getUserIdFromCookie(bool $security = true): int
     {
-        $token = $_COOKIE[$this->rm_key] ?? null;
+        $token = cookie($this->rm_key);
 
         if (!$token || !$this->validateToken($token)) {
             return 0;
@@ -255,7 +255,7 @@ class CookieGuard implements GuardInterface
      */
     protected function destroy(): bool
     {
-        $token = $_COOKIE[$this->rm_key] ?? null;
+        $token = cookie($this->rm_key);
 
         if (!$token || !$this->validateToken($token)) {
             return false;

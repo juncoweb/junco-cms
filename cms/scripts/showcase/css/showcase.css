@@ -1,9 +1,9 @@
 /* --- Showcase ----------------------------------------- */
 .article-wrapper {
   display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+  gap: var(--spacing-4);
+  margin-top: var(--spacing-4);
+  margin-bottom: var(--spacing-8);
 }
 .article-wrapper > div {
   flex: auto;
@@ -20,7 +20,7 @@
 }
 .article-title .edit {
   color: var(--regular-subtle-font-color);
-  font-size: 1rem;
+  font-size: var(--font-size-base);
 }
 .article-info {
   color: var(--regular-subtle-font-color);
@@ -34,15 +34,15 @@
   margin: 5px;
 }
 .article-description p {
-  margin: 0 0 1rem;
+  margin: 0 0 var(--spacing-4);
 }
 
-@media only screen and (max-width: 600px) {
+@media (max-width: 600px) {
   .article-wrapper {
     display: block;
   }
   .article-media {
     max-width: none;
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-4);
   }
 }

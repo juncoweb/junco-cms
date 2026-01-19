@@ -1,35 +1,37 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
-return function (&$rows) {
-    $rows['transport']['options'] = [
-        0        => '--- ' . _t('Select') . ' ---',
-        'mail'    => 'mail',
-        'smtp'    => 'smtp'
-    ];
+use Junco\Settings\PluginLoader;
 
-    $rows['charset']['options'] = [
-        'iso-8859-1'    => 'iso-8859-1',
-        'utf-8'            => 'utf-8'
-    ];
+return function (PluginLoader $loader) {
+    $loader->setOptions('transport', [
+        0       => '--- ' . _t('Select') . ' ---',
+        'mail' => 'mail',
+        'smtp' => 'smtp'
+    ]);
 
-    $rows['header_encoding']['options'] = [
-        'B'    => 'Base64',
-        'Q'    => 'Quoted-printable'
-    ];
+    $loader->setOptions('charset', [
+        'iso-8859-1' => 'iso-8859-1',
+        'utf-8'      => 'utf-8'
+    ]);
 
-    $rows['message_encoding']['options'] = [
-        'base64'            => 'Base64',
-        'quoted-printable'    => 'Quoted-printable'
-    ];
+    $loader->setOptions('header_encoding', [
+        'B' => 'Base64',
+        'Q' => 'Quoted-printable'
+    ]);
 
-    $rows['smtp_secure']['options'] = [
-        0        => '--- ' . _t('Select') . ' ---',
-        'tls'    => 'tls',
-        'ssl'    => 'ssl'
-    ];
+    $loader->setOptions('message_encoding', [
+        'base64'           => 'Base64',
+        'quoted-printable' => 'Quoted-printable'
+    ]);
+
+    $loader->setOptions('smtp_secure', [
+        0     => '--- ' . _t('Select') . ' ---',
+        'tls' => 'tls',
+        'ssl' => 'ssl'
+    ]);
 };

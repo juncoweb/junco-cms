@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -53,7 +53,13 @@ class AdminUsersLabelsModel extends Model
             if ($row['label_key']) {
                 $row['label_key'] = '-' . $row['label_key'];
             }
+
             $row['label_key'] = $row['extension_alias'] . $row['label_key'];
+            $row['__labels'] = [];
+
+            if (!$row['is_protected']) {
+                $row['__labels'][] = 'editable';
+            }
 
             $rows[] = $row;
         }

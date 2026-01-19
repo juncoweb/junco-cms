@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -15,10 +15,10 @@ use Psr\Http\Message\ResponseInterface;
 class responder_master_default_http_blank extends ResponderBase implements HttpBlankInterface
 {
     // vars
-    protected string $content         = '';
-    protected string $filename         = '';
-    protected string $ContentType    = '';
-    protected int    $ContentLength    = 0;
+    protected string $content       = '';
+    protected string $filename      = '';
+    protected string $ContentType   = '';
+    protected int    $ContentLength = 0;
 
     /**
      * Create File
@@ -45,10 +45,10 @@ class responder_master_default_http_blank extends ResponderBase implements HttpB
             $ContentType = (new MimeHelper)->getType($filename);
         }
 
-        $this->content            = $content;
-        $this->filename            = $filename;
-        $this->ContentType        = $ContentType;
-        $this->ContentLength    = strlen($content);
+        $this->content       = $content;
+        $this->filename      = $filename;
+        $this->ContentType   = $ContentType;
+        $this->ContentLength = strlen($content);
     }
 
     /**

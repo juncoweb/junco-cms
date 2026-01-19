@@ -15,7 +15,7 @@
     @include navbar-nested(
         $bg-color: $backend-thirdbar-nested-bg-color,
         $separator-color: $backend-thirdbar-separator-color,
-        $box-shadow: $dropdown-box-shadow
+        $box-shadow: var(--box-shadow-dropdown)
     );
     @include navbar-horizontal;
     @include navbar-dropdown();

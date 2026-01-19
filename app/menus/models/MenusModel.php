@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -134,18 +134,18 @@ class MenusModel extends Model
         $translates = [];
         foreach ($rows as $row) {
             $parts = explode('|', $row['menu_default_path']);
-            $_text = array_pop($parts);
+            $text = array_pop($parts);
 
-            if ($_text != ';') {
-                $translates[$row['extension_alias']][] = $_text;
+            if ($text != ';') {
+                $translates[$row['extension_alias']][] = $text;
             }
 
             if ($row['menu_default_path'] != $row['menu_path']) {
                 $parts = explode('|', $row['menu_path']);
-                $_text = array_pop($parts);
+                $text = array_pop($parts);
 
-                if ($_text != ';') {
-                    $translates[$row['extension_alias']][] = $_text;
+                if ($text != ';') {
+                    $translates[$row['extension_alias']][] = $text;
                 }
             }
         }

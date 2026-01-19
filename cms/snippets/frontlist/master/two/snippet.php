@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -35,43 +35,46 @@ class frontlist_master_two_snippet extends FrontlistBase
                     $title = '<a href="' . $row['url'] . '" title="' . $row['title'] . '">' . $title . '</a>';
                 }
 
-                $html .= '<article control-row="' . $row['id'] . '"><div class="fl-entry">';
+                $html .= '<article control-row="' . $row['id'] . '">';
                 if ($row['image_html']) {
-                    $html .= '<div class="fl-thumbnail">' . $row['image_html'] . '</div>';
+                    $html .= '<div class="grid gap-0 article-wrapper">';
+                    $html .= '<div class="article-media">' . $row['image_html'] . '</div>';
+                } else {
+                    $html .= '<div class="article-wrapper">';
                 }
 
-                $html  .= '<div>';
+                $html .= '<div class="article-container">';
                 $html .= '<div><h3>' . $title . '</h3></div>';
+
                 if ($row['date']) {
-                    $html .= '<div class="fl-date">' . $row['date'] . '</div>';
+                    $html .= '<div class="article-date">' . $row['date'] . '</div>';
                 }
 
                 if ($row['author']) {
-                    $html .= '<div class="fl-author">' . $row['author'] . '</div>';
+                    $html .= '<div class="article-author">' . $row['author'] . '</div>';
                 }
 
                 if ($row['description']) {
-                    $html .= '<div class="fl-description">' . $row['description'] . '</div>';
+                    $html .= '<div class="article-description">' . $row['description'] . '</div>';
                 }
 
                 if ($row['button']) {
-                    $html .= '<div class="fl-button">' . $row['button'] . '</div>';
+                    $html .= '<div class="article-button">' . $row['button'] . '</div>';
                 }
 
                 if ($row['labels']) {
-                    $html .= '<div class="fl-labels">' . sprintf(_t('Labels %s'), implode(' ', array_map(function ($label) {
-                        return '<a href="' . $label['url'] . '">' . $label['name'] . '</a>';
-                    }, $row['labels']))) . '</div>';
+                    $html .= '<div class="article-labels">' . $this->renderLabels($row['labels']) . '</div>';
                 }
+
                 $html .= '</div></div>';
 
                 if ($row['footer'] || $row['rating']) {
-                    $html .= '<div class="fl-footer">' . $row['rating'] . $row['footer'] . '</div>';
+                    $html .= '<div class="article-footer">' . $row['rating'] . $row['footer'] . '</div>';
                 }
                 $html .= '</article>';
             }
 
-            $html = '<div class="frontlist-two">' . $html . "\n" . '</div>' . "\n";
+            $html = '<div class="grid grid-medium-box grid-responsive frontlist-two">' . $html . "\n" . '</div>' . "\n";
             $this->rows = []; // freeing memory
 
         } else {
@@ -83,9 +86,21 @@ class frontlist_master_two_snippet extends FrontlistBase
         }
 
         if ($pagi) {
-            $html .= '<div class="fl-pagination">' . $pagi . '</div>' . "\n";
+            $html .= '<div class="article-pagination">' . $pagi . '</div>' . "\n";
         }
 
         return $html;
+    }
+
+    /**
+     * Render
+     * 
+     * @return string
+     */
+    protected function renderLabels(array $labels): string
+    {
+        return sprintf(_t('Labels %s'), implode(' ', array_map(function ($label) {
+            return '<a href="' . $label['url'] . '">' . $label['name'] . '</a>';
+        }, $labels)));
     }
 }

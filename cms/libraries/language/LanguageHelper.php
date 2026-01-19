@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -73,8 +73,7 @@ class LanguageHelper
 
         switch ((int)$config['language.type']) {
             case 0:
-                $cookie_path = config('system.cookie_path');
-                return setcookie($config['language.key'], $language, 0x7fffffff, $cookie_path);
+                return app('language')->setCookie($language);
             case 1:
                 return $language;
         }

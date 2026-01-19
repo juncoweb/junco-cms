@@ -1,26 +1,10 @@
 /* --- tipography ------------------------------------------- */
 body {
-    font-family: $font-family;
-    font-size: $font-size;
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
     font-weight: normal;
-    line-height: $line-height;
+    line-height: var(--line-height-base);
     color: var(--regular-font-color);
-}
-
-button,
-input,
-optgroup,
-select,
-textarea {
-    margin: 0;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-}
-
-::placeholder {
-    color: currentColor;
-    opacity: 0.5;
 }
 
 // link
@@ -38,6 +22,37 @@ a {
     }
 }
 
+// font-family
+.font-sans {
+    font-family: var(--font-family-sans);
+}
+
+.font-serif {
+    font-family: var(--font-family-serif);
+}
+
+.font-mono {
+    font-family: var(--font-family-mono);
+}
+
+// font-size
+.font-small {
+    font-size: var(--font-size-sm);
+}
+
+.font-large {
+    font-size: var(--font-size-lg);
+}
+
+//
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
 // headers
 h1,
 h2,
@@ -45,8 +60,9 @@ h3,
 h4,
 h5,
 h6 {
+    font-family: var(--heading-font-family);
+    font-weight: var(--heading-font-weight);
     color: var(--regular-heading-color);
-    font-weight: 300;
     text-wrap: balance;
     margin-top: 0;
     margin-bottom: 0.5rem;
@@ -69,46 +85,20 @@ p {
     text-wrap: pretty;
 }
 
-.font-small {
-    font-size: $small-font-size;
-}
-
-.font-large {
-    font-size: $large-font-size;
-}
-
-.normal {
-    font-weight: normal;
-}
-
-.bold {
-    font-weight: bold;
-}
-
-.italic {
-    font-style: italic;
-}
-
-// selection
-::selection {
-    color: $font-selection-color;
-    background: $font-selection-bg;
-}
-
 // code
 code,
 kbd,
 pre,
 samp {
-    font-family: $font-family-monospace;
+    font-family: var(--font-family-mono);
 }
 
 code {
     font-size: $code-font-size;
     color: $code-color;
-    background: $code-bg;
+    background-color: $code-bg-color;
     padding: $code-padding;
-    border-radius: $medium-border-radius;
+    border-radius: var(--rounded-md);
 }
 
 pre {
@@ -119,4 +109,27 @@ pre {
         background-color: transparent;
         border-radius: 0;
     }
+}
+
+// selection
+::selection {
+    color: $font-selection-color;
+    background: $font-selection-bg;
+}
+
+// form
+button,
+input,
+optgroup,
+select,
+textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+::placeholder {
+    color: currentColor;
+    opacity: 0.5;
 }

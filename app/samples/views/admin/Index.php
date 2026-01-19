@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -20,6 +20,6 @@ $tpl = Template::get();
 $tpl->js('assets/samples-admin.min.js');
 $tpl->domready('AdminTools.List()');
 $tpl->title(_t('Samples'), 'fa-solid fa-toolbox');
-$tpl->content = $bbx->render();
+$tpl->content($bbx->render());
 
 return $tpl->response();

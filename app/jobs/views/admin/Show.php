@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -22,6 +22,6 @@ $zoom->group($num_attempts)->setLabel(_t('Attempts'));
 $modal = Modal::get();
 $modal->close();
 $modal->title(_t('Failure'));
-$modal->content = $zoom->render();
+$modal->content($zoom->render());
 
 return $modal->response();

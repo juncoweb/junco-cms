@@ -4,12 +4,12 @@
     position: fixed;
     top: 10%;
     right: 5%;
-    z-index: $zindex-toast;
+    z-index: var(--zindex-toast);
 }
 
 .toast {
-    box-shadow: $dropdown-box-shadow;
-    border-radius: $medium-border-radius;
+    box-shadow: var(--box-shadow-dropdown);
+    border-radius: var(--rounded-md);
     display: flex;
 
     > div {
@@ -28,6 +28,6 @@
         }
     }
     & ~ .toast {
-        margin-top: $spacing;
+        margin-top: var(--spacing-4);
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -21,17 +21,19 @@ class template_frontend_default_snippet extends Template
         parent::__construct();
         $config = config('frontend');
         $options = $config['frontend.default_options'];
-        $options['logo_img']     = $config['frontend.logo_img'];
-        $options['logo_text']    = $config['frontend.logo_text'];
-        $options['header_fixed'] = $config['frontend.header_fixed'];
-        $options['header_css']   = $config['frontend.header_css'];
-        $options['theme']        = $config['frontend.theme'];
-        $options['on_display']   = $config['frontend.on_display'];
-        $options['topbar']       = $config['frontend.topbar'] ?: [];
-        $options['navbar']       = $config['frontend.navbar'];
-        $options['sidebar']      = $config['frontend.sidebar'];
-        $options['footer']       = $config['frontend.footer'];
-        $options['hash']         = router()->getHash();
+        $options['logo_img']        = $config['frontend.logo_img'];
+        $options['logo_text']       = $config['frontend.logo_text'];
+        $options['header_fixed']    = $config['frontend.header_fixed'];
+        $options['header_style']    = $config['frontend.header_style'];
+        $options['footer_style']    = $config['frontend.footer_style'];
+        $options['copyright_style'] = $config['frontend.copyright_style'];
+        $options['theme']           = $config['frontend.theme'];
+        $options['on_display']      = $config['frontend.on_display'];
+        $options['topbar']          = $config['frontend.topbar'] ?: [];
+        $options['navbar']          = $config['frontend.navbar'];
+        $options['sidebar']         = $config['frontend.sidebar'];
+        $options['footer']          = $config['frontend.footer'];
+        $options['hash']            = router()->getHash();
 
         $this->assets->options($options);
         $this->alter_options     = $config['frontend.alter_options'];
@@ -39,7 +41,7 @@ class template_frontend_default_snippet extends Template
         //
         $this->terms_url         = $config['frontend.terms_url'];
         $this->privacy_url       = $config['frontend.privacy_url'];
-        $this->cookie_consent    = $config['frontend.cookie_consent'] && empty($_COOKIE['cookieConsent']);
+        $this->cookie_consent    = $config['frontend.cookie_consent'];
         $this->user              = curuser();
     }
 
@@ -148,13 +150,16 @@ class template_frontend_default_snippet extends Template
                 case 'theme':
                     $html .= '<div class="btn-group">'
                         . '<button type="button" control-felem="dropdown" control-tpl="theme" role="caret" class="th-btn">'
-                        .   '<span data-select-label><i class="fa-solid fa-sun" aria-hidden="true"></i><i class="fa-solid fa-caret-down ml-2"></i></span>'
+                        .   '<span class="only-on-light"><i class="fa-solid fa-sun" aria-hidden="true"></i><div class="visually-hidden">' . ($t1 = _t('Light')) . '</div></span>'
+                        .   '<span class="only-on-dark"><i class="fa-solid fa-moon" aria-hidden="true"></i><div class="visually-hidden">' . ($t2 = _t('Dark')) . '</div></span>'
+                        .   '<span class="only-on-auto"><i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i><div class="visually-hidden">' . ($t3 = _t('Auto')) . '</div></span>'
+                        .   '<i class="fa-solid fa-caret-down ml-2"></i>'
                         . '</button>'
                         . '<div role="drop-menu" class="dropdown-menu" style="display: none;">'
                         .  '<ul>'
-                        .   '<li><a href="javascript:void(0)" data-value="light"><i class="fa-solid fa-sun"></i> <span>' . _t('Light') . '</span></a></li>'
-                        .   '<li><a href="javascript:void(0)" data-value="dark"><i class="fa-solid fa-moon"></i> <span>' . _t('Dark') . '</span></a></li>'
-                        .   '<li><a href="javascript:void(0)" data-value="auto"><i class="fa-solid fa-circle-half-stroke"></i> <span>' . _t('Auto') . '</span></a></li>'
+                        .   '<li><a href="javascript:void(0)" data-value="light"><i class="fa-solid fa-sun"></i> <span>' . $t1 . '</span></a></li>'
+                        .   '<li><a href="javascript:void(0)" data-value="dark"><i class="fa-solid fa-moon"></i> <span>' . $t2 . '</span></a></li>'
+                        .   '<li><a href="javascript:void(0)" data-value="auto"><i class="fa-solid fa-circle-half-stroke"></i> <span>' . $t3  . '</span></a></li>'
                         .  '</ul>'
                         . '</div>'
                         . '</div>';
@@ -181,13 +186,10 @@ class template_frontend_default_snippet extends Template
                     break;
 
                 case 'notifications':
-                    $total = $this->getNotifications();
-                    if ($total) {
-                        $html .= '<a href="javascript:void(0)" control-tpl="notifications" title="' . ($t = _t('Notifications')) . '" aria-label="' . $t . '" class="th-btn">'
-                            . '<i class="fa-solid fa-bell" aria-hidden="true"></i>'
-                            . ($total ? '<span class="badge badge-danger badge-small">' . $total  . '</span>' : '')
-                            . '</a>';
-                    }
+                    $html .= '<a href="javascript:void(0)" control-tpl="notifications" title="' . ($t = _t('Notifications')) . '" aria-label="' . $t . '" class="th-btn">'
+                        . '<i class="fa-solid fa-bell" aria-hidden="true"></i>'
+                        . '<span class="badge badge-danger badge-small rounded-full" style="display: none;"></span>'
+                        . '</a>';
                     break;
 
                 case 'search':
@@ -201,18 +203,6 @@ class template_frontend_default_snippet extends Template
         }
 
         return $html;
-    }
-
-    /**
-     * Get
-     */
-    protected function getNotifications(): int
-    {
-        return db()->query("
-		SELECT COUNT(*)
-		FROM `#__notifications`
-		WHERE user_id = ?
-		AND read_at IS NULL", $this->user->getId())->fetchColumn();
     }
 
     /**
@@ -240,19 +230,10 @@ class template_frontend_default_snippet extends Template
     /**
      * Render
      */
-    protected function renderCookieConsent()
+    protected function renderCookieConsent(): string
     {
-        if ($this->cookie_consent) {
-            $legend = sprintf(
-                _t('We use our own and third party cookies to improve the user experience through their navigation. If you continue to browse you accept their use. %sTerms and conditions of use%s'),
-                '<a href="' . $this->terms_url . '" target="_blank">',
-                '</a>'
-            );
-
-            return '<section id="cookieconsent" class="container tpl-legal visible" role="dialog" aria-live="polite" aria-describedby="cc-text cc-btn"><div>'
-                .  '<p id="cc-text">' . $legend . '</p>'
-                .  '<button id="cc-btn" class="btn btn-small btn-primary btn-solid">' . _t('Understood') . '</button>'
-                . '</div></section>' . "\n";
-        }
+        return $this->cookie_consent
+            ? (Plugin::get('cookie-consent', 'load', $this->cookie_consent)?->run() ?? '')
+            : '';
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -133,9 +133,9 @@ class ImageResizer
      * @param string $max_wh
      * @param int    $mode
      * 
-     * @return void
+     * @return string
      */
-    public static function sanitizeWH(string &$max_wh, int $mode): void
+    public static function sanitizeWH(string $max_wh, int $mode): string
     {
         if ($mode == self::RESIZE_EXACT) {
             $max_wh = explode('x', $max_wh, 2);
@@ -163,6 +163,8 @@ class ImageResizer
                 $max_wh = 10;
             }
         }
+
+        return $max_wh;
     }
 
     /**

@@ -1,28 +1,10 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
-class dashboard_master_default_snippet
-{
-    // vars
-    protected $rows = [];
+use Junco\Dashboard\DashboardBase;
 
-    /**
-     * 
-     */
-    public function row(string $html)
-    {
-        $this->rows[] = $html;
-    }
-
-    /**
-     * 
-     */
-    public function render()
-    {
-        return implode('', $this->rows);
-    }
-}
+class dashboard_master_default_snippet extends DashboardBase {}

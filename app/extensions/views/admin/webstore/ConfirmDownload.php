@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -18,13 +18,15 @@ if ($is_close) {
 }
 $form->toggle('install')->setLabel(_t('Install'));
 
+$html = $form->render();
+$html .= '<div class="dialog dialog-warning">' . _t('If you choose not to install, the package will be available in the installer.') . '</div>';
+
+
 // modal
 $modal = Modal::get();
 $modal->title($title);
 $modal->enter(_t('Download'));
 $modal->close();
-//
-$modal->content = $form->render()
-    . '<div class="dialog dialog-warning">' . _t('If you choose not to install, the package will be available in the installer.') . '</div>';
+$modal->content($html);
 
 return $modal->response();

@@ -1,18 +1,20 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
-return function (&$dashboard) {
+use Junco\Dashboard\DashboardInterface;
+
+return function (DashboardInterface $dashboard) {
     $allow_cache = SYSTEM_ALLOW_CACHE;
     $html        = '';
 
     if ($allow_cache) {
-        $cache_key    = 'contact-ha#';
-        $cache        = cache();
-        $html        = $cache->get($cache_key);
+        $cache_key = 'contact-ha#';
+        $cache     = cache();
+        $html      = $cache->get($cache_key);
     }
 
     // cache
@@ -33,7 +35,7 @@ return function (&$dashboard) {
             . '</h4>';
 
         if ($data['created_at']) {
-            $details .= '<span class="color-light">' . sprintf(_t('Last %s'), $data['created_at']->format(_t('Y-M-d'))) . '</span>';
+            $details .= '<span class="color-subtle-default">' . sprintf(_t('Last %s'), $data['created_at']->format(_t('Y-M-d'))) . '</span>';
         }
 
         //
@@ -45,5 +47,5 @@ return function (&$dashboard) {
         $allow_cache and $cache->set($cache_key, $html);
     }
 
-    $dashboard->row($html);
+    $dashboard->section($html);
 };

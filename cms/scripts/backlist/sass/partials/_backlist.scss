@@ -1,9 +1,9 @@
 /* --- backList -------------------------------------------- */
 .backlist-box {
     position: relative;
-    //max-width: $screen-x-large;
+    //max-width: $screen-xl;
     //min-height: 20rem;
-    margin-bottom: $spacing;
+    margin-bottom: var(--spacing-4);
 }
 
 .backlist-slot {
@@ -14,28 +14,30 @@
 .backlist-wrapper {
     .empty-list {
         text-align: center;
-        padding: 0 $spacing;
+        padding: 0 var(--spacing-4);
 
         p {
-            font-size: $large-font-size;
+            font-size: var(--font-size-lg);
             font-weight: bold;
             color: var(--regular-subtle-font-color);
             text-align: center;
-            margin: $spacing auto;
-            padding: $spacing;
-            border: $border-width $border-style var(--regular-border-color);
-            border-radius: $medium-border-radius;
+            margin: var(--spacing-4) auto;
+            padding: var(--spacing-4);
+            border-width: var(--border-width);
+            border-style: var(--border-style);
+            border-color: var(--regular-border-color);
+            border-radius: var(--rounded-md);
             display: inline-block;
         }
     }
 
     .footer {
-        padding: $spacing ($spacing * 0.5);
+        padding: var(--spacing-4) var(--spacing-2);
     }
 }
 
 .kl-body {
-    font-size: $small-font-size;
+    font-size: var(--font-size-sm);
     color: var(--regular-subtle-font-color);
 
     > div:nth-child(2) {
@@ -59,16 +61,10 @@
     &,
     &:hover {
         color: var(--regular-font-color) !important;
-        border-bottom-width: $border-width dashed var(--regular-border-color);
+        border-bottom-width: var(--border-width);
+        border-bottom-style: dashed;
+        border-bottom-color: var(--regular-border-color);
         text-decoration: none;
-    }
-}
-
-.kl-editable {
-    cursor: text;
-
-    input {
-        font-size: $small-font-size;
     }
 }
 
@@ -76,17 +72,21 @@
 .backlist-actions {
     z-index: 1;
     position: sticky;
-    border-radius: $medium-border-radius;
+    border-radius: var(--rounded-md);
     background-color: var(--regular-surface-color);
 
     &.active {
-        border: $border-width $border-style var(--regular-border-color);
-        box-shadow: $template-box-shadow;
+        border-width: var(--border-width);
+        border-style: var(--border-style);
+        border-color: var(--regular-border-color);
+        box-shadow: var(--box-shadow-template);
     }
 
-    > div:first-child {
+    .box-buttons {
         display: flex;
-        padding: $spacing * 0.5;
+        flex-wrap: wrap;
+        gap: var(--spacing-2);
+        padding: var(--spacing-2);
 
         > div {
             flex: auto;
@@ -105,7 +105,7 @@
 /* --- filters --- */
 .backlist-filters {
     text-align: right;
-    padding: $spacing * 0.5;
+    padding: var(--spacing-2);
     background: var(--regular-bg-color);
 
     input.btn {
@@ -116,6 +116,6 @@
 /* --- pagination --- */
 .backlist-pagination .info {
     text-wrap: nowrap;
-    margin: $spacing;
+    margin: var(--spacing-4);
     display: inline-block;
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -19,9 +19,9 @@ interface MenusInterface
      * 
      * @param bool $value
      * 
-     * @return void
+     * @return self
      */
-    public function setWithEdges(bool $value = true): void;
+    public function setWithEdges(bool $value = true): self;
 
     /**
      * Render

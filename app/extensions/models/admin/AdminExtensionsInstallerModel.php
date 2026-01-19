@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -88,6 +88,14 @@ class AdminExtensionsInstallerModel extends Model
                 } elseif (!empty($info['extension']) && in_array($info['extension'], $extensions)) {
                     $indexes[$info['filename']] = array_push($rows, $row) - 1;
                 }
+            }
+        }
+
+        foreach ($rows as $index => $row) {
+            $rows[$index]['__labels'] = [];
+
+            if ($row['has_failed']) {
+                $rows[$index]['__labels'][] = 'failed';
             }
         }
 

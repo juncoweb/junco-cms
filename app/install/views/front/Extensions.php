@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -12,6 +12,6 @@ $tpl->options([
     'submit' => true
 ]);
 $tpl->title(_t('Extensions installer'));
-$tpl->content = _t('Click next to install the extensions.');
+$tpl->content(_t('Click next to install the extensions.'));
 
 return $tpl->response();

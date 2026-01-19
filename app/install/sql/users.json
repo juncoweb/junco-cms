@@ -469,8 +469,8 @@
             }
         },
         "users_roles_labels": {
-            "Query": "CREATE TABLE IF NOT EXISTS `#__users_roles_labels` (\n  `id` smallint unsigned NOT NULL AUTO_INCREMENT,\n  `extension_id` smallint unsigned NOT NULL,\n  `label_key` varchar(16) COLLATE utf8mb4_general_ci NOT NULL,\n  `label_name` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,\n  `label_description` text COLLATE utf8mb4_general_ci,\n  PRIMARY KEY (`id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "MysqlQuery": "CREATE TABLE IF NOT EXISTS `#__users_roles_labels` (\n  `id` smallint unsigned NOT NULL AUTO_INCREMENT,\n  `extension_id` smallint unsigned NOT NULL,\n  `label_key` varchar(16) COLLATE utf8mb4_general_ci NOT NULL,\n  `label_name` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,\n  `label_description` text COLLATE utf8mb4_general_ci,\n  PRIMARY KEY (`id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
+            "Query": "CREATE TABLE IF NOT EXISTS `#__users_roles_labels` (\n  `id` smallint unsigned NOT NULL AUTO_INCREMENT,\n  `extension_id` smallint unsigned NOT NULL,\n  `label_key` varchar(16) COLLATE utf8mb4_general_ci NOT NULL,\n  `label_name` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,\n  `label_description` text COLLATE utf8mb4_general_ci,\n  PRIMARY KEY (`id`),\n  UNIQUE KEY `uni` (`extension_id`,`label_key`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
+            "MysqlQuery": "CREATE TABLE IF NOT EXISTS `#__users_roles_labels` (\n  `id` smallint unsigned NOT NULL AUTO_INCREMENT,\n  `extension_id` smallint unsigned NOT NULL,\n  `label_key` varchar(16) COLLATE utf8mb4_general_ci NOT NULL,\n  `label_name` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,\n  `label_description` text COLLATE utf8mb4_general_ci,\n  PRIMARY KEY (`id`),\n  UNIQUE KEY `uni` (`extension_id`,`label_key`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
             "History": [],
             "Fields": {
                 "id": {
@@ -534,6 +534,13 @@
                     "Columns": [
                         "id"
                     ]
+                },
+                "uni": {
+                    "Columns": [
+                        "extension_id",
+                        "label_key"
+                    ],
+                    "Type": "UNIQUE"
                 }
             }
         },

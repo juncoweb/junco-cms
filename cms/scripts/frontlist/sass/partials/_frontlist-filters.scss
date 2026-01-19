@@ -2,14 +2,14 @@
 .frontlist-filters {
     text-align: right;
     background: $fronlist-filters-bg-color;
-    margin-bottom: $spacing;
-    padding: ($spacing * 0.5) $spacing;
-    border-radius: $medium-border-radius;
+    margin-bottom: var(--spacing-4);
+    padding: var(--spacing-2) var(--spacing-4);
+    border-radius: var(--rounded-md);
     position: relative;
 
     form > div {
         display: inline-block;
-        gap: $spacing;
+        gap: var(--spacing-4);
         flex-wrap: wrap;
     }
 

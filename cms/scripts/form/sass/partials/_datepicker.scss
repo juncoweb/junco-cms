@@ -1,15 +1,15 @@
-/* --- date ------------------------------ */
-.input-date {
-    font-size: $small-font-size;
+/* --- datepicker ------------------------------ */
+.input-datepicker {
+    font-size: var(--font-size-sm);
     line-height: normal;
     text-align: center;
     max-width: 250px;
     background: var(--regular-surface-color);
-    border-width: $border-width;
-    border-style: $border-style;
+    border-width: var(--border-width);
+    border-style: var(--border-style);
     border-color: var(--regular-border-color);
-    border-radius: $medium-border-radius;
-    box-shadow: $element-box-shadow;
+    border-radius: var(--rounded-md);
+    box-shadow: var(--box-shadow-dropdown);
 
     table {
         width: 100%;
@@ -19,12 +19,12 @@
 
     th {
         font-weight: bold;
-        padding: $date-cell-padding;
+        padding: $datepicker-cell-padding;
         overflow: hidden;
     }
 
     td {
-        padding: $date-cell-padding;
+        padding: $datepicker-cell-padding;
         cursor: pointer;
         overflow: hidden;
 
@@ -36,8 +36,8 @@
 
     .header {
         font-weight: bold;
-        border-bottom-width: $border-width;
-        border-bottom-style: $border-style;
+        border-bottom-width: var(--border-width);
+        border-bottom-style: var(--border-style);
         border-bottom-color: var(--regular-border-color);
     }
 
@@ -60,23 +60,23 @@
 
     .nav {
         margin-top: 1px;
-        border-top-width: $border-width;
-        border-top-style: $border-style;
+        border-top-width: var(--border-width);
+        border-top-style: var(--border-style);
         border-top-color: var(--regular-border-color);
         cursor: pointer;
 
         td {
-            padding: (1.4 * $date-cell-padding) 0;
+            padding: (1.4 * $datepicker-cell-padding) 0;
         }
     }
 
     .s-minutes td {
-        padding: (2 * $date-cell-padding) $date-cell-padding;
+        padding: (2 * $datepicker-cell-padding) $datepicker-cell-padding;
     }
 
     .s-months td,
     .s-time td {
-        padding: (3 * $date-cell-padding) $date-cell-padding;
+        padding: (3 * $datepicker-cell-padding) $datepicker-cell-padding;
     }
 
     //.nav-up:after { content: '\25B2'; }

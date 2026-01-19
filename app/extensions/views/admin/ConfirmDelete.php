@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -23,11 +23,15 @@ $form->checkbox('option[files]')->setLabel(_t('Delete files'));
 $form->checkbox('option[data]')->setLabel(_t('Delete data'));
 $form->checkbox('option[db]')->setLabel('Delete DB');
 
+$html = '<p>' . $message . '</p>';
+$html .= $form->render();
+
+
 // modal
 $modal = Modal::get();
-$modal->title($_text = _t('Delete'), 'fa-solid fa-trash');
-$modal->enter($_text);
+$modal->title($t = _t('Delete'), 'fa-solid fa-trash');
+$modal->enter($t);
 $modal->close();
-$modal->content = '<p>' . $message . '</p>' . $form->render();
+$modal->content($html);
 
 return $modal->response();

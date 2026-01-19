@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -88,10 +88,10 @@ $bottom_html = !empty($this->options->bottom)
 
 // footer
 $footer_html = !empty($this->options->footer)
-    ? $this->getWidget(
+    ? "\n\t" . '<footer class="tpl-footer ' . $this->options->footer_style . '"><div class="container">' . $this->getWidget(
         $this->options->footer,
         $this->options->footer_widget ?? 'frontend.footer'
-    )
+    ) . "\n\t" . '</div></footer>'
     : '';
 
 ?>
@@ -126,7 +126,7 @@ $footer_html = !empty($this->options->footer)
         <li><a href="#content"><?= _t('Skip to main content') ?></a></li>
         <li><a href="#sidebar"><?= _t('Skip to sidebar') ?></a></li>
     </ul>
-    <header class="tpl-header <?= $this->options->header_css ?>" data-sticky>
+    <header class="tpl-header <?= $this->options->header_style ?>" data-sticky>
         <div class="top-header">
             <div class="container"><?= $this->renderTopHeader() ?></div>
         </div>
@@ -148,7 +148,7 @@ $footer_html = !empty($this->options->footer)
     <?= $bottom_html ?>
     <?= $footer_html ?>
 
-    <section class="tpl-copyright">
+    <section class="tpl-copyright <?= $this->options->copyright_style ?>">
         <div class="container">
             <?= $this->renderCopyright() ?>
         </div>

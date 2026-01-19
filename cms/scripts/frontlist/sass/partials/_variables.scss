@@ -2,14 +2,19 @@
 $fronlist-filters-bg-color: var(--regular-bg-color) !default;
 
 // frontlist - default
-$fronlist-border-color: var(--regular-border-color) !default;
-$fronlist-desc-color: var(--regular-subtle-font-color) !default;
+$fronlist-default-media-width: 160px !default;
+$fronlist-default-subtle-font-color: var(--regular-subtle-font-color) !default;
+$fronlist-default-border-color: var(--regular-border-color) !default;
 
 // frontlist - two
-$frontlist-two-border-color: var(--regular-border-color) !default;
-$frontlist-two-desc-color: var(--regular-subtle-font-color) !default;
+$frontlist-two-media-width: 140px;
+$frontlist-two-padding: var(--spacing-2) !default;
+$frontlist-two-bg-color: var(--regular-bg-color) !default;
+$frontlist-two-subtle-font-color: var(--regular-subtle-font-color) !default;
 
 // frontlist - three
+$frontlist-three-border-radius: var(--rounded-md) !default;
+$frontlist-three-padding: var(--spacing-3) !default;
+$frontlist-three-subtle-font-color: var(--regular-subtle-font-color) !default;
 $frontlist-three-desc-color: #fff !default;
-$frontlist-three-margin: 4%;
-$frontlist-three-padding: 10px;
+$frontlist-three-desc-bg-color: var(--overlay-color-1) !default;

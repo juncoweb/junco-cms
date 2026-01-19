@@ -1,7 +1,7 @@
 /* --- suite ----------------------------------------------------- */
 .fe-suite {
     width: 100%;
-    border-width: $border-width;
+    border-width: var(--border-width);
     border-style: dashed;
     border-color: var(--regular-border-color);
 

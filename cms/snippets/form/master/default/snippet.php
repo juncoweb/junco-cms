@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -135,11 +135,11 @@ class form_master_default_snippet extends form_master_default_elements implement
             if (is_array($row)) {
                 $partial = '';
                 foreach ($row as $element) {
-                    $partial .= '<div>' . $this->renderRow($element) . '</div>';
+                    $partial .= '<div>' . $this->renderElement($element) . '</div>';
                 }
                 $html .= '<div class="form-group"><div class="form-columns">' . $partial . '</div></div>';
             } else {
-                $html .= $this->renderRow($row);
+                $html .= $this->renderElement($row);
             }
         }
 
@@ -248,7 +248,7 @@ class form_master_default_snippet extends form_master_default_elements implement
     /**
      * Render
      */
-    protected function renderRow(FormElementInterface $element): string
+    protected function renderElement(FormElementInterface $element): string
     {
         $content = $element->render();
         $label   = $element->getLabel();

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -23,13 +23,15 @@ $form->hidden('id');
 $form->element($question);
 $form->textarea('message', ['auto-grow' => ''])->setLabel(_t('Message'));
 
+$html = $form->render();
+$html .= '<div class="dialog dialog-warning">' . _t('By submitting the report, you agree to share personal information.') . '</div>';
+
 
 // modal
 $modal = Modal::get();
 $modal->close();
 $modal->enter();
-$modal->title(_t('Report bugs'));
-$modal->content = $form->render()
-    . '<div class="dialog dialog-warning">' . _t('By submitting the report, you agree to share personal information.') . '</div>';
+$modal->title(_t('Report bugs'), 'fa-solid fa-bug');
+$modal->content($html);
 
 return $modal->response();

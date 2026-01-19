@@ -1,0 +1,89 @@
+/* --- colors ------------------------------------------------- */
+@each $name, $color in $theme-colors {
+    $class: ".tpl-#{$name}";
+    $contrast: map-get($color, "contrast");
+
+    @if ($name == "default") {
+        $class: "";
+        $class2: "";
+        $name: "";
+    } @else {
+        $name: -#{$name};
+    }
+
+    .tpl-header#{$class},
+    .tpl-copyright#{$class},
+    .tpl-footer#{$class} {
+        --font-color: var(--regular#{$name}-font-color);
+        --active-font-color: var(--regular-#{$contrast}-surface-color);
+        --bg-color: var(--regular#{$name}-bg-color);
+        --border-color: var(--regular#{$name}-border-color);
+        --contrast-font-color: var(--solid-#{$contrast}-font-color);
+        --contrast-bg-color: var(--solid-#{$contrast}-bg-color);
+
+        &.tpl-solid {
+            --font-color: var(--solid#{$name}-font-color);
+            --active-font-color: var(--solid-#{$contrast}-bg-color);
+            --bg-color: var(--solid#{$name}-bg-color);
+            --border-color: var(--solid#{$name}-border-color);
+            --contrast-font-color: var(--solid-#{$contrast}-font-color);
+            --contrast-bg-color: var(--solid-#{$contrast}-bg-color);
+        }
+    }
+}
+
+// basic
+.tpl-header {
+    &,
+    & button,
+    & a {
+        color: var(--font-color);
+
+        &:hover,
+        &:focus {
+            color: var(--active-font-color);
+        }
+    }
+
+    i.capital {
+        color: var(--contrast-font-color);
+        background-color: var(--contrast-bg-color);
+    }
+
+    &,
+    nav ul li ul {
+        background-color: var(--bg-color);
+    }
+
+    nav ul li a {
+        &:hover,
+        &:focus {
+            background-color: var(--active-bg-color);
+        }
+    }
+
+    .th-btn {
+        border-color: var(--border-color);
+    }
+}
+
+.tpl-footer {
+    color: var(--font-color);
+    background: var(--bg-color);
+    border-top-color: var(--border-color);
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: var(--font-color);
+    }
+}
+
+.tpl-copyright {
+    color: var(--font-color);
+    background: var(--bg-color);
+    border-top-color: var(--border-color);
+}

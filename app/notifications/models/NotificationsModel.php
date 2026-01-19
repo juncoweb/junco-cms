@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -40,5 +40,28 @@ class NotificationsModel extends Model
 
         // query
         $this->db->exec("DELETE FROM `#__notifications` WHERE id IN (?..)", $data['id']);
+    }
+
+    /**
+     * Data
+     */
+    public function data(): array
+    {
+        $user_id = curuser()->getId();
+
+        if (!$user_id) {
+            return ['error' => 1];
+        }
+
+        // query
+        $total = db()->query("
+		SELECT COUNT(*)
+		FROM `#__notifications`
+		WHERE user_id = ?
+		AND read_at IS NULL", $user_id)->fetchColumn();
+
+        return [
+            'total' => $total
+        ];
     }
 }

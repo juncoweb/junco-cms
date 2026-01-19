@@ -1,37 +1,23 @@
 /* --- Frontlist Two -------------------------------- */
-$frontlist-two-margin: 3%;
-$frontlist-two-padding: 10px;
-
 .frontlist-two {
     article {
-        display: inline-block;
-        width: (100% - $frontlist-two-margin) * 0.5;
-        margin: 0 $frontlist-two-margin $frontlist-two-margin 0;
-        vertical-align: top;
-
-        &:before {
-            clear: both;
-        }
-        &:nth-of-type(2n) {
-            margin-right: 0;
-        }
-        .fl-entry {
-            display: table;
-            position: relative;
+        .article-wrapper {
+            grid-template-columns: $frontlist-two-media-width auto;
+            background-color: $frontlist-two-bg-color;
             overflow: hidden;
-            background-color: var(--regular-bg-color);
-            width: 100%;
 
             & > div {
-                display: table-cell;
-                vertical-align: top;
                 padding: $frontlist-two-padding;
                 position: relative;
                 overflow: hidden;
+
+                & ~ div {
+                    padding-left: 0;
+                }
             }
 
             & h3 {
-                font-size: $large-font-size;
+                font-size: var(--font-size-lg);
                 margin: 0;
 
                 a {
@@ -41,52 +27,39 @@ $frontlist-two-padding: 10px;
             }
         }
 
-        .fl-thumbnail {
-            width: 120px + 2 * $frontlist-two-padding;
+        .article-media {
+            position: relative;
 
-            & ~ div {
-                padding-left: 0;
-            }
             img {
                 display: block;
                 width: 100%;
             }
         }
 
-        .fl-author,
-        .fl-date {
-            color: $fronlist-desc-color;
-            font-size: $small-font-size;
+        .article-author,
+        .article-date {
+            color: $frontlist-two-subtle-font-color;
+            font-size: var(--font-size-sm);
         }
 
-        .fl-description {
-            color: $fronlist-desc-color;
-            min-height: 30px;
+        .article-description {
+            color: $frontlist-two-subtle-font-color;
         }
 
-        .fl-button {
+        .article-button {
             text-align: right;
         }
 
-        .fl-labels {
+        .article-labels {
             background-color: var(--regular-bg-color);
-            color: $fronlist-desc-color;
-            font-size: $small-font-size;
+            color: $frontlist-two-subtle-font-color;
+            font-size: var(--font-size-sm);
         }
 
-        .fl-footer {
+        .article-footer {
             margin-top: 2px;
-            background-color: var(--regular-bg-color);
+            background-color: $frontlist-two-bg-color;
             padding: $frontlist-two-padding;
-        }
-    }
-}
-
-@media only screen and (max-width: $screen-large) {
-    .frontlist-two {
-        article {
-            width: 100%;
-            margin-right: 0;
         }
     }
 }

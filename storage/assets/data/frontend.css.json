@@ -1,5 +1,5 @@
 {
-    "assets": "cms\/scripts\/frontend\/css\/frontend-default.css,\r\ncms\/scripts\/frontend\/css\/widget.css,\r\ncms\/scripts\/frontend\/css\/widget-list.css,\r\ncms\/scripts\/frontend\/css\/widget-post.css,\r\n\r\n#\r\ncms\/scripts\/notifications\/css\/notifications.css",
-    "default_assets": "cms\/scripts\/frontend\/css\/frontend-default.css,\r\ncms\/scripts\/frontend\/css\/widget.css,\r\ncms\/scripts\/frontend\/css\/widget-list.css,\r\ncms\/scripts\/frontend\/css\/widget-post.css,\r\n\r\n#\r\ncms\/scripts\/notifications\/css\/notifications.css",
+    "assets": "cms\/scripts\/frontend\/css\/frontend-default.css,\r\ncms\/scripts\/frontend\/css\/frontend-default-colors.css,\r\ncms\/scripts\/frontend\/css\/plugin.cookie-consent.css,\r\ncms\/scripts\/frontend\/css\/widget.css,\r\ncms\/scripts\/frontend\/css\/widget-list.css,\r\ncms\/scripts\/frontend\/css\/widget-post.css,\r\n\r\n#\r\ncms\/scripts\/notifications\/css\/notifications.css",
+    "default_assets": "cms\/scripts\/frontend\/css\/frontend-default.css,\r\ncms\/scripts\/frontend\/css\/frontend-default-colors.css,\r\ncms\/scripts\/frontend\/css\/plugin.cookie-consent.css,\r\ncms\/scripts\/frontend\/css\/widget.css,\r\ncms\/scripts\/frontend\/css\/widget-list.css,\r\ncms\/scripts\/frontend\/css\/widget-post.css,\r\n\r\n#\r\ncms\/scripts\/notifications\/css\/notifications.css",
     "to_verify": 0
 }

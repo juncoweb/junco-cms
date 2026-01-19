@@ -1,8 +1,8 @@
 /* -------- dialog ------------------------------------------------- */
 .dialog {
-    margin-bottom: $spacing;
+    margin-bottom: var(--spacing-4);
     padding: $dialog-padding;
     border-width: $dialog-border-width;
-    border-style: $border-style;
-    border-radius: $medium-border-radius;
+    border-style: var(--border-style);
+    border-radius: var(--rounded-md);
 }

@@ -12,16 +12,17 @@ input::-webkit-datetime-edit-minute-field {
 
 /* -------- input ---------------------- */
 .input-field {
-    font-size: $font-size;
-    line-height: $line-height;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
     margin: 0;
     padding: $felem-input-padding;
     width: 100%;
-    border-width: $border-width;
-    border-style: $border-style;
-    border-radius: $medium-border-radius;
+    border-width: var(--border-width);
+    border-style: var(--border-style);
+    border-radius: var(--rounded-md);
     background-image: none;
     background-color: var(--regular-surface-color);
+    box-shadow: var(--box-shadow-input);
     box-sizing: border-box;
     position: relative;
     display: block;
@@ -48,7 +49,7 @@ input::-webkit-datetime-edit-minute-field {
         border-color: inherit;
         border-style: solid;
         border-width: 0;
-        border-inline-end-width: $border-width;
+        border-inline-end-width: var(--border-width);
     }
 
     &:-webkit-autofill,
@@ -60,23 +61,14 @@ input::-webkit-datetime-edit-minute-field {
     }
 }
 
-.input-label ~ .input-label {
-    margin-left: $spacing;
-}
-
-.input-block {
-    &.input-label,
-    & .input-label {
-        /* as usual checkbox & radio */
-        display: block;
-        margin-left: 0 !important;
-    }
+.input-field.input-auto {
+    width: auto;
 }
 
 select.input-field {
     padding-right: 1.75rem;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
-    background-size: $font-size;
+    background-size: var(--font-size-base);
     background-position: center right 0.75rem;
     background-repeat: no-repeat;
     appearance: none;
@@ -128,6 +120,20 @@ textarea.input-field {
     }
 }
 
+// label
+.input-label ~ .input-label {
+    margin-left: var(--spacing-4);
+}
+
+.input-block {
+    &.input-label,
+    & .input-label {
+        /* as usual checkbox & radio */
+        display: block;
+        margin-left: 0 !important;
+    }
+}
+
 /* --- input group --------------------- */
 .input-group {
     width: 100%;
@@ -170,17 +176,13 @@ textarea.input-field {
     width: 100%;
     position: relative;
     display: inline-block;
-
-    .input-field {
-        padding-right: 2rem;
-    }
 }
 
 .input-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2rem;
+    width: $felem-input-icon-width-md;
     background: none;
     border: none;
     position: absolute;
@@ -197,38 +199,39 @@ textarea.input-field {
     }
 }
 
+// icon on right
+.input-icon-group .input-field:has(+ .input-icon) {
+    padding-right: $felem-input-icon-width-md;
+}
+
 .input-field + .input-icon {
     right: 0;
-    left: auto;
 }
 
+// icon on left
 .input-icon + .input-field {
-    padding: $felem-input-padding;
-    padding-left: 2rem;
-}
-
-.input-field.input-auto {
-    width: auto;
+    padding-left: $felem-input-icon-width-md;
 }
 
 /* --- checkbox & radio & toggle ------- */
 .input-checkbox,
 .input-radio,
 .input-toggle {
-    width: $felem-input-check-size;
-    height: $felem-input-check-size;
+    width: $felem-input-checkable-size;
+    height: $felem-input-checkable-size;
     vertical-align: text-bottom;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    border-style: $border-style;
-    border-width: $border-width;
-    border-radius: 9999px;
+    border-style: var(--border-style);
+    border-width: var(--border-width);
+    border-radius: var(--rounded-full);
+    box-shadow: var(--box-shadow-button);
     appearance: none;
 }
 
 .input-checkbox {
-    border-radius: $small-border-radius;
+    border-radius: var(--rounded-sm);
 
     &:checked {
         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m5 11 3 3 7-7'/%3e%3c/svg%3e");
@@ -240,14 +243,14 @@ textarea.input-field {
 }
 
 .input-checkall {
-    border-bottom-width: $border-width;
-    border-bottom-style: $border-style;
+    border-bottom-width: var(--border-width);
+    border-bottom-style: var(--border-style);
     border-bottom-color: var(--regular-border-color);
-    margin-bottom: 0.125 * $spacing;
+    margin-bottom: calc(var(--spacing-4) * 0.125);
 }
 
 .input-toggle {
-    width: $felem-input-check-size * 2;
+    width: $felem-input-toggle-width;
     transition: background-position 200ms;
     background-position: left;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2.5' fill='rgba%280, 0, 0, 0.3%29'/%3e%3c/svg%3e");
@@ -262,57 +265,58 @@ textarea.input-field {
 .input-large {
     &.input-field,
     .input-field {
-        font-size: $large-font-size;
+        font-size: var(--font-size-lg);
         padding: $felem-input-large-padding;
-        border-radius: $large-border-radius;
+        border-radius: var(--rounded-lg);
     }
 
     .input-checkbox {
-        border-radius: $large-border-radius;
+        border-radius: var(--rounded-lg);
     }
 
     // icon
     .input-icon {
-        font-size: $large-font-size;
-        width: $large-font-size * 2;
+        font-size: var(--font-size-lg);
+        width: $felem-input-icon-width-lg;
     }
 
-    &.input-icon-group .input-field {
-        padding-right: $large-font-size * 2;
+    // icon on right
+    &.input-icon-group .input-field:has(+ .input-icon) {
+        padding-right: $felem-input-icon-width-lg;
     }
 
+    // icon on left
     &.input-icon-group .input-icon + .input-field {
-        padding: $felem-input-large-padding;
-        padding-left: $large-font-size * 2;
+        padding-left: $felem-input-icon-width-lg;
     }
 }
 
 .input-small {
     &.input-field,
     .input-field {
-        font-size: $small-font-size;
+        font-size: var(--font-size-sm);
         padding: $felem-input-small-padding;
-        border-radius: $small-border-radius;
+        border-radius: var(--rounded-sm);
     }
 
     .input-checkbox {
-        border-radius: $small-border-radius;
+        border-radius: var(--rounded-sm);
     }
 
     // icon
     .input-icon {
-        font-size: $small-font-size;
-        padding: $felem-input-small-padding;
-        width: $small-font-size * 2;
+        font-size: var(--font-size-sm);
+        width: $felem-input-icon-width-sm;
     }
 
-    &.input-icon-group .input-field {
-        padding-right: $small-font-size * 2;
+    // icon on right
+    &.input-icon-group .input-field:has(+ .input-icon) {
+        padding-right: $felem-input-icon-width-sm;
     }
 
+    // icon on left
     &.input-icon-group .input-icon + .input-field {
-        padding-right: $felem-input-small-padding;
-        padding-left: $small-font-size * 2;
+        padding-left: $felem-input-icon-width-sm;
     }
 }
 
@@ -320,7 +324,7 @@ textarea.input-field {
 .input-actions {
     display: flex;
     align-items: center;
-    gap: $spacing * 0.5;
+    gap: var(--spacing-2);
 
     > :first-child {
         flex: auto;

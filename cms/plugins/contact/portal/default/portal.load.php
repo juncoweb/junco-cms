@@ -1,15 +1,16 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
-return function (&$portal) {
-    $domready = 'JsForm('
-        . '"#contact-form", '
-        . '{focusable:false}).request(JsUrl("/contact/take"), function(message, code) { '
-        .    'if (code) { window.location = JsUrl("/contact/message"); } else { alert(message); }'
+use Junco\Portal\PortalInterface;
+
+return function (PortalInterface $portal) {
+    $domready = 'JsForm("#portal-contact", {focusable:false})'
+        . '.request(JsUrl("/contact/take"), function(res) { '
+        .    'if (res.ok()) { window.location = JsUrl("/contact/message"); } else { alert(res.message); }'
         . '})';
 
     config('contact-widget.load_resources')
@@ -17,13 +18,21 @@ return function (&$portal) {
     app('assets')->domready($domready);
 
     $curuser = curuser();
-    $html = '<div id="contact">'
-        . '<form id="contact-form" class="contact-form">'
-        .   '<p><input type="text" name="contact_name" value="' . $curuser->getName() . '" class="input-field input-large" placeholder="' . _t('Name') . '" required /></p>'
-        .   '<p><input type="email" name="contact_email" value="' . $curuser->getEmail() . '" class="input-field input-large" placeholder="' . _t('Email') . '" required /></p>'
-        .   '<p><textarea placeholder="Mensaje" name="contact_message" class="input-field input-large" control-felem="auto-grow" data-min-height="84px" required></textarea></p>'
-        .   '<button type="submit" class="btn btn-primary btn-solid btn-large">' . _t('Enter') . '</button>'
-        . FormSecurity::getToken()
+    $felem   = Form::getElements();
+    if ($curuser->getId()) {
+        $felem->setValues([
+            'contact_name' => $curuser->getName(),
+            'contact_email' => $curuser->getEmail(),
+        ]);
+    }
+
+    $html = '<div class="input-large btn-large">'
+        . '<form id="portal-contact">'
+        .   '<p>' . $felem->input('contact_name', ['placeholder' => _t('Name'), 'required' => '']) . '</p>'
+        .   '<p>' . $felem->input('contact_email', ['placeholder' => _t('Email'), 'required' => '']) . '</p>'
+        .   '<p>' . $felem->textarea('contact_message', ['placeholder' => _t('Message'), 'required' => '', 'auto-grow' => '', 'data-min-height' => '84px']) . '</p>'
+        .   '<p>' . $felem->enter(_t('Enter'), ['captcha' => config('contact.captcha')]) . '</p>'
+        .   FormSecurity::getToken()
         . '</form>'
         . '</div>';
 
@@ -31,6 +40,7 @@ return function (&$portal) {
     $portal->section([
         'title' => _t('Contact'),
         'content' => $html,
-        'css' => 'widget-contact-form'
+        'css' => 'portal-contact',
+        'attr' => ['id' => 'contact']
     ]);
 };

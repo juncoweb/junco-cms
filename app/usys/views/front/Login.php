@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -51,17 +51,23 @@ foreach ($widgets as $widget) {
 }
 
 if (router()->isFormat('modal')) {
+    $html = $message . '<div class="usys-modal">' . $html . '</div>';
+
     // modal
     $modal = Modal::get();
     $modal->title(_t('Log in'));
-    $modal->content = $message . '<div class="usys-modal">' . $html . '</div>';
+    $modal->content($html);
+
     return $modal->response();
 } else {
+    $html = $message . '<div class="panel mb-4 usys-wrapper usys-login"><div class="panel-body">' . $html . '</div></div>';
+
     // template
     $tpl = Template::get();
     $tpl->options($options);
     $tpl->domready('Usys.load()');
     $tpl->title(_t('Log in'));
-    $tpl->content = $message . '<div class="panel mb-4 usys-wrapper usys-login"><div class="panel-body">' . $html . '</div></div>';
+    $tpl->content($html);
+
     return $tpl->response();
 }

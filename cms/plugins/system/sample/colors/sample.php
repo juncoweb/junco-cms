@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -34,7 +34,7 @@ function create_table(string $type): string
                 //. '<h1>Lorem ipsum</h1>'
                 . '<p>' . $class . $typeClass . '</p>'
                 . '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>'
-                . '<p class="color-light color-' . $color . $colorClass . '">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>'
+                . '<p class="color-subtle-default color-' . $color . $colorClass . '">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>'
                 . '</div>'
                 . '</td>';
         }
@@ -57,6 +57,6 @@ $tpl->options([
     'thirdbar' => 'system.thirdbar'
 ]);
 $tpl->title('Colors');
-$tpl->content = $html;
+$tpl->content($html);
 
 return $tpl->response();

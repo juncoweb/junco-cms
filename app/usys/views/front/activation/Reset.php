@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -28,13 +28,14 @@ $form->group(
 );
 
 //$form->enter();
+$html = '<div class="panel mb-4 usys-wrapper usys-reset-act"><div class="panel-body">' . $form->render() . '</div></div>';
+$html .= '<p class="dialog dialog-warning">' . _t('At the end of the order, the previous activation messages will be deleted') . '</p>';
 
 // template
 $tpl = Template::get();
 $tpl->options($options);
 $tpl->domready('UsysActivation.reset()');
 $tpl->title(_t('Reset activation'));
-$tpl->content = '<div class="panel mb-4 usys-wrapper usys-reset-act"><div class="panel-body">' . $form->render() . '</div></div>'
-    . '<p class="dialog dialog-warning">' . _t('At the end of the order, the previous activation messages will be deleted') . '</p>';
+$tpl->content($html);
 
 return $tpl->response();

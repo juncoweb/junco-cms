@@ -1,105 +1,75 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
 defined('IS_TEST') or die;
 
+// elements
+$felem = Form::getElements();
 
-$elements = [
-    /**
-     * Input
-     */
-    'Input' => [
-        ['.input-color', '<input type="file" class="input-field input-primary">'],
+// samples
+$samples = Samples::get();
+$samples
+    ->html($felem->input('name'))
+    ->setLabel('.input-field');
 
-        ['.input-color', '<input class="input-field" control-felem="color">'],
+$samples
+    ->html($felem->input('name', ['type' => 'file']))
+    ->setLabel('.input-file');
 
-        ['.input-field', '<select class="input-field"> <option value="">Default select</option></select>'],
+$samples
+    ->html($felem->input('name', ['control-felem' => 'color']))
+    ->setLabel('control-felem="color"');
 
-        [
-            '.input-group',
-            '<div class="input-group">'
-                .  '<input type="text" class="input-field" placeholder="Input">'
-                .  '<span class="btn"><input type="checkbox" class="input-checkbox"></span>'
-                . '</div>'
-        ],
+$samples
+    ->html($felem->select('name', ['--- Default ---']))
+    ->setLabel('.input-field[type=select]');
 
-        [
-            '.input-group',
-            '<div class="input-group">'
-                .  '<span class="btn"><i class="fa-solid fa-user"></i></span>'
-                .  '<input type="text" class="input-field" placeholder="Input">'
-                .  '<span class="btn"><i class="fa">@</i></span>'
-                . '</div>'
-        ],
+//
+$html = $felem->group(
+    $felem->input('name', ['placeholder' => 'Input']),
+    $felem->checkbox('name')
+);
+$samples
+    ->html($html)
+    ->setLabel('.input-group');
 
-        [
-            '.input-group',
-            '<div class="input-group">'
-                .  '<span class="btn"><i class="fa-solid fa-user"></i></span>'
-                .  '<input type="text" class="input-field" placeholder="Input 1">'
-                .  '<input type="text" class="input-field" placeholder="Input 2">'
-                . '</div>'
-        ],
+//
+$html = $felem->group(
+    $felem->button(['icon' => 'fa-solid fa-user']),
+    $felem->input('name'),
+    $felem->button(['label' => '@'])
+);
+$samples
+    ->html($html)
+    ->setLabel('.input-group');
 
-        [
-            '.input-group',
-            '<div class="input-group">'
-                .  '<span class="btn"><i class="fa-solid fa-user"></i></span>'
-                .  '<textarea class="input-field" placeholder="Textarea" control-felem="auto-grow" rows="1"></textarea>'
-                . '</div>'
-        ],
+//
+$html = $felem->group(
+    $felem->button(['icon' => 'fa-solid fa-user']),
+    $felem->input('name1', ['placeholder' => 'Input 1']),
+    $felem->input('name2', ['placeholder' => 'Input 2']),
+);
+$samples
+    ->html($html)
+    ->setLabel('.input-group');
 
-        [
-            '.input-icon',
-            '<div class="input-icon-group">'
-                . '<input class="input-field" placeholder="Search...">'
-                . '<button class="input-icon" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>'
-                . '</div>'
-        ],
+//
+$html = $felem->group(
+    $felem->button(['icon' => 'fa-solid fa-user']),
+    $felem->textarea('name', ['placeholder' => 'Textarea', 'control-felem' => 'auto-grow', 'rows' => 1])
+);
+$samples->html($html)->setLabel('.input-group');
 
-        [
-            '.input-icon',
-            '<div class="input-icon-group">'
-                . '<input class="input-field" placeholder="Search...">'
-                . '<div class="input-icon"><i class="fa-solid fa-user"></i></div>'
-                . '</div>'
-        ],
-
-        ['.input-icon .input-primary .input-small', '<div class="input-icon-group input-primary input-small">'
-            . '<span class="input-icon"><i class="fa-solid fa-user"></i></span>'
-            . '<input class="input-field" placeholder="Search...">'
-            . '</div>'],
-
-        ['.input-icon .input-large', '<div class="input-icon-group input-large">'
-            . '<span class="input-icon"><i class="fa-solid fa-user"></i></span>'
-            . '<input class="input-field" placeholder="Search...">'
-            . '</div>'],
-
-    ],
-];
-
-// print
-$html = '';
-foreach ($elements as $title => $rows) {
-    //$html .= '<h2>' . $title . '</h2>';
-    $html .= '<table class="test-table">';
-    foreach ($rows as $row) {
-        $html .= '<tr><td>' . $row[0] . '</td><td>' . $row[1] . '</td><td width="30%">' . htmlentities($row[1]) . '</td></tr>';
-    }
-    $html .= '</table>';
-}
+$html = $samples->render();
 
 // template
 $tpl = Template::get();
-$tpl->options([
-    'domready' => "JsFelem.load('#content')",
-    'thirdbar' => 'form.thirdbar'
-]);
-$tpl->title('Form Elements');
-$tpl->content = '<div class="panel"><div class="panel-body">' . $html . '</div></div>';
+$tpl->options(['thirdbar' => 'form.thirdbar']);
+$tpl->title('Form group');
+$tpl->content($html);
 
 return $tpl->response();

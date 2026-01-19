@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -19,12 +19,15 @@ $form->select('precompile', $precompile_options)
     ->setHelp(_t('For each style sheet, try to find and run the precompiler.'));
 $form->separate(_t('Only Css'));
 
+$html = '<p>' . _t('Please, confirm compile the asset files.') . '</p>';
+$html .= $form->render();
+
+
 // modal
 $modal = Modal::get();
-$modal->title($_text = _t('Compile'));
-$modal->enter($_text);
+$modal->title($t = _t('Compile'));
+$modal->enter($t);
 $modal->close();
-$modal->content = '<p>' . _t('Please, confirm compile the asset files.') . '</p>'
-    . $form->render();
+$modal->content($html);
 
 return $modal->response();

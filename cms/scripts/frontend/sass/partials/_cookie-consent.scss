@@ -1,0 +1,23 @@
+/* --- cookie concent --- */
+.cookie-consent {
+    position: relative;
+    display: none;
+
+    &.visible {
+        display: block;
+    }
+
+    & > div {
+        color: #ffffff;
+        text-align: center;
+        padding: var(--spacing-4);
+        background-color: var(--overlay-color-2);
+        width: 400px;
+        position: fixed;
+        bottom: var(--spacing-4);
+
+        p {
+            font-size: var(--font-size-sm);
+        }
+    }
+}

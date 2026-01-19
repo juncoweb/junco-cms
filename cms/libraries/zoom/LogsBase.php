@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -15,7 +15,7 @@ abstract class LogsBase
     protected $db;
     protected ?int   $notary_id = null;
     protected int    $max_chars = 120;
-    protected string $tag       = '<div class="badge badge-regular badge-small">%s: <span class="color-light">%s</span> => %s</div>';
+    protected string $tag       = '<div class="badge badge-regular badge-small">%s: <span class="color-subtle-default">%s</span> => %s</div>';
 
     /**
      * Constructor

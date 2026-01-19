@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -9,42 +9,55 @@
 $bls = Backlist::get();
 
 // filters
-$bft = $bls->getFilters();
-$bft->setValues($data);
-$bft->searchIn([
+$filters = $bls->getFilters();
+$filters->setValues($data);
+$filters->searchIn([
     1 => _t('Name'),
     2 => _t('User'),
     3 => _t('Email')
 ]);
-$bft->select('type', $types);
+$filters->select('type', $types);
 
 // table
-$bls->check_h();
-$bls->th(_t('Type'), ['priority' => 2, 'width' => 90]);
-$bls->th(_t('Code'), ['priority' => 2, 'width' => 60, 'class' => 'text-center']);
-$bls->th(_t('Description'), ['priority' => 2]);
-$bls->th(_t('Name'));
-$bls->th(_t('Created'), ['priority' => 2]);
+if ($rows) {
+    foreach ($rows as &$row) {
+        if ($row['activity_context']) {
+            $row['fullname'] .= '<div class="color-subtle-default">' . $row['activity_context'] . '</div>';
+        }
 
-foreach ($rows as $row) {
-    if ($row['activity_context']) {
-        $row['fullname'] .= '<div class="color-light">' . $row['activity_context'] . '</div>';
+        if ($row['token_selector']) {
+            $row['fullname'] .= '<div class="color-subtle-default">' . $row['token_selector'] . ' / ' . $row['status'] . '</div>';
+        }
     }
 
-    if ($row['token_selector']) {
-        $row['fullname'] .= '<div class="color-light">' . $row['token_selector'] . ' / ' . $row['status'] . '</div>';
-    }
-
-    if ($row['modified_at']) {
-        $row['modified_at'] = '<div class="color-light">' . $row['modified_at'] . '</div>';
-    }
-
-    $bls->check($row['id']);
-    $bls->td($row['activity_type']);
-    $bls->td($row['activity_code']);
-    $bls->td($row['message']);
-    $bls->td($row['fullname']);
-    $bls->td($row['created_at']->format($d ??= _t('Y-m-d H:i:s')) . $row['modified_at']);
+    $bls->setRows($rows);
+    $bls->fixDate('created_at', _t('Y-m-d H:i:s'));
 }
+//
+$bls->check();
+$bls->column(':activity_type')
+    ->setLabel(_t('Type'))
+    ->setSubtle()
+    ->setWidth(90);
+
+$bls->column(':activity_code')
+    ->setLabel(_t('Code'))
+    ->setSubtle()
+    ->setWidth(60)
+    ->alignCenter();
+
+$bls->column(':message')
+    ->setLabel(_t('Description'));
+
+$bls->column(':fullname')
+    ->setLabel(_t('Name'))
+    ->setSubtle();
+
+$bls->column(':created_at')
+    ->setLabel(_t('Created'))
+    ->setSubtle();
+
+$bls->column(':modified_at')
+    ->setSubtle();
 
 return $bls->render($pagi);

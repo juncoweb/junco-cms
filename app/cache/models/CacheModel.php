@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -33,7 +33,15 @@ class CacheModel extends Model
             }
         }
 
-        return $data + ['keys' => $keys];
+        $rows = [];
+        foreach ($keys as $key) {
+            $rows[] = [
+                'id' => $key,
+                'name' => $key
+            ];
+        }
+
+        return $data + ['rows' => $rows];
     }
 
     /**

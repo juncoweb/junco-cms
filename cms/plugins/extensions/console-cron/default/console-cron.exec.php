@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
 use Junco\Console\Cron;
 
-return function (Cron &$cron) {
+return function (Cron $cron) {
     if (config('extensions-updater.enabled')) {
         $expression = config('extensions-updater.cron_expression');
         $expression and $cron->on($expression)?->call(function () {

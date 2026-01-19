@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -58,9 +58,9 @@ interface TemplateInterface extends ResponderInterface
     /**
      * Load a set of values that will be passed to the template.
      *
-     * @param array|string|null $options A list of keys / values.
+     * @param ?array $options A list of keys / values.
      */
-    public function options(array|string|null $options = null): void;
+    public function options(?array $options = null): void;
 
     /**
      * Returns the value of a variable.
@@ -83,6 +83,15 @@ interface TemplateInterface extends ResponderInterface
      * @param array|string $options
      */
     public function title(array|string $title, array|string $options = []): void;
+
+    /**
+     * Set the content of the page
+     *
+     * @param string $content
+     * 
+     * @return void
+     */
+    public function content(string $content): void;
 
     /**
      * Hash

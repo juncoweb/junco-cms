@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -11,9 +11,9 @@ use Junco\Form\FilterElements;
 class backlist_master_default_filters extends FilterElements implements FiltersInterface
 {
     //
-    protected int    $curOrder    = -1;
-    protected int    $idxOrder    = 0;
-    protected string $curSort    = '';
+    protected int    $curOrder = -1;
+    protected int    $idxOrder = 0;
+    protected string $curSort  = '';
 
     /**
      * Sort
@@ -36,14 +36,14 @@ class backlist_master_default_filters extends FilterElements implements FiltersI
      * 
      * @return string
      */
-    public function sort_h(string $title = ''): string
+    public function sort_h(string $label = ''): string
     {
         $sort = $this->curOrder === (++$this->idxOrder)
             ? ' <i class="' . ($this->curSort === 'asc' ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down') . ' color-primary"></i>'
             : '';
 
         return '<a href="javascript:void(0)" control-filter="sort" data-value="' . $this->idxOrder . '" class="kl-sort">'
-            .  $title . $sort
+            .  $label . $sort
             . '</a>';
     }
 

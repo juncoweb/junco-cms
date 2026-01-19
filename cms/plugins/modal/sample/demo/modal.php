@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -15,15 +15,17 @@ $string = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac 
 $modal = Modal::get();
 $modal->close();
 $modal->title('Hello!');
-$modal->content = '<div>time: ' . time() . '</div>';
 
+$html = '<div>time: ' . time() . '</div>';
 switch ($example) {
     case 1:
         $modal->button('alert(\'Hello!\')', _t('Enter'));
         break;
     case 2:
-        $modal->content .= str_repeat($string, 0);
+        $html .= str_repeat($string, 0);
         break;
 }
+
+$modal->content($html);
 
 return $modal->response();

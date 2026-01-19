@@ -1,5 +1,0 @@
-{
-    "assets": "# utils\r\ncms\/scripts\/system\/js\/utils\/navbar.js,\r\ncms\/scripts\/system\/js\/utils\/theme.js,\r\n\r\n# backend\r\ncms\/scripts\/backend\/js\/backend.js,\r\ncms\/scripts\/backend\/js\/search.js,\r\ncms\/scripts\/backend\/js\/thirdbar.js,\r\ncms\/scripts\/backend\/js\/topbar.js,\r\n\r\n#\r\ncms\/scripts\/usys\/js\/usys.js,\r\ncms\/scripts\/notifications\/js\/notifications.js,\r\n",
-    "default_assets": "# utils\r\ncms\/scripts\/system\/js\/utils\/navbar.js,\r\ncms\/scripts\/system\/js\/utils\/theme.js,\r\n\r\n# backend\r\ncms\/scripts\/backend\/js\/backend.js,\r\ncms\/scripts\/backend\/js\/search.js,\r\ncms\/scripts\/backend\/js\/thirdbar.js,\r\ncms\/scripts\/backend\/js\/topbar.js,\r\n\r\n#\r\ncms\/scripts\/usys\/js\/usys.js,\r\ncms\/scripts\/notifications\/js\/notifications.js,\r\n",
-    "to_verify": 0
-}

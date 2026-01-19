@@ -8,7 +8,7 @@
 
 .input-tag-group {
     display: inline-block;
-    margin-bottom: $border-width;
+    margin-bottom: var(--border-width);
 
     > :not(:first-child):not(:last-child) {
         border-radius: 0;
@@ -34,7 +34,7 @@
     background: var(--regular-bg-color);
     padding: 0.375rem 0.875rem;
     text-decoration: none;
-    border-radius: $medium-border-radius;
+    border-radius: var(--rounded-md);
     display: inline-block;
     cursor: default;
 

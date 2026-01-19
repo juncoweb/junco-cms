@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -13,30 +13,31 @@ if (!empty($error)) {
 $bls = Backlist::get();
 
 // filters	
-$bft = $bls->getFilters();
-$bft->setValues($data);
-$bft->search();
+$filters = $bls->getFilters();
+$filters->setValues($data);
+$filters->search();
 
 // table
-$bls->check_h();
-$bls->th(_t('Code'));
-$bls->th(_t('Developer'), ['priority' => 2]);
-$bls->th(['width' => 100, 'class' => 'text-nowrap']);
-$bls->th(['width' => 80, 'class' => 'text-nowrap', 'priority' => 2]);
-
 if ($rows) {
-    $_date = _t('Y-M-d');
-    $_hour = _t('H:i:s');
-
-    foreach ($rows as $row) {
-        $row['created_at'] = new Date($row['created_at']);
-
-        $bls->check($row['id']);
-        $bls->td($row['translation_code']);
-        $bls->td($row['developer_name']);
-        $bls->td($row['created_at']->format($_date));
-        $bls->td($row['created_at']->format($_hour));
-    }
+    $bls->setRows($rows);
+    $bls->fixDate('created_at', _t('Y-M-d'), _t('H:i:s'));
 }
+//
+$bls->check();
+$bls->column(':translation_code')
+    ->setLabel(_t('Code'));
+
+$bls->column(':developer_name')
+    ->setLabel(_t('Developer'))
+    ->setSubtle();
+
+$bls->column(':created_at.date')
+    ->setWidth(100)
+    ->noWrap();
+
+$bls->column(':created_at.time')
+    ->setWidth(80)
+    ->setSubtle()
+    ->noWrap();
 
 return $bls->render();

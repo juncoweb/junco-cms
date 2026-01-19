@@ -6,15 +6,6 @@
         $class: "";
     }
 
-    .color-light {
-        &.color-#{$name} {
-            color: var(--regular#{$class}-subtle-font-color);
-            &.color-solid {
-                color: var(--solid#{$class}-subtle-font-color);
-            }
-        }
-    }
-
     .box-#{$name}-active {
         color: var(--regular#{$class}-active-font-color);
         background-color: var(--regular#{$class}-active-bg-color);

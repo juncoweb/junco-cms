@@ -1,7 +1,7 @@
 <?php
 
 /*
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  *
  */
@@ -10,27 +10,30 @@
 $bls = Backlist::get();
 
 // filters
-$bft = $bls->getFilters();
-$bft->setValues($data);
-$bft->select('role_id', $roles);
-$bft->search();
+$filters = $bls->getFilters();
+$filters->setValues($data);
+$filters->select('role_id', $roles);
+$filters->search();
 
-$bls->check_h();
-$bls->button_h('status');
-$bls->th($roles[$role_id], ['width' => 100, 'class' => 'text-nowrap']);
-$bls->th(['priority' => 2]);
-
-foreach ($rows as $row) {
-    $statuses = [
-        ['icon' => 'fa-solid fa-circle color-red', 'title' => _t('Disabled')],
-        ['icon' => 'fa-solid fa-circle color-green', 'title' => _t('Enabled')]
-    ];
-
-    $bls->check($row['id']);
-    $bls->button($statuses[(int)$row['status']]);
-    $bls->td($row['label_name']);
-    $bls->td($row['label_description'] ? _t($row['label_description']) : '');
+// table
+if ($rows) {
+    $bls->setRows($rows);
+    $bls->fixEnum('status', [
+        ['color' => 'red', 'title' => _t('Disabled')],
+        ['color' => 'green', 'title' => _t('Enabled')]
+    ]);
 }
+//
+$bls->check();
+$bls->status('status');
+$bls->column(':label_name')
+    ->setLabel($roles[$role_id])
+    ->setWidth(100)
+    ->noWrap();
+
+$bls->column(':label_description')
+    ->setSubtle();
 
 $bls->hidden('role_id', $role_id);
+
 return $bls->render();

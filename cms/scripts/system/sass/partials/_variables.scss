@@ -269,65 +269,23 @@ $solid-dark-colors: () !default;
     $solid-dark-colors: map-merge($solid-dark-colors, $map);
 }
 
-// screen
-$screen-small: 600px !default;
-$screen-medium: 770px !default;
-$screen-large: 990px !default;
-$screen-x-large: 1200px !default;
-
-// z-index
-$zindex-navbar: 1000 !default;
-$zindex-pullnav: 2000 !default;
-$zindex-dropdown: 1000 !default;
-$zindex-modal: 1050 !default;
-$zindex-lightbox: 1050 !default;
-$zindex-tooltip: 1070 !default;
-$zindex-loading: 1080 !default;
-$zindex-toast: 1080 !default;
-
-// shadows
-$shadow-color: rgba(var(--solid-surface-rgb-color), 0.075);
-$template-box-shadow:
-    0 2px 2px 0 $shadow-color,
-    0 3px 1px -2px $shadow-color,
-    0 1px 5px 0 $shadow-color !default;
-$dropdown-box-shadow:
-    0 2px 2px 0 $shadow-color,
-    0 3px 1px -2px $shadow-color,
-    0 1px 5px 0 $shadow-color !default;
-$element-box-shadow: 1px 1px 2px $shadow-color !default;
-
-// border
-$border-width: 1px !default;
-$border-style: solid !default;
-
-// border-radius
-$small-border-radius: 0.25rem !default; // 4px
-$medium-border-radius: 0.375rem !default; // 6px
-$large-border-radius: 0.5rem !default; // 8px
-$x-large-border-radius: 0.625rem !default; // 10px
-
-// spacing
-$spacing: 1rem !default;
-$spacers: (
-    0: 0,
-    1: $spacing * 0.25,
-    2: $spacing * 0.5,
-    4: $spacing,
-    6: $spacing * 1.5,
-    8: $spacing * 2
-) !default;
-
 // tipography
-// -----------------------------------------------
-$font-family: system-ui !default;
-$font-family-monospace: monospace !default;
+$line-height-base: 1.5 !default;
 
-$font-size: 1rem !default; // .875rem
-$small-font-size: $font-size * 0.875 !default;
-$large-font-size: $font-size * 1.25 !default;
-$line-height: 1.5 !default;
+$font-family-sans: ui-sans-serif, system-ui, sans-serif !default;
+$font-family-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif !default;
+$font-family-mono: monospace !default;
+$font-family-base: $font-family-sans !default;
 
+$font-size-base: 1rem !default; // .875rem
+$font-size-sm: $font-size-base * 0.875 !default;
+$font-size-lg: $font-size-base * 1.25 !default;
+$font-size-xl: $font-size-base * 1.5 !default;
+$font-size-2xl: $font-size-base * 2 !default;
+$font-size-3xl: $font-size-base * 2.5 !default;
+
+$heading-font-family: inherit !default;
+$heading-font-weight: normal !default;
 $heading-sizes: () !default;
 $heading-sizes: map-merge(
     (
@@ -341,22 +299,96 @@ $heading-sizes: map-merge(
     $heading-sizes
 );
 
-// link
+// selection
+$font-selection-color: var(--solid-primary-font-color) !default;
+$font-selection-bg: var(--solid-primary-bg-color) !default;
+
+// link // ?
 $link-color: $primary-color !default;
 $link-decoration: null !default;
 
 $link-hover-color: $primary-color !default;
 $link-hover-decoration: null !default;
 
-// selection
-$font-selection-color: #fff !default;
-$font-selection-bg: $primary-color !default;
-
 // code
-$code-font-size: $small-font-size !default;
-$code-padding: 0.25rem 0.375rem !default;
+$code-font-size: $font-size-sm !default;
 $code-color: $link-color !default;
-$code-bg: var(--regular-bg-color) !default;
+$code-padding: 0.25rem 0.375rem !default;
+$code-bg-color: var(--regular-bg-color) !default;
+
+// screen
+$screen-sm: 600px !default;
+$screen-md: 770px !default;
+$screen-lg: 990px !default;
+$screen-xl: 1200px !default;
+
+// z-index
+$zindex-navbar: 1000 !default;
+$zindex-dropdown: 1000 !default;
+$zindex-modal: 1050 !default;
+$zindex-lightbox: 1050 !default;
+$zindex-tooltip: 1070 !default;
+$zindex-loading: 1080 !default;
+$zindex-toast: 1080 !default;
+$zindex-pullnav: 2000 !default;
+
+// shadows
+$shadow-color: rgba(var(--solid-surface-rgb-color), 0.1) !default;
+
+$box-shadow-sm:
+    0 1px 3px 0 $shadow-color,
+    0 1px 2px -1px $shadow-color !default;
+$box-shadow-md:
+    0 4px 6px -1px $shadow-color,
+    0 2px 4px -2px $shadow-color !default;
+$box-shadow-lg:
+    0 10px 15px -3px $shadow-color,
+    0 4px 6px -4px $shadow-color !default;
+$box-shadow-xl:
+    0 20px 25px -5px $shadow-color,
+    0 8px 10px -6px $shadow-color !default;
+
+$box-shadow-template: var(--box-shadow-md) !default;
+$box-shadow-dropdown: var(--box-shadow-lg) !default;
+$box-shadow-button: var(--box-shadow-sm) !default;
+$box-shadow-input: var(--box-shadow-sm) !default;
+
+// overlay
+$overlay-color-1: rgba(0, 0, 0, 0.3) !default;
+$overlay-color-2: rgba(0, 0, 0, 0.8) !default;
+
+// border
+$border-width: 1px !default;
+$border-style: solid !default;
+//
+$border-radius-sm: 0.25rem !default; // 4px
+$border-radius-md: 0.375rem !default; // 6px
+$border-radius-lg: 0.5rem !default; // 8px
+$border-radius-xl: 0.625rem !default; // 10px
+$border-radius-full: 9999px !default;
+
+// spacing
+$spacing: 1rem !default;
+$var-spacers: (
+    1: $spacing * 0.25,
+    2: $spacing * 0.5,
+    3: $spacing * 0.75,
+    4: $spacing,
+    6: $spacing * 1.5,
+    8: $spacing * 2,
+    12: $spacing * 3
+) !default;
+$css-spacers: (
+    0: 0,
+    1: $spacing * 0.25,
+    2: $spacing * 0.5,
+    4: $spacing,
+    6: $spacing * 1.5,
+    8: $spacing * 2
+) !default;
+
+// sizing
+$sizing: $font-size-base !default;
 
 // Components
 // -----------------------------------------------
@@ -368,22 +400,22 @@ $badge-padding-x: 0.625rem !default;
 
 // dialog
 // -----------------------------------------------
-$dialog-padding: $font-size !default;
+$dialog-padding: var(--spacing-4) !default;
 $dialog-border-width: 0 0 0 5px !default;
 
 // notify
 // -----------------------------------------------
 $notify-color: var(--solid-primary-font-color) !default;
 $notify-bg-color: rgba(var(--solid-primary-surface-rgb-color), 0.75) !default;
-$notify-zindex: $zindex-loading;
+$notify-zindex: var(--zindex-toast);
 $notify-top: -30px;
 
 // lightbox
 // -----------------------------------------------
 $lightbox-bg-color: rgba(0, 0, 0, 0.9) !default;
 $lightbox-cross-size: 32px !default;
-$lightbox-max-width: $screen-x-large !default;
-$lightbox-zindex: $zindex-lightbox !default;
+$lightbox-max-width: $screen-xl !default;
+$lightbox-zindex: var(--zindex-lightbox) !default;
 
 // loading
 // -----------------------------------------------
@@ -391,10 +423,10 @@ $loading-color: $secondary-color !default;
 
 // table
 // -----------------------------------------------
-$table-border-width: $border-width !default;
-$table-border-style: $border-style !default;
+$table-border-width: var(--border-width) !default;
+$table-border-style: var(--border-style) !default;
 
-$table-padding: $spacing * 0.5 !default;
+$table-padding: var(--spacing-2) !default;
 
 // toasts
 // -----------------------------------------------
@@ -404,4 +436,4 @@ $toast-max-width: 350px !default;
 // -----------------------------------------------
 $tooltip-color: var(--solid-font-color);
 $tooltip-bg-color: rgba(var(--solid-surface-rgb-color), 0.8);
-$tooltip-border-radius: $medium-border-radius;
+$tooltip-border-radius: var(--rounded-md);

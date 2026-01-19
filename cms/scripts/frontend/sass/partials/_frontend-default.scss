@@ -19,7 +19,7 @@ body.fixed-header {
     }
 
     &:not(.full-body) .accessibility-nav li {
-        top: -20rem - $frontend-body-border-top;
+        top: $frontend-accessibility-border-top;
     }
 }
 
@@ -33,7 +33,7 @@ body.full-body {
 
     .top-header {
         text-align: right;
-        height: $font-size * $line-height;
+        height: calc(var(--font-size-base) * var(--line-height-base));
         opacity: 1;
         transition-property: height, opacity;
         transition-duration: $frontend-header-transition-duration;
@@ -41,7 +41,7 @@ body.full-body {
 
     .main-header {
         display: flex;
-        gap: $spacing;
+        gap: var(--spacing-4);
     }
 
     .logo {
@@ -62,7 +62,7 @@ body.full-body {
 
             & > div {
                 display: inline-flex;
-                gap: $spacing;
+                gap: var(--spacing-4);
                 align-items: center;
             }
         }
@@ -99,16 +99,16 @@ body.full-body {
 
 .tpl-main {
     min-height: 500px;
-    padding-bottom: $spacing * 2;
+    padding-bottom: var(--spacing-8);
 
     main {
-        padding-bottom: $spacing * 2;
+        padding-bottom: var(--spacing-8);
     }
 }
 
 .main-wrapper {
     display: flex;
-    gap: $spacing;
+    gap: var(--spacing-4);
 
     main {
         flex: auto;
@@ -118,7 +118,7 @@ body.full-body {
         flex: 0 0 25%;
     }
 
-    @media (max-width: $screen-medium) {
+    @media (max-width: $screen-md) {
         & {
             display: block;
         }
@@ -126,28 +126,13 @@ body.full-body {
 }
 
 .tpl-footer {
-    color: $frontend-footer-color;
-    background: $frontend-footer-bg-color;
-    padding: ($spacing * 3) 0 ($spacing * 2);
+    padding: var(--spacing-12) 0 var(--spacing-8);
     border-top: $frontend-border;
-    border-top-color: $frontend-footer-border-color;
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        color: $frontend-footer-color;
-    }
 }
 
 .tpl-copyright {
-    color: $frontend-copyright-color;
-    padding: ($spacing * 2) 0;
-    background: $frontend-copyright-bg-color;
+    padding: var(--spacing-8) 0;
     border-top: $frontend-border;
-    border-top-color: $frontend-copyright-border-color;
 }
 
 /* Layout content */
@@ -173,7 +158,7 @@ body.full-body {
             left: 2px;
 
             &:focus {
-                box-shadow: var(--shadow-01);
+                box-shadow: var(--box-shadow-dropdown);
                 text-decoration: none;
                 top: calc(20rem + 2px);
             }
@@ -187,10 +172,10 @@ body.full-body {
     }
 
     .th-btn {
-        margin-right: -$border-width;
-        padding: 0 $spacing;
+        margin-right: -var(--border-width);
+        padding: 0 var(--spacing-4);
         background: none;
-        border: $border-width solid;
+        border: var(--border-width) solid;
         border-top: 0;
         border-bottom: 0;
         display: inline-block;
@@ -202,13 +187,13 @@ body.full-body {
             font-style: normal;
             text-align: center;
             margin-right: 5px;
-            border-radius: 50%;
+            border-radius: var(--rounded-full);
             display: inline-block;
-            width: $font-size * $line-height;
+            width: calc(var(--font-size-base) * var(--line-height-base));
         }
 
         .badge {
-            margin-left: -$font-size * 0.125;
+            margin-left: calc(var(--spacing-1) * -1);
         }
     }
 
@@ -226,20 +211,21 @@ body.full-body {
 .tpl-search {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 1556;
+    background: var(--overlay-color-2);
+    z-index: var(--zindex-lightbox);
     display: none;
+    padding: 0 var(--spacing-4);
 
     > div {
-        color: #fff;
-        font-size: 24px;
+        color: var(--solid-font-color);
+        font-size: var(--font-size-2xl);
         position: absolute;
         top: 5%;
         right: 5%;
     }
 
     form {
-        width: 80%;
+        max-width: 900px;
         margin: 140px auto;
     }
 }
@@ -253,11 +239,6 @@ body.full-body {
 }
 
 .tpl-footer {
-    p,
-    a {
-        line-height: $font-size * 2;
-    }
-
     &-widget {
         width: 25%;
     }
@@ -281,165 +262,12 @@ body.full-body {
     }
 }
 
-@media (max-width: $screen-small) {
+@media (max-width: $screen-sm) {
     .tpl-copyright .box {
         display: block;
 
         & > div {
             text-align: center !important;
-        }
-    }
-}
-
-.tpl-legal {
-    position: relative;
-    display: none;
-
-    &.visible {
-        display: block;
-    }
-
-    & > div {
-        color: #fff;
-        text-align: center;
-        padding: 15px;
-        background-color: rgba(0, 0, 0, 0.8);
-        width: 400px;
-        position: fixed;
-        bottom: 15px;
-
-        p {
-            font-size: 0.9em;
-        }
-    }
-}
-
-/* --- colors ------------------------------------------------- */
-@each $name, $color in $theme-colors {
-    $class: ".header-#{$name}";
-    $contrast: map-get($color, "contrast");
-
-    @if ($name == "default") {
-        $class: "";
-        $name: "";
-    } @else {
-        $name: -#{$name};
-    }
-
-    // basic
-    .tpl-header#{$class} {
-        &,
-        & button,
-        & a {
-            color: var(--solid-bg-color);
-
-            &:hover,
-            &:focus {
-                color: var(--solid#{$name}-bg-color);
-            }
-        }
-
-        i.capital {
-            color: var(--solid#{$name}-font-color);
-            background-color: var(--solid#{$name}-bg-color);
-        }
-
-        &,
-        nav ul li ul {
-            background-color: var(--regular-surface-color);
-        }
-
-        &.active {
-            background-color: rgba(var(--regular-surface-rgb-color), $frontend-header-active-opacity);
-        }
-
-        nav ul li a {
-            &:hover,
-            &:focus {
-                background-color: var(--regular#{$name}-disabled-bg-color);
-            }
-        }
-
-        .th-btn {
-            border-color: var(--regular-border-color);
-        }
-    }
-
-    // regular
-    .tpl-header.header-regular#{$name} {
-        &,
-        & button,
-        & a {
-            color: var(--regular#{$name}-font-color);
-
-            &:hover,
-            &:focus {
-                color: var(--regular-#{$contrast}-surface-color);
-            }
-        }
-
-        i.capital {
-            color: var(--solid-#{$contrast}-font-color);
-            background-color: var(--solid-#{$contrast}-bg-color);
-        }
-
-        &,
-        nav ul li ul {
-            background-color: var(--regular#{$name}-bg-color);
-        }
-
-        &.active {
-            //background-color: rgba(var(--regular#{$name}-bg-color), $frontend-header-active-opacity);
-        }
-
-        nav ul li a {
-            &:hover,
-            &:focus {
-                background-color: var(--regular#{$name}-active-bg-color);
-            }
-        }
-
-        .th-btn {
-            border-color: var(--regular#{$name}-border-color);
-        }
-    }
-
-    // solid
-    .tpl-header.header-solid#{$class} {
-        &,
-        & button,
-        & a {
-            color: var(--solid#{$name}-font-color);
-
-            &:hover,
-            &:focus {
-                color: var(--solid-#{$contrast}-bg-color);
-            }
-        }
-
-        i.capital {
-            color: var(--solid-#{$contrast}-font-color);
-            background-color: var(--solid-#{$contrast}-bg-color);
-        }
-
-        &,
-        nav ul li ul {
-            background-color: var(--solid#{$name}-surface-color);
-        }
-
-        &.active {
-            background-color: rgba(var(--solid#{$name}-surface-rgb-color), $frontend-header-active-opacity);
-        }
-
-        nav ul li a {
-            &:hover,
-            &:focus {
-                background-color: var(--solid#{$name}-active-bg-color);
-            }
-        }
-
-        .th-btn {
-            border-color: var(--solid#{$name}-border-color);
         }
     }
 }
@@ -465,17 +293,14 @@ body.full-body {
 
 /* navbar-mobile */
 .navbar-mobile {
-    font-size: $large-font-size;
-    margin-top: $spacing * 2;
+    font-size: var(--font-size-lg);
+    margin-top: var(--spacing-8);
 
     @include navbar(
         $color: var(--solid-font-color),
         $hover-color: var(--solid-primary-surface-color),
         $bg-hover-color: var(--solid-disabled-bg-color),
-        $padding: (
-            $spacing * 0.5
-        )
-        $spacing
+        $padding: var(--spacing-2) var(--spacing-4)
     );
     @include navbar-nested($padding: 7px 14px 7px 42px, $bg-color: var(--solid-disabled-bg-color));
     @include navbar-dropdown($position: relative, $width: null);
@@ -486,7 +311,7 @@ body.full-body {
     @include navbar-btn($color: $frontend-pull-btn-color, $font-size: 2rem);
 }
 
-@media (max-width: $screen-small) {
+@media (max-width: $screen-sm) {
     .pull-btn {
         display: block;
     }
@@ -512,7 +337,7 @@ body.full-body {
 
     body {
         border-top: 0;
-        min-width: 800px !important;
+        min-width: $screen-lg !important;
     }
 
     .tpl-container {

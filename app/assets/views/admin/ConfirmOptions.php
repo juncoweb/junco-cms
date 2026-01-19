@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -22,6 +22,6 @@ $html .= '<div class="dialog dialog-warning">' . _t('Edit the Javascript setting
 // modal
 $modal = Modal::get();
 $modal->title(_t('Options'));
-$modal->content = $html;
+$modal->content($html);
 
 return $modal->response();

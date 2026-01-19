@@ -1,11 +1,18 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
-return function (&$rows) {
-    if ($rows['url'] && substr($rows['url'], -1) != '/')
-        $rows['url'] .= '/';
+use Junco\Settings\PluginUpdater;
+
+return function (PluginUpdater $updater) {
+    $updater->setValue('url', function ($value) {
+        if (substr($value, -1) != '/') {
+            $value .= '/';
+        }
+
+        return $value;
+    });
 };

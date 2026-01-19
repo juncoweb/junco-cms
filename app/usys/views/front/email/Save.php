@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -18,6 +18,6 @@ if ($error) {
 $tpl = Template::get();
 $tpl->options($options);
 $tpl->title($title, _t('Save Email'));
-$tpl->content = $html;
+$tpl->content($html);
 
 return $tpl->response();

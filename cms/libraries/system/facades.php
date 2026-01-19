@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -177,6 +177,14 @@ function request(): ?ServerRequest
 function response(int $code = 200, string $reasonPhrase = ''): Response
 {
     return new Response($code, [], null, '1.1', $reasonPhrase);
+}
+
+/**
+ * Request
+ */
+function cookie(string $key, mixed $default = null): mixed
+{
+    return app('request')->getCookieParams()[$key] ?? $default;
 }
 
 /**

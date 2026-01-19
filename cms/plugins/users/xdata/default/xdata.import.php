@@ -1,26 +1,20 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
 use Junco\Extensions\XData\MalformedDataException;
+use Junco\Extensions\XData\XData;
 
-/**
- * Import
- *
- * @param object $xdata
- *
- * @return void
- */
-return function (&$xdata) {
+return function (XData $xdata) {
     // vars
-    $data        = $xdata->getData();
-    $db            = db();
-    $insert        = [];
-    $update        = [];
-    $label_id    = [];
+    $data     = $xdata->getData();
+    $db       = db();
+    $insert   = [];
+    $update   = [];
+    $label_id = [];
 
     // set
     $current = $db->query("
@@ -32,10 +26,10 @@ return function (&$xdata) {
 
     foreach ($data as $r) {
         $row = [
-            'extension_id'        => $xdata->extension_id,
-            'label_key'            => $r['label_key'] ?? '',
+            'extension_id'      => $xdata->extension_id,
+            'label_key'         => $r['label_key'] ?? '',
             'label_name'        => $r['label_name'] ?? '',
-            'label_description'    => $r['label_description'] ?? ''
+            'label_description' => $r['label_description'] ?? ''
         ];
 
         // validate

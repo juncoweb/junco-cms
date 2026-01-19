@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -40,5 +40,13 @@ class MyNotificationsController extends Controller
     {
         return $this->middleware('form.security')
             ?: $this->wrapper(fn() => (new NotificationsModel)->status());
+    }
+
+    /**
+     * Data
+     */
+    public function data()
+    {
+        return (new NotificationsModel)->data();
     }
 }

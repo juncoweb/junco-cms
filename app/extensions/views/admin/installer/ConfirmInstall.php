@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -140,7 +140,7 @@ if (!$error_fatal) {
     //
     if ($executables) {
         foreach ($executables as $action => $content) {
-            $form->checkbox("execute_{$action}")->setLabel($action . ' <span class="color-light">(' . implode(', ', $content) . ')</span>');
+            $form->checkbox("execute_{$action}")->setLabel($action . ' <span class="color-subtle-default">(' . implode(', ', $content) . ')</span>');
         }
 
         $form->separate(_t('Executables'));
@@ -159,6 +159,13 @@ if ($changelog) {
     $tabs->tab('<i class="fa-solid fa-file-lines" title="' . _t('Changelog') . '"></i>', $changelog);
 }
 
+$html = '<form id="js-form">'
+    . $tabs->render()
+    . '<input type="hidden" name="package" value="' . $package . '">'
+    . $token
+    . '</form>';
+
+
 // modal
 $modal = Modal::get();
 if (!$error_fatal) {
@@ -166,10 +173,6 @@ if (!$error_fatal) {
 }
 $modal->close();
 $modal->title([_t('Installer'), $id]);
-$modal->content = '<form id="js-form">'
-    . $tabs->render()
-    . '<input type="hidden" name="package" value="' . $package . '">'
-    . $token
-    . '</form>';
+$modal->content($html);
 
 return $modal->response();

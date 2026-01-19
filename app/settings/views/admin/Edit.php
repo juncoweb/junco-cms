@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -101,6 +101,6 @@ foreach ($data['rows'] as $row) {
 // modal
 $modal = Modal::get();
 $modal->title([_t('Settings'), _t('Manager')]);
-$modal->content = $form->render();
+$modal->content($form->render());
 
 return $modal->response();

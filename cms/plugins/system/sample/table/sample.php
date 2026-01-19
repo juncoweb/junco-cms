@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -56,6 +56,6 @@ foreach ($rows as $row) {
 $tpl = Template::get();
 $tpl->options(['thirdbar' => 'system.thirdbar']);
 $tpl->title('Table');
-$tpl->content = $html;
+$tpl->content($html);
 
 return $tpl->response();

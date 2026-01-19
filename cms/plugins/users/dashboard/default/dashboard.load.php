@@ -1,11 +1,13 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
-return function (&$dashboard) {
+use Junco\Dashboard\DashboardInterface;
+
+return function (DashboardInterface $dashboard) {
     $allow_cache = SYSTEM_ALLOW_CACHE;
     $html        = '';
 
@@ -31,7 +33,7 @@ return function (&$dashboard) {
             . ' (<span>' . $data['num_users'] . '</span>)'
             . '<a href="' . url('admin/users') . '"><i class="fa-solid fa-external-link float-right"></i></a>'
             . '</h4>'
-            . '<span class="color-light">' . sprintf(_t('Last %s'), $data['created_at']->format(_t('Y-m-d'))) . '</span>';
+            . '<span class="color-subtle-default">' . sprintf(_t('Last %s'), $data['created_at']->format(_t('Y-m-d'))) . '</span>';
 
         //
         $html = '<div class="grid grid-21 grid-responsive mb-4">'
@@ -42,5 +44,5 @@ return function (&$dashboard) {
         $allow_cache and $cache->set($cache_key, $html);
     }
 
-    $dashboard->row($html);
+    $dashboard->section($html);
 };

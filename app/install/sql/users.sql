@@ -91,7 +91,8 @@ CREATE TABLE IF NOT EXISTS `#__users_roles_labels` (
   `label_key` varchar(16) COLLATE utf8mb4_general_ci NOT NULL,
   `label_name` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,
   `label_description` text COLLATE utf8mb4_general_ci,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uni` (`extension_id`,`label_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- 

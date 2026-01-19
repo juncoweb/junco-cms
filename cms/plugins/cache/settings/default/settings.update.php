@@ -1,12 +1,14 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
-return function (&$rows) {
-    switch ($rows['adapter']) {
+use Junco\Settings\PluginUpdater;
+
+return function (PluginUpdater $updater) {
+    switch ($updater->getValue('adapter')) {
         case 'apcu':
             if (!function_exists('apcu_enabled') || !apcu_enabled()) {
                 throw new Exception(_t('Your server does not support the selected library.'));

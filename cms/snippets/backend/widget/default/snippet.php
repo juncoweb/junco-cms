@@ -1,32 +1,20 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
-class widget_backend_default_snippet
+use Junco\Template\WidgetBase;
+
+class widget_backend_default_snippet extends WidgetBase
 {
-    // vars
-    protected $rows = [];
-
-    /**
-     * Section
-     * 
-     * @param array $section
-     */
-    public function section(array $section)
-    {
-        $this->rows[] = array_merge([
-            'content'    => '',
-            'css'        => ''
-        ], $section);
-    }
-
     /**
      * Render
+     * 
+     * @return string
      */
-    public function render()
+    public function render(): string
     {
         $html = '';
         foreach ($this->rows as $row) {

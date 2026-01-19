@@ -6869,7 +6869,7 @@ msgstr "Renombrar"
 #: app/tickets/views/audit/replies/Create.php:14
 #: app/tickets/views/my/Create.php:16
 #: app/tickets/views/my/replies/Create.php:14
-#: cms/plugins/contents/form-drop-options/files/form-drop-options.load.php:9
+#: cms/plugins/contents/form-dropdown-options/files/form-dropdown-options.load.php:9
 #: storage/settings/data/contents/translate.contents-files.php:3
 #: storage/settings/data/extensions/translate.extensions.php:4
 #: storage/settings/data/tickets/translate.tickets.php:3
@@ -8976,7 +8976,7 @@ msgid "Optional"
 msgstr "Opcional"
 
 #: app/goods/views/audit/ConfirmExport.php:20
-#: cms/plugins/contents/form-drop-options/separate/form-drop-options.load.php:9
+#: cms/plugins/contents/form-dropdown-options/separate/form-dropdown-options.load.php:9
 #: cms/plugins/form/sample/demo/sample.php:26
 msgid "Separate"
 msgstr "Separar"

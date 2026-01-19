@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -16,6 +16,6 @@ $bac->refresh();
 $modal = Modal::get();
 $modal->close();
 $modal->title(_t('Translations'));
-$modal->content = $bbx->render($this->list($data));
+$modal->content($bbx->render($this->list($data)));
 
 return $modal->response();

@@ -9,10 +9,10 @@
   cursor: pointer;
 }
 .rating.rating-large {
-  font-size: 1.25rem;
+  font-size: var(--font-size-lg);
 }
 .rating.rating-small {
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
 }
 .rating.rating-default i {
   color: var(--solid-surface-color);
@@ -57,7 +57,7 @@
   display: flex;
   align-items: center;
   white-space: nowrap;
-  gap: 1rem;
+  gap: var(--spacing-4);
 }
 .rating-detail ol li > div:first-child {
   flex: auto;

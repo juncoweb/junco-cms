@@ -1,41 +1,37 @@
 /* --- Frontlist ------------------------------- */
-.frontlist {
-  clear: left;
-  border-collapse: collapse;
+.frontlist article {
+  grid-template-columns: min-content auto min-content;
+  border-bottom-width: var(--border-width);
+  border-bottom-style: var(--border-style);
+  border-bottom-color: var(--regular-border-color);
+}
+.frontlist article > div {
+  padding-bottom: 1px;
+}
+.frontlist article .article-media {
+  width: 160px;
+}
+.frontlist article .article-media img {
+  display: block;
   width: 100%;
 }
-.frontlist > tbody > tr {
-  border-bottom: 1px solid var(--regular-border-color);
-}
-.frontlist > tbody > tr > td {
-  vertical-align: top;
-}
-.frontlist > tbody > tr > td.col-img {
-  width: 120px;
-  text-align: center;
-  padding-right: 10px;
-}
-.frontlist > tbody > tr > td.col-img img {
-  border: 0;
-  padding: 2px;
-}
-.frontlist > tbody > tr > td.col-bdy h3 {
-  font-size: 1.25rem;
+.frontlist article .article-container h3 {
+  font-size: var(--font-size-lg);
   margin: 0;
 }
-.frontlist > tbody > tr > td.col-bdy h3 a {
+.frontlist article .article-container h3 a {
   color: var(--regular-font-color);
   text-decoration: none;
 }
-.frontlist > tbody > tr > td.col-opt {
-  width: 20px;
-}
-.frontlist .fl-author,
-.frontlist .fl-date {
+.frontlist .article-author,
+.frontlist .article-date {
+  font-size: var(--font-size-sm);
   color: var(--regular-subtle-font-color);
-  font-size: 0.875rem;
 }
-.frontlist .fl-description {
+.frontlist .article-desc {
   color: var(--regular-subtle-font-color);
-  min-height: 30px;
+  padding-bottom: var(--spacing-2);
+}
+.frontlist .article-footer {
+  padding-bottom: var(--spacing-2);
 }

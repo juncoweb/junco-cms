@@ -1,0 +1,74 @@
+/* --- navbar --- */
+.navbar-mobile,
+.navbar {
+    @include navbar(
+        $color: $backend-navbar-color,
+        $hover-color: $backend-navbar-hover-color,
+        $bg-hover-color: $backend-navbar-bg-hover-color,
+        $padding: 10px 20px,
+        $border-radius: var(--rounded-md)
+    );
+
+    @include navbar-nested(
+        $color: $backend-navbar-nested-color,
+        $bg-color: $backend-navbar-nested-bg-color,
+        $bg-hover-color: $backend-navbar-nested-hover-bg-color,
+        $separator-color: $backend-navbar-separator-color
+    );
+    padding-top: calc(var(--sizing) * 6);
+
+    li {
+        padding: var(--border-width) calc(var(--border-width) * 2);
+    }
+}
+
+.navbar {
+    width: $backend-navbar-width;
+
+    > ul {
+        min-width: $backend-navbar-minimized-width;
+
+        & > li {
+            > ul li.selected > a {
+                background-color: $backend-navbar-nested-hover-bg-color;
+            }
+        }
+    }
+}
+
+.navbar-minimizer {
+    margin-top: var(--spacing-8);
+
+    a {
+        font-size: var(--font-size-lg);
+        color: $backend-navbar-color;
+        padding: var(--spacing-2) var(--spacing-4);
+        background-color: $backend-navbar-minimizer-bg-color;
+        border-radius: 0 var(--rounded-full) var(--rounded-full) 0;
+        transition: padding-left 0.2s linear;
+
+        &:hover {
+            padding-left: var(--spacing-6);
+        }
+
+        i {
+            transition: transform 0.2s linear;
+        }
+    }
+}
+
+.navbar-minimized .navbar-minimizer a i {
+    transform: rotate(180deg);
+}
+
+.navbar-mobile {
+    font-size: var(--font-size-lg);
+}
+
+.pull-navbar {
+    background-color: $backend-navbar-bg-color;
+}
+
+.pull-btn {
+    @include navbar-btn($color: var(--solid-font-color) !important, $hover-color: var(--solid-active-font-color));
+}

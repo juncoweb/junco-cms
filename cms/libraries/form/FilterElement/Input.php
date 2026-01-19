@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -30,35 +30,46 @@ class Input extends FilterElement
             'class' => 'btn'
         ], $attr) . '/>';
 
-        if ($icon) {
-            $tagName   = 'span';
-            $position  = 'left';
+        $this->html = $icon
+            ? $this->withIcon($icon, $html)
+            : $html;;
+    }
 
-            if (is_array($icon)) {
-                $iconClass = $this->extract($icon, 'name');
-                $position  = $this->extract($icon, 'position');
+    /**
+     * With icon
+     */
+    protected function withIcon(array|string $icon, string $html): string
+    {
+        $tagName  = 'span';
+        $position = 'left';
+        $class    = '';
 
-                if (isset($icon['type'])) {
-                    $tagName = 'button';
-                }
-            } else {
-                $iconClass = $icon;
-                $icon = [];
+        if (is_array($icon)) {
+            $iconClass = $this->extract($icon, 'name');
+            $position  = $this->extract($icon, 'position');
+            $class     = $this->extract($icon, 'class');
+
+            if (isset($icon['type'])) {
+                $tagName = 'button';
             }
-
-            $icon = '<' . $tagName . $this->attr([
-                'class'    => 'input-icon'
-            ], $icon) . '><i class="' . $iconClass . '"></i></' . $tagName . '>';
-
-            if ($position === 'right') {
-                $html .= $icon;
-            } else {
-                $html = $icon . $html;
+            if ($class) {
+                $class = ' ' . $class;
             }
-
-            $html = '<div class="input-icon-group">' . $html . '</div>';
+        } else {
+            $iconClass = $icon;
+            $icon = [];
         }
 
-        $this->html = $html;
+        $icon = '<' . $tagName . $this->attr([
+            'class' => 'input-icon'
+        ], $icon) . '><i class="' . $iconClass . '"></i></' . $tagName . '>';
+
+        if ($position === 'right') {
+            $html .= $icon;
+        } else {
+            $html = $icon . $html;
+        }
+
+        return '<div class="input-icon-group' . $class . '">' . $html . '</div>';
     }
 }

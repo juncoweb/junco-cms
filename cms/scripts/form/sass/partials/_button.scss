@@ -7,18 +7,18 @@ button::-moz-focus-inner {
 /* --- button ---- */
 a.btn,
 .btn {
-    font-family: $font-family;
-    font-size: $font-size;
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
     font-weight: normal;
-    line-height: $line-height;
+    line-height: var(--line-height-base);
     vertical-align: middle;
     text-decoration: none;
     margin: 0;
     padding: $felem-btn-padding;
-    border-width: $border-width;
-    border-style: $border-style;
-    border-radius: $medium-border-radius;
-    box-shadow: $element-box-shadow;
+    border-width: var(--border-width);
+    border-style: var(--border-style);
+    border-radius: var(--rounded-md);
+    box-shadow: var(--box-shadow-button);
     //-webkit-appearance: none; -moz-appearance: none; appearance: none;
     box-sizing: border-box;
     display: inline-block;
@@ -45,9 +45,16 @@ a.btn,
     }
 }
 
-@media only screen and (max-width: $screen-large) {
+@media (max-width: $screen-lg) {
     .btn-responsive-caption {
         display: none;
+    }
+}
+
+.rounded-full {
+    &.btn,
+    &.btn-group .btn {
+        border-radius: var(--rounded-full);
     }
 }
 
@@ -55,10 +62,10 @@ a.btn,
 .btn-group {
     position: relative;
     display: inline-block;
-    //white-space: nowrap;
+    white-space: nowrap;
 
     & + & {
-        margin-left: $spacing * 0.5;
+        margin-left: var(--spacing-2);
     }
 
     & > & + & {
@@ -102,17 +109,17 @@ a.btn,
     max-height: 20rem;
     min-width: 180px;
     padding: 0;
-    border-width: $border-width;
-    border-style: $border-style;
+    border-width: var(--border-width);
+    border-style: var(--border-style);
     border-color: var(--regular-border-color);
-    border-radius: $medium-border-radius;
+    border-radius: var(--rounded-md);
     background-color: var(--regular-surface-color);
-    box-shadow: $dropdown-box-shadow;
+    box-shadow: var(--box-shadow-dropdown);
     position: absolute;
     left: 0;
     overflow-y: auto;
     overflow-x: hidden;
-    z-index: $zindex-dropdown;
+    z-index: var(--zindex-dropdown);
 
     > ul {
         text-align: left;
@@ -133,8 +140,8 @@ a.btn,
             &.separator {
                 font-size: 1px;
                 margin: 2px 0 2px 0;
-                border-bottom-width: $border-width;
-                border-bottom-style: $border-style;
+                border-bottom-width: var(--border-width);
+                border-bottom-style: var(--border-style);
                 border-bottom-color: var(--regular-border-color);
                 height: 0;
                 line-height: 0;
@@ -171,7 +178,6 @@ a.btn,
     padding-right: 0.125rem;
     white-space: nowrap;
     display: inline;
-    //border-radius: $font-size * $line-height * .5;
 
     &,
     &:hover,
@@ -185,17 +191,17 @@ a.btn,
 .btn-large {
     .btn,
     &.btn {
-        font-size: $large-font-size;
+        font-size: var(--font-size-lg);
         padding: $felem-btn-large-padding;
-        border-radius: $large-border-radius;
+        border-radius: var(--rounded-lg);
     }
 }
 
 .btn-small {
     .btn,
     &.btn {
-        font-size: $small-font-size;
+        font-size: var(--font-size-sm);
         padding: $felem-btn-small-padding;
-        border-radius: $small-border-radius;
+        border-radius: var(--rounded-sm);
     }
 }

@@ -1,28 +1,30 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
 // modal
 $modal = Modal::get();
 $modal->type('alert');
-$modal->title($_text = _t('Delete'), 'fa-solid fa-trash');
+$modal->title($t = _t('Delete'), 'fa-solid fa-trash');
 if (!$warning) {
-    $modal->enter($_text);
+    $modal->enter($t);
 }
 $modal->close();
 //
 if ($warning) {
+    $html = '';
     foreach ($warning as $message) {
-        $modal->content .= '<p class="dialog dialog-warning">' . $message . '</p>';
+        $html .= '<p class="dialog dialog-warning">' . $message . '</p>';
     }
-} else {
-    $modal->form();
-    $modal->form->question($id);
-    $modal->form->hidden('developer_id', $id);
-}
 
+    $modal->content('<p class="dialog dialog-warning">' . $message . '</p>');
+} else {
+    $modal->getForm()
+        ->question($id)
+        ->hidden('developer_id', $id);
+}
 
 return $modal->response();

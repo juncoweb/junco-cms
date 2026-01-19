@@ -30,6 +30,7 @@ return [
 			]
 		]
 	],
+	'on_display' => '',
 
 	/**
 	 * Themes
@@ -40,15 +41,10 @@ return [
 	/**
 	 * Header
 	 */
+	'header_style' => '',
+	'header_fixed' => true,
 	'logo_text' => '',
 	'logo_img' => '',
-	'header_fixed' => true,
-	'header_css' => 'header-regular',
-
-	/**
-	 * Plugins
-	 */
-	'on_display' => '',
 	'topbar' => [
 		0 => 'login',
 		1 => 'theme',
@@ -58,17 +54,31 @@ return [
 		5 => 'contact'
 	],
 	'navbar' => 'frontend.navbar',
+
+	/**
+	 * Sidebar
+	 */
 	'sidebar' => [
 		0 => 'search'
 	],
+
+	/**
+	 * Footer
+	 */
+	'footer_style' => '',
 	'footer' => [
 		0 => 'contact'
 	],
+
+	/**
+	 * Copyright
+	 */
+	'copyright_style' => '',
 
 	/**
 	 * Legal
 	 */
 	'terms_url' => '',
 	'privacy_url' => '',
-	'cookie_consent' => '',
+	'cookie_consent' => 'frontend',
 ];

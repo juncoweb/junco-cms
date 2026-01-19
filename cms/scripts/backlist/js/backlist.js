@@ -24,8 +24,8 @@ function Backlist(ID) {
                     return;
                 }
 
-                let data = row.getAttribute('row-labels');
-                let labels = data ? data.split(',') : [];
+                let data = row.getAttribute('labels-list');
+                let labels = data ? data.split(' ') : [];
                 function toggle(state) {
                     checkbox.checked = state;
                     row.classList.toggle('active', state);
@@ -636,13 +636,13 @@ function Backlist(ID) {
 
         return {
             load: function () {
-                let $options = $box.querySelector('div[backlist-actions]');
+                let $actions = $box.querySelector('div[backlist-actions]');
 
-                if (!$options) {
+                if (!$actions) {
                     return;
                 }
 
-                _controls.load('list', $options, function (el, fn, cmd) {
+                _controls.load('list', $actions, function (el, fn, cmd) {
                     _buttons.add(cmd, el);
 
                     // set events
@@ -669,7 +669,7 @@ function Backlist(ID) {
                     el.addEventListener('click', fn2);
                 });
 
-                JsFelem.load($options);
+                JsFelem.load($actions);
             },
 
             getData: function (data) {

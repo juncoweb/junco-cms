@@ -1,8 +1,6 @@
 // Variables
-$modal-box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.1),
-    0 -1px 0 rgba(0, 0, 0, 0.02) !default;
-$modal-overlay-bg-color: rgba(0, 0, 0, 0.3) !default;
+$modal-box-shadow: var(--box-shadow-dropdown) !default;
+$modal-overlay-bg-color: var(--overlay-color-1) !default;
 
 $modal-small-width: 380px !default;
 $modal-medium-width: 600px !default;

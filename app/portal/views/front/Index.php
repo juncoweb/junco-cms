@@ -1,22 +1,21 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
-// vars
-$view = snippet('portal', $snippet);
-
 # plugins
+$portal = snippet('portal', $snippet);
 if ($plugins) {
-    Plugins::get('portal', 'load', $plugins)->run($view);
+    Plugins::get('portal', 'load', $plugins)->run($portal);
 }
+$html = $portal->render();
 
 // template
 $tpl = Template::get();
 $tpl->options($options);
 $tpl->title(_t('Portal'));
-$tpl->content = $view->render();
+$tpl->content($html);
 
 return $tpl->response();

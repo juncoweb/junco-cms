@@ -4,27 +4,27 @@
         color: $contact-icon-color;
         font-size: $contact-icon-size;
     }
+
     .ci-links {
         a {
+            font-size: $contact-links-font-size;
             color: $contact-links-color;
+            background-color: $contact-links-bg-color;
             display: inline-block;
             text-align: center;
             vertical-align: middle;
-            font-size: $contact-links-size;
             margin: $contact-links-margin;
-            padding: $contact-links-padding;
-            height: $contact-links-height;
-            width: $contact-links-width;
-            background-color: $contact-links-bg-color;
+            height: $contact-links-size;
+            width: $contact-links-size;
             border-radius: $contact-links-border-radius;
 
             &:hover {
-                color: $contact-links-color-hover;
-                background-color: $contact-links-bg-color-hover;
+                color: $contact-links-hover-color;
+                background-color: $contact-links-hover-bg-color;
             }
 
             i {
-                line-height: $contact-links-height;
+                line-height: $contact-links-size;
             }
         }
     }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -52,7 +52,6 @@ class AdminExtensionsUpdatesModel extends Model
             if (!$row['extension_name']) {
                 $row['extension_name'] = $row['extension_alias'];
             }
-            $row['released_at'] = new Date($row['released_at']);
             $row['status'] = $statuses[$row['status']] ??= UpdateStatus::{$row['status']}->fetch();
 
             $rows[] = $row;

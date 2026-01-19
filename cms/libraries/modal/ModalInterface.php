@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -65,9 +65,9 @@ interface ModalInterface extends ResponderInterface
      * 
      * @param string $id
      * 
-     * @return modal_form
+     * @return ModalFormInterface
      */
-    public function form(string $id = ''): \modal_form;
+    public function getForm(string $id = ''): ModalFormInterface;
 
     /**
      * Set the pathway of the page
@@ -105,4 +105,13 @@ interface ModalInterface extends ResponderInterface
      * @return void
      */
     public function footer(string $html = ''): void;
+
+    /**
+     * Content
+     *
+     * @param string $html
+     * 
+     * @return void
+     */
+    public function content(string $html): void;
 }

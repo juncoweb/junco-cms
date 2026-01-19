@@ -1,7 +1,7 @@
 <?php
 
 /*
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -11,9 +11,9 @@ use Junco\Form\Contract\FormActionsInterface;
 class form_master_default_actions extends ActionElements implements FormActionsInterface
 {
     // vars
-    protected array $mainbox    = [];
-    protected array $leftbox    = [];
-    protected int   $group        = 0;
+    protected array $mainbox = [];
+    protected array $leftbox = [];
+    protected int   $group   = 0;
 
     /**
      * Button

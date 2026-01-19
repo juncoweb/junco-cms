@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -9,31 +9,38 @@
 $bls = Backlist::get();
 
 // filters
-$bft = $bls->getFilters();
-$bft->setValues($data);
-$bft->searchIn([
+$filters = $bls->getFilters();
+$filters->setValues($data);
+$filters->searchIn([
     1 => _t('Name'),
     2 => _t('User'),
     3 => _t('Email')
 ]);
-$bft->select('role_id', $roles);
-$bft->sort($sort, $order);
+$filters->select('role_id', $roles);
+$filters->sort($sort, $order);
 
 // table
-$bls->check_h();
-$bls->th(_t('Name'), ['sort' => true]);
-$bls->th(_t('Role'), ['priority' => 2]);
-$bls->th(_t('Created'), ['priority' => 2, 'width' => 90, 'sort' => true, 'class' => 'text-nowrap']);
-$bls->button_h(['control' => 'status', 'icon' => 'fa-solid fa-circle color-{{ color }}']);
-
 if ($rows) {
-    foreach ($rows as $row) {
-        $bls->check($row['id']);
-        $bls->td($row['fullname']);
-        $bls->td(implode(', ', $row['roles']));
-        $bls->td($row['created_at']->format(_t('Y-M-d')));
-        $bls->button($row['status']);
-    }
+    $bls->setRows($rows);
+    $bls->fixList('roles');
+    $bls->fixDate('created_at', _t('Y-M-d'));
+    $bls->fixEnum('status');
 }
+//
+$bls->check();
+$bls->column(':fullname')
+    ->setLabel(_t('Name'), $filters);
+
+$bls->column(':roles')
+    ->setLabel(_t('Role'))
+    ->setSubtle();
+
+$bls->column(':created_at')
+    ->setLabel(_t('Created'), $filters)
+    ->setSubtle()
+    ->setWidth(90)
+    ->noWrap();
+
+$bls->status('status');
 
 return $bls->render($pagi);

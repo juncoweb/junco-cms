@@ -5,7 +5,7 @@
 
 .portal-header {
     text-align: center;
-    margin: 0 0 $spacing;
+    margin: 0 0 var(--spacing-4);
 }
 
 .portal-title {
@@ -19,7 +19,7 @@
 }
 
 .portal-caption {
-    font-size: $large-font-size;
+    font-size: var(--font-size-lg);
 }
 
 // colors
@@ -99,7 +99,7 @@
 }
 
 // media
-@media (min-width: $screen-x-large) {
+@media (min-width: $screen-xl) {
     .portal-reduced-margin {
         margin-right: 20%;
     }

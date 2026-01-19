@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -9,23 +9,26 @@
 $bls = Backlist::get();
 
 // filters
-$bft = $bls->getFilters();
-$bft->setValues($data);
-$bft->search();
+$filters = $bls->getFilters();
+$filters->setValues($data);
+$filters->search();
 
 // table
-$bls->check_h();
-$bls->th(_t('Message'));
-$bls->th(['priority' => 2, 'class' => 'text-nowrap']);
-//$bls->status_h();
-$bls->link_h(['icon' => 'fa-solid fa-arrow-right']);
-
-foreach ($rows as $row) {
-    $bls->check($row['id']);
-    $bls->td($row['notification_message']);
-    $bls->td($row['created_at']->format($dt ??= _t('Y-M-d')));
-    //$bls->status($row['status']);
-    $bls->link($row['url'], (bool)$row['url']);
+if ($rows) {
+    $bls->setRows($rows);
+    $bls->fixDate('created_at', _t('Y-M-d'));
 }
+//
+$bls->check();
+$bls->column(':notification_message')
+    ->setLabel(_t('Message'));
+
+$bls->column(':created_at')
+    ->setSubtle()
+    ->noWrap();
+
+$bls->link(':url')
+    ->setIcon('fa-solid fa-arrow-right')
+    ->keep('url');
 
 return $bls->render($pagi);

@@ -1,7 +1,10 @@
 <?php
 
+use Junco\Settings\PluginLoader;
+use Junco\Settings\PluginUpdater;
+
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -388,19 +391,41 @@ class Settings
      */
     protected function runPlugin(array &$data): void
     {
-        $plugins = Plugins::get('settings', 'load', str_replace('-', '.', $this->key));
+        $plugin = Plugin::get('settings', 'load', str_replace('-', '.', $this->key));
 
-        if ($plugins) {
-            $rows = $data['rows'];
-            $plugins->run($rows);
-
-            // I verify that no new entries have been created.
-            if (array_keys($rows) == array_keys($data['rows'])) {
-                $data['rows'] = $rows;
-            } else {
-                $data['warning'][] = _t('The plugin is adding keys, so it is ignored.');
-            }
+        if (!$plugin) {
+            return;
         }
+
+        $loader = new PluginLoader($data['rows']);
+        $plugin->run($loader);
+
+        if ($loader->ok()) {
+            $data['rows'] = $loader->fetchAll();
+        } else {
+            $data['warning'][] = _t('The plugin is adding keys, so it is ignored.');
+        }
+    }
+
+    /**
+     * Run
+     * 
+     * @param array $rows
+     * 
+     * @return array $rows
+     */
+    public function runUpdatePlugin(array $rows): array
+    {
+        $plugin = Plugin::get('settings', 'update', str_replace('-', '.', $this->key));
+
+        if (!$plugin) {
+            return $rows;
+        }
+
+        $loader = new PluginUpdater($rows);
+        $plugin->run($loader);
+
+        return $loader->fetchAll();
     }
 
     /**

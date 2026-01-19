@@ -1,28 +1,38 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
+
+use Junco\Samples\Snippet\SamplesInterface;
 
 class Samples
 {
     /**
      * Get
      */
+    public static function get(): SamplesInterface
+    {
+        return snippet('samples');
+    }
+
+    /**
+     * Get
+     */
     public function fetchAll(string $search = '', int $field = 0): array
     {
         $pattern = $this->keyInfo('*.*')['file'];
-        $files = glob($pattern);
+        $files   = glob($pattern);
 
         if (!$files) {
             return [];
         }
 
-        $rows        = [];
-        $regex_1    = '';
-        $regex_2    = '';
-        $url        = url('admin/samples/show', ['key' => '%s']);
+        $rows    = [];
+        $regex_1 = '';
+        $regex_2 = '';
+        $url     = url('admin/samples/show', ['key' => '%s']);
 
         if ($search) {
             switch ($field) {
@@ -38,8 +48,8 @@ class Samples
         }
 
         foreach ($files as $file) {
-            $info        = pathinfo($file);
-            $extension    = basename(dirname($file, 3));
+            $info      = pathinfo($file);
+            $extension = basename(dirname($file, 3));
 
             if ($regex_2 && !preg_match($regex_2, $extension)) {
                 continue;
@@ -91,7 +101,7 @@ class Samples
         }
 
         $file   = $this->keyInfo($key)['json'];
-        $buffer    = json_encode($data, JSON_PRETTY_PRINT);
+        $buffer = json_encode($data, JSON_PRETTY_PRINT);
 
         //
         if (false === file_put_contents($file, $buffer)) {
@@ -115,7 +125,7 @@ class Samples
             'name' => $part[1],
             'point' => $part[2],
             'file' => SYSTEM_ABSPATH . sprintf('cms/plugins/%s/sample/%s/%s.php', $part[0], $part[1], $part[2]),
-            'json'    => SYSTEM_ABSPATH . sprintf('cms/plugins/%s/sample/%s/%s.json', $part[0], $part[1], 'sample'),
+            'json' => SYSTEM_ABSPATH . sprintf('cms/plugins/%s/sample/%s/%s.json', $part[0], $part[1], 'sample'),
         ];
     }
 
@@ -128,11 +138,11 @@ class Samples
     {
         $info = $this->keyInfo($key);
         $data = [
-            'key'            => $key,
-            'extension'        => $info['extension'],
-            'title'            => $info['name'],
-            'description'    => '',
-            'image'            => 'fa-solid fa-gear',
+            'key'         => $key,
+            'extension'   => $info['extension'],
+            'title'       => $info['name'],
+            'description' => '',
+            'image'       => 'fa-solid fa-gear',
         ];
 
         if (is_file($info['json'])) {
@@ -163,13 +173,28 @@ class Samples
      * Menu
      * 
      * @param string $extension
-     * @param array  $rows
+     * @param array  $baseRows
      */
-    public function menu(string $extension, array $rows = [])
+    public function menu(string $extension, array $baseRows = []): string
     {
-        // vars
-        $groups = [];
 
+        $groups  = $this->getGroups($baseRows);
+        $samples = $this->fetchAll($extension, 2);
+        $rows    = $this->merge($baseRows, $samples, $groups);
+
+        $this->addBackOption($rows);
+
+        return '<div class="widget-thirdbar" control-tpl="thirdbar">'
+            . $this->renderEdge($rows)
+            . '</div>';
+    }
+
+    /**
+     * 
+     */
+    protected function getGroups(array &$rows): array
+    {
+        $groups = [];
         foreach ($rows as $i => $row) {
             if (isset($row['edge'])) {
                 foreach ($row['edge'] as $key) {
@@ -179,37 +204,47 @@ class Samples
             }
         }
 
-        $_rows = $this->fetchAll($extension, 2);
-
-        foreach ($_rows as $row) {
-            if (isset($groups[$row['key']])) {
-                $rows[$groups[$row['key']]]['edge'][] = $row;
-            } else {
-                $rows[] = $row;
-            }
-        }
-
-        array_unshift($rows, [
-            'title' => _t('Back'),
-            'url' => url('admin/samples'),
-            'image' => 'fa-solid fa-arrow-left',
-        ]);
-
-        return '<div class="widget-thirdbar" control-tpl="thirdbar">'
-            . $this->_menu($rows)
-            . '</div>';
+        return $groups;
     }
 
     /**
      * 
      */
-    protected function _menu($rows)
+    protected function merge(array $rows, array $samples, array $groups): array
+    {
+        foreach ($samples as $sample) {
+            if (isset($groups[$sample['key']])) {
+                $rows[$groups[$sample['key']]]['edge'][] = $sample;
+            } else {
+                $rows[] = $sample;
+            }
+        }
+
+        return $rows;
+    }
+
+    /**
+     * Add back option
+     */
+    protected function addBackOption(array &$rows): void
+    {
+        array_unshift($rows, [
+            'title' => _t('Back'),
+            'url'   => url('admin/samples'),
+            'image' => 'fa-solid fa-arrow-left',
+        ]);
+    }
+
+    /**
+     * Render
+     */
+    protected function renderEdge(array $rows): string
     {
         $html = '';
         foreach ($rows as $row) {
             $edge = '';
             if (isset($row['edge'])) {
-                $edge = $this->_menu($row['edge']);
+                $edge = $this->renderEdge($row['edge']);
             }
 
             $html .= '<li>'

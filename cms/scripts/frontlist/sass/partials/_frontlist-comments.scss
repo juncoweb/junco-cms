@@ -1,19 +1,17 @@
 /* --- Frontlist Comments -------------------------------- */
-$frontlist-comments-secondary-color: var(--regular-subtle-font-color) !default;
-
 .fl-comments {
     .list-row {
-        margin-bottom: $spacing;
+        margin-bottom: var(--spacing-4);
 
         &.response {
-            padding-left: $spacing;
-            border-left: 3px solid $frontlist-comments-secondary-color;
+            padding-left: var(--spacing-4);
+            border-left: 3px solid var(--regular-border-color);
         }
     }
 
     .header,
     .message {
-        margin-bottom: $spacing * 0.3;
+        margin-bottom: var(--spacing-1);
     }
 
     .author {
@@ -21,23 +19,23 @@ $frontlist-comments-secondary-color: var(--regular-subtle-font-color) !default;
     }
 
     .date {
-        color: $frontlist-comments-secondary-color;
+        color: var(--regular-subtle-font-color);
     }
 
     .to {
-        color: $frontlist-comments-secondary-color;
+        color: var(--regular-subtle-font-color);
 
         &:hover {
-            color: $frontlist-comments-secondary-color;
+            color: var(--regular-subtle-font-color);
         }
     }
 
     .options {
-        font-size: $small-font-size;
+        font-size: var(--font-size-sm);
 
         a {
             //color: var(--regular-font-color);
-            color: $frontlist-comments-secondary-color;
+            color: var(--regular-subtle-font-color);
             margin: 0 5px;
             padding: 0 3px;
 

@@ -7,7 +7,7 @@
 
     .post-thumb {
         float: left;
-        margin-right: $spacing;
+        margin-right: var(--spacing-4);
 
         img {
             width: 85px;
@@ -20,6 +20,6 @@
 
     .post-meta {
         color: var(--regular-subtle-font-color);
-        font-size: $small-font-size;
+        font-size: var(--font-size-sm);
     }
 }

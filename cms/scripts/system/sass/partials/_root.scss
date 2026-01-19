@@ -55,3 +55,68 @@
         }
     }
 }
+
+:root {
+    // tipography
+    --line-height-base: #{$line-height-base};
+
+    --font-family-sans: #{$font-family-sans};
+    --font-family-serif: #{$font-family-serif};
+    --font-family-mono: #{$font-family-mono};
+    --font-family-base: #{$font-family-base};
+
+    --font-size-base: #{$font-size-base};
+    --font-size-sm: #{$font-size-sm};
+    --font-size-lg: #{$font-size-lg};
+    --font-size-xl: #{$font-size-xl};
+    --font-size-2xl: #{$font-size-2xl};
+    --font-size-3xl: #{$font-size-3xl};
+
+    // heading
+    --heading-font-family: #{$heading-font-family};
+    --heading-font-weight: #{$heading-font-weight};
+
+    // z-index
+    --zindex-navbar: #{$zindex-navbar};
+    --zindex-dropdown: #{$zindex-dropdown};
+    --zindex-modal: #{$zindex-modal};
+    --zindex-lightbox: #{$zindex-lightbox};
+    --zindex-tooltip: #{$zindex-tooltip};
+    --zindex-loading: #{$zindex-loading};
+    --zindex-toast: #{$zindex-toast};
+    --zindex-pullnav: #{$zindex-pullnav};
+
+    // shadows
+    --box-shadow-sm: #{$box-shadow-sm};
+    --box-shadow-md: #{$box-shadow-md};
+    --box-shadow-lg: #{$box-shadow-lg};
+    --box-shadow-xl: #{$box-shadow-xl};
+
+    --box-shadow-template: #{$box-shadow-template};
+    --box-shadow-dropdown: #{box-shadow-dropdown};
+    --box-shadow-button: #{$box-shadow-button};
+    --box-shadow-input: #{$box-shadow-input};
+
+    // overflow
+    --overlay-color-1: #{$overlay-color-1};
+    --overlay-color-2: #{$overlay-color-2};
+
+    // border
+    --border-width: #{$border-width};
+    --border-style: #{$border-style};
+
+    // radius
+    --rounded-sm: #{$border-radius-sm};
+    --rounded-md: #{$border-radius-md};
+    --rounded-lg: #{$border-radius-lg};
+    --rounded-xl: #{$border-radius-xl};
+    --rounded-full: #{$border-radius-full};
+
+    // spacing
+    @each $size, $value in $var-spacers {
+        --spacing-#{$size}: #{$value};
+    }
+
+    // sizing
+    --sizing: #{$sizing};
+}

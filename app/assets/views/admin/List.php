@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -9,32 +9,31 @@
 $bls = Backlist::get();
 
 // filters
-$bft = $bls->getFilters();
-$bft->setValues($data);
-$bft->checkbox('verify', _t('Verify'));
-$bft->checkbox('compare', _t('Compare'));
-$bft->select('type', $types);
-$bft->search();
+$filters = $bls->getFilters();
+$filters->setValues($data);
+$filters->checkbox('verify', _t('Verify'));
+$filters->checkbox('compare', _t('Compare'));
+$filters->select('type', $types);
+$filters->search();
 
 // table
-$bls->check_h();
-$bls->th(_t('File'));
-$bls->th(_t('Type'), ['priority' => 2]);
-$bls->button_h('inspect');
-
-if ($pagi->num_rows) {
-    $statuses = [
-        ['icon' => 'fa-solid fa-circle color-green', 'title' => _t('Ok')],
-        ['icon' => 'fa-solid fa-circle color-red', 'title' => _t('Verify')],
-    ];
-
-    foreach ($pagi->fetchAll() as $row) {
-        $bls->check($row['key']);
-        $bls->td($row['name']);
-        $bls->td($row['type']);
-        $bls->button($statuses[$row['to_verify']]);
-    }
+if ($rows) {
+    $bls->setRows($rows);
+    $bls->fixEnum('to_verify', [
+        ['color' => 'green', 'title' => _t('Ok')],
+        ['color' => 'red', 'title' => _t('Verify')],
+    ]);
 }
+//
+$bls->check(':key');
+$bls->column(':name')
+    ->setLabel(_t('File'));
 
+$bls->column(':type')
+    ->setLabel(_t('Type'))
+    ->setSubtle();
+
+$bls->button('inspect')
+    ->setIcon('fa-solid fa-circle color-{{ to_verify.color }}', ':to_verify.title');
 
 return $bls->render($pagi);

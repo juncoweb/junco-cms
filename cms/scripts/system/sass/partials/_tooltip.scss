@@ -7,7 +7,7 @@
     position: absolute;
     top: -2000px;
     left: -2000px;
-    z-index: $zindex-tooltip;
+    z-index: var(--zindex-tooltip);
     visibility: hidden;
     transition: opacity 300ms;
     opacity: 0;

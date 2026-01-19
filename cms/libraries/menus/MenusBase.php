@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -9,10 +9,10 @@ abstract class MenusBase implements MenusInterface
 {
     // vars
     protected Menus  $menus;
-    protected string $HR                = ';';
-    protected string $EOL                = '';
-    protected string $TAB                = '';
-    protected bool   $only_if_has_edge    = false;
+    protected string $HR               = ';';
+    protected string $EOL              = '';
+    protected string $TAB              = '';
+    protected bool   $only_if_has_edge = false;
 
     /**
      * Constructor
@@ -34,11 +34,12 @@ abstract class MenusBase implements MenusInterface
      * 
      * @param bool $value
      * 
-     * @return void
+     * @return self
      */
-    public function setWithEdges(bool $value = true): void
+    public function setWithEdges(bool $value = true): self
     {
         $this->only_if_has_edge = $value;
+        return $this;
     }
 
     /**

@@ -1,8 +1,20 @@
 
-Form v2.5
+Logger v2.4
 =======================================================
-- The date.js library is now datepicker.js
+- The logger adapter has been added.
 
-Zoom v0.1
+Session v1.1
 =======================================================
-- Now the &quot;date&quot; method only accepts a date in string format.
+- Fixed bug in session(), the session was closing when the browser was refreshed.
+
+Backlist v5.1
+=======================================================
+- The way the table is created has been changed.
+
+Portal v1.1
+=======================================================
+- Now use a widget collector.
+
+Dashboard v2.4
+=======================================================
+- Now use a widget collector.

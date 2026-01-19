@@ -29,11 +29,6 @@ return [
 	 */
 	'front_default_component' => 'system',
 	'route_replaces' => [
-		'component' => [
-			'contents' => 'blogs'
-		],
-		'task' => [
-		]
 	],
 
 	/**

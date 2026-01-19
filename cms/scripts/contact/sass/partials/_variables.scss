@@ -1,18 +1,18 @@
 // portal
-$contact-form-bg-color: var(--regular-bg-color) !default;
-$contact-form-padding: 20px 0 40px !default;
+$contact-portal-bg-color: var(--regular-bg-color) !default;
+$contact-portal-padding: var(--spacing-4) 0 !default;
+$contact-portal-width: calc(var(--sizing) * 32) !default;
 
 // widgets
 $contact-icon-color: null !default;
-$contact-icon-size: $large-font-size !default;
+$contact-icon-size: var(--font-size-lg) !default;
 
-$contact-links-size: 24px !default;
+$contact-links-font-size: var(--font-size-xl) !default;
+$contact-links-size: calc($contact-links-font-size * 2) !default;
+$contact-links-margin: 0 10px 2px 0 !default;
+$contact-links-border-radius: var(--rounded-full) !default;
+//
 $contact-links-color: var(--regular-font-color) !default;
-$contact-links-color-hover: var(--solid-font-color) !default;
-$contact-links-margin: 0 10px 0 0 !default;
-$contact-links-padding: null !default;
-$contact-links-height: $contact-links-size * 2 !default;
-$contact-links-width: $contact-links-height !default;
 $contact-links-bg-color: var(--regular-border-color) !default;
-$contact-links-bg-color-hover: $primary-color !default;
-$contact-links-border-radius: 50% !default;
+$contact-links-hover-color: var(--solid-font-color) !default;
+$contact-links-hover-bg-color: var(--solid-primary-bg-color) !default;

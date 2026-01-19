@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -113,6 +113,11 @@ class AdminExtensionsModel extends Model
 
         foreach ($rows as $i => $row) {
             $rows[$i]['status'] = $statuses[$row['status']] ??= ExtensionStatus::{$row['status']}->fetch();
+            $rows[$i]['__labels'] = [];
+
+            if (!$row['is_protected']) {
+                $rows[$i]['__labels'][] = 'owner';
+            }
         }
 
         if ($rows && SYSTEM_DEVELOPER_MODE) {
@@ -435,8 +440,14 @@ class AdminExtensionsModel extends Model
         $names    = (new Components)->getNames();
 
         foreach ($rows as $i => $row) {
-            $rows[$i]['can_compile']    = !$row['is_protected'] && $row['package_id'] == -1;
+            $can_compile = !$row['is_protected'] && $row['package_id'] == -1;
+
+            $rows[$i]['can_compile']    = $can_compile;
             $rows[$i]['package_exists'] = $row['status']['is_active'] && is_file(sprintf($filepath, $row['extension_alias'], $row['extension_version']));
+
+            if ($can_compile) {
+                $rows[$i]['__labels'][] = 'package';
+            }
 
             if ($row['components']) {
                 $components = [];

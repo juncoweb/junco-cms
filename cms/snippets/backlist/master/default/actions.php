@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -208,8 +208,8 @@ class backlist_master_default_actions extends ActionElements implements ActionsI
         }
 
         return '<div backlist-actions class="backlist-actions">'
-            . '<div>' . $html_1 . $html_2 . '</div>'
-            . '<div></div>'
+            . '<div class="box-buttons">' . $html_1 . $html_2 . '</div>'
+            . '<div class="box-filters"></div>'
             . '</div>';
     }
 

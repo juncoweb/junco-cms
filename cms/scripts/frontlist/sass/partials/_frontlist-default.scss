@@ -1,52 +1,49 @@
 /* --- Frontlist ------------------------------- */
 .frontlist {
-    clear: left;
-    border-collapse: collapse;
-    width: 100%;
+    article {
+        grid-template-columns: min-content auto min-content;
+        border-bottom-width: var(--border-width);
+        border-bottom-style: var(--border-style);
+        border-bottom-color: $fronlist-default-border-color;
 
-    & > tbody > tr {
-        border-bottom: 1px solid $fronlist-border-color;
+        > div {
+            padding-bottom: 1px;
+        }
 
-        & > td {
-            vertical-align: top;
+        .article-media {
+            width: $fronlist-default-media-width;
 
-            &.col-img {
-                width: 120px;
-                text-align: center;
-                padding-right: 10px;
-
-                img {
-                    border: 0;
-                    padding: 2px;
-                }
+            img {
+                display: block;
+                width: 100%;
             }
+        }
 
-            &.col-bdy {
-                h3 {
-                    font-size: $large-font-size;
-                    margin: 0;
+        .article-container {
+            h3 {
+                font-size: var(--font-size-lg);
+                margin: 0;
 
-                    a {
-                        color: var(--regular-font-color);
-                        text-decoration: none;
-                    }
+                a {
+                    color: var(--regular-font-color);
+                    text-decoration: none;
                 }
-            }
-
-            &.col-opt {
-                width: 20px;
             }
         }
     }
 
-    .fl-author,
-    .fl-date {
-        color: $fronlist-desc-color;
-        font-size: $small-font-size;
+    .article-author,
+    .article-date {
+        font-size: var(--font-size-sm);
+        color: $fronlist-default-subtle-font-color;
     }
 
-    .fl-description {
-        color: $fronlist-desc-color;
-        min-height: 30px;
+    .article-desc {
+        color: $fronlist-default-subtle-font-color;
+        padding-bottom: var(--spacing-2);
+    }
+
+    .article-footer {
+        padding-bottom: var(--spacing-2);
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -61,7 +61,10 @@ class AdminLanguageDomainsModel extends Model
                 && (pathinfo($dir . $elem, PATHINFO_EXTENSION) == 'po')
                 && (!$filter || preg_match($filter, $elem))
             ) {
-                $rows[$elem] = $elem;
+                $rows[$elem] = [
+                    'id' => $elem,
+                    'name' => $elem
+                ];
             }
         }
 

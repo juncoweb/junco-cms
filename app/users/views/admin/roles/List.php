@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -9,19 +9,15 @@
 $bls = Backlist::get();
 
 // filters
-$bft = $bls->getFilters();
-$bft->setValues($data);
-$bft->search();
+$filters = $bls->getFilters();
+$filters->setValues($data);
+$filters->search();
 
 // table
-$bls->check_h();
-$bls->th(_t('Name'));
-
-if ($rows) {
-    foreach ($rows as $row) {
-        $bls->check($row['id']);
-        $bls->td($row['role_name']);
-    }
-}
+$bls->setRows($rows);
+//
+$bls->check();
+$bls->column(':role_name')
+    ->setLabel(_t('Name'));
 
 return $bls->render($pagi);

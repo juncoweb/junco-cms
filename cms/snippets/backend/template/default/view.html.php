@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
 // vars
 $this->css(['assets/backend.min.css']);
-$this->js(['assets/backend-default.min.js']);
+$this->js(['assets/backend.min.js']);
 
 $html_title = '';
 if ($this->title) {
@@ -95,14 +95,16 @@ $footer        = sprintf(_t('© %d by %s - All rights reserved'), date('Y'), '<a
         <a href="#sidebar" class="visually-hidden-focusable"><?= _t('Skip to sidebar') ?></a>
     </div>
 
-    <header class="layout-header<?= ($this->options->header_color === 'default' ? '' : ' header-' . $this->options->header_color) ?>" data-sticky>
-        <div class="layout-logo">
-            <a href="<?= url('admin/') ?>" aria-label="<?= _t('Homepage') ?>">
-                <div class="layout-capital"><?= $this->getCapital() ?></div>
-                <div class="layout-sitename"><span><?= $this->site->name ?></span><span> | <?= _t('Administration') ?></span></div>
-            </a>
+    <header class="layout-header<?= ($this->themeColor === 'default' ? '' : ' header-' . $this->themeColor) ?>" data-tck="<?= $this->themeColorKey ?>" data-sticky>
+        <div>
+            <div class="layout-logo">
+                <a href="<?= url('admin/') ?>" aria-label="<?= _t('Homepage') ?>">
+                    <div class="layout-capital"><?= $this->getCapital() ?></div>
+                    <div class="layout-sitename"><span><?= $this->site->name ?></span><span> | <?= _t('Administration') ?></span></div>
+                </a>
+            </div>
+            <?= $mainbar ?>
         </div>
-        <?= $mainbar ?>
     </header><!-- end header -->
 
     <?= $sidebar ?>

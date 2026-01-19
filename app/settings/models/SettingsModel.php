@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -52,7 +52,7 @@ class SettingsModel extends Model
         }
 
         # plugins
-        Plugins::get('settings', 'update', str_replace('-', '.', $input['__key']))?->run($rows);
+        $rows = $settings->runUpdatePlugin($rows);
 
         foreach ($rows as $k => $value) {
             // security
@@ -97,7 +97,9 @@ class SettingsModel extends Model
 
                 // json
                 case 'json':
-                    if ($value && is_string($value)) {
+                    if (empty($value)) {
+                        $value = [];
+                    } elseif (is_string($value)) {
                         $value = json_decode($value, true);
 
                         if (null === $value) {

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -9,36 +9,36 @@
 $bls = Backlist::get();
 
 // filters
-$bft = $bls->getFilters();
-$bft->setValues($data);
-$bft->search();
+$filters = $bls->getFilters();
+$filters->setValues($data);
+$filters->search();
 
 // table
-$bls->check_h();
-$bls->link_h(_t('Name'), ['control' => 'domains']);
-$bls->th(_t('Key'), ['priority' => 2]);
-$bls->button_h(['icon' => '']);;
-$bls->button_h('status');
-
 if ($rows) {
-    $selected = [
-        'no' => ['icon' => 'fa-solid fa-star table-dimmed', 'title' => _t('No')],
-        'yes' =>  ['icon' => 'fa-solid fa-star', 'title' => _t('Selected')],
-    ];
-    $statuses = [
-        'disabled' => ['icon' => 'fa-solid fa-circle color-red', 'title' => _t('Disabled')],
-        'enabled' => ['icon' => 'fa-solid fa-circle color-green', 'title' => _t('Enabled')]
-    ];
-
-    foreach ($rows as $row) {
-        if ($row['status'] == 'enabled') {
-            $bls->setLabel('enabled');
-        }
-        $bls->check($row['id']);
-        $bls->link(['caption' => $row['name']]);
-        $bls->td($row['id']);
-        $bls->button($selected[$row['selected']]);
-        $bls->button($statuses[$row['status']]);
-    }
+    $bls->setRows($rows);
+    $bls->setLabels('__labels');
+    $bls->fixEnum('selected', [
+        'no' => ['color' => 'subtle-default', 'title' => _t('No')],
+        'yes' =>  ['color' => 'default', 'title' => _t('Selected')]
+    ]);
+    $bls->fixEnum('status', [
+        'disabled' => ['color' => 'red', 'title' => _t('Disabled')],
+        'enabled' => ['color' => 'green', 'title' => _t('Enabled')]
+    ]);
 }
+//
+$bls->check();
+$bls->control('domains')
+    ->setText(':name')
+    ->setLabel(_t('Name'));
+
+$bls->column(':id')
+    ->setLabel(_t('Key'))
+    ->setSubtle();
+
+$bls->button()
+    ->setIcon('fa-solid fa-star color-{{ selected.color }}', ':selected.title');
+
+$bls->status('status');
+
 return $bls->render();

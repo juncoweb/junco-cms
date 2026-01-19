@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -26,6 +26,6 @@ $tiles->separate(_t('Shortcuts'));
 // template
 $tpl = Template::get();
 $tpl->title(_t('Email'), 'fa-solid fa-envelope');
-$tpl->content = $tiles->render();
+$tpl->content($tiles->render());
 
 return $tpl->response();

@@ -107,8 +107,8 @@
             &.separator {
                 font-size: 1px;
                 margin: 2px 0 2px 0;
-                border-bottom-width: $border-width;
-                border-bottom-style: $border-style;
+                border-bottom-width: var(--border-width);
+                border-bottom-style: var(--border-style);
                 border-bottom-color: $separator-color;
                 height: 0;
                 line-height: 0;
@@ -146,7 +146,7 @@
             right: $right;
             left: $left;
             display: none;
-            z-index: $zindex-navbar;
+            z-index: var(--zindex-navbar);
 
             &.active {
                 display: block;
@@ -193,7 +193,7 @@
         color: $hover-color;
     }
 
-    @media (max-width: $screen-small) {
+    @media (max-width: $screen-sm) {
         display: inline-block;
     }
 }
@@ -217,7 +217,7 @@
     height: 100%;
     width: 70%;
     transform: translateX(-100%);
-    z-index: $zindex-pullnav + 1;
+    z-index: calc(var(--zindex-pullnav) + 1);
     zoom: 1;
     overflow-y: auto;
     transition: transform 0.2s ease-out;
@@ -225,14 +225,14 @@
 
 .pull-overlay {
     display: none;
-    background: rgba(0, 0, 0, 0.25);
+    background: var(--overlay-color-1);
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
     overflow: hidden;
-    z-index: $zindex-pullnav;
+    z-index: var(--zindex-pullnav);
 }
 
 .pull-target {
@@ -242,7 +242,7 @@
     left: 0;
     width: 10px;
     background: rgba(0, 0, 0, 0);
-    z-index: $zindex-pullnav + 2;
+    z-index: calc(var(--zindex-pullnav) + 2);
 }
 
 .pull-on {

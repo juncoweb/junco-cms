@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -38,6 +38,6 @@ $form->element($tabs->render());
 // modal
 $modal = Modal::get();
 $modal->title($title);
-$modal->content = $form->render();
+$modal->content($form->render());
 
 return $modal->response();

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -17,6 +17,6 @@ $bac->filters();
 $modal = Modal::get();
 $modal->close();
 $modal->title(_t('Developers'));
-$modal->content = $bbx->render($this->list());
+$modal->content($bbx->render($this->list()));
 
 return $modal->response();

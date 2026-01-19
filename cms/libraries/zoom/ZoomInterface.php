@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -29,11 +29,11 @@ interface ZoomInterface
     /**
      * Date
      * 
-     * @param Date $date
+     * @param ?string $date
      * 
      * @return ZoomGroup
      */
-    public function date(Date|string|null $date): ZoomGroup;
+    public function date(?string $date): ZoomGroup;
 
     /**
      * Group

@@ -1,14 +1,16 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
-return function (&$rows) {
-    $rows['shortcuts_allow_cache']['options'] = [
+use Junco\Settings\PluginLoader;
+
+return function (PluginLoader $loader) {
+    $loader->setOptions('shortcuts_allow_cache', [
         -1 => _t('Inherit'),
-        0 => _t('No'),
-        1 => _t('Yes')
-    ];
+        0  => _t('No'),
+        1  => _t('Yes')
+    ]);
 };

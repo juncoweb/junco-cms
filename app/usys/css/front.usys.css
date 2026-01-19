@@ -1,37 +1,37 @@
 /* --- Usys --------------------------------------------- */
 .usys-wrapper {
-  margin: 3rem auto;
+  margin: var(--spacing-12) auto;
   max-width: 700px;
 }
 .usys-modal {
-  margin: 1rem 2rem;
+  margin: var(--spacing-4) var(--spacing-8);
 }
 .usys-login {
   max-width: 400px !important;
 }
 .usys-login .reset-pwd {
-  margin-left: 1rem;
+  margin-left: var(--spacing-4);
 }
 .usys-login button {
   width: 100%;
 }
 .usys-connect {
-  margin-top: 0.5rem;
+  margin-top: var(--spacing-2);
 }
 .usys-connect a {
   font-weight: bold;
-  color: #fff;
-  background: #009eff;
-  padding: 0.75rem 1rem;
+  color: var(--solid-font-color);
+  background: var(--solid-bg-color);
+  padding: var(--spacing-3) var(--spacing-4);
   display: block;
   position: relative;
   text-decoration: none;
 }
 .usys-connect a i {
-  margin-right: 1rem;
+  margin-right: var(--spacing-4);
 }
 .usys-reset-act {
-  margin: 3rem auto;
+  margin: var(--spacing-12) auto;
 }
 .usys-reset-act #new-email {
   margin: 0;
@@ -40,6 +40,6 @@
 }
 .usys-reset-act #new-email span {
   font-style: italic;
-  margin-right: 1rem;
+  margin-right: var(--spacing-4);
   padding: 0;
 }

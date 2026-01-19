@@ -1,10 +1,9 @@
-/* --- contact-form ---------------------------------------- */
-.widget-contact-form {
-    background-color: $contact-form-bg-color;
-    padding: $contact-form-padding;
+/* --- portal-contact ---------------------------------------- */
+.portal-contact {
+    background-color: $contact-portal-bg-color;
+    padding: $contact-portal-padding;
 
     .container {
-        max-width: 500px;
-        margin: 0 auto;
+        max-width: $contact-portal-width;
     }
 }

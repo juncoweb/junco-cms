@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -50,8 +50,6 @@ class MyNotificationsModel extends Model
         $rows = [];
         if ($pagi->num_rows) {
             foreach ($pagi->fetchAll() as $row) {
-                $row['created_at'] = new Date($row['created_at']);
-
                 $rows[] = $row;
             }
 

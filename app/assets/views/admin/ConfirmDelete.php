@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
 // modal
 $modal = Modal::get();
 $modal->type('alert');
-$modal->title($_text = _t('Delete'), 'fa-solid fa-trash');
-$modal->enter($_text);
+$modal->title($t = _t('Delete'), 'fa-solid fa-trash');
+$modal->enter($t);
 $modal->close();
 //
-$modal->form();
-$modal->form->question($id);
-$modal->form->hidden('keys', $id);
+$modal->getForm()
+    ->question($id)
+    ->hidden('keys', $id);
 
 return $modal->response();

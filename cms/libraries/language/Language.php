@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -21,9 +21,9 @@ class Language
     protected $translator;
     protected $language;
     //
-    protected $config            = null;
-    protected $availables        = [];
-    protected $num_availables    = 0;
+    protected $config         = null;
+    protected $availables     = [];
+    protected $num_availables = 0;
 
     /**
      * Constructor
@@ -57,9 +57,9 @@ class Language
             }
         } else {
             // default
-            $language            = 'en_GB';
-            $this->availables    = [$language];
-            $this->translator    = new None();
+            $language         = 'en_GB';
+            $this->availables = [$language];
+            $this->translator = new None();
         }
 
         $this->language = $language;
@@ -138,7 +138,7 @@ class Language
     /**
      * Find in Url.
      */
-    protected function findInUrl()
+    protected function findInUrl(): string
     {
         $language = Filter::input(GET, $this->config['language.key']);
 
@@ -149,50 +149,52 @@ class Language
                 $language = $this->negotiate();
             }
         }
-        $this->normalize($language);
 
-        return $language;
+        return $this->normalize($language);
     }
 
     /**
      * Find in route.
      */
-    protected function findInRoute()
+    protected function findInRoute(): ?string
     {
         $availables = $this->availables;
+
         if ($this->config['language.normalize']) {
             $availables = array_merge($availables, array_keys($this->config['language.normalize'] ?: []));
         }
+
         return router()->lookupLanguage($availables);
     }
 
     /**
      * Find in Cookie.
      */
-    protected function findInCookie()
+    protected function findInCookie(): string
     {
-        $is_empty = empty($_COOKIE[$this->config['language.key']]);
+        $cookieLanguage = cookie($this->config['language.key']);
 
-        if (!$is_empty) {
-            $language = $_COOKIE[$this->config['language.key']];
+        if ($cookieLanguage) {
+            $language = $cookieLanguage;
         } elseif ($this->config['language.negotiate']) {
             $language = $this->negotiate();
         } else {
-            $language = false;
+            $language = '';
         }
-        $this->normalize($language);
 
-        if ($is_empty || $language != $_COOKIE[$this->config['language.key']]) {
-            $cookie_path = config('system.cookie_path');
-            setcookie($this->config['language.key'], $language, 0x7fffffff, $cookie_path);
+        $language = $this->normalize($language);
+
+        if ($language != $cookieLanguage) {
+            $this->setCookie($language);
         }
+
         return $language;
     }
 
     /**
      * Option to modify (and normalize) the language.
      */
-    protected function normalize(&$language)
+    protected function normalize(?string $language): string
     {
         if (
             $language
@@ -205,6 +207,18 @@ class Language
         if (!$language || !in_array($language, $this->availables)) {
             $language = $this->availables[0];
         }
+
+        return $language;
+    }
+
+    /**
+     * Set
+     */
+    public function setCookie(string $language): bool
+    {
+        $cookie_path = config('system.cookie_path');
+
+        return setcookie($this->config['language.key'], $language, 0x7fffffff, $cookie_path);
     }
 
     /**
@@ -212,7 +226,7 @@ class Language
      *
      * @see: http://www.php.net/manual/en/function.http-negotiate-language.php
      */
-    protected function negotiate()
+    protected function negotiate(): string
     {
         // vars
         $server    = request()->getServerParams();

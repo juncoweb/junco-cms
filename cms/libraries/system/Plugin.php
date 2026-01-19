@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -64,5 +64,36 @@ class Plugin
     public function run(mixed ...$args): mixed
     {
         return call_user_func_array($this->listener, $args);
+    }
+
+    /**
+     * Run the plugin.
+     * 
+     * @param mixed ...$args   The parameters that the plugin function requires.
+     *
+     * @return mixed           The return of the plugin function.
+     */
+    public function safeRun(mixed ...$args): mixed
+    {
+        try {
+            return call_user_func_array($this->listener, $args);
+        } catch (Throwable $e) {
+            $this->log($e);
+        }
+
+        return null;
+    }
+
+    /**
+     * Log
+     */
+    public function log(Throwable $e): void
+    {
+        app('logger')->alert(sprintf('%s: %s', get_class($e), $e->getMessage()), [
+            'code'      => $e->getCode(),
+            'file'      => $e->getFile(),
+            'line'      => $e->getLine(),
+            'backtrace' => $e->getTraceAsString()
+        ]);
     }
 }

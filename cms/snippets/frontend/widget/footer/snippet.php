@@ -1,36 +1,20 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
-class widget_frontend_footer_snippet
+use Junco\Template\WidgetBase;
+
+class widget_frontend_footer_snippet extends WidgetBase
 {
-    // vars
-    protected $rows = [];
-
-    /**
-     * Section
-     * 
-     * @param array $section
-     */
-    public function section(array $section)
-    {
-        $this->rows[] = array_merge([
-            'title'        => '',
-            'content'    => '',
-            'css'        => ''
-        ], $section);
-    }
-
     /**
      * Render
      */
-    function render()
+    function render(): string
     {
         $html  = '';
-
         foreach ($this->rows as $row) {
             $html .= "\n\t\t"
                 . '<div class="widget' . ($row['css'] ? ' ' . $row['css'] : '') . '">'
@@ -39,6 +23,6 @@ class widget_frontend_footer_snippet
                 . '</div>';
         }
 
-        return "\n\t" . '<footer class="tpl-footer"><div class="container"><div class="grid grid-4 grid-responsive">' . $html . "\n\t" . '</div></div></footer>';
+        return '<div class="grid grid-4 grid-responsive">' . $html . "\n\t" . '</div>';
     }
 }

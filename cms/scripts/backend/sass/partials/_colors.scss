@@ -1,0 +1,61 @@
+/* --- Colors --- */
+@each $name, $color in $theme-colors {
+    $className: ".header-#{$name}";
+    $class: -#{$name};
+
+    @if ($name == "default") {
+        $className: "";
+        $class: "";
+    }
+
+    .layout-header#{$className} {
+        --bg-color: var(--solid#{$class}-bg-color);
+        --font-color: var(--solid#{$class}-font-color);
+        --subtle-font-color: var(--solid#{$class}-subtle-font-color);
+    }
+}
+
+.layout-header {
+    background: var(--bg-color);
+
+    .layout-logo a {
+        color: var(--font-color);
+    }
+
+    .layout-capital {
+        color: var(--font-color);
+        background: var(--subtle-font-color);
+    }
+
+    // search
+    .layout-search {
+        span,
+        input,
+        input:hover,
+        input:focus {
+            border-color: var(--subtle-font-color);
+            box-shadow: none;
+        }
+
+        span {
+            color: var(--subtle-font-color);
+        }
+
+        input {
+            color: var(--font-color);
+        }
+
+        input::placeholder {
+            color: var(--subtle-font-color);
+        }
+    }
+
+    // topbar
+    .layout-topbar .th-btn {
+        color: var(--subtle-font-color);
+
+        &:hover {
+            color: var(--font-color);
+        }
+    }
+}

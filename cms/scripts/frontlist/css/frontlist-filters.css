@@ -2,14 +2,14 @@
 .frontlist-filters {
   text-align: right;
   background: var(--regular-bg-color);
-  margin-bottom: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
+  margin-bottom: var(--spacing-4);
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--rounded-md);
   position: relative;
 }
 .frontlist-filters form > div {
   display: inline-block;
-  gap: 1rem;
+  gap: var(--spacing-4);
   flex-wrap: wrap;
 }
 .frontlist-filters input.btn[name=search] {

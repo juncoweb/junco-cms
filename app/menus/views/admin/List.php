@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -9,36 +9,45 @@
 $bls = Backlist::get();
 
 // filters
-$bft = $bls->getFilters();
-$bft->setValues($data);
-$bft->searchIn([
+$filters = $bls->getFilters();
+$filters->setValues($data);
+$filters->searchIn([
     1 => _t('Path'),
     2 => _t('Extension'),
 ]);
-$bft->select('menu_key', $menu_keys);
+$filters->select('menu_key', $menu_keys);
 
 // table
-$bls->check_h();
-$bls->th(_t('Name'));
-$bls->th(_t('Extension'), ['priority' => 2]);
-$bls->th(_t('Key'), ['priority' => 2]);
-$bls->button_h('lock');
-$bls->status_h();
-
 if ($rows) {
-    $distributed = [
-        ['icon' => 'fa-solid fa-link-slash table-dimmed', 'title' => _t('Not distributed')],
-        ['icon' => 'fa-solid fa-link', 'title' => _t('Is distributed')],
-    ];
-
-    foreach ($rows as $row) {
-        $bls->check($row['id']);
-        $bls->td(str_repeat('<span class="color-light">|—</span> ', $row['depth']) . $row['menu_name']);
-        $bls->td($row['extension_name']);
-        $bls->td($bls->isRepeated($row['menu_key']));
-        $bls->button($distributed[$row['is_distributed']], !$row['is_protected']);
-        $bls->status($row['status']);
+    foreach ($rows as &$row) {
+        $row['before'] = str_repeat('<span class="color-subtle-default">|—</span> ', $row['depth']);
     }
+
+    $bls->setRows($rows);
+    $bls->fixRepeats('menu_key');
+    $bls->fixEnum('is_distributed', [
+        ['icon' => 'fa-solid fa-link-slash table-subtle.color', 'title' => _t('Not distributed')],
+        ['icon' => 'fa-solid fa-link', 'title' => _t('Is distributed')],
+    ]);
+    $bls->fixEnum('status');
 }
+//
+$bls->check();
+$bls->column(':menu_name')
+    ->setLabel(_t('Name'))
+    ->setBefore(':before');
+
+$bls->column(':extension_name')
+    ->setLabel(_t('Extension'))
+    ->setSubtle();
+
+$bls->column(':menu_key')
+    ->setLabel(_t('Key'))
+    ->setSubtle();
+
+$bls->button('lock')
+    ->setIcon(':is_distributed.icon', ':is_distributed.title');
+
+$bls->status('status');
 
 return $bls->render($pagi);

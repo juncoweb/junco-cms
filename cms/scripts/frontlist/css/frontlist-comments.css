@@ -1,14 +1,14 @@
 /* --- Frontlist Comments -------------------------------- */
 .fl-comments .list-row {
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-4);
 }
 .fl-comments .list-row.response {
-  padding-left: 1rem;
-  border-left: 3px solid var(--regular-subtle-font-color);
+  padding-left: var(--spacing-4);
+  border-left: 3px solid var(--regular-border-color);
 }
 .fl-comments .header,
 .fl-comments .message {
-  margin-bottom: 0.3rem;
+  margin-bottom: var(--spacing-1);
 }
 .fl-comments .author {
   font-weight: bold;
@@ -23,7 +23,7 @@
   color: var(--regular-subtle-font-color);
 }
 .fl-comments .options {
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
 }
 .fl-comments .options a {
   color: var(--regular-subtle-font-color);

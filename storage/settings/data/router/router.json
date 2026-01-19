@@ -88,12 +88,7 @@
             "type": "input-text",
             "group": 2,
             "ordering": 3,
-            "default_value": {
-                "component": {
-                    "contents": "blogs"
-                },
-                "task": []
-            },
+            "default_value": [],
             "help": "Replace component and task name. Format: component:renamed{task:renamed}",
             "history": [
                 "front_replace_url"

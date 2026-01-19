@@ -1,5 +1,5 @@
 {
-    "assets": "# utils\r\ncms\/scripts\/system\/js\/utils\/ActiveHeader.js,\r\ncms\/scripts\/system\/js\/utils\/theme.js,\r\n\r\n# frontend\r\ncms\/scripts\/system\/js\/utils\/navbar.js,\r\ncms\/scripts\/frontend\/js\/frontend-default.js,\r\n\r\n#\r\ncms\/scripts\/usys\/js\/usys.js,\r\ncms\/scripts\/notifications\/js\/notifications.js,",
-    "default_assets": "# utils\r\ncms\/scripts\/system\/js\/utils\/ActiveHeader.js,\r\ncms\/scripts\/system\/js\/utils\/theme.js,\r\n\r\n# frontend\r\ncms\/scripts\/system\/js\/utils\/navbar.js,\r\ncms\/scripts\/frontend\/js\/frontend-default.js,\r\n\r\n#\r\ncms\/scripts\/usys\/js\/usys.js,\r\ncms\/scripts\/notifications\/js\/notifications.js,",
+    "assets": "# utils\r\ncms\/scripts\/system\/js\/utils\/ActiveHeader.js,\r\ncms\/scripts\/system\/js\/utils\/theme.js,\r\n\r\n# frontend\r\ncms\/scripts\/system\/js\/utils\/navbar.js,\r\ncms\/scripts\/frontend\/js\/frontend-default.js,\r\n\r\n# plugins\r\ncms\/scripts\/usys\/js\/usys.js,\r\ncms\/scripts\/notifications\/js\/notifications.js,\r\ncms\/scripts\/frontend\/js\/plugin.cookie-consent.js,",
+    "default_assets": "# utils\r\ncms\/scripts\/system\/js\/utils\/ActiveHeader.js,\r\ncms\/scripts\/system\/js\/utils\/theme.js,\r\n\r\n# frontend\r\ncms\/scripts\/system\/js\/utils\/navbar.js,\r\ncms\/scripts\/frontend\/js\/frontend-default.js,\r\n\r\n# plugins\r\ncms\/scripts\/usys\/js\/usys.js,\r\ncms\/scripts\/notifications\/js\/notifications.js,\r\ncms\/scripts\/frontend\/js\/plugin.cookie-consent.js,",
     "to_verify": 0
 }

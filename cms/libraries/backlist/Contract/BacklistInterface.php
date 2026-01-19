@@ -1,13 +1,17 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
 namespace Junco\Backlist\Contract;
 
-use Pagination;
+use Junco\Backlist\Contract\ButtonInterface;
+use Junco\Backlist\Contract\ColumnInterface;
+use Junco\Backlist\Contract\ControlInterface;
+use Junco\Backlist\Contract\LinkInterface;
+use Junco\Backlist\Contract\FiltersInterface;
 
 interface BacklistInterface
 {
@@ -21,146 +25,166 @@ interface BacklistInterface
     public function getFilters(string $snippet = ''): FiltersInterface;
 
     /**
-     * Table header
+     * Set
      * 
-     * @param string|array|null $content
-     * @param ?array            $options
-     */
-    public function th(string|array|null $content = '', ?array $options = null);
-
-    /**
-     * Cell
+     * @param array $rows
      * 
-     * @param string $html
+     * @return void
      */
-    public function td(?string $html = '');
-
-    /**
-     * Body
-     * 
-     * @param string $html_1
-     */
-    public function body(string $html_1 = '', $html_2 = true, $length = 140);
-
-    /**
-     * Is repeated
-     */
-    public function isRepeated($value, bool $return_bool = false);
+    public function setRows(array $rows): void;
 
     /**
      * Labels
      * 
-     * @param array $labels
-     */
-    public function setLabels(array $labels);
-
-    /**
-     * Label
+     * @param string $name
      * 
-     * @param string ...$labels
+     * @return void
      */
-    public function setLabel(string ...$labels);
+    public function setLabels(string $name): void;
 
     /**
-     * Set index
-     * 
-     * @param string $value
-     */
-    public function setIndex(string $value);
-
-    /**
-     * Check header
-     */
-    public function check_h();
-
-    /**
-     * Check
-     * 
-     * @param string $id
-     * @param bool   $is_enabled
-     */
-    public function check(string $id = '', bool $is_enabled = true);
-
-    /**
-     * Up down header
-     */
-    public function up_down_h();
-
-    /**
-     * Up down
-     */
-    public function up_down($up, $down);
-
-    /**
-     * Link header
+     * Fix
      *
-     * @param string|array $content
-     * @param array        $data
+     * @param string       $name
+     * @param string       $name
+     * @param array|string $formats
+     * 
+     * @return void
      */
-    public function link_h(string|array $content = '', array $data = []);
+    public function fixDate(string $name, string $date_format, array|string $formats = ''): void;
+
+    /**
+     * Fix
+     *
+     * @param string $name
+     * @param string $separator
+     * 
+     * @return void
+     */
+    public function fixList(string $name, string $separator = ', '): void;
+
+    /**
+     * Fix
+     *
+     * @param string $name
+     */
+    public function fixEnum(string $name = 'status', ?array $options = null): void;
+
+    /**
+     * Fix
+     *
+     * @param string  $name
+     * @param ?string $replace
+     * 
+     * @return void
+     */
+    public function fixRepeats(string $name, ?string $replace = null): void;
+
+    /**
+     * Apply
+     *
+     * @param string 
+     * 
+     * @return void
+     */
+    public function apply(callable $fn): void;
+
+    /**
+     * Column
+     * 
+     * @param string $column
+     * 
+     * @return ColumnInterface
+     */
+    public function column(string $column = ''): ColumnInterface;
 
     /**
      * Link
      *
-     * @param string|array $data
-     * @param bool         $is_enabled
+     * @param string $url
+     * 
+     * @return LinkInterface
      */
-    public function link(string|array|null $data = null, $is_enabled = true);
+    public function link(string $url = ''): LinkInterface;
 
     /**
-     * Search header
+     * Control
      *
-     * @param string $content
-     * @param array  $data
+     * @param string $control
+     * 
+     * @return ControlInterface
      */
-    public function search_h(string $content = '', array $data = []);
-
-    /**
-     * Search
-     *
-     * @param string|array|null $data
-     * @param ?string           $caption
-     * @param bool              $is_enabled
-     */
-    public function search(string|array|null $data = null, ?string $caption = null, bool $is_enabled = true);
-
-    /**
-     * Button h
-     *
-     * @param string|array $control
-     * @param string       $title
-     * @param string       $icon
-     */
-    public function button_h(string|array $control = '', string $title = '', string $icon = '');
+    public function control(string $control): ControlInterface;
 
     /**
      * Button
      *
-     * @param array $data
+     * @param string $control
+     * 
+     * @return ButtonInterface
      */
-    public function button(array $data = [], bool $is_enabled = true);
+    public function button(string $control = ''): ButtonInterface;
 
     /**
-     * Status header
+     * Search
      *
-     * @param string $control
+     * @param string $column
+     * @param string $value
+     * @param string $field
+     * 
+     * @return SearchInterface
      */
-    public function status_h(string|false $control = '');
+    public function search(string $column, string $value, string $field = ''): SearchInterface;
+
+    /**
+     * Check
+     * 
+     * @param string $value
+     * @param string $index
+     * 
+     * @return void
+     */
+    public function check(string $value = ':id', string $index = ''): void;
+
+    /**
+     * Up
+     * 
+     * @param string $control
+     * @param string $name
+     * 
+     * @return void
+     */
+    public function up(string $control = '', string $name = ''): void;
+
+    /**
+     * Down
+     * 
+     * @param string $control
+     * @param string $name
+     * 
+     * @return void
+     */
+    public function down(string $control = '', string $name = ''): void;
 
     /**
      * Status
-     *
-     * @param string $index
+     * 
+     * @param string $control
+     * @param string $name
+     * 
+     * @return void
      */
-    public function status(string $index);
+    public function status(string $control = '', string $name = 'status'): void;
 
     /**
      * Hidden
      * 
      * @param string $name
      * @param string $value
+     * 
+     * @return void
      */
-    public function hidden(string $name, string $value = '');
+    public function hidden(string $name, string $value = ''): void;
 
     /**
      * Render

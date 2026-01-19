@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -29,6 +29,6 @@ $tpl = Template::get();
 $tpl->editor();
 $tpl->domready("JsTabs('#tabs').select()");
 $tpl->title('Email Message');
-$tpl->content = '<div style="max-width: 1000px;">' . $html . '</div>';
+$tpl->content('<div style="max-width: 1000px;">' . $html . '</div>');
 
 return $tpl->response();

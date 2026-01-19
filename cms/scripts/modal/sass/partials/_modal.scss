@@ -2,10 +2,10 @@
 .modal {
     position: relative;
     background-color: var(--regular-surface-color);
-    border-width: $border-width;
-    border-style: $border-style;
+    border-width: var(--border-width);
+    border-style: var(--border-style);
     border-color: var(--regular-border-color);
-    border-radius: $medium-border-radius;
+    border-radius: var(--rounded-md);
     box-shadow: $modal-box-shadow;
     animation-name: modal;
     animation-duration: $modal-animation-duration;
@@ -18,7 +18,7 @@
         position: absolute;
         margin: 0 auto;
         inset: 30px 0 auto;
-        z-index: $zindex-modal;
+        z-index: var(--zindex-modal);
     }
 
     &-small {
@@ -38,9 +38,9 @@
     }
 
     &-header {
-        padding: $spacing;
-        border-bottom-width: $border-width;
-        border-bottom-style: $border-style;
+        padding: var(--spacing-4);
+        border-bottom-width: var(--border-width);
+        border-bottom-style: var(--border-style);
         border-bottom-color: var(--regular-border-color);
 
         .modal-title-group {
@@ -60,13 +60,13 @@
     }
 
     &-body {
-        padding: $spacing;
+        padding: var(--spacing-4);
         min-height: 3rem;
         position: relative;
     }
 
     &-footer {
-        padding: $spacing;
+        padding: var(--spacing-4);
     }
 
     &-footer .btn {
@@ -74,11 +74,11 @@
     }
 
     &-overlay {
-        padding: $spacing * 2 $spacing;
+        padding: var(--spacing-8) var(--spacing-4);
         position: fixed;
         inset: 0;
         overflow: auto;
-        z-index: $zindex-modal;
+        z-index: var(--zindex-modal);
         background: $modal-overlay-bg-color;
 
         & > div {
@@ -94,7 +94,7 @@
 @keyframes modal {
     from {
         opacity: 0;
-        bottom: ($spacing * 2);
+        bottom: var(--spacing-8);
     }
 
     to {
@@ -115,8 +115,8 @@
 .modal-default {
     .modal-footer {
         text-align: right;
-        border-top-width: $border-width;
-        border-top-style: $border-style;
+        border-top-width: var(--border-width);
+        border-top-style: var(--border-style);
         border-top-color: var(--regular-border-color);
     }
 }

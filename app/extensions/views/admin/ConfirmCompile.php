@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -59,7 +59,7 @@ if ($status) {
                     $html_1 .= '<div><b>' . $row['name'] . '</b></div>';
 
                     foreach ($row['set'] as $key => $value) {
-                        $html_1 .= '<div class="color-light"><b>' . $key . ':</b> ' . str_replace(',', ', ', $value) . '</div>';
+                        $html_1 .= '<div class="color-subtle-default"><b>' . $key . ':</b> ' . str_replace(',', ', ', $value) . '</div>';
                     }
                 }
 
@@ -88,6 +88,6 @@ if ($enter) {
 }
 $modal->close();
 $modal->title([_t('Extensions'), _t('Compile')]);
-$modal->content = $html;
+$modal->content($html);
 
 return $modal->response();

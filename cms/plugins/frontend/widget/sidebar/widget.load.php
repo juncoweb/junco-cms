@@ -1,11 +1,13 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
-return function (&$widget) {
+use Junco\Template\WidgetInterface;
+
+return function (WidgetInterface $widget) {
     $allow_cache = SYSTEM_ALLOW_CACHE;
     $key         = config('frontend-sidebar.key');
     $html        = '';

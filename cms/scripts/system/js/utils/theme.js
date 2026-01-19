@@ -1,34 +1,34 @@
 /* --- Theme ------------------------------------------ */
 const JsTheme = function ($btn) {
     const storageName = 'prefers-color-scheme';
-    const $icon = $btn.querySelector('i');
     const currentTheme = localStorage.getItem(storageName) || 'auto';
 
-    function set(theme, className, title) {
-        if (theme === 'auto') {
-            theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+    function getTheme(mode) {
+        if (mode === 'auto') {
+            return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
                 ? 'dark'
                 : 'light';
         }
-        document.documentElement.setAttribute('data-theme', theme);
-        $icon.className = className;
-        $btn.setAttribute('title', title);
-        $btn.setAttribute('aria-label', title);
+
+        return mode;
     }
 
-    $btn.parentNode.querySelectorAll('[data-value]').forEach(function (el) {
-        const theme = el.getAttribute('data-value');
-        const className = el.querySelector('i').className;
-        const title = el.querySelector('span').textContent;
+    function set(mode) {
+        document.documentElement.setAttribute('data-theme', getTheme(mode));
+        ['dark', 'light', 'auto', 'hidden'].forEach((m) => document.body.classList.toggle(`mode-${m}`, m == mode));
+    }
 
-        if (currentTheme === theme) {
-            set(theme, className, title);
+    $btn.parentNode.querySelectorAll('[data-value]').forEach(function ($el) {
+        const mode = $el.getAttribute('data-value');
+
+        if (currentTheme === mode) {
+            set(mode);
         }
 
-        el.addEventListener('click', function () {
-            localStorage.setItem(storageName, theme);
+        $el.addEventListener('click', function () {
+            localStorage.setItem(storageName, mode);
             document.body.click();
-            set(theme, className, title);
+            set(mode);
         });
     });
 };

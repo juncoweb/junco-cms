@@ -12,7 +12,7 @@ $spacing-properties: (
     "l": -left
 );
 
-@each $size, $value in $spacers {
+@each $size, $value in $css-spacers {
     .mx-#{$size} {
         margin-left: $value;
         margin-right: $value;

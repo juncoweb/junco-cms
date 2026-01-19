@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -54,6 +54,6 @@ $tpl = Template::get();
 $tpl->options($options);
 $tpl->domready('Usys.signup()');
 $tpl->title(_t('Sign up'));
-$tpl->content = $html;
+$tpl->content($html);
 
 return $tpl->response();

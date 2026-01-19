@@ -1,10 +1,11 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
+use Junco\Modal\ModalFormInterface;
 use Junco\Modal\ModalInterface;
 use Junco\Mvc\Result;
 use Junco\Responder\ResponderBase;
@@ -13,12 +14,12 @@ use Psr\Http\Message\ResponseInterface;
 class modal_master_default_snippet extends ResponderBase implements ModalInterface
 {
     // vars
-    protected array $json    = [];
-    protected array $buttons = [];
-    protected array $hidden  = [];
+    protected array  $json    = [];
+    protected array  $buttons = [];
+    protected array  $hidden  = [];
+    protected string $content = '';
     //
-    public ?modal_form $form = null;
-    public string $content   = '';
+    protected ?ModalFormInterface $form = null;
 
     /**
      * Type
@@ -110,11 +111,11 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
      * 
      * @param string $id
      * 
-     * @return modal_form
+     * @return ModalFormInterface
      */
-    public function form(string $id = ''): modal_form
+    public function getForm(string $id = ''): ModalFormInterface
     {
-        return $this->form = new modal_form($id);
+        return $this->form = snippet('modal#form', '', $id);
     }
 
     /**
@@ -159,6 +160,18 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
     {
         $this->json['help_url'] = $url;
         $this->json['help_title'] = _t('Help');
+    }
+
+    /**
+     * Content
+     *
+     * @param string $html
+     * 
+     * @return void
+     */
+    public function content(string $html): void
+    {
+        $this->content = $html;
     }
 
     /**
@@ -230,62 +243,10 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
         }
 
         // form
-        if (isset($this->form)) {
-            $this->json['form'] = $this->form->json;
+        if ($this->form !== null) {
+            $this->form->merge($this->json);
         }
 
         return $this->createJsonResponse($this->json, $statusCode, $reasonPhrase);
-    }
-}
-
-/**
- * Modal Form
- */
-class modal_form
-{
-    public $json = [];
-
-    /**
-     * Constructor
-     * 
-     * @param string $id
-     */
-    public function __construct(string $id)
-    {
-        $this->json['id'] = ($id ?: 'js-form');
-        $this->json['hidden'][] = FormSecurity::getToken(true);
-    }
-
-    /**
-     * Hidden
-     * 
-     * @param string       $name
-     * @param string|array $value
-     */
-    public function hidden(string $name = '', $value = '')
-    {
-        if (is_array($value)) {
-            foreach ($value as $key => $value) {
-                $this->json['hidden'][] = ['name' => $name . '[' . $key . ']', 'value' => $value];
-            }
-        } else {
-            $this->json['hidden'][] = ['name' => $name, 'value' => $value];
-        }
-    }
-
-    /**
-     * Question
-     * 
-     * @param int|array $count
-     */
-    public function question($count = 1)
-    {
-        $count = is_array($count)
-            ? count($count)
-            : (int)$count;
-
-        echo '<p>'
-            . sprintf(_nt('Are you sure you want to delete the selected item?', 'Are you sure you want to delete the %d selected items?', $count), $count)
-            . '</p>';
     }
 }

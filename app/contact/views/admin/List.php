@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -9,34 +9,34 @@
 $bls = Backlist::get();
 
 // filters
-$bft = $bls->getFilters();
-$bft->setValues($data);
-$bft->search();
+$filters = $bls->getFilters();
+$filters->setValues($data);
+$filters->search();
 
 // table
-$bls->check_h();
-$bls->link_h(_t('Contact'), [
-    'control' => 'show',
-    'title' => _t('Show'),
-]);
-$bls->th(['priority' => 2]);
-$bls->th(_t('Date'), ['priority' => 2, 'width' => 80, 'class' => 'text-nowrap']);
-//$bls->th(['width' => 20]);
-$bls->status_h();
-
-foreach ($rows as $row) {
-    /* if ($row['fullname']) {
-		$row['fullname'] = '<i class="fa-solid fa-user" title="' . $row['fullname'] . '" aria-hidden="true"></i>';
-	} else {
-		$row['fullname'] = '';
-	} */
-
-    $bls->check($row['id']);
-    $bls->link(['caption' => $row['contact_name']]);
-    $bls->td(Utils::cutText($row['contact_message']));
-    $bls->td($row['created_at']->format($d ??= _t('Y-m-d')));
-    //$bls->td($row['fullname']);
-    $bls->status($row['status']);
+if ($rows) {
+    foreach ($rows as $i => $row) {
+        $rows[$i]['contact_message'] = Utils::cutText($row['contact_message']);
+    }
+    $bls->setRows($rows);
+    $bls->fixDate('created_at', _t('Y-m-d'));
+    $bls->fixenum('status');
 }
+//
+$bls->check();
+$bls->control('show')
+    ->setText(':contact_name', _t('Show'))
+    ->setLabel(_t('Contact'));
+
+$bls->column(':contact_message')
+    ->setSubtle();
+
+$bls->column(':created_at')
+    ->setLabel(_t('Date'))
+    ->setSubtle()
+    ->setWidth(80)
+    ->noWrap();
+
+$bls->status('status');
 
 return $bls->render($pagi);

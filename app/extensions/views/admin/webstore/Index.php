@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -19,6 +19,6 @@ $tpl->css('assets/extensions-admin.min.css');
 $tpl->js('assets/extensions-admin.min.js');
 $tpl->domready('Webstore.List()');
 $tpl->title(_t('Web Store'), 'fa-solid fa-bag-shopping');
-$tpl->content = $bbx->render();
+$tpl->content($bbx->render());
 
 return $tpl->response();

@@ -1,7 +1,7 @@
 /* --- grid ---------------------------- */
 .grid {
     display: grid;
-    gap: $spacing;
+    gap: var(--spacing-4);
 
     &-2 {
         grid-template-columns: repeat(2, 1fr);
@@ -56,13 +56,13 @@
     }
 }
 
-@each $size, $value in $spacers {
+@each $size, $value in $css-spacers {
     .gap-#{$size} {
         gap: $value;
     }
 }
 
-@media (max-width: $screen-large) {
+@media (max-width: $screen-lg) {
     .grid-responsive.grid {
         &-4 {
             grid-template-columns: 1fr 1fr;
@@ -78,7 +78,7 @@
     }
 }
 
-@media (max-width: $screen-medium) {
+@media (max-width: $screen-md) {
     .grid-responsive.grid {
         &-2,
         &-3,
@@ -99,32 +99,32 @@
 .container,
 .container-fluid {
     width: 100%;
-    padding-right: $spacing;
-    padding-left: $spacing;
+    padding-right: var(--spacing-4);
+    padding-left: var(--spacing-4);
     margin-right: auto;
     margin-left: auto;
 }
 
-@media (min-width: $screen-small) {
+@media (min-width: $screen-sm) {
     .container {
-        max-width: calc($screen-small - 2 * $spacing);
+        max-width: calc($screen-sm - 2 * var(--spacing-4));
     }
 }
 
-@media (min-width: $screen-medium) {
+@media (min-width: $screen-md) {
     .container {
-        max-width: calc($screen-medium - 3 * $spacing);
+        max-width: calc($screen-md - 3 * var(--spacing-4));
     }
 }
 
-@media (min-width: $screen-large) {
+@media (min-width: $screen-lg) {
     .container {
-        max-width: calc($screen-large - 2 * $spacing);
+        max-width: calc($screen-lg - 2 * var(--spacing-4));
     }
 }
 
-@media (min-width: $screen-x-large) {
+@media (min-width: $screen-xl) {
     .container {
-        max-width: calc($screen-x-large - 3 * $spacing);
+        max-width: calc($screen-xl - 3 * var(--spacing-4));
     }
 }

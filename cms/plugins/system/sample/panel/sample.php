@@ -1,52 +1,55 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
 defined('IS_TEST') or die;
 
-// vars
-$colors = ['default', 'primary', 'secondary', 'success', 'info', 'warning', 'danger'];
-$html = '';
+// samples
+$samples = Samples::get();
 
-// ---
-$partial = '';
-foreach ($colors as $color) {
-    $partial .= '<div class="panel panel-' . $color . '">'
-        .   '<div class="panel-header"><h4>' . ucfirst($color) . '</h4></div>'
-        .   '<div class="panel-body">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa</div>'
-        . '</div>';
-}
-$html .= '<h4>.panel</h4><div class="grid grid-medium-box mb-4">' . $partial . '</div>';
+// 1
+$samples
+    ->html(implode(PHP_EOL, [
+        '<div class="panel">',
+        '<div class="panel-header"><h4>Example</h4></div>',
+        '<div class="panel-body">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa</div>',
+        '</div>'
+    ]))
+    ->setLabel('Example 1');
 
-// ---
-$partial = '';
-foreach ($colors as $color) {
-    $partial .= '<div class="panel panel-' . $color . ' panel-solid">'
-        .   '<div class="panel-header"><h4>' . ucfirst($color) . '</h4></div>'
+// 2
+$samples
+    ->colors('<div class="panel panel-{{ color }}">'
+        .   '<div class="panel-header"><h4>{{ caption }}</h4></div>'
         .   '<div class="panel-body">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa</div>'
-        . '</div>';
-}
-$html .= '<h4>.panel .panel-solid</h4><div class="grid grid-medium-box mb-4">' . $partial . '</div>';
+        . '</div>')
+    ->setLabel('.panel');
 
-// ---
-$partial = '';
-foreach ($colors as $color) {
-    $partial .= '<div class="panel panel-' . $color . ' panel-regular">'
-        .   '<div class="panel-header"><h4>' . ucfirst($color) . '</h4></div>'
+// 3
+$samples
+    ->colors('<div class="panel panel-{{ color }} panel-solid">'
+        .   '<div class="panel-header"><h4>{{ caption }}</h4></div>'
         .   '<div class="panel-body">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa</div>'
-        . '</div>';
-}
-$html .= '<h4>.panel .panel-regular</h4><div class="grid grid-medium-box mb-4">' . $partial . '</div>';
+        . '</div>')
+    ->setLabel('.panel .panel-solid');
+
+// 4
+$samples
+    ->colors('<div class="panel panel-{{ color }} panel-regular">'
+        .   '<div class="panel-header"><h4>{{ caption }}</h4></div>'
+        .   '<div class="panel-body">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa</div>'
+        . '</div>')
+    ->setLabel('.panel .panel-regular');
+
+$html = $samples->render();
 
 // template
 $tpl = Template::get();
-$tpl->options([
-    'thirdbar' => 'system.thirdbar'
-]);
+$tpl->options(['thirdbar' => 'system.thirdbar']);
 $tpl->title('Panel');
-$tpl->content = $html;
+$tpl->content($html);
 
 return $tpl->response();

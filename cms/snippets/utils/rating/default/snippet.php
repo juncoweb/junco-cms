@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -22,17 +22,16 @@ class rating_utils_default_snippet
 
         $class = 'rating';
         if ($attr) {
-            if (
-                isset($attr['color'])
-                && in_array($attr['color'], ['primary', 'secondary', 'info', 'success', 'warning', 'danger'])
-            ) {
-                $class .= ' rating-' . $attr['color'];
+            if (isset($attr['color'])) {
+                $class .= in_array($attr['color'], ['primary', 'secondary', 'info', 'success', 'warning', 'danger'])
+                    ? ' rating-' . $attr['color']
+                    : ' ' . $attr['color'];
             }
-            if (
-                isset($attr['size'])
-                && in_array($attr['size'], ['small', 'large'])
-            ) {
-                $class .= ' rating-' . $attr['size'];
+
+            if (isset($attr['size'])) {
+                $class .= in_array($attr['size'], ['small', 'large'])
+                    ? ' rating-' . $attr['size']
+                    : ' ' . $attr['size'];
             }
         }
 

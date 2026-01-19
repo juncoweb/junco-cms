@@ -17,23 +17,23 @@
                 }
 
                 & ~ li {
-                    border-top-width: $border-width;
-                    border-top-style: $border-style;
+                    border-top-width: var(--border-width);
+                    border-top-style: var(--border-style);
                     border-top-color: var(--regular-border-color);
                 }
 
                 .dd {
                     color: var(--regular-subtle-font-color);
-                    font-size: $small-font-size;
+                    font-size: var(--font-size-sm);
                 }
             }
         }
     }
 
     &-group {
-        margin-bottom: $border-width;
-        padding-bottom: $border-width;
-        border-bottom-width: $border-width;
+        margin-bottom: var(--border-width);
+        padding-bottom: var(--border-width);
+        border-bottom-width: var(--border-width);
         border-bottom-style: dashed;
         border-bottom-color: var(--regular-border-color);
     }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -51,6 +51,6 @@ $tpl->options([
     'submit' => true
 ]);
 $tpl->title(_t('Settings'));
-$tpl->content = $form->render();
+$tpl->content($form->render());
 
 return $tpl->response();

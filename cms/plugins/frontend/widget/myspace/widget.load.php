@@ -1,19 +1,21 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
-return function (&$widget) {
+use Junco\Template\WidgetInterface;
+
+return function (WidgetInterface $widget) {
     $rows        = null;
     $allow_cache = SYSTEM_ALLOW_CACHE;
     $menu_key    = 'my-Default';
 
     if ($allow_cache) {
-        $cache_key    = $menu_key . '#';
-        $cache        = cache();
-        $rows        = $cache->get($cache_key);
+        $cache_key = $menu_key . '#';
+        $cache     = cache();
+        $rows      = $cache->get($cache_key);
     }
 
     if (!$rows) {
@@ -36,11 +38,11 @@ return function (&$widget) {
             }
 
             $rows[] = [
-                'menu_name'     => $row['menu_name'],
-                'menu_url'        => $row['menu_url'],
-                'menu_image'    => $row['menu_image'],
-                'menu_hash'        => $row['menu_hash'],
-                'label_id'        => $params['label_id'],
+                'menu_name'  => $row['menu_name'],
+                'menu_url'   => $row['menu_url'],
+                'menu_image' => $row['menu_image'],
+                'menu_hash'  => $row['menu_hash'],
+                'label_id'   => $params['label_id'],
             ];
         }
         $allow_cache and $cache->set($cache_key, $rows);

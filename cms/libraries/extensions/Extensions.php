@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -31,13 +31,13 @@ class Extensions
     public static function getComponents(): array
     {
         return [
-            'a'    => ['name' => 'Application', 'source' => 'app/%s/',            'local' => 'app/%s/',                    'clean' => true],
-            'm'    => ['name' => 'Media',        'source' => 'media/%s/',        'local' => SYSTEM_MEDIA_PATH . '%s/',    'clean' => false],
-            'j'    => ['name' => 'Scripts',    'source' => 'cms/scripts/%s/',    'local' => 'cms/scripts/%s/',            'clean' => true],
-            'k'    => ['name' => 'Snippets',    'source' => 'cms/snippets/%s/',    'local' => 'cms/snippets/%s/',            'clean' => true],
-            'l'    => ['name' => 'Libraries',    'source' => 'cms/libraries/%s/', 'local' => 'cms/libraries/%s/',        'clean' => true],
-            'p'    => ['name' => 'Plugins',    'source' => 'cms/plugins/%s/',    'local' => 'cms/plugins/%s/',            'clean' => true],
-            'v'    => ['name' => 'Vendor',        'source' => 'vendor/%s/',        'local' => 'vendor/%s/',                'clean' => true],
+            'a' => ['name' => 'Application', 'source' => 'app/%s/',           'local' => 'app/%s/',                 'clean' => true],
+            'm' => ['name' => 'Media',       'source' => 'media/%s/',         'local' => SYSTEM_MEDIA_PATH . '%s/', 'clean' => false],
+            'j' => ['name' => 'Scripts',     'source' => 'cms/scripts/%s/',   'local' => 'cms/scripts/%s/',         'clean' => true],
+            'k' => ['name' => 'Snippets',    'source' => 'cms/snippets/%s/',  'local' => 'cms/snippets/%s/',        'clean' => true],
+            'l' => ['name' => 'Libraries',   'source' => 'cms/libraries/%s/', 'local' => 'cms/libraries/%s/',       'clean' => true],
+            'p' => ['name' => 'Plugins',     'source' => 'cms/plugins/%s/',   'local' => 'cms/plugins/%s/',         'clean' => true],
+            'v' => ['name' => 'Vendor',      'source' => 'vendor/%s/',        'local' => 'vendor/%s/',              'clean' => true],
         ];
     }
 

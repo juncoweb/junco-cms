@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -81,5 +81,42 @@ class Plugins
 
             call_user_func_array($func, $args);
         }
+    }
+
+    /**
+     * Run the plugins.
+     *
+     * @param mixed &$ref      Variable passed by reference to be modified.
+     * @param mixed ...$args   Other params.
+     */
+    public function safeRun(mixed &$ref = null, mixed ...$args): void
+    {
+        $pass_key = is_object($ref) && method_exists($ref, 'setPluginKey');
+        $args     = array_merge([&$ref], $args);
+
+        foreach ($this->listeners as $key => $func) {
+            try {
+                if ($pass_key) {
+                    $ref->setPluginKey($key);
+                }
+
+                call_user_func_array($func, $args);
+            } catch (Throwable $e) {
+                $this->log($e);
+            }
+        }
+    }
+
+    /**
+     * Log
+     */
+    public function log(Throwable $e): void
+    {
+        app('logger')->alert(sprintf('%s: %s', get_class($e), $e->getMessage()), [
+            'code'      => $e->getCode(),
+            'file'      => $e->getFile(),
+            'line'      => $e->getLine(),
+            'backtrace' => $e->getTraceAsString()
+        ]);
     }
 }

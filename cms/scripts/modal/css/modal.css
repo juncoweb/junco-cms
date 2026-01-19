@@ -2,11 +2,11 @@
 .modal {
   position: relative;
   background-color: var(--regular-surface-color);
-  border-width: 1px;
-  border-style: solid;
+  border-width: var(--border-width);
+  border-style: var(--border-style);
   border-color: var(--regular-border-color);
-  border-radius: 0.375rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 -1px 0 rgba(0, 0, 0, 0.02);
+  border-radius: var(--rounded-md);
+  box-shadow: var(--box-shadow-dropdown);
   animation-name: modal;
   animation-duration: 0.4s;
 }
@@ -14,7 +14,7 @@
   position: absolute;
   margin: 0 auto;
   inset: 30px 0 auto;
-  z-index: 1050;
+  z-index: var(--zindex-modal);
 }
 .modal-small {
   max-width: 380px;
@@ -29,9 +29,9 @@
   max-width: 1200px;
 }
 .modal-header {
-  padding: 1rem;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
+  padding: var(--spacing-4);
+  border-bottom-width: var(--border-width);
+  border-bottom-style: var(--border-style);
   border-bottom-color: var(--regular-border-color);
 }
 .modal-header .modal-title-group {
@@ -46,23 +46,23 @@
   flex: auto;
 }
 .modal-body {
-  padding: 1rem;
+  padding: var(--spacing-4);
   min-height: 3rem;
   position: relative;
 }
 .modal-footer {
-  padding: 1rem;
+  padding: var(--spacing-4);
 }
 .modal-footer .btn {
   margin: 1px 2px;
 }
 .modal-overlay {
-  padding: 2rem 1rem;
+  padding: var(--spacing-8) var(--spacing-4);
   position: fixed;
   inset: 0;
   overflow: auto;
-  z-index: 1050;
-  background: rgba(0, 0, 0, 0.3);
+  z-index: var(--zindex-modal);
+  background: var(--overlay-color-1);
 }
 .modal-overlay > div {
   position: static;
@@ -74,7 +74,7 @@
 @keyframes modal {
   from {
     opacity: 0;
-    bottom: 2rem;
+    bottom: var(--spacing-8);
   }
   to {
     opacity: 1;
@@ -90,7 +90,7 @@
 /* default */
 .modal-default .modal-footer {
   text-align: right;
-  border-top-width: 1px;
-  border-top-style: solid;
+  border-top-width: var(--border-width);
+  border-top-style: var(--border-style);
   border-top-color: var(--regular-border-color);
 }

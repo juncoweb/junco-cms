@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -9,32 +9,38 @@
 $bls = Backlist::get();
 
 // filters
-$bft = $bls->getFilters();
-$bft->setValues($data);
-$bft->select('status', $statuses);
-$bft->select('level', $levels);
+$filters = $bls->getFilters();
+$filters->setValues($data);
+$filters->select('status', $statuses);
+$filters->select('level', $levels);
 
 // table
-$bls->check_h();
-$bls->link_h(_t('Level'), [
-    'control' => 'show',
-    'options' => ['width' => 60, 'priority' => 2]
-]);
-$bls->th();
-$bls->th(_t('Date'), ['width' => 80, 'class' => 'text-nowrap']);
-$bls->th(_t('Time'), ['width' => 50, 'class' => 'text-nowrap', 'priority' => 2]);
-$bls->button_h([
-    'control' => 'status',
-    'icon' => 'fa-solid fa-circle color-{{ color }}'
-]);
-
-foreach ($rows as $row) {
-    $bls->check($row['id']);
-    $bls->link(['caption' => $row['level']]);
-    $bls->td($row['message'] . '<div class="table-dimmed only-on-large-screen">' . $row['file'] . '</div>');
-    $bls->td($row['created_at']->format($d ??= _t('Y-M-d')));
-    $bls->td($row['created_at']->format($t ??= _t('H:i:s')));
-    $bls->button($row['status']);
+if ($rows) {
+    $bls->setRows($rows);
+    $bls->fixDate('created_at', _t('Y-M-d'), _t('H:i:s'));
+    $bls->fixEnum('status');
 }
+//
+$bls->check();
+$bls->control('show')
+    ->setText(':level')
+    ->setLabel(_t('Level'))
+    ->setWidth(60)
+    ->setSubtle();
+
+$bls->column('{{ message }}<div class="table-subtle-color only-on-large-screen">{{ file }}</div>');
+
+$bls->column(':created_at.date')
+    ->setLabel(_t('Date'))
+    ->setWidth(80)
+    ->noWrap();
+
+$bls->column(':created_at.time')
+    ->setLabel(_t('Time'))
+    ->setWidth(50)
+    ->noWrap()
+    ->setSubtle();
+
+$bls->status('status');
 
 return $bls->render($pagi);

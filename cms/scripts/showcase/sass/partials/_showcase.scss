@@ -2,9 +2,9 @@
 .article {
     &-wrapper {
         display: flex;
-        gap: $spacing;
-        margin-top: $spacing;
-        margin-bottom: $spacing * 2;
+        gap: var(--spacing-4);
+        margin-top: var(--spacing-4);
+        margin-bottom: var(--spacing-8);
 
         & > div {
             flex: auto;
@@ -27,7 +27,7 @@
 
         .edit {
             color: var(--regular-subtle-font-color);
-            font-size: $font-size;
+            font-size: var(--font-size-base);
         }
     }
 
@@ -49,17 +49,17 @@
         }
 
         p {
-            margin: 0 0 $spacing;
+            margin: 0 0 var(--spacing-4);
         }
     }
 }
 
-@media only screen and (max-width: $screen-small) {
+@media (max-width: $screen-sm) {
     .article-wrapper {
         display: block;
     }
     .article-media {
         max-width: none;
-        margin-bottom: $spacing;
+        margin-bottom: var(--spacing-4);
     }
 }

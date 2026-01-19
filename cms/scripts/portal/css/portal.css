@@ -5,7 +5,7 @@
 
 .portal-header {
   text-align: center;
-  margin: 0 0 1rem;
+  margin: 0 0 var(--spacing-4);
 }
 
 .portal-title {
@@ -37,7 +37,7 @@ h6.portal-title {
 }
 
 .portal-caption {
-  font-size: 1.25rem;
+  font-size: var(--font-size-lg);
 }
 
 .portal-section {

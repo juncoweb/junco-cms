@@ -6,7 +6,9 @@
         "General",
         "Themes",
         "Header",
-        "Plugins",
+        "Sidebar",
+        "Footer",
+        "Copyright",
         "Legal"
     ],
     "rows": {
@@ -56,6 +58,19 @@
             "reload_on_change": 0,
             "status": 0
         },
+        "on_display": {
+            "label": "On display",
+            "type": "plugins",
+            "group": 0,
+            "ordering": 3,
+            "default_value": "",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
         "theme": {
             "label": "Default",
             "type": "select-text",
@@ -82,11 +97,39 @@
             "reload_on_change": 0,
             "status": 1
         },
+        "header_style": {
+            "label": "Style",
+            "type": "select-text",
+            "group": 2,
+            "ordering": 1,
+            "default_value": "",
+            "help": "",
+            "history": [
+                "header_css"
+            ],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "header_fixed": {
+            "label": "Fixed",
+            "type": "boolean",
+            "group": 2,
+            "ordering": 2,
+            "default_value": true,
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
         "logo_text": {
             "label": "Text",
             "type": "input-text",
             "group": 2,
-            "ordering": 1,
+            "ordering": 3,
             "default_value": "",
             "help": "",
             "history": [],
@@ -99,46 +142,7 @@
             "label": "Image",
             "type": "input-text",
             "group": 2,
-            "ordering": 1,
-            "default_value": "",
-            "help": "",
-            "history": [],
-            "autoload": 1,
-            "translate": 0,
-            "reload_on_change": 0,
-            "status": 1
-        },
-        "header_fixed": {
-            "label": "Fixed",
-            "type": "boolean",
-            "group": 2,
-            "ordering": 3,
-            "default_value": true,
-            "help": "",
-            "history": [],
-            "autoload": 1,
-            "translate": 0,
-            "reload_on_change": 0,
-            "status": 1
-        },
-        "header_css": {
-            "label": "Css",
-            "type": "input-text",
-            "group": 2,
             "ordering": 4,
-            "default_value": "header-regular",
-            "help": "",
-            "history": [],
-            "autoload": 1,
-            "translate": 0,
-            "reload_on_change": 0,
-            "status": 1
-        },
-        "on_display": {
-            "label": "On display",
-            "type": "plugins",
-            "group": 3,
-            "ordering": 1,
             "default_value": "",
             "help": "",
             "history": [],
@@ -150,8 +154,8 @@
         "topbar": {
             "label": "Topbar",
             "type": "select-multiple-text",
-            "group": 3,
-            "ordering": 1,
+            "group": 2,
+            "ordering": 5,
             "default_value": [
                 "login",
                 "theme",
@@ -170,8 +174,8 @@
         "navbar": {
             "label": "Navbar",
             "type": "plugin",
-            "group": 3,
-            "ordering": 3,
+            "group": 2,
+            "ordering": 6,
             "default_value": "frontend.navbar",
             "help": "",
             "history": [],
@@ -181,10 +185,10 @@
             "status": 1
         },
         "sidebar": {
-            "label": "Sidebar",
+            "label": "Plugins",
             "type": "plugins",
             "group": 3,
-            "ordering": 4,
+            "ordering": 1,
             "default_value": [
                 "search"
             ],
@@ -195,11 +199,24 @@
             "reload_on_change": 0,
             "status": 1
         },
+        "footer_style": {
+            "label": "Style",
+            "type": "select-text",
+            "group": 4,
+            "ordering": 1,
+            "default_value": "",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
         "footer": {
-            "label": "Footer",
+            "label": "Plugins",
             "type": "plugins",
-            "group": 3,
-            "ordering": 5,
+            "group": 4,
+            "ordering": 2,
             "default_value": [
                 "contact"
             ],
@@ -210,10 +227,23 @@
             "reload_on_change": 0,
             "status": 1
         },
+        "copyright_style": {
+            "label": "Style",
+            "type": "select-text",
+            "group": 5,
+            "ordering": 1,
+            "default_value": "",
+            "help": "",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
         "terms_url": {
             "label": "Terms",
             "type": "input-text",
-            "group": 4,
+            "group": 6,
             "ordering": 1,
             "default_value": "",
             "help": "The url to the document.",
@@ -226,7 +256,7 @@
         "privacy_url": {
             "label": "Privacy",
             "type": "input-text",
-            "group": 4,
+            "group": 6,
             "ordering": 2,
             "default_value": "",
             "help": "The url to the document.",
@@ -238,11 +268,11 @@
         },
         "cookie_consent": {
             "label": "Consent",
-            "type": "boolean",
-            "group": 4,
+            "type": "plugin",
+            "group": 6,
             "ordering": 3,
-            "default_value": "",
-            "help": "Enable the cookie consent form.",
+            "default_value": "frontend",
+            "help": "It allows you to add a consent form.",
             "history": [],
             "autoload": 1,
             "translate": 0,

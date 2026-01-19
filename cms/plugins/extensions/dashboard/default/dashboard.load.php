@@ -1,11 +1,13 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
-return function (&$dashboard) {
+use Junco\Dashboard\DashboardInterface;
+
+return function (DashboardInterface $dashboard) {
     $cache = cache();
     $html = $cache->get('extensions-updates#');
 
@@ -20,6 +22,6 @@ return function (&$dashboard) {
     }
 
     if ($html != 'null') {
-        $dashboard->row($html);
+        $dashboard->section($html);
     }
 };

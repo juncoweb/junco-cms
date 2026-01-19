@@ -1,16 +1,16 @@
 /* -------- panel ------------------------------------------------- */
 .panel {
     background-color: var(--regular-surface-color);
-    border-width: $border-width;
-    border-style: $border-style;
-    border-radius: $medium-border-radius;
-    box-shadow: $template-box-shadow;
+    border-width: var(--border-width);
+    border-style: var(--border-style);
+    border-radius: var(--rounded-md);
+    box-shadow: var(--box-shadow-template);
     position: relative;
 
     &-header {
-        padding: $spacing;
-        border-bottom-width: $border-width;
-        border-bottom-style: $border-style;
+        padding: var(--spacing-4);
+        border-bottom-width: var(--border-width);
+        border-bottom-style: var(--border-style);
 
         h1,
         h2,
@@ -22,17 +22,17 @@
     }
 
     &-body {
-        padding: $spacing;
+        padding: var(--spacing-4);
         overflow-x: auto;
 
         .panel-stat-value {
-            font-size: 2.1 * $font-size;
+            font-size: var(--font-size-2xl);
         }
     }
 
     &-footer {
-        padding: $spacing;
-        border-top-width: $border-width;
-        border-top-style: $border-style;
+        padding: var(--spacing-4);
+        border-top-width: var(--border-width);
+        border-top-style: var(--border-style);
     }
 }

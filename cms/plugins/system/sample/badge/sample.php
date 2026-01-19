@@ -1,50 +1,45 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
 defined('IS_TEST') or die;
 
-// vars
-$colors = ['default', 'primary', 'secondary', 'success', 'info', 'warning', 'danger'];
-$html = '';
+// samples
+$samples = Samples::get();
 
-// ---
-$partial = '';
-foreach ($colors as $color) {
-    $partial .= '<div class="badge badge-' . $color . '">' . $color . '</div>';
-}
-$html .= '<p><h4>.badge</h4>' . $partial . '</p>';
+// 1
+$samples
+    ->colors('<div class="badge badge-{{ color }}">{{ caption }}</div>')
+    ->setLabel('.badge')
+    ->setInline();
 
-// ---
-$partial = '';
-foreach ($colors as $color) {
-    $partial .= '<div class="badge badge-regular badge-' . $color . '">' . $color . '</div>';
-}
-$html .= '<p><h4>.badge .badge-regular</h4>' . $partial . '</p>';
+// 2
+$samples
+    ->colors('<div class="badge badge-regular badge-{{ color }}">{{ caption }}</div>')
+    ->setLabel('.badge .badge-regular')
+    ->setInline();
 
-// ---
-$partial = '';
-foreach ($colors as $color) {
-    $partial .= '<div class="badge badge-' . $color . ' badge-large">' . $color . '</div>';
-}
-$html .= '<p><h4>.badge .badge-large</h4>' . $partial . '</p>';
+// 3
+$samples
+    ->colors('<div class="badge badge-{{ color }} badge-small">{{ caption }}</div>')
+    ->setLabel('.badge .badge-small')
+    ->setInline();
 
-// ---
-$partial = '';
-foreach ($colors as $color) {
-    $partial .= '<div class="badge badge-' . $color . ' badge-small">' . $color . '</div>';
-}
-$html .= '<p><h4>.badge .badge-small</h4>' . $partial . '</p>';
+// 4
+$samples
+    ->colors('<div class="badge badge-{{ color }} badge-large">{{ caption }}</div>')
+    ->setLabel('.badge .badge-large')
+    ->setInline();
+
+$html = $samples->render();
 
 // template
 $tpl = Template::get();
-$tpl->options([
-    'thirdbar' => 'system.thirdbar'
-]);
+$tpl->options(['thirdbar' => 'system.thirdbar']);
 $tpl->title('Badge');
-$tpl->content = '<div class="panel"><div class="panel-body">' . $html . '</div></div>';
+$tpl->content($html);
 
 return $tpl->response();

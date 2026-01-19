@@ -1,13 +1,16 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
-return function (&$widget) {
+use Junco\Template\WidgetInterface;
+
+return function (WidgetInterface $widget) {
     $config = config('contact-widget');
-    $config['contact-widget.load_resources'] and app('assets')->css(['assets/contact-widget.min.css']);
+    $config['contact-widget.load_resources']
+        and app('assets')->css(['assets/contact-widget.min.css']);
 
     foreach ($config['contact-widget.delivery'] as $partial) {
         if (!$partial) {

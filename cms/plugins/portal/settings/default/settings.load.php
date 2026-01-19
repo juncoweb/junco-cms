@@ -1,11 +1,13 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
-return function (&$rows) {
-    //$rows['plugins']['plugins'] = 'portal';
-    //$rows['snippet']['snippet'] = 'portal';
+use Junco\Settings\PluginLoader;
+
+return function (PluginLoader $loader) {
+    $loader->setPlugins('plugins', 'portal');
+    $loader->setSnippet('snippet', 'portal');
 };

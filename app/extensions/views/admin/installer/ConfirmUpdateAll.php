@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -22,7 +22,7 @@ if ($num_updates) {
 }
 $modal->close();
 $modal->title(_t('Update all'));
-$modal->content = $html;
-$modal->form();
+$modal->content($html);
+$modal->getForm();
 
 return $modal->response();

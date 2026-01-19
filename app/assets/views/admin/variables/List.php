@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -9,20 +9,23 @@
 $bls = Backlist::get();
 
 // filters
-$bft = $bls->getFilters();
-$bft->setValues($data);
-$bft->search();
+$filters = $bls->getFilters();
+$filters->setValues($data);
+$filters->search();
 
 // table
-$bls->check_h();
-$bls->th(_t('Name'));
-$bls->th(['priority' => 2]);
-
-foreach ($rows as $row) {
-    $bls->check($row['file']);
-    $bls->td($row['name']);
-    $bls->td($bls->isRepeated($row['scope']));
+if ($rows) {
+    $bls->setRows($rows);
+    $bls->fixRepeats('scope');
 }
+//
+$bls->check(':file');
+$bls->column(':name')
+    ->setLabel(_t('Name'));
+
+$bls->column(':scope')
+    ->setSubtle();
+
 $bls->hidden('key', $key);
 
 return $bls->render();

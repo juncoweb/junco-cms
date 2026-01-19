@@ -14,8 +14,8 @@
             top: $notify-top;
             padding: 0.625rem 1rem;
             background: $notify-bg-color;
-            border-radius: $medium-border-radius;
-            box-shadow: $element-box-shadow;
+            border-radius: var(--rounded-md);
+            box-shadow: var(--box-shadow-dropdown);
             left: 50%;
             -webkit-transform: translateX(-50%);
             transform: translateX(-50%);

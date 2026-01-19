@@ -1,15 +1,19 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
+
+use Junco\Users\Curuser;
 
 class template_backend_default_snippet extends Template
 {
     // vars
-    protected $user = null;
-    protected $isMinimized = null;
+    protected Curuser $user;
+    protected bool    $isMinimized;
+    protected string  $themeColorKey;
+    protected string  $themeColor;
 
     /**
      * Constructor
@@ -17,17 +21,18 @@ class template_backend_default_snippet extends Template
     public function __construct()
     {
         $config = config('backend');
-        $options = $config['backend.default_options'];
-        $options['theme'] = $config['backend.theme'];
+        $options            = $config['backend.default_options'];
+        $options['theme']   = $config['backend.theme'];
         $options['mainbar'] = $config['backend.mainbar'];
         $options['sidebar'] = $config['backend.sidebar'];
-        $options['header_color'] = $config['backend.header_color'];
 
         parent::__construct();
         $this->assets->options($options);
-        $this->view    = __DIR__ . '/view.html.php';
-        $this->user = curuser();
-        $this->isMinimized = $_COOKIE['BackendNavbar'] ?? false;
+        $this->view          = __DIR__ . '/view.html.php';
+        $this->user          = curuser();
+        $this->isMinimized   = (bool)cookie('BackendNavbar');
+        $this->themeColorKey = 'ThemeColor' . $this->user->getId();
+        $this->themeColor    = cookie($this->themeColorKey, $config['backend.header_color']);
     }
 
     /**

@@ -1,11 +1,11 @@
 /* --- Pagination -------------------------------- */
 .fl-comments-pagination {
     background: var(--regular-bg-color);
-    margin-bottom: $spacing;
-    padding: $spacing;
+    margin-bottom: var(--spacing-4);
+    padding: var(--spacing-4);
 
     a,
     span {
-        padding: 0 ($spacing * 0.5);
+        padding: 0 var(--spacing-2);
     }
 }

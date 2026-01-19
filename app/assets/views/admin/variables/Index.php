@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -22,6 +22,6 @@ $tpl = Template::get();
 $tpl->js('assets/assets-admin.min.js');
 $tpl->domready('AssetsVariables.List(\'' . $key . '\')');
 $tpl->title([_t('Themes'), $title], 'fa-solid fa-palette');
-$tpl->content = $bbx->render();
+$tpl->content($bbx->render());
 
 return $tpl->response();

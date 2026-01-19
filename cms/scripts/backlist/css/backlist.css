@@ -1,7 +1,7 @@
 /* --- backList -------------------------------------------- */
 .backlist-box {
   position: relative;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-4);
 }
 
 .backlist-slot {
@@ -11,25 +11,27 @@
 
 .backlist-wrapper .empty-list {
   text-align: center;
-  padding: 0 1rem;
+  padding: 0 var(--spacing-4);
 }
 .backlist-wrapper .empty-list p {
-  font-size: 1.25rem;
+  font-size: var(--font-size-lg);
   font-weight: bold;
   color: var(--regular-subtle-font-color);
   text-align: center;
-  margin: 1rem auto;
-  padding: 1rem;
-  border: 1px solid var(--regular-border-color);
-  border-radius: 0.375rem;
+  margin: var(--spacing-4) auto;
+  padding: var(--spacing-4);
+  border-width: var(--border-width);
+  border-style: var(--border-style);
+  border-color: var(--regular-border-color);
+  border-radius: var(--rounded-md);
   display: inline-block;
 }
 .backlist-wrapper .footer {
-  padding: 1rem 0.5rem;
+  padding: var(--spacing-4) var(--spacing-2);
 }
 
 .kl-body {
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
   color: var(--regular-subtle-font-color);
 }
 .kl-body > div:nth-child(2) {
@@ -47,33 +49,32 @@
 
 .kl-sort, .kl-sort:hover {
   color: var(--regular-font-color) !important;
-  border-bottom-width: 1px dashed var(--regular-border-color);
+  border-bottom-width: var(--border-width);
+  border-bottom-style: dashed;
+  border-bottom-color: var(--regular-border-color);
   text-decoration: none;
-}
-
-.kl-editable {
-  cursor: text;
-}
-.kl-editable input {
-  font-size: 0.875rem;
 }
 
 /* --- actions --- */
 .backlist-actions {
   z-index: 1;
   position: sticky;
-  border-radius: 0.375rem;
+  border-radius: var(--rounded-md);
   background-color: var(--regular-surface-color);
 }
 .backlist-actions.active {
-  border: 1px solid var(--regular-border-color);
-  box-shadow: 0 2px 2px 0 rgba(var(--solid-surface-rgb-color), 0.075), 0 3px 1px -2px rgba(var(--solid-surface-rgb-color), 0.075), 0 1px 5px 0 rgba(var(--solid-surface-rgb-color), 0.075);
+  border-width: var(--border-width);
+  border-style: var(--border-style);
+  border-color: var(--regular-border-color);
+  box-shadow: var(--box-shadow-template);
 }
-.backlist-actions > div:first-child {
+.backlist-actions .box-buttons {
   display: flex;
-  padding: 0.5rem;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2);
 }
-.backlist-actions > div:first-child > div {
+.backlist-actions .box-buttons > div {
   flex: auto;
 }
 .backlist-actions .btn-create {
@@ -86,7 +87,7 @@
 /* --- filters --- */
 .backlist-filters {
   text-align: right;
-  padding: 0.5rem;
+  padding: var(--spacing-2);
   background: var(--regular-bg-color);
 }
 .backlist-filters input.btn {
@@ -96,6 +97,6 @@
 /* --- pagination --- */
 .backlist-pagination .info {
   text-wrap: nowrap;
-  margin: 1rem;
+  margin: var(--spacing-4);
   display: inline-block;
 }

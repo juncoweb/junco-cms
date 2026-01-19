@@ -5,7 +5,7 @@
 }
 .widget-post .post-thumb {
   float: left;
-  margin-right: 1rem;
+  margin-right: var(--spacing-4);
 }
 .widget-post .post-thumb img {
   width: 85px;
@@ -15,5 +15,5 @@
 }
 .widget-post .post-meta {
   color: var(--regular-subtle-font-color);
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright (c) 2009-2025 by Junco CMS
+ * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
 
@@ -51,7 +51,21 @@ class AdminExtensionsChangesModel extends Model
 		[WHERE]
 		[ORDER BY created_at DESC]");
 
-        return $data + ['pagi' => $pagi];
+        $rows = [];
+        foreach ($pagi->fetchAll() as $row) {
+            $row['__labels'] = [];
+
+            if (!$row['status']) {
+                $row['__labels'][] = 'enabled';
+            }
+
+            $rows[] = $row;
+        }
+
+        return $data + [
+            'rows' => $rows,
+            'pagi' => $pagi
+        ];
     }
 
     /**
