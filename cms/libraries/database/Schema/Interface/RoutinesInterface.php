@@ -7,6 +7,7 @@
 
 namespace Junco\Database\Schema\Interface;
 
+use Junco\Database\Schema\Interface\Entity\RoutineInterface;
 use Database;
 
 interface RoutinesInterface
@@ -17,42 +18,69 @@ interface RoutinesInterface
     public function __construct(Database $db);
 
     /**
-     * Fetch All
+     * Has
      * 
-     * @param array $param
-     * 
-     * @return array
-     */
-    public function fetchAll(array $where = []): array;
-
-    /**
-     * Show
-     * 
-     * @param string $Type   The values can be FUNCTION or PROCEDURE.
+     * @param string $Type
      * @param string $Name
      * 
-     * @return array
+     * @return bool
      */
-    public function showData(string $Type = '', string $Name = '', array $db_prefix_tables = []): array;
+    public function has(string $Type, string $Name): bool;
+
+    /**
+     * Fetch
+     * 
+     * @param array $where
+     * @param bool  $optimize   It does not add the parameters to improve performance.
+     * 
+     * @return RoutineInterface[]
+     */
+    public function fetchAll(array $where = [], bool $optimize = false): array;
+
+    /**
+     * Fetch
+     * 
+     * @param string $Name
+     * 
+     * @return ?RoutineInterface
+     */
+    public function fetch(string $Name): ?RoutineInterface;
 
     /**
      * Create
      * 
-     * @param string $Type
-     * @param string $RoutineName
-     * @param array  $Routine
+     * @param RoutineInterface $Routine
      * 
-     * @return void
+     * @return int
      */
-    public function create(string $Type, string $RoutineName, array $Routine): void;
+    public function create(RoutineInterface $Routine): int;
 
     /**
      * Drop
      * 
      * @param string $Type
-     * @param string $RoutineName
+     * @param string $Name
      * 
      * @return int
      */
-    public function drop(string $Type, string $RoutineName): int;
+    public function drop(string $Type, string $Name): int;
+
+    /**
+     * New
+     * 
+     * @param string $Type
+     * @param string $Name
+     * 
+     * @return RoutineInterface
+     */
+    public function newRoutine(string $Type, string $Name): RoutineInterface;
+
+    /**
+     * From
+     * 
+     * @param array $Data
+     * 
+     * @return ?RoutineInterface
+     */
+    public function from(array $Data): ?RoutineInterface;
 }

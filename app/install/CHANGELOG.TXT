@@ -1,20 +1,4 @@
 
-Logger v2.4
+Database v5.1
 =======================================================
-- The logger adapter has been added.
-
-Session v1.1
-=======================================================
-- Fixed bug in session(), the session was closing when the browser was refreshed.
-
-Backlist v5.1
-=======================================================
-- The way the table is created has been changed.
-
-Portal v1.1
-=======================================================
-- Now use a widget collector.
-
-Dashboard v2.4
-=======================================================
-- Now use a widget collector.
+- The entities were implemented in the schema library

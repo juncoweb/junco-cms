@@ -13,7 +13,7 @@ function Lightbox(options) {
     const overlay = body.appendChild(JsElement('div.lightbox', { html: '<div></div>' }));
     const box = overlay.firstChild;
     const that = {
-        remnove: function () {
+        remove: function () {
             overlay.parentNode.removeChild(overlay);
             body.classList.remove('lightbox-fixed');
         },

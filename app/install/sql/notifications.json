@@ -1,118 +1,157 @@
 {
     "TABLE": {
-        "notifications": {
-            "Query": "CREATE TABLE IF NOT EXISTS `#__notifications` (\n  `id` int NOT NULL AUTO_INCREMENT,\n  `user_id` int unsigned NOT NULL,\n  `notification_type` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `notification_id` int NOT NULL DEFAULT '0',\n  `notification_message` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,\n  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,\n  `read_at` datetime DEFAULT NULL,\n  PRIMARY KEY (`id`),\n  KEY `user_id` (`user_id`),\n  KEY `notification_type` (`notification_type`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "MysqlQuery": "CREATE TABLE IF NOT EXISTS `#__notifications` (\n  `id` int NOT NULL AUTO_INCREMENT,\n  `user_id` int unsigned NOT NULL,\n  `notification_type` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `notification_id` int NOT NULL DEFAULT '0',\n  `notification_message` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,\n  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,\n  `read_at` datetime DEFAULT NULL,\n  PRIMARY KEY (`id`),\n  KEY `user_id` (`user_id`),\n  KEY `notification_type` (`notification_type`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "History": [],
-            "Fields": {
-                "id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "int",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "auto_increment",
-                        "Comment": ""
-                    }
+        "#__notifications": {
+            "Name": "#__notifications",
+            "Comment": null,
+            "Engine": "InnoDB",
+            "Collation": "utf8mb4_general_ci",
+            "Columns": [
+                {
+                    "Name": "id",
+                    "Type": "int",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "auto_increment",
+                    "Comment": ""
                 },
-                "user_id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "int unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "user_id",
+                    "Type": "int",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "notification_type": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(255)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": "",
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "notification_type",
+                    "Type": "varchar",
+                    "Length": "255",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": "",
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "notification_id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "int",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "0",
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "notification_id",
+                    "Type": "int",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "0",
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "notification_message": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "text",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "notification_message",
+                    "Type": "text",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "created_at": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "datetime",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "CURRENT_TIMESTAMP",
-                        "Extra": "DEFAULT_GENERATED",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "created_at",
+                    "Type": "datetime",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "CURRENT_TIMESTAMP",
+                    "Extra": "DEFAULT_GENERATED",
+                    "Comment": ""
                 },
-                "updated_at": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "datetime",
-                        "Collation": null,
-                        "Null": "YES",
-                        "Default": null,
-                        "Extra": "on update CURRENT_TIMESTAMP",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "updated_at",
+                    "Type": "datetime",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": true,
+                    "Default": null,
+                    "Extra": "on update CURRENT_TIMESTAMP",
+                    "Comment": ""
                 },
-                "read_at": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "datetime",
-                        "Collation": null,
-                        "Null": "YES",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "read_at",
+                    "Type": "datetime",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": true,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 }
-            },
-            "Indexes": {
-                "PRIMARY": {
+            ],
+            "Indexes": [
+                {
+                    "Name": "PRIMARY",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 116,
+                    "IndexType": "BTREE",
                     "Columns": [
-                        "id"
+                        {
+                            "Name": "id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
                     ]
                 },
-                "user_id": {
+                {
+                    "Name": "user_id",
+                    "Type": null,
+                    "IsUnique": false,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 9,
+                    "IndexType": "BTREE",
                     "Columns": [
-                        "user_id"
-                    ],
-                    "Type": "INDEX"
+                        {
+                            "Name": "user_id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
                 },
-                "notification_type": {
+                {
+                    "Name": "notification_type",
+                    "Type": null,
+                    "IsUnique": false,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 2,
+                    "IndexType": "BTREE",
                     "Columns": [
-                        "notification_type"
-                    ],
-                    "Type": "INDEX"
+                        {
+                            "Name": "notification_type",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
                 }
-            }
+            ],
+            "ForeignKeys": []
         }
     }
 }

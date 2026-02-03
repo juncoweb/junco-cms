@@ -8,14 +8,12 @@
 namespace Junco\Database\Schema\Mysql;
 
 use Junco\Database\Schema\Interface\IndexesInterface;
+use Junco\Database\Schema\Interface\Entity\IndexInterface;
+use Junco\Database\Schema\Mysql\Entity\Index;
 use Database;
 
 class Indexes implements IndexesInterface
 {
-    // use
-    use IndexesTrait;
-
-    //
     protected $db;
 
     /**
@@ -27,69 +25,145 @@ class Indexes implements IndexesInterface
     }
 
     /**
-     * Show Indexes
+     * Has
+     * 
+     * @param string $TableName
+     * @param string $IndexName
+     * 
+     * @return bool
+     */
+    public function has(string $TableName, string $IndexName): bool
+    {
+        return (bool)$this->db->query("
+        SHOW INDEX
+        FROM `$TableName`
+        WHERE Key_name = '$IndexName'")->fetchColumn();
+    }
+
+    /**
+     * Fetch All
      * 
      * @param string $TableName
      * @param array  $where
      * 
-     * @return array
+     * @return IndexInterface[]
      */
     public function fetchAll(string $TableName, array $where = []): array
     {
         if ($where) {
-            foreach ($where as $field => $value) {
+            foreach ($where as $column => $value) {
+                $column = $this->getColumnName($column);
+
                 if (is_string($value)) {
-                    $this->db->where("`$field` = ?", $value);
+                    $this->db->where("`$column` = ?", $value);
                 } else {
-                    $this->db->where("`$field` IN ( ?.. )", $value);
+                    $this->db->where("`$column` IN ( ?.. )", $value);
                 }
             }
         }
 
-        return $this->db->query("SHOW INDEX FROM `$TableName` [WHERE]")->fetchAll();
-    }
+        $rows = $this->db->query("SHOW INDEX FROM `$TableName` [WHERE]")->fetchAll();
+        $indexes = [];
 
-    /**
-     * Add Index
-     * 
-     * @param string $TableName
-     * @param string $IndexName
-     * @param array  $Index
-     * 
-     * @return int
-     */
-    public function create(string $TableName, string $IndexName, array $Index): int
-    {
-        $Columns = $this->getIndexColumnsStatement($Index['Columns']);
-        $has = $this->db->query("SHOW INDEX FROM `$TableName` WHERE Key_name = '$IndexName'")->fetchColumn();
-
-        if ($IndexName == 'PRIMARY') {
-            if ($has) {
-                return $this->db->exec("ALTER TABLE `$TableName` DROP PRIMARY KEY, ADD PRIMARY KEY ($Columns)");
+        foreach ($rows as $row) {
+            if (!isset($indexes[$row['Key_name']])) {
+                $indexes[$row['Key_name']] = new Index(
+                    $row['Table'],
+                    $row['Key_name'],
+                    $row['Non_unique'] == '0',
+                    $row['Null'] == 'YES',
+                    $row['Comment'],
+                    $row['Collation'],
+                    $row['Cardinality'],
+                    $row['Index_type']
+                );
             }
-            return $this->db->exec("ALTER TABLE `$TableName` ADD PRIMARY KEY ($Columns)");
+
+            $indexes[$row['Key_name']]->addColumn(
+                $row['Column_name'],
+                $row['Seq_in_index'],
+                $row['Index_comment'],
+                $row['Sub_part']
+            );
         }
-        if ($has) {
-            return $this->db->exec("ALTER TABLE `$TableName` DROP INDEX `$IndexName`, ADD $Index[Type] `$IndexName` ($Columns)");
-        }
-        return $this->db->exec("ALTER TABLE `$TableName` ADD $Index[Type] `$IndexName` ($Columns)");
+
+        return array_values($indexes);
     }
 
     /**
-     * Drop Index
+     * Fetch
      * 
      * @param string $TableName
      * @param string $IndexName
-     * @param array  $Index
+     * 
+     * @return ?IndexInterface
+     */
+    public function fetch(string $TableName, string $IndexName): ?IndexInterface
+    {
+        return $this->fetchAll($TableName, ['Name' => $IndexName])[0] ?? null;
+    }
+
+    /**
+     * Create
+     * 
+     * @param IndexInterface $Index
      * 
      * @return int
      */
-    public function drop(string $TableName, string $IndexName, array $Index = []): int
+    public function create(IndexInterface $Index): int
+    {
+        $indexExists = $this->has(
+            $Index->getTableName(),
+            $Index->getName()
+        );
+
+        return $this->db->exec(
+            $Index->getAlterStatement($indexExists)
+        );
+    }
+
+    /**
+     * Drop
+     * 
+     * @param string $TableName
+     * @param string $IndexName
+     * 
+     * @return int
+     */
+    public function drop(string $TableName, string $IndexName): int
     {
         if ($IndexName == 'PRIMARY') {
             return $this->db->exec("ALTER TABLE `$TableName` DROP PRIMARY KEY");
         }
 
         return $this->db->exec("ALTER TABLE `$TableName` DROP INDEX `$IndexName`");
+    }
+
+    /**
+     * New
+     * 
+     * @param string $TableName
+     * @param string $Name
+     * 
+     * @return IndexInterface
+     */
+    public function newIndex(string $TableName, string $Name): Index
+    {
+        return new Index($TableName, $Name);
+    }
+
+    /**
+     * Get
+     */
+    protected function getColumnName(string $column): string
+    {
+        return match ($column) {
+            'Name' => 'Key_name',
+            'Table' => 'Table',
+            'Comment' => 'Comment',
+            'Collation' => 'Collation',
+            'Cardinality' => 'Cardinality',
+            default => abort()
+        };
     }
 }

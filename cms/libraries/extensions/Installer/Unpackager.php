@@ -408,7 +408,7 @@ class Unpackager
 
         // I see that the table is installed
         if ($this->is_installer) {
-            $security = $this->schema->tables()->has('extensions_developers');
+            $security = $this->hasTable('extensions_developers');
         }
 
         if ($security) {
@@ -454,7 +454,7 @@ class Unpackager
      */
     protected function getCurrentVersions(): array
     {
-        if (!$this->schema->tables()->has('extensions')) {
+        if (!$this->hasTable('extensions')) {
             return [];
         }
 
@@ -752,5 +752,19 @@ class Unpackager
         }
 
         return $parsed;
+    }
+
+    /**
+     * Has table
+     * 
+     * @param string $table
+     * 
+     * @return bool
+     */
+    protected function hasTable(string $table): bool
+    {
+        return $this->schema->tables()->has(
+            $this->db->getPrefixer()->forceLocalOnTableName($table)
+        );
     }
 }

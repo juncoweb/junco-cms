@@ -19,16 +19,16 @@ interface SchemaInterface
     /**
      * Database
      * 
-     * @return _DatabaseInterface
+     * @return DatabaseInfoInterface
      */
-    public function database(): _DatabaseInterface;
+    public function database(): DatabaseInfoInterface;
 
     /**
-     * Fields
+     * Columns
      * 
-     * @return FieldsInterface
+     * @return ColumnsInterface
      */
-    public function fields(): FieldsInterface;
+    public function columns(): ColumnsInterface;
 
     /**
      * ForeignKeys
@@ -43,13 +43,6 @@ interface SchemaInterface
      * @return IndexesInterface
      */
     public function indexes(): IndexesInterface;
-
-    /**
-     * Registers
-     * 
-     * @return RegistersInterface
-     */
-    public function registers(): RegistersInterface;
 
     /**
      * Routines

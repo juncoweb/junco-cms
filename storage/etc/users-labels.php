@@ -37,6 +37,8 @@ define('L_SUBSCRIPTIONS_COLLECTOR', 22);
 define('L_SUBSCRIPTIONS_SECRETARY', 21);
 define('L_SUBSCRIPTIONS_TREASURER', 23);
 define('L_SYSTEM_ADMIN', 2);
+define('L_TEST', 66);
+define('L_TEST_EDITOR', 67);
 define('L_TICKETS', 39);
 define('L_TICKETS_AUDITOR', 40);
 define('L_VIDEOS', 5);

@@ -7,10 +7,11 @@
 
 namespace Junco\Database\Schema\Mysql;
 
-use Junco\Database\Schema\Interface\_DatabaseInterface;
+use Junco\Database\Schema\Interface\DatabaseInfoInterface;
+use Junco\Database\Schema\Mysql\Entity\DatabaseEntity;
 use Database;
 
-class _Database implements _DatabaseInterface
+class DatabaseInfo implements DatabaseInfoInterface
 {
     //
     protected $db;
@@ -21,6 +22,26 @@ class _Database implements _DatabaseInterface
     public function __construct(Database $db)
     {
         $this->db = $db;
+    }
+
+    /**
+     * Fetch
+     *
+     * @return ?DatabaseEntityInterface
+     */
+    public function fetch(): ?DatabaseEntity
+    {
+        $data = $this->db->query("
+        SELECT
+         SCHEMA_NAME ,
+         DEFAULT_COLLATION_NAME
+        FROM INFORMATION_SCHEMA.SCHEMATA
+        WHERE SCHEMA_NAME = DATABASE()")->fetch();
+
+        return new DatabaseEntity(
+            $data['SCHEMA_NAME'],
+            $data['DEFAULT_COLLATION_NAME']
+        );
     }
 
     /**
@@ -43,21 +64,5 @@ class _Database implements _DatabaseInterface
     public function getCollations(): array
     {
         return $this->db->query("SHOW COLLATION")->fetchAll();
-    }
-
-    /**
-     * Get
-     *
-     * @return array
-     */
-    public function showData(): array
-    {
-        $db_name = $this->db->query("SELECT DATABASE()")->fetchColumn();
-        $query = $this->db->query("SHOW CREATE DATABASE `$db_name`")->fetchColumn(1);
-
-        return  [
-            'Name'            => $db_name,
-            'MysqlQuery'    => $query,
-        ];
     }
 }

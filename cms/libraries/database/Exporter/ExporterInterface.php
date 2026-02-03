@@ -13,59 +13,20 @@ namespace Junco\Database\Exporter;
 interface ExporterInterface
 {
     /**
-     * Add a comment header with some reference data to the buffer
-     *
-     * @param array  $data
-     */
-    public function addHeader(array $data = []): void;
-
-    /**
-     * Add
-     *
-     * @param array $database
-     * @param bool  $add_drop_database
-     */
-    public function addDatabase(array $database, bool $add_drop_database = false): void;
-
-    /**
-     * Add a routines to the buffer
+     * Constructor
      * 
-     * @param array $routines
-     * @param bool  $add_drop_routine
+     * @param array $processes
      */
-    public function addRoutines(array $routines, bool $add_drop_routine = false): void;
-
-    /**
-     * Add the tables to the buffer
-     * 
-     * @param array $table
-     * @param bool  $add_drop_table
-     */
-    public function addTable(array $table, bool $add_drop_table = false): void;
-
-    /**
-     * Add registers into the buffer
-     * 
-     * @param array $data
-     * @param bool  $use_ignore
-     * @param int   $max_query_size
-     */
-    public function addRegisters(array $data, bool $use_ignore = false, int $max_query_size = 0): void;
-
-    /**
-     * Add triggers into the buffer
-     * 
-     * @param array $triggers
-     * @param bool  $add_drop_trigger
-     */
-    public function addTriggers($triggers, bool $add_drop_trigger = false): void;
+    public function __construct(array $processes, object $options);
 
     /**
      * Used to record history of changes.
      * 
      * @param string|array $history
+     * 
+     * @return self
      */
-    public function addHistory(string|array $history): void;
+    public function addHistory(string|array $history): self;
 
     /**
      * Render

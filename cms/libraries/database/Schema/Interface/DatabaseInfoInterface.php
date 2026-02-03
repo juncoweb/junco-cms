@@ -7,14 +7,22 @@
 
 namespace Junco\Database\Schema\Interface;
 
+use Junco\Database\Schema\Interface\Entity\DatabaseEntityInterface;
 use Database;
 
-interface _DatabaseInterface
+interface DatabaseInfoInterface
 {
     /**
      * Constructor
      */
     public function __construct(Database $db);
+
+    /**
+     * Fetch
+     *
+     * @return ?DatabaseEntityInterface
+     */
+    public function fetch(): ?DatabaseEntityInterface;
 
     /**
      * Get
@@ -29,11 +37,4 @@ interface _DatabaseInterface
      * @return array
      */
     public function getCollations(): array;
-
-    /**
-     * Show
-     *
-     * @return array
-     */
-    public function showData(): array;
 }

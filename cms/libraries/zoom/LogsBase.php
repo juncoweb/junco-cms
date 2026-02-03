@@ -126,7 +126,7 @@ abstract class LogsBase
         $data = [];
 
         foreach ($newData as $key => $value) {
-            if ($oldData[$key] != $value) {
+            if (isset($oldData[$key]) && $oldData[$key] != $value) {
                 $data[$key] = [$oldData[$key], $value];
             }
         }

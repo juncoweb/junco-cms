@@ -8,13 +8,14 @@
 namespace Junco\Database\Schema\Mysql;
 
 use Junco\Database\Schema\Interface\TriggersInterface;
+use Junco\Database\Schema\Interface\Entity\TriggerInterface;
+use Junco\Database\Schema\Mysql\Entity\Trigger;
 use Database;
 
 class Triggers implements TriggersInterface
 {
     //
     protected $db;
-    protected $prefixer;
 
     /**
      * Constructor
@@ -22,84 +23,120 @@ class Triggers implements TriggersInterface
     public function __construct(Database $db)
     {
         $this->db = $db;
-        $this->prefixer = $db->getPrefixer();
     }
 
     /**
-     * Show triggers
+     * Has
+     * 
+     * @param string $Name
+     * 
+     * @return bool
+     */
+    public function has(string $Name): bool
+    {
+        return (bool)$this->db->query("SHOW TRIGGERS WHERE Trigger = ?", $Name)->fetchColumn();
+    }
+
+    /**
+     * Fetch all
      * 
      * @param array $where
      * 
-     * @return array
+     * @return TriggerInterface[]
      */
     public function fetchAll(array $where = []): array
     {
         if ($where) {
-            foreach ($where as $field => $value) {
-                if ($field == 'Name') {
-                    $field = 'Trigger';
+            foreach ($where as $column => $value) {
+                if ($column == 'Name') {
+                    $column = 'Trigger';
                 }
+
                 if (is_string($value)) {
-                    $this->db->where("`$field` = ?", $value);
+                    $this->db->where("`$column` = ?", $value);
                 } else {
-                    $this->db->where("`$field` IN ( ?.. )", $value);
+                    $this->db->where("`$column` IN ( ?.. )", $value);
                 }
             }
         }
 
-        return $this->db->query("SHOW TRIGGERS [WHERE]")->fetchAll();
+        $triggers = $this->db->query("SHOW TRIGGERS [WHERE]")->fetchAll();
+
+        return array_map(fn($trigger) => new Trigger(
+            $trigger['Trigger'],
+            $trigger['Table'],
+            $trigger['Timing'],
+            $trigger['Event'],
+            $trigger['Statement']
+        ), $triggers);
     }
 
     /**
-     * Get trigger data
+     * Fetch
      * 
-     * @param string $Trigger
-     * @param array  $db_prefix_tables
+     * @param string $Name
+     * 
+     * @return ?TriggerInterface
      */
-    public function showData(string $Trigger, array $db_prefix_tables = []): array
+    public function fetch(string $Name): ?TriggerInterface
     {
-        $query = $this->db->query("SHOW CREATE TRIGGER `$Trigger`")->fetchColumn(2);
-        $query = preg_replace('@^CREATE (.*?) TRIGGER@', 'CREATE TRIGGER', $query);
-
-        if ($db_prefix_tables) {
-            $query = $this->prefixer->replaceWithUniversal($query, $db_prefix_tables);
-        }
-
-        return [
-            'Name'            => $Trigger,
-            'MysqlQuery'    => $query,
-        ];
+        return $this->fetchAll(['Name' => $Name])[0] ?? null;
     }
 
     /**
-     * Create Trigger
+     * Create
      * 
-     * @param string $Trigger
-     * @param string $Timing
-     * @param string $Event
-     * @param string $Table
-     * @param string $Statement
+     * @param TriggerInterface $trigger
      * 
      * @return int
      */
-    public function create(string $Trigger, string $Timing, string $Event, string $Table, string $Statement): int
+    public function create(TriggerInterface $trigger): int
     {
-        return $this->db->exec("CREATE TRIGGER `$Trigger` $Timing $Event ON `$Table` FOR EACH ROW $Statement");
+        $query = $trigger->getCreateStatement();
+        $Name  = $trigger->getName();
+
+        $this->db->exec("DROP TRIGGER IF EXISTS `$Name`"); // there should be a rollback !!!!!
+
+        return $this->db->exec($query);
     }
 
     /**
-     * Drop Trigger
+     * Drop
      * 
-     * @param string|array $TriggerName
+     * @param string|array $Name
      * 
      * @return int
      */
-    public function drop(string|array $TriggerName): int
+    public function drop(string|array $Name): int
     {
-        if (is_array($TriggerName)) {
-            $TriggerName = implode('`, `', $TriggerName);
+        if (is_array($Name)) {
+            $Name = implode('`, `', $Name);
         }
 
-        return $this->db->exec("DROP TRIGGER IF EXISTS `$TriggerName`");
+        return $this->db->exec("DROP TRIGGER IF EXISTS `$Name`");
+    }
+
+    /**
+     * New
+     * 
+     * @param string $Name
+     * 
+     * @return TriggerInterface
+     */
+    public function newTrigger(string $Name): TriggerInterface
+    {
+        return new Trigger($Name);
+    }
+
+    /**
+     * From
+     * 
+     * @param array $Data
+     * 
+     * @return ?TriggerInterface
+     */
+    public function from(array $Data): ?TriggerInterface
+    {
+        return Trigger::from($Data);
     }
 }

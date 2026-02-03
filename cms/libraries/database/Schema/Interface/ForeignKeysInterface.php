@@ -8,6 +8,7 @@
 namespace Junco\Database\Schema\Interface;
 
 use Database;
+use Junco\Database\Schema\Interface\Entity\ForeignKeyInterface;
 
 interface ForeignKeysInterface
 {
@@ -29,54 +30,52 @@ interface ForeignKeysInterface
     /**
      * Foreign keys
      * 
-     * @param array $where
+     * @param string $TableName
+     * @param array  $where
      * 
-     * @return array
+     * @return ForeignKey[]
      */
-    public function fetchAll(array $where = []): array;
+    public function fetchAll(string $TableName, array $where = []): array;
 
     /**
-     * Show
+     * Fetch
      * 
      * @param string $TableName
      * @param string $Name
      * 
-     * @return array
+     * @return ?ForeignKey
      */
-    public function showData(string $TableName, string $Name): ?array;
+    public function fetch(string $TableName, string $Name): ?ForeignKeyInterface;
 
     /**
      * Create
      * 
-     * @param string $TableName
-     * @param string $Name
-     * @param string $ColumName
-     * @param string $ReferencedTableName
-     * @param string $ReferencedColumnName
-     * @param string $DeleteRule
-     * @param string $UpdateRule
+     * @param ForeignKeyInterface $ForeignKey
      * 
      * @return int
      */
-    public function create(
-        string $TableName,
-        string $Name,
-        string $ColumName,
-        string $ReferencedTableName,
-        string $ReferencedColumnName,
-        string $DeleteRule = 'RESTRICT',
-        string $UpdateRule = 'RESTRICT'
-    ): int;
+    public function create(ForeignKeyInterface $ForeignKey): int;
 
     /**
      * Drop
      * 
      * @param string       $TableName
-     * @param string|array $Name
+     * @param string|array $Names
      * 
      * @return int
      */
-    public function drop(string $TableName, string|array $Name): int;
+    public function drop(string $TableName, string|array $Names): int;
+
+    /**
+     * New
+     * 
+     * @param string $Name
+     * @param string $TableName
+     * @param string $ColumName
+     * 
+     * @return ForeignKeyInterface
+     */
+    public function newForeignKey(string $Name, string $TableName, string $ColumName): ForeignKeyInterface;
 
     /**
      * Get

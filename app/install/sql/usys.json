@@ -1,125 +1,181 @@
 {
     "TABLE": {
-        "usys_sessions": {
-            "Query": "CREATE TABLE IF NOT EXISTS `#__usys_sessions` (\n  `id` bigint unsigned NOT NULL AUTO_INCREMENT,\n  `user_id` int unsigned NOT NULL,\n  `session_selector` char(16) COLLATE utf8mb4_general_ci NOT NULL,\n  `session_validator` char(64) COLLATE utf8mb4_general_ci NOT NULL,\n  `session_hash` char(32) COLLATE utf8mb4_general_ci NOT NULL,\n  `session_ip` varbinary(16) NOT NULL,\n  `session_ua` text COLLATE utf8mb4_general_ci NOT NULL,\n  `accessed_at` datetime NOT NULL,\n  PRIMARY KEY (`id`),\n  UNIQUE KEY `session_selector` (`session_selector`),\n  UNIQUE KEY `session_validator` (`session_validator`,`session_hash`),\n  KEY `user_id` (`user_id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "MysqlQuery": "CREATE TABLE IF NOT EXISTS `#__usys_sessions` (\n  `id` bigint unsigned NOT NULL AUTO_INCREMENT,\n  `user_id` int unsigned NOT NULL,\n  `session_selector` char(16) COLLATE utf8mb4_general_ci NOT NULL,\n  `session_validator` char(64) COLLATE utf8mb4_general_ci NOT NULL,\n  `session_hash` char(32) COLLATE utf8mb4_general_ci NOT NULL,\n  `session_ip` varbinary(16) NOT NULL,\n  `session_ua` text COLLATE utf8mb4_general_ci NOT NULL,\n  `accessed_at` datetime NOT NULL,\n  PRIMARY KEY (`id`),\n  UNIQUE KEY `session_selector` (`session_selector`),\n  UNIQUE KEY `session_validator` (`session_validator`,`session_hash`),\n  KEY `user_id` (`user_id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "History": [],
-            "Fields": {
-                "id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "bigint unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "auto_increment",
-                        "Comment": ""
-                    }
+        "#__usys_sessions": {
+            "Name": "#__usys_sessions",
+            "Comment": null,
+            "Engine": "InnoDB",
+            "Collation": "utf8mb4_general_ci",
+            "Columns": [
+                {
+                    "Name": "id",
+                    "Type": "bigint",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "auto_increment",
+                    "Comment": ""
                 },
-                "user_id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "int unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "user_id",
+                    "Type": "int",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "session_selector": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "char(16)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "session_selector",
+                    "Type": "char",
+                    "Length": "16",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "session_validator": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "char(64)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "session_validator",
+                    "Type": "char",
+                    "Length": "64",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "session_hash": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "char(32)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "session_hash",
+                    "Type": "char",
+                    "Length": "32",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "session_ip": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varbinary(16)",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "session_ip",
+                    "Type": "varbinary",
+                    "Length": "16",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "session_ua": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "text",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "session_ua",
+                    "Type": "text",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "accessed_at": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "datetime",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "accessed_at",
+                    "Type": "datetime",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 }
-            },
-            "Indexes": {
-                "PRIMARY": {
+            ],
+            "Indexes": [
+                {
+                    "Name": "PRIMARY",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 43,
+                    "IndexType": "BTREE",
                     "Columns": [
-                        "id"
+                        {
+                            "Name": "id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
                     ]
                 },
-                "session_selector": {
+                {
+                    "Name": "session_selector",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 43,
+                    "IndexType": "BTREE",
                     "Columns": [
-                        "session_selector"
-                    ],
-                    "Type": "UNIQUE"
+                        {
+                            "Name": "session_selector",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
                 },
-                "session_validator": {
+                {
+                    "Name": "session_validator",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 43,
+                    "IndexType": "BTREE",
                     "Columns": [
-                        "session_validator",
-                        "session_hash"
-                    ],
-                    "Type": "UNIQUE"
+                        {
+                            "Name": "session_validator",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        },
+                        {
+                            "Name": "session_hash",
+                            "Sequence": 2,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
                 },
-                "user_id": {
+                {
+                    "Name": "user_id",
+                    "Type": null,
+                    "IsUnique": false,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 3,
+                    "IndexType": "BTREE",
                     "Columns": [
-                        "user_id"
-                    ],
-                    "Type": "INDEX"
+                        {
+                            "Name": "user_id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
                 }
-            }
+            ],
+            "ForeignKeys": []
         }
     }
 }

@@ -8,13 +8,14 @@
 namespace Junco\Database\Schema\Mysql;
 
 use Junco\Database\Schema\Interface\ForeignKeysInterface;
+use Junco\Database\Schema\Interface\Entity\ForeignKeyInterface;
+use Junco\Database\Schema\Mysql\Entity\ForeignKey;
 use Database;
 
 class ForeignKeys implements ForeignKeysInterface
 {
     //
     protected $db;
-    protected array $rules = ['CASCADE', 'SET NULL', 'NO ACTION', 'RESTRICT'];
 
     /**
      * Constructor
@@ -45,19 +46,19 @@ class ForeignKeys implements ForeignKeysInterface
     /**
      * Foreign keys
      * 
-     * @param array $where
+     * @param string $TableName
+     * @param array  $where
      * 
-     * @return array
+     * @return ForeignKey[]
      */
-    public function fetchAll(array $where = []): array
+    public function fetchAll(string $TableName, array $where = []): array
     {
         $this->db->where("k.TABLE_SCHEMA = (SELECT DATABASE())");
+        $this->db->where("k.TABLE_NAME = ?", $TableName);
+
         if ($where) {
-            foreach ($where as $field => $value) {
-                switch ($field) {
-                    case 'TableName':
-                        $this->db->where("k.TABLE_NAME = ?", $value);
-                        break;
+            foreach ($where as $column => $value) {
+                switch ($column) {
                     case 'Name':
                         $this->db->where("k.CONSTRAINT_NAME = ?", $value);
                         break;
@@ -66,95 +67,96 @@ class ForeignKeys implements ForeignKeysInterface
         }
         $this->db->where("k.REFERENCED_COLUMN_NAME IS NOT NULL");
 
-        $rows = $this->db->query("
+        $fks = $this->db->query("
 		SELECT
-		 k.TABLE_NAME AS TableName,
-		 k.COLUMN_NAME AS ColumnName,
-		 k.CONSTRAINT_NAME AS Name,
-		 k.REFERENCED_TABLE_SCHEMA AS ReferencedDbName,
-		 k.REFERENCED_TABLE_NAME AS ReferencedTableName,
-		 k.REFERENCED_COLUMN_NAME AS ReferencedColumnName,
-		 c.UPDATE_RULE AS UpdateRule,
-		 c.DELETE_RULE AS DeleteRule
+		 k.TABLE_NAME,
+		 k.COLUMN_NAME,
+		 k.CONSTRAINT_NAME,
+		 k.REFERENCED_TABLE_SCHEMA,
+		 k.REFERENCED_TABLE_NAME,
+		 k.REFERENCED_COLUMN_NAME,
+		 c.UPDATE_RULE,
+		 c.DELETE_RULE
 		FROM `information_schema`.`KEY_COLUMN_USAGE` k
 		LEFT JOIN `information_schema`.`REFERENTIAL_CONSTRAINTS` c ON (c.CONSTRAINT_NAME = k.CONSTRAINT_NAME) 
 		[WHERE]
 		ORDER BY k.TABLE_NAME, k.COLUMN_NAME")->fetchAll();
 
-        /* foreach ($rows as $i => $row) {
-			$rows[$i] = new ForeignKey(
-				$row['TableName'],
-				$row['ColumnName'],
-				$row['Name'],
-				$row['ReferencedDbName'],
-				$row['ReferencedTableName'],
-				$row['ReferencedColumnName']
-			);
-		} */
-
-        return $rows;
+        return array_map(fn($fk) => new ForeignKey(
+            $fk['CONSTRAINT_NAME'],
+            $fk['TABLE_NAME'],
+            $fk['COLUMN_NAME'],
+            $fk['UPDATE_RULE'],
+            $fk['DELETE_RULE'],
+            $fk['REFERENCED_TABLE_SCHEMA'],
+            $fk['REFERENCED_TABLE_NAME'],
+            $fk['REFERENCED_COLUMN_NAME'],
+        ), $fks);
     }
+
     /**
-     * Show
+     * Fetch
      * 
      * @param string $TableName
      * @param string $Name
      * 
-     * @return array
+     * @return ?ForeignKey
      */
-    public function showData(string $TableName, string $Name): ?array
+    public function fetch(string $TableName, string $Name): ?ForeignKey
     {
-        $data = $this->fetchAll(['TableName' => $TableName, 'Name' => $Name]);
+        $fk = $this->fetchAll($TableName, ['Name' => $Name]);
 
-        return $data ? $data[0] : null;
+        return $fk[0] ?? null;
     }
 
     /**
      * Create
      * 
-     * @param string $TableName
-     * @param string $Name
-     * @param string $ColumName
-     * @param string $ReferencedTableName
-     * @param string $ReferencedColumnName
-     * @param string $DeleteRule
-     * @param string $UpdateRule
+     * @param ForeignKeyInterface $ForeignKey
      * 
      * @return int
      */
-    public function create(
-        string $TableName,
-        string $Name,
-        string $ColumName,
-        string $ReferencedTableName,
-        string $ReferencedColumnName,
-        string $DeleteRule = 'RESTRICT',
-        string $UpdateRule = 'RESTRICT'
-    ): int {
-        $this->sanitizeRule($DeleteRule);
-        $this->sanitizeRule($UpdateRule);
-
-        return $this->db->exec("ALTER TABLE `$TableName`"
-            . " ADD CONSTRAINT `$Name` FOREIGN KEY (`$ColumName`)"
-            . " REFERENCES `$ReferencedTableName` (`$ReferencedColumnName`)"
-            . " ON DELETE $DeleteRule ON UPDATE $UpdateRule");
+    public function create(ForeignKeyInterface $ForeignKey): int
+    {
+        return $this->db->exec(
+            $ForeignKey->getAlterStatement()
+        );
     }
 
     /**
      * Drop
      * 
      * @param string       $TableName
-     * @param string|array $Name
+     * @param string|array $Names
      * 
      * @return int
      */
-    public function drop(string $TableName, string|array $Name): int
+    public function drop(string $TableName, string|array $Names): int
     {
-        $drop_stmt = is_array($Name)
-            ? implode(', ', array_map(fn($Name) => "DROP FOREIGN KEY `$Name`", $Name))
-            : "DROP FOREIGN KEY `$Name`";
+        if (!is_array($Names)) {
+            $Names = [$Names];
+        }
+
+        $drop_stmt = implode(', ', array_map(
+            fn($Name) => "DROP FOREIGN KEY `$Name`",
+            $Names
+        ));
 
         return $this->db->exec("ALTER TABLE `$TableName` $drop_stmt");
+    }
+
+    /**
+     * New
+     * 
+     * @param string $Name
+     * @param string $TableName
+     * @param string $ColumName
+     * 
+     * @return ForeignKeyInterface
+     */
+    public function newForeignKey(string $Name, string $TableName, string $ColumName): ForeignKeyInterface
+    {
+        return new ForeignKey($Name, $TableName, $ColumName);
     }
 
     /**
@@ -164,18 +166,6 @@ class ForeignKeys implements ForeignKeysInterface
      */
     public function getRules(): array
     {
-        return $this->rules;
-    }
-
-    /**
-     * Sanitize
-     * 
-     * @param string $rule
-     */
-    protected function sanitizeRule(string &$rule): void
-    {
-        if (!in_array($rule, $this->rules)) {
-            $rule = 'RESTRICT';
-        }
+        return ['CASCADE', 'SET NULL', 'NO ACTION', 'RESTRICT'];
     }
 }

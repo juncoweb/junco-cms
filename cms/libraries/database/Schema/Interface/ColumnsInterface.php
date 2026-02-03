@@ -7,9 +7,10 @@
 
 namespace Junco\Database\Schema\Interface;
 
+use Junco\Database\Schema\Interface\Entity\ColumnInterface;
 use Database;
 
-interface FieldsInterface
+interface ColumnsInterface
 {
     /**
      * Constructor
@@ -17,17 +18,27 @@ interface FieldsInterface
     public function __construct(Database $db);
 
     /**
-     * Show Fields
+     * Fetch all
      * 
      * @param string $TableName
      * @param array  $where
      * 
-     * @return array
+     * @return ColumnInterface[]
      */
     public function fetchAll(string $TableName, array $where = []): array;
 
     /**
-     * Get Fields
+     * Fetch
+     * 
+     * @param string $TableName
+     * @param string $ColumnName
+     * 
+     * @return ?ColumnInterface
+     */
+    public function fetch(string $TableName, string $ColumnName): ?ColumnInterface;
+
+    /**
+     * Get Columns
      * 
      * @param string $TableName
      * @param array  $where
@@ -39,20 +50,19 @@ interface FieldsInterface
     /**
      * Alter
      * 
-     * @param string  $TableName
-     * @param array	  $Fields
+     * @param ColumnInterface $column
      * 
      * @return int
      */
-    public function alter(string $TableName, array $Fields): int;
+    public function alter(ColumnInterface $column): int;
 
     /**
      * Drop
      * 
      * @param string		$TableName
-     * @param string|array	$FieldNames
+     * @param string|array	$ColumnNames
      * 
      * @return int
      */
-    public function drop(string $TableName, string|array $FieldNames): int;
+    public function drop(string $TableName, string|array $ColumnNames): int;
 }

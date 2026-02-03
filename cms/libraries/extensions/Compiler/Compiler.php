@@ -7,13 +7,14 @@
 
 namespace Junco\Extensions\Compiler;
 
+use Junco\Database\Exporter;
+use Junco\Database\Prefixer;
 use Junco\Extensions\Components;
 use Junco\Extensions\XData\XDataManager;
 use Filesystem;
 use Database;
 use Exception;
 use Plugins;
-use DatabaseExporter;
 use Archive;
 
 class Compiler
@@ -368,48 +369,83 @@ class Compiler
      */
     protected function compileDatabase(string $db_queries, string $extension_alias, string $db_history): void
     {
-        $export = new DatabaseExporter();
-        $export->set_db_prefix      = true;
-        $export->add_drop_routine   = true;
-        $export->add_drop_table     = false;
-        $export->add_if_not_exists  = true;
-        $export->add_auto_increment = false;
-        $export->use_ignore         = true;
+        $exporter = new Exporter();
+        $exporter->setOptions(
+            use_universal_prefix: true,
+            add_drop_routine: true,
+            add_drop_table: false,
+            add_if_not_exists: true,
+            add_auto_increment: false,
+            use_ignore: true,
+        );
+        $exporter->addFromList($db_queries);
 
-        foreach (explode(',', $db_queries) as $cmd) {
-            $cmd  = explode(':', trim($cmd));
-            $Name = $cmd[1] ?? $cmd[0];
-            $Type = isset($cmd[1]) ? $cmd[0] : 'TABLE';
-
-            switch ($Type) {
-                case 'ROWS':
-                case 'TABLE':
-                    $export->addTable($Name);
-                    break;
-
-                case 'TRIGGER':
-                    $export->addTrigger($Name);
-                    break;
-
-                case 'PROCEDURE':
-                case 'FUNCTION':
-                    $export->addRoutine($Type, $Name);
-                    break;
-
-                default:
-                    throw new Exception(sprintf('In the extension «%s», one of the parameters db_queries is unknown', $extension_alias));
-            }
-        }
-
-        $jsdata = $export->getAsJS();
-        $sqldata = $export->getAsMysql();
+        $jsdata  = $exporter->getAsJSON();
+        $sqldata = $exporter->getAsSQL();
 
         if ($db_history) {
-            $jsdata->addHistory($db_history);
+            $jsdata->addHistory($this->sanitizeHistory($db_history));
         }
 
         $jsdata->write($this->sqlpath . $extension_alias . '.json');
         $sqldata->write($this->sqlpath . $extension_alias . '.sql');
+    }
+
+    /**
+     * Sanitize
+     * 
+     * @param string $history
+     * 
+     * @return array
+     */
+    protected function sanitizeHistory(string $history): array
+    {
+        $history = (array)json_decode($history, true);
+
+        // @deprecated
+        if (!empty($history['TABLE'])) {
+            foreach ($history['TABLE'] as $TableName => $Table) {
+                if (!empty($Table['History'])) {
+                    $history['Tables'][$TableName] = $Table['History'];
+                }
+
+                if (!empty($Table['Fields'])) {
+                    foreach ($Table['Fields'] as $FieldName => $Field) {
+                        if (!empty($Field['History'])) {
+                            $history['Columns'][$TableName][$FieldName] = $Field['History'];
+                        }
+                    }
+                }
+            }
+
+            unset($history['TABLE']);
+        }
+
+        $prefixer = $this->db->getPrefixer();
+
+        if (!empty($history['Tables'])) {
+            $history['Tables'] = $this->removePrefix($prefixer, $history['Tables']);
+        }
+
+        if (!empty($history['Columns'])) {
+            $history['Columns'] = $this->removePrefix($prefixer, $history['Columns']);
+        }
+
+        return $history;
+    }
+
+    /**
+     * Remove
+     */
+    protected function removePrefix(Prefixer $prefixer, array $input): array
+    {
+        $output = [];
+
+        foreach ($input as $tbl_name => $data) {
+            $output[$prefixer->putUniversalOnTableName($tbl_name)] = $data;
+        }
+
+        return $output;
     }
 
     /**

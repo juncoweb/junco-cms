@@ -1,663 +1,894 @@
 {
     "TABLE": {
-        "users": {
-            "Query": "CREATE TABLE IF NOT EXISTS `#__users` (\n  `id` int unsigned NOT NULL AUTO_INCREMENT,\n  `fullname` varchar(48) COLLATE utf8mb4_general_ci NOT NULL,\n  `username` varchar(24) COLLATE utf8mb4_general_ci DEFAULT NULL,\n  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `email` varchar(148) COLLATE utf8mb4_general_ci NOT NULL,\n  `verified_email` enum('no','yes') COLLATE utf8mb4_general_ci NOT NULL,\n  `user_slug` varchar(24) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `avatar_id` int unsigned NOT NULL DEFAULT '0',\n  `avatar_file` varchar(64) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  `status` enum('autosignup','inactive','active') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'inactive',\n  PRIMARY KEY (`id`),\n  UNIQUE KEY `email` (`email`),\n  UNIQUE KEY `username` (`username`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "MysqlQuery": "CREATE TABLE IF NOT EXISTS `#__users` (\n  `id` int unsigned NOT NULL AUTO_INCREMENT,\n  `fullname` varchar(48) COLLATE utf8mb4_general_ci NOT NULL,\n  `username` varchar(24) COLLATE utf8mb4_general_ci DEFAULT NULL,\n  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `email` varchar(148) COLLATE utf8mb4_general_ci NOT NULL,\n  `verified_email` enum('no','yes') COLLATE utf8mb4_general_ci NOT NULL,\n  `user_slug` varchar(24) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `avatar_id` int unsigned NOT NULL DEFAULT '0',\n  `avatar_file` varchar(64) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  `status` enum('autosignup','inactive','active') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'inactive',\n  PRIMARY KEY (`id`),\n  UNIQUE KEY `email` (`email`),\n  UNIQUE KEY `username` (`username`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "History": [],
-            "Fields": {
-                "id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "int unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "auto_increment",
-                        "Comment": ""
-                    }
+        "#__users": {
+            "Name": "#__users",
+            "Comment": null,
+            "Engine": "InnoDB",
+            "Collation": "utf8mb4_general_ci",
+            "Columns": [
+                {
+                    "Name": "id",
+                    "Type": "int",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "auto_increment",
+                    "Comment": ""
                 },
-                "fullname": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(48)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "fullname",
+                    "Type": "varchar",
+                    "Length": "48",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "username": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(24)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "YES",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "username",
+                    "Type": "varchar",
+                    "Length": "24",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": true,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "password": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(255)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": "",
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "password",
+                    "Type": "varchar",
+                    "Length": "255",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": "",
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "email": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(148)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "email",
+                    "Type": "varchar",
+                    "Length": "148",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "verified_email": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "enum('no','yes')",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "verified_email",
+                    "Type": "enum",
+                    "Length": "'no','yes'",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "user_slug": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(24)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": "",
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "user_slug",
+                    "Type": "varchar",
+                    "Length": "24",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": "",
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "avatar_id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "int unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "0",
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "avatar_id",
+                    "Type": "int",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "0",
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "avatar_file": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(64)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": "",
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "avatar_file",
+                    "Type": "varchar",
+                    "Length": "64",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": "",
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "created_at": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "datetime",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "CURRENT_TIMESTAMP",
-                        "Extra": "DEFAULT_GENERATED",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "created_at",
+                    "Type": "datetime",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "CURRENT_TIMESTAMP",
+                    "Extra": "DEFAULT_GENERATED",
+                    "Comment": ""
                 },
-                "updated_at": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "timestamp",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "CURRENT_TIMESTAMP",
-                        "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "updated_at",
+                    "Type": "timestamp",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "CURRENT_TIMESTAMP",
+                    "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+                    "Comment": ""
                 },
-                "status": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "enum('autosignup','inactive','active')",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": "inactive",
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "status",
+                    "Type": "enum",
+                    "Length": "'autosignup','inactive','active'",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": "inactive",
+                    "Extra": "",
+                    "Comment": ""
                 }
-            },
-            "Indexes": {
-                "PRIMARY": {
+            ],
+            "Indexes": [
+                {
+                    "Name": "PRIMARY",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 2,
+                    "IndexType": "BTREE",
                     "Columns": [
-                        "id"
+                        {
+                            "Name": "id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
                     ]
                 },
-                "email": {
+                {
+                    "Name": "email",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 2,
+                    "IndexType": "BTREE",
                     "Columns": [
-                        "email"
-                    ],
-                    "Type": "UNIQUE"
+                        {
+                            "Name": "email",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
                 },
-                "username": {
+                {
+                    "Name": "username",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": true,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 2,
+                    "IndexType": "BTREE",
                     "Columns": [
-                        "username"
-                    ],
-                    "Type": "UNIQUE"
+                        {
+                            "Name": "username",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
                 }
-            }
+            ],
+            "ForeignKeys": []
         },
-        "users_activities": {
-            "Query": "CREATE TABLE IF NOT EXISTS `#__users_activities` (\n  `id` bigint unsigned NOT NULL AUTO_INCREMENT,\n  `user_id` int unsigned NOT NULL,\n  `user_ip` varbinary(16) NOT NULL,\n  `activity_type` enum('signup','activation','login','autologin','savepwd','savemail','validation') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,\n  `activity_code` smallint NOT NULL DEFAULT '0',\n  `activity_context` text COLLATE utf8mb4_general_ci,\n  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "MysqlQuery": "CREATE TABLE IF NOT EXISTS `#__users_activities` (\n  `id` bigint unsigned NOT NULL AUTO_INCREMENT,\n  `user_id` int unsigned NOT NULL,\n  `user_ip` varbinary(16) NOT NULL,\n  `activity_type` enum('signup','activation','login','autologin','savepwd','savemail','validation') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,\n  `activity_code` smallint NOT NULL DEFAULT '0',\n  `activity_context` text COLLATE utf8mb4_general_ci,\n  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "History": [
+        "#__users_activities": {
+            "Name": "#__users_activities",
+            "Comment": null,
+            "Engine": "InnoDB",
+            "Collation": "utf8mb4_general_ci",
+            "Columns": [
+                {
+                    "Name": "id",
+                    "Type": "bigint",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "auto_increment",
+                    "Comment": ""
+                },
+                {
+                    "Name": "user_id",
+                    "Type": "int",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
+                },
+                {
+                    "Name": "user_ip",
+                    "Type": "varbinary",
+                    "Length": "16",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
+                },
+                {
+                    "Name": "activity_type",
+                    "Type": "enum",
+                    "Length": "'signup','activation','login','autologin','savepwd','savemail','validation'",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
+                },
+                {
+                    "Name": "activity_code",
+                    "Type": "smallint",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "0",
+                    "Extra": "",
+                    "Comment": ""
+                },
+                {
+                    "Name": "activity_context",
+                    "Type": "text",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": true,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
+                },
+                {
+                    "Name": "created_at",
+                    "Type": "datetime",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": true,
+                    "Default": "CURRENT_TIMESTAMP",
+                    "Extra": "DEFAULT_GENERATED",
+                    "Comment": ""
+                }
+            ],
+            "Indexes": [
+                {
+                    "Name": "PRIMARY",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 327,
+                    "IndexType": "BTREE",
+                    "Columns": [
+                        {
+                            "Name": "id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
+                }
+            ],
+            "ForeignKeys": []
+        },
+        "#__users_activities_locks": {
+            "Name": "#__users_activities_locks",
+            "Comment": null,
+            "Engine": "InnoDB",
+            "Collation": "utf8mb4_general_ci",
+            "Columns": [
+                {
+                    "Name": "id",
+                    "Type": "bigint",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "auto_increment",
+                    "Comment": ""
+                },
+                {
+                    "Name": "user_id",
+                    "Type": "int",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "0",
+                    "Extra": "",
+                    "Comment": ""
+                },
+                {
+                    "Name": "user_ip",
+                    "Type": "varbinary",
+                    "Length": "16",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
+                },
+                {
+                    "Name": "lock_type",
+                    "Type": "enum",
+                    "Length": "'signup','activation','login','autologin','savepwd','savemail','token'",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
+                },
+                {
+                    "Name": "lock_counter",
+                    "Type": "smallint",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "0",
+                    "Extra": "",
+                    "Comment": ""
+                },
+                {
+                    "Name": "expires_at",
+                    "Type": "datetime",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
+                }
+            ],
+            "Indexes": [
+                {
+                    "Name": "PRIMARY",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 0,
+                    "IndexType": "BTREE",
+                    "Columns": [
+                        {
+                            "Name": "id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
+                }
+            ],
+            "ForeignKeys": []
+        },
+        "#__users_activities_tokens": {
+            "Name": "#__users_activities_tokens",
+            "Comment": null,
+            "Engine": "InnoDB",
+            "Collation": "utf8mb4_general_ci",
+            "Columns": [
+                {
+                    "Name": "activity_id",
+                    "Type": "bigint",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
+                },
+                {
+                    "Name": "token_selector",
+                    "Type": "char",
+                    "Length": "12",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
+                },
+                {
+                    "Name": "token_validator",
+                    "Type": "char",
+                    "Length": "64",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
+                },
+                {
+                    "Name": "token_to",
+                    "Type": "varchar",
+                    "Length": "255",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
+                },
+                {
+                    "Name": "modified_at",
+                    "Type": "datetime",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": true,
+                    "Default": null,
+                    "Extra": "on update CURRENT_TIMESTAMP",
+                    "Comment": ""
+                },
+                {
+                    "Name": "status",
+                    "Type": "tinyint",
+                    "Length": "1",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "0",
+                    "Extra": "",
+                    "Comment": ""
+                }
+            ],
+            "Indexes": [
+                {
+                    "Name": "PRIMARY",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 14,
+                    "IndexType": "BTREE",
+                    "Columns": [
+                        {
+                            "Name": "activity_id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
+                },
+                {
+                    "Name": "session_selector",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 14,
+                    "IndexType": "BTREE",
+                    "Columns": [
+                        {
+                            "Name": "token_selector",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
+                }
+            ],
+            "ForeignKeys": []
+        },
+        "#__users_roles": {
+            "Name": "#__users_roles",
+            "Comment": null,
+            "Engine": "InnoDB",
+            "Collation": "utf8mb4_general_ci",
+            "Columns": [
+                {
+                    "Name": "id",
+                    "Type": "smallint",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "auto_increment",
+                    "Comment": ""
+                },
+                {
+                    "Name": "role_name",
+                    "Type": "varchar",
+                    "Length": "32",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
+                },
+                {
+                    "Name": "role_description",
+                    "Type": "text",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": true,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
+                }
+            ],
+            "Indexes": [
+                {
+                    "Name": "PRIMARY",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 2,
+                    "IndexType": "BTREE",
+                    "Columns": [
+                        {
+                            "Name": "id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
+                }
+            ],
+            "ForeignKeys": []
+        },
+        "#__users_roles_labels": {
+            "Name": "#__users_roles_labels",
+            "Comment": null,
+            "Engine": "InnoDB",
+            "Collation": "utf8mb4_general_ci",
+            "Columns": [
+                {
+                    "Name": "id",
+                    "Type": "smallint",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "auto_increment",
+                    "Comment": ""
+                },
+                {
+                    "Name": "extension_id",
+                    "Type": "smallint",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
+                },
+                {
+                    "Name": "label_key",
+                    "Type": "varchar",
+                    "Length": "16",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
+                },
+                {
+                    "Name": "label_name",
+                    "Type": "varchar",
+                    "Length": "32",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
+                },
+                {
+                    "Name": "label_description",
+                    "Type": "text",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": true,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
+                }
+            ],
+            "Indexes": [
+                {
+                    "Name": "PRIMARY",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 44,
+                    "IndexType": "BTREE",
+                    "Columns": [
+                        {
+                            "Name": "id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
+                },
+                {
+                    "Name": "uni",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 25,
+                    "IndexType": "BTREE",
+                    "Columns": [
+                        {
+                            "Name": "extension_id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        },
+                        {
+                            "Name": "label_key",
+                            "Sequence": 2,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
+                }
+            ],
+            "ForeignKeys": []
+        },
+        "#__users_roles_labels_map": {
+            "Name": "#__users_roles_labels_map",
+            "Comment": null,
+            "Engine": "InnoDB",
+            "Collation": "utf8mb4_general_ci",
+            "Columns": [
+                {
+                    "Name": "id",
+                    "Type": "int",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "auto_increment",
+                    "Comment": ""
+                },
+                {
+                    "Name": "role_id",
+                    "Type": "tinyint",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
+                },
+                {
+                    "Name": "label_id",
+                    "Type": "tinyint",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
+                },
+                {
+                    "Name": "status",
+                    "Type": "tinyint",
+                    "Length": "1",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "0",
+                    "Extra": "",
+                    "Comment": ""
+                }
+            ],
+            "Indexes": [
+                {
+                    "Name": "PRIMARY",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 38,
+                    "IndexType": "BTREE",
+                    "Columns": [
+                        {
+                            "Name": "id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
+                },
+                {
+                    "Name": "uniq",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 2,
+                    "IndexType": "BTREE",
+                    "Columns": [
+                        {
+                            "Name": "role_id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        },
+                        {
+                            "Name": "label_id",
+                            "Sequence": 2,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
+                },
+                {
+                    "Name": "label_id",
+                    "Type": null,
+                    "IsUnique": false,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 35,
+                    "IndexType": "BTREE",
+                    "Columns": [
+                        {
+                            "Name": "label_id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
+                },
+                {
+                    "Name": "role_id",
+                    "Type": null,
+                    "IsUnique": false,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 2,
+                    "IndexType": "BTREE",
+                    "Columns": [
+                        {
+                            "Name": "role_id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
+                }
+            ],
+            "ForeignKeys": []
+        },
+        "#__users_roles_map": {
+            "Name": "#__users_roles_map",
+            "Comment": null,
+            "Engine": "InnoDB",
+            "Collation": "utf8mb4_general_ci",
+            "Columns": [
+                {
+                    "Name": "user_id",
+                    "Type": "int",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
+                },
+                {
+                    "Name": "role_id",
+                    "Type": "int",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
+                }
+            ],
+            "Indexes": [
+                {
+                    "Name": "PRIMARY",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 2,
+                    "IndexType": "BTREE",
+                    "Columns": [
+                        {
+                            "Name": "user_id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        },
+                        {
+                            "Name": "role_id",
+                            "Sequence": 2,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
+                }
+            ],
+            "ForeignKeys": []
+        }
+    },
+    "HISTORY": {
+        "Tables": {
+            "#__users_activities": [
                 "usys_activities"
             ],
-            "Fields": {
-                "id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "bigint unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "auto_increment",
-                        "Comment": ""
-                    }
-                },
-                "user_id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "int unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                },
-                "user_ip": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varbinary(16)",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                },
-                "activity_type": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "enum('signup','activation','login','autologin','savepwd','savemail','validation')",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                },
-                "activity_code": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "smallint",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "0",
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                },
-                "activity_context": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "text",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "YES",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                },
-                "created_at": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "datetime",
-                        "Collation": null,
-                        "Null": "YES",
-                        "Default": "CURRENT_TIMESTAMP",
-                        "Extra": "DEFAULT_GENERATED",
-                        "Comment": ""
-                    }
-                }
-            },
-            "Indexes": {
-                "PRIMARY": {
-                    "Columns": [
-                        "id"
-                    ]
-                }
-            }
-        },
-        "users_activities_locks": {
-            "Query": "CREATE TABLE IF NOT EXISTS `#__users_activities_locks` (\n  `id` bigint unsigned NOT NULL AUTO_INCREMENT,\n  `user_id` int unsigned NOT NULL DEFAULT '0',\n  `user_ip` varbinary(16) NOT NULL,\n  `lock_type` enum('signup','activation','login','autologin','savepwd','savemail','token') COLLATE utf8mb4_general_ci NOT NULL,\n  `lock_counter` smallint unsigned NOT NULL DEFAULT '0',\n  `expires_at` datetime NOT NULL,\n  PRIMARY KEY (`id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "MysqlQuery": "CREATE TABLE IF NOT EXISTS `#__users_activities_locks` (\n  `id` bigint unsigned NOT NULL AUTO_INCREMENT,\n  `user_id` int unsigned NOT NULL DEFAULT '0',\n  `user_ip` varbinary(16) NOT NULL,\n  `lock_type` enum('signup','activation','login','autologin','savepwd','savemail','token') COLLATE utf8mb4_general_ci NOT NULL,\n  `lock_counter` smallint unsigned NOT NULL DEFAULT '0',\n  `expires_at` datetime NOT NULL,\n  PRIMARY KEY (`id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "History": [
+            "#__users_activities_locks": [
                 "usys_activities_locks"
             ],
-            "Fields": {
-                "id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "bigint unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "auto_increment",
-                        "Comment": ""
-                    }
-                },
-                "user_id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "int unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "0",
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                },
-                "user_ip": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varbinary(16)",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                },
-                "lock_type": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "enum('signup','activation','login','autologin','savepwd','savemail','token')",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                },
-                "lock_counter": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "smallint unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "0",
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                },
-                "expires_at": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "datetime",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                }
-            },
-            "Indexes": {
-                "PRIMARY": {
-                    "Columns": [
-                        "id"
-                    ]
-                }
-            }
-        },
-        "users_activities_tokens": {
-            "Query": "CREATE TABLE IF NOT EXISTS `#__users_activities_tokens` (\n  `activity_id` bigint unsigned NOT NULL,\n  `token_selector` char(12) COLLATE utf8mb4_general_ci NOT NULL,\n  `token_validator` char(64) COLLATE utf8mb4_general_ci NOT NULL,\n  `token_to` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,\n  `modified_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,\n  `status` tinyint(1) NOT NULL DEFAULT '0',\n  PRIMARY KEY (`activity_id`),\n  UNIQUE KEY `session_selector` (`token_selector`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "MysqlQuery": "CREATE TABLE IF NOT EXISTS `#__users_activities_tokens` (\n  `activity_id` bigint unsigned NOT NULL,\n  `token_selector` char(12) COLLATE utf8mb4_general_ci NOT NULL,\n  `token_validator` char(64) COLLATE utf8mb4_general_ci NOT NULL,\n  `token_to` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,\n  `modified_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,\n  `status` tinyint(1) NOT NULL DEFAULT '0',\n  PRIMARY KEY (`activity_id`),\n  UNIQUE KEY `session_selector` (`token_selector`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "History": [
+            "#__users_activities_tokens": [
                 "usys_activities_tokens"
-            ],
-            "Fields": {
-                "activity_id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "bigint unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                },
-                "token_selector": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "char(12)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                },
-                "token_validator": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "char(64)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                },
-                "token_to": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(255)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                },
-                "modified_at": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "datetime",
-                        "Collation": null,
-                        "Null": "YES",
-                        "Default": null,
-                        "Extra": "on update CURRENT_TIMESTAMP",
-                        "Comment": ""
-                    }
-                },
-                "status": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "tinyint(1)",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "0",
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                }
-            },
-            "Indexes": {
-                "PRIMARY": {
-                    "Columns": [
-                        "activity_id"
-                    ]
-                },
-                "session_selector": {
-                    "Columns": [
-                        "token_selector"
-                    ],
-                    "Type": "UNIQUE"
-                }
-            }
+            ]
         },
-        "users_roles": {
-            "Query": "CREATE TABLE IF NOT EXISTS `#__users_roles` (\n  `id` smallint unsigned NOT NULL AUTO_INCREMENT,\n  `role_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,\n  `role_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,\n  PRIMARY KEY (`id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "MysqlQuery": "CREATE TABLE IF NOT EXISTS `#__users_roles` (\n  `id` smallint unsigned NOT NULL AUTO_INCREMENT,\n  `role_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,\n  `role_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,\n  PRIMARY KEY (`id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "History": [],
-            "Fields": {
-                "id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "smallint unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "auto_increment",
-                        "Comment": ""
-                    }
-                },
-                "role_name": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(32)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                },
-                "role_description": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "text",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "YES",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                }
-            },
-            "Indexes": {
-                "PRIMARY": {
-                    "Columns": [
-                        "id"
-                    ]
-                }
-            }
-        },
-        "users_roles_labels": {
-            "Query": "CREATE TABLE IF NOT EXISTS `#__users_roles_labels` (\n  `id` smallint unsigned NOT NULL AUTO_INCREMENT,\n  `extension_id` smallint unsigned NOT NULL,\n  `label_key` varchar(16) COLLATE utf8mb4_general_ci NOT NULL,\n  `label_name` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,\n  `label_description` text COLLATE utf8mb4_general_ci,\n  PRIMARY KEY (`id`),\n  UNIQUE KEY `uni` (`extension_id`,`label_key`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "MysqlQuery": "CREATE TABLE IF NOT EXISTS `#__users_roles_labels` (\n  `id` smallint unsigned NOT NULL AUTO_INCREMENT,\n  `extension_id` smallint unsigned NOT NULL,\n  `label_key` varchar(16) COLLATE utf8mb4_general_ci NOT NULL,\n  `label_name` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,\n  `label_description` text COLLATE utf8mb4_general_ci,\n  PRIMARY KEY (`id`),\n  UNIQUE KEY `uni` (`extension_id`,`label_key`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "History": [],
-            "Fields": {
-                "id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "smallint unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "auto_increment",
-                        "Comment": ""
-                    }
-                },
-                "extension_id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "smallint unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                },
-                "label_key": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(16)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                },
-                "label_name": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(32)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                },
-                "label_description": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "text",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "YES",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                }
-            },
-            "Indexes": {
-                "PRIMARY": {
-                    "Columns": [
-                        "id"
-                    ]
-                },
-                "uni": {
-                    "Columns": [
-                        "extension_id",
-                        "label_key"
-                    ],
-                    "Type": "UNIQUE"
-                }
-            }
-        },
-        "users_roles_labels_map": {
-            "Query": "CREATE TABLE IF NOT EXISTS `#__users_roles_labels_map` (\n  `id` int unsigned NOT NULL AUTO_INCREMENT,\n  `role_id` tinyint unsigned NOT NULL,\n  `label_id` tinyint unsigned NOT NULL,\n  `status` tinyint(1) NOT NULL DEFAULT '0',\n  PRIMARY KEY (`id`),\n  UNIQUE KEY `uniq` (`role_id`,`label_id`),\n  KEY `label_id` (`label_id`),\n  KEY `role_id` (`role_id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "MysqlQuery": "CREATE TABLE IF NOT EXISTS `#__users_roles_labels_map` (\n  `id` int unsigned NOT NULL AUTO_INCREMENT,\n  `role_id` tinyint unsigned NOT NULL,\n  `label_id` tinyint unsigned NOT NULL,\n  `status` tinyint(1) NOT NULL DEFAULT '0',\n  PRIMARY KEY (`id`),\n  UNIQUE KEY `uniq` (`role_id`,`label_id`),\n  KEY `label_id` (`label_id`),\n  KEY `role_id` (`role_id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "History": [],
-            "Fields": {
-                "id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "int unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "auto_increment",
-                        "Comment": ""
-                    }
-                },
-                "role_id": {
-                    "History": [
-                        "class_id"
-                    ],
-                    "Describe": {
-                        "Type": "tinyint unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                },
-                "label_id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "tinyint unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                },
-                "status": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "tinyint(1)",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "0",
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                }
-            },
-            "Indexes": {
-                "PRIMARY": {
-                    "Columns": [
-                        "id"
-                    ]
-                },
-                "uniq": {
-                    "Columns": [
-                        "role_id",
-                        "label_id"
-                    ],
-                    "Type": "UNIQUE"
-                },
-                "label_id": {
-                    "Columns": [
-                        "label_id"
-                    ],
-                    "Type": "INDEX"
-                },
-                "role_id": {
-                    "Columns": [
-                        "role_id"
-                    ],
-                    "Type": "INDEX"
-                }
-            }
-        },
-        "users_roles_map": {
-            "Query": "CREATE TABLE IF NOT EXISTS `#__users_roles_map` (\n  `user_id` int unsigned NOT NULL,\n  `role_id` int unsigned NOT NULL,\n  PRIMARY KEY (`user_id`,`role_id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "MysqlQuery": "CREATE TABLE IF NOT EXISTS `#__users_roles_map` (\n  `user_id` int unsigned NOT NULL,\n  `role_id` int unsigned NOT NULL,\n  PRIMARY KEY (`user_id`,`role_id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "History": [],
-            "Fields": {
-                "user_id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "int unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                },
-                "role_id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "int unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
-                }
-            },
-            "Indexes": {
-                "PRIMARY": {
-                    "Columns": [
-                        "user_id",
-                        "role_id"
-                    ]
-                }
+        "Columns": {
+            "#__users_roles_labels_map": {
+                "role_id": [
+                    "class_id"
+                ]
             }
         }
     }

@@ -9,6 +9,7 @@ use Junco\Database\Adapter\AdapterInterface;
 use Junco\Database\Adapter\StatementInterface;
 use Junco\Database\Adapter\ResultInterface;
 use Junco\Database\Schema\Interface\SchemaInterface;
+use Junco\Database\Prefixer;
 
 class Database
 {
@@ -742,12 +743,12 @@ class Database
     /**
      * Get
      * 
-     * @return \DatabasePrefixer
+     * @return Prefixer
      */
-    public function getPrefixer(): \DatabasePrefixer
+    public function getPrefixer(): Prefixer
     {
         if ($this->prefixer === null) {
-            $this->prefixer = new \DatabasePrefixer($this->prefix);
+            $this->prefixer = new Prefixer($this->prefix);
         }
 
         return $this->prefixer;

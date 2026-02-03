@@ -2383,7 +2383,7 @@ msgstr "Temas"
 
 #: app/balances/models/BalancesEntriesModel.php:76
 #: app/subscriptions/models/SubscriptionsModel.php:129
-#: cms/libraries/database/DatabaseImporter.php:43
+#: cms/libraries/database/Importer.php:43
 msgid "The file is empty or could not be read."
 msgstr "El archivo está vacío o no se puede leer."
 
@@ -4057,7 +4057,7 @@ msgstr "Líneas"
 #: app/invoices/views/audit/ConfirmExtract.php:22
 #: app/settings/views/admin/Form.php:183
 #: app/workshops/views/my/groups/lessons/Notes.php:22
-#: cms/libraries/persons/PersonsTrace.php:44
+#: cms/libraries/persons/TraceCollector.php:44
 #: cms/libraries/subscriptions/Summary.php:207
 #: cms/libraries/subscriptions/Summary.php:214
 #: cms/plugins/search/search_engine/default/search_engine.load.php:92
@@ -5845,8 +5845,8 @@ msgid "The «%s» is incorrect."
 msgstr "El «%s» es incorrecto."
 
 #: app/codemanager/models/CodemanagerApplicationExporterModel.php:177
-#: cms/libraries/database/Exporter/JSDataExporter.php:142
-#: cms/libraries/database/Exporter/MysqlExporter.php:213
+#: cms/libraries/database/Exporter/JSonExporter.php:142
+#: cms/libraries/database/Exporter/SqlExporter.php:213
 #: cms/libraries/system/Etc.php:23
 msgid "Failed to write the target file."
 msgstr "Error al escribir el archivo de destino."

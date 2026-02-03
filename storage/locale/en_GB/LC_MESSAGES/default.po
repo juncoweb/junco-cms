@@ -2270,7 +2270,7 @@ msgstr ""
 
 #: app/balances/models/BalancesEntriesModel.php:86
 #: app/subscriptions/models/SubscriptionsModel.php:163
-#: cms/libraries/database/DatabaseImporter.php:40
+#: cms/libraries/database/Importer.php:40
 msgid "The file is empty or could not be read."
 msgstr ""
 
@@ -3952,7 +3952,7 @@ msgstr ""
 #: app/subscriptions/models/SubscriptionsSummaryModel.php:388
 #: app/subscriptions/models/SubscriptionsSummaryModel.php:391
 #: app/workshops/views/my/groups/lessons/Notes.php:22
-#: cms/libraries/persons/PersonsTrace.php:48
+#: cms/libraries/persons/TraceCollector.php:48
 #: cms/plugins/search/search_engine/default/search_engine.load.php:92
 #: cms/plugins/search/search_engine/default/search_engine.load.php:95
 #: cms/snippets/backlist/master/default/snippet.php:584
@@ -6067,8 +6067,8 @@ msgid "The «%s» is incorrect."
 msgstr ""
 
 #: app/codemanager/models/CodemanagerApplicationExporterModel.php:179
-#: cms/libraries/database/Exporter/JSDataExporter.php:142
-#: cms/libraries/database/Exporter/MysqlExporter.php:213
+#: cms/libraries/database/Exporter/JSonExporter.php:142
+#: cms/libraries/database/Exporter/SqlExporter.php:213
 #: cms/libraries/system/Etc.php:23
 msgid "Failed to write the target file."
 msgstr ""

@@ -361,12 +361,8 @@ class AdminExtensionsModel extends Model
             $Type = isset($value[1]) ? $value[0] : 'TABLE';
 
             if ($Type == 'TABLE') {
-                // query
-                $rows = $this->db->getSchema()->fields()->fetchAll($Name);
-
                 $Fields = [];
-                foreach ($rows as $row) {
-                    $Field = $row['Field'];
+                foreach ($this->getFields($Name) as $Field) {
                     $key = "db_history[$Type][$Name][Fields][$Field][History]";
 
                     if (isset($db_history[$Type][$Name]['Fields'][$Field]['History'])) {
@@ -508,6 +504,14 @@ class AdminExtensionsModel extends Model
 		 extension_name
 		FROM `#__extensions`
 		WHERE id = ?", $extension_id)->fetch();
+    }
+
+    /**
+     * Get
+     */
+    protected function getFields(string $tbl_name): array
+    {
+        return $this->db->getSchema()->columns()->list($tbl_name);
     }
 
     /**

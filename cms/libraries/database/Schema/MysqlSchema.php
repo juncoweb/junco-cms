@@ -8,19 +8,10 @@
 namespace Junco\Database\Schema;
 
 use Junco\Database\Schema\Interface\SchemaInterface;
-use Junco\Database\Schema\Interface\_DatabaseInterface;
-use Junco\Database\Schema\Interface\FieldsInterface;
-use Junco\Database\Schema\Interface\ForeignKeysInterface;
-use Junco\Database\Schema\Interface\IndexesInterface;
-use Junco\Database\Schema\Interface\RegistersInterface;
-use Junco\Database\Schema\Interface\RoutinesInterface;
-use Junco\Database\Schema\Interface\TablesInterface;
-use Junco\Database\Schema\Interface\TriggersInterface;
-use Junco\Database\Schema\Mysql\_Database;
-use Junco\Database\Schema\Mysql\Fields;
+use Junco\Database\Schema\Mysql\DatabaseInfo;
+use Junco\Database\Schema\Mysql\Columns;
 use Junco\Database\Schema\Mysql\ForeignKeys;
 use Junco\Database\Schema\Mysql\Indexes;
-use Junco\Database\Schema\Mysql\Registers;
 use Junco\Database\Schema\Mysql\Routines;
 use Junco\Database\Schema\Mysql\Tables;
 use Junco\Database\Schema\Mysql\Triggers;
@@ -30,8 +21,8 @@ class MysqlSchema implements SchemaInterface
 {
     //
     protected $db;
-    protected $_database;
-    protected $fields;
+    protected $database_info;
+    protected $columns;
     protected $foreignKeys;
     protected $indexes;
     protected $registers;
@@ -60,29 +51,29 @@ class MysqlSchema implements SchemaInterface
     /**
      * Database
      * 
-     * @return _DatabaseInterface
+     * @return DatabaseInfo
      */
-    public function database(): _DatabaseInterface
+    public function database(): DatabaseInfo
     {
-        return $this->_database ??= new _Database($this->db);
+        return $this->database_info ??= new DatabaseInfo($this->db);
     }
 
     /**
-     * Fields
+     * Columns
      * 
-     * @return FieldsInterface
+     * @return Columns
      */
-    public function fields(): FieldsInterface
+    public function columns(): Columns
     {
-        return $this->fields ??= new Fields($this->db);
+        return $this->columns ??= new Columns($this->db);
     }
 
     /**
      * ForeignKeys
      * 
-     * @return ForeignKeysInterface
+     * @return ForeignKeys
      */
-    public function foreignKeys(): ForeignKeysInterface
+    public function foreignKeys(): ForeignKeys
     {
         return $this->foreignKeys ??= new ForeignKeys($this->db);
     }
@@ -90,29 +81,19 @@ class MysqlSchema implements SchemaInterface
     /**
      * Indexes
      * 
-     * @return IndexesInterface
+     * @return Indexes
      */
-    public function indexes(): IndexesInterface
+    public function indexes(): Indexes
     {
         return $this->indexes ??= new Indexes($this->db);
     }
 
     /**
-     * Registers
-     * 
-     * @return RegistersInterface
-     */
-    public function registers(): RegistersInterface
-    {
-        return $this->registers ??= new Registers($this->db);
-    }
-
-    /**
      * Routines
      * 
-     * @return RoutinesInterface
+     * @return Routines
      */
-    public function routines(): RoutinesInterface
+    public function routines(): Routines
     {
         return $this->routines ??= new Routines($this->db);
     }
@@ -120,9 +101,9 @@ class MysqlSchema implements SchemaInterface
     /**
      * Tables
      * 
-     * @return TablesInterface
+     * @return Tables
      */
-    public function tables(): TablesInterface
+    public function tables(): Tables
     {
         return $this->tables ??= new Tables($this->db);
     }
@@ -130,9 +111,9 @@ class MysqlSchema implements SchemaInterface
     /**
      * Triggers
      * 
-     * @return TriggersInterface
+     * @return Triggers
      */
-    public function triggers(): TriggersInterface
+    public function triggers(): Triggers
     {
         return $this->triggers ??= new Triggers($this->db);
     }

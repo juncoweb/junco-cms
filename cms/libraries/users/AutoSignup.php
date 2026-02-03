@@ -138,7 +138,11 @@ class AutoSignup
      */
     protected function generateUsernameFromIncrement()
     {
-        $number = $this->db->getSchema()->tables()->fetchAll(['Name' => 'users'])[0]['Auto_increment'] ?? 0;
+        $table  = $this->db->getSchema()->tables()->fetchAll(['Name' => 'users'])[0] ?? null;
+        $number = $table
+            ? $table->getAutoIncrement()
+            : 0;
+
         return "user{$number}";
     }
 

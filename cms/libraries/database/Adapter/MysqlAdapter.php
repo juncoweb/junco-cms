@@ -139,10 +139,10 @@ class MysqlAdapter implements AdapterInterface
         $data = $this->connection->get_charset();
         return [
             'client'    => $this->connection->client_info,
-            'host'        => $this->connection->host_info,
+            'host'      => $this->connection->host_info,
             'server'    => $this->connection->server_info,
-            'charset'    => $data->charset,
-            'collation'    => $data->collation,
+            'charset'   => $data->charset,
+            'collation' => $data->collation,
         ];
     }
 

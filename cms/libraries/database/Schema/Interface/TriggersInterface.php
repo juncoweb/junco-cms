@@ -7,6 +7,7 @@
 
 namespace Junco\Database\Schema\Interface;
 
+use Junco\Database\Schema\Interface\Entity\TriggerInterface;
 use Database;
 
 interface TriggersInterface
@@ -17,7 +18,16 @@ interface TriggersInterface
     public function __construct(Database $db);
 
     /**
-     * Show triggers
+     * Has
+     * 
+     * @param string $Name
+     * 
+     * @return bool
+     */
+    public function has(string $Name): bool;
+
+    /**
+     * Fetch all
      * 
      * @param array $where
      * 
@@ -26,32 +36,47 @@ interface TriggersInterface
     public function fetchAll(array $where = []): array;
 
     /**
-     * Get trigger data
+     * Fetch
      * 
-     * @param string $Trigger
-     * @param array  $db_prefix_tables
+     * @param string $Name
+     * 
+     * @return ?TriggerInterface
      */
-    public function showData(string $Trigger, array $db_prefix_tables = []): array;
+    public function fetch(string $Name): ?TriggerInterface;
 
     /**
-     * Create Trigger
+     * Create
      * 
-     * @param string $Trigger
-     * @param string $Timing
-     * @param string $Event
-     * @param string $Table
-     * @param string $Statement
+     * @param TriggerInterface $trigger
      * 
      * @return int
      */
-    public function create(string $Trigger, string $Timing, string $Event, string $Table, string $Statement): int;
+    public function create(TriggerInterface $trigger): int;
 
     /**
-     * Drop Trigger
+     * Drop
      * 
-     * @param string|array $TriggerName
+     * @param string|array $Name
      * 
      * @return int
      */
-    public function drop(string|array $TriggerName): int;
+    public function drop(string|array $Name): int;
+
+    /**
+     * New
+     * 
+     * @param string $Name
+     * 
+     * @return TriggerInterface
+     */
+    public function newTrigger(string $Name): TriggerInterface;
+
+    /**
+     * From
+     * 
+     * @param array $Data
+     * 
+     * @return ?TriggerInterface
+     */
+    public function from(array $Data): ?TriggerInterface;
 }

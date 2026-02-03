@@ -20,7 +20,9 @@ class UserTableExistsMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $has = db()->getSchema()->tables()->has('users');
+        $has = db()->getSchema()->tables()->has(
+            db()->getPrefixer()->forceLocalOnTableName('users')
+        );
 
         if (!$has) {
             throw new Exception(sprintf('MiddlewareError: %s', _t('The installer requires the user table.')));

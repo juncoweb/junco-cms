@@ -65,23 +65,24 @@ class Extensions
 
         // triggers
         if ($queries) {
-            $rows = $schema->triggers()->fetchAll(['Table' => array_column($queries, 'Name')]);
+            $tables   = array_column($queries, 'Name');
+            $triggers = $schema->triggers()->fetchAll(['Table' => $tables]);
 
-            foreach ($rows as $row) {
+            foreach ($triggers as $trigger) {
                 $queries[] = [
                     'Type' => 'TRIGGER',
-                    'Name' => $row['Trigger']
+                    'Name' => $trigger->getName()
                 ];
             }
         }
         $alias_2 = ucfirst($alias);
 
         // query - routines
-        $regex = "^[a-z]*{$alias_2}.*";
-        foreach ($schema->routines()->fetchAll(['Search' => $alias]) as $row) {
+        $regex = "^([a-z]*{$alias_2}.*|{$alias}\_\_.*)";
+        foreach ($schema->routines()->fetchAll(['Search' => $alias]) as $routine) {
             $queries[] = [
-                'Type' => $row['Type'],
-                'Name' => $row['Name']
+                'Type' => $routine->getType(),
+                'Name' => $routine->getName()
             ];
         }
 

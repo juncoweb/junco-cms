@@ -9,7 +9,7 @@ namespace Junco\Extensions\Installer;
 
 use Junco\Extensions\Installer\Unpackager;
 use Junco\Extensions\XData\XDataManager;
-use DatabaseImporter;
+use Junco\Database\Importer;
 use Filesystem;
 
 class Installer extends Unpackager
@@ -23,7 +23,7 @@ class Installer extends Unpackager
     public int   $db_import            = self::IMPORT_FROM_JSON;
     //
     protected Filesystem $fs;
-    protected DatabaseImporter $importer;
+    protected Importer $importer;
     protected ?XDataManager $xdm = null;
     protected array $extensions = [];
 
@@ -37,7 +37,7 @@ class Installer extends Unpackager
         parent::__construct($is_installer);
 
         $this->fs       = new Filesystem('');
-        $this->importer = new DatabaseImporter();
+        $this->importer = new Importer();
     }
 
     /**

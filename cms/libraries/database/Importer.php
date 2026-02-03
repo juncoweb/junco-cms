@@ -5,14 +5,20 @@
  * @author: Junco CMS (tm)
  */
 
-class DatabaseImporter
+namespace Junco\Database;
+
+use Junco\Database\Importer\JSonImporter;
+use Junco\Database\Importer\SqlImporter;
+use Exception;
+
+class Importer
 {
     // vars
     protected array $adapter = [];
 
     // settings
     public $abspath = '';
-    public $drop_nonexistent_columns = false; // only jschema
+    public $drop_nonexistent_columns = false; // only json
 
     /**
      * Import from directory
@@ -101,12 +107,12 @@ class DatabaseImporter
     {
         switch ($type) {
             case 'json':
-                $adapter = new Junco\Database\Importer\JSDataImporter();
+                $adapter = new JSonImporter();
                 $adapter->drop_nonexistent_columns = $this->drop_nonexistent_columns;
                 return $adapter;
 
             case 'sql':
-                return new Junco\Database\Importer\MysqlImporter();
+                return new SqlImporter();
         }
     }
 }

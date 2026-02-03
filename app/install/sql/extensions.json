@@ -1,565 +1,671 @@
 {
     "TABLE": {
-        "extensions": {
-            "Query": "CREATE TABLE IF NOT EXISTS `#__extensions` (\n  `id` smallint unsigned NOT NULL AUTO_INCREMENT,\n  `developer_id` smallint unsigned NOT NULL,\n  `package_id` int NOT NULL DEFAULT '0' COMMENT 'Used in packaging',\n  `extension_alias` varchar(16) COLLATE utf8mb4_general_ci NOT NULL,\n  `extension_name` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,\n  `extension_version` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,\n  `extension_credits` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,\n  `extension_license` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,\n  `extension_abstract` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,\n  `extension_require` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `extension_key` varchar(64) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `components` varchar(16) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `db_queries` text COLLATE utf8mb4_general_ci,\n  `db_history` text COLLATE utf8mb4_general_ci,\n  `xdata` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  `status` enum('public','private','deprecated') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'public',\n  PRIMARY KEY (`id`),\n  UNIQUE KEY `extension_alias` (`extension_alias`),\n  KEY `developer_id` (`developer_id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "MysqlQuery": "CREATE TABLE IF NOT EXISTS `#__extensions` (\n  `id` smallint unsigned NOT NULL AUTO_INCREMENT,\n  `developer_id` smallint unsigned NOT NULL,\n  `package_id` int NOT NULL DEFAULT '0' COMMENT 'Used in packaging',\n  `extension_alias` varchar(16) COLLATE utf8mb4_general_ci NOT NULL,\n  `extension_name` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,\n  `extension_version` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,\n  `extension_credits` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,\n  `extension_license` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,\n  `extension_abstract` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,\n  `extension_require` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `extension_key` varchar(64) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `components` varchar(16) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `db_queries` text COLLATE utf8mb4_general_ci,\n  `db_history` text COLLATE utf8mb4_general_ci,\n  `xdata` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  `status` enum('public','private','deprecated') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'public',\n  PRIMARY KEY (`id`),\n  UNIQUE KEY `extension_alias` (`extension_alias`),\n  KEY `developer_id` (`developer_id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "History": [],
-            "Fields": {
-                "id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "smallint unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "auto_increment",
-                        "Comment": ""
-                    }
+        "#__extensions": {
+            "Name": "#__extensions",
+            "Comment": null,
+            "Engine": "InnoDB",
+            "Collation": "utf8mb4_general_ci",
+            "Columns": [
+                {
+                    "Name": "id",
+                    "Type": "smallint",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "auto_increment",
+                    "Comment": ""
                 },
-                "developer_id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "smallint unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "developer_id",
+                    "Type": "smallint",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "package_id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "int",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "0",
-                        "Extra": "",
-                        "Comment": "Used in packaging"
-                    }
+                {
+                    "Name": "package_id",
+                    "Type": "int",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "0",
+                    "Extra": "",
+                    "Comment": "Used in packaging"
                 },
-                "extension_alias": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(16)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "extension_alias",
+                    "Type": "varchar",
+                    "Length": "16",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "extension_name": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(64)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "extension_name",
+                    "Type": "varchar",
+                    "Length": "64",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "extension_version": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(32)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "extension_version",
+                    "Type": "varchar",
+                    "Length": "32",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "extension_credits": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(255)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "extension_credits",
+                    "Type": "varchar",
+                    "Length": "255",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "extension_license": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(255)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "extension_license",
+                    "Type": "varchar",
+                    "Length": "255",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "extension_abstract": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(255)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "extension_abstract",
+                    "Type": "varchar",
+                    "Length": "255",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "extension_require": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(255)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": "",
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "extension_require",
+                    "Type": "varchar",
+                    "Length": "255",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": "",
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "extension_key": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(64)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": "",
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "extension_key",
+                    "Type": "varchar",
+                    "Length": "64",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": "",
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "components": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(16)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": "",
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "components",
+                    "Type": "varchar",
+                    "Length": "16",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": "",
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "db_queries": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "text",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "YES",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "db_queries",
+                    "Type": "text",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": true,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "db_history": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "text",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "YES",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "db_history",
+                    "Type": "text",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": true,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "xdata": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(255)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": "",
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "xdata",
+                    "Type": "varchar",
+                    "Length": "255",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": "",
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "created_at": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "datetime",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "CURRENT_TIMESTAMP",
-                        "Extra": "DEFAULT_GENERATED",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "created_at",
+                    "Type": "datetime",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "CURRENT_TIMESTAMP",
+                    "Extra": "DEFAULT_GENERATED",
+                    "Comment": ""
                 },
-                "updated_at": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "datetime",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "CURRENT_TIMESTAMP",
-                        "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "updated_at",
+                    "Type": "datetime",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "CURRENT_TIMESTAMP",
+                    "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+                    "Comment": ""
                 },
-                "status": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "enum('public','private','deprecated')",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": "public",
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "status",
+                    "Type": "enum",
+                    "Length": "'public','private','deprecated'",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": "public",
+                    "Extra": "",
+                    "Comment": ""
                 }
-            },
-            "Indexes": {
-                "PRIMARY": {
+            ],
+            "Indexes": [
+                {
+                    "Name": "PRIMARY",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 124,
+                    "IndexType": "BTREE",
                     "Columns": [
-                        "id"
+                        {
+                            "Name": "id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
                     ]
                 },
-                "extension_alias": {
+                {
+                    "Name": "extension_alias",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 124,
+                    "IndexType": "BTREE",
                     "Columns": [
-                        "extension_alias"
-                    ],
-                    "Type": "UNIQUE"
+                        {
+                            "Name": "extension_alias",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
                 },
-                "developer_id": {
+                {
+                    "Name": "developer_id",
+                    "Type": null,
+                    "IsUnique": false,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 1,
+                    "IndexType": "BTREE",
                     "Columns": [
-                        "developer_id"
-                    ],
-                    "Type": "INDEX"
+                        {
+                            "Name": "developer_id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
                 }
-            }
+            ],
+            "ForeignKeys": []
         },
-        "extensions_changes": {
-            "Query": "CREATE TABLE IF NOT EXISTS `#__extensions_changes` (\n  `id` int unsigned NOT NULL AUTO_INCREMENT,\n  `extension_id` int unsigned NOT NULL,\n  `change_description` tinytext COLLATE utf8mb4_general_ci NOT NULL,\n  `is_compatible` tinyint(1) NOT NULL DEFAULT '0',\n  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,\n  `status` tinyint(1) NOT NULL DEFAULT '0',\n  PRIMARY KEY (`id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "MysqlQuery": "CREATE TABLE IF NOT EXISTS `#__extensions_changes` (\n  `id` int unsigned NOT NULL AUTO_INCREMENT,\n  `extension_id` int unsigned NOT NULL,\n  `change_description` tinytext COLLATE utf8mb4_general_ci NOT NULL,\n  `is_compatible` tinyint(1) NOT NULL DEFAULT '0',\n  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,\n  `status` tinyint(1) NOT NULL DEFAULT '0',\n  PRIMARY KEY (`id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "History": [],
-            "Fields": {
-                "id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "int unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "auto_increment",
-                        "Comment": ""
-                    }
+        "#__extensions_changes": {
+            "Name": "#__extensions_changes",
+            "Comment": null,
+            "Engine": "InnoDB",
+            "Collation": "utf8mb4_general_ci",
+            "Columns": [
+                {
+                    "Name": "id",
+                    "Type": "int",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "auto_increment",
+                    "Comment": ""
                 },
-                "extension_id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "int unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "extension_id",
+                    "Type": "int",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "change_description": {
-                    "History": [
-                        "change_details"
-                    ],
-                    "Describe": {
-                        "Type": "tinytext",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "change_description",
+                    "Type": "tinytext",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "is_compatible": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "tinyint(1)",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "0",
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "is_compatible",
+                    "Type": "tinyint",
+                    "Length": "1",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "0",
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "created_at": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "datetime",
-                        "Collation": null,
-                        "Null": "YES",
-                        "Default": "CURRENT_TIMESTAMP",
-                        "Extra": "DEFAULT_GENERATED",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "created_at",
+                    "Type": "datetime",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": true,
+                    "Default": "CURRENT_TIMESTAMP",
+                    "Extra": "DEFAULT_GENERATED",
+                    "Comment": ""
                 },
-                "status": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "tinyint(1)",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "0",
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "status",
+                    "Type": "tinyint",
+                    "Length": "1",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "0",
+                    "Extra": "",
+                    "Comment": ""
                 }
-            },
-            "Indexes": {
-                "PRIMARY": {
+            ],
+            "Indexes": [
+                {
+                    "Name": "PRIMARY",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 1951,
+                    "IndexType": "BTREE",
                     "Columns": [
-                        "id"
+                        {
+                            "Name": "id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
                     ]
                 }
-            }
+            ],
+            "ForeignKeys": []
         },
-        "extensions_developers": {
-            "Query": "CREATE TABLE IF NOT EXISTS `#__extensions_developers` (\n  `id` smallint unsigned NOT NULL AUTO_INCREMENT,\n  `developer_name` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,\n  `project_url` varchar(128) COLLATE utf8mb4_general_ci NOT NULL,\n  `webstore_url` varchar(128) COLLATE utf8mb4_general_ci NOT NULL,\n  `webstore_token` varchar(128) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `default_credits` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `default_license` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  `is_protected` tinyint(1) NOT NULL DEFAULT '1',\n  PRIMARY KEY (`id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "MysqlQuery": "CREATE TABLE IF NOT EXISTS `#__extensions_developers` (\n  `id` smallint unsigned NOT NULL AUTO_INCREMENT,\n  `developer_name` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,\n  `project_url` varchar(128) COLLATE utf8mb4_general_ci NOT NULL,\n  `webstore_url` varchar(128) COLLATE utf8mb4_general_ci NOT NULL,\n  `webstore_token` varchar(128) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `default_credits` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `default_license` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',\n  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  `is_protected` tinyint(1) NOT NULL DEFAULT '1',\n  PRIMARY KEY (`id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "History": [],
-            "Fields": {
-                "id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "smallint unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "auto_increment",
-                        "Comment": ""
-                    }
+        "#__extensions_developers": {
+            "Name": "#__extensions_developers",
+            "Comment": null,
+            "Engine": "InnoDB",
+            "Collation": "utf8mb4_general_ci",
+            "Columns": [
+                {
+                    "Name": "id",
+                    "Type": "smallint",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "auto_increment",
+                    "Comment": ""
                 },
-                "developer_name": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(32)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "developer_name",
+                    "Type": "varchar",
+                    "Length": "32",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "project_url": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(128)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "project_url",
+                    "Type": "varchar",
+                    "Length": "128",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "webstore_url": {
-                    "History": [
-                        "update_url"
-                    ],
-                    "Describe": {
-                        "Type": "varchar(128)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "webstore_url",
+                    "Type": "varchar",
+                    "Length": "128",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "webstore_token": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(128)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": "",
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "webstore_token",
+                    "Type": "varchar",
+                    "Length": "128",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": "",
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "default_credits": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(255)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": "",
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "default_credits",
+                    "Type": "varchar",
+                    "Length": "255",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": "",
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "default_license": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(255)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": "",
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "default_license",
+                    "Type": "varchar",
+                    "Length": "255",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": "",
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "created_at": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "datetime",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "CURRENT_TIMESTAMP",
-                        "Extra": "DEFAULT_GENERATED",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "created_at",
+                    "Type": "datetime",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "CURRENT_TIMESTAMP",
+                    "Extra": "DEFAULT_GENERATED",
+                    "Comment": ""
                 },
-                "updated_at": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "datetime",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "CURRENT_TIMESTAMP",
-                        "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "updated_at",
+                    "Type": "datetime",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "CURRENT_TIMESTAMP",
+                    "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+                    "Comment": ""
                 },
-                "is_protected": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "tinyint(1)",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "1",
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "is_protected",
+                    "Type": "tinyint",
+                    "Length": "1",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "1",
+                    "Extra": "",
+                    "Comment": ""
                 }
-            },
-            "Indexes": {
-                "PRIMARY": {
+            ],
+            "Indexes": [
+                {
+                    "Name": "PRIMARY",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 1,
+                    "IndexType": "BTREE",
                     "Columns": [
-                        "id"
+                        {
+                            "Name": "id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
                     ]
                 }
-            }
+            ],
+            "ForeignKeys": []
         },
-        "extensions_updates": {
-            "Query": "CREATE TABLE IF NOT EXISTS `#__extensions_updates` (\n  `id` int NOT NULL AUTO_INCREMENT,\n  `extension_id` int NOT NULL,\n  `update_version` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,\n  `released_at` datetime DEFAULT NULL,\n  `checked_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  `has_failed` tinyint unsigned NOT NULL DEFAULT '0',\n  `failure_msg` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,\n  `status` enum('canceled','available','installed') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'canceled',\n  PRIMARY KEY (`id`),\n  KEY `extension_id` (`extension_id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "MysqlQuery": "CREATE TABLE IF NOT EXISTS `#__extensions_updates` (\n  `id` int NOT NULL AUTO_INCREMENT,\n  `extension_id` int NOT NULL,\n  `update_version` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,\n  `released_at` datetime DEFAULT NULL,\n  `checked_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  `has_failed` tinyint unsigned NOT NULL DEFAULT '0',\n  `failure_msg` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,\n  `status` enum('canceled','available','installed') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'canceled',\n  PRIMARY KEY (`id`),\n  KEY `extension_id` (`extension_id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "History": [],
-            "Fields": {
-                "id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "int",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "auto_increment",
-                        "Comment": ""
-                    }
+        "#__extensions_updates": {
+            "Name": "#__extensions_updates",
+            "Comment": null,
+            "Engine": "InnoDB",
+            "Collation": "utf8mb4_general_ci",
+            "Columns": [
+                {
+                    "Name": "id",
+                    "Type": "int",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "auto_increment",
+                    "Comment": ""
                 },
-                "extension_id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "int",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "extension_id",
+                    "Type": "int",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "update_version": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(32)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "update_version",
+                    "Type": "varchar",
+                    "Length": "32",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "released_at": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "datetime",
-                        "Collation": null,
-                        "Null": "YES",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "released_at",
+                    "Type": "datetime",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": true,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "checked_at": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "datetime",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "CURRENT_TIMESTAMP",
-                        "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "checked_at",
+                    "Type": "datetime",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "CURRENT_TIMESTAMP",
+                    "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+                    "Comment": ""
                 },
-                "created_at": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "datetime",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "CURRENT_TIMESTAMP",
-                        "Extra": "DEFAULT_GENERATED",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "created_at",
+                    "Type": "datetime",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "CURRENT_TIMESTAMP",
+                    "Extra": "DEFAULT_GENERATED",
+                    "Comment": ""
                 },
-                "updated_at": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "datetime",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "CURRENT_TIMESTAMP",
-                        "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "updated_at",
+                    "Type": "datetime",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "CURRENT_TIMESTAMP",
+                    "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+                    "Comment": ""
                 },
-                "has_failed": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "tinyint unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "0",
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "has_failed",
+                    "Type": "tinyint",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "0",
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "failure_msg": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "text",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "YES",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "failure_msg",
+                    "Type": "text",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": true,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "status": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "enum('canceled','available','installed')",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": "canceled",
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "status",
+                    "Type": "enum",
+                    "Length": "'canceled','available','installed'",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": "canceled",
+                    "Extra": "",
+                    "Comment": ""
                 }
-            },
-            "Indexes": {
-                "PRIMARY": {
+            ],
+            "Indexes": [
+                {
+                    "Name": "PRIMARY",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 0,
+                    "IndexType": "BTREE",
                     "Columns": [
-                        "id"
+                        {
+                            "Name": "id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
                     ]
                 },
-                "extension_id": {
+                {
+                    "Name": "extension_id",
+                    "Type": null,
+                    "IsUnique": false,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 0,
+                    "IndexType": "BTREE",
                     "Columns": [
-                        "extension_id"
-                    ],
-                    "Type": "INDEX"
+                        {
+                            "Name": "extension_id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
                 }
+            ],
+            "ForeignKeys": []
+        }
+    },
+    "HISTORY": {
+        "Columns": {
+            "#__extensions_changes": {
+                "change_description": [
+                    "change_details"
+                ]
+            },
+            "#__extensions_developers": {
+                "webstore_url": [
+                    "update_url"
+                ]
             }
         }
     }

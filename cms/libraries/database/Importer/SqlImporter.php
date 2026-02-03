@@ -9,7 +9,7 @@ namespace Junco\Database\Importer;
 
 use Database;
 
-class MysqlImporter
+class SqlImporter
 {
     // vars
     protected $db;
@@ -22,11 +22,8 @@ class MysqlImporter
      */
     public function __construct(?Database $db = null)
     {
-        if ($db === null) {
-            $db = db();
-        }
-        $this->db = $db;
-        $this->prefixer = $db->getPrefixer();
+        $this->db = $db ?? db();
+        $this->prefixer = $this->db->getPrefixer();
     }
 
     /**

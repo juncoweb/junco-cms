@@ -5,17 +5,38 @@
  * @author: Junco CMS (tm)
  */
 
-class DatabasePrefixer
+namespace Junco\Database;
+
+class Prefixer
 {
     // vars
-    protected $universal_prefix = '#__';
+    protected string $universal_prefix = '#__';
+    protected array  $replaces         = [];
 
     /**
      * Constructor
      * 
      * @param string $prefix
      */
-    public function __construct(protected string $prefix = '') {}
+    public function __construct(
+        protected string $prefix = ''
+    ) {}
+
+    /**
+     * Set
+     * 
+     * @param array $tbl_names
+     * 
+     * @return self
+     */
+    public function setTables(array $tbl_names): self
+    {
+        foreach ($tbl_names as $tbl_name) {
+            $this->replaces['`' . $tbl_name . '`'] = '`' . $this->putUniversalOnTableName($tbl_name) . '`';
+        }
+
+        return $this;
+    }
 
     /**
      * Replace with local prefix
@@ -37,19 +58,9 @@ class DatabasePrefixer
      * 
      * @return string The string with replacements
      */
-    public function replaceWithUniversal(string $query, string|array $tbl_names): string
+    public function replaceWithUniversal(string $query): string
     {
-        if (is_string($tbl_names)) {
-            $tbl_names = [$tbl_names];
-        }
-
-        $replace = [];
-        foreach ($tbl_names as $i => $tbl_name) {
-            $tbl_names[$i] = '`' . $tbl_name . '`';
-            $replace[$i] = '`' . $this->putUniversalOnTableName($tbl_name) . '`';
-        }
-
-        return str_replace($tbl_names, $replace, $query);
+        return strtr($query, $this->replaces);
     }
 
     /**

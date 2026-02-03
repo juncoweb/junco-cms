@@ -1,106 +1,121 @@
 {
     "TABLE": {
-        "contact": {
-            "Query": "CREATE TABLE IF NOT EXISTS `#__contact` (\n  `id` int unsigned NOT NULL AUTO_INCREMENT,\n  `user_id` int unsigned NOT NULL,\n  `user_ip` varbinary(16) NOT NULL,\n  `contact_name` varchar(48) COLLATE utf8mb4_general_ci NOT NULL,\n  `contact_email` varchar(48) COLLATE utf8mb4_general_ci NOT NULL,\n  `contact_message` text COLLATE utf8mb4_general_ci NOT NULL,\n  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,\n  `status` tinyint(1) NOT NULL DEFAULT '0',\n  PRIMARY KEY (`id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "MysqlQuery": "CREATE TABLE IF NOT EXISTS `#__contact` (\n  `id` int unsigned NOT NULL AUTO_INCREMENT,\n  `user_id` int unsigned NOT NULL,\n  `user_ip` varbinary(16) NOT NULL,\n  `contact_name` varchar(48) COLLATE utf8mb4_general_ci NOT NULL,\n  `contact_email` varchar(48) COLLATE utf8mb4_general_ci NOT NULL,\n  `contact_message` text COLLATE utf8mb4_general_ci NOT NULL,\n  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,\n  `status` tinyint(1) NOT NULL DEFAULT '0',\n  PRIMARY KEY (`id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
-            "History": [],
-            "Fields": {
-                "id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "int unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "auto_increment",
-                        "Comment": ""
-                    }
+        "#__contact": {
+            "Name": "#__contact",
+            "Comment": null,
+            "Engine": "InnoDB",
+            "Collation": "utf8mb4_general_ci",
+            "Columns": [
+                {
+                    "Name": "id",
+                    "Type": "int",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "auto_increment",
+                    "Comment": ""
                 },
-                "user_id": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "int unsigned",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "user_id",
+                    "Type": "int",
+                    "Length": "",
+                    "Attribute": "unsigned",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "user_ip": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varbinary(16)",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "user_ip",
+                    "Type": "varbinary",
+                    "Length": "16",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "contact_name": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(48)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "contact_name",
+                    "Type": "varchar",
+                    "Length": "48",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "contact_email": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "varchar(48)",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "contact_email",
+                    "Type": "varchar",
+                    "Length": "48",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "contact_message": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "text",
-                        "Collation": "utf8mb4_general_ci",
-                        "Null": "NO",
-                        "Default": null,
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "contact_message",
+                    "Type": "text",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": null,
+                    "Extra": "",
+                    "Comment": ""
                 },
-                "created_at": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "datetime",
-                        "Collation": null,
-                        "Null": "YES",
-                        "Default": "CURRENT_TIMESTAMP",
-                        "Extra": "DEFAULT_GENERATED",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "created_at",
+                    "Type": "datetime",
+                    "Length": "",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": true,
+                    "Default": "CURRENT_TIMESTAMP",
+                    "Extra": "DEFAULT_GENERATED",
+                    "Comment": ""
                 },
-                "status": {
-                    "History": [],
-                    "Describe": {
-                        "Type": "tinyint(1)",
-                        "Collation": null,
-                        "Null": "NO",
-                        "Default": "0",
-                        "Extra": "",
-                        "Comment": ""
-                    }
+                {
+                    "Name": "status",
+                    "Type": "tinyint",
+                    "Length": "1",
+                    "Attribute": "",
+                    "Collation": null,
+                    "IsNull": false,
+                    "Default": "0",
+                    "Extra": "",
+                    "Comment": ""
                 }
-            },
-            "Indexes": {
-                "PRIMARY": {
+            ],
+            "Indexes": [
+                {
+                    "Name": "PRIMARY",
+                    "Type": null,
+                    "IsUnique": true,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 23,
+                    "IndexType": "BTREE",
                     "Columns": [
-                        "id"
+                        {
+                            "Name": "id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
                     ]
                 }
-            }
+            ],
+            "ForeignKeys": []
         }
     }
 }

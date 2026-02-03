@@ -7,6 +7,7 @@
 
 namespace Junco\Database\Schema\Interface;
 
+use Junco\Database\Schema\Interface\Entity\TableInterface;
 use Database;
 
 interface TablesInterface
@@ -17,13 +18,13 @@ interface TablesInterface
     public function __construct(Database $db);
 
     /**
-     * Has table
+     * Has
      * 
-     * @param string $tbl_name
+     * @param string $TableName
      * 
      * @return bool
      */
-    public function has(string $tbl_name): bool;
+    public function has(string $TableName): bool;
 
     /**
      * Fetch All
@@ -35,6 +36,15 @@ interface TablesInterface
     public function fetchAll(array $where = []): array;
 
     /**
+     * Fetch
+     * 
+     * @param string $TableName
+     * 
+     * @return ?TableInterface
+     */
+    public function fetch(string $TableName): ?TableInterface;
+
+    /**
      * List
      * 
      * @return array    An associative array of all tables.
@@ -42,35 +52,25 @@ interface TablesInterface
     public function list(): array;
 
     /**
-     * Show
+     * New
      * 
-     * @param string $tbl_name
-     * @param string $tbl_name
-     * @param bool   $add_if_not_exists
-     * @param bool   $add_auto_increment
-     * @param bool   $set_db_prefix = false
+     * @param string $Name
      * 
-     * @return array
+     * @return TableInterface
      */
-    public function showData(
-        string $tbl_name,
-        bool   $add_if_not_exists = false,
-        bool   $add_auto_increment = false,
-        bool   $set_db_prefix = false
-    ): array;
+    public function newTable(string $Name): TableInterface;
 
     /**
-     * Create Table
+     * Create
      * 
-     * @param string $TableName
-     * @param array  $Table
+     * @param TableInterface $Table
      * 
      * @return int
      */
-    public function create(string $TableName, array $Table): int;
+    public function create(TableInterface $Table): int;
 
     /**
-     * Copy Table
+     * Copy
      * 
      * @param string $FromTableName
      * @param string $ToTableName
@@ -81,14 +81,13 @@ interface TablesInterface
     public function copy(string $FromTableName, string $ToTableName, bool $CopyRegisters = false): int;
 
     /**
-     * Alter Table
+     * Alter
      * 
-     * @param string $TableName
-     * @param array  $Table
+     * @param TableInterface $Table
      * 
      * @return int
      */
-    public function alter(string $TableName, array $Table): int;
+    public function alter(TableInterface $Table): int;
 
     /**
      * Rename
@@ -119,7 +118,16 @@ interface TablesInterface
     public function drop(string|array $TableNames): int;
 
     /**
-     * Validate Table Name
+     * From
+     * 
+     * @param array $Data
+     * 
+     * @return ?TableInterface
+     */
+    public function from(array $Data): ?TableInterface;
+
+    /**
+     * Validate table name
      * 
      * @param string $tbl_name
      * 

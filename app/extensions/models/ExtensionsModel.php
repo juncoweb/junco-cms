@@ -170,6 +170,8 @@ class ExtensionsModel extends Model
         }
 
         // delete
+        $this->db->exec("DELETE FROM `#__extensions_changes` WHERE extension_id IN (?..)", $data['id']);
+        $this->db->exec("DELETE FROM `#__extensions_updates` WHERE extension_id IN (?..)", $data['id']);
         $this->db->exec("DELETE FROM `#__extensions` WHERE id IN (?..)", $data['id']);
     }
 
