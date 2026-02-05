@@ -17,12 +17,12 @@ use Exception;
 class ImageResizer
 {
     // const
-    const RESIZE_PROPORTIONAL        = 1;
-    const RESIZE_PROPORTIONAL_AREA    = 2;
-    const RESIZE_SQUARE                = 3;
-    const RESIZE_EXACT                = 4;
-    const RESIZE_EXACT_WIDTH        = 5;
-    const RESIZE_EXACT_HEIGHT        = 6;
+    const RESIZE_PROPORTIONAL      = 1;
+    const RESIZE_PROPORTIONAL_AREA = 2;
+    const RESIZE_SQUARE            = 3;
+    const RESIZE_EXACT             = 4;
+    const RESIZE_EXACT_WIDTH       = 5;
+    const RESIZE_EXACT_HEIGHT      = 6;
 
     /**
      * Resize
@@ -60,7 +60,7 @@ class ImageResizer
             throw new Exception(sprintf(_t('Error %s! failed resizing the image.'), __LINE__));
         }
 
-        $max_wh      = $this->getMaxWH($max_wh, $mode);
+        $max_wh   = $this->getMaxWH($max_wh, $mode);
         $resizing = $this->calculateResizing($original, $max_wh, $mode, $force_rsz);
 
         // the image does not require resizing.
@@ -118,12 +118,12 @@ class ImageResizer
     public static function getModes(): array
     {
         return [
-            self::RESIZE_PROPORTIONAL        => '1 - Proportional',
-            self::RESIZE_PROPORTIONAL_AREA    => '2 - Proportional area',
-            self::RESIZE_SQUARE                => '3 - Square',
-            self::RESIZE_EXACT                => '4 - Exact',
-            self::RESIZE_EXACT_WIDTH        => '5 - Exact width',
-            self::RESIZE_EXACT_HEIGHT        => '6 - Exact height'
+            self::RESIZE_PROPORTIONAL      => '1 - Proportional',
+            self::RESIZE_PROPORTIONAL_AREA => '2 - Proportional area',
+            self::RESIZE_SQUARE            => '3 - Square',
+            self::RESIZE_EXACT             => '4 - Exact',
+            self::RESIZE_EXACT_WIDTH       => '5 - Exact width',
+            self::RESIZE_EXACT_HEIGHT      => '6 - Exact height'
         ];
     }
 
@@ -301,13 +301,13 @@ class ImageResizer
             $rsz_ratio    = $resizing[0] / $resizing[1];
 
             if ($org_ratio > $rsz_ratio) {
-                $new_w            = $rsz_ratio * $original[1];
-                $original['x']    = floor(($original[0] - $new_w) / 2);
-                $original[0]    = floor($new_w);
+                $new_w         = $rsz_ratio * $original[1];
+                $original['x'] = floor(($original[0] - $new_w) / 2);
+                $original[0]   = floor($new_w);
             } elseif ($org_ratio < $rsz_ratio) {
-                $new_h             = $original[0] / $rsz_ratio;
-                $original['y']    = floor(($original[1] - $new_h) / 2);
-                $original[1]    = floor($new_h);
+                $new_h         = $original[0] / $rsz_ratio;
+                $original['y'] = floor(($original[1] - $new_h) / 2);
+                $original[1]   = floor($new_h);
             }
         }
 

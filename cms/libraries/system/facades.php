@@ -184,7 +184,7 @@ function response(int $code = 200, string $reasonPhrase = ''): Response
  */
 function cookie(string $key, mixed $default = null): mixed
 {
-    return app('request')->getCookieParams()[$key] ?? $default;
+    return request()?->getCookieParams()[$key] ?? $default;
 }
 
 /**

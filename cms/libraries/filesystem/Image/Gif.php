@@ -54,8 +54,8 @@ class Gif implements ImageInterface
         $transparent = imagecolortransparent($imgBase);
 
         if ($transparent >= 0) {
-            $color            = imagecolorsforindex($imgBase, $transparent);
-            $transparent    = imagecolorallocate($image, $color['red'], $color['green'], $color['blue']);
+            $color       = imagecolorsforindex($imgBase, $transparent);
+            $transparent = imagecolorallocate($image, $color['red'], $color['green'], $color['blue']);
             imagefill($image, 0, 0, $transparent);
             imagecolortransparent($image, $transparent);
         }
