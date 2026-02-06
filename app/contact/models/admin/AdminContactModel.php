@@ -82,9 +82,15 @@ class AdminContactModel extends Model
 
         $data['contact_message'] = nl2br($data['contact_message']);
         $data['user_ip']         = inet_ntop($data['user_ip']);
+        $data['geo_url']         = null;
 
         if ($data['user_id']) {
             $data['user_url'] = url('admin/users') . sprintf('#/search=%s&field=2', $data['user_id']);
+        }
+
+        $plugin = config('contact.geolocations_plugin');
+        if ($plugin) {
+            $data['geo_url'] = Plugin::get('geolocations', 'show_url', $plugin)?->run($data['user_ip']);
         }
 
         return $data;

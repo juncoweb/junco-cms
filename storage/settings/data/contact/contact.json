@@ -3,7 +3,8 @@
     "description": "",
     "groups": [
         "Template",
-        "Security"
+        "Security",
+        "Administration"
     ],
     "descriptions": [],
     "rows": {
@@ -59,6 +60,19 @@
             "ordering": 2,
             "default_value": "3",
             "help": "Amount per hour.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 0,
+            "status": 1
+        },
+        "geolocations_plugin": {
+            "label": "Geolocation",
+            "type": "plugin",
+            "group": 2,
+            "ordering": 1,
+            "default_value": "",
+            "help": "",
             "history": [],
             "autoload": 1,
             "translate": 0,

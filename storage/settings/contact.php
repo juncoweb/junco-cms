@@ -20,4 +20,9 @@ return [
 	 */
 	'captcha' => '',
 	'floodcontrol' => '3',
+
+	/**
+	 * Administration
+	 */
+	'geolocations_plugin' => '',
 ];

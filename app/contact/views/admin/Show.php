@@ -18,7 +18,7 @@ if ($user_id) {
 }
 $zoom->columns(
     $zoom->date($created_at)->setLabel(_t('Created')),
-    $zoom->group($user_ip)->setLabel(_t('Ip'))
+    $zoom->group($user_ip)->setLabel(_t('Ip'))->setLink($geo_url)
 );
 $zoom->group(sprintf('<a href="mailto:%s">%s</a>', $contact_email, $contact_email))->setLabel(_t('Email'));
 $zoom->group($contact_message)->setLabel(_t('Message'));

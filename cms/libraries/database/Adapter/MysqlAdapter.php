@@ -12,6 +12,7 @@ use mysqli_sql_exception;
 use mysqli_stmt;
 use mysqli_result;
 use Error;
+use Junco\Database\Error\MysqlError;
 
 /**
  * Database Mysqli Adapter
@@ -43,7 +44,7 @@ class MysqlAdapter implements AdapterInterface
                 $this->connection->set_charset($config['database.charset']);
             }
         } catch (mysqli_sql_exception $e) {
-            throw new Error($e->getMessage(), $e->getCode());
+            throw new MysqlError($e);
         }
     }
 
@@ -81,7 +82,7 @@ class MysqlAdapter implements AdapterInterface
         try {
             return new MysqliStatement($this->connection->prepare($query));
         } catch (mysqli_sql_exception $e) {
-            throw new Error($e->getMessage(), $e->getCode());
+            throw new MysqlError($e);
         }
     }
 
@@ -97,7 +98,7 @@ class MysqlAdapter implements AdapterInterface
         try {
             return new MysqliResult($this->connection->query($query));
         } catch (mysqli_sql_exception $e) {
-            throw new Error($e->getMessage(), $e->getCode());
+            throw new MysqlError($e);
         }
     }
 
@@ -115,7 +116,7 @@ class MysqlAdapter implements AdapterInterface
 
             return $this->connection->affected_rows;
         } catch (mysqli_sql_exception $e) {
-            throw new Error($e->getMessage(), $e->getCode());
+            throw new MysqlError($e);
         }
     }
 
@@ -232,7 +233,7 @@ class MysqliStatement implements StatementInterface
             $this->stmt->execute();
         } catch (mysqli_sql_exception $e) {
             // I change the exception for an error.
-            throw new Error($e->getMessage(), $e->getCode());
+            throw new MysqlError($e);
         }
     }
 

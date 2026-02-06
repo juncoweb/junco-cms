@@ -11,6 +11,7 @@ use PDO;
 use PDOException;
 use PDOStatement;
 use Error;
+use Junco\Database\Error\PdoError;
 
 /**
  * Database PDO adapter
@@ -49,7 +50,7 @@ class PdoAdapter implements AdapterInterface
                 $this->connection->exec("SET CLIENT_ENCODING TO '$config[charset]'");
             }
         } catch (PDOException $e) {
-            throw new Error($e->getMessage(), (int)$e->getCode());
+            throw new PdoError($e);
         }
     }
 
@@ -89,7 +90,7 @@ class PdoAdapter implements AdapterInterface
 
             return new PdoAdapterStatement($this->connection->prepare($query));
         } catch (PDOException $e) {
-            throw new Error($e->getMessage(), (int)$e->getCode());
+            throw new PdoError($e);
         }
     }
 
@@ -107,7 +108,7 @@ class PdoAdapter implements AdapterInterface
 
             return new PdoResult($this->connection->query($query));
         } catch (PDOException $e) {
-            throw new Error($e->getMessage(), (int)$e->getCode());
+            throw new PdoError($e);
         }
     }
 
@@ -125,7 +126,7 @@ class PdoAdapter implements AdapterInterface
 
             return $this->connection->exec($query);
         } catch (PDOException $e) {
-            throw new Error($e->getMessage(), (int)$e->getCode());
+            throw new PdoError($e);
         }
     }
 
@@ -206,7 +207,7 @@ class PdoAdapterStatement implements StatementInterface
             $this->stmt->execute($params);
         } catch (PDOException $e) {
             // I change the exception for an error.
-            throw new Error($e->getMessage(), (int)$e->getCode());
+            throw new PdoError($e);
         }
     }
 
