@@ -23,7 +23,7 @@ $filters->sort($sort, $order);
 if ($rows) {
     $bls->setRows($rows);
     $bls->fixList('roles');
-    $bls->fixDate('created_at', _t('Y-M-d'));
+    $bls->fixDate('created_at');
     $bls->fixEnum('status');
 }
 //

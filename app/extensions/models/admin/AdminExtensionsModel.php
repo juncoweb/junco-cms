@@ -44,10 +44,10 @@ class AdminExtensionsModel extends Model
     public function getListData()
     {
         $data = $this->filter(POST, [
-            'search'        => 'text',
-            'status'        => 'enum:extensions.extension_status',
-            'developer_id'  => 'id',
-            'option'        => 'int',
+            'search'       => 'text',
+            'status'       => 'enum:extensions.extension_status',
+            'developer_id' => 'id',
+            'option'       => 'int',
         ]);
 
         // query
@@ -84,16 +84,9 @@ class AdminExtensionsModel extends Model
 		 e.extension_alias ,
 		 e.extension_name ,
 		 e.extension_version ,
-		 e.extension_credits ,
-		 e.extension_license ,
-		 e.extension_abstract ,
-		 e.components ,
-		 e.db_queries ,
-		 e.xdata ,
 		 e.status ,
 		 e.package_id ,
 		 d.developer_name ,
-		 d.project_url ,
 		 d.is_protected ,
 		 IF (u.has_update, TRUE, FALSE) AS has_update
 		]* FROM `#__extensions` e
@@ -112,7 +105,7 @@ class AdminExtensionsModel extends Model
         $rows = $pagi->fetchAll();
 
         foreach ($rows as $i => $row) {
-            $rows[$i]['status'] = $statuses[$row['status']] ??= ExtensionStatus::{$row['status']}->fetch();
+            $rows[$i]['status']   = $statuses[$row['status']] ??= ExtensionStatus::{$row['status']}->fetch();
             $rows[$i]['__labels'] = [];
 
             if (!$row['is_protected']) {
@@ -126,12 +119,64 @@ class AdminExtensionsModel extends Model
 
         return [
             ...$data,
-            'status' => $data['status']?->name,
-            'developers' => $this->getListDevelopers(),
+            'status'         => $data['status']?->name,
+            'developers'     => $this->getListDevelopers(),
             'developer_mode' => SYSTEM_DEVELOPER_MODE,
-            'statuses' => ExtensionStatus::getList(['' => _t('All statuses')]),
-            'rows' => $rows,
-            'pagi' => $pagi
+            'statuses'       => ExtensionStatus::getList(['' => _t('All statuses')]),
+            'rows'           => $rows,
+            'pagi'           => $pagi
+        ];
+    }
+
+    /**
+     * Get show data
+     */
+    public function getShowData()
+    {
+        $input = $this->filter(POST, ['id' => 'id|array|required:abort']);
+
+        // query
+        $data = $this->db->query("
+        SELECT
+         e.id,
+         e.developer_id,
+         e.package_id,
+         e.extension_alias,
+         e.extension_name,
+         e.extension_version,
+         e.extension_credits,
+         e.extension_license,
+         e.extension_abstract,
+         e.extension_require,
+         e.extension_key,
+         e.components,
+         e.db_queries,
+         e.db_history,
+         e.xdata,
+         e.created_at,
+         e.updated_at,
+         e.status ,
+         d.developer_name ,
+         d.project_url ,
+		 d.is_protected
+        FROM `#__extensions` e
+		LEFT JOIN `#__extensions_developers` d ON (e.developer_id = d.id)
+        WHERE e.id = ?", $input['id'])->fetch() or abort();
+
+
+        if ($data['components']) {
+            $names = (new Components)->getNames();
+            $data['components'] = array_map(
+                fn($key) => [
+                    'title'   => $names[$key] ?? '?',
+                    'caption' => $key,
+                ],
+                str_split($data['components'])
+            );
+        }
+
+        return $data + [
+            'developer_mode' => SYSTEM_DEVELOPER_MODE,
         ];
     }
 
@@ -184,13 +229,13 @@ class AdminExtensionsModel extends Model
 		FROM `#__extensions` e WHERE id = ?", $input['id'])->fetch() or abort();
 
         return [
-            'title' => _t('Edit'),
-            'values' => $data,
-            'is_edit' => true,
-            'is_protected' => $data['is_protected'],
-            'developers' => $this->getDevelopers(),
+            'title'            => _t('Edit'),
+            'values'           => $data,
+            'is_edit'          => true,
+            'is_protected'     => $data['is_protected'],
+            'developers'       => $this->getDevelopers(),
             'can_be_a_package' => !($data['package_id'] > 0),
-            'annexed_to' => $data['annexed_to']
+            'annexed_to'       => $data['annexed_to']
         ];
     }
 
@@ -334,7 +379,7 @@ class AdminExtensionsModel extends Model
     /**
      * Get
      */
-    public function getConfirmDbHistoryData()
+    public function getConfirmDbhistoryData()
     {
         $data = $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
@@ -387,10 +432,10 @@ class AdminExtensionsModel extends Model
                 }
 
                 $queries[] = [
-                    'Name' => $Name,
-                    'Type' => $Type,
+                    'Name'   => $Name,
+                    'Type'   => $Type,
                     'Fields' => $Fields,
-                    'key' => $key
+                    'key'    => $key
                 ];
             }
         }
@@ -433,7 +478,6 @@ class AdminExtensionsModel extends Model
     protected function setDevelopersData(array &$rows)
     {
         $filepath = (new Carrier)->getTargetPath() . '%s_%s.zip';
-        $names    = (new Components)->getNames();
 
         foreach ($rows as $i => $row) {
             $can_compile = !$row['is_protected'] && $row['package_id'] == -1;
@@ -443,16 +487,6 @@ class AdminExtensionsModel extends Model
 
             if ($can_compile) {
                 $rows[$i]['__labels'][] = 'package';
-            }
-
-            if ($row['components']) {
-                $components = [];
-
-                foreach (str_split($row['components']) as $key) {
-                    $components[$key] = $names[$key] ?? '?';
-                }
-
-                $rows[$i]['components'] = $components;
             }
         }
     }

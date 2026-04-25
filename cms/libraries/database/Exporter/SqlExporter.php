@@ -7,10 +7,10 @@
 
 namespace Junco\Database\Exporter;
 
-use Junco\Database\Schema\Interface\Entity\DatabaseEntityInterface;
-use Junco\Database\Schema\Interface\Entity\RoutineInterface;
-use Junco\Database\Schema\Interface\Entity\TableInterface;
-use Junco\Database\Schema\Interface\Entity\TriggerInterface;
+use Junco\Database\Base\Entity\DatabaseInterface;
+use Junco\Database\Base\Entity\RoutineInterface;
+use Junco\Database\Base\Entity\TableInterface;
+use Junco\Database\Base\Entity\TriggerInterface;
 
 class SqlExporter implements ExporterInterface
 {
@@ -125,11 +125,11 @@ class SqlExporter implements ExporterInterface
     /**
      * Add
      *
-     * @param DatabaseEntityInterface $database
+     * @param DatabaseInterface $database
      * 
      * @return void
      */
-    protected function addDatabase(DatabaseEntityInterface $database): void
+    protected function addDatabase(DatabaseInterface $database): void
     {
         $this->addTitle($database->getName());
 

@@ -27,42 +27,15 @@ $filters->search();
 
 // table
 if ($rows) {
-    $details_title = [_t('Developer'), _t('Version'), _t('Description'), _t('Credits'), _t('License'), _t('Website')];
-    if ($developer_mode) {
-        $details_title = array_merge($details_title, [_t('Components'), _t('Queries'), _t('Data')]);
-    }
-
-    foreach ($rows as $i => $row) {
-        $content = [
-            $row['developer_name'],
-            $row['extension_version'],
-            $row['extension_abstract'],
-            $row['extension_credits'],
-            $row['extension_license'],
-            $row['project_url']
-        ];
-
-        if ($developer_mode) {
-            $content = array_merge($content, [$row['components'], $row['db_queries'], $row['xdata']]);
-        }
-
-        $rows[$i]['details_data'] = htmlentities(json_encode([
-            'title'   => $row['extension_name'],
-            'content' => $content
-        ]));
-    }
-
     $bls->setRows($rows);
     $bls->setLabels('__labels');
     $bls->fixEnum('status');
 }
 //
 $bls->check();
-$bls->control('details')
+$bls->control('show')
     ->setText(':extension_name')
-    ->setAfter('<div id="details-{{ id }}" style="display: none;">{{ details_data }}</div>')
-    ->setLabel(_t('Name'))
-    ->setAttr(['data-value' => 'details-{{ id }}']);
+    ->setLabel(_t('Name'));
 
 $bls->column(':developer_name')
     ->setSubtle();
@@ -83,10 +56,4 @@ if ($developer_mode) {
 
 $bls->status();
 
-if ($rows) {
-    $html = '<div id="details-caption" style="display: none;">' . json_encode($details_title) . '</div>';
-} else {
-    $html = '';
-}
-
-echo $html . $bls->render($pagi);
+echo $bls->render($pagi);

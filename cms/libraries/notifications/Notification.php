@@ -45,7 +45,7 @@ abstract class Notification implements NotificationInterface
      */
     public function getType(): string
     {
-        return $this->type ??= preg_replace('#[A-Z]#', '-$0', lcfirst(substr((new \ReflectionClass($this))->getShortName(), 0, -12)));
+        return $this->type ??= preg_replace('/[A-Z]/', '-$0', lcfirst(substr((new \ReflectionClass($this))->getShortName(), 0, -12)));
     }
 
     /**

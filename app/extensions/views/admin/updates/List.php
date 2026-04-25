@@ -16,7 +16,7 @@ $filters->search();
 // table
 if ($rows) {
     $bls->setRows($rows);
-    $bls->fixDate('released_at', _t('Y-M-d'));
+    $bls->fixDate('released_at');
     $bls->fixEnum('status');
 }
 //

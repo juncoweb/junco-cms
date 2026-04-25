@@ -8,11 +8,6 @@
 if ($can_connect) {
     $html = '<div class="dialog dialog-success">' . _t('The Database connection is successful.') . '</div>';
 } else {
-    $adapters = [
-        'mysql' => 'MySql',
-        //'pgsql' => 'PostgreSql'
-    ];
-
     // form
     $form = Form::get();
     $form->setValues($values);
@@ -20,8 +15,6 @@ if ($can_connect) {
         ->setLabel(_t('Adapter'))
         ->setHelp(_t('The use of postgres is only experimental. For production use myqsl.'));
 
-    $form->toggle('use_pdo')
-        ->setLabel(_t('Use PDO'));
     $form->separate(_t('General'));
     //
     $form->input('db_server')

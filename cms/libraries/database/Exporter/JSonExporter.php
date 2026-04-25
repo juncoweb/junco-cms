@@ -7,9 +7,9 @@
 
 namespace Junco\Database\Exporter;
 
-use Junco\Database\Schema\Interface\Entity\RoutineInterface;
-use Junco\Database\Schema\Interface\Entity\TableInterface;
-use Junco\Database\Schema\Interface\Entity\TriggerInterface;
+use Junco\Database\Base\Entity\RoutineInterface;
+use Junco\Database\Base\Entity\TableInterface;
+use Junco\Database\Base\Entity\TriggerInterface;
 
 class JSonExporter implements ExporterInterface
 {

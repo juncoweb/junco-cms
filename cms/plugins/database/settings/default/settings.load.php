@@ -8,16 +8,12 @@
 use Junco\Settings\PluginLoader;
 
 return function (PluginLoader $loader) {
-    $loader->setOptions('adapter', [
-        'pdo'   => 'PDO',
-        'mysql' => 'MySql',
-        'pgsql' => 'PostgreSql',
-    ]);
+    $loader->setOptions('adapter', Database::getAdapters());
 
     // collations
     $collations = [];
     foreach (db()->getSchema()->database()->getCollations() as $row) {
-        $collations[$row['Charset']][$row['Collation']]    = $row['Collation'];
+        $collations[$row['Charset']][$row['Collation']] = $row['Collation'];
     }
 
     $loader->setOptions('collation', $collations);

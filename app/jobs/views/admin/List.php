@@ -22,7 +22,7 @@ if ($rows) {
     }
 
     $bls->setRows($rows);
-    $bls->fixDate('available_at', _t('Y-M-d'), _t('H:i:s'));
+    $bls->fixDate('available_at', ['date' => _t('Y-M-d'), 'time' => _t('H:i:s')]);
     $bls->fixEnum('reserved_at', [
         ['color' => 'danger', 'title' => _t('Reserved')],
         ['color' => 'warning', 'title' => _t('Waiting')],

@@ -1441,6 +1441,9 @@ img.responsive {
   padding-top: 0;
   padding-bottom: 0;
 }
+.table.table-fixed {
+  table-layout: fixed;
+}
 .table tbody > tr.active td {
   background: var(--regular-primary-bg-color) !important;
 }

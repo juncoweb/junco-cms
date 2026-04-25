@@ -70,7 +70,7 @@ class form_master_default_elements implements FormElementsInterface
             $attr['name'] .= $this->deep_name;
         }
 
-        return $this->addElement(Plugin::get('form_element', 'load', $plugin)?->run($attr));
+        return $this->addElement(Plugin::get('form-element', 'load', $plugin)?->run($attr));
     }
 
     /**

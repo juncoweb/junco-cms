@@ -3,8 +3,8 @@
 var UsysLock = (function () {
     var btnText;
     return function ($form, expires) {
-        var date = new Date(expires * 1000 - Date.now());
-        var value = parseInt(date.getTime() / 1000);
+        var value = expires - Math.floor(Date.now() / 1000);
+        console.log(value);
         var btn = (function () {
             var btn = $form.getSubmit();
             var attr = btn.tagName == 'BUTTON' ? 'innerHTML' : 'value';

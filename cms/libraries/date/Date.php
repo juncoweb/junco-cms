@@ -9,6 +9,8 @@ class Date extends DateTime
 {
     // vars
     private static $yesterday = null;
+    private static ?DateTimeZone $utc_tz = null;
+    private static ?DateTimeZone $local_tz = null;
 
     /**
      * Format the date
@@ -22,28 +24,9 @@ class Date extends DateTime
 
         // pretty format
         $output = preg_replace_callback('#\[(.*)?\]#', function ($match) {
-            if (isset($match[1])) {
-                if (!self::$yesterday) {
-                    $date = getdate();
-                    self::$yesterday = $date[0]
-                        - $date['hours'] * 3600
-                        - $date['minutes'] * 60
-                        - $date['seconds'] - 86400;
-                }
-                $timestamp = $this->getTimestamp();
-
-                if ($timestamp > self::$yesterday) {
-                    if ($timestamp < self::$yesterday + 86400) {
-                        return _t('Yesterday');
-                    } elseif ($timestamp < self::$yesterday + 172800) {
-                        return _t('Today');
-                    } elseif ($timestamp < self::$yesterday + 259200) {
-                        return _t('Tomorrow');
-                    }
-                }
-
-                return $match[1];
-            }
+            return isset($match[1])
+                ? $this->getPrittyFormat($match[1])
+                : '';
         }, $output);
 
         // translate
@@ -63,17 +46,46 @@ class Date extends DateTime
     }
 
     /**
-     * Format interval.
+     * Format
      *
-     * @param string|DateTime $datetime2
-     * @param int             $granularity
-     *
-     * @return string or null
+     * @param string $datetime
      */
-    public function formatInterval($datetime2, int $granularity = 2)
+    protected function getPrittyFormat(string $datetime): string
+    {
+        if (!self::$yesterday) {
+            $date = getdate();
+            self::$yesterday = $date[0]
+                - $date['hours'] * 3600
+                - $date['minutes'] * 60
+                - $date['seconds'] - 86400;
+        }
+        $timestamp = $this->getTimestamp();
+
+        if ($timestamp > self::$yesterday) {
+            if ($timestamp < self::$yesterday + 86400) {
+                return _t('Yesterday');
+            } elseif ($timestamp < self::$yesterday + 172800) {
+                return _t('Today');
+            } elseif ($timestamp < self::$yesterday + 259200) {
+                return _t('Tomorrow');
+            }
+        }
+
+        return $datetime;
+    }
+
+    /**
+     * Format interval
+     *
+     * @param DateTimeInterface|string $datetime2
+     * @param int                      $granularity
+     *
+     * @return ?string
+     */
+    public function formatInterval(DateTimeInterface|string $datetime2, int $granularity = 2): ?string
     {
         if ($granularity < 1) {
-            return;
+            return null;
         }
 
         if (is_string($datetime2)) {
@@ -119,9 +131,28 @@ class Date extends DateTime
         return implode(' ', $output);
     }
 
+    /**
+     * To UTC timezone
+     * 
+     * @return self
+     */
+    public function toUTC(): self
+    {
+        return $this->setTimezone(self::$utc_tz ??= new DateTimeZone('UTC'));
+    }
 
     /**
-     * Magic method to access properties of the date.
+     * To local timezone
+     * 
+     * @return self
+     */
+    public function toLocal(): self
+    {
+        return $this->setTimezone(self::$local_tz ??= new DateTimeZone(date_default_timezone_get()));
+    }
+
+    /**
+     * Magic method to access properties of the date
      *
      * @param string $name The name of the property.
      *
@@ -260,12 +291,6 @@ class Date extends DateTime
             case 'second':
                 return parent::format('s');
 
-                // Timezone
-                // Full Date/Time
-                // input formt
-            case 'inputformat':
-                return parent::format('Y-m-d\TH:i');
-
             default:
                 $trace = debug_backtrace();
                 trigger_error(
@@ -277,23 +302,55 @@ class Date extends DateTime
     }
 
     /**
-     * Returns an array with the months of the year.
+     * Returns an array with the days of the week
+     * 
+     * @return array
      */
-    public static function getMonths()
+    public static function getDays(): array
     {
         return [
-            1    => _t('January'),
-            2    => _t('February'),
-            3    => _t('March'),
-            4    => _t('April'),
-            5    => _t('May'),
-            6    => _t('June'),
-            7    => _t('July'),
-            8    => _t('August'),
-            9    => _t('September'),
-            10    => _t('October'),
-            11    => _t('November'),
-            12    => _t('December')
+            0 => _t('Sunday'),
+            1 => _t('Monday'),
+            2 => _t('Tuesday'),
+            3 => _t('Wednesday'),
+            4 => _t('Thursday'),
+            5 => _t('Friday'),
+            6 => _t('Saturday'),
         ];
+    }
+
+    /**
+     * Returns an array with the months of the year
+     * 
+     * @return array
+     */
+    public static function getMonths(): array
+    {
+        return [
+            1  => _t('January'),
+            2  => _t('February'),
+            3  => _t('March'),
+            4  => _t('April'),
+            5  => _t('May'),
+            6  => _t('June'),
+            7  => _t('July'),
+            8  => _t('August'),
+            9  => _t('September'),
+            10 => _t('October'),
+            11 => _t('November'),
+            12 => _t('December')
+        ];
+    }
+
+    /**
+     * Creates a Date object from a UTC datetime string and converts it to the local timezone.
+     * 
+     * @return self
+     */
+    public static function fromUTC(string $datetime = 'now'): self
+    {
+        self::$utc_tz ??= new DateTimeZone('UTC'); // initialize
+
+        return (new self($datetime, self::$utc_tz))->toLocal();
     }
 }

@@ -15,23 +15,23 @@ use Junco\Extensions\Enum\ExtensionStatus;
 
 class ExtensionsModel extends Model
 {
-    // vars
-    protected $db;
+	// vars
+	protected $db;
 
-    /**
+	/**
      * Constructor
      */
-    public function __construct()
-    {
-        $this->db = db();
-    }
+	public function __construct()
+	{
+		$this->db = db();
+	}
 
-    /**
+	/**
      * save
      */
-    public function save()
-    {
-        $data = $this->filter(POST, [
+	public function save()
+	{
+		$data = $this->filter(POST, [
             'id'                 => 'id',
             'developer_id'       => 'id|required',
             'extension_alias'    => 'required',
@@ -74,14 +74,14 @@ class ExtensionsModel extends Model
             $data['extension_version'] = '0.1';
             $this->db->exec("INSERT INTO `#__extensions` (??) VALUES (??)", $data);
         }
-    }
+	}
 
-    /**
+	/**
      * Status
      */
-    public function status()
-    {
-        $data = $this->filter(POST, [
+	public function status()
+	{
+		$data = $this->filter(POST, [
             'id'     => 'id|array|required:abort',
             'status' => 'enum:extensions.extension_status|required:abort',
         ]);
@@ -136,14 +136,14 @@ class ExtensionsModel extends Model
 
         // query
         $this->db->exec("UPDATE `#__extensions` SET status = ? WHERE id IN (?..)", $data['status'], $data['id']);
-    }
+	}
 
-    /**
+	/**
      * Delete
      */
-    public function delete()
-    {
-        $data = $this->filter(POST, [
+	public function delete()
+	{
+		$data = $this->filter(POST, [
             'id'     => 'id|array|required:abort',
             'option' => 'array',
         ]);
@@ -173,14 +173,14 @@ class ExtensionsModel extends Model
         $this->db->exec("DELETE FROM `#__extensions_changes` WHERE extension_id IN (?..)", $data['id']);
         $this->db->exec("DELETE FROM `#__extensions_updates` WHERE extension_id IN (?..)", $data['id']);
         $this->db->exec("DELETE FROM `#__extensions` WHERE id IN (?..)", $data['id']);
-    }
+	}
 
-    /**
+	/**
      * Append
      */
-    public function append()
-    {
-        $data = $this->filter(POST, [
+	public function append()
+	{
+		$data = $this->filter(POST, [
             'id'         => 'id|required:abort',
             'extensions' => 'id|array',
         ]);
@@ -197,14 +197,14 @@ class ExtensionsModel extends Model
 		UPDATE `#__extensions` 
 		SET package_id = ? 
 		WHERE id IN (?..)", $data['id'], $data['extensions']);
-    }
+	}
 
-    /**
+	/**
      * Compile
      */
-    public function compile()
-    {
-        $data = $this->filter(POST, [
+	public function compile()
+	{
+		$data = $this->filter(POST, [
             'id'                    => 'id|array|required:abort',
             'get_install_package'   => 'bool',
             'package_name_format'   => 'int',
@@ -222,14 +222,14 @@ class ExtensionsModel extends Model
         foreach ($data['id'] as $package_id) {
             $compiler->compile($package_id);
         }
-    }
+	}
 
-    /**
+	/**
      * DB History
      */
-    public function dbHistory()
-    {
-        $data = $this->filter(POST, [
+	public function dbHistory()
+	{
+		$data = $this->filter(POST, [
             'id'         => 'id|required:abort',
             'db_history' => 'array',
         ]);
@@ -238,14 +238,14 @@ class ExtensionsModel extends Model
 
         // query
         $this->db->exec("UPDATE `#__extensions` SET db_history = ? WHERE id = ?", $data['db_history'], $data['id']);
-    }
+	}
 
-    /**
+	/**
      * Update Readme
      */
-    public function updateReadme()
-    {
-        $data = $this->filter(POST, [
+	public function updateReadme()
+	{
+		$data = $this->filter(POST, [
             'alias'  => 'text|required:abort',
             'readme' => '',
         ]);
@@ -256,18 +256,18 @@ class ExtensionsModel extends Model
 
         is_dir($dir) or mkdir($dir);
         file_put_contents($file, $data['readme']);
-    }
+	}
 
-    /**
+	/**
      * Distribute
      * 
      * @throws Exception
      * 
      * @return array
      */
-    public function distribute(): array
-    {
-        $data = $this->filter(GET, ['id' => 'id|array:first|required:abort']);
+	public function distribute(): array
+	{
+		$data = $this->filter(GET, ['id' => 'id|array:first|required:abort']);
 
         $messages = [];
         try {
@@ -296,14 +296,14 @@ class ExtensionsModel extends Model
         }
 
         return ['messages' => $messages];
-    }
+	}
 
-    /**
+	/**
      * Remove
      */
-    protected function removeFiles(array $rows)
-    {
-        $components = new Components();
+	protected function removeFiles(array $rows)
+	{
+		$components = new Components();
         $fs = new Filesystem();
 
         foreach ($rows as $row) {
@@ -311,14 +311,14 @@ class ExtensionsModel extends Model
                 $fs->remove($dir);
             }
         }
-    }
+	}
 
-    /**
+	/**
      * Remove
      */
-    protected function removeData(array $rows)
-    {
-        $xdm = new XDataManager;
+	protected function removeData(array $rows)
+	{
+		$xdm = new XDataManager;
 
         foreach ($rows as $row) {
             $has = $xdm->find($row['id'], $row['extension_alias']);
@@ -329,14 +329,14 @@ class ExtensionsModel extends Model
         }
 
         $xdm->deleteAll();
-    }
+	}
 
-    /**
+	/**
      * Remove
      */
-    protected function removeDatabase(array $rows)
-    {
-        $drop = [];
+	protected function removeDatabase(array $rows)
+	{
+		$drop = [];
 
         foreach ($rows as $row) {
             $queries = Extensions::getQueries($row['extension_alias'], true);
@@ -351,14 +351,14 @@ class ExtensionsModel extends Model
                 $this->db->exec("DROP $Type IF EXISTS `$Name`");
             }
         }
-    }
+	}
 
-    /**
+	/**
      * Get
      */
-    protected function getDeveloperData(int $developer_id): array|false
-    {
-        return $this->db->query("
+	protected function getDeveloperData(int $developer_id): array|false
+	{
+		return $this->db->query("
 		SELECT
          id ,
 		 default_credits,
@@ -366,14 +366,14 @@ class ExtensionsModel extends Model
 		FROM `#__extensions_developers`
 		WHERE id = ?
 		AND is_protected = 0", $developer_id)->fetch();
-    }
+	}
 
-    /**
+	/**
      * Get
      */
-    protected function getValidPackageId(int $extension_id, bool $is_package): int
-    {
-        if ($extension_id) {
+	protected function getValidPackageId(int $extension_id, bool $is_package): int
+	{
+		if ($extension_id) {
             $package_id = $this->db->query("
 			SELECT package_id 
 			FROM `#__extensions`
@@ -385,14 +385,14 @@ class ExtensionsModel extends Model
         }
 
         return $is_package ? -1 : 0;
-    }
+	}
 
-    /**
+	/**
      * Get
      */
-    protected function getDbHistory(array $db_history): string
-    {
-        $json = [];
+	protected function getDbHistory(array $db_history): string
+	{
+		$json = [];
 
         foreach ($db_history as $Type => $rows) {
             if ($Type != 'TABLE') {
@@ -415,14 +415,14 @@ class ExtensionsModel extends Model
         return $json
             ? json_encode($json)
             : '';
-    }
+	}
 
-    /**
+	/**
      * Get
      */
-    protected function getExtensionData(int $extension_id): array|false
-    {
-        return $this->db->query("
+	protected function getExtensionData(int $extension_id): array|false
+	{
+		return $this->db->query("
         SELECT
          e.extension_alias AS alias,
          e.extension_name AS name,
@@ -433,5 +433,5 @@ class ExtensionsModel extends Model
         LEFT JOIN `#__extensions_developers` d ON (e.developer_id = d.id)
         WHERE e.id = ?
         AND e.status IN ( ?.. )", $extension_id, ExtensionStatus::getActives())->fetch();
-    }
+	}
 }

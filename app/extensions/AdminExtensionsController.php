@@ -26,6 +26,14 @@ class AdminExtensionsController extends Controller
     }
 
     /**
+     * Show
+     */
+    public function show()
+    {
+        return $this->view(null, (new AdminExtensionsModel)->getShowData());
+    }
+
+    /**
      * Create
      */
     public function create()
@@ -123,7 +131,7 @@ class AdminExtensionsController extends Controller
      */
     public function confirmDbhistory()
     {
-        return $this->view(null, (new AdminExtensionsModel)->getConfirmDbHistoryData());
+        return $this->view(null, (new AdminExtensionsModel)->getConfirmDbhistoryData());
     }
 
     /**

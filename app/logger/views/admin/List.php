@@ -17,7 +17,7 @@ $filters->select('level', $levels);
 // table
 if ($rows) {
     $bls->setRows($rows);
-    $bls->fixDate('created_at', _t('Y-M-d'), _t('H:i:s'));
+    $bls->fixDate('created_at', ['date' => _t('Y-M-d'), 'time' => _t('H:i:s')]);
     $bls->fixEnum('status');
 }
 //

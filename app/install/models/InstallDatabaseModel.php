@@ -20,26 +20,19 @@ class InstallDatabaseModel extends Model
         ];
 
         if (!$data['can_connect']) {
-            $config     = (new Config)->get('database');
-            $use_pdo = false;
-
-            if ($config['database.adapter'] == 'pdo') {
-                $config['database.adapter'] = (new Config)->get('database-pdo.adapter');
-                $use_pdo = true;
-            }
-            $json = file_get_contents(SYSTEM_ABSPATH . 'app/install/collations/collations.json');
+            $config = (new Config)->get('database');
             $data += [
-                'collations' => json_decode($json, true),
+                'collations' => $this->getCollections(),
+                'adapters' => Database::getAdapters(),
                 'values' => [
-                    'db_adapter'    => $config['database.adapter'],
-                    'use_pdo'        => $use_pdo,
-                    'db_server'        => $config['database.server'],
-                    'db_username'    => $config['database.username'],
-                    'db_password'    => $config['database.password'],
-                    'db_port'        => $config['database.port'],
-                    'db_database'    => $config['database.database'],
-                    'db_collation'    => $config['database.collation'],
-                    'db_prefix'        => $config['database.prefix'],
+                    'db_adapter'   => $config['database.adapter'],
+                    'db_server'    => $config['database.server'],
+                    'db_username'  => $config['database.username'],
+                    'db_password'  => $config['database.password'],
+                    'db_port'      => $config['database.port'],
+                    'db_database'  => $config['database.database'],
+                    'db_collation' => $config['database.collation'],
+                    'db_prefix'    => $config['database.prefix'],
                 ],
             ];
         }
@@ -54,7 +47,6 @@ class InstallDatabaseModel extends Model
     {
         $data = $this->filter(POST, [
             'db_adapter'   => '',
-            'use_pdo'      => '',
             'db_server'    => '',
             'db_username'  => '',
             'db_password'  => '',
@@ -82,18 +74,10 @@ class InstallDatabaseModel extends Model
             $data['db_prefix'] .= '_';
         }
 
-        if ($data['use_pdo']) {
-            $pdo_adapter = $data['db_adapter'];
-            $data['db_adapter'] = 'pdo';
-        } else {
-            $pdo_adapter = '';
-        }
-
         if (!$this->connect($data)) {
             //return $this->unprocessable($e->getMessage());
             return $this->unprocessable(_t('The database could not be found or created.'));
         }
-
 
         // update settings
         (new Settings('database'))->update([
@@ -107,33 +91,27 @@ class InstallDatabaseModel extends Model
             'collation' => $data['db_collation'],
             'charset'   => $data['db_charset'],
         ]);
-        if ($pdo_adapter) {
-            (new Settings('database-pdo'))->update([
-                'pdo_adapter' => $pdo_adapter,
-            ]);
-        }
+    }
+
+    /**
+     * Get
+     */
+    protected function getCollections(): array
+    {
+        $file    = SYSTEM_ABSPATH . 'app/install/collations/collations.json';
+        $content = file_get_contents($file);
+
+        return json_decode($content, true);
     }
 
     /**
      * Connect
      */
-    protected function connect(array $data): Junco\Database\Adapter\AdapterInterface|null
+    protected function connect(array $data): bool
     {
-        switch ($data['db_adapter']) {
-            case 'pdo':
-                $class = Junco\Database\Adapter\PdoAdapter::class;
-                break;
-            case 'pgsql':
-                $class = Junco\Database\Adapter\PgsqlAdapter::class;
-                break;
-            default:
-                $class = Junco\Database\Adapter\MysqlAdapter::class;
-                break;
-        }
-
         try {
-            $db = new $class([
-                'database.adapter'  => 'mysql',
+            $db = new Database([
+                'database.adapter'  => $data['db_adapter'],
                 'database.server'   => $data['db_server'],
                 'database.username' => $data['db_username'],
                 'database.password' => $data['db_password'],
@@ -142,11 +120,11 @@ class InstallDatabaseModel extends Model
                 'database.charset'  => $data['db_charset'],
             ]);
         } catch (Throwable $e) {
-            return null;
+            throw $e;
+            return false;
         }
 
-        return $db;
-
+        return $db->isConnected();
 
         /*
 		// create database

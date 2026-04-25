@@ -247,7 +247,7 @@ msgstr ""
 #: cms/plugins/codemanager/generator/nested-set-tree-categories/src/app/__alias__/models/__scope__/__ModelNameWithScope__.php:123
 #: cms/plugins/codemanager/generator/roles/src/app/__alias__/models/__scope__/__ModelNameWithScope__.php:76
 #: cms/plugins/codemanager/generator/subcomponent-crud/src/app/__alias__/models/__scope__/__ModelNameWithScope__.php:53
-#: cms/plugins/settings/form_element/json/form_element.load.php:13
+#: cms/plugins/settings/form-element/json/form-element.load.php:13
 #: cms/plugins/test/generator/schedules/src/app/__alias__/views/__scope__/__SubcomponentName__/Prepare.php:14
 #: cms/snippets/backlist/master/default/actions.php:55
 #: cms/snippets/frontlist/master/default/actions.php:52
@@ -425,7 +425,7 @@ msgstr ""
 #: cms/plugins/codemanager/generator/nested-set-tree-categories/src/app/__alias__/models/__scope__/__ModelNameWithScope__.php:153
 #: cms/plugins/codemanager/generator/roles/src/app/__alias__/models/__scope__/__ModelNameWithScope__.php:106
 #: cms/plugins/codemanager/generator/subcomponent-crud/src/app/__alias__/models/__scope__/__ModelNameWithScope__.php:80
-#: cms/plugins/settings/form_element/json/form_element.load.php:14
+#: cms/plugins/settings/form-element/json/form-element.load.php:14
 #: cms/plugins/test/generator/schedules/src/app/__alias__/models/__scope__/__ModelNameWithScope__.php:172
 #: cms/snippets/backlist/master/default/actions.php:93
 #: cms/snippets/bandaramallo/showcase/default/snippet.php:65
@@ -2640,7 +2640,7 @@ msgstr ""
 #: app/jobs/views/admin/failures/List.php:20
 #: app/webstore/views/admin/addresses/List.php:29
 #: app/webstore/views/admin/downloads/List.php:36
-#: cms/plugins/settings/form_element/json/form_element.load.php:12
+#: cms/plugins/settings/form-element/json/form-element.load.php:12
 #: cms/snippets/backlist/master/default/snippet.php:284
 #: storage/settings/data/foodservices/translate.foodservices.php:3
 #: storage/settings/data/outdoors/translate.outdoors.php:3
@@ -6622,7 +6622,7 @@ msgstr ""
 #: app/codemanager/views/endpoint/Dashboard.php:38
 #: app/codemanager/views/endpoint/Delete.php:38
 #: app/codemanager/views/endpoint/Showcase.php:38
-#: cms/plugins/codemanager/form_element/help/form_element.load.php:12
+#: cms/plugins/codemanager/form-element/help/form-element.load.php:12
 msgid ""
 "The code has already been created. If you select it, it will be rewritten."
 msgstr ""

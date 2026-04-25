@@ -257,7 +257,7 @@ msgstr "No hay ningún diseño seleccionado donde mostrar el comprobante."
 #: cms/plugins/codemanager/generator/nested-set-tree-categories/src/app/__alias__/models/__scope__/__ModelNameWithScope__.php:115
 #: cms/plugins/codemanager/generator/roles/src/app/__alias__/models/__scope__/__ModelNameWithScope__.php:74
 #: cms/plugins/codemanager/generator/subcomponent-crud/src/app/__alias__/models/__scope__/__ModelNameWithScope__.php:68
-#: cms/plugins/settings/form_element/json/form_element.load.php:13
+#: cms/plugins/settings/form-element/json/form-element.load.php:13
 #: cms/plugins/test/generator/credentials/src/app/__alias__/models/__scope__/__ModelNameWithScope__.php:49
 #: cms/plugins/test/generator/variations/src/app/__alias__/models/__scope__/__ModelNameWithScope__.php:76
 #: cms/snippets/backlist/master/default/actions.php:55
@@ -455,7 +455,7 @@ msgstr "Crear"
 #: cms/plugins/codemanager/generator/nested-set-tree-categories/src/app/__alias__/models/__scope__/__ModelNameWithScope__.php:144
 #: cms/plugins/codemanager/generator/roles/src/app/__alias__/models/__scope__/__ModelNameWithScope__.php:103
 #: cms/plugins/codemanager/generator/subcomponent-crud/src/app/__alias__/models/__scope__/__ModelNameWithScope__.php:94
-#: cms/plugins/settings/form_element/json/form_element.load.php:14
+#: cms/plugins/settings/form-element/json/form-element.load.php:14
 #: cms/plugins/test/generator/credentials/src/app/__alias__/models/__scope__/__ModelNameWithScope__.php:73
 #: cms/plugins/test/generator/variations/src/app/__alias__/models/__scope__/__ModelNameWithScope__.php:120
 #: cms/snippets/backlist/master/default/actions.php:93
@@ -2763,7 +2763,7 @@ msgstr "Escritorio"
 #: app/webstore/views/admin/downloads/List.php:36
 #: app/webstore/views/my/keys/Index.php:15
 #: app/workshops/views/front/Enrollment.php:82
-#: cms/plugins/settings/form_element/json/form_element.load.php:12
+#: cms/plugins/settings/form-element/json/form-element.load.php:12
 #: cms/snippets/backlist/master/default/snippet.php:283
 #: storage/settings/data/foodservices/translate.foodservices.php:3
 #: storage/settings/data/portfolios/translate.portfolios-widgets.php:12
@@ -6448,7 +6448,7 @@ msgstr "Padre"
 #: app/codemanager/views/endpoint/Dashboard.php:38
 #: app/codemanager/views/endpoint/Delete.php:39
 #: app/codemanager/views/endpoint/Showcase.php:38
-#: cms/plugins/codemanager/form_element/help/form_element.load.php:12
+#: cms/plugins/codemanager/form-element/help/form-element.load.php:12
 msgid ""
 "The code has already been created. If you select it, it will be rewritten."
 msgstr "El código ya ha sido creado. Si lo selecciona, se reescribirá."
@@ -13302,7 +13302,7 @@ msgid "Visible"
 msgstr "Visible"
 
 #: cms/libraries/planners/Enum/ScheduleStatus.php:30
-msgid "Announced"
+msgid "Arrived"
 msgstr "Anunciado"
 
 #: cms/libraries/planners/Enum/ScheduleStatus.php:32

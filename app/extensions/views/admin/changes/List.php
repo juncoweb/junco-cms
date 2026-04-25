@@ -18,7 +18,7 @@ if ($rows) {
 
     $bls->setRows($rows);
     $bls->setLabels('__labels');
-    $bls->fixDate('created_at', _t('Y-M-d'));
+    $bls->fixDate('created_at');
 }
 //
 $bls->check();

@@ -11,9 +11,9 @@ namespace Junco\Database;
 use Junco\Database\Exporter\ExporterInterface;
 use Junco\Database\Exporter\JSonExporter;
 use Junco\Database\Exporter\SqlExporter;
-use Junco\Database\Schema\Interface\Entity\RoutineInterface;
-use Junco\Database\Schema\Interface\Entity\TableInterface;
-use Junco\Database\Schema\Interface\Entity\TriggerInterface;
+use Junco\Database\Base\Entity\RoutineInterface;
+use Junco\Database\Base\Entity\TableInterface;
+use Junco\Database\Base\Entity\TriggerInterface;
 use Database;
 use Exception;
 
@@ -41,7 +41,7 @@ class Exporter
     {
         $this->db      = $db ?? db();
         $this->schema  = $this->db->getSchema();
-        $this->options = $this->setOptions();
+        $this->setOptions();
     }
 
     /**
@@ -333,7 +333,9 @@ class Exporter
      */
     public function getAsSQL(): ExporterInterface
     {
-        return new SqlExporter($this->processes, $this->options);
+        $options = clone($this->options);
+
+        return new SqlExporter($this->processes, $options);
     }
 
     /**
@@ -343,7 +345,7 @@ class Exporter
      */
     public function getAsJSON(): ExporterInterface
     {
-        return new JSonExporter($this->processes, $this->options);
+        return new JSonExporter($this->processes, clone($this->options));
     }
 
     /**

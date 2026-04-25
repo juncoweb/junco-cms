@@ -1,4 +1,4 @@
 
-Database v5.1
+Date v3.1
 =======================================================
-- The entities were implemented in the schema library
+- Support for local time has been added.

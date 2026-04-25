@@ -80,8 +80,9 @@ interface ShowcaseInterface
      * Date
      * 
      * @param string $date
+     * @param bool   $toLocal
      */
-    public function date(string $date): void;
+    public function date(string $date, bool $toLocal = true): void;
 
     /**
      * Price

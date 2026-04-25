@@ -73,53 +73,44 @@ class backlist_master_default_snippet implements BacklistInterface
      * Fix
      *
      * @param string       $name
-     * @param string       $name
      * @param array|string $formats
+     * @param bool         $toLocal
      * 
      * @return void
      */
-    public function fixDate(string $name, string $date_format, array|string $formats = ''): void
+    public function fixDate(string $name, array|string $formats = '', bool $toLocal = true): void
     {
-        if ($formats) {
-            if (is_string($formats)) {
-                $formats = ['time' => $formats];
-            }
-            $formats['date'] = $date_format;
+        if (!$this->rows) {
+            return;
+        }
 
+        if (is_array($formats)) {
             foreach ($this->rows as $i => $row) {
-                $dt = $row[$name] ?? null;
-
-                if (is_string($dt)) {
-                    $dt = new Date($dt);
-                } else {
-                    // @deprecated on v15.1
-                    $trace = debug_backtrace();
-                    trigger_error(
-                        'Deprecated property type "Date" for Backlist::fixDate() in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'],
-                        E_USER_NOTICE
-                    );
+                if (empty($row[$name])) {
+                    continue;
                 }
+
+                $dt = $toLocal
+                    ? Date::fromUTC($row[$name])
+                    : new Date($row[$name]);
 
                 foreach ($formats as $key => $format) {
                     $this->rows[$i]["$name.$key"] = $dt->format($format);
                 }
             }
         } else {
-            foreach ($this->rows as $i => $row) {
-                $dt = $row[$name] ?? null;
+            $format = $formats ?: _t('Y-M-d');
 
-                if (is_string($dt)) {
-                    $dt = new Date($dt);
-                } else {
-                    // @deprecated on v15.1
-                    $trace = debug_backtrace();
-                    trigger_error(
-                        'Deprecated property type "Date" for Backlist::fixDate() in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'],
-                        E_USER_NOTICE
-                    );
+            foreach ($this->rows as $i => $row) {
+                if (empty($row[$name])) {
+                    continue;
                 }
 
-                $this->rows[$i][$name] = $dt?->format($date_format);
+                $dt = $toLocal
+                    ? Date::fromUTC($row[$name])
+                    : new Date($row[$name]);
+
+                $this->rows[$i][$name] = $dt?->format($format);
             }
         }
     }

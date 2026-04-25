@@ -8,5 +8,5 @@ return [
 	/**
 	 * General
 	 */
-	'file' => '',
+	'path' => 'sqlite/',
 ];

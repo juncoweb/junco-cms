@@ -59,6 +59,10 @@
         padding-bottom: 0;
     }
 
+    &.table-fixed {
+        table-layout: fixed;
+    }
+
     // Interactive classes
     tbody > tr.active td {
         background: var(--regular-primary-bg-color) !important;

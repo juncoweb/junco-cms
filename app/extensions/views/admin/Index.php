@@ -20,6 +20,7 @@ if ($developer_mode) {
         'label' => $case->title()
     ], $statuses));
     $bac->dropdown([
+        //['control' => 'show', 'label' => _t('Show'), 'icon' => 'fa-solid fa-eye'],
         ['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash'],
         ['control' => 'changes', 'label' => _t('Changes'), 'icon' => 'fa-regular fa-file-lines'],
         ['control' => 'confirm_dbhistory', 'label' => _t('DB history'), 'icon' => 'fa-solid fa-clock-rotate-left'],

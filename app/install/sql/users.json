@@ -289,7 +289,7 @@
                     "IsNull": false,
                     "Comment": "",
                     "Collation": "A",
-                    "Cardinality": 327,
+                    "Cardinality": 366,
                     "IndexType": "BTREE",
                     "Columns": [
                         {
@@ -479,7 +479,7 @@
                     "IsNull": false,
                     "Comment": "",
                     "Collation": "A",
-                    "Cardinality": 14,
+                    "Cardinality": 43,
                     "IndexType": "BTREE",
                     "Columns": [
                         {
@@ -497,7 +497,7 @@
                     "IsNull": false,
                     "Comment": "",
                     "Collation": "A",
-                    "Cardinality": 14,
+                    "Cardinality": 43,
                     "IndexType": "BTREE",
                     "Columns": [
                         {

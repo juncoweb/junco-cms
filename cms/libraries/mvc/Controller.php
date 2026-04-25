@@ -142,7 +142,7 @@ class Controller
         }
 
         if (!$component) {
-            $_path        = explode('_', preg_replace('#[A-Z]#', '_$0', lcfirst(substr(static::class, 0, -10))));
+            $_path        = explode('_', preg_replace('/[A-Z]/', '_$0', lcfirst(substr(static::class, 0, -10))));
             $component    = lcfirst(array_splice($_path, 1, 1)[0]);
 
             if ($path) {

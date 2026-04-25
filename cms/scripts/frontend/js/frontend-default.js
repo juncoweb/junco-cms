@@ -1,6 +1,6 @@
 
 /* --- Frontend ---------------------------- */
-var Frontend = (function () {
+const Frontend = (function () {
     const controls = JsControls({ tpl: {} });
 
     return {

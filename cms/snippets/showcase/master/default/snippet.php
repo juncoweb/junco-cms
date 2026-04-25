@@ -17,7 +17,7 @@ class showcase_master_default_snippet extends ShowcaseBase
         'title'        => '',
         'image'        => '',
         'image_html'   => '',
-        'date'         => '',
+        'date'         => null,
         'summary'      => '',
         'description'  => '',
         'button'       => '',
@@ -49,9 +49,6 @@ class showcase_master_default_snippet extends ShowcaseBase
         $info = [];
 
         if ($data['date']) {
-            if (is_string($data['date'])) {
-                $data['date'] = new Date($data['date']);
-            }
             $info[] = '<div class="article-date">' . $data['date']->format(_t('Y-M-d')) . '</div>';
         }
 

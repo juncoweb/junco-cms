@@ -8,10 +8,10 @@
 namespace Junco\Database\Importer;
 
 use Junco\Database\Prefixer;
-use Junco\Database\Schema\Interface\SchemaInterface;
-use Junco\Database\Schema\Interface\Entity\ForeignKeyInterface;
-use Junco\Database\Schema\Interface\Entity\IndexInterface;
-use Junco\Database\Schema\Interface\Entity\TableInterface;
+use Junco\Database\Base\Schema\SchemaInterface;
+use Junco\Database\Base\Entity\ForeignKeyInterface;
+use Junco\Database\Base\Entity\IndexInterface;
+use Junco\Database\Base\Entity\TableInterface;
 use Database;
 
 class JSonImporter

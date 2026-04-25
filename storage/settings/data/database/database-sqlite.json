@@ -1,19 +1,21 @@
 {
     "title": "SQLite",
     "description": "",
+    "descriptions": [],
     "groups": [
         "General"
     ],
-    "descriptions": [],
     "rows": {
-        "file": {
-            "label": "File",
+        "path": {
+            "label": "Path",
             "type": "input-text",
             "group": 0,
             "ordering": 1,
-            "default_value": "",
+            "default_value": "sqlite\/",
             "help": "",
-            "history": [],
+            "history": [
+                "file"
+            ],
             "autoload": 1,
             "translate": 0,
             "reload_on_change": 0,

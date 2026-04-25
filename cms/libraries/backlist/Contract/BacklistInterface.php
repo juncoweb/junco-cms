@@ -46,12 +46,12 @@ interface BacklistInterface
      * Fix
      *
      * @param string       $name
-     * @param string       $name
      * @param array|string $formats
+     * @param bool         $toLocal
      * 
      * @return void
      */
-    public function fixDate(string $name, string $date_format, array|string $formats = ''): void;
+    public function fixDate(string $name, array|string $formats = '', bool $toLocal = true): void;
 
     /**
      * Fix

@@ -16,7 +16,7 @@ $filters->search();
 // table
 if ($rows) {
     $bls->setRows($rows);
-    $bls->fixDate('created_at', _t('Y-M-d'));
+    $bls->fixDate('created_at');
 }
 //
 $bls->check();

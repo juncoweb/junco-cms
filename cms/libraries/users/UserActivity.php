@@ -9,6 +9,7 @@ namespace Junco\Users;
 
 use Junco\Users\Enum\ActivityType;
 use Junco\Users\Exception\UserActivityException;
+use Date;
 
 class UserActivity
 {
@@ -147,7 +148,7 @@ class UserActivity
         FROM `#__users_activities_locks`
         WHERE id = ?", $this->lock_id)->fetchColumn();
 
-        $this->expires_at = strtotime($expires_at);
+        $this->expires_at = Date::fromUTC($expires_at)->getTimestamp();
     }
 
     /**

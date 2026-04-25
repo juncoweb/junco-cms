@@ -7,6 +7,7 @@
 
 namespace Junco\Showcase;
 
+use Date;
 use Junco\Form\FormElement\Button;
 use Junco\Showcase\Contract\ShowcaseInterface;
 use Junco\Tabs\TabsInterface;
@@ -132,10 +133,13 @@ abstract class ShowcaseBase implements ShowcaseInterface
      * Date
      * 
      * @param string $date
+     * @param bool   $toLocal
      */
-    public function date(string $date): void
+    public function date(string $date, bool $toLocal = true): void
     {
-        $this->data['date'] = $date;
+        $this->data['date'] = $toLocal
+            ? Date::fromUTC($date)
+            : new Date($date);
     }
 
     /**

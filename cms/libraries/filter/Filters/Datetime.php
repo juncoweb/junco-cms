@@ -7,12 +7,16 @@
 
 namespace Junco\Filter\Filters;
 
+use Date;
+
 class Datetime extends FilterAbstract
 {
+    protected bool $isUTC = false;
+
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(string|array|null $filter_value = null)
     {
         $this->type = 'datetime';
         $this->default  = null;
@@ -21,6 +25,15 @@ class Datetime extends FilterAbstract
             'filter' => FILTER_CALLBACK,
             'options' => [$this, 'validateDatetime']
         ];
+
+        if ($filter_value == 'to-utc') {
+            $this->isUTC = true;
+            $this->afterCallback[] = function (&$value) {
+                if ($value) {
+                    $value = (new Date($value))->toUTC()->format('Y-m-d H:i');
+                }
+            };
+        }
     }
 
     /**
@@ -51,6 +64,8 @@ class Datetime extends FilterAbstract
             ));
         }
 
-        $this->default = date('Y-m-d H:i');
+        $this->default = $this->isUTC
+            ? (new Date)->toUTC()->format('Y-m-d H:i')
+            : date('Y-m-d H:i');
     }
 }

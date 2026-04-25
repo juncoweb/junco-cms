@@ -100,10 +100,10 @@ class AdminAssetsModel extends Model
      */
     public function getEditData()
     {
-        $data = $this->filter(POST, ['id' => 'array:first|required:abort']);
+        $input = $this->filter(POST, ['id' => 'array:first|required:abort']);
 
         //
-        $data = (new AssetsBasic)->fetch($data['id']) or abort();
+        $data = (new AssetsBasic)->fetch($input['id']) or abort();
 
         if ($data) {
             $data = $this->explodeName($data);

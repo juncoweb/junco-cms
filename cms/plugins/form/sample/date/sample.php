@@ -23,7 +23,7 @@ $form->setValues([
 
 $form->input('date_1', ['control-felem' => 'date'])->setLabel('Datetime (custom)');
 $form->input('date_2', ['control-felem' => 'datetime-local'])->setLabel('Datetime (custom)');
-$form->input('date_3', ['type' => 'datetime-local'])->setLabel('Datetime (System)');
+$form->input('date_3', ['type' => 'datetime-local', 'to-local' => true])->setLabel('Datetime (System)');
 $form->input('date_4', ['type' => 'date'])->setLabel('Date (System)');
 $form->element('<div id="date-test"></div>')->setLabel('Inline');
 $form->button(['label' => 'Show', 'id' => 'date_4_btn_1']);

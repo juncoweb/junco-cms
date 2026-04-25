@@ -5,10 +5,10 @@
  * @author: Junco CMS (tm)
  */
 
-use Junco\Database\Adapter\AdapterInterface;
-use Junco\Database\Adapter\StatementInterface;
-use Junco\Database\Adapter\ResultInterface;
-use Junco\Database\Schema\Interface\SchemaInterface;
+use Junco\Database\Base\AdapterInterface;
+use Junco\Database\Base\ResultInterface;
+use Junco\Database\Base\StatementInterface;
+use Junco\Database\Base\Schema\SchemaInterface;
 use Junco\Database\Prefixer;
 
 class Database
@@ -51,34 +51,50 @@ class Database
         $this->prefix   = $config['database.prefix'];
 
         if ($config['database.timezone']) {
-            $tz = (new DateTime)->format('P');
-            $this->__query("SET time_zone = '$tz'");
+            //$tz = (new DateTime)->format('P');
+            $tz = '+00:00';
+            $this->__exec("SET time_zone = '$tz'");
         }
     }
 
     /**
      * Get
      */
-    public function getAdapter(array $config): AdapterInterface
+    protected function getAdapter(array $config): AdapterInterface
     {
         switch ($config['database.adapter']) {
-            case 'pdo':
-                $config['database.adapter'] = config('database-pdo.adapter');
-                return new Junco\Database\Adapter\PdoAdapter($config);
+            case 'pdo.mysql':
+            case 'pdo.pgsql':
+            case 'pdo.sqlite':
+                return new Junco\Database\Adapter\Pdo\Adapter($config);
 
             case 'pgsql':
-                return new Junco\Database\Adapter\PgsqlAdapter($config);
+                return new Junco\Database\Adapter\Pgsql\Adapter($config);
 
             case 'sqlite':
-                $config['file'] ??= config('database-sqlite.file');
-                return new Junco\Database\Adapter\SqliteAdapter($config);
+                return new Junco\Database\Adapter\Sqlite\Adapter($config);
 
             case 'mock':
-                return new Junco\Database\Adapter\MockAdapter($config);
+                return new Junco\Database\Adapter\Mock\Adapter($config);
 
             default:
-                return new Junco\Database\Adapter\MysqlAdapter($config);
+                return new Junco\Database\Adapter\Mysql\Adapter($config);
         }
+    }
+
+    /**
+     * Get
+     */
+    public static function getAdapters(): array
+    {
+        return [
+            'mysql'      => 'MySql',
+            //'pgsql'      => 'PostgreSql',
+            //'sqlite'     => 'SQLite',
+            'pdo.mysql'  => 'PDO - MySql',
+            //'pdo.pgsql'  => 'PDO - PostgreSql',
+            //'pdo.sqlite' => 'PDO - SQLite',
+        ];
     }
 
     /**

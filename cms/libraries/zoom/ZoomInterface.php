@@ -30,10 +30,11 @@ interface ZoomInterface
      * Date
      * 
      * @param ?string $date
+     * @param bool    $toLocal
      * 
      * @return ZoomGroup
      */
-    public function date(?string $date): ZoomGroup;
+    public function date(?string $date, bool $toLocal = true): ZoomGroup;
 
     /**
      * Group

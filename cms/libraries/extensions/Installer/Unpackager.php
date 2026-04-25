@@ -9,7 +9,7 @@ namespace Junco\Extensions\Installer;
 
 use Junco\Extensions\Components;
 use Junco\Extensions\Extensions;
-use Junco\Database\Schema\Interface\SchemaInterface;
+use Junco\Database\Base\Schema\SchemaInterface;
 use Database;
 use Exception;
 use Junco\Extensions\Enum\UpdateStatus;

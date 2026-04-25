@@ -64,7 +64,7 @@ class ThrowableHandler
             $message = $this->getMessageFromCode($statusCode);
         }
 
-        $code = $e->getCode();
+        $code = (int)$e->getCode();
 
         return System::getOutput($severe)->responseWithMessage($message, $statusCode, $code);
     }

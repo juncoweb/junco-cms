@@ -7,6 +7,8 @@
 
 namespace Junco\Form\FormElement;
 
+use Date;
+
 class Input extends FormElement
 {
     /**
@@ -21,6 +23,15 @@ class Input extends FormElement
         string $value,
         array  $attr = []
     ) {
+        if (
+            isset($attr['type'])
+            && $attr['type'] == 'datetime-local'
+            && $this->extract($attr, 'to-local', true)
+            && $value
+        ) {
+            $value = Date::fromUTC($value)->format('Y-m-d\TH:i');
+        }
+
         $icon = $this->extract($attr, 'icon');
         $html = '<input' . $this->attr([
             'type'  => 'text',

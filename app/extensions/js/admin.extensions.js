@@ -36,22 +36,6 @@ let Extensions = (function () {
         return _target;
     }
 
-    function getContent(i, value) {
-        switch (i) {
-            case 5: return '<a href="' + value + '" target="_blank">' + value + '</a>';
-            case 6:
-                let x = '';
-                for (let j in value) {
-                    x += '<div title="' + value[j] + '" class="badge badge-primary text-uppercase">' + j + '</div>';
-                }
-                return x;
-
-            case 7: return value.split(',').join(',<br />');
-            case 8: return value.split(',').join(', ');
-        }
-        return value;
-    }
-
     let _backlist, target;
     let mo = {
         size: 'large',
@@ -62,15 +46,19 @@ let Extensions = (function () {
     };
 
     let _controls = {
+        show: {
+            numRows: '1',
+            modalOptions: {
+                size: 'large',
+            }
+        },
         edit: {
             numRows: '1',
             modalOptions: mo,
         },
-
         create: {
             modalOptions: mo,
         },
-
         confirm_status: {
             onlyRows: 'owner',
             modalOptions: {
@@ -80,7 +68,6 @@ let Extensions = (function () {
                 },
             },
         },
-
         confirm_delete: {
             modalOptions: {
                 onLoad: function () {
@@ -89,7 +76,6 @@ let Extensions = (function () {
                 },
             },
         },
-
         confirm_dbhistory: {
             numRows: '1',
             modalOptions: {
@@ -100,7 +86,6 @@ let Extensions = (function () {
                 },
             },
         },
-
         edit_readme: {
             numRows: '1',
             modalOptions: {
@@ -111,25 +96,6 @@ let Extensions = (function () {
                 },
             },
         },
-
-        details: function (el) {
-            try {
-                let html = '';
-                let caption = JSON.parse(document.getElementById('details-caption').innerHTML);
-                let options = JSON.parse(document.getElementById(el.getAttribute('data-value')).innerHTML);
-
-                for (let i = 0, L = options.content.length; i < L; i++) {
-                    if (options.content[i]) {
-                        html += '<tr><th>' + caption[i] + ':</th><td>' + getContent(i, options.content[i]) + '</td></tr>';
-                    }
-                }
-                options.content = '<table class="table table-condensed table-auto">' + html + '</table>';
-                Modal(options).show();
-            } catch (e) {
-                alert(e);
-            }
-        },
-
         confirm_append: {
             numRows: '1',
             onlyRows: 'package',
@@ -140,7 +106,6 @@ let Extensions = (function () {
                 },
             },
         },
-
         confirm_compile: {
             onlyRows: 'package',
             modalOptions: {
@@ -149,11 +114,10 @@ let Extensions = (function () {
                 },
             },
         },
-
         distribute: {
             data: { format: 'blank' },
             load: 'blank'
-        },
+        }
     };
 
     return {

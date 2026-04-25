@@ -1,7 +1,6 @@
 {
     "title": "Database",
     "description": "",
-    "descriptions": [],
     "groups": [
         "General",
         "User",
@@ -9,6 +8,7 @@
         "Charset",
         "Time zone"
     ],
+    "descriptions": [],
     "rows": {
         "adapter": {
             "label": "Adapter",
@@ -133,7 +133,7 @@
             "group": 4,
             "ordering": 1,
             "default_value": "",
-            "help": "",
+            "help": "Force the database to +00:00 UTC",
             "history": [],
             "autoload": 1,
             "translate": 0,
