@@ -70,11 +70,11 @@ class showcase_master_default_snippet extends ShowcaseBase
         }
 
         if ($data['num_visits'] > -1) {
-            $line[] = sprintf(_t('%d visits'), $data['num_visits']);
+            $line[] = sprintf(_nt('%d visit', '%d visits', $data['num_visits']), $data['num_visits']);
         }
 
         if ($data['num_comments'] != -1) {
-            $line[] = sprintf(_t('%d comments'), $data['num_comments']);
+            $line[] = sprintf(_nt('%d comment', '%d comments', $data['num_comments']), $data['num_comments']);
         }
 
         if ($line) {

@@ -10,8 +10,8 @@ namespace Junco\Extensions;
 class Extensions
 {
     // vars
-    static $alias  = '';
-    static $tables = null;
+    static string $alias  = '';
+    static ?array $tables = null;
 
     /**
      * Validate the alias.

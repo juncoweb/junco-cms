@@ -52,7 +52,7 @@ class AdminExtensionsUpdatesModel extends Model
             if (!$row['extension_name']) {
                 $row['extension_name'] = $row['extension_alias'];
             }
-            $row['status'] = $statuses[$row['status']] ??= UpdateStatus::{$row['status']}->fetch();
+            $row['status'] = $statuses[$row['status']] ??= UpdateStatus::get($row['status'])->fetch();
 
             $rows[] = $row;
         }

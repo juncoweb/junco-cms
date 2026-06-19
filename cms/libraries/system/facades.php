@@ -18,11 +18,14 @@ use Junco\Users\Curuser;
  */
 function app(string $id = ''): object
 {
-    if ($id) {
-        return Container::getInstance()->get($id);
+    static $container;
+    if ($container === null) {
+        $container = Container::getInstance();
     }
 
-    return Container::getInstance();
+    return $id
+        ? $container->get($id)
+        : $container;
 }
 
 /**
@@ -246,7 +249,7 @@ function session(): Session
 /**
  * Snippet
  */
-function snippet(string $extension, ?string $snippet = null, ...$args): object
+function snippet(string $extension, ?string $snippet = null, mixed ...$args): object
 {
     static $snippets;
     if ($snippets === null) {
@@ -286,7 +289,7 @@ function _t(string $message): string
 /**
  * Plural version of gettext
  * 
- * @param string $message
+ * @param string $singular
  * @param string $plural
  * @param int    $n
  * 

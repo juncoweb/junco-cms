@@ -458,9 +458,9 @@
                     "Length": "",
                     "Attribute": "",
                     "Collation": null,
-                    "IsNull": false,
-                    "Default": "CURRENT_TIMESTAMP",
-                    "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+                    "IsNull": true,
+                    "Default": null,
+                    "Extra": "on update CURRENT_TIMESTAMP",
                     "Comment": ""
                 },
                 {
@@ -575,9 +575,9 @@
                     "Length": "",
                     "Attribute": "",
                     "Collation": null,
-                    "IsNull": false,
-                    "Default": "CURRENT_TIMESTAMP",
-                    "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+                    "IsNull": true,
+                    "Default": null,
+                    "Extra": "on update CURRENT_TIMESTAMP",
                     "Comment": ""
                 },
                 {
@@ -622,7 +622,7 @@
                     "IsNull": false,
                     "Comment": "",
                     "Collation": "A",
-                    "Cardinality": 0,
+                    "Cardinality": 1,
                     "IndexType": "BTREE",
                     "Columns": [
                         {
@@ -640,7 +640,7 @@
                     "IsNull": false,
                     "Comment": "",
                     "Collation": "A",
-                    "Cardinality": 0,
+                    "Cardinality": 1,
                     "IndexType": "BTREE",
                     "Columns": [
                         {

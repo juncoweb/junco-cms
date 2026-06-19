@@ -34,7 +34,7 @@ class pagination_frontlist_comments_snippet
             2
         );
 
-        return '<div class="fl-comments-pagination">'
+        return '<div class="comments-pagination">'
             . '<div class="float-right">' . $data['first'] . $data['prev'] . $data['next'] . $data['last'] . '</div>'
             .  _t('Pages') . ': ' . $data['numeration']
             . '</div>';

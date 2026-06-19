@@ -36,26 +36,28 @@ class frontlist_master_comments_snippet extends FrontlistBase
             $allow_vote   = $this->getOption('allow_vote');
             $allow_report = $this->getOption('allow_report');
             $allow_delete = $this->getOption('allow_delete');
-            $btn          = '';
+            $btn = [];
 
             if ($allow_reply) {
                 $reply = _t('Reply');
-                $btn .= '·<a href="javascript:void(0)" control-list="reply" title="' . $reply . '">' . $reply . '</a>';
+                $btn[] = '<a href="javascript:void(0)" role="button" control-list="reply" title="' . $reply . '">' . $reply . '</a>';
             }
 
             if ($allow_vote) {
-                $btn .= '·<a href="javascript:void(0)" control-list="vote_up" title="' . _t('Add a vote') . '"><i class="fa-solid fa-thumbs-up"></i></a>'
-                    . '<a href="javascript:void(0)" control-list="vote_down" title="' . _t('Subtract vote') . '"><i class="fa-solid fa-thumbs-down"></i></a>'
-                    . '<div class="votes">%s</div>';
+                $btn[] = '<a href="javascript:void(0)" role="button" control-list="vote_up" title="' . _t('Add a vote') . '"><i class="fa-solid fa-thumbs-up"></i></a>'
+                    . '<a href="javascript:void(0)" role="button" control-list="vote_down" title="' . _t('Subtract vote') . '"><i class="fa-solid fa-thumbs-down"></i></a>'
+                    . '<div class="votes"><div class="visually-hidden">' . _t('Total votes %s') . '</div>%s</div>';
             }
 
             if ($allow_report) {
-                $btn .= '·<a href="javascript:void(0)" control-list="report" title="' . _t('Report') . '"><i class="fa-solid fa-flag"></i></a>';
+                $btn[] = '<a href="javascript:void(0)" role="button" control-list="report" title="' . _t('Report') . '"><i class="fa-solid fa-flag"></i></a>';
             }
 
             if ($allow_delete) {
-                $btn .= '·<a href="javascript:void(0)" control-list="trash" title="' . _t('Trash') . '"><i class="fa-solid fa-trash"></i></a>';
+                $btn[] = '<a href="javascript:void(0)" role="button" control-list="trash" title="' . _t('Trash') . '"><i class="fa-solid fa-trash"></i></a>';
             }
+
+            $actions = '<span aria-hidden="true">·</span>' . implode('<span aria-hidden="true">·</span>', $btn);
 
             foreach ($this->rows as $row) {
                 $header = [];
@@ -78,18 +80,17 @@ class frontlist_master_comments_snippet extends FrontlistBase
                     $row['response_to'] = '<span class="to">@' . $row['response_to'] . '</span> ';
                 }
 
+                $num_votes = '';
                 if ($row['num_votes'] > 0) {
-                    $row['num_votes'] = '<span class="color-success">+' . $row['num_votes'] . '</span>';
+                    $num_votes = '<span class="color-success" aria-hidden="true">+' . $row['num_votes'] . '</span>';
                 } elseif ($row['num_votes'] < 0) {
-                    $row['num_votes'] = '<span class="color-danger">' . $row['num_votes'] . '</span>';
-                } else {
-                    $row['num_votes'] = '';
+                    $num_votes = '<span class="color-danger" aria-hidden="true">' . $row['num_votes'] . '</span>';
                 }
 
                 $html .= "\n\t" . '<div control-row="' . $row['id'] . '"  class="list-row' . $class . '">';
                 $html .= '<div class="header">' . implode(' · ', $header) . '</div>'
                     . '<div class="message">' . $row['response_to'] . $row['message'] . '</div>'
-                    . '<div class="options">' . sprintf($btn, $row['num_votes']) . '</div>';
+                    . '<div class="actions">' . sprintf($actions, $row['num_votes'], $num_votes) . '</div>';
 
                 if ($allow_reply) {
                     $html .= '<div control-form></div>';
@@ -98,11 +99,12 @@ class frontlist_master_comments_snippet extends FrontlistBase
                 $html .= '</div>';
             }
 
-            $html = "\n" . '<div class="fl-comments">' . $html . "\n" . '</div>' . "\n";
             $this->rows = []; // freeing memory
         } else {
-            $html = '<div class="empty-list">' . ($this->empty_list ?: _t('Empty list')) . '</div>' . "\n";
+            $html = '<div class="empty-list">' . ($this->empty_list ?: _t('Empty list')) . '</div>';
         }
+
+        $html = "\n" . '<div class="comments-list">' . $html . "\n" . '</div>' . "\n";
 
         if (isset($this->filters)) {
             $html = $this->filters->render() . "\n" . $html;

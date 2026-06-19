@@ -10,9 +10,9 @@ namespace Junco\Extensions\Compiler;
 class PluginCollector
 {
     // vars
-    protected $rows            = [];
-    protected $plugins        = null;
-    protected $plugin_key    = '';
+    protected array  $plugins;
+    protected array  $rows       = [];
+    protected string $plugin_key = '';
 
     /**
      * Constructor

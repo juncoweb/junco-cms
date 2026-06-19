@@ -65,6 +65,15 @@ interface BacklistInterface
 
     /**
      * Fix
+     * 
+     * @param string $name
+     * 
+     * @return void
+     */
+    public function fixCurrency(string $name): void;
+
+    /**
+     * Fix
      *
      * @param string $name
      */

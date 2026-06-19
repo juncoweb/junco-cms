@@ -339,3 +339,22 @@ input:checked ~ .d-on-not-checked {
 input:not(:checked) ~ .d-on-checked {
     display: none;
 }
+
+/* --- list group ---------------------- */
+.list-group {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    > li {
+        margin: 0 0 var(--spacing-2);
+        border-width: var(--border-width);
+        border-style: var(--border-style);
+        border-color: var(--regular-border-color);
+        border-radius: var(--rounded-md);
+
+        &:has(input:checked) {
+            border-color: var(--regular-primary-border-color);
+        }
+    }
+}

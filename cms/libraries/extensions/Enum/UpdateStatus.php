@@ -51,6 +51,14 @@ enum UpdateStatus
     /**
      * Get
      */
+    public static function get(string $name): self
+    {
+        return self::{$name};
+    }
+
+    /**
+     * Get
+     */
     public static function getActives(): array
     {
         return [self::canceled, self::installed];

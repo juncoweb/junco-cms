@@ -59,6 +59,16 @@
             "menu_hash": "",
             "menu_params": "",
             "status": 1
+        },
+        {
+            "menu_key": "backend-Default",
+            "menu_path": "Personalization|Updates",
+            "menu_order": 7,
+            "menu_url": "admin\/extensions.updates,",
+            "menu_image": "",
+            "menu_hash": "extensions-updates",
+            "menu_params": "",
+            "status": 0
         }
     ]
 }

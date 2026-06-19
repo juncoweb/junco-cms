@@ -15,12 +15,12 @@ use Filesystem;
 class Installer extends Unpackager
 {
     // vars
-    public bool  $only_selected_alias  = false;
-    public bool  $clean_everything     = false;
-    public bool  $remove_package       = false;
-    public bool  $execute_before       = true;
-    public bool  $execute_after        = true;
-    public int   $db_import            = self::IMPORT_FROM_JSON;
+    public bool $only_selected_alias = false;
+    public bool $clean_everything    = false;
+    public bool $remove_package      = false;
+    public bool $execute_before      = true;
+    public bool $execute_after       = true;
+    public int  $db_import           = self::IMPORT_FROM_JSON;
     //
     protected Filesystem $fs;
     protected Importer $importer;
@@ -53,8 +53,9 @@ class Installer extends Unpackager
     {
         // initialize
         $this->unpack($package);
-        $this->getExtensions($extension_alias);
-        $this->xdm = new XDataManager($this->srcpath, $this->is_installer);
+
+        $this->extensions = $this->getExtensions($this->extensions_2, $extension_alias);
+        $this->xdm        = new XDataManager($this->srcpath, $this->is_installer);
 
         // before
         if ($this->execute_before && !$this->is_installer) {
@@ -107,26 +108,37 @@ class Installer extends Unpackager
     /**
      * Get
      * 
+     * @param array $extensions
      * @param array $extension_alias
      * 
-     * @return void
+     * @return array
      */
-    protected function getExtensions(array $extension_alias): void
+    protected function getExtensions(array $extensions, array $extension_alias): array
     {
-        $this->extensions = $this->extensions_2;
-
         if ($this->only_selected_alias) {
-            $this->extensions = array_values(
-                array_filter(
-                    $this->extensions,
-                    fn($row) => in_array($row['extension_alias'], $extension_alias)
-                )
-            );
+            $extensions = $this->filterExtensions($extensions, $extension_alias);
         }
 
-        if (!$this->extensions) {
+        if (!$extensions) {
             $this->fatal(_t('Please, select the extensions.'));
         }
+
+        return $extensions;
+    }
+
+    /**
+     * Filter
+     * 
+     * @return array
+     */
+    protected function filterExtensions(array $extensions, array $extension_alias): array
+    {
+        return array_values(
+            array_filter(
+                $extensions,
+                fn($row) => in_array($row['extension_alias'], $extension_alias)
+            )
+        );
     }
 
     /**
@@ -270,11 +282,10 @@ class Installer extends Unpackager
      */
     protected function updateDeveloper(): void
     {
-        $this->db->exec(
-            "UPDATE `#__extensions_developers` SET ?? WHERE id = ?",
-            $this->developer,
-            $this->developer_id
-        );
+        $this->db->exec("
+        UPDATE `#__extensions_developers`
+        SET ??
+        WHERE id = ?", $this->developer, $this->developer_id);
     }
 
     /**

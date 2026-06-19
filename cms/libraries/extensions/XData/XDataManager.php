@@ -90,7 +90,7 @@ class XDataManager
      *
      * @param string $extension_alias_host   It refers to the place where the data will be stored.
      * @param string $extension_alias_client
-     * @param string $extension_id_client
+     * @param int    $extension_id_client
      * @param mixed  $output_type                   File from which the data to be stored will be read.
      */
     public function import(
@@ -119,8 +119,8 @@ class XDataManager
      *
      * @param string $extension_alias_host   It refers to the place where the data will be stored.
      * @param string $extension_alias_client
-     * @param string $extension_id_client
-     * @param mixed  $output_type                   File from which the data to be stored will be read.
+     * @param int    $extension_id_client
+     * @param mixed  $output_type            File from which the data to be stored will be read.
      */
     public function export(
         string $extension_alias_host,
@@ -171,7 +171,7 @@ class XDataManager
             return true;
         }
 
-        $hosts   = array_unique(array_column($this->services, 'extension_alias_host'));
+        $hosts   = $this->getHosts();
         $plugins = $this->getPlugins($option, $hosts);
 
         foreach ($this->services as $row) {

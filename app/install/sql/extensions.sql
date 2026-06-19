@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `#__extensions_developers` (
   `default_credits` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `default_license` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP  on update CURRENT_TIMESTAMP,
+  `updated_at` datetime NULL on update CURRENT_TIMESTAMP,
   `is_protected` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `#__extensions_updates` (
   `released_at` datetime NULL,
   `checked_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP  on update CURRENT_TIMESTAMP,
+  `updated_at` datetime NULL on update CURRENT_TIMESTAMP,
   `has_failed` tinyint unsigned NOT NULL DEFAULT 0,
   `failure_msg` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   `status` enum('canceled','available','installed') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'canceled',

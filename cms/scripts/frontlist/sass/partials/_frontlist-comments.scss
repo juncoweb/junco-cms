@@ -1,5 +1,5 @@
 /* --- Frontlist Comments -------------------------------- */
-.fl-comments {
+.comments-list {
     .list-row {
         margin-bottom: var(--spacing-4);
 
@@ -30,7 +30,7 @@
         }
     }
 
-    .options {
+    .actions {
         font-size: var(--font-size-sm);
 
         a {
@@ -49,5 +49,10 @@
             display: inline;
             margin-left: 5px;
         }
+    }
+
+    .empty-list {
+        font-style: italic;
+        margin-bottom: var(--spacing-4);
     }
 }

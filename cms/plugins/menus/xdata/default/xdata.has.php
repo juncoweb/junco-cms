@@ -5,6 +5,8 @@
  * @author: Junco CMS (tm)
  */
 
+use Junco\Menus\XStorage;
+
 /**
  * Has data
  *
@@ -14,10 +16,5 @@
  * @return bool
  */
 return function ($extension_id, $extension_alias) {
-    // query
-    return db()->query("
-	SELECT COUNT(*)
-	FROM `#__menus`
-	WHERE extension_id = $extension_id
-	AND is_distributed = 1")->fetchColumn();
+    return (new XStorage)->has($extension_id);
 };

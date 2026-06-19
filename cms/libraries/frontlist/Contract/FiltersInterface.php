@@ -14,7 +14,7 @@ interface FiltersInterface extends FilterElementsInterface
     /**
      * Url
      * 
-     * @param string $url
+     * @param string $route
      * 
      * @return void
      */
@@ -23,7 +23,7 @@ interface FiltersInterface extends FilterElementsInterface
     /**
      * Render
      * 
-     * @return void
+     * @return string
      */
     public function render(): string;
 }

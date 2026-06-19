@@ -36,7 +36,7 @@ interface FormInterface extends FormElementsInterface
     /**
      * Columns
      * 
-     * @param FormElementInterface[]
+     * @param FormElementInterface ...$elements
      * 
      * @return void
      */

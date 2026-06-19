@@ -13,7 +13,7 @@ $form = Form::get();
 //
 $form->columns(
     $form->input('name')->setLabel(_t('Name'))->setHelp('Name of the plugin.'),
-    $form->input('tag')->setLabel(_t('Tag'))
+    $form->input('tag')->setLabel('Tag')
 );
 $form->group(
     $form->input('name')->setLabel(_t('Name'))->setHelp('Name of the plugin.'),

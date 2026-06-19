@@ -1,4 +1,12 @@
 
-Date v3.1
+Database v5.2
 =======================================================
-- Support for local time has been added.
+- The plugins were improved.
+
+Router v4.6
+=======================================================
+- The plugins were improved.
+
+Users v0.2
+=======================================================
+- The plugins were improved.

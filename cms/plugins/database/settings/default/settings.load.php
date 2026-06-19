@@ -5,16 +5,14 @@
  * @author: Junco CMS (tm)
  */
 
+use Junco\Database\Repository\Setter;
 use Junco\Settings\PluginLoader;
 
 return function (PluginLoader $loader) {
-    $loader->setOptions('adapter', Database::getAdapters());
+    $repository = new Setter;
+    $adapters   = $repository->getAdapters();
+    $collations = $repository->getCollations();
 
-    // collations
-    $collations = [];
-    foreach (db()->getSchema()->database()->getCollations() as $row) {
-        $collations[$row['Charset']][$row['Collation']] = $row['Collation'];
-    }
-
+    $loader->setOptions('adapter', $adapters);
     $loader->setOptions('collation', $collations);
 };

@@ -7,14 +7,14 @@
 
 namespace Junco\Extensions\Updater;
 
-use Junco\Extensions\Updater\Carrier;
+use Junco\Extensions\Enum\ExtensionStatus;
+use Junco\Extensions\Enum\UpdateStatus;
 use Junco\Extensions\Installer\Installer;
 use Junco\Extensions\Installer\Unpackager;
+use Junco\Extensions\Updater\Carrier;
 use Database;
 use Exception;
 use Filesystem;
-use Junco\Extensions\Enum\ExtensionStatus;
-use Junco\Extensions\Enum\UpdateStatus;
 
 class Updater extends Carrier
 {

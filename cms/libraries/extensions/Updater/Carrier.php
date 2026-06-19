@@ -14,7 +14,7 @@ use Exception;
 class Carrier
 {
     // vars
-    protected string $target;
+    protected string   $target;
     protected ?Archive $archive = null;
 
     /**
@@ -235,7 +235,10 @@ class Carrier
      */
     protected function getExtensionKey(string $extension_alias): string
     {
-        return db()->query("SELECT extension_key FROM `#__extensions` e WHERE extension_alias = ?", $extension_alias)->fetchColumn();
+        return db()->query("
+        SELECT extension_key
+        FROM `#__extensions`
+        WHERE extension_alias = ?", $extension_alias)->fetchColumn();
     }
 
     /**
@@ -264,6 +267,6 @@ class Carrier
      */
     protected function isValidKey(string $key): bool
     {
-        return preg_match('@^[\w-]{32}$@i', $key);
+        return preg_match('/^[\w-]{32}$/i', $key);
     }
 }

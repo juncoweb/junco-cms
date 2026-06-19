@@ -82,21 +82,6 @@ class Model
     }
 
     /**
-     * Extract
-     * 
-     * @param ... $names
-     * 
-     * @return void
-     */
-    final public function extract(...$names): void
-    {
-        foreach ($names as $name) {
-            $this->$name = $this->data[$name];
-            unset($this->data[$name]);
-        }
-    }
-
-    /**
      * Slice
      * 
      * @param array  &$data

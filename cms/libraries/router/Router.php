@@ -16,17 +16,16 @@ use Junco\Http\Server\RequestHandler;
 class Router
 {
     // vars
-    protected array  $route                     = [];
-    protected string $orig_route                = '';
-    protected ?array $queryParams               = null;
-    protected ?array $url_lang                  = null;
-    protected string $access_point              = 'front';
-    protected string $component                 = '';
-    protected string $deepcomponent             = '';
-    protected string $fullcomponent             = '';
-    protected string $task                      = '';
-    protected string $format                    = 'template';
-    protected Closure|array|false $controller   = false;
+    protected array  $route                   = [];
+    protected ?array $queryParams             = null;
+    protected ?array $url_lang                = null;
+    protected string $access_point            = 'front';
+    protected string $component               = '';
+    protected string $deepcomponent           = '';
+    protected string $fullcomponent           = '';
+    protected string $task                    = '';
+    protected string $format                  = 'template';
+    protected Closure|array|false $controller = false;
     protected Routes $routes;
     // config
     protected string $route_key;
@@ -91,13 +90,15 @@ class Router
      */
     protected function extractRouteAndFormat(string $method, array &$queryParams): void
     {
+        $route = '';
+
         if (array_key_exists($this->route_key, $queryParams)) {
-            $this->orig_route = $queryParams[$this->route_key];
+            $route = rtrim($queryParams[$this->route_key], '/');
             unset($queryParams[$this->route_key]);
         }
 
-        if ($this->orig_route) {
-            $this->route = array_values(array_filter(explode('/', $this->orig_route)));
+        if ($route) {
+            $this->route = explode('/', $route);
         }
 
         if ($method == 'INPUT') {
@@ -125,9 +126,9 @@ class Router
 
         // I am looking for the component and the task
         if ($this->route) {
-            $component            = explode('.', array_shift($this->route), 2);
-            $this->deepcomponent  = $component[1] ?? '';
-            $this->component      = $component[0];
+            $component           = explode('.', array_shift($this->route), 2);
+            $this->deepcomponent = $component[1] ?? '';
+            $this->component     = $component[0];
 
             if ($this->route) {
                 $this->task = implode('/', $this->route);
@@ -192,8 +193,8 @@ class Router
                 if ($this->task) {
                     $this->component .= '/' . $this->task;
                 }
-                $this->task            = $this->component;
-                $this->component    = '';
+                $this->task = $this->component;
+                $this->component = '';
                 $flag = false;
             } else {
                 $flag = true;
@@ -543,8 +544,8 @@ class Router
                 $args = [$this->url_lang['key'] => $this->url_lang['value']] + $args;
             }
 
-            $url    = 'index.php';
-            $goto    = [];
+            $url  = 'index.php';
+            $goto = [];
 
             if ($access_point) {
                 $goto[] = $access_point;
@@ -574,11 +575,9 @@ class Router
     }
 
     /**
-     * Get a url
+     * Get
      * 
-     * @param string $route
-     * @param array  $args
-     * @param bool   $absolute
+     * @param bool $absolute
      * 
      * @return string
      */

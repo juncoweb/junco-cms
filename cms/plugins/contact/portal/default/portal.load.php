@@ -38,9 +38,9 @@ return function (PortalInterface $portal) {
 
     # portal
     $portal->section([
-        'title' => _t('Contact'),
+        'title'   => _t('Contact'),
         'content' => $html,
-        'css' => 'portal-contact',
-        'attr' => ['id' => 'contact']
+        'css'     => 'portal-contact',
+        'attr'    => ['id' => 'contact']
     ]);
 };

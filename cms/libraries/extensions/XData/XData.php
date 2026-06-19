@@ -7,11 +7,11 @@
 
 namespace Junco\Extensions\XData;
 
+use Database;
+use Exception;
+
 class XData
 {
-    // const
-    const XDATA_FILE = '%s.%s.json';
-
     // vars
     protected string $basepath     = '';
     protected string $store_path   = '';
@@ -41,8 +41,9 @@ class XData
     /**
      * Set
      * 
-     * @param int    $extension_id
-     * @param string $extension_alias
+     * @param string $extension_alias_host
+     * @param string $extension_alias_client
+     * @param int    $extension_id_client
      * @param string $output_type
      */
     public function setClient(
@@ -63,11 +64,11 @@ class XData
      */
     public function resetClient(): void
     {
-        $this->extension_alias_host       = '';
-        $this->extension_alias_client     = '';
-        $this->extension_id_client        = 0;
-        $this->output_type                = null;
-        $this->extension_aliases_client   = array_unique($this->extension_aliases_client);
+        $this->extension_alias_host     = '';
+        $this->extension_alias_client   = '';
+        $this->extension_id_client      = 0;
+        $this->output_type              = null;
+        $this->extension_aliases_client = array_unique($this->extension_aliases_client);
     }
 
     /**
@@ -82,14 +83,9 @@ class XData
         if (is_array($file)) {
             $file = $this->getFileFromRequet($file);
         } elseif ($this->extension_alias_host && $this->extension_alias_client) {
-            $file = $this->store_path
-                . sprintf(
-                    self::XDATA_FILE,
-                    $this->extension_alias_client,
-                    $this->extension_alias_host
-                );
+            $file = $this->getFile();
         } else {
-            throw new \Exception(_t('Please select a file from your computer.'));
+            throw new Exception(_t('Please select a file from your computer.'));
         }
 
         $data = $this->getJsonData($file);
@@ -101,15 +97,12 @@ class XData
             throw new MalformedDataException('XData file is invalid');
         }
 
-        if ($this->extensions === null) {
-            $this->extensions = $this->getExtensions();
-        }
+        $this->extensions        ??= $this->getExtensions();
+        $this->extension_id_client = $this->extensions[$extension_alias_client] ?? 0;
 
-        if (!isset($this->extensions[$extension_alias_client])) {
+        if (!$this->extension_id_client) {
             throw new MalformedDataException('XData client_id not found');
         }
-
-        $this->extension_id_client = $this->extensions[$extension_alias_client];
 
         return $data[$extension_alias_client];
     }
@@ -125,28 +118,26 @@ class XData
         if (!$this->extension_alias_client) {
             throw new MalformedDataException('XData client alias not found');
         }
-        if ($is_resource === null) {
-            $is_resource = $this->output_type;
-        }
 
-        $file = sprintf(self::XDATA_FILE, $this->extension_alias_client, $this->extension_alias_host);
+        $file   = $this->getFile();
         $buffer = json_encode([$this->extension_alias_client => $data], JSON_PRETTY_PRINT);
 
-        if ($is_resource) {
+        if ($is_resource ??= $this->output_type) {
             return $this->getFileResponse($file, $buffer);
-        } else {
-            is_dir($this->store_path) or mkdir($this->store_path, SYSTEM_MKDIR_MODE, true);
+        }
 
-            if (false === file_put_contents($this->store_path . $file, $buffer)) {
-                throw new MalformedDataException('XData error writing export file');
-            }
+        is_dir($this->store_path)
+            or mkdir($this->store_path, SYSTEM_MKDIR_MODE, true);
+
+        if (false === file_put_contents($file, $buffer)) {
+            throw new MalformedDataException('XData error writing export file');
         }
     }
 
     /**
      * Get
      */
-    public function __get($name)
+    public function __get(string $name) // @deprecated in v16
     {
         switch ($name) {
             case 'basepath':
@@ -156,6 +147,10 @@ class XData
                 return $this->is_installer;
 
             case 'extension_id':
+                if (!$this->extension_id_client) {
+                    trigger_error('XData::extension_id = 0. This should not happen. To correct it, first call the XData::getData() method.', E_USER_NOTICE);
+                }
+
                 return $this->extension_id_client;
 
             case 'extension_alias':
@@ -174,7 +169,51 @@ class XData
     }
 
     /**
-     * Get data
+     * Get
+     */
+    public function getPath(): string
+    {
+        return $this->basepath;
+    }
+
+    /**
+     * Is
+     */
+    public function isInstaller(): bool
+    {
+        return $this->is_installer;
+    }
+
+    /**
+     * Get
+     */
+    public function getExtensionId(): int
+    {
+        if (!$this->extension_id_client) {
+            trigger_error('XData::extension_id = 0. This should not happen. To correct it, first call the XData::getData() method.', E_USER_NOTICE);
+        }
+
+        return $this->extension_id_client;
+    }
+
+    /**
+     * Get
+     */
+    public function getExtensionAlias(): string
+    {
+        return $this->extension_alias_client;
+    }
+
+    /**
+     * Get
+     */
+    public function getExtensionAliases(): array
+    {
+        return $this->extension_aliases_client;
+    }
+
+    /**
+     * Get
      * 
      * @param array $file
      * 
@@ -182,11 +221,23 @@ class XData
      */
     protected function getFileFromRequet(array $file): string
     {
-        if (pathinfo($file['name'] ?? '', PATHINFO_EXTENSION) != 'json') {
-            throw new \Exception(_t('The file type is invalid.'));
+        $extension = pathinfo($file['name'] ?? '', PATHINFO_EXTENSION);
+
+        if ($extension != 'json') {
+            throw new Exception(_t('The file type is invalid.'));
         }
 
         return $file['tmp_name'];
+    }
+
+    /**
+     * Get
+     * 
+     * @return string
+     */
+    protected function getFile(): string
+    {
+        return $this->store_path . sprintf('%s.%s.json', $this->extension_alias_client, $this->extension_alias_host);
     }
 
     /**
@@ -222,7 +273,7 @@ class XData
     {
         return db()
             ->query("SELECT extension_alias, id FROM `#__extensions`")
-            ->fetchAll(\Database::FETCH_COLUMN, [0 => 1]);
+            ->fetchAll(Database::FETCH_COLUMN, [0 => 1]);
     }
 
     /**
@@ -240,7 +291,7 @@ class XData
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header('Cache-Control: protected', false); // required for certain browsers
         header('Content-Type: application/json; charset=utf-8');
-        header('Content-Disposition: attachment; filename="' . $file . '";');
+        header('Content-Disposition: attachment; filename="' . pathinfo($file, PATHINFO_BASENAME) . '";');
         header('Content-Transfer-Encoding: binary');
         header('Content-Length: ' . strlen($buffer));
 

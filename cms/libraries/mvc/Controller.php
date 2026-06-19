@@ -16,9 +16,9 @@ use Psr\Http\Message\ResponseInterface;
 class Controller
 {
     // vars
-    private ?RequestHandler $handler      = null;
-    private array           $middlewares  = [];
-    private array           $traces       = [];
+    private ?RequestHandler $handler     = null;
+    private array           $middlewares = [];
+    private array           $traces      = [];
 
     /**
      * Middleware
@@ -55,9 +55,9 @@ class Controller
     /**
      * Middleware
      * 
-     * @param ...$middlewares
+     * @param array $middlewares
      */
-    final public function filterMiddlewares($middlewares): array
+    final public function filterMiddlewares(array $middlewares): array
     {
         if (is_array($middlewares[0])) {
             $middlewares = $middlewares[0];
@@ -114,8 +114,8 @@ class Controller
     /**
      * Include a view and pass data to it.
      * 
-     * @param ?string $path
-     * @param ?array $data
+     * @param ?string $__view
+     * @param ?array  $data
      * 
      * @return string|array|ResponseInterface
      */

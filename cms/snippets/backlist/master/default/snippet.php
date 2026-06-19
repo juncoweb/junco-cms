@@ -23,6 +23,7 @@ class backlist_master_default_snippet implements BacklistInterface
     protected string $hiddens = '';
     //
     protected FiltersInterface $filters;
+    protected ?Currency $currency = null;
 
     /**
      * Filters
@@ -110,7 +111,7 @@ class backlist_master_default_snippet implements BacklistInterface
                     ? Date::fromUTC($row[$name])
                     : new Date($row[$name]);
 
-                $this->rows[$i][$name] = $dt?->format($format);
+                $this->rows[$i][$name] = $dt->format($format);
             }
         }
     }
@@ -127,6 +128,26 @@ class backlist_master_default_snippet implements BacklistInterface
     {
         foreach ($this->rows as $i => $row) {
             $this->rows[$i][$name] = implode($separator, $row[$name]);
+        }
+    }
+
+    /**
+     * Fix
+     * 
+     * @return void
+     */
+    public function fixCurrency(string $name): void
+    {
+        if (!$this->rows) {
+            return;
+        }
+
+        $this->currency ??= new Currency();
+
+        foreach ($this->rows as $i => $row) {
+            $this->rows[$i][$name] = $row[$name]
+                ? $this->currency->format($row[$name])
+                : '';
         }
     }
 
@@ -153,6 +174,8 @@ class backlist_master_default_snippet implements BacklistInterface
                         $value = 1;
                     } elseif ($value == 'no') {
                         $value = 0;
+                    } else {
+                        continue;
                     }
                 }
 

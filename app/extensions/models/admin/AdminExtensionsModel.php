@@ -105,7 +105,7 @@ class AdminExtensionsModel extends Model
         $rows = $pagi->fetchAll();
 
         foreach ($rows as $i => $row) {
-            $rows[$i]['status']   = $statuses[$row['status']] ??= ExtensionStatus::{$row['status']}->fetch();
+            $rows[$i]['status']   = $statuses[$row['status']] ??= ExtensionStatus::get($row['status'])->fetch();
             $rows[$i]['__labels'] = [];
 
             if (!$row['is_protected']) {

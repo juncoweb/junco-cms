@@ -176,12 +176,7 @@ let Settings = (function () {
 
     function Load(url, save) {
         if (_goback && save) {
-            window.top.history.pushState({
-                path: url
-            },
-                window.self.document.title,
-                url
-            );
+            window.top.history.pushState({ path: url }, window.self.document.title, url);
         }
 
         JsRequest.text({
@@ -201,7 +196,7 @@ let Settings = (function () {
     }
 
     function Menus() {
-        let A = [];
+        const A = [];
         function Select(el) {
             let i = A.length;
             while (i--) {
@@ -209,6 +204,7 @@ let Settings = (function () {
             }
             el.className = 'selected';
         }
+
         document.querySelectorAll('.widget-thirdbar ul > li > ul a').forEach(function (el) {
             A.push(el);
             el.addEventListener('click', function (event) {

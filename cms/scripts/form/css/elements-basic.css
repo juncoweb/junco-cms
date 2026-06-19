@@ -464,6 +464,23 @@ input:not(:checked) ~ .d-on-checked {
   display: none;
 }
 
+/* --- list group ---------------------- */
+.list-group {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.list-group > li {
+  margin: 0 0 var(--spacing-2);
+  border-width: var(--border-width);
+  border-style: var(--border-style);
+  border-color: var(--regular-border-color);
+  border-radius: var(--rounded-md);
+}
+.list-group > li:has(input:checked) {
+  border-color: var(--regular-primary-border-color);
+}
+
 /* --- colors ---------------------------------------------------------- */
 .btn .btn, .btn.btn {
   color: var(--regular-font-color);
@@ -1148,6 +1165,28 @@ input:not(:checked) ~ .d-on-checked {
 }
 .input-danger.input-solid.input-checkbox:checked, .input-danger.input-solid .input-checkbox:checked, .input-danger.input-solid.input-radio:checked, .input-danger.input-solid .input-radio:checked, .input-danger.input-solid.input-toggle:checked, .input-danger.input-solid .input-toggle:checked {
   background-color: var(--solid-danger-border-color);
+}
+
+.list-group li.input-default:has(input:checked) {
+  border-color: var(--regular-default-border-color);
+}
+.list-group li.input-primary:has(input:checked) {
+  border-color: var(--regular-primary-border-color);
+}
+.list-group li.input-secondary:has(input:checked) {
+  border-color: var(--regular-secondary-border-color);
+}
+.list-group li.input-success:has(input:checked) {
+  border-color: var(--regular-success-border-color);
+}
+.list-group li.input-info:has(input:checked) {
+  border-color: var(--regular-info-border-color);
+}
+.list-group li.input-warning:has(input:checked) {
+  border-color: var(--regular-warning-border-color);
+}
+.list-group li.input-danger:has(input:checked) {
+  border-color: var(--regular-danger-border-color);
 }
 
 .outline-none.btn,

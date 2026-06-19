@@ -12,9 +12,7 @@ use Junco\Filesystem\UploadedFileManager;
 class LanguageModel extends Model
 {
     // vars
-    protected $db;
-    protected string $language = '';
-
+    protected Database $db;
 
     /**
      * Constructor
@@ -89,12 +87,12 @@ class LanguageModel extends Model
             'name'     => 'text|required',
         ]);
 
-        // extract
-        $this->extract('language');
-
-        $locale = (new LanguageHelper)->getLocale();
-        $file   = $locale . $this->language . '/' . $this->language . '.json';
-        $buffer = json_encode($data, JSON_PRETTY_PRINT);
+        //
+        $language = $this->slice($data, 'language');
+        $locale   = (new LanguageHelper)->getLocale();
+        //
+        $file     = $locale . $language . '/' . $language . '.json';
+        $buffer   = json_encode($data, JSON_PRETTY_PRINT);
 
         if (false === file_put_contents($file, $buffer)) {
             return $this->unprocessable(_t('Error! the task has not been realized.'));
@@ -158,12 +156,15 @@ class LanguageModel extends Model
 
         //
         $config = config('language-distribute');
+
         if (!$config['language-distribute.token']) {
             return $this->unprocessable(_t('The distribution system requires a token.'));
         }
+
         if (!$config['language-distribute.url']) {
             return $this->unprocessable(_t('The distribution system requires a url.'));
         }
+
         if (!set_time_limit(0)) { // set time limit
             return $this->unprocessable('Error (time_limit)');
         }

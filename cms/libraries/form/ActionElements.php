@@ -168,6 +168,7 @@ abstract class ActionElements implements ActionElementsInterface
                         . '>';
                 } else {
                     $html .= '<a href="' . $row['href'] . '">';
+                    $html .= '<span class="color-subtle-default float-right" aria-hidden="true"><i class="fa-solid fa-external-link"></i></span>';
                 }
 
                 if (!empty($row['icon'])) {

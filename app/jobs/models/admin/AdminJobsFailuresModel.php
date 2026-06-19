@@ -10,7 +10,7 @@ use Junco\Mvc\Model;
 class AdminJobsFailuresModel extends Model
 {
     // vars
-    protected $db;
+    protected Database $db;
 
     /**
      * Constructor
@@ -19,6 +19,15 @@ class AdminJobsFailuresModel extends Model
     {
         $this->db = db();
     }
+
+    /**
+     * Get
+     */
+    public function getIndexData()
+    {
+        return ['back_url' => url('admin/jobs')];
+    }
+
 
     /**
      * Get

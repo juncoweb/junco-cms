@@ -6,19 +6,10 @@
  */
 
 use Junco\Settings\PluginLoader;
+use Junco\Users\Repository\Setter;
 
 return function (PluginLoader $loader) {
-    // query
-    $roles = db()->query("
-	SELECT id, role_name
-	FROM `#__users_roles`
-	WHERE id NOT IN (
-		SELECT role_id
-		FROM `#__users_roles_labels_map`
-		WHERE label_id = ?
-		AND status = 1
-	)
-	ORDER BY role_name", L_SYSTEM_ADMIN)->fetchAll(Database::FETCH_COLUMN, [0 => 1], ['--- ' . _t('Select') . ' ---']);
+    $roles = (new Setter)->getRoles(['--- ' . _t('Select') . ' ---']);
 
     $loader->setOptions('default_ucid', $roles);
     $loader->setOptions('password_level', [

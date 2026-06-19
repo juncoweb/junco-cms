@@ -5,6 +5,8 @@
  * @author: Junco CMS (tm)
  */
 
+use Junco\Users\Repository\XStorage;
+
 /**
  * Has data
  *
@@ -14,8 +16,5 @@
  * @return bool
  */
 return function ($extension_id, $extension_alias) {
-    return db()->query("
-	SELECT COUNT(*)
-	FROM `#__users_roles_labels`
-	WHERE extension_id = ?", $extension_id)->fetchColumn();
+    return (new XStorage)->has($extension_id);
 };

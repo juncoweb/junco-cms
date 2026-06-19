@@ -212,6 +212,14 @@
     }
 }
 
+.list-group {
+    @each $name, $color in $theme-colors {
+        li.input-#{$name}:has(input:checked) {
+            border-color: var(--regular-#{$name}-border-color);
+        }
+    }
+}
+
 .outline-none.btn,
 .btn-group.outline-none .btn {
     border-color: transparent;

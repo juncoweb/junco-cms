@@ -80,10 +80,9 @@ class AdminSettingsModel extends Model
             $this->append($data, $input['add_rows']);
         }
 
-        $data['key']    = $input['key'];
-        $data['groups'] = implode('|', $data['groups']);
-        array_unshift($data['descriptions'], $data['description']);
-        $data['description'] = implode("\n|", $data['descriptions']);
+        $data['key']         = $input['key'];
+        $data['groups']      = implode('|', $data['groups']);
+        $data['description'] = $this->getDescription($data['descriptions'], $data['description']);
 
         foreach (array_keys($data['rows']) as $name) {
             $data['rows'][$name]['id'] = $name;
@@ -128,8 +127,8 @@ class AdminSettingsModel extends Model
                     $count++;
                 }
             } else {
-                $json[0]['deep']    = "[0]";
-                $json[0]['values']    = ['__id' => null];
+                $json[0]['deep']   = "[0]";
+                $json[0]['values'] = ['__id' => null];
             }
         } else {
             if ($is_edit) {
@@ -156,6 +155,15 @@ class AdminSettingsModel extends Model
     public function getConfirmDeleteData()
     {
         return $this->filter(POST, ['key' => '']);
+    }
+
+    /**
+     * Get
+     */
+    protected function getDescription(array $descriptions, string $description): string
+    {
+        array_unshift($descriptions, $description);
+        return implode("\n|", $descriptions);
     }
 
     /**

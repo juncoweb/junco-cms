@@ -10,15 +10,11 @@ $bbx = Backlist::getBox();
 
 // actions
 $bac = $bbx->getActions();
-/* $bac->toggle([
-	['control' => 'status', 'value' => 1, 'label' => _t('Enabled')],
-	['control' => 'status', 'value' => 0, 'label' => _t('Disabled')],
-]); */
-//$bac->delete();
+$bac->back($back_url);
+$bac->separate();
+//
 $bac->button('show', _t('Show'), 'fa-solid fa-eye');
-/* $bac->dropdown([
-	['control' => 'confirm_trash', 'label' => _t('Delete')],
-]); */
+//
 $bac->filters();
 $bac->refresh();
 

@@ -1,40 +1,44 @@
 /* --- Frontlist Comments -------------------------------- */
-.fl-comments .list-row {
+.comments-list .list-row {
   margin-bottom: var(--spacing-4);
 }
-.fl-comments .list-row.response {
+.comments-list .list-row.response {
   padding-left: var(--spacing-4);
   border-left: 3px solid var(--regular-border-color);
 }
-.fl-comments .header,
-.fl-comments .message {
+.comments-list .header,
+.comments-list .message {
   margin-bottom: var(--spacing-1);
 }
-.fl-comments .author {
+.comments-list .author {
   font-weight: bold;
 }
-.fl-comments .date {
+.comments-list .date {
   color: var(--regular-subtle-font-color);
 }
-.fl-comments .to {
+.comments-list .to {
   color: var(--regular-subtle-font-color);
 }
-.fl-comments .to:hover {
+.comments-list .to:hover {
   color: var(--regular-subtle-font-color);
 }
-.fl-comments .options {
+.comments-list .actions {
   font-size: var(--font-size-sm);
 }
-.fl-comments .options a {
+.comments-list .actions a {
   color: var(--regular-subtle-font-color);
   margin: 0 5px;
   padding: 0 3px;
 }
-.fl-comments .options a:hover {
+.comments-list .actions a:hover {
   color: var(--regular-primary-surface-color);
 }
-.fl-comments .options .votes {
+.comments-list .actions .votes {
   font-weight: bold;
   display: inline;
   margin-left: 5px;
+}
+.comments-list .empty-list {
+  font-style: italic;
+  margin-bottom: var(--spacing-4);
 }

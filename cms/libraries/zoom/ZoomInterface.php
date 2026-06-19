@@ -37,6 +37,25 @@ interface ZoomInterface
     public function date(?string $date, bool $toLocal = true): ZoomGroup;
 
     /**
+     * Image
+     * 
+     * @param ?string $src
+     * @param string  $alt
+     * 
+     * @return ZoomGroup
+     */
+    public function image(?string $src, string $alt = ''): ZoomGroup;
+
+    /**
+     * Currency
+     * 
+     * @param float $value
+     * 
+     * @return ZoomGroup
+     */
+    public function currency(float $value): ZoomGroup;
+
+    /**
      * Group
      * 
      * @param array ...$group

@@ -11,27 +11,27 @@ defined('PAGINATION_PAGE') or
 class Pagination
 {
     // vars
-    public int $cur_page        = 0;
-    public int $rows_per_page    = 15;
-    public int $num_rows        = 0;
-    public int $num_pages        = 1;
-    public int $offset            = 0;
-    protected string $snippet    = '';
-    protected array  $rows        = [];
+    public int $cur_page      = 0;
+    public int $rows_per_page = 15;
+    public int $num_rows      = 0;
+    public int $num_pages     = 1;
+    public int $offset        = 0;
+    protected string $snippet = '';
+    protected array  $rows    = [];
 
     // navigation
-    public string $nav_href        = 'javascript:void(0)';
-    public string $nav_disabled    = 'disabled';
-    public string $nav_active    = 'active';
+    public string $nav_href     = 'javascript:void(0)';
+    public string $nav_disabled = 'disabled';
+    public string $nav_active   = 'active';
 
     /**
-     * Slice
-     *
-     * @Performs the paging of an array.
+     * Performs the paging of an array
      * 
      * @param array  $rows
+     * 
+     * @return void
      */
-    public function slice($rows)
+    public function slice($rows): void
     {
         $this->num_rows = count($rows);
         $this->calculate();
@@ -39,59 +39,67 @@ class Pagination
     }
 
     /**
-     * calculate
+     * Calculate
+     * 
+     * @return void
      */
-    public function calculate()
+    public function calculate(): void
     {
         if (!$this->cur_page) {
-            $this->cur_page    =
-                Filter::input(GET, PAGINATION_PAGE, 'id')
+            $this->cur_page = Filter::input(GET, PAGINATION_PAGE, 'id')
                 ?: Filter::input(POST, PAGINATION_PAGE, 'id')
                 ?: 1;
         }
         if ($this->cur_page < 1) {
-            $this->cur_page    = 1;
+            $this->cur_page = 1;
         }
 
-        $this->num_pages    = ceil($this->num_rows / $this->rows_per_page);
-        $this->cur_page        = $this->num_pages > 1
+        $this->num_pages = ceil($this->num_rows / $this->rows_per_page);
+        $this->cur_page  = $this->num_pages > 1
             ? ($this->cur_page < $this->num_pages ? $this->cur_page : $this->num_pages)
             : 1;
-        $this->offset        = ($this->cur_page - 1) * $this->rows_per_page;
+        $this->offset = ($this->cur_page - 1) * $this->rows_per_page;
     }
 
     /**
-     * Url
-     *
-     * @Build the url by adding the page number. 
+     * Set
      * 
+     * @param array $rows
+     * 
+     * @return void
      */
-    public function setRows(array $rows)
+    public function setRows(array $rows): void
     {
         $this->rows = $rows;
     }
 
     /**
-     * Fetch all results.
+     * Fetch all results
+     * 
+     * @return array
      */
-    public function fetchAll()
+    public function fetchAll(): array
     {
         return $this->rows;
     }
 
     /**
-     * Url
-     *
-     * @Build the url by adding the page number. 
+     * Build the url by adding the page number
+     * 
+     * @param string $route
+     * @param array  $args
+     * @param string $hash
+     * 
+     * @param ?string $route
      * 
      */
-    public function url(?string $route = null, array $args = [], $hash = '')
+    public function url(string $route = '', array $args = [], string $hash = ''): void
     {
-        if (array_filter($args)) {
+        if ($args) {
             $args = array_filter($args);
         }
         $args[PAGINATION_PAGE] = '{{page}}';
-        $this->nav_href    = url($route, $args) . $hash;
+        $this->nav_href = url($route, $args) . $hash;
     }
 
     /**
@@ -102,22 +110,24 @@ class Pagination
      * @param array  $tags  
      * @param array  $arrows  
      * @param int    $num_links
+     * 
+     * @return array
      */
     public function build(
         array   $tags,
         array   $arrows,
         int     $num_links = -1,
         ?string $extremes = null
-    ) {
+    ): array {
         $data = [];
-        if ($arrows) {
-            // nav arrows
+
+        if ($arrows) { // nav arrows
             if ($this->cur_page != 1) {
                 $data['first'] = 1;
                 $data['prev']  = $this->cur_page - 1;
             } else {
-                $data['first']    =
-                    $data['prev']    = false;
+                $data['first'] =
+                    $data['prev'] = false;
             }
 
             if ($this->cur_page < $this->num_pages) {
@@ -127,32 +137,43 @@ class Pagination
                 $data['next'] =
                     $data['last'] = false;
             }
+
             foreach ($arrows as $key => $arrow) {
                 if ($data[$key]) {
-                    $data[$key] = strtr($tags[0], ['{{page}}' => $data[$key], '{{placeholder}}' => $arrow, '{{key}}' => $key]);
+                    $data[$key] = strtr($tags[0], [
+                        '{{page}}'        => $data[$key],
+                        '{{placeholder}}' => $arrow,
+                        '{{key}}'         => $key
+                    ]);
                 } else {
-                    $data[$key] = strtr($tags[1], ['{{style}}' => $this->nav_disabled, '{{placeholder}}' => $arrow, '{{key}}' => $key]);
+                    $data[$key] = strtr($tags[1], [
+                        '{{style}}'       => $this->nav_disabled,
+                        '{{placeholder}}' => $arrow,
+                        '{{key}}'         => $key
+                    ]);
                 }
             }
         }
 
-        if ($num_links > -1) {
-            // vars
-            $from    = $this->cur_page - $num_links;
-            $to        = $this->cur_page + $num_links;
-            $html    = '';
+        if ($num_links > -1) { // vars
+            $from = $this->cur_page - $num_links;
+            $to   = $this->cur_page + $num_links;
+            $html = '';
 
             if (count($tags) > 2) {
                 $tags[0] = $tags[2];
                 $tags[1] = $tags[3];
             }
+
             if ($from < 1) {
                 $to  -= $from - 1;
                 $from = 1;
             }
+
             if ($to > $this->num_pages) {
                 $from -= $to - $this->num_pages;
                 $to    = $this->num_pages;
+
                 if ($from < 1) {
                     $from = 1;
                 }
@@ -160,9 +181,15 @@ class Pagination
 
             for ($i = $from; $i <= $to; $i++) {
                 if ($i != $this->cur_page) {
-                    $html .= strtr($tags[0], ['{{page}}' => $i, '{{placeholder}}' => $i]);
+                    $html .= strtr($tags[0], [
+                        '{{page}}'        => $i,
+                        '{{placeholder}}' => $i
+                    ]);
                 } else {
-                    $html .= strtr($tags[1], ['{{style}}' => $this->nav_active, '{{placeholder}}' => $i]);
+                    $html .= strtr($tags[1], [
+                        '{{style}}'       => $this->nav_active,
+                        '{{placeholder}}' => $i
+                    ]);
                 }
             }
 
@@ -173,12 +200,19 @@ class Pagination
 
             if ($extremes !== null) { // build: 1 ...   ... 99
                 if ($from != 1) {
-                    $data['first_number'] = strtr($tags[0], ['{{page}}' => 1, '{{placeholder}}' => 1]) . $extremes;
+                    $data['first_number'] = strtr($tags[0], [
+                        '{{page}}'        => 1,
+                        '{{placeholder}}' => 1
+                    ]) . $extremes;
                 } else {
                     $data['first_number'] = '';
                 }
+
                 if ($to != $this->num_pages) {
-                    $data['last_number'] = $extremes . strtr($tags[0], ['{{page}}' => $this->num_pages, '{{placeholder}}' => $this->num_pages]);
+                    $data['last_number'] = $extremes . strtr($tags[0], [
+                        '{{page}}'        => $this->num_pages,
+                        '{{placeholder}}' => $this->num_pages
+                    ]);
                 } else {
                     $data['last_number'] = '';
                 }
@@ -189,10 +223,11 @@ class Pagination
     }
 
     /**
-     * Sets the snippet to use.
+     * Sets the snippet to use
      * 
      * @param string $snippet
      * 
+     * @return void
      */
     public function snippet(string $snippet = ''): void
     {
@@ -201,6 +236,8 @@ class Pagination
 
     /**
      * Render
+     * 
+     * @return string
      */
     public function render(): string
     {
@@ -208,7 +245,9 @@ class Pagination
     }
 
     /**
-     * To string representation.
+     * To string representation
+     * 
+     * @return string
      */
     public function __toString(): string
     {

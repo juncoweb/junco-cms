@@ -10,7 +10,7 @@ use Junco\Mvc\Model;
 class AdminJobsModel extends Model
 {
     // vars
-    protected $db;
+    protected Database $db;
 
     /**
      * Constructor

@@ -29,7 +29,7 @@ class Snippets
      *
      * @return object  An instance of the object.
      */
-    public function new(string $name, ?string $snippet = null, ...$args): ?object
+    public function new(string $name, ?string $snippet = null, mixed ...$args): ?object
     {
         $name = explode('#', $name);
         $extension = $name[0];

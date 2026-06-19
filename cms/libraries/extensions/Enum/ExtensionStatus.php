@@ -64,6 +64,14 @@ enum ExtensionStatus
     /**
      * Get
      */
+    public static function get(string $name): self
+    {
+        return self::{$name};
+    }
+
+    /**
+     * Get
+     */
     public static function getList(array $list = []): array
     {
         foreach (self::cases() as $case) {

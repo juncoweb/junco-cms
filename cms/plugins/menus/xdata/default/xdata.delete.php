@@ -5,9 +5,9 @@
  * @author: Junco CMS (tm)
  */
 
-
 use Junco\Extensions\XData\XData;
+use Junco\Menus\XStorage;
 
 return function (XData $xdata) {
-    db()->exec("DELETE FROM `#__menus` WHERE extension_id = ?", $xdata->extension_id);
+    (new XStorage)->delete($xdata->extension_id);
 };

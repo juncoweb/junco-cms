@@ -10,8 +10,9 @@ use PhpParser\Node\Expr\Instanceof_;
 abstract class ZoomBase implements ZoomInterface
 {
     // vars
-    protected string $id;
-    protected array  $groups = [];
+    protected string    $id;
+    protected array     $groups = [];
+    protected ?Currency $currency = null;
 
     /**
      * Constructor
@@ -77,6 +78,39 @@ abstract class ZoomBase implements ZoomInterface
                 .   $date->format(_t('Y-M-d')) . ' <span class="color-subtle-default">' . $date->format('H:i:s') . '</span>'
                 . '</time>';
         }
+
+        return $this->groups[] = (new ZoomGroup($content));
+    }
+
+    /**
+     * Image
+     * 
+     * @param ?string $src
+     * @param string  $alt
+     * 
+     * @return ZoomGroup
+     */
+    public function image(?string $src, string $alt = ''): ZoomGroup
+    {
+        $content = $src
+            ? '<image src="' . $src . '" alt="' . $alt . '" class="responsive" />'
+            : '-';
+
+        return $this->groups[] = (new ZoomGroup($content));
+    }
+
+    /**
+     * Currency
+     * 
+     * @param float $value
+     * 
+     * @return ZoomGroup
+     */
+    public function currency(float $value): ZoomGroup
+    {
+        $content = $value
+            ? ($this->currency ??= new Currency)->format($value)
+            : '';
 
         return $this->groups[] = (new ZoomGroup($content));
     }

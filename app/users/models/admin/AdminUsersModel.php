@@ -87,7 +87,7 @@ class AdminUsersModel extends Model
 
         $rows = [];
         foreach ($pagi->fetchAll() as $row) {
-            $row['status'] = $statuses[$row['status']] ??= UserStatus::{$row['status']}->fetch();
+            $row['status'] = $statuses[$row['status']] ??= UserStatus::get($row['status'])->fetch();
             $row['roles'] = [];
 
             $rows[$row['id']] = $row;
