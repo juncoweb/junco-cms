@@ -31,7 +31,7 @@ class CustomSelect extends FilterElement
             $default = array_key_first($options);
         }
 
-        $html = '<button type="button" control-felem="select" data-on-change="submit" class="btn dropdown-toggle">'
+        $html = '<button type="button" control-felem="select" on-change="submit" class="btn btn-caret">'
             .   $options[$default]
             . '</button>'
             .  '<div class="dropdown-menu" style="display: none;">'

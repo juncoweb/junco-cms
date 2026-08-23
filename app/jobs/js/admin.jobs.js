@@ -1,5 +1,5 @@
 
-/* --- Jobs ------------------------------------------ */
+/* --- Jobs --- */
 let Jobs = (function () {
     function $U(task) {
         return JsUrl('admin/jobs/' + task);
@@ -16,14 +16,14 @@ let Jobs = (function () {
     }
 
     let _backlist, target;
-    let mo = {
+    const mo = {
         size: 'large',
         onLoad: function () {
             target = this;
             JsForm().request($U('save'), callback);
         },
     };
-    let _controls = {
+    const _controls = {
         show: {
             numRows: '1',
             modalOptions: {

@@ -28,11 +28,11 @@ class Nestedset
             $partial[$depth][] = $row;
 
             if (($row['right_id'] - $row['left_id']) > 1) { // the node nests children
-                $right_id[$depth] = $row['right_id'];        // I store the value
+                $right_id[$depth]  = $row['right_id'];      // I store the value
                 $partial[++$depth] = [];                    // Initialize
 
             } elseif ($depth > 0 && $row['right_id'] == ($right_id[$depth - 1] - 1)) {
-                $right_id[$depth] = $row['right_id'];         // store value
+                $right_id[$depth] = $row['right_id'];       // store value
 
                 while ($depth > 0 && $right_id[$depth] == ($right_id[$depth - 1] - 1)) { // I start to nest the partial
                     $i = count($partial[$depth - 1]) - 1;
@@ -124,9 +124,9 @@ class Nestedset
             $right_id    = [];
 
             foreach ($rows as $i => $row) {
-                $rows[$i]['up']        = $row['left_id'] != $start;
-                $rows[$i]['down']    = $row['right_id'] != $end;
-                $has_children        = ($row['right_id'] - $row['left_id']) > 1;
+                $rows[$i]['up']   = $row['left_id'] != $start;
+                $rows[$i]['down'] = $row['right_id'] != $end;
+                $has_children     = ($row['right_id'] - $row['left_id']) > 1;
 
                 if ($has_children) {
                     $right_id[] = $row['right_id'] - 1;

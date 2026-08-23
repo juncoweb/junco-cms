@@ -14,7 +14,8 @@ return function (WidgetInterface $widget) {
             'image' => 'fa-regular fa-paper-plane',
             'edge' => [
                 'form.button',
-                'form.button-group'
+                'form.button-group',
+                'form.press-btn'
             ]
         ],
         [
@@ -27,9 +28,18 @@ return function (WidgetInterface $widget) {
                 'form.checks',
                 'form.date',
                 'form.editor',
-                'form.UploadHandle',
+                'form.UploadHandler',
                 'form.collection',
-                'form.suite'
+                'form.suite',
+            ]
+        ],
+        [
+            'title' => _t('Plugin'),
+            'image' => 'fa-solid fa-puzzle-piece',
+            'edge' => [
+                'form.select-color',
+                'form.select-weekday',
+                'form.rating',
             ]
         ],
     ]);

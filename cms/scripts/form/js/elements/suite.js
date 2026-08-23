@@ -1,44 +1,52 @@
 
-/* --- Suite ----------------------------------------------------------- */
+/* --- Suite --- */
 JsFelem.implement({
     suite: function (el) {
-        var name = el.getAttribute('data-name');
-        var box = el.querySelectorAll('li');
-        var All = box[1].querySelectorAll('label');
-        var selected = el.getAttribute('data-selected');
-        var checkAll = el.querySelector('input[type=checkbox]');
-
-        var Has = {};
-        var _count = 0;
-        var _total = All.length;
+        const name = el.getAttribute('data-name');
+        const $box0 = el.querySelector('.box-0');
+        const $box1 = el.querySelector('.box-1');
+        const $actions = el.querySelector('.actions');
+        const labels = $box0.querySelectorAll('label');
+        const strDft = el.getAttribute('data-selected');
+        const dft = strDft ? strDft.split(',') : [];
+        const $chkall = el.querySelector('input.input-checkbox');
+        const total = labels.length;
 
         // functions
-        function reset(_selected) {
-            // clear
-            box[0].querySelectorAll('input').forEach(function (el) {
-                Has[el.value](0);
-            });
-
-            if (typeof _selected != 'string') {
-                _selected = selected;
-            }
-
-            // put selected
-            if (_selected) {
-                _selected.split(',').forEach(function (k) {
-                    if (typeof Has[k] != 'undefined') {
-                        Has[k](1);
-                    }
-                });
-            }
+        function Checks(box) {
+            return box.querySelectorAll('input[type="checkbox"]:checked').length;
         }
 
-        function dragAndDrop(tag) {
+        function getValue(value) {
+            if (typeof value == 'undefined') {
+                return dft;
+            }
+            if (!value) {
+                return [];
+            }
+            if (typeof value == 'string') {
+                return value.split(',');
+            }
+
+            return Array.isArray(value)
+                ? value
+                : [];
+        }
+
+        function reset(value) {
+            value = getValue(value);
+
+            labels.forEach(($label) => $label.toggle(
+                value.includes($label.value())
+            ));
+        }
+
+        function DragAndDrop($tag) {
             var corrector, current;
 
-            JsMove(tag, function () {
-                var target = tag.getBoundingClientRect();
-                var rect = box[0].getBoundingClientRect();
+            JsMove($tag, function () {
+                var target = $tag.getBoundingClientRect();
+                var rect = $box1.getBoundingClientRect();
 
                 corrector = {
                     x: target.width / 2 + rect.left + (window.pageXOffset || document.documentElement.scrollLeft),
@@ -46,9 +54,9 @@ JsFelem.implement({
                 };
             },
                 function (event) {
-                    tag.style.position = 'absolute';
-                    tag.style.left = (event.pageX - corrector.x) + 'px';
-                    tag.style.top = (event.pageY - corrector.y) + 'px';
+                    $tag.style.position = 'absolute';
+                    $tag.style.left = (event.pageX - corrector.x) + 'px';
+                    $tag.style.top = (event.pageY - corrector.y) + 'px';
 
                     if (current) {
                         var target = current.getBoundingClientRect();
@@ -62,9 +70,9 @@ JsFelem.implement({
                     }
 
                     if (!current) {
-                        box[0].querySelectorAll('label').forEach(function (x) {
+                        $box1.querySelectorAll('label').forEach(function (x) {
                             var target = x.getBoundingClientRect();
-                            if (x != tag
+                            if (x != $tag
                                 && target.top < event.clientY
                                 && target.bottom > event.clientY
                                 && target.left < event.clientX
@@ -77,97 +85,94 @@ JsFelem.implement({
                 },
                 function () {
                     if (current) {
-                        var target = tag.getBoundingClientRect();
+                        var target = $tag.getBoundingClientRect();
                         var rect = current.getBoundingClientRect();
 
                         if (rect.left + rect.width / 2 < target.left + target.width / 2) {
                             if (current.nextSibling) {
-                                box[0].insertBefore(tag, current.nextSibling);
+                                $box1.insertBefore($tag, current.nextSibling);
                             } else {
-                                box[0].appendChild(tag);
+                                $box1.appendChild($tag);
                             }
                         } else {
-                            box[0].insertBefore(tag, current);
+                            $box1.insertBefore($tag, current);
                         }
 
                         current = null;
                     }
-                    tag.style.position = '';
-                    tag.style.left = '';
-                    tag.style.top = '';
+                    $tag.style.position = '';
+                    $tag.style.left = '';
+                    $tag.style.top = '';
                 });
         }
 
-        //
-        All.forEach(function (el) {
-            var tag;
-            var isSelected = el.classList.contains('selected');
-            var value = el.getAttribute('data-value');
-            var fn = function (show) {
-                if (isSelected === show) {
-                    return;
+        function KeyboardControl($tag) {
+            $tag.addEventListener('keydown', function (event) {
+                if (event.key === 'ArrowLeft') {
+                    if (this.previousSibling) {
+                        $box1.insertBefore(this, this.previousSibling);
+                    }
+                } else if (event.key === 'ArrowRight') {
+                    if (this.nextSibling) {
+                        $box1.insertBefore(this.nextSibling, this);
+                    }
                 }
-
-                if (typeof tag == 'undefined') {
-                    tag = JsElement('label.input-tag selected', {
-                        html: '<input type="hidden" name="' + name + '[]" value="' + value + '"/>' + el.innerHTML
-                    });
-
-                    dragAndDrop(tag);
-                }
-
-                if (show) {
-                    box[0].appendChild(tag);
-                    el.classList.add('selected');
-                    _count++;
-                } else {
-                    box[0].removeChild(tag);
-                    el.classList.remove('selected');
-                    _count--;
-                }
-
-                checkAll.checked = (_count == _total);
-                isSelected = show;
-            };
-
-            //
-            el.value = value;
-            el.addEventListener('click', function () {
-                fn(el.classList.contains('selected') ? 0 : 1);
+                this.focus();
             });
+        }
 
-            Has[value] = fn;
-        });
+        function ReadOnly($tag) {
+            $tag.querySelector('input')
+                .addEventListener('click', (event) => event.preventDefault());
+        }
 
-        // buttons
-        var toggle = function (force) {
-            var v = ['', 'none', ''];
-
-            box[0].style.display = v[force];
-            box[1].style.display = v[force + 1];
-            btn.forEach(function (el, j) {
-                el.style.display = v[force + (j == 3 ? 0 : 1)];
-            });
+        function dpl(el, status) {
+            el.style.display = ['', 'none', ''][status];
         };
 
-        checkAll.addEventListener('change', function () {
-            var force = checkAll.checked == true ? 1 : 0;
+        //
+        JsTabs(el.firstChild).select();
 
-            All.forEach(function (el) {
-                Has[el.value](force);
+        labels.forEach(function ($label) {
+            const $chk = $label.querySelector('input');
+            const $tag = JsElement('label.btn btn-small', {
+                html: '<input type="checkbox" class="input-hidden" name="' + name + '[]" value="' + $chk.value + '" checked />' + $label.querySelector('span').innerHTML
             });
+
+            DragAndDrop($tag);
+            KeyboardControl($tag);
+            ReadOnly($tag);
+
+            $label.value = function () {
+                return $chk.value
+            };
+            $label.toggle = function (checked) {
+                if (checked) {
+                    $box1.appendChild($tag);
+                } else if ($tag.parentNode) {
+                    $box1.removeChild($tag);
+                }
+
+                $chk.checked = checked;
+                $chkall.checked = (Checks($box0) == total);
+            };
+
+            $chk.addEventListener('change', () => $label.toggle($chk.checked));
         });
 
-        var btn = el.querySelectorAll('div');
-        btn[0].addEventListener('click', function () { toggle(0) });
-        btn[1].addEventListener('click', reset);
-        btn[3].addEventListener('click', function () { toggle(1) });
+        $chkall.addEventListener('change', () => {
+            const force = $chkall.checked;
+            labels.forEach(($label) => $label.toggle(force));
+        });
 
-        toggle(1);
-        reset(selected); // Show selected
+        $actions
+            .querySelector('button')
+            .addEventListener('click', () => reset());
+
+        reset(dft);
 
         // prepare form element
-        el.value = selected;
+        el.value = dft.join(',');
         el.type = 'suite';
         el.reset = reset;
     }

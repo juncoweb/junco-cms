@@ -58,7 +58,7 @@ interface ZoomInterface
     /**
      * Group
      * 
-     * @param array ...$group
+     * @param ZoomGroup ...$group
      * 
      * @return void
      */

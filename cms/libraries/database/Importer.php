@@ -13,7 +13,6 @@ use Exception;
 
 class Importer
 {
-    // vars
     protected array $adapter = [];
 
     // settings
@@ -36,8 +35,10 @@ class Importer
      * Import from file
      *
      * @param string $file the file path
+     * 
+     * @return void
      */
-    public function fromFile($file)
+    public function fromFile($file): void
     {
         if (!is_file($this->abspath . $file)) {
             return;
@@ -57,8 +58,10 @@ class Importer
      *
      * @param string $content
      * @param string $type
+     * 
+     * @return void
      */
-    public function fromContent(string $content, string $type = '')
+    public function fromContent(string $content, string $type = ''): void
     {
         if ($type != 'json') {
             $type = 'sql';

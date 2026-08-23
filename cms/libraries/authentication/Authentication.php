@@ -10,7 +10,7 @@ use Junco\Authentication\GuardInterface;
 class Authentication
 {
     // vars
-    protected $guard;
+    protected GuardInterface $guard;
 
     /**
      * Constructor

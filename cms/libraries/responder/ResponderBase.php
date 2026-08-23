@@ -9,6 +9,7 @@ namespace Junco\Responder;
 
 use Junco\Responder\Contract\ResponderInterface;
 use Junco\Http\Message\HttpFactory;
+use Junco\Mvc\Result;
 use Psr\Http\Message\ResponseInterface;
 
 abstract class ResponderBase implements ResponderInterface
@@ -66,5 +67,19 @@ abstract class ResponderBase implements ResponderInterface
         }
 
         return $buffer;
+    }
+
+    /**
+     * Response
+     * 
+     * @return ResponseInterface
+     */
+    public function responseWithResult(Result $result): ResponseInterface
+    {
+        return $this->responseWithMessage(
+            $result->getMessage(),
+            $result->getStatusCode(),
+            $result->getCode()
+        );
     }
 }

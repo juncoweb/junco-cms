@@ -7,8 +7,7 @@
 
 class LanguageHelper
 {
-    // vars
-    protected $locale = null;
+    protected string $locale;
 
     /**
      * Constructor
@@ -23,35 +22,22 @@ class LanguageHelper
     /**
      * Returns the available languages
      *
-     * @param bool $all It also returns those that are not selected in the configuration.
+     * @param bool $all    It also returns those that are not selected in the configuration.
      *
      * @return array
      */
     public function getAvailables(bool $all = false): array
     {
-        // vars
+        $availables = $all
+            ? $this->scandir($this->locale)
+            : app('language')->getAvailables();
+
         $rows = [];
-
-        if ($all) {
-            $availables = scandir($this->locale);
-            if ($availables) {
-                $availables = array_diff($availables, ['.', '..']);
-            } else {
-                $availables = [];
-            }
-        } else {
-            $availables = app('language')->getAvailables();
-        }
-
         foreach ($availables as $language) {
-            if (is_dir($this->locale . $language)) {
-                $json = $this->locale . $language . '/' . $language . '.json';
-                $json = is_file($json)
-                    ? json_decode(file_get_contents($json), true)
-                    : false;
+            $file = $this->locale . $language . '/' . $language . '.json';
+            $json = $this->getJsonContent($file);
 
-                $rows[$language] = $json['name'] ?? $language;
-            }
+            $rows[$language] = $json['name'] ?? $language;
         }
 
         return $rows;
@@ -61,53 +47,51 @@ class LanguageHelper
      * Try changing the current language
      *
      * @param string $language  The new language.
+     * 
+     * @return bool
      */
-    public function change(string $language)
+    public function change(string $language): bool
     {
         if (!$language) {
-            $language = false;
-        } elseif (!is_dir($this->locale . $language)) {
             return false;
         }
-        $config = config('language');
 
-        switch ((int)$config['language.type']) {
-            case 0:
-                return app('language')->setCookie($language);
-            case 1:
-                return $language;
+        if (!is_dir($this->locale . $language)) {
+            return false;
         }
+
+        if (config('language.type') == 0) { // cookie
+            return app('language')->setCookie($language);
+        }
+
+        return true;
     }
 
     /**
      * Get Locale
+     * 
+     * @return string
      */
-    public function getLocale()
+    public function getLocale(): string
     {
         return $this->locale;
     }
 
     /**
      * Translate
+     * 
+     * @param string $basename
+     * @param array  $translate
+     * @param string $dir
+     * 
+     * @return void
      */
-    public function translate(string $basename, array $translate, string $dir = '')
+    public function translate(string $basename, array $translate, string $dir = ''): void
     {
-        foreach ($translate as $i => $t) {
-            $t = str_replace('\'', '\\\'', html_entity_decode($t, ENT_QUOTES));
-            $translate[$i] = "_t('$t')";
-        }
+        $file   = $this->getTranslateFile($dir ?: SYSTEM_STORAGE . 'translate/', $basename);
+        $buffer = $this->getTranslateContent($translate);
 
-        if (!$dir) {
-            $dir = SYSTEM_STORAGE . 'translate/';
-        }
-
-        is_dir($dir) or mkdir($dir, SYSTEM_MKDIR_MODE, true);
-
-        $file   = sprintf('%s%s.php', $dir, $basename);
-        $buffer = '<?php return ' . implode(' . ' . PHP_EOL, $translate) . '; ?>';
-        $result = file_put_contents($file, $buffer);
-
-        if (false === $result) {
+        if (false === file_put_contents($file, $buffer)) {
             throw new Exception('LanguageHelper::translate() [Error]');
         }
     }
@@ -115,12 +99,79 @@ class LanguageHelper
     /**
      * Refresh
      */
-    public function refresh()
+    public function refresh(): void
     {
-        $files = glob(sprintf('%s*/LC_MESSAGES/*.mo.php', $this->locale));
+        $pattern = sprintf('%s*/LC_MESSAGES/*.mo.php', $this->locale);
+        $files   = glob($pattern);
 
         foreach ($files as $file) {
             unlink($file);
         }
+    }
+
+    /**
+     * Scandir
+     * 
+     * @param string $dir
+     * 
+     * @return array
+     */
+    protected function scandir(string $dir): array
+    {
+        $cdir = is_readable($dir) ? scandir($dir) : false;
+
+        if (!$cdir) {
+            return [];
+        }
+
+        $nodes = array_diff($cdir, ['.', '..']);
+
+        return $nodes;
+    }
+
+    /**
+     * Get
+     * 
+     * @param string $file
+     * 
+     * @return ?array
+     */
+    protected function getJsonContent(string $file): ?array
+    {
+        if (!is_file($file)) {
+            return null;
+        }
+
+        $content = file_get_contents($file);
+
+        if (!$content) {
+            return null;
+        }
+
+        return json_decode($content, true) ?? null;
+    }
+
+    /**
+     * Get
+     */
+    protected function getTranslateContent(array $translate): string
+    {
+        foreach ($translate as $i => $t) {
+            $t = str_replace('\'', '\\\'', html_entity_decode($t, ENT_QUOTES));
+            $translate[$i] = "_t('$t')";
+        }
+
+        return '<?php return ' . implode(' . ' . PHP_EOL, $translate) . '; ?>';
+    }
+
+    /**
+     * Get
+     */
+    protected function getTranslateFile(string $dir, string $basename): string
+    {
+        is_dir($dir)
+            or mkdir($dir, SYSTEM_MKDIR_MODE, true);
+
+        return sprintf('%s%s.php', $dir, $basename);
     }
 }

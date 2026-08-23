@@ -1,13 +1,12 @@
 {
     "title": "Language",
     "description": "",
-    "descriptions": [],
     "groups": [
         "General",
         "System",
-        "Negotiate",
         "Domains"
     ],
+    "descriptions": [],
     "rows": {
         "availables": {
             "label": "Availables",
@@ -25,11 +24,24 @@
             "reload_on_change": 1,
             "status": 1
         },
+        "normalize": {
+            "label": "Normalize",
+            "type": "json",
+            "group": 0,
+            "ordering": 2,
+            "default_value": "",
+            "help": "Converts the input language. The format is an associative array: {&quot;original&quot;:&quot;replacement&quot;}.",
+            "history": [],
+            "autoload": 1,
+            "translate": 0,
+            "reload_on_change": 1,
+            "status": 1
+        },
         "type": {
             "label": "Type",
             "type": "select-integer",
             "group": 0,
-            "ordering": 2,
+            "ordering": 3,
             "default_value": "0",
             "help": "Available only if you select more than one language.",
             "history": [],
@@ -90,36 +102,10 @@
             "reload_on_change": 1,
             "status": 0
         },
-        "negotiate": {
-            "label": "Negotiate",
-            "type": "json",
-            "group": 2,
-            "ordering": 1,
-            "default_value": "",
-            "help": "Try to find the best language for each user. The format is a simple array.",
-            "history": [],
-            "autoload": 1,
-            "translate": 0,
-            "reload_on_change": 1,
-            "status": 1
-        },
-        "normalize": {
-            "label": "Normalize",
-            "type": "json",
-            "group": 2,
-            "ordering": 2,
-            "default_value": "",
-            "help": "Converts the input language. The format is an associative array: {&quot;original&quot;:&quot;replacement&quot;}.",
-            "history": [],
-            "autoload": 1,
-            "translate": 0,
-            "reload_on_change": 1,
-            "status": 1
-        },
         "default_domain": {
             "label": "Default",
             "type": "input-text",
-            "group": 3,
+            "group": 2,
             "ordering": 1,
             "default_value": "default",
             "help": "The domain is ultimately the name of the .po and .mo files that will store the translations.",

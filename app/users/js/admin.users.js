@@ -16,14 +16,14 @@ var Users = (function () {
     }
 
     let _backlist, target;
-    let mo = {
+    const mo = {
         size: 'large',
         onLoad: function () {
             target = this;
             JsForm({ btn: this }).request($U('save'), callback);
         },
     };
-    let _controls = {
+    const _controls = {
         create: {
             modalOptions: mo,
         },

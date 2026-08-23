@@ -7,6 +7,7 @@
 
 namespace Junco\Http\Server;
 
+use Junco\Debugger\HttpThrowableHandler;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -20,17 +21,13 @@ class RequestHandler implements RequestHandlerInterface
 {
     // vars
     protected $middlewares = [];
-    protected $fallbackHandler;
 
     /**
      * Constructor
      * 
      * @param RequestHandlerInterface $fallbackHandler
      */
-    public function __construct(RequestHandlerInterface $fallbackHandler)
-    {
-        $this->fallbackHandler = $fallbackHandler;
-    }
+    public function __construct(protected RequestHandlerInterface $fallbackHandler) {}
 
     /**
      * Add middleware to the queue.
@@ -103,6 +100,6 @@ class RequestHandler implements RequestHandlerInterface
      */
     protected function exceptionHandler(\Throwable $e): ResponseInterface
     {
-        return (new ThrowableHandler)->getResponse($e);
+        return (new HttpThrowableHandler)->getResponse($e);
     }
 }

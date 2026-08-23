@@ -9,7 +9,7 @@ namespace Junco\Extensions\Enum;
 
 enum UpdateStatus
 {
-    case canceled;
+    case cancelled;
     case available;
     case installed;
 
@@ -19,7 +19,7 @@ enum UpdateStatus
     public function title(): string
     {
         return match ($this) {
-            self::canceled  => _t('Canceled'),
+            self::cancelled  => _t('Cancelled'),
             self::available => _t('Available'),
             self::installed => _t('Installed'),
         };
@@ -31,7 +31,7 @@ enum UpdateStatus
     public function color(): string
     {
         return match ($this) {
-            self::canceled  => 'red',
+            self::cancelled  => 'red',
             self::available => 'orange',
             self::installed => 'green',
         };
@@ -61,6 +61,6 @@ enum UpdateStatus
      */
     public static function getActives(): array
     {
-        return [self::canceled, self::installed];
+        return [self::cancelled, self::installed];
     }
 }

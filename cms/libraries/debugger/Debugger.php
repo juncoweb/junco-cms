@@ -5,6 +5,7 @@
  * @author: Junco CMS (tm)
  */
 
+use Junco\Debugger\HttpThrowableHandler;
 use Junco\Debugger\ThrowableHandler;
 
 class Debugger
@@ -43,7 +44,7 @@ class Debugger
 
         // exception handler
         set_exception_handler(function (Throwable $e) {
-            (new ThrowableHandler)->emit($e);
+            (new HttpThrowableHandler)->emit($e); // This fails on the console
         });
     }
 

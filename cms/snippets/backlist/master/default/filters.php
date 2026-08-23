@@ -11,9 +11,10 @@ use Junco\Form\FilterElements;
 class backlist_master_default_filters extends FilterElements implements FiltersInterface
 {
     //
-    protected int    $curOrder = -1;
-    protected int    $idxOrder = 0;
-    protected string $curSort  = '';
+    protected int    $order     = -1;
+    protected int    $idxOrder  = 0;
+    protected string $sortTitle = '';
+    protected string $sortTag   = '';
 
     /**
      * Sort
@@ -25,25 +26,38 @@ class backlist_master_default_filters extends FilterElements implements FiltersI
      */
     public function sort(string $sort = '', int $order = 0): void
     {
-        $this->hidden('sort', $this->curSort = $sort);
-        $this->hidden('order', $this->curOrder = $order);
+        if ($sort === 'asc') {
+            $this->sortTitle = _t('Ascending');
+            $icon = 'fa-solid fa-caret-up';
+        } else {
+            $this->sortTitle = _t('Descending');
+            $icon = 'fa-solid fa-caret-down';
+        }
+
+        $this->order = $order;
+        $this->sortTag = '<i class="' . $icon . ' color-primary" aria-hidden="true"></i>';
+
+        $this->hidden('sort', $sort);
+        $this->hidden('order', $order);
     }
 
     /**
      * Adds filter controls to a table header.
      * 
-     * @param string $header
+     * @param string $label
      * 
      * @return string
      */
     public function sort_h(string $label = ''): string
     {
-        $sort = $this->curOrder === (++$this->idxOrder)
-            ? ' <i class="' . ($this->curSort === 'asc' ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down') . ' color-primary"></i>'
-            : '';
+        $this->idxOrder++;
+        $title = sprintf(_t('Order by %s, %s'), $label, $this->sortTitle);
+        $status = $this->order === $this->idxOrder;
 
-        return '<a href="javascript:void(0)" control-filter="sort" data-value="' . $this->idxOrder . '" class="kl-sort">'
-            .  $label . $sort
+        return '<a href="javascript:void(0)" role="button" control-filter="sort" data-value="' . $this->idxOrder . '" title="' . $title . '" class="kl-sort" aria-pressed="' . ($status ? 'true' : 'false') . '">'
+            . '<span class="visually-hidden">' . $title . '</span>'
+            . '<span aria-hidden="true">' . $label . '</span>'
+            . ($status ? $this->sortTag : '')
             . '</a>';
     }
 

@@ -29,8 +29,8 @@ class AssetsExporter extends AssetsBasic
     /**
      * Export
      *
+     * @param string $basepath
      * @param array  $aliases
-     * @param string $dst_path
      *
      * @return void
      */

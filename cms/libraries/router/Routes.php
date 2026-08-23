@@ -9,7 +9,6 @@ namespace Junco\Router;
 
 use Closure;
 use Error;
-use Router;
 
 /**
  * Routes
@@ -17,13 +16,13 @@ use Router;
 class Routes
 {
     // route
-    protected string  $method                = '';
-    protected array   $queryParams            = [];
-    protected array   $routes                = [];
+    protected string  $method               = '';
+    protected array   $queryParams          = [];
+    protected array   $routes               = [];
     protected array   $arguments            = [];
-    protected int     $counter                = 0;
-    protected string  $route_baseid            = '';
-    protected ?string $current_route_baseid    = null;
+    protected int     $counter              = 0;
+    protected string  $route_baseid         = '';
+    protected ?string $current_route_baseid = null;
 
     /**
      * Constructor
@@ -33,8 +32,8 @@ class Routes
      */
     public function __construct(string $method, array $queryParams)
     {
-        $this->method        = $method;
-        $this->queryParams    = $queryParams;
+        $this->method      = $method;
+        $this->queryParams = $queryParams;
     }
 
     /**
@@ -129,14 +128,14 @@ class Routes
     /**
      * Records a route
      * 
-     * @param string   						$uri
-     * @param string|array|callable|null	$callback
-     * @param string   						$id
+     * @param string                     $uri
+     * @param string|array|callable|null $callback
+     * @param string                     $id
      */
     public function route(
-        string                        $uri,
-        string|array|callable|null    $callback,
-        string                        $id = ''
+        string                     $uri,
+        string|array|callable|null $callback,
+        string                     $id = ''
     ) {
         $this->addRoute($uri, $callback, $id);
     }
@@ -144,16 +143,16 @@ class Routes
     /**
      * Records a route with args
      * 
-     * @param string 						$uri
-     * @param array							$paramNames
-     * @param string|array|callable|null	$callback
-     * @param string						$id
+     * @param string                     $uri
+     * @param array                      $paramNames
+     * @param string|array|callable|null $callback
+     * @param string                     $id
      */
     public function routeWith(
-        string                        $uri,
-        array                        $paramNames,
-        string|array|callable|null    $callback,
-        string                        $id = ''
+        string                     $uri,
+        array                      $paramNames,
+        string|array|callable|null $callback,
+        string                     $id = ''
     ) {
         $this->addRoute($uri, $callback, $id, $paramNames);
     }
@@ -161,16 +160,16 @@ class Routes
     /**
      * Adds a routing record
      * 
-     * @param string 						$uri
-     * @param string|array|callable|null	$callback
-     * @param string						$id
-     * @param array							$paramNames
+     * @param string                     $uri
+     * @param string|array|callable|null $callback
+     * @param string                     $id
+     * @param array                      $paramNames
      */
     protected function addRoute(
-        string                        $uri,
-        string|array|callable|null    $callback,
-        string                        $id,
-        array                        $paramNames = []
+        string                     $uri,
+        string|array|callable|null $callback,
+        string                     $id,
+        array                      $paramNames = []
     ) {
         $uri    = explode(' ', trim($uri), 2);
         $method = '';
@@ -191,10 +190,10 @@ class Routes
         }
 
         $this->routes[$route_id] = [
-            'method'        => $method ? explode('|', $method) : ['GET'],
-            'uri'            => $uri,
-            'paramNames'    => $paramNames,
-            'callback'        => $callback,
+            'method'     => $method ? explode('|', $method) : ['GET'],
+            'uri'        => $uri,
+            'paramNames' => $paramNames,
+            'callback'   => $callback,
         ];
     }
 
@@ -218,24 +217,27 @@ class Routes
             $replaces = [];
 
             foreach ($matches as $i => $match) {
-                $var_find    = $match[0];
+                $var_find   = $match[0];
                 $var_prefix = $match['prefix'] ?? '';
-                $var_name    = $match['name'];
-                $var_type    = $match['type'] ?? '';
-                $optional    = $match['optional'] ?? '';
-                $var_key     = "var{$i}";
+                $var_name   = $match['name'];
+                $var_type   = $match['type'] ?? '';
+                $optional   = $match['optional'] ?? '';
+                $var_key    = "var{$i}";
 
                 switch ($var_type) {
                     case 'id':
                         $var_replace = '[0-9]+';
                         break;
+
                     case 'int':
                         $var_replace = '-?[0-9]+';
                         break;
+
                     default:
                     case 'string':
                         $var_replace = '[^/]+?';
                         break;
+
                     case '*':
                         $var_replace = '.+?';
                         break;

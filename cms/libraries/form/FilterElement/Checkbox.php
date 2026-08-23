@@ -27,15 +27,14 @@ class Checkbox extends FilterElement
             $attr['label'] = '<i class="' . $attr['icon'] . '" title="' . ($attr['label'] ?? '') . '"></i>';
         }
 
-        $this->html = '<label class="btn btn-press" control-felem="press">'
+        $this->html = '<label class="btn">'
             . '<input'
             .  ' type="checkbox" name="' . $name . '"'
             .  ' value="1"'
             .  ' control-felem="submit"'
             .  ' data-value="change"'
-            .  ' class="input-checkbox mr-2"'
+            .  ' class="input-checkbox mr-2' . (empty($attr['hidden']) ? '' : ' input-hidden') . '"'
             .   ($checked ? ' checked' : '')
-            .   (empty($attr['hidden']) ? '' : ' style="display: none;"')
             . ' />'
             . '<span>' . ($attr['label'] ?? '?') . '</span>'
             . '</label>';

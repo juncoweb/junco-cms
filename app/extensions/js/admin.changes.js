@@ -17,7 +17,7 @@
         }
 
         let target_2;
-        let mo = {
+        const mo = {
             size: 'large',
             target: target,
             onLoad: function () {
@@ -26,7 +26,7 @@
             },
         };
 
-        let _backlist = Backlist('changes');
+        const _backlist = Backlist('changes');
         _backlist.url($U)
             .controls({
                 create: {

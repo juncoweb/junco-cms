@@ -232,43 +232,47 @@
   clear: both;
 }
 
-/* --- suite ----------------------------------------------------- */
+/* --- suite --- */
 .fe-suite {
-  width: 100%;
+  --separator: var(--spacing-1);
+}
+.fe-suite .btn-tablist {
+  text-align: right;
+}
+.fe-suite .btn-tabpanel-group {
+  padding: var(--separator);
   border-width: var(--border-width);
-  border-style: dashed;
+  border-style: var(--border-style);
   border-color: var(--regular-border-color);
+  border-radius: var(--rounded-md);
 }
-.fe-suite ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.fe-suite .btn-tabpanel-group > div {
+  min-height: var(--font-size-base);
 }
-.fe-suite > ul {
-  display: table;
-  width: 100%;
-  vertical-align: top;
-  table-layout: fixed;
-}
-.fe-suite > ul > li {
-  display: table-cell;
+.fe-suite .box {
   position: relative;
-  vertical-align: top;
-  padding: 2px;
   white-space: pre-wrap;
+  top: calc(-1 * var(--separator));
+  left: calc(-1 * var(--separator));
 }
-.fe-suite > ul > li:last-child {
-  width: 30px;
+.fe-suite .box label {
+  margin-top: var(--separator);
+  margin-left: var(--separator);
 }
-.fe-suite > ul > li:first-child label {
+.fe-suite .box-group {
+  display: flex;
+  gap: var(--spacing-2);
+}
+.fe-suite .box-group .box {
+  flex: auto;
+}
+.fe-suite .box-group .actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+.fe-suite .box-1 label {
   cursor: move !important;
-}
-.fe-suite > ul > li div {
-  margin: 0 5px 5px;
-  display: block;
-  width: 20px;
-  height: 20px;
-  text-align: center;
 }
 
 /* --- Tags --------------------------------------------------*/

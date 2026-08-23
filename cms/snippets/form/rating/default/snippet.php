@@ -5,7 +5,7 @@
  * @author: Junco CMS (tm)
  */
 
-class rating_utils_default_snippet
+class rating_form_default_snippet
 {
     /**
      * Render

@@ -5,7 +5,6 @@
  * @author: Junco CMS (tm)
  */
 
-use Junco\Mvc\Result;
 use Junco\Responder\Contract\AjaxTextInterface;
 use Junco\Responder\ResponderBase;
 use Psr\Http\Message\ResponseInterface;
@@ -30,20 +29,14 @@ class responder_master_default_ajax_text extends ResponderBase implements AjaxTe
     /**
      * Creates a simplified response with a message.
      * 
-     * @param Result|string $message
-     * @param int $statusCode
-     * @param int $code
+     * @param string $message
+     * @param int    $statusCode
+     * @param int    $code
      * 
      * @return ResponseInterface
      */
-    public function responseWithMessage(Result|string $message = '', int $statusCode = 0, int $code = 0): ResponseInterface
+    public function responseWithMessage(string $message = '', int $statusCode = 0, int $code = 0): ResponseInterface
     {
-        if ($message instanceof Result) {
-            $statusCode = $message->getStatusCode();
-            $code       = $message->getCode();
-            $message    = $message->getMessage();
-        }
-
         if ($code) {
             $message = "$code - $message";
         }

@@ -7,8 +7,7 @@
 
 class Date extends DateTime
 {
-    // vars
-    private static $yesterday = null;
+    private static ?int $yesterday = null;
     private static ?DateTimeZone $utc_tz = null;
     private static ?DateTimeZone $local_tz = null;
 
@@ -98,31 +97,20 @@ class Date extends DateTime
 
         foreach (['y', 'm', 'd', 'h', 'i', 's'] as $i) {
             $value = $interval->$i;
+
             if ($count || $value) {
                 if (++$count > $granularity) {
                     break;
                 }
 
-                switch ($i) {
-                    case 'y':
-                        $text = _nt('%d year', '%d years', $value);
-                        break;
-                    case 'm':
-                        $text = _nt('%d month', '%d months', $value);
-                        break;
-                    case 'd':
-                        $text = _nt('%d day', '%d days', $value);
-                        break;
-                    case 'h':
-                        $text = _nt('%d hour', '%d hours', $value);
-                        break;
-                    case 'i':
-                        $text = _nt('%d minute', '%d minutes', $value);
-                        break;
-                    case 's':
-                        $text = _nt('%d second', '%d seconds', $value);
-                        break;
-                }
+                $text = match ($i) {
+                    'y' => _nt('%d year', '%d years', $value),
+                    'm' => _nt('%d month', '%d months', $value),
+                    'd' => _nt('%d day', '%d days', $value),
+                    'h' => _nt('%d hour', '%d hours', $value),
+                    'i' => _nt('%d minute', '%d minutes', $value),
+                    's' => _nt('%d second', '%d seconds', $value),
+                };
 
                 $output[] = sprintf($text, $value);
             }

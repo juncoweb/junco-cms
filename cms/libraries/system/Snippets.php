@@ -7,7 +7,6 @@
 
 class Snippets
 {
-    // vars
     protected array  $defaults;
     protected string $index;
 

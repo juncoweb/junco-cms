@@ -7,7 +7,6 @@
 
 class ZoomGroup
 {
-    // vars
     protected string $label = '';
     protected string $content = '';
 
@@ -47,7 +46,7 @@ class ZoomGroup
     /**
      * Set
      */
-    public function setLink(?string $href, $attr = []): self
+    public function setLink(?string $href, array $attr = []): self
     {
         $attr = array_merge([
             'icon'   => 'fa-solid fa-external-link',

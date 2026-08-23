@@ -12,9 +12,9 @@ class Input extends FilterElement
     /**
      * Constructor
      *
-     * @param string  $name
-     * @param ?string $label
-     * @param array	  $attr
+     * @param string $name
+     * @param string $value
+     * @param array	 $attr
      */
     public function __construct(
         protected string $name,

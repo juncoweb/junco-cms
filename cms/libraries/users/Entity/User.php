@@ -13,7 +13,7 @@ class User
 {
     protected int        $id          = 0;
     protected string     $username    = '';
-    protected string     $fullname    = '';
+    protected string     $name        = '';
     protected string     $email       = '';
     protected string     $password    = '';
     protected UserStatus $status      = UserStatus::inactive;
@@ -25,17 +25,17 @@ class User
     public function __construct(
         int    $id,
         string $username,
-        string $fullname,
+        string $name,
         string $email,
         string $password,
         UserStatus|string $status
     ) {
         $this->id       = $id;
-        $this->username = $username;
-        $this->fullname = $fullname;
-        $this->email    = $email;
-        $this->password = $password;
-        $this->status   = is_string($status)
+        $this->username  = $username;
+        $this->name      = $name;
+        $this->email     = $email;
+        $this->password  = $password;
+        $this->status    = is_string($status)
             ? UserStatus::get($status)
             : $status;
     }
@@ -53,7 +53,7 @@ class User
      */
     public function getName(): string
     {
-        return $this->fullname;
+        return $this->name;
     }
 
     /**
@@ -73,6 +73,15 @@ class User
     }
 
     /**
+     * Set
+     */
+    public function setStatus(UserStatus $status): self
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    /**
      * Get
      */
     public function getStatus(): UserStatus
@@ -81,19 +90,27 @@ class User
     }
 
     /**
-     * Verify
-     */
-    public function verifyPassword(string $password): bool
-    {
-        return password_verify($password, $this->password);
-    }
-
-    /**
      * Is
      */
     public function isActive(): bool
     {
         return $this->status === UserStatus::active;
+    }
+
+    /**
+     * Is
+     */
+    public function isAutoSignUp(): bool
+    {
+        return $this->status === UserStatus::autosignup;
+    }
+
+    /**
+     * Verify
+     */
+    public function verifyPassword(string $password): bool
+    {
+        return password_verify($password, $this->password);
     }
 
     /**

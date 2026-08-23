@@ -13,16 +13,16 @@ use EmailException;
 class SmtpTransport extends TransportAbstract
 {
     // smtp
-    public    $smtp_host        = null;
-    public    $smtp_port        = null;
-    public    $smtp_timeout        = null;
+    public string $smtp_host;
+    public int    $smtp_port;
+    public int    $smtp_timeout;
     //
-    public    $smtp_secure        = null;
-    public    $smtp_auth        = null;
-    public    $smtp_user        = null;
-    public    $smtp_pwd            = null;
+    public string $smtp_secure;
+    public bool   $smtp_auth;
+    public string $smtp_user;
+    public string $smtp_pwd;
     //
-    protected $smtp_resource    = null;
+    protected $smtp_resource = null;
 
     /**
      * Constructor
@@ -32,13 +32,13 @@ class SmtpTransport extends TransportAbstract
         $config = config('email');
 
         // smtp
-        $this->smtp_host        = $config['email.smtp_host'];
-        $this->smtp_port        = $config['email.smtp_port'];
-        $this->smtp_timeout        = $config['email.smtp_timeout'];
-        $this->smtp_secure        = $config['email.smtp_secure'];
-        $this->smtp_auth        = $config['email.smtp_auth'];
-        $this->smtp_user        = $config['email.smtp_user'];
-        $this->smtp_pwd            = $config['email.smtp_pwd'];
+        $this->smtp_host    = $config['email.smtp_host'];
+        $this->smtp_port    = $config['email.smtp_port'];
+        $this->smtp_timeout = $config['email.smtp_timeout'];
+        $this->smtp_secure  = $config['email.smtp_secure'];
+        $this->smtp_auth    = $config['email.smtp_auth'];
+        $this->smtp_user    = $config['email.smtp_user'];
+        $this->smtp_pwd     = $config['email.smtp_pwd'];
     }
 
     /**

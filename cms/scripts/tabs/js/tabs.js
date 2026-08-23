@@ -42,35 +42,33 @@ function JsTabs(tablist, options) {
     }
 
     let handle, selected;
-    let tabs = getChildNodes(tablist, 'LI');
-    let panels = getChildNodes(tabpanel, 'DIV');
-    let total = tabs.length;
-    let lastTab = total - 1;
+    const tabs = getChildNodes(tablist, 'LI');
+    const panels = getChildNodes(tabpanel, 'DIV');
+    const total = tabs.length;
+    const lastTab = total - 1;
 
     // props & events
-    tabs.forEach(function (el, index) {
-        el.setAttribute('aria-setsize', total);
-        el.setAttribute('aria-posinset', index + 1);
-        el.setAttribute('tabindex', 0);
-        el.addEventListener('click', function (event) {
+    tabs.forEach(function ($tab, index) {
+        $tab.setAttribute('aria-setsize', total);
+        $tab.setAttribute('aria-posinset', index + 1);
+        $tab.setAttribute('tabindex', 0);
+        $tab.addEventListener('click', (event) => {
             event.preventDefault();
             that.select(index);
         });
-        el.addEventListener('keydown', function (event) {
+        $tab.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
                 document.activeElement.click();
             } else if (event.key === 'ArrowLeft') {
-                that.prev();
-                tabs[selected].focus();
+                that.prev().focus();
             } else if (event.key === 'ArrowRight') {
-                that.next();
-                tabs[selected].focus();
+                that.next().focus();
             }
         });
     });
 
 
-    let that = {
+    const that = {
         /**
          * select
          *
@@ -87,15 +85,14 @@ function JsTabs(tablist, options) {
             // make the tablist changes
             if (index != selected) {
                 selected = index;
-                let status;
 
-                for (var i = 0; i < total; i++) {
+                for (let status, i = 0; i < total; i++) {
                     status = (i == index);
 
                     tabs[i].setAttribute('aria-selected', status);
                     tabs[i].setAttribute('tabindex', status ? 0 : -1);
-                    tabs[i].className =
-                        panels[i].className = (status ? 'selected' : '');
+                    tabs[i].classList.toggle('selected', status);
+                    panels[i].classList.toggle('selected', status);
 
                     if (options.onSelect) {
                         options.onSelect.call(that, i, status);
@@ -104,17 +101,23 @@ function JsTabs(tablist, options) {
                 if (handle) {
                     clearTimeout(handle);
                 }
-                handle = setTimeout(function () { panels[index].classList.add('active') }, 10);
+                handle = setTimeout(() => panels[index].classList.add('active'), 10);
             }
+
             return this;
         },
 
         prev: function () {
-            this.select(selected - 1);
+            return this.select(selected - 1);
         },
 
         next: function () {
-            this.select(selected + 1);
+            return this.select(selected + 1);
+        },
+
+        focus: function () {
+            tabs[selected].focus();
+            return this;
         },
 
         selectedTabNumber: function () {

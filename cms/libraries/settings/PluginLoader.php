@@ -54,7 +54,9 @@ final class PluginLoader
     public function setHelp(string $name, string $message = '', string ...$values): void
     {
         if (!$message) {
-            $message = _t($this->rows[$name]['help'] ?? '?');
+            $message = empty($this->rows[$name]['help'])
+                ? '?'
+                : _t($this->rows[$name]['help']);
         }
 
         if ($values) {

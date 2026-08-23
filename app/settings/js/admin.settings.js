@@ -109,7 +109,7 @@ let Settings = (function () {
     let target, _form, $restore;
     let _goback = history && history.pushState;
     let $box = document.querySelector('#settings-box');
-    let _controls = {
+    const _controls = {
         refresh: function () {
             Load();
         },
@@ -154,7 +154,7 @@ let Settings = (function () {
                                 JsForm().request($U('update'), callback);
                             },
                         },
-                    }, false, 'modal');
+                    });
                 },
             },
         },
@@ -325,7 +325,7 @@ function JsonFormElement($btn) {
 
 (function () {
     let target, current;
-    let _controls = {
+    const _controls = {
         remove: function (el) {
             (FormRow(el) || FormFieldset(el)).remove();
         },

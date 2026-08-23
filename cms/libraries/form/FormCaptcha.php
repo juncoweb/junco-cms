@@ -8,9 +8,9 @@
 class FormCaptcha
 {
     /**
-     * Verify
+     * Get
      */
-    public static function get(string $captcha)
+    public static function get(string $captcha): array
     {
         $plugin = Plugin::get('captcha', 'load', $captcha);
 

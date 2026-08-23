@@ -16,9 +16,9 @@ use Psr\Http\Message\StreamInterface;
 class Message implements MessageInterface
 {
     // vars
-    protected string $version        = '1.1';
-    protected array  $headers        = [];
-    protected array  $headerNames    = [];
+    protected string $version     = '1.1';
+    protected array  $headers     = [];
+    protected array  $headerNames = [];
     protected StreamInterface $stream;
 
     /**
@@ -162,12 +162,12 @@ class Message implements MessageInterface
         $this->verifyHeaderName($name);
 
         $new        = clone $this;
-        $value        = $new->filterHeaderValue($value, $name);
+        $value      = $new->filterHeaderValue($value, $name);
         $normalized = strtolower($name);
 
         if ($new->hasHeader($normalized)) {
-            $original                    = $new->headerNames[$normalized];
-            $new->headers[$original]    = array_merge($this->headers[$original], $value);
+            $original                      = $new->headerNames[$normalized];
+            $new->headers[$original]       = array_merge($this->headers[$original], $value);
         } else {
             $new->headers[$name]           = $value;
             $new->headerNames[$normalized] = $name;
@@ -256,8 +256,8 @@ class Message implements MessageInterface
                 throw new \InvalidArgumentException(sprintf('Cannot add duplicate header «%s»', $name));
             }
 
-            $this->headerNames[$normalized]    = $name;
-            $this->headers[$name]            = $this->filterHeaderValue($value, $name);
+            $this->headerNames[$normalized] = $name;
+            $this->headers[$name]           = $this->filterHeaderValue($value, $name);
         }
     }
 

@@ -8,7 +8,7 @@
 class ContactReport
 {
     // vars
-    protected $db;
+    protected Database $db;
     protected string $monthFormat = 'm/Y';
 
     /**

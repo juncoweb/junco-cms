@@ -172,7 +172,7 @@ interface FormElementsInterface
     /**
      * Group
      * 
-     * @param FormElementInterface[]
+     * @param FormElementInterface ...$elements
      * 
      * @return FormElementInterface
      */

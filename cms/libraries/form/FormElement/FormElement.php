@@ -153,11 +153,15 @@ abstract class FormElement implements FormElementInterface
             $attr['type'] ??= 'button';
         }
 
+        if (empty($attr['class'])) {
+            $attr['class'] = 'btn-inline';
+        }
+
         $tagName = isset($attr['href'])
             ? 'a'
             : (isset($attr['type']) ? 'button' : 'div');
 
-        return '<' . $tagName . $this->attr(['class' => 'btn-inline'], $attr) . '>' . $label . '</' . $tagName . '>';
+        return '<' . $tagName . $this->attr($attr) . '>' . $label . '</' . $tagName . '>';
     }
 
     /**
@@ -172,12 +176,12 @@ abstract class FormElement implements FormElementInterface
         unset($attr['checkbox']);
 
         $label    = '';
-        $hidden   = false;
+        $class    = [];
         $icon     = $this->extract($attr, 'icon');
         $icon_alt = $this->extract($attr, 'icon_alt');
 
         if ($icon) {
-            $hidden = true;
+            $class['class'] = 'input-hidden';
 
             if ($icon_alt) {
                 $label .= '<i class="' . $icon . ' d-on-not-checked" aria-hidden="true"></i>';
@@ -191,8 +195,8 @@ abstract class FormElement implements FormElementInterface
             $label .= '<span class="visually-hidden">' . $attr['title'] . '</span>';
         }
 
-        return '<label class="btn-inline' . ($hidden ? ' checkbox-hidden' : '') . '">'
-            . '<input type="checkbox"' . $this->attr(['class' => 'input-checkbox'], $attr)  . '>'
+        return '<label class="btn-inline">'
+            . '<input type="checkbox"' . $this->attr($class, $attr)  . '>'
             . $label
             . '</label>';
     }
@@ -220,7 +224,7 @@ abstract class FormElement implements FormElementInterface
     /**
      * Merge attributes
      */
-    protected function attr(array $a, array $b): string
+    protected function attr(array $a, array $b = []): string
     {
         if ($b) {
             if (isset($b['class'])) {

@@ -10,7 +10,7 @@ namespace Junco\Jobs;
 interface JobInterface
 {
     /**
-     * Execute the job.
+     * Execute the job
      */
     public function handle(): bool;
 }

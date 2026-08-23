@@ -1,5 +1,5 @@
 
-/* --- Assets ------------------------------------------ */
+/* --- Assets --- */
 let AdminAssets = (function () {
     function $U(task) {
         return JsUrl('admin/assets/' + task, false);
@@ -16,7 +16,7 @@ let AdminAssets = (function () {
     }
 
     let _backlist, target;
-    let mo = {
+    const mo = {
         size: 'large',
         onLoad: function () {
             target = this;
@@ -32,7 +32,7 @@ let AdminAssets = (function () {
         },
     };
 
-    let _controls = {
+    const _controls = {
         create: {
             modalOptions: mo,
         },

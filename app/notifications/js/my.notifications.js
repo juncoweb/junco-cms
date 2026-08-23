@@ -1,5 +1,5 @@
 
-/* --- Notifications ------------------------------------------ */
+/* --- Notifications --- */
 let MyNotifications = (function () {
     function $U(task) {
         return JsUrl('my/notifications/' + task);
@@ -16,7 +16,7 @@ let MyNotifications = (function () {
     }
 
     let _backlist, target;
-    let _controls = {
+    const _controls = {
         status: {
             onSuccess: callback,
         },

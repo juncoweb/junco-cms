@@ -42,7 +42,7 @@ $html = '<div class="dialog dialog-success">'
 // template
 $tpl = Template::get('install');
 $tpl->options(['hash' => 'finish']);
-$tpl->title(sprintf(_t('Thank you %s for choosing us!'), $fullname));
+$tpl->title(sprintf(_t('Thank you %s for choosing us!'), $user_name));
 $tpl->content($html);
 
 return $tpl->response();

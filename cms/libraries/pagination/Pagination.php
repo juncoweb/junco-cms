@@ -27,11 +27,11 @@ class Pagination
     /**
      * Performs the paging of an array
      * 
-     * @param array  $rows
+     * @param array $rows
      * 
      * @return void
      */
-    public function slice($rows): void
+    public function slice(array $rows): void
     {
         $this->num_rows = count($rows);
         $this->calculate();

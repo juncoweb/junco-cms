@@ -28,7 +28,7 @@ if ($rows) {
 }
 //
 $bls->check();
-$bls->column(':fullname')
+$bls->column(':user_name')
     ->setLabel(_t('Name'), $filters);
 
 $bls->column(':roles')

@@ -31,7 +31,7 @@ class Signup
      * Signup
      */
     public function signup(
-        string $fullname,
+        string $user_name,
         string $username,
         string $email,
         string $password,
@@ -51,7 +51,7 @@ class Signup
             throw new UserValidationException(_t('Passwords do not match.'));
         }
 
-        if (!$fullname) {
+        if (!$user_name) {
             throw new UserValidationException(_t('Please, fill in the name.'));
         }
 
@@ -75,14 +75,14 @@ class Signup
         if ($user_id > 0) {
             $this->db->exec("
 			UPDATE `#__users` 
-			SET fullname = ?, username = ?, password = ?, status = ?
-			WHERE id = ?", $fullname, $username, $password, UserStatus::active, $user_id);
+			SET user_name = ?, user_username = ?, user_password = ?, status = ?
+			WHERE id = ?", $user_name, $username, $password, UserStatus::active, $user_id);
 
             return true;
         }
 
         // query - insert
-        $this->db->exec("INSERT INTO `#__users` (fullname, username, email, password) VALUES (?, ?, ?, ?)", $fullname, $username, $email, $password);
+        $this->db->exec("INSERT INTO `#__users` (user_name, user_username, user_email, user_password) VALUES (?, ?, ?, ?)", $user_name, $username, $email, $password);
         $user_id = $this->db->lastInsertId();
 
         // query - role
@@ -90,7 +90,7 @@ class Signup
 
         // token
         $token = UserActivityToken::generate(ActivityType::activation, $user_id, $email);
-        $result = (new UsysToken)->send($token, $fullname);
+        $result = (new UsysToken)->send($token, $user_name);
 
         if (!$result) {
             throw new UserValidationException(_t('Your account has been created correctly. However, an error occurred when sending the activation message.'));

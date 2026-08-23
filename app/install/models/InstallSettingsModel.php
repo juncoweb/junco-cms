@@ -32,9 +32,9 @@ class InstallSettingsModel extends Model
         // query
         $values = $this->db->query("
 		SELECT
-		 fullname ,
-		 username ,
-		 email
+		 user_name ,
+		 user_username ,
+		 user_email
 		FROM `#__users`
 		WHERE id = ?", $this->user_id)->fetch() ?: [];
 
@@ -64,10 +64,10 @@ class InstallSettingsModel extends Model
             'site_baseurl' => 'text',
             'site_email'   => 'email',
             //
-            'fullname'     => 'text',
-            'username'     => 'text',
-            'password'     => '',
-            'email'        => 'email',
+            'user_name'      => 'text',
+            'user_username' => 'text',
+            'user_password' => '',
+            'user_email'    => 'email',
         ]);
 
         // slice
@@ -88,14 +88,14 @@ class InstallSettingsModel extends Model
         }
 
         //
-        if (!$data['fullname']) {
+        if (!$data['user_name']) {
             return $this->unprocessable(_t('Please, fill in the name.'));
         }
 
-        UserHelper::validateUsername($data['username']);
-        UserHelper::validatePassword($data['password']);
+        UserHelper::validateUsername($data['user_username']);
+        UserHelper::validatePassword($data['user_password']);
 
-        if (!$data['email']) {
+        if (!$data['user_email']) {
             return $this->unprocessable(_t('Please, fill in with a valid email.'));
         }
 
@@ -108,7 +108,7 @@ class InstallSettingsModel extends Model
         ]);
 
         // query: admin
-        $data['password'] = UserHelper::hash($data['password']);
+        $data['user_password'] = UserHelper::hash($data['user_password']);
 
         $role_id = config('install.admininstrator_role_id') ?: 1;
         $label_id = L_SYSTEM_ADMIN;

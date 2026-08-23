@@ -1,5 +1,5 @@
 
-/* --- JobsFailures ------------------------------------------ */
+/* --- JobsFailures --- */
 let JobsFailures = (function () {
     function $U(task) {
         return JsUrl('admin/jobs.failures/' + task);
@@ -16,7 +16,7 @@ let JobsFailures = (function () {
     }
 
     let _backlist, target;
-    let _controls = {
+    const _controls = {
         show: {
             numRows: '1',
             modalOptions: {

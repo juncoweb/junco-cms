@@ -17,11 +17,11 @@ class UsysToken
      * Send
      *
      * @param UserActivityToken  $token
-     * @param string     $fullname  The user fullname.
+     * @param string     $user_name  The user user_name.
      * 
      * @return bool
      */
-    public function send(UserActivityToken $token, string $fullname): bool
+    public function send(UserActivityToken $token, string $user_name): bool
     {
         switch ($token->getType()) {
             case ActivityType::signup:
@@ -52,7 +52,7 @@ class UsysToken
 
         // message
         $message = Email::getMessage();
-        $message->line(_t('Hello, %s'), $fullname);
+        $message->line(_t('Hello, %s'), $user_name);
         $message->line($paragraph);
         $message->codelink($this->getUrl($token));
         $message->legal();

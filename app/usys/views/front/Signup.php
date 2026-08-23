@@ -9,21 +9,21 @@
 if (!empty($error)) {
     $html = '<p class="dialog dialog-warning">' . _t('This option is not available.') . '</p>';
 } else {
-    $email_opt = ['type' => 'email'];
+    $email_attr = ['type' => 'email'];
 
     // form
     $form = Form::get();
     if ($user) {
         $form->setValues($user);
         $form->hidden('token', $token);
-        $email_opt['readonly'] = 'readonly';
+        $email_attr['readonly'] = 'readonly';
     }
 
-    $form->input('fullname')->setLabel(_t('Name'));
-    $form->input('username')->setLabel(_t('Username'));
-    $form->input('password', ['type' => 'password'])->setLabel(_t('Password'));
+    $form->input('user_name')->setLabel(_t('Name'));
+    $form->input('user_username')->setLabel(_t('Username'));
+    $form->input('user_password', ['type' => 'password'])->setLabel(_t('Password'));
     $form->input('verified', ['type' => 'password'])->setLabel(_t('Password Confirmation'));
-    $form->input('email', $email_opt)->setLabel(_t('Email'));
+    $form->input('user_email', $email_attr)->setLabel(_t('Email'));
 
     if ($legal_url) {
         $form->checkbox('legal')->setLabel(sprintf(

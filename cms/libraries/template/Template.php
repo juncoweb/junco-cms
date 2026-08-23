@@ -5,7 +5,6 @@
  * @author: Junco CMS (tm)
  */
 
-use Junco\Mvc\Result;
 use Junco\Responder\ResponderBase;
 use Psr\Http\Message\ResponseInterface;
 
@@ -419,20 +418,14 @@ class Template extends ResponderBase implements TemplateInterface
     /**
      * Creates a simplified response with a message.
      * 
-     * @param Result|string $message
-     * @param int $statusCode
-     * @param int $code
+     * @param string $message
+     * @param int    $statusCode
+     * @param int    $code
      * 
      * @return ResponseInterface
      */
-    public function responseWithMessage(Result|string $message = '', int $statusCode = 0, int $code = 0): ResponseInterface
+    public function responseWithMessage(string $message = '', int $statusCode = 0, int $code = 0): ResponseInterface
     {
-        if ($message instanceof Result) {
-            $statusCode = $message->getStatusCode();
-            $code       = $message->getCode();
-            $message    = $message->getMessage();
-        }
-
         // 401 Unauthorized - The user must login. I display the login page in the current template.
         // 403 Forbidden - The user has insufficient permissions.
         // 404 Not Found - I display the message in the current template.

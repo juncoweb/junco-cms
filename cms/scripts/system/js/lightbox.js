@@ -7,11 +7,19 @@ function Lightbox(options) {
         hideWithButton: true,
         hideWithOverlay: true,
         valignCenter: true,
+        onShow: null,
+        onHide: null,
+        onToggle: null
     }, options);
 
     const body = document.body;
     const overlay = body.appendChild(JsElement('div.lightbox', { html: '<div></div>' }));
     const box = overlay.firstChild;
+    const _focus = JsFocus(overlay, {
+        onEscape: function () {
+            that.hide();
+        }
+    });
     const that = {
         remove: function () {
             overlay.parentNode.removeChild(overlay);
@@ -21,6 +29,14 @@ function Lightbox(options) {
         toggle: function (force) {
             const status = body.classList.toggle('lightbox-fixed', force);
             overlay.style.display = status ? '' : 'none';
+            _focus.toggle(status);
+
+            if (status) {
+                options.onShow?.call(that);
+            } else {
+                options.onHide?.call(that);
+            }
+            options.onHide?.call(that, status);
 
             return status;
         },
@@ -55,7 +71,10 @@ function Lightbox(options) {
 
     if (options.hideWithButton) {
         overlay
-            .appendChild(JsElement('i.fa-solid fa-xmark lightbox-cross'))
+            .appendChild(JsElement('button.lightbox-cross btn-inline', {
+                html: '<i class="fa-solid fa-xmark" aria-hidden="true"></i>',
+                'aria-label': 'Close'
+            }))
             .addEventListener('click', function (event) {
                 event.stopPropagation();
                 that.hide();

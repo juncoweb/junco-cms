@@ -14,7 +14,6 @@ use Throwable;
 
 class Jobs
 {
-    // vars
     protected DriverInterface $driver;
 
     /**
@@ -101,11 +100,11 @@ class Jobs
      */
     protected function errorHandler(Throwable $error, array $data): void
     {
-        $job_id            = $data['id'] ?? 0;
-        $job_uuid        = $data['job_uuid'] ?? '';
-        $job_queue        = $data['job_queue'];
-        $job_payload    = $data['job_payload'];
-        $job_error        = $error->__toString();
+        $job_id      = $data['id'] ?? 0;
+        $job_uuid    = $data['job_uuid'] ?? '';
+        $job_queue   = $data['job_queue'];
+        $job_payload = $data['job_payload'];
+        $job_error   = $error->__toString();
 
         db()->exec("
 		INSERT INTO `#__jobs_failures` (job_id, job_uuid, job_queue, job_payload, job_error)

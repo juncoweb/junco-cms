@@ -6,7 +6,7 @@ let Webstore = (function () {
     }
 
     let _backlist, target;
-    let _controls = {
+    const _controls = {
         confirm_download: {
             modalOptions: {
                 //size: 'medium',

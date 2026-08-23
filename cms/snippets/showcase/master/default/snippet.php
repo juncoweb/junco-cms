@@ -66,7 +66,7 @@ class showcase_master_default_snippet extends ShowcaseBase
 
         $line = [];
         if ($data['avg_ratings'] !== null) {
-            $line[] = snippet('rating', 'utils')->render($data['avg_ratings'], ['color' => 'warning']);
+            $line[] = snippet('rating', 'form')->render($data['avg_ratings'], ['color' => 'warning']);
         }
 
         if ($data['num_visits'] > -1) {

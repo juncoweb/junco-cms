@@ -19,7 +19,7 @@ class AuthenticationMiddleware implements MiddlewareInterface
     /**
      * Constructor
      */
-    public function __construct(...$labels)
+    public function __construct(mixed ...$labels)
     {
         foreach ($labels as $label_id) {
             if (is_numeric($label_id)) {

@@ -1,4 +1,4 @@
-/* --- Rating ---------------------------------------- */
+/* --- Rating --- */
 function JsRating(box, options) {
     function getElements(box) {
         if (typeof box == 'string') {
@@ -117,7 +117,7 @@ function JsRating(box, options) {
     });
 }
 
-/* --- detail --- */
+/* --- Detail --- */
 function JsRatingDetail(el, options) {
     options = Object.assign({
         value: undefined,
@@ -156,7 +156,7 @@ function JsRatingDetail(el, options) {
     });
 }
 
-/* --- felem --- */
+/* --- form element --- */
 function JsRatingHolder() {
     let el, values, dftValue;
     return {

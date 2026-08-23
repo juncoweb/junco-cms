@@ -1,12 +1,4 @@
 
-Database v5.2
+Form v2.5
 =======================================================
-- The plugins were improved.
-
-Router v4.6
-=======================================================
-- The plugins were improved.
-
-Users v0.2
-=======================================================
-- The plugins were improved.
+- Accessibility and performance were improved.

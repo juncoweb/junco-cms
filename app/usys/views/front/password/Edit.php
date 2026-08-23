@@ -14,7 +14,7 @@ if ($token) {
     $form = Form::get();
     $form->hidden('token', $token);
     //
-    $form->input('password', ['type' => 'password'])->setLabel(_t('Password'));
+    $form->input('user_password', ['type' => 'password'])->setLabel(_t('Password'));
     $form->input('verified', ['type' => 'password'])->setLabel(_t('Confirm'));
     $form->enter();
 

@@ -112,7 +112,7 @@ body {
 
 .install-loading div {
     font-weight: bold;
-    background: url(../img/js-loading.gif) no-repeat 4px 5px;
+    background: url(../img/loading.gif) no-repeat 4px 5px;
     padding: 5px 9px 4px 25px;
 }
 

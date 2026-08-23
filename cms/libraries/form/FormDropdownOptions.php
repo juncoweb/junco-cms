@@ -13,9 +13,11 @@ class FormDropdownOptions
     /**
      * Set 
      *
-     * @param string 
+     * @param array $option
+     * 
+     * @return void
      */
-    public function push($option)
+    public function push(array $option): void
     {
         $this->options[] = $option;
     }

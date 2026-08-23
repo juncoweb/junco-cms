@@ -1,4 +1,4 @@
-/* --- FormRow ----------------------------- */
+/* --- FormRow --- */
 const FormRow = function (el) {
     if (typeof el === 'string') {
         el = document.querySelector(el);
@@ -56,8 +56,11 @@ const FormRow = function (el) {
         },
 
         toggle: function (status) {
+            if (typeof status == 'undefined') {
+                status = $row.style.display == 'none';
+            }
             $row.style.display = status ? '' : 'none';
-            return that;
+            return status;
         },
 
         clone: function (callback) {
@@ -95,55 +98,6 @@ const FormRow = function (el) {
 
         remove: function () {
             $row.parentNode.removeChild($row);
-        }
-    };
-
-    return that;
-}
-
-/* --- FormFieldset ----------------------------- */
-const FormFieldset = function (el) {
-    if (typeof el === 'string') {
-        el = document.querySelector(el);
-    }
-
-    if (typeof el !== 'object') {
-        return null;
-    }
-
-    function getRow(el) {
-        while (el.tagName !== 'BODY') {
-            if (el.classList.contains('form-fieldset')) {
-                return el;
-            }
-            el = el.parentNode;
-        }
-    }
-
-    const $fieldset = getRow(el);
-
-    if (typeof $fieldset !== 'object') {
-        return null;
-    }
-
-    let that = {
-        getRow: function (number = 0) {
-            const rows = $fieldset.querySelectorAll('.form-body .form-group');
-            if (rows.length > number) {
-                return FormRow(rows[number]);
-            }
-            return null;
-        },
-
-        getElement: function (selector) {
-            if (selector) {
-                return $fieldset.querySelector(selector);
-            }
-            return $fieldset;
-        },
-
-        remove: function () {
-            $fieldset.parentNode.removeChild($fieldset);
         }
     };
 

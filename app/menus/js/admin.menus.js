@@ -18,7 +18,7 @@ let Menus = (function () {
             }
 
             let target;
-            let mo = {
+            const mo = {
                 size: 'large',
                 onLoad: function () {
                     target = this;
@@ -26,7 +26,7 @@ let Menus = (function () {
                 },
             };
 
-            let _backlist = Backlist()
+            const _backlist = Backlist()
                 .url($U)
                 .controls({
                     create: {

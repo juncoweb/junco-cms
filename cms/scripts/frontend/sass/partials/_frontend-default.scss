@@ -208,36 +208,6 @@ body.full-body {
     }
 }
 
-.tpl-search {
-    position: absolute;
-    inset: 0;
-    background: var(--overlay-color-2);
-    z-index: var(--zindex-lightbox);
-    display: none;
-    padding: 0 var(--spacing-4);
-
-    > div {
-        color: var(--solid-font-color);
-        font-size: var(--font-size-2xl);
-        position: absolute;
-        top: 5%;
-        right: 5%;
-    }
-
-    form {
-        max-width: 900px;
-        margin: 140px auto;
-    }
-}
-
-.search-fixed {
-    overflow: hidden;
-
-    .tpl-search {
-        display: block;
-    }
-}
-
 .tpl-footer {
     &-widget {
         width: 25%;

@@ -18,12 +18,12 @@ if ($user_id) {
 $form = Form::get();
 
 if ($user) {
-    $form->element($user['fullname']);
+    $form->element($user['user_name']);
     $form->setValues($user);
 }
 
 $form->input('email_username', ['placeholder' => _t('Email/Username'), 'icon' => 'fa-solid fa-user']);
-$form->input('password', ['type' => 'password', 'placeholder' => _t('Password'), 'icon' => 'fa-solid fa-key']);
+$form->input('user_password', ['type' => 'password', 'placeholder' => _t('Password'), 'icon' => 'fa-solid fa-key']);
 
 $element = '';
 if ($remember) {

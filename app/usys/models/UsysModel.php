@@ -37,12 +37,12 @@ class UsysModel extends Model
     {
         $data = $this->filter(POST, [
             'token'    => 'text',
-            'fullname' => 'text',
-            'username' => 'text',
-            'email'    => 'email',
-            'password' => 'required',
-            'verified' => 'text',
-            'legal'    => 'bool',
+            'user_name' => 'text',
+            'user_username' => 'text',
+            'user_email'    => 'email',
+            'user_password' => 'required',
+            'verified'      => 'text',
+            'legal'         => 'bool',
         ]);
 
         //
@@ -60,10 +60,10 @@ class UsysModel extends Model
 
             $service = new Signup();
             $result  = $service->signup(
-                $data['fullname'],
-                $data['username'],
-                $data['email'],
-                $data['password'],
+                $data['user_name'],
+                $data['user_username'],
+                $data['user_email'],
+                $data['user_password'],
                 $data['verified'],
                 $data['legal'],
                 $user_id
@@ -91,7 +91,7 @@ class UsysModel extends Model
     {
         $data = $this->filter(POST, [
             'email_username' => 'text',
-            'password'       => '',
+            'user_password'  => '',
             'remember'       => 'bool',
             'redirect'       => 'text'
         ]);
@@ -100,7 +100,7 @@ class UsysModel extends Model
             $service = new Login;
             $service->validateCredencial(
                 $data['email_username'],
-                $data['password'] ?? ''
+                $data['user_password'] ?? ''
             );
 
             $mfa_url = $this->getNextUrl($service->getUserId(), $data['redirect']);

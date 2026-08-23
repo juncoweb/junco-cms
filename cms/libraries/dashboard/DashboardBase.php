@@ -9,7 +9,6 @@ namespace Junco\Dashboard;
 
 abstract class DashboardBase implements DashboardInterface
 {
-    // vars
     protected array $sections = [];
 
     /**

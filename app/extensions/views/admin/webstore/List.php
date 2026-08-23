@@ -31,7 +31,7 @@ if (!empty($error)) {
     $bls->column('<a href="{{ details_url }}" class="ws-title">{{ name }}</a>'
         . '<div class="ws-details">'
         . sprintf(_t('By %s'), '<b>{{ developer }}</b>')
-        . '<div>' . snippet('rating', 'utils')->render('{{ num_ratings }}') . ' | <span>{{ num_views }} ' . _t('Visits') . '</span></div>'
+        . '<div>' . snippet('rating', 'form')->render('{{ num_ratings }}') . ' | <span>{{ num_views }} ' . _t('Visits') . '</span></div>'
         . '</div>');
 
     $bls->column('<button'

@@ -1,4 +1,4 @@
-/* --- Topbar ------------------------------------------ */
+/* --- Topbar --- */
 Backend.attachAll({
     notifications: function (el) {
         JsNotifications.load(el);

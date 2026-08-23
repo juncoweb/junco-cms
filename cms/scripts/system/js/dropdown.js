@@ -1,12 +1,11 @@
 /**
- * Drop down
+ * Dropdown
  *
- * @author: Junco CMS (tm)
- * @events:
- * onShow
- * onHide
- * onToggle
- *
+ * @param el
+ * @param options
+ *  - onShow
+ *  - onHide
+ *  - onToggle
  */
 
 const JsDropdown = (function () {
@@ -19,9 +18,7 @@ const JsDropdown = (function () {
         }
 
         if (!el) {
-            if (that) {
-                that.hide();
-            }
+            that && that.hide();
             return;
         }
 
@@ -54,15 +51,14 @@ const JsDropdown = (function () {
                     status = window.getComputedStyle(current)['display'] == 'none';
                 }
 
-                function fn(evName, displayValue, fireEvents) {
+                function fn(evName, displayValue, events) {
                     document[evName]('click', that.hide);
-                    current[evName]('click', function (event) {
-                        event.stopPropagation();
-                    });
+                    current[evName]('click', (event) => event.stopPropagation());
                     current.style.display = displayValue;
-                    fireEvents.forEach(function (fireEvent) {
-                        if (typeof options[fireEvent] == 'function') {
-                            options[fireEvent](status);
+
+                    events.forEach(function (name) {
+                        if (typeof options[name] == 'function') {
+                            options[name](status);
                         }
                     });
                 }

@@ -12,14 +12,14 @@ class SearchInput extends FilterElement
     /**
      * Constructor
      *
-     * @param string  $name
-     * @param ?string $label
-     * @param array	  $attr
+     * @param string $name
+     * @param mixed  $value
+     * @param array	 $attr
      */
     public function __construct(
         protected string $name,
         mixed $value,
-        array  $attr = []
+        array $attr = []
     ) {
         $this->html = '<div class="btn-group">'
             . '<input type="text" name="' . $name . '" value="' . $value . '" aria-label="' . _t('Search') . '" class="btn"/>'

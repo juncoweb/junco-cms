@@ -13,7 +13,7 @@ var Permissions = (function () {
                 }
                 _backlist.notify(res.message);
             };
-            let _backlist = Backlist()
+            const _backlist = Backlist()
                 .url($U)
                 .controls({
                     status: {

@@ -21,10 +21,11 @@ CREATE TABLE IF NOT EXISTS `#__extensions` (
   `xdata` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NULL on update CURRENT_TIMESTAMP,
-  `status` enum('public','private','deprecated') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'public',
+  `status` enum('prototype','private','public','deprecated') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'public',
   PRIMARY KEY (`id`),
   UNIQUE `extension_alias` (`extension_alias`),
-  KEY `developer_id` (`developer_id`)
+  KEY `developer_id` (`developer_id`),
+  KEY `package_id` (`package_id`)
 ) ENGINE=InnoDB  DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 -- 
@@ -39,7 +40,8 @@ CREATE TABLE IF NOT EXISTS `#__extensions_changes` (
   `is_compatible` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` datetime NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(1) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `extension_id` (`extension_id`)
 ) ENGINE=InnoDB  DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 -- 
@@ -58,7 +60,8 @@ CREATE TABLE IF NOT EXISTS `#__extensions_developers` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NULL on update CURRENT_TIMESTAMP,
   `is_protected` tinyint(1) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `developer_name` (`developer_name`)
 ) ENGINE=InnoDB  DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 -- 
@@ -76,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `#__extensions_updates` (
   `updated_at` datetime NULL on update CURRENT_TIMESTAMP,
   `has_failed` tinyint unsigned NOT NULL DEFAULT 0,
   `failure_msg` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
-  `status` enum('canceled','available','installed') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'canceled',
+  `status` enum('cancelled','available','installed') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'cancelled',
   PRIMARY KEY (`id`),
   KEY `extension_id` (`extension_id`)
 ) ENGINE=InnoDB  DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;

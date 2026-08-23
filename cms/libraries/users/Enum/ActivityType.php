@@ -26,9 +26,9 @@ enum ActivityType
             self::signup     => _t('Sign up'),
             self::activation => _t('Activation'),
             self::login      => _t('Log in'),
-            self::autologin  => _t('Autologin'),
-            self::savepwd    => _t('Savepwd'),
-            self::savemail   => _t('Savemail'),
+            self::autologin  => _t('Auto log in'),
+            self::savepwd    => _t('Save password'),
+            self::savemail   => _t('Save email'),
             self::validation => _t('Validation'),
         };
     }

@@ -8,12 +8,11 @@
 class AutoloadHelper
 {
     /**
-     * Constructor
-     */
-    public function __construct() {}
-
-    /**
      * Register
+     * 
+     * @param string ...$vendors
+     * 
+     * @return void
      */
     public function register(string ...$vendors): void
     {
@@ -21,6 +20,7 @@ class AutoloadHelper
 
         foreach ($vendors as $vendor) {
             $files = glob(SYSTEM_ABSPATH . 'vendor/' . $vendor . '/*/composer.json') ?: [];
+
             foreach ($files as $file) {
                 $composer = json_decode(file_get_contents($file), true);
                 $basedir = dirname($file) . DIRECTORY_SEPARATOR;
@@ -34,11 +34,19 @@ class AutoloadHelper
         }
     }
 
-    public function registerNamespace(string $namespace, string $basedir)
+    /**
+     * Register Namespace
+     * 
+     * @param string $namespace
+     * @param string $basedir
+     * 
+     * @return bool
+     */
+    protected function registerNamespace(string $namespace, string $basedir): bool
     {
-        spl_autoload_register(function ($class) use ($namespace, $basedir) {
+        return spl_autoload_register(function ($class) use ($namespace, $basedir) {
             if (0 !== strpos($class, $namespace)) {
-                return;
+                return false;
             }
 
             $subClass = substr($class, strlen($namespace));
@@ -46,7 +54,10 @@ class AutoloadHelper
 
             if (file_exists($file)) {
                 require $file;
+                return true;
             }
+
+            return false;
         });
     }
 }

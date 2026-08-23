@@ -14,17 +14,17 @@ use Junco\Database\Exporter\SqlExporter;
 use Junco\Database\Base\Entity\RoutineInterface;
 use Junco\Database\Base\Entity\TableInterface;
 use Junco\Database\Base\Entity\TriggerInterface;
+use Junco\Database\Base\Schema\SchemaInterface;
 use Database;
 use Exception;
 
 class Exporter
 {
-    // vars
-    protected $db;
-    protected $schema;
-    protected ?object $options = null;
+    protected Database $db;
+    protected SchemaInterface $schema;
     protected ?Prefixer $prefixer = null;
-    protected $processes = [
+    protected ?object $options = null;
+    protected array $processes = [
         'Header'   => '',
         'Database' => '',
         'Routines' => [],
@@ -35,12 +35,12 @@ class Exporter
     /**
      * Constructor
      * 
-     * @param Database $db
+     * @param ?Database $db
      */
     public function __construct(?Database $db = null)
     {
-        $this->db      = $db ?? db();
-        $this->schema  = $this->db->getSchema();
+        $this->db     = $db ?? db();
+        $this->schema = $this->db->getSchema();
         $this->setOptions();
     }
 
@@ -255,6 +255,7 @@ class Exporter
      * Adds a table to the buffer
      * 
      * @param TableInterface $table
+     * @param bool           $add_rows
      * 
      * @return void
      */

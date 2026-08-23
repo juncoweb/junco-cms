@@ -1,5 +1,5 @@
 
-/* --- Cache ------------------------------- */
+/* --- Cache ---- */
 let Cache = (function () {
     function $U(task) {
         return JsUrl('admin/cache/' + task);
@@ -18,7 +18,7 @@ let Cache = (function () {
             }
 
             let target;
-            let _backlist = Backlist()
+            const _backlist = Backlist()
                 .url($U)
                 .controls({
                     confirm_delete: {

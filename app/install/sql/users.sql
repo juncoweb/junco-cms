@@ -5,20 +5,21 @@
 -- DROP TABLE IF EXISTS `#__users`;
 CREATE TABLE IF NOT EXISTS `#__users` (
   `id` int unsigned NOT NULL auto_increment,
-  `fullname` varchar(48) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `username` varchar(24) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
-  `email` varchar(148) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `verified_email` enum('no','yes') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `user_slug` varchar(24) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
+  `user_name` varchar(48) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `user_username` varchar(24) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `user_password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
+  `user_email` varchar(148) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `verified_email` enum('no','yes') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `avatar_id` int unsigned NOT NULL DEFAULT 0,
   `avatar_file` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP  on update CURRENT_TIMESTAMP,
+  `updated_at` datetime NULL on update CURRENT_TIMESTAMP,
   `status` enum('autosignup','inactive','active') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'inactive',
   PRIMARY KEY (`id`),
-  UNIQUE `email` (`email`),
-  UNIQUE `username` (`username`)
+  KEY `user_slug` (`user_slug`),
+  KEY `user_username` (`user_username`),
+  KEY `user_email` (`user_email`)
 ) ENGINE=InnoDB  DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 -- 
@@ -34,7 +35,8 @@ CREATE TABLE IF NOT EXISTS `#__users_activities` (
   `activity_code` smallint NOT NULL DEFAULT 0,
   `activity_context` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   `created_at` datetime NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 -- 
@@ -49,7 +51,9 @@ CREATE TABLE IF NOT EXISTS `#__users_activities_locks` (
   `lock_type` enum('signup','activation','login','autologin','savepwd','savemail','token') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `lock_counter` smallint unsigned NOT NULL DEFAULT 0,
   `expires_at` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `user_ip` (`user_ip`)
 ) ENGINE=InnoDB  DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 -- 
@@ -107,8 +111,8 @@ CREATE TABLE IF NOT EXISTS `#__users_roles_labels_map` (
   `status` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE `uniq` (`role_id`, `label_id`),
-  KEY `label_id` (`label_id`),
-  KEY `role_id` (`role_id`)
+  KEY `role_id` (`role_id`),
+  KEY `label_id` (`label_id`)
 ) ENGINE=InnoDB  DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 -- 

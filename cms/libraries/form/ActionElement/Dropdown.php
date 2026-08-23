@@ -23,7 +23,7 @@ class Dropdown extends ActionElement
         $this->html = '<div class="btn-group">'
             .  '<button' . $this->attr([
                 'type'          => 'button',
-                'class'         => 'btn ' . ($caret ? 'dropdown-toggle' : 'dropdown'),
+                'class'         => 'btn ' . ($caret ? 'btn-caret' : 'dropdown'),
                 'control-felem' => 'dropdown',
                 'data-tooltip'  => '',
             ], $attr) . '>'

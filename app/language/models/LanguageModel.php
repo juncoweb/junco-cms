@@ -187,7 +187,7 @@ class LanguageModel extends Model
         // remove
         unlink($file);
 
-        if (!$code) {
+        if (!(int)$code) {
             return $this->unprocessable(_t('Error! the task has not been realized.'));
         }
     }

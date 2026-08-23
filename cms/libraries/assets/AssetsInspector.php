@@ -8,8 +8,8 @@
 class AssetsInspector extends AssetsBasic
 {
     // vars
-    protected $asset_not_found = ' /* this is not found */';
-    protected $compiled_file_not_found = '# Compiled file not found.';
+    protected string $asset_not_found         = ' /* this is not found */';
+    protected string $compiled_file_not_found = '# Compiled file not found.';
 
     /**
      * Inspect all

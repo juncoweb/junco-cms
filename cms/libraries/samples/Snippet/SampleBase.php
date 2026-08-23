@@ -53,9 +53,10 @@ abstract class SampleBase implements SampleInterface
         string $label = '',
         bool $return = false
     ): string {
-        $btn = '<a href="javascript:void(0)" class="sample-btn" control-sample="' . $control . '" title="' . $label . '">'
-            .  '<i class="' . $icon . '"></i>'
-            . '</a>';
+        $btn = '<button type="button" control-sample="' . $control . '" class="btn-inline" title="' . $label . '">'
+            .  '<i class="' . $icon . '" aria-hidden="true"></i>'
+            . '<span class="visually-hidden">' . $label . '</span>'
+            . '</button>';
 
         if ($return) {
             return $btn;

@@ -1,12 +1,12 @@
 <?php
 
-use Junco\Settings\PluginLoader;
-use Junco\Settings\PluginUpdater;
-
 /**
  * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
+
+use Junco\Settings\PluginLoader;
+use Junco\Settings\PluginUpdater;
 
 class Settings
 {
@@ -170,11 +170,11 @@ class Settings
     /**
      * Get
      * 
-     * @param string $file
+     * @param string $filename
      * 
      * @return bool
      */
-    protected function isValidDataFilename($filename): bool
+    protected function isValidDataFilename(string $filename): bool
     {
         return $this->alias == $filename
             || $this->alias == substr($filename, 0, strlen($this->alias));
@@ -291,9 +291,11 @@ class Settings
      * Translate.
      *
      * @param array $translate    A list with the texts to be translated.
-     * @param array $is_frontend
+     * @param bool  $is_frontend
+     * 
+     * @return void
      */
-    public function translate(array $translate, bool $is_frontend = false)
+    public function translate(array $translate, bool $is_frontend = false): void
     {
         if ($is_frontend) {
             (new LanguageHelper())->translate('settings.' . $this->key, $translate);
@@ -468,7 +470,7 @@ class Settings
     /**
      * var_export
      */
-    protected function var_export($var, $depth = 1): string
+    protected function var_export(mixed $var, $depth = 1): string
     {
         if (is_array($var)) {
             $tab = $this->EOL . str_repeat("\t", $depth);
@@ -537,7 +539,7 @@ class Settings
     /**
      * Remove
      */
-    protected function remove($file)
+    protected function remove(string $file)
     {
         is_file($file) and unlink($file);
     }
@@ -545,9 +547,7 @@ class Settings
     /**
      * Make the data directory
      * 
-     * @param string $setpath
-     * 
-     * @return string
+     * @return void
      */
     protected function mkdir(): void
     {

@@ -50,8 +50,8 @@ class DebuggerEmitter implements EmitterInterface
     protected function emitStatusLine(ResponseInterface $response): void
     {
         $protocolVersion = $response->getProtocolVersion();
-        $statusCode = $response->getStatusCode();
-        $reasonPhrase = $response->getReasonPhrase();
+        $statusCode      = $response->getStatusCode();
+        $reasonPhrase    = $response->getReasonPhrase();
 
         if ($reasonPhrase) {
             $reasonPhrase = ' ' . $reasonPhrase;

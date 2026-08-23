@@ -11,13 +11,13 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use \Filter;
-use \System;
+use Filter;
+use Responder;
 
 class SecurityMiddleware implements MiddlewareInterface
 {
     // vars
-    protected $method = null;
+    protected int $method;
 
     /**
      * Process an incoming server request.
@@ -33,7 +33,7 @@ class SecurityMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         if (!$this->verify()) {
-            return System::getOutput()
+            return Responder::get()
                 ->responseWithMessage(_t('The security token has expired. Refresh the page.'))
                 ->withStatus(403, 'Invalid CSRF Token');
         }

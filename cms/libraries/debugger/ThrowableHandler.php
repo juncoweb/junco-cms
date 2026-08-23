@@ -7,68 +7,11 @@
 
 namespace Junco\Debugger;
 
-use Junco\Http\Emitter\SapiEmitter;
-use Junco\Http\Exception\HttpThrowableInterface;
 use Error;
-use System;
 use Throwable;
 
 class ThrowableHandler
 {
-    /**
-     * Emit
-     * 
-     * @param Throwable $e
-     * 
-     * @return void
-     */
-    public function emit(Throwable $e): void
-    {
-        try {
-            $response = $this->getResponse($e, true);
-            (new SapiEmitter)->emit($response);
-            die;
-        } catch (Throwable $x) {
-        }
-
-        http_response_code(500);
-        die(sprintf('%d - %s', $e->getCode(), $e->getTraceAsString()));
-    }
-
-    /**
-     * Get
-     * 
-     * @param Throwable $e
-     * 
-     * @return 
-     *  Psr\Http\Message\ResponseInterface
-     *  Junco\Console\Output\OutputInterface
-     */
-    public function getResponse(Throwable $e, bool $severe = false)
-    {
-        $statusCode = 0;
-
-        if ($e instanceof HttpThrowableInterface) {
-            $statusCode = $e->getStatusCode();
-
-            if (!$severe && $statusCode == 403) {
-                $severe = true; // Force the basic template.
-            }
-        }
-
-        $message = $e instanceof Error
-            ? $this->handleThrowableError($e, $statusCode)
-            : $e->getMessage();
-
-        if (!$message) {
-            $message = $this->getMessageFromCode($statusCode);
-        }
-
-        $code = (int)$e->getCode();
-
-        return System::getOutput($severe)->responseWithMessage($message, $statusCode, $code);
-    }
-
     /**
      * Returns a message from a numeric code
      * 
@@ -78,26 +21,21 @@ class ThrowableHandler
      */
     public function getMessageFromCode(int $code = 0): string
     {
-        switch ($code) {
-            case 401:
-                return sprintf(
-                    _t('Please, you must %s or %s'),
-                    '<a href="' . url('/usys/login', ['redirect' => -1]) . '">' . _t('Log in') . '</a>',
-                    '<a href="' . url('/usys/signup') . '">' . _t('Sign up') . '</a>'
-                );
-            case 403:
-                return _t('Access denied.');
-            case 404:
-                return _t('The requested was not found on this server.');
-            case 500:
-                return sprintf(
-                    _t('Fatal error in safety. Please help us to fix it by contacting the %sadministration%s.'),
-                    '<a href="' . url('/contact') . '" target="_blank">',
-                    '</a>'
-                );
-            default:
-                return _t('A fatal error or a security failure has occurred.');
-        }
+        return match ($code) {
+            401 => sprintf(
+                _t('Please, you must %s or %s'),
+                '<a href="' . url('/usys/login', ['redirect' => -1]) . '">' . _t('Log in') . '</a>',
+                '<a href="' . url('/usys/signup') . '">' . _t('Sign up') . '</a>'
+            ),
+            403 => _t('Access denied.'),
+            404 => _t('The requested was not found on this server.'),
+            500 => sprintf(
+                _t('Fatal error in safety. Please help us to fix it by contacting the %sadministration%s.'),
+                '<a href="' . url('/contact') . '" target="_blank">',
+                '</a>'
+            ),
+            default => _t('A fatal error or a security failure has occurred.'),
+        };
     }
 
     /**

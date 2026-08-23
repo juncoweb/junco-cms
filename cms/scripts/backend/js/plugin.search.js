@@ -1,4 +1,4 @@
-/* --- search ------------------------------------------ */
+/* --- search --- */
 Backend.attach('search', function (el) {
     let status = 0;
     let data = null;

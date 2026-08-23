@@ -5,14 +5,14 @@
  * @author: Junco CMS (tm)
  */
 
-class rating_detail_utils_default_snippet
+class rating_detail_form_default_snippet
 {
     /**
      * Render
      * 
-     * @param array $data
+     * @param array $value
      */
-    public function render(array $value)
+    public function render(array $value): string
     {
         $num_ratings = array_sum($value);
         $rating_value = implode('|', $value);

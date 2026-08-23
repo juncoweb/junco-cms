@@ -34,7 +34,8 @@ class UploadedFileManager
     /**
      * Constructor
      *
-     * @param string $file
+     * @param UploadedFileInterface|array|null $UploadedFile
+     * @param bool $isMultiple
      */
     public function __construct(UploadedFileInterface|array|null $UploadedFile = null, bool $isMultiple = false)
     {
@@ -59,8 +60,10 @@ class UploadedFileManager
 
     /**
      * Getter
+     * 
+     * @deprecated in v16
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         switch ($name) {
             case 'num_files':
@@ -72,13 +75,21 @@ class UploadedFileManager
     }
 
     /**
+     * Get
+     */
+    public function getNumFiles(): int
+    {
+        return $this->num_files;
+    }
+
+    /**
      * Verify
      * 
-     * @return self
+     * @return static
      * 
      * @throws Exception
      */
-    public function verifyIsEmpty(): self
+    public function verifyIsEmpty(): static
     {
         if (!$this->num_files) {
             throw new Exception(_t('Please select a file from your computer.'));
@@ -88,9 +99,15 @@ class UploadedFileManager
     }
 
     /**
+     * Keep
      * 
+     * @param bool $keepCurrent
+     * 
+     * @throws HttpError
+     * 
+     * @return void
      */
-    public function keepCurrent(bool $keepCurrent = true)
+    public function keepCurrent(bool $keepCurrent = true): void
     {
         // security
         ($keepCurrent && $this->num_files) and abort();
@@ -100,8 +117,12 @@ class UploadedFileManager
 
     /**
      * Set
+     * 
+     * @param string $basedir
+     * 
+     * @return static
      */
-    public function setBasedir(string $basedir = '')
+    public function setBasedir(string $basedir = ''): static
     {
         $this->basedir = $basedir;
         return $this;
@@ -118,11 +139,13 @@ class UploadedFileManager
      *    max_files        =>  int,             The maximum number of files.
      * ]
      * 
-     * @return self
+     * @return static
      * 
      * @throws Exception
+     * 
+     * @return static
      */
-    public function validate(?array $rules = null): self
+    public function validate(?array $rules = null): static
     {
         if ($rules === null) {
             return $this;
@@ -166,20 +189,27 @@ class UploadedFileManager
      * @param bool   $rewrite     Rewrite the file if it already exists.
      *
      * @throws Exception
+     * 
+     * @return static
      */
-    public function moveTo(string $targetPath, int $rename = 0, bool $rewrite = false)
+    public function moveTo(string $targetPath, int $rename = 0, bool $rewrite = false): static
     {
         $this->dirpath = $this->basedir . $targetPath;
 
         is_dir($this->dirpath)
             or $this->makeDir($this->dirpath);
 
-        if (!$rename || !in_array($rename, [1, 2, 3, 4])) {
+        if ($rename == self::DEFAULT_RENAME || !in_array($rename, [
+            self::DEFAULT_NAME,
+            self::CURUSER_NAME,
+            self::CLEAN_NAME,
+            self::UNIQUE_ID,
+        ])) {
             $rename = config('filesystem.default_rename');
         }
 
         for ($i = 0; $i < $this->num_files; $i++) {
-            $basename = $this->files[$i]['basename'];
+            $basename  = $this->files[$i]['basename'];
             $extension = $this->files[$i]['extension'];
 
             switch ($rename) {
@@ -213,13 +243,13 @@ class UploadedFileManager
     }
 
     /**
-     * Set current file.
+     * Set current file
      * 
      * @param string $filename
      * 
-     * @return self
+     * @return static
      */
-    public function setCurrentFile(?string $filename = null): self
+    public function setCurrentFile(?string $filename = null): static
     {
         if ($this->keepCurrent) {
             $this->num_files and abort();
@@ -236,9 +266,9 @@ class UploadedFileManager
     }
 
     /**
-     * Returns an UploadedFile object or an array of them.
+     * Returns an UploadedFile object or an array of them
      *
-     * @return UploadedFile|array
+     * @return UploadedFileInterface|UploadedFileInterface[]
      */
     public function getUploadedFile(): UploadedFileInterface|array
     {
@@ -252,7 +282,7 @@ class UploadedFileManager
      *
      * @return array
      */
-    public function getUploadedFileData()
+    public function getUploadedFileData(): array
     {
         return $this->isMultiple
             ? $this->files
@@ -260,7 +290,7 @@ class UploadedFileManager
     }
 
     /**
-     * Returns the client filename.
+     * Returns the client filename
      * 
      * if multiple, returns an array, otherwise a string.
      *
@@ -276,10 +306,12 @@ class UploadedFileManager
     }
 
     /**
-     * Returns the filename.
+     * Returns the filename
      * 
      * if multiple, returns an array or a string separated 
      * by the value passed as argument.
+     * 
+     * @param ?string $separator
      *
      * @return string|array
      */
@@ -289,6 +321,7 @@ class UploadedFileManager
             if ($separator === null) {
                 return $this->files;
             }
+
             return implode($separator, array_column($this->files, 'filename'));
         }
 
@@ -296,7 +329,9 @@ class UploadedFileManager
     }
 
     /**
-     * Get parsed contents. 
+     * Get parsed contents
+     * 
+     * @param bool|string $parse
      *
      * @return mixed
      */
@@ -337,13 +372,9 @@ class UploadedFileManager
     }
 
     /**
-     * Add an Uploaded File.
-     * 
-     * @param UploadedFileInterface $file
-     * 
-     * @throws Exception
+     * Add an Uploaded File
      */
-    protected function addUploadedFile(UploadedFileInterface $UploadedFile)
+    protected function addUploadedFile(UploadedFileInterface $UploadedFile): void
     {
         switch ($UploadedFile->getError()) {
             case UPLOAD_ERR_OK:
@@ -373,11 +404,7 @@ class UploadedFileManager
     }
 
     /**
-     * Returns a standard row of data.
-     * 
-     * @param string $filename
-     * 
-     * @return array
+     * Returns a standard row of data
      */
     protected function builtFileData(string $filename): array
     {
@@ -391,9 +418,9 @@ class UploadedFileManager
     }
 
     /**
-     * Validate extension.
+     * Validate extension
      */
-    protected function validateExtension(array|string $extensions)
+    protected function validateExtension(array|string $extensions): void
     {
         if ($extensions == '*') {
             return;
@@ -410,9 +437,9 @@ class UploadedFileManager
     }
 
     /**
-     * Validate minimum size.
+     * Validate minimum size
      */
-    protected function validateMinSize(int $min_size)
+    protected function validateMinSize(int $min_size): void
     {
         foreach ($this->uploadedFiles as $file) {
             if ($file->getSize() < $min_size) {
@@ -427,9 +454,9 @@ class UploadedFileManager
     }
 
     /**
-     * Validate maximum size.
+     * Validate maximum size
      */
-    protected function validateMaxSize(int $max_size)
+    protected function validateMaxSize(int $max_size): void
     {
         foreach ($this->uploadedFiles as $file) {
             if ($file->getSize() > $max_size) {
@@ -444,9 +471,9 @@ class UploadedFileManager
     }
 
     /**
-     * Validate maximum characters.
+     * Validate maximum characters
      */
-    protected function validateMaxChars(int $max_chars)
+    protected function validateMaxChars(int $max_chars): void
     {
         foreach ($this->files as $info) {
             $length = strlen($info['clientFilename']);
@@ -457,9 +484,9 @@ class UploadedFileManager
     }
 
     /**
-     * Validate maximum files.
+     * Validate maximum files
      */
-    protected function validateMaxFiles(int $max_files)
+    protected function validateMaxFiles(int $max_files): void
     {
         if ($max_files < 0) {
             throw new Exception(_t('At the moment it is not allowed to upload files.'));
@@ -471,7 +498,7 @@ class UploadedFileManager
     /**
      * Make directory
      */
-    protected function makeDir(string $dir)
+    protected function makeDir(string $dir): void
     {
         if ($this->mkdir) {
             mkdir($dir, SYSTEM_MKDIR_MODE, true);
@@ -481,9 +508,9 @@ class UploadedFileManager
     }
 
     /**
-     * Rename if the file exists.
+     * Rename if the file exists
      */
-    protected function renameIfExists(string $basename, string $extension)
+    protected function renameIfExists(string $basename, string $extension): string
     {
         for (
             $count = 1;
@@ -498,11 +525,9 @@ class UploadedFileManager
     }
 
     /**
-     * delete
-     * 
-     * @param string $filename
+     * Delete
      */
-    protected function delete(string $filename)
+    protected function delete(string $filename): void
     {
         $file = $this->dirpath . $filename;
 
@@ -510,11 +535,9 @@ class UploadedFileManager
     }
 
     /**
-     * Transform a name to ASCII characters.
-     *
-     * @param string $string
+     * Transform a name to ASCII characters
      */
-    public function cleanName(string $name)
+    public function cleanName(string $name): string
     {
         $name = str_replace(
             ['á', 'é', 'í', 'ó', 'ú', 'à', 'è', 'ì', 'ò', 'ù', 'â', 'ê', 'î', 'ô', 'û', 'ä', 'ë', 'ï', 'ö', 'ü', 'Á', 'É', 'Í', 'Ó', 'Ú', 'À', 'È', 'Ì', 'Ò', 'Ù', 'Â', 'Ê', 'Î', 'Ô', 'Û', 'Ä', 'Ë', 'Ï', 'Ö', 'Ü', 'ñ', 'Ñ', 'ç', 'Ç', 'º', 'ª'],
@@ -528,7 +551,7 @@ class UploadedFileManager
     /**
      * Get renamings
      */
-    public static function getRenames()
+    public static function getRenames(): array
     {
         return [
             self::DEFAULT_NAME => 'Default name',

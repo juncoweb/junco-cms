@@ -7,7 +7,6 @@
 
 class Currency
 {
-    // vars
     protected int    $decimals;
     protected string $decimal_separator;
     protected string $thousands_separator;
@@ -18,9 +17,9 @@ class Currency
     public function __construct()
     {
         if (preg_match('/([^0])([^0])(0+)?$/', _t('$.,00'), $match)) {
-            $this->thousands_separator    = $match[1];
-            $this->decimal_separator    = $match[2];
-            $this->decimals                = isset($match[3]) ? (int)strlen($match[3]) : 2;
+            $this->thousands_separator = $match[1];
+            $this->decimal_separator   = $match[2];
+            $this->decimals            = isset($match[3]) ? (int)strlen($match[3]) : 2;
         }
     }
 

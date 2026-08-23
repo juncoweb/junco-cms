@@ -12,8 +12,8 @@ use Junco\Form\Contract\ActionElementInterface;
 abstract class ActionElement implements ActionElementInterface
 {
     // vars
-    protected string  $html    = '';
-    protected string  $help    = '';
+    protected string $html = '';
+    protected string $help = '';
 
     /**
      * Render
@@ -77,9 +77,9 @@ abstract class ActionElement implements ActionElementInterface
      */
     protected function getLabel(array &$attr = []): string
     {
-        $label        = $this->extract($attr, 'label', '{{ icon }}{{ caption }}');
-        $icon        = $this->extract($attr, 'icon');
-        $caption    = $this->extract($attr, 'caption');
+        $label   = $this->extract($attr, 'label', '{{ icon }}{{ caption }}');
+        $icon    = $this->extract($attr, 'icon');
+        $caption = $this->extract($attr, 'caption');
 
         if ($icon) {
             $icon = '<i class="' . $icon . '" aria-hidden="true"></i>' . ($label ? ' ' : '');

@@ -49,7 +49,7 @@ class UserHelper
      * 
      * @return bool
      * 
-     * @throws Exception
+     * @throws UserValidationException
      */
     public static function validateEmail(string $value, bool $throw = true): bool
     {
@@ -72,7 +72,7 @@ class UserHelper
      * 
      * @return bool
      * 
-     * @throws Exception
+     * @throws UserValidationException
      */
     public static function verifySlug(string $value, bool $throw = true): bool
     {
@@ -94,7 +94,7 @@ class UserHelper
      * 
      * @return bool
      * 
-     * @throws Exception
+     * @throws UserValidationException
      */
     public static function validatePassword(string $value, bool $throw = true): bool
     {
@@ -148,12 +148,12 @@ class UserHelper
      * 
      * @return bool
      * 
-     * @throws Exception
+     * @throws UserValidationException
      */
     public static function isUniqueUsername(string $username, int $user_id = 0, bool $throw = true): bool
     {
         // query
-        $current_id = db()->query("SELECT id FROM `#__users` WHERE username = ?", $username)->fetchColumn();
+        $current_id = db()->query("SELECT id FROM `#__users` WHERE user_username = ?", $username)->fetchColumn();
 
         if ($current_id && $current_id != $user_id) {
             if ($throw) {
@@ -174,12 +174,12 @@ class UserHelper
      * 
      * @return bool
      * 
-     * @throws Exception
+     * @throws UserValidationException
      */
     public static function isUniqueEmail(string $email, int $user_id = 0, bool $throw = true): bool
     {
         // query
-        $current_id = db()->query("SELECT id FROM `#__users` WHERE email = ?", $email)->fetchColumn();
+        $current_id = db()->query("SELECT id FROM `#__users` WHERE user_email = ?", $email)->fetchColumn();
 
         if ($current_id && $current_id != $user_id) {
             if ($throw) {
@@ -212,7 +212,7 @@ class UserHelper
     public static function rehash(string $password, int $user_id)
     {
         if (password_needs_rehash($password, PASSWORD_DEFAULT)) {
-            db()->exec("UPDATE `#__users` SET password = ? WHERE id = ?", self::hash($password), $user_id);
+            db()->exec("UPDATE `#__users` SET user_password = ? WHERE id = ?", self::hash($password), $user_id);
         }
     }
 
@@ -228,9 +228,9 @@ class UserHelper
         $db = db();
 
         if (filter_var($input, FILTER_VALIDATE_EMAIL)) {
-            $db->where("email = ?", $input);
+            $db->where("user_email = ?", $input);
         } elseif (UserHelper::validateUsername($input, false)) {
-            $db->where("username = ?", $input);
+            $db->where("user_username = ?", $input);
         } else {
             return null;
         }
@@ -238,10 +238,10 @@ class UserHelper
         $data = $db->query("
 		SELECT
 		 id ,
-		 username ,
-		 fullname ,
-         email ,
-		 password ,
+		 user_name ,
+		 user_username ,
+         user_email ,
+		 user_password ,
 		 status
 		FROM `#__users`
 		[WHERE]")->fetch();
@@ -252,10 +252,10 @@ class UserHelper
 
         return new User(
             $data['id'],
-            $data['username'],
-            $data['fullname'],
-            $data['email'],
-            $data['password'],
+            $data['user_username'],
+            $data['user_name'],
+            $data['user_email'],
+            $data['user_password'],
             $data['status']
         );
     }

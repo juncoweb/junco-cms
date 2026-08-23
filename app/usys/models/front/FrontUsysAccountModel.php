@@ -29,9 +29,9 @@ class FrontUsysAccountModel extends Model
         $data = $this->db->query("
 		SELECT
 		 id ,
-		 fullname ,
-		 username ,
-		 email
+		 user_name ,
+		 user_username ,
+		 user_email
 		FROM `#__users`
 		WHERE id = ?", curuser()->getId())->fetch();
 

@@ -57,7 +57,7 @@ class ReplacesHelper
 
         $value = [
             'component' => [],
-            'task'  => []
+            'task' => []
         ];
 
         foreach ($matches as $match) {

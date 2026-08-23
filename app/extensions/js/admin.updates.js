@@ -1,5 +1,5 @@
 
-/* --- ExtensionsUpdates ------------------------------------------ */
+/* --- ExtensionsUpdates --- */
 let ExtensionsUpdates = (function () {
     function $U(task) {
         return JsUrl('admin/extensions.updates/' + task);
@@ -16,7 +16,7 @@ let ExtensionsUpdates = (function () {
     }
 
     let _backlist, target;
-    let _controls = {
+    const _controls = {
     };
 
     return {

@@ -16,8 +16,7 @@ use Junco\Extensions\Updater\Carrier;
 
 class AdminExtensionsModel extends Model
 {
-    // vars
-    protected $db;
+    protected Database $db;
 
     /**
      * Constructor
@@ -165,14 +164,13 @@ class AdminExtensionsModel extends Model
 
 
         if ($data['components']) {
-            $names = (new Components)->getNames();
-            $data['components'] = array_map(
-                fn($key) => [
-                    'title'   => $names[$key] ?? '?',
-                    'caption' => $key,
-                ],
-                str_split($data['components'])
-            );
+            $data['components'] = $this->getComponents($data['components']);
+        }
+        if ($data['db_queries']) {
+            $data['db_queries'] = $this->splitList($data['db_queries']);
+        }
+        if ($data['xdata']) {
+            $data['xdata'] = $this->splitList($data['xdata']);
         }
 
         return $data + [
@@ -500,6 +498,27 @@ class AdminExtensionsModel extends Model
 		SELECT id, developer_name
 		FROM `#__extensions_developers`
 		ORDER BY developer_name")->fetchAll(Database::FETCH_COLUMN, [0 => 1], [_t('All developers')]);
+    }
+
+    /**
+     * Get
+     */
+    protected function getComponents(string $components): array
+    {
+        $names = (new Components)->getNames();
+
+        return array_map(fn($key) => [
+            'title'   => $names[$key] ?? '?',
+            'caption' => $key,
+        ], str_split($components));
+    }
+
+    /**
+     * Get
+     */
+    protected function splitList(string $list): string
+    {
+        return str_replace(',', ', ', $list);
     }
 
     /**

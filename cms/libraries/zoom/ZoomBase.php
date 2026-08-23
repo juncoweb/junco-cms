@@ -1,7 +1,5 @@
 <?php
 
-use PhpParser\Node\Expr\Instanceof_;
-
 /**
  * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
@@ -29,7 +27,7 @@ abstract class ZoomBase implements ZoomInterface
      * 
      * @param string $content
      * 
-     * @return array
+     * @return ZoomGroup
      */
     public function group(string $content = ''): ZoomGroup
     {
@@ -118,7 +116,7 @@ abstract class ZoomBase implements ZoomInterface
     /**
      * Group
      * 
-     * @param array ...$group
+     * @param ZoomGroup ...$group
      * 
      * @return void
      */

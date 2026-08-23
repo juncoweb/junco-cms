@@ -1,5 +1,5 @@
 
-/* --- Thirdbar ------------------------------------------ */
+/* --- Thirdbar --- */
 Backend.attach('thirdbar', function (bar) {
     (document.querySelectorAll('.widget-thirdbar ul > li > a') || []).forEach(function ($btn) {
         const $menu = $btn.nextSibling && $btn.nextSibling.tagName === 'UL'

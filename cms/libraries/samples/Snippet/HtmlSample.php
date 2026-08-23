@@ -14,8 +14,8 @@ class HtmlSample extends SampleBase
      */
     public function render(): string
     {
-        $this->btn('toggle', 'fa-solid fa-code', 'Show/Hide code');
-        $this->btn('copy', 'fa-solid fa-copy', 'Copy code');
+        $this->btn('copy', 'fa-solid fa-copy', _t('Copy code'));
+        $this->btn('toggle', 'fa-solid fa-code', _t('Show / Hide code'));
 
         return $this->panels(
             $this->code,

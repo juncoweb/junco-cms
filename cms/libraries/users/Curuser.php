@@ -34,10 +34,10 @@ class Curuser extends User
             $data = db()->query("
 			SELECT
 			 id ,
-			 username ,
-			 fullname ,
-			 email ,
-			 password ,
+			 user_name ,
+			 user_username ,
+			 user_email ,
+			 user_password ,
              status
 			FROM `#__users`
 			WHERE id = ?
@@ -45,10 +45,10 @@ class Curuser extends User
 
             if ($data) {
                 $this->id       = $data['id'];
-                $this->username = $data['username'];
-                $this->fullname = $data['fullname'];
-                $this->email    = $data['email'];
-                $this->password = $data['password'];
+                $this->username = $data['user_username'];
+                $this->name     = $data['user_name'];
+                $this->email    = $data['user_email'];
+                $this->password = $data['user_password'];
                 $this->status   = UserStatus::active;
             }
         }
@@ -68,7 +68,7 @@ class Curuser extends User
         switch ($name) {
             case 'id':
             case 'username':
-            case 'fullname':
+            case 'user_name':
             case 'email':
             case 'password':
                 return $this->{$name};

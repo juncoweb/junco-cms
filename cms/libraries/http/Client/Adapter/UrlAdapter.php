@@ -34,9 +34,9 @@ class UrlAdapter extends AdapterAbstract
      */
     public function sendRequest(RequestInterface $request): ClientResponseInterface
     {
-        $uri        = $request->getUri();
-        $method        = $request->getMethod();
-        $headers    = $request->getHeaders();
+        $uri     = $request->getUri();
+        $method  = $request->getMethod();
+        $headers = $request->getHeaders();
 
         $http = [
             'method' => $method,

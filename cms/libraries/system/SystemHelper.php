@@ -23,8 +23,8 @@ class SystemHelper
 
         foreach ($cdir as $dir) {
             preg_match($regex, $dir, $matches);
-            $plugin            = $matches[1] . ($matches[2] == 'default' ? '' : '.' . $matches[2]);
-            $rows[$plugin]    = $plugin;
+            $plugin        = $matches[1] . ($matches[2] == 'default' ? '' : '.' . $matches[2]);
+            $rows[$plugin] = $plugin;
         }
 
         return $rows;

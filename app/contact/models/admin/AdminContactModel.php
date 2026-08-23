@@ -40,7 +40,7 @@ class AdminContactModel extends Model
 		 c.contact_message ,
 		 c.created_at ,
 		 c.status ,
-		 u.fullname
+		 u.user_name
 		]* FROM `#__contact` c
 		[LEFT JOIN `#__users` u ON ( c.user_id = u.id )]
 		[WHERE]
@@ -75,7 +75,7 @@ class AdminContactModel extends Model
 		 c.contact_message,
 		 c.created_at,
 		 c.status ,
-		 u.fullname
+		 u.user_name
 		FROM `#__contact` c
 		LEFT JOIN `#__users` u ON ( c.user_id = u.id )
 		WHERE c.id = ?", $input['id'])->fetch() or abort();

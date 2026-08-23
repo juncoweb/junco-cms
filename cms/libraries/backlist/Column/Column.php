@@ -15,7 +15,7 @@ class Column extends ColumnBase implements ColumnInterface
     /**
      * Constructor
      * 
-     * @param string $name
+     * @param string $column
      */
     public function __construct(string $column)
     {

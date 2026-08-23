@@ -22,9 +22,9 @@ use Plugin;
 abstract class FilterElements implements FilterElementsInterface
 {
     // vars
-    protected ?array $values    = null;
-    protected array  $rows        = [];
-    protected string $hidden    = '';
+    protected ?array $values = null;
+    protected array  $rows   = [];
+    protected string $hidden = '';
 
     /**
      * Set Values
@@ -81,7 +81,7 @@ abstract class FilterElements implements FilterElementsInterface
     /**
      * Search
      * 
-     * @return FilterElement
+     * @return FilterElementInterface
      */
     public function search(): SearchInput
     {
@@ -93,7 +93,7 @@ abstract class FilterElements implements FilterElementsInterface
      * 
      * @param array $options
      * 
-     * @return FilterElement
+     * @return FilterElementInterface
      */
     public function searchIn(array $options): InputSelect
     {
@@ -129,7 +129,7 @@ abstract class FilterElements implements FilterElementsInterface
      * @param string       $name
      * @param array|string $attr
      * 
-     * @return FilterElement
+     * @return FilterElementInterface
      */
     public function checkbox(string $name = '', array|string $attr = []): Checkbox
     {

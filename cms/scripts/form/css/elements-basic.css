@@ -64,7 +64,7 @@ a.btn.btn-outline,
 .btn-group > .btn-group + .btn-group {
   margin-left: 0;
 }
-.btn-group > .btn:not(:last-child):not(.dropdown):not(.dropdown-toggle),
+.btn-group > .btn:not(:last-child):not(.dropdown):not(.btn-caret),
 .btn-group > .btn-group:not(:last-child) > .btn {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -75,17 +75,24 @@ a.btn.btn-outline,
   border-bottom-left-radius: 0;
 }
 
-.btn-press:has(> input:checked) {
-  background-color: var(--regular-active-bg-color);
+.btn-pill {
+  min-width: calc(var(--font-size-base) * 2.5);
+  text-align: center;
 }
 
-.dropdown-toggle::after {
+.input-hidden {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  pointer-events: none;
+}
+
+.btn-caret::after {
   display: inline-block;
   content: "▾";
   font-style: normal;
   margin-left: 7px;
 }
-.btn ~ .dropdown-toggle::after {
+.btn ~ .btn-caret::after {
   margin-left: 0;
 }
 
@@ -116,9 +123,6 @@ a.btn.btn-outline,
 .dropdown-menu > ul > li {
   padding: 0 0.375rem;
   white-space: nowrap;
-  /* &.selected i:after {
-  	content: '\2713';
-  } */
 }
 .dropdown-menu > ul > li.separator {
   font-size: 1px;
@@ -147,23 +151,28 @@ a.btn.btn-outline,
 }
 
 .btn-inline {
+  color: inherit;
+  font-weight: inherit;
+  margin: 0;
   padding-left: 0.125rem;
   padding-right: 0.125rem;
+  background: none;
+  border: none;
+  box-shadow: none;
   white-space: nowrap;
   display: inline;
 }
 .btn-inline, .btn-inline:hover, .btn-inline:focus {
-  color: var(--regular-font-color);
   text-decoration: none;
 }
 
-.btn-large .btn, .btn-large.btn {
+.btn-large:not(.rounded-full) .btn, .btn-large:not(.rounded-full).btn {
   font-size: var(--font-size-lg);
   padding: 0.5rem 1.125rem;
   border-radius: var(--rounded-lg);
 }
 
-.btn-small .btn, .btn-small.btn {
+.btn-small:not(.rounded-full) .btn, .btn-small:not(.rounded-full).btn {
   font-size: var(--font-size-sm);
   padding: 0.25rem 0.75rem;
   border-radius: var(--rounded-sm);
@@ -183,6 +192,7 @@ input::-webkit-datetime-edit-minute-field {
 
 /* -------- input ---------------------- */
 .input-field {
+  text-align: left;
   font-size: var(--font-size-base);
   line-height: var(--line-height-base);
   margin: 0;
@@ -227,16 +237,51 @@ input::-webkit-datetime-edit-minute-field {
   width: auto;
 }
 
+.input-select,
 select.input-field {
   padding-right: 1.75rem;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
   background-size: var(--font-size-base);
   background-position: center right 0.75rem;
   background-repeat: no-repeat;
+}
+.input-select[size], .input-select[multiple],
+select.input-field[size],
+select.input-field[multiple] {
+  height: auto;
+}
+
+select.input-field:not(.custom-select) {
   appearance: none;
 }
-select.input-field[size], select.input-field[multiple] {
-  height: auto;
+
+.select-group {
+  position: relative;
+}
+.select-group .dropdown-menu {
+  width: 100%;
+}
+
+select.custom-select, select.custom-select::picker(select) {
+  appearance: base-select;
+}
+select.custom-select::picker(select) {
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  background-color: inherit;
+  border-width: var(--border-width);
+  border-style: var(--border-style);
+  border-color: inherit;
+  border-radius: var(--rounded-md);
+  padding: 0;
+}
+select.custom-select::picker-icon,
+select.custom-select option::checkmark {
+  display: none;
+}
+select.custom-select option {
+  padding: 0.375rem 0.875rem;
 }
 
 textarea.input-field {
@@ -452,10 +497,6 @@ textarea.input-field[control-felem=auto-grow] {
   flex: auto;
 }
 
-.checkbox-hidden input[type=checkbox] {
-  display: none;
-}
-
 input:checked ~ .d-on-not-checked {
   display: none;
 }
@@ -520,9 +561,6 @@ input:not(:checked) ~ .d-on-checked {
   background-color: transparent;
   border-color: var(--regular-border-color);
 }
-.btn .btn-press.checked {
-  background-color: var(--solid-active-bg-color);
-}
 
 .btn-primary .btn, .btn-primary.btn {
   color: var(--regular-primary-font-color);
@@ -561,9 +599,6 @@ input:not(:checked) ~ .d-on-checked {
   color: var(--solid-primary-bg-color);
   background-color: transparent;
   border-color: var(--regular-primary-border-color);
-}
-.btn-primary .btn-press.checked {
-  background-color: var(--solid-primary-active-bg-color);
 }
 
 .btn-secondary .btn, .btn-secondary.btn {
@@ -604,9 +639,6 @@ input:not(:checked) ~ .d-on-checked {
   background-color: transparent;
   border-color: var(--regular-secondary-border-color);
 }
-.btn-secondary .btn-press.checked {
-  background-color: var(--solid-secondary-active-bg-color);
-}
 
 .btn-success .btn, .btn-success.btn {
   color: var(--regular-success-font-color);
@@ -645,9 +677,6 @@ input:not(:checked) ~ .d-on-checked {
   color: var(--solid-success-bg-color);
   background-color: transparent;
   border-color: var(--regular-success-border-color);
-}
-.btn-success .btn-press.checked {
-  background-color: var(--solid-success-active-bg-color);
 }
 
 .btn-info .btn, .btn-info.btn {
@@ -688,9 +717,6 @@ input:not(:checked) ~ .d-on-checked {
   background-color: transparent;
   border-color: var(--regular-info-border-color);
 }
-.btn-info .btn-press.checked {
-  background-color: var(--solid-info-active-bg-color);
-}
 
 .btn-warning .btn, .btn-warning.btn {
   color: var(--regular-warning-font-color);
@@ -729,9 +755,6 @@ input:not(:checked) ~ .d-on-checked {
   color: var(--solid-warning-bg-color);
   background-color: transparent;
   border-color: var(--regular-warning-border-color);
-}
-.btn-warning .btn-press.checked {
-  background-color: var(--solid-warning-active-bg-color);
 }
 
 .btn-danger .btn, .btn-danger.btn {
@@ -772,8 +795,11 @@ input:not(:checked) ~ .d-on-checked {
   background-color: transparent;
   border-color: var(--regular-danger-border-color);
 }
-.btn-danger .btn-press.checked {
-  background-color: var(--solid-danger-active-bg-color);
+
+.btn:has(> .input-hidden:checked), .btn:has(> .input-hidden:checked):hover {
+  color: var(--solid-primary-font-color);
+  background-color: var(--solid-primary-bg-color);
+  border-color: var(--solid-primary-border-color);
 }
 
 .input-field {
@@ -1194,8 +1220,11 @@ input:not(:checked) ~ .d-on-checked {
   border-color: transparent;
 }
 
-/* --- focused ------------------------- */
+/* --- focused --- */
 .btn:focus,
+.btn:has(> .input-hidden:focus),
+.btn-inline:focus,
+.btn-inline:has(> .input-hidden:focus),
 .input-field:focus,
 .input-checkbox:focus,
 .input-radio:focus,
@@ -1205,6 +1234,9 @@ input:not(:checked) ~ .d-on-checked {
 }
 
 .btn:focus,
+.btn:has(> .input-hidden:focus),
+.btn-inline:focus,
+.btn-inline:has(> .input-hidden:focus),
 .input-field:focus,
 .input-checkbox:focus,
 .input-radio:focus,
@@ -1212,8 +1244,9 @@ input:not(:checked) ~ .d-on-checked {
   box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-primary-surface-rgb-color), 0.35);
 }
 
-.btn-primary.btn:focus,
-.btn-primary .btn:focus {
+.btn-primary.btn:focus, .btn-primary.btn:has(> .input-hidden:focus), .btn-primary.btn-inline:focus, .btn-primary.btn-inline:has(> .input-hidden:focus),
+.btn-primary .btn:focus,
+.btn-primary .btn:has(> .input-hidden:focus) {
   box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-primary-surface-rgb-color), 0.35);
 }
 
@@ -1225,12 +1258,17 @@ input:not(:checked) ~ .d-on-checked {
   box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-primary-surface-rgb-color), 0.35);
 }
 
-.input-primary.input-solid.input-field:focus, .input-primary.input-solid .input-field:focus, .input-primary.input-solid.input-checkbox:focus, .input-primary.input-solid .input-checkbox:focus, .input-primary.input-solid.input-radio:focus, .input-primary.input-solid .input-radio:focus, .input-primary.input-solid.input-toggle:focus, .input-primary.input-solid .input-toggle:focus {
+.input-primary.input-solid.input-field:focus,
+.input-primary.input-solid .input-field:focus, .input-primary.input-solid.input-checkbox:focus,
+.input-primary.input-solid .input-checkbox:focus, .input-primary.input-solid.input-radio:focus,
+.input-primary.input-solid .input-radio:focus, .input-primary.input-solid.input-toggle:focus,
+.input-primary.input-solid .input-toggle:focus {
   box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-primary-surface-rgb-color), 0.35);
 }
 
-.btn-secondary.btn:focus,
-.btn-secondary .btn:focus {
+.btn-secondary.btn:focus, .btn-secondary.btn:has(> .input-hidden:focus), .btn-secondary.btn-inline:focus, .btn-secondary.btn-inline:has(> .input-hidden:focus),
+.btn-secondary .btn:focus,
+.btn-secondary .btn:has(> .input-hidden:focus) {
   box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-secondary-surface-rgb-color), 0.35);
 }
 
@@ -1242,12 +1280,17 @@ input:not(:checked) ~ .d-on-checked {
   box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-secondary-surface-rgb-color), 0.35);
 }
 
-.input-secondary.input-solid.input-field:focus, .input-secondary.input-solid .input-field:focus, .input-secondary.input-solid.input-checkbox:focus, .input-secondary.input-solid .input-checkbox:focus, .input-secondary.input-solid.input-radio:focus, .input-secondary.input-solid .input-radio:focus, .input-secondary.input-solid.input-toggle:focus, .input-secondary.input-solid .input-toggle:focus {
+.input-secondary.input-solid.input-field:focus,
+.input-secondary.input-solid .input-field:focus, .input-secondary.input-solid.input-checkbox:focus,
+.input-secondary.input-solid .input-checkbox:focus, .input-secondary.input-solid.input-radio:focus,
+.input-secondary.input-solid .input-radio:focus, .input-secondary.input-solid.input-toggle:focus,
+.input-secondary.input-solid .input-toggle:focus {
   box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-secondary-surface-rgb-color), 0.35);
 }
 
-.btn-success.btn:focus,
-.btn-success .btn:focus {
+.btn-success.btn:focus, .btn-success.btn:has(> .input-hidden:focus), .btn-success.btn-inline:focus, .btn-success.btn-inline:has(> .input-hidden:focus),
+.btn-success .btn:focus,
+.btn-success .btn:has(> .input-hidden:focus) {
   box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-success-surface-rgb-color), 0.35);
 }
 
@@ -1259,12 +1302,17 @@ input:not(:checked) ~ .d-on-checked {
   box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-success-surface-rgb-color), 0.35);
 }
 
-.input-success.input-solid.input-field:focus, .input-success.input-solid .input-field:focus, .input-success.input-solid.input-checkbox:focus, .input-success.input-solid .input-checkbox:focus, .input-success.input-solid.input-radio:focus, .input-success.input-solid .input-radio:focus, .input-success.input-solid.input-toggle:focus, .input-success.input-solid .input-toggle:focus {
+.input-success.input-solid.input-field:focus,
+.input-success.input-solid .input-field:focus, .input-success.input-solid.input-checkbox:focus,
+.input-success.input-solid .input-checkbox:focus, .input-success.input-solid.input-radio:focus,
+.input-success.input-solid .input-radio:focus, .input-success.input-solid.input-toggle:focus,
+.input-success.input-solid .input-toggle:focus {
   box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-success-surface-rgb-color), 0.35);
 }
 
-.btn-info.btn:focus,
-.btn-info .btn:focus {
+.btn-info.btn:focus, .btn-info.btn:has(> .input-hidden:focus), .btn-info.btn-inline:focus, .btn-info.btn-inline:has(> .input-hidden:focus),
+.btn-info .btn:focus,
+.btn-info .btn:has(> .input-hidden:focus) {
   box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-info-surface-rgb-color), 0.35);
 }
 
@@ -1276,12 +1324,17 @@ input:not(:checked) ~ .d-on-checked {
   box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-info-surface-rgb-color), 0.35);
 }
 
-.input-info.input-solid.input-field:focus, .input-info.input-solid .input-field:focus, .input-info.input-solid.input-checkbox:focus, .input-info.input-solid .input-checkbox:focus, .input-info.input-solid.input-radio:focus, .input-info.input-solid .input-radio:focus, .input-info.input-solid.input-toggle:focus, .input-info.input-solid .input-toggle:focus {
+.input-info.input-solid.input-field:focus,
+.input-info.input-solid .input-field:focus, .input-info.input-solid.input-checkbox:focus,
+.input-info.input-solid .input-checkbox:focus, .input-info.input-solid.input-radio:focus,
+.input-info.input-solid .input-radio:focus, .input-info.input-solid.input-toggle:focus,
+.input-info.input-solid .input-toggle:focus {
   box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-info-surface-rgb-color), 0.35);
 }
 
-.btn-warning.btn:focus,
-.btn-warning .btn:focus {
+.btn-warning.btn:focus, .btn-warning.btn:has(> .input-hidden:focus), .btn-warning.btn-inline:focus, .btn-warning.btn-inline:has(> .input-hidden:focus),
+.btn-warning .btn:focus,
+.btn-warning .btn:has(> .input-hidden:focus) {
   box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-warning-surface-rgb-color), 0.35);
 }
 
@@ -1293,12 +1346,17 @@ input:not(:checked) ~ .d-on-checked {
   box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-warning-surface-rgb-color), 0.35);
 }
 
-.input-warning.input-solid.input-field:focus, .input-warning.input-solid .input-field:focus, .input-warning.input-solid.input-checkbox:focus, .input-warning.input-solid .input-checkbox:focus, .input-warning.input-solid.input-radio:focus, .input-warning.input-solid .input-radio:focus, .input-warning.input-solid.input-toggle:focus, .input-warning.input-solid .input-toggle:focus {
+.input-warning.input-solid.input-field:focus,
+.input-warning.input-solid .input-field:focus, .input-warning.input-solid.input-checkbox:focus,
+.input-warning.input-solid .input-checkbox:focus, .input-warning.input-solid.input-radio:focus,
+.input-warning.input-solid .input-radio:focus, .input-warning.input-solid.input-toggle:focus,
+.input-warning.input-solid .input-toggle:focus {
   box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-warning-surface-rgb-color), 0.35);
 }
 
-.btn-danger.btn:focus,
-.btn-danger .btn:focus {
+.btn-danger.btn:focus, .btn-danger.btn:has(> .input-hidden:focus), .btn-danger.btn-inline:focus, .btn-danger.btn-inline:has(> .input-hidden:focus),
+.btn-danger .btn:focus,
+.btn-danger .btn:has(> .input-hidden:focus) {
   box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-danger-surface-rgb-color), 0.35);
 }
 
@@ -1310,6 +1368,10 @@ input:not(:checked) ~ .d-on-checked {
   box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-danger-surface-rgb-color), 0.35);
 }
 
-.input-danger.input-solid.input-field:focus, .input-danger.input-solid .input-field:focus, .input-danger.input-solid.input-checkbox:focus, .input-danger.input-solid .input-checkbox:focus, .input-danger.input-solid.input-radio:focus, .input-danger.input-solid .input-radio:focus, .input-danger.input-solid.input-toggle:focus, .input-danger.input-solid .input-toggle:focus {
+.input-danger.input-solid.input-field:focus,
+.input-danger.input-solid .input-field:focus, .input-danger.input-solid.input-checkbox:focus,
+.input-danger.input-solid .input-checkbox:focus, .input-danger.input-solid.input-radio:focus,
+.input-danger.input-solid .input-radio:focus, .input-danger.input-solid.input-toggle:focus,
+.input-danger.input-solid .input-toggle:focus {
   box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-danger-surface-rgb-color), 0.35);
 }

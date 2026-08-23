@@ -50,11 +50,11 @@ class Factory extends HttpFactory
 
         foreach ($multipart as $part) {
             $part = array_merge([
-                'name'        => '',
-                'contents'    => '',
-                'file'        => '',
-                'headers'    => [],
-                'filename'    => ''
+                'name'     => '',
+                'contents' => '',
+                'file'     => '',
+                'headers'  => [],
+                'filename' => ''
             ], $part);
 
             $mimepart .= $this->createMimepart($part['name'], $part['contents'], $part['file'], $part['headers'], $part['filename']);
@@ -79,14 +79,14 @@ class Factory extends HttpFactory
     /**
      * @param string[] $headers
      *
-     * @return array{0: StreamInterface, 1: string[]}
+     * @return string
      */
     protected function createMimepart(
-        string                     $name,
-        StreamInterface|string    $contents,
-        string                    $file,
-        array                    $headers,
-        string                    $filename
+        string                 $name,
+        StreamInterface|string $contents,
+        string                 $file,
+        array                  $headers,
+        string                 $filename
     ): string {
 
         if (!$name) {

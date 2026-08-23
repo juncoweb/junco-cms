@@ -12,6 +12,7 @@ return [
 		0 => 'es_AR',
 		1 => 'en_GB'
 	],
+	'normalize' => '',
 	'type' => '0',
 
 	/**
@@ -21,12 +22,6 @@ return [
 	'key' => 'lang',
 	'locale' => 'locale',
 	'codeset' => 'utf8',
-
-	/**
-	 * Negotiate
-	 */
-	'negotiate' => '',
-	'normalize' => '',
 
 	/**
 	 * Domains

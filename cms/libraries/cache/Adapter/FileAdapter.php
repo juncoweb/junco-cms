@@ -9,7 +9,6 @@ namespace Junco\Cache\Adapter;
 
 class FileAdapter implements AdapterInterface
 {
-    // vars
     protected string $dirpath = SYSTEM_STORAGE . 'cache/';
 
     /**

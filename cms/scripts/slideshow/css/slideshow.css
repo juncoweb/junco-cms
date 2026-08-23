@@ -13,6 +13,9 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  /* arrows */
+  /* nav */
+  /* text */
 }
 .slideshow ul {
   text-align: center;
@@ -57,9 +60,6 @@
   left: 0;
   background: rgba(0, 0, 0, 0.1);
 }
-.slideshow {
-  /* arrows */
-}
 .slideshow .ss-prev,
 .slideshow .ss-next {
   font-size: 1.5em;
@@ -89,9 +89,6 @@
 .slideshow .ss-next span:before {
   content: "❭";
 }
-.slideshow {
-  /* nav */
-}
 .slideshow .ss-nav {
   position: absolute;
   width: 100%;
@@ -111,9 +108,6 @@
 }
 .slideshow .ss-nav ul li.selected div {
   background: #fff;
-}
-.slideshow {
-  /* text */
 }
 .slideshow .ss-fixed {
   position: absolute;

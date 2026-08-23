@@ -7,18 +7,18 @@
 
 namespace Junco\Mvc;
 
-use Junco\Debugger\ThrowableHandler;
+use Junco\Debugger\HttpThrowableHandler;
 use Junco\Http\Exception\HttpError;
 use Junco\Http\Exception\HttpException;
 use Junco\Http\Server\RequestHandler;
 use Psr\Http\Message\ResponseInterface;
+use Responder;
 
 class Controller
 {
-    // vars
-    private ?RequestHandler $handler     = null;
-    private array           $middlewares = [];
-    private array           $traces      = [];
+    private ?RequestHandler $handler = null;
+    private array $middlewares = [];
+    private array $traces      = [];
 
     /**
      * Middleware
@@ -169,28 +169,32 @@ class Controller
      * 
      * @param callable $fn
      * 
-     * @return Psr\Http\Message\ResponseInterface | Junco\Console\Output\OutputInterface
+     * @return ResponseInterface
      */
-    final protected function wrapper(callable $fn): mixed
+    protected function wrapper(callable $fn): ResponseInterface
     {
         try {
             $result = $fn();
 
             if ($result === null) {
-                $result = new Result(200, _t('The task has been completed successfully.'), 1);
-            } elseif ($result instanceof ResponseInterface) { // legacy
-                app('logger')->notice('The controller wrapper should not return a ResponseInterface object.');
-                return $result;
-            } elseif (!$result instanceof Result) {
-                app('logger')->notice('The controller wrapper should return a Result object.');
-                $result = $this->getLegacyResult($result); // legacy
+                return Responder::get()->responseWithMessage(_t('The task has been completed successfully.'), 200, 1);
             }
 
-            return \System::getOutput()->responseWithMessage($result);
+            if (!$result instanceof Result) { // legacy
+                app('logger')->notice('The controller wrapper should return a Result object.');
+
+                if ($result instanceof ResponseInterface) {
+                    return $result;
+                }
+
+                $result = $this->getLegacyResult($result);
+            }
+
+            return Responder::get()->responseWithResult($result);
         } catch (HttpException | HttpError $e) { // new features
-            return (new ThrowableHandler)->getResponse($e);
+            return (new HttpThrowableHandler)->getResponse($e);
         } catch (\Exception $e) { // legacy
-            return \System::getOutput()->responseWithMessage($e->getMessage(), 422, $e->getCode());
+            return Responder::get()->responseWithMessage($e->getMessage(), 422, $e->getCode());
         }
     }
 

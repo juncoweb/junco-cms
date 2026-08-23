@@ -7,18 +7,18 @@
 
 namespace Junco\Archive\Adapter;
 
-use \Phar;
-use \PharData;
-use \Exception;
+use Phar;
+use PharData;
+use Exception;
 
 class PharAdapter implements AdapterInterface
 {
     // vars
-    protected $phar            = null;
-    protected $file            = null;
-    protected $tmp_file        = null;
-    protected $compression    = null;
-    protected $accept = [
+    protected ?PharData $phar     = null;
+    protected string $file        = '';
+    protected string $tmp_file    = '';
+    protected array  $compression = [];
+    protected array  $accept = [
         'phar' => 'phar',
         'tar' => 'tar',
     ];
@@ -31,6 +31,7 @@ class PharAdapter implements AdapterInterface
         if (!extension_loaded('phar')) {
             throw new Exception(_t('The Archive class has no support to execute the task.'));
         }
+
         if (extension_loaded('zlib')) {
             // gz
             $this->accept['gz'] = 'gz';
@@ -39,6 +40,7 @@ class PharAdapter implements AdapterInterface
             $this->accept['tgz'] = 'gz';
             $this->accept['tgzip'] = 'gz';
         }
+
         if (extension_loaded('bz2')) {
             // bz
             $this->accept['bz'] = 'bz';
@@ -56,9 +58,12 @@ class PharAdapter implements AdapterInterface
     /**
      * Extract
      *
-     * @param string $file		The full path to the file.
-     * @param string $dir		The directory where the package will be extracted.
-     * @param bool   $delete	Option to delete the compressed file.
+     * @param string $file  The full path to the file.
+     * @param string $dir   The directory where the package will be extracted.
+     * 
+     * @throws Exception
+     * 
+     * @return void
      */
     public function extract(string $file, string $dir): void
     {
@@ -72,9 +77,13 @@ class PharAdapter implements AdapterInterface
     /**
      * Compress
      * 
-     * @param string $file		The full path to the file to be created.
-     * @param string $dir		The base directory.
-     * @param array  $nodes		Select only some directories or files from the base directory. 
+     * @param string $file   The full path to the file to be created.
+     * @param string $dir    The base directory.
+     * @param array  $nodes  Select only some directories or files from the base directory.
+     * 
+     * @throws Exception
+     * 
+     * @return void
      */
     public function compress(string $file, string $dir, array $nodes): void
     {
@@ -90,10 +99,10 @@ class PharAdapter implements AdapterInterface
      */
     protected function create(string $file): void
     {
-        $info                = pathinfo($file);
-        $this->tmp_file        = $info['dirname'] . '/~tmp_' . uniqid();
-        $this->file            = $info['dirname'] . '/' . $info['basename'];
-        $extension            = $info['extension'];
+        $info           = pathinfo($file);
+        $this->tmp_file = $info['dirname'] . '/~tmp_' . uniqid();
+        $this->file     = $info['dirname'] . '/' . $info['basename'];
+        $extension      = $info['extension'];
 
         if (!isset($this->accept[$extension])) {
             throw new Exception(_t('The Archive class has no support to execute the task.'));
@@ -111,10 +120,10 @@ class PharAdapter implements AdapterInterface
 
         if ($extension == 'phar') {
             $format = Phar::PHAR;
-            $this->tmp_file    .= '.phar';
+            $this->tmp_file .= '.phar';
         } else {
             $format = Phar::TAR;
-            $this->tmp_file    .= '.tar';
+            $this->tmp_file .= '.tar';
         }
 
         $this->phar = new PharData($this->tmp_file, 0, null, $format);

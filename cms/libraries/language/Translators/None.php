@@ -24,7 +24,7 @@ class None implements TranslatorInterface
     /**
      * Plural version of gettext
      * 
-     * @param string $message
+     * @param string $singular
      * @param string $plural
      * @param int    $n
      * 

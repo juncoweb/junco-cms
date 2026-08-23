@@ -1,5 +1,5 @@
 
-/* --- Language ------------------------------------------ */
+/* --- Language --- */
 let Language = (function () {
     function $U(task, format) {
         return JsUrl('admin/language/' + task, {}, format);
@@ -16,7 +16,7 @@ let Language = (function () {
     }
 
     let _backlist, target;
-    let mo = {
+    const mo = {
         onLoad: function () {
             target = this;
             JsForm({ btn: this }).request($U('save'), callback);

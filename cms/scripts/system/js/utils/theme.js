@@ -1,4 +1,4 @@
-/* --- Theme ------------------------------------------ */
+/* --- Theme --- */
 const JsTheme = function ($btn) {
     const storageName = 'prefers-color-scheme';
     const currentTheme = localStorage.getItem(storageName) || 'auto';

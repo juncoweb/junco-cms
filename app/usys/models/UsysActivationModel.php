@@ -50,7 +50,9 @@ class UsysActivationModel extends Model
         }
 
         if ($data['option'] == 1) {
-            return $this->unprocessable($this->obfuscateEmail($user->getEmail()), 5);
+            $message = $this->obfuscateEmail($user->getEmail());
+
+            return $this->result(200, $message, 5);
         }
 
         /**
@@ -112,7 +114,7 @@ class UsysActivationModel extends Model
         UserHelper::isUniqueEmail($email, $user_id);
 
         // query
-        $this->db->exec("UPDATE `#__users` SET email = ? WHERE id = ?", $email, $user_id);
+        $this->db->exec("UPDATE `#__users` SET user_email = ? WHERE id = ?", $email, $user_id);
 
         return $email;
     }

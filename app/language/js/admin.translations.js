@@ -17,7 +17,7 @@
         }
 
         let target_2;
-        let _backlist = Backlist('translations')
+        const _backlist = Backlist('translations')
             .url($U)
             .controls({
                 confirm_download: {

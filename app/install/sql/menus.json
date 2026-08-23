@@ -181,6 +181,24 @@
                     ]
                 },
                 {
+                    "Name": "extension_id",
+                    "Type": null,
+                    "IsUnique": false,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 95,
+                    "IndexType": "BTREE",
+                    "Columns": [
+                        {
+                            "Name": "extension_id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
+                },
+                {
                     "Name": "menu_key",
                     "Type": null,
                     "IsUnique": false,

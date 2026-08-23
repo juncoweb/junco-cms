@@ -18,10 +18,8 @@
  * 4- The path to the plugin will be composed as follows:
  *      - SYSTEM_ABSPATH . 'cms/plugins/{extension_alias}/{plugin_name}/{alter_plugin}/{plugin_name}.{plugin_hook}.php'
  */
-
 class Plugins
 {
-    // vars
     protected $listeners = [];
 
     /**

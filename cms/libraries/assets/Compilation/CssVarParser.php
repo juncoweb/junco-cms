@@ -32,7 +32,7 @@ class CssVarParser
      * 
      * @param string $content  The stylesheet content.
      */
-    public function addString(string $content)
+    public function addString(string $content): void
     {
         $this->content = $this->clean($content);
         $start = 0;
@@ -59,11 +59,11 @@ class CssVarParser
     }
 
     /**
-     * File
+     * Add
      * 
      * @param string $file  The stylesheet file path.
      * 
-     * @return string The stylesheet
+     * @return void
      */
     public function addFile(string $file): void
     {
@@ -133,9 +133,7 @@ class CssVarParser
     }
 
     /**
-     * File
-     * 
-     * @param string $file  The stylesheet file path.
+     * Has
      * 
      * @return bool
      */
@@ -145,11 +143,11 @@ class CssVarParser
     }
 
     /**
-     * File
+     * Get
      * 
-     * @param string $file  The stylesheet file path.
+     * @param string $pattern
      * 
-     * @return bool
+     * @return ?string
      */
     public function getNextMatch(string $pattern): ?string
     {
@@ -164,13 +162,13 @@ class CssVarParser
     }
 
     /**
-     * File
+     * Find
      * 
-     * @param string $file  The stylesheet file path.
+     * @param string $scope
      * 
-     * @return string The stylesheet
+     * @return void
      */
-    public function find(string $scope)
+    public function find(string $scope): void
     {
         $this->offset++;
         $braces = 0;
@@ -232,7 +230,7 @@ class CssVarParser
      * 
      * @throws Exception
      */
-    protected function error(string $expecting)
+    protected function error(string $expecting): void
     {
         $unexpected = $this->getNextString();
         $content    = substr($this->content, 0, $this->offset);
@@ -258,9 +256,9 @@ class CssVarParser
     /**
      * Get
      * 
-     * @param int $length
+     * @param string $token
      * 
-     * @return string
+     * @return int
      */
     protected function getNextPosition(string $token): int
     {

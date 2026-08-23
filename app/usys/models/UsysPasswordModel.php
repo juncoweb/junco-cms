@@ -60,7 +60,7 @@ class UsysPasswordModel extends Model
     {
         $data = $this->filter(POST, [
             'token'    => 'text',
-            'password' => 'required',
+            'user_password' => 'required',
             'verified' => 'required',
         ]);
 
@@ -73,15 +73,15 @@ class UsysPasswordModel extends Model
 
         $user_id = $token->getUserId();
 
-        if ($data['password'] !== $data['verified']) {
+        if ($data['user_password'] !== $data['verified']) {
             return $this->unprocessable(_t('Passwords do not match.'));
         }
 
-        UserHelper::validatePassword($data['password']);
-        $data['password'] = UserHelper::hash($data['password']);
+        UserHelper::validatePassword($data['user_password']);
+        $data['user_password'] = UserHelper::hash($data['user_password']);
 
         // query
-        $this->db->exec("UPDATE `#__users` SET password = ? WHERE id = ?", $data['password'], $user_id);
+        $this->db->exec("UPDATE `#__users` SET user_password = ? WHERE id = ?", $data['user_password'], $user_id);
 
         $token->destroy();
         auth()->login($user_id);

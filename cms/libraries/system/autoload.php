@@ -54,10 +54,10 @@ spl_autoload_register(function ($className) {
         return false;
     }
 
-    $parts        = explode('\\', $className);
-    $parts[0]    = 'cms/libraries';
-    $parts[1]    = strtolower($parts[1]);
-    $file        = SYSTEM_ABSPATH . implode('/', $parts) . '.php';
+    $parts    = explode('\\', $className);
+    $parts[0] = 'cms/libraries';
+    $parts[1] = strtolower($parts[1]);
+    $file     = SYSTEM_ABSPATH . implode('/', $parts) . '.php';
 
     if (is_file($file)) {
         include $file;
@@ -78,16 +78,16 @@ spl_autoload_register(function ($className) {
     }
     $replaces = [
         [
-            'Psr\Log'            => 'log/src',                    // PSR-3
-            'Psr\Http\Message'    => 'http-message/src',            // PSR-7
-            'Psr\Container'        => 'container/src',                // PSR-11
-            'Psr\Http\Server'    => 'http-server-handler/src',    // PSR-15
-            'Psr\SimpleCache'    => 'simple-cache/src',            // PSR-16
-            'Psr\Http\Client'    => 'http-client/src',            // PSR-18
+            'Psr\Log'          => 'log/src',                    // PSR-3
+            'Psr\Http\Message' => 'http-message/src',           // PSR-7
+            'Psr\Container'    => 'container/src',              // PSR-11
+            'Psr\Http\Server'  => 'http-server-handler/src',    // PSR-15
+            'Psr\SimpleCache'  => 'simple-cache/src',           // PSR-16
+            'Psr\Http\Client'  => 'http-client/src',            // PSR-18
         ],
         [
-            'Psr\Http\Message'    => 'http-factory/src',            // PSR-17
-            'Psr\Http\Server'    => 'http-server-middleware/src', // PSR-15
+            'Psr\Http\Message' => 'http-factory/src',           // PSR-17
+            'Psr\Http\Server'  => 'http-server-middleware/src', // PSR-15
         ]
     ];
 

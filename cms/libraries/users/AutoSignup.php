@@ -32,7 +32,7 @@ class AutoSignup
      */
     public function getUserFromEmail(
         string $email,
-        string $fullname = '',
+        string $user_name = '',
         bool   $send_token = false,
         bool   $verified_email = false
     ): User {
@@ -44,26 +44,26 @@ class AutoSignup
         $data = $this->db->query("
 		SELECT
 		 id ,
-		 fullname ,
-		 username ,
-		 email ,
-         password ,
+		 user_name ,
+		 user_username ,
+		 user_email ,
+         user_password ,
 		 status
 		FROM `#__users`
-		WHERE email = ?", $email)->fetch();
+		WHERE user_email = ?", $email)->fetch();
 
         if ($data) {
             return new User(
                 $data['id'],
-                $data['username'],
-                $data['fullname'],
-                $data['email'],
-                $data['password'],
+                $data['user_username'],
+                $data['user_name'],
+                $data['user_email'],
+                $data['user_password'],
                 $data['status']
             );
         }
 
-        return $this->newUser($email, $fullname, $send_token, $verified_email);
+        return $this->newUser($email, $user_name, $send_token, $verified_email);
     }
 
     /**
@@ -71,7 +71,7 @@ class AutoSignup
      */
     protected function newUser(
         string $email,
-        string $fullname,
+        string $user_name,
         bool $send_token,
         bool $verified_email
     ): User {
@@ -80,19 +80,19 @@ class AutoSignup
         $status         = UserStatus::autosignup;
         $verified_email = $verified_email ? 'yes' : 'no';
 
-        if (!$fullname) {
-            $fullname = $username;
+        if (!$user_name) {
+            $user_name = $username;
         }
 
         // query
         $this->db->exec("
         INSERT INTO `#__users` (
-         fullname,
-         username,
-         email,
+         user_name,
+         user_username,
+         user_email,
          verified_email, 
          status
-        ) VALUES (?, ?, ?, ?, ?)", $fullname, $username, $email, $verified_email, $status);
+        ) VALUES (?, ?, ?, ?, ?)", $user_name, $username, $email, $verified_email, $status);
         $user_id = $this->db->lastInsertId();
 
         // query
@@ -101,10 +101,10 @@ class AutoSignup
         // Email
         if ($send_token) {
             $token = UserActivityToken::generate(ActivityType::signup, $user_id, $email);
-            (new UsysToken)->send($token, $fullname);
+            (new UsysToken)->send($token, $user_name);
         }
 
-        return (new User($user_id, $username, $fullname, $email, '', $status))->setCreation();
+        return (new User($user_id, $username, $user_name, $email, '', $status))->setCreation();
     }
 
     /**
@@ -130,7 +130,7 @@ class AutoSignup
      */
     protected function isUniqueUsername(string $username)
     {
-        return !$this->db->query("SELECT COUNT(*) FROM `#__users` WHERE username = ?", $username)->fetchColumn();
+        return !$this->db->query("SELECT COUNT(*) FROM `#__users` WHERE user_username = ?", $username)->fetchColumn();
     }
 
     /**

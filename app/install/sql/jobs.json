@@ -92,7 +92,7 @@
                     "IsNull": false,
                     "Comment": "",
                     "Collation": "A",
-                    "Cardinality": 13,
+                    "Cardinality": 18,
                     "IndexType": "BTREE",
                     "Columns": [
                         {
@@ -221,6 +221,24 @@
                     "Columns": [
                         {
                             "Name": "id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
+                },
+                {
+                    "Name": "job_id",
+                    "Type": null,
+                    "IsUnique": false,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 18,
+                    "IndexType": "BTREE",
+                    "Columns": [
+                        {
+                            "Name": "job_id",
                             "Sequence": 1,
                             "Comment": "",
                             "SubPart": null

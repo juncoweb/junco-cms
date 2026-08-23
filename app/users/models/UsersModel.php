@@ -28,11 +28,11 @@ class UsersModel extends Model
     {
         $data = $this->filter(POST, [
             'user_id'  => 'id',
-            'fullname' => 'text',
-            'username' => '',
-            'password' => '',
-            'email'    => 'email',
-            'role_id'  => 'id|array',
+            'user_name' => 'text',
+            'user_username' => '',
+            'user_password' => '',
+            'user_email'    => 'email',
+            'role_id'       => 'id|array',
         ]);
 
         // slice
@@ -40,33 +40,33 @@ class UsersModel extends Model
         $role_id = $this->slice($data, 'role_id');
 
         // validate
-        if (!$data['fullname']) {
+        if (!$data['user_name']) {
             return $this->unprocessable(_t('Please, fill in the name.'));
         }
 
-        if (!$data['username']) {
+        if (!$data['user_username']) {
             return $this->unprocessable(_t('Please, fill in the username.'));
         }
-        UserHelper::validateUsername($data['username']);
+        UserHelper::validateUsername($data['user_username']);
 
         // password
-        if ($data['password']) {
-            UserHelper::validatePassword($data['password']);
-            $data['password'] = UserHelper::hash($data['password']);
+        if ($data['user_password']) {
+            UserHelper::validatePassword($data['user_password']);
+            $data['user_password'] = UserHelper::hash($data['user_password']);
         } elseif ($user_id) {
-            unset($data['password']);
+            unset($data['user_password']);
         } else {
             return $this->unprocessable(_t('Please, fill in the password.'));
         }
 
         // username
-        UserHelper::isUniqueUsername($data['username'], $user_id);
+        UserHelper::isUniqueUsername($data['user_username'], $user_id);
 
         // email
-        if ($data['email']) {
-            UserHelper::isUniqueEmail($data['email'], $user_id);
+        if ($data['user_email']) {
+            UserHelper::isUniqueEmail($data['user_email'], $user_id);
         } elseif ($user_id) {
-            unset($data['email']);
+            unset($data['user_email']);
         } else {
             return $this->unprocessable(_t('Please, fill in with a valid email.'));
         }

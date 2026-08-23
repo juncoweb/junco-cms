@@ -159,6 +159,7 @@ if ($groups) {
             if ($row['restore']) {
                 $element->setAction([
                     'icon'         => 'fa-solid fa-wand-magic',
+                    'type'         => 'button',
                     'control-form' => 'restore',
                     'data-restore' => $row['name'],
                     'title'        => _t('Restore'),

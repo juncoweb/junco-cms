@@ -17,7 +17,7 @@
         }
 
         let target_2;
-        let mo = {
+        const mo = {
             size: 'large',
             target: target,
             onLoad: function () {
@@ -25,7 +25,7 @@
                 JsForm({ btn: this }).request($U('save'), callback);
             },
         };
-        let _backlist = Backlist('developers')
+        const _backlist = Backlist('developers')
             .url($U)
             .controls({
                 edit: {

@@ -7,13 +7,13 @@
 
 namespace Junco\Archive\Adapter;
 
-use \RarArchive;
-use \Exception;
+use RarArchive;
+use Exception;
 
 class RarAdapter implements AdapterInterface
 {
     // vars
-    protected $rar = null;
+    protected RarArchive $rar;
 
     /**
      * Constructor
@@ -30,11 +30,12 @@ class RarAdapter implements AdapterInterface
     /**
      * Extract
      *
-     * @param string $file		The full path to the file.
-     * @param string $dir		The directory where the package will be extracted.
-     * @param bool   $delete	Option to delete the compressed file.
-     *
+     * @param string $file  The full path to the file.
+     * @param string $dir   The directory where the package will be extracted.
+     * 
      * @throws Exception
+     * 
+     * @return void
      */
     public function extract(string $file, string $dir): void
     {
@@ -52,9 +53,13 @@ class RarAdapter implements AdapterInterface
     /**
      * Compress
      * 
-     * @param string $file		The full path to the file to be created.
-     * @param string $dir		The base directory.
-     * @param array  $nodes		Select only some directories or files from the base directory. 
+     * @param string $file   The full path to the file to be created.
+     * @param string $dir    The base directory.
+     * @param array  $nodes  Select only some directories or files from the base directory.
+     * 
+     * @throws Exception
+     * 
+     * @return void
      */
     public function compress(string $file, string $dir, array $nodes): void
     {

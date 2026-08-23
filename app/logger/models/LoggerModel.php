@@ -12,7 +12,7 @@ use Junco\Logger\LoggerManager;
 class LoggerModel extends Model
 {
     // vars
-    protected $manager;
+    protected LoggerManager $manager;
 
     /**
      * Constructor

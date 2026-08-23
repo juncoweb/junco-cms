@@ -12,6 +12,7 @@ input::-webkit-datetime-edit-minute-field {
 
 /* -------- input ---------------------- */
 .input-field {
+    text-align: left;
     font-size: var(--font-size-base);
     line-height: var(--line-height-base);
     margin: 0;
@@ -65,20 +66,61 @@ input::-webkit-datetime-edit-minute-field {
     width: auto;
 }
 
+// select
+.input-select,
 select.input-field {
     padding-right: 1.75rem;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
     background-size: var(--font-size-base);
     background-position: center right 0.75rem;
     background-repeat: no-repeat;
-    appearance: none;
 
     &[size],
     &[multiple] {
         height: auto;
     }
 }
+select.input-field:not(.custom-select) {
+    appearance: none;
+}
 
+// custom select
+.select-group {
+    position: relative;
+
+    .dropdown-menu {
+        width: 100%;
+    }
+}
+
+select.custom-select {
+    &,
+    &::picker(select) {
+        appearance: base-select;
+    }
+
+    &::picker(select) {
+        color: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        background-color: inherit;
+        border-width: var(--border-width);
+        border-style: var(--border-style);
+        border-color: inherit;
+        border-radius: var(--rounded-md);
+        padding: 0;
+    }
+
+    &::picker-icon,
+    option::checkmark {
+        display: none;
+    }
+    option {
+        padding: $felem-input-padding;
+    }
+}
+
+//
 textarea.input-field {
     overflow-y: auto;
     resize: vertical;
@@ -329,9 +371,6 @@ textarea.input-field {
     > :first-child {
         flex: auto;
     }
-}
-.checkbox-hidden input[type="checkbox"] {
-    display: none;
 }
 input:checked ~ .d-on-not-checked {
     display: none;

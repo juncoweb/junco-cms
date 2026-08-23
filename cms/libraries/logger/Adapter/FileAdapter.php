@@ -13,8 +13,8 @@ use Junco\Logger\Enum\LogStatus;
 class FileAdapter implements AdapterInterface
 {
     // vars
-    protected $dirpath  = '';
-    protected $filepath = '';
+    protected string $dirpath;
+    protected string $filepath;
 
     /**
      * Constructor
@@ -49,9 +49,6 @@ class FileAdapter implements AdapterInterface
 
         //
         foreach ($rows as $i => $row) {
-            if (is_numeric($row['created_at'])) {
-                $rows[$i]['created_at'] = date('Y-m-d H:i:s', (int)$row['created_at']); // @deprecated in v14.8
-            }
             $rows[$i]['level']   = $levels[$row['level']] ??= LogLevel::get($row['level']);
             $rows[$i]['status']  = $statuses[$row['status']] ??= LogStatus::get($row['status']);
             $rows[$i]['context'] = json_decode($row['context'], true);
@@ -89,10 +86,7 @@ class FileAdapter implements AdapterInterface
      */
     public function log(LogLevel $level, string $message, array $context): bool
     {
-        $lines = is_file($this->filepath)
-            ? file($this->filepath)
-            : [];
-
+        $lines      = $this->getLines();
         $count      = count($lines);
         $id         = ($count ? (int)$lines[$count - 1] : 0) + 1;
         $status     = LogStatus::unchecked->name;

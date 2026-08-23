@@ -9,7 +9,6 @@ namespace Junco\Mvc;
 
 class Result
 {
-    // vars
     protected string $message;
     protected int    $statusCode;
     protected int    $code;

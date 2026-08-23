@@ -278,7 +278,7 @@ class backlist_master_default_snippet implements BacklistInterface
      * @param string $value
      * @param string $field
      * 
-     * @return SearchInterface
+     * @return Search
      */
     public function search(string $column, string $value, string $field = ''): Search
     {

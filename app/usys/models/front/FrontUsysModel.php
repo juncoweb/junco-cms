@@ -205,9 +205,9 @@ class FrontUsysModel extends Model
     {
         $user = $this->db->query("
 		SELECT
-		 fullname ,
-		 username ,
-		 email ,
+		 user_name ,
+		 user_username ,
+		 user_email ,
 		 status
 		FROM `#__users`
 		WHERE id = ?", $token->getUserId())->fetch();
@@ -255,7 +255,7 @@ class FrontUsysModel extends Model
         return $this->db->query("
 		SELECT
 		 username AS email_username,
-		 fullname 
+		 user_name 
 		FROM `#__users`
 		WHERE id = ?", $user_id)->fetch() ?: null;
     }

@@ -24,14 +24,13 @@ class UploadedImageManager extends UploadedFileManager
      * 
      * @param ?array $rules
      * 
+     * @return static
      */
-    public function validate(?array $rules = null): self
+    public function validate(?array $rules = null): static
     {
         return parent::validate(
             array_merge(['allow_extensions' => config('filesystem.accept_images')], $rules ?? [])
         );
-
-        return $this;
     }
 
     /**
@@ -56,8 +55,9 @@ class UploadedImageManager extends UploadedFileManager
             $resizer = new ImageResizer();
 
             foreach ($this->files as $info) {
+                $src_file = $this->dirpath . $info['filename'];
+
                 foreach ($this->resizes as $sizename => $data) {
-                    $src_file = $this->dirpath . $info['filename'];
                     $rsz_file = $this->basedir . strtr($this->resizes_path, [
                         '{sizename}' => $sizename,
                         '{filename}' => $info['filename']
@@ -65,6 +65,7 @@ class UploadedImageManager extends UploadedFileManager
 
                     $resizer->resize($src_file, $rsz_file, $data['size'], $data['mode']);
                 }
+
                 $this->save_orig or unlink($src_file);
             }
         }
@@ -104,8 +105,8 @@ class UploadedImageManager extends UploadedFileManager
             ]];
         }
 
-        $this->resizes_path    = $resizes_path;
-        $this->resizes        = $resizes;
+        $this->resizes_path = $resizes_path;
+        $this->resizes      = $resizes;
         $this->save_orig    = $save_orig;
 
         return $this;
@@ -175,16 +176,21 @@ class UploadedImageManager extends UploadedFileManager
 
     /**
      * Delete
+     * 
+     * @param array|string|null $files
+     * 
+     * @return void
      */
-    public function delete($files): void
+    public function delete(array|string|null $files = null): void
     {
-        if ($files === true) {
+        if ($files === null) {
             $files = $this->files;
         } elseif (!is_array($files)) {
             $files = [$files];
         }
 
         $sizenames = array_keys($this->resizes);
+
         foreach ($files as $filename) {
             foreach ($sizenames as $sizename) {
                 $f = $this->basepath . strtr($this->resizes_path, [

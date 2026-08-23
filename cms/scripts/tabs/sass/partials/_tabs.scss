@@ -1,24 +1,56 @@
-/* --- Tabs ----------------------------------------- */
+/* --- Tabs --- */
+.btn-tablist,
 .tablist {
-    margin: 0 var(--spacing-4);
+    margin: 0;
     padding: 0;
 
     li {
-        line-height: var(--line-height-base);
-        margin: 0;
-        padding: $tablist-padding;
         list-style: none;
         display: inline-block;
-        background-color: var(--regular-bg-color);
-        border-width: var(--border-width);
-        border-style: var(--border-style);
-        border-color: var(--regular-border-color);
-        border-radius: var(--rounded-md) var(--rounded-md) 0 0;
+        margin: 0;
         cursor: default;
 
         .on-small {
             display: none;
         }
+    }
+}
+.tabpanel-group,
+.btn-tabpanel-group {
+    & > div {
+        display: none;
+
+        &.selected {
+            display: block;
+        }
+    }
+}
+
+@media (max-width: $screen-sm) {
+    .btn-tablist,
+    .tablist {
+        li:not(.selected) .on-small {
+            display: inline-block;
+        }
+
+        li:not(.selected) .on-large {
+            display: none;
+        }
+    }
+}
+
+// .tabslist
+.tablist {
+    margin: 0 var(--spacing-4);
+
+    li {
+        line-height: var(--line-height-base);
+        padding: $tablist-padding;
+        background-color: var(--regular-bg-color);
+        border-width: var(--border-width);
+        border-style: var(--border-style);
+        border-color: var(--regular-border-color);
+        border-radius: var(--rounded-md) var(--rounded-md) 0 0;
     }
 
     li:focus {
@@ -47,32 +79,58 @@
     border-top-width: var(--border-width);
     border-top-style: var(--border-style);
     border-top-color: var(--regular-border-color);
+}
 
-    & > div {
-        display: none;
-
-        &.selected {
-            display: block;
-        }
+// btn-tablist
+.btn-tablist {
+    li {
+        line-height: var(--line-height-base);
+        padding: $tablist-padding;
+        background-color: var(--regular-bg-color);
+        margin-bottom: var(--spacing-1);
+        border-radius: var(--rounded-md);
     }
+
+    li:focus {
+        border-color: var(--regular-active-border-color);
+    }
+
+    li ~ li {
+        margin-left: var(--spacing-1);
+    }
+
+    li:hover,
+    li.selected {
+        background: var(--regular-active-bg-color);
+    }
+}
+
+.btn-tabpanel-group {
+    background: var(--regular-surface-color);
 }
 
 // sizes
-.tab-large {
+.tab-small {
+    &.btn-tablist li,
     &.tablist li {
-        font-size: var(--font-size-lg);
-        padding: $tablist-large-padding;
-        border-radius: var(--rounded-lg) var(--rounded-lg) 0 0;
+        font-size: var(--font-size-sm);
+        padding: $tablist-small-padding;
+        border-radius: var(--rounded-sm);
     }
 }
 
-//
-@media (max-width: $screen-sm) {
-    .tablist li:not(.selected) .on-small {
-        display: inline-block;
+.tab-large {
+    &.btn-tablist li,
+    &.tablist li {
+        font-size: var(--font-size-lg);
+        padding: $tablist-large-padding;
+        border-radius: var(--rounded-lg);
     }
-
-    .tablist li:not(.selected) .on-large {
-        display: none;
+}
+.tab-small,
+.tab-large {
+    &.tablist li {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
     }
 }

@@ -8,12 +8,12 @@
 class Assets
 {
     // vars
-    protected $options  = null;
-    protected $meta     = [];
-    protected $css      = [];
-    protected $head_js  = [];
-    protected $js       = [];
-    protected $domready = [];
+    protected stdClass $options;
+    protected array $meta     = [];
+    protected array $css      = [];
+    protected array $head_js  = [];
+    protected array $js       = [];
+    protected array $domready = [];
 
     /**
      * Constructor
@@ -38,7 +38,7 @@ class Assets
      */
     public function clear(): void
     {
-        $this->options  = null;
+        $this->options  = new stdClass();
         $this->meta     = [];
         $this->css      = [];
         $this->head_js  = [];

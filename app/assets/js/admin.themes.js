@@ -16,7 +16,7 @@ let AssetsThemes = (function () {
     }
 
     let _backlist, target;
-    let _controls = {
+    const _controls = {
         create: {
             modalOptions: {
                 //size: 'large',

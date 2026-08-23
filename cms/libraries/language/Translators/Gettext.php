@@ -22,10 +22,10 @@ class Gettext implements TranslatorInterface
             $codeset = 'utf8';
         }
 
-        if (DIRECTORY_SEPARATOR == "\\") {        // windows
+        if (DIRECTORY_SEPARATOR == "\\") { // windows
             putenv("LC_ALL={$language}");
             //putenv("LC_MESSAGES={$language}");
-        } else {                                // linux
+        } else {                          // linux
             setlocale(LC_ALL, $language . '.' . $codeset);
             //setlocale(LC_MESSAGES, $language);
         }
@@ -50,7 +50,7 @@ class Gettext implements TranslatorInterface
     /**
      * Plural version of gettext
      * 
-     * @param string $message
+     * @param string $singular
      * @param string $plural
      * @param int    $n
      * 

@@ -792,22 +792,20 @@ textarea {
 .lightbox > div > div {
   flex: auto;
 }
-.lightbox > i {
+.lightbox > button {
   color: #fff;
   font-size: 32px;
   text-align: center;
   display: block;
-  line-height: 32px;
+  line-height: 48px;
   padding: 0 16px 0 8px;
+  background: rgba(0, 0, 0, 0.9);
   border-radius: var(--rounded-md) 0 0 var(--rounded-md);
   position: fixed;
   right: 0;
   top: 20px;
   cursor: pointer;
   z-index: 100;
-}
-.lightbox > i:hover {
-  background: #666;
 }
 
 /* --- loading ----------------------------------------- */
@@ -889,7 +887,7 @@ img.responsive {
   position: absolute;
 }
 
-/* --- notify ------------------------------------------ */
+/* --- notify --- */
 .notify-box {
   position: relative;
   z-index: var(--zindex-toast);
@@ -2131,6 +2129,33 @@ a.color-blue {
   background-color: #067bcc;
 }
 
+.color-skyblue,
+a.color-skyblue {
+  color: #82c8e5;
+}
+
+.bg-skyblue {
+  background-color: #82c8e5;
+}
+
+.color-cian,
+a.color-cian {
+  color: #008b8b;
+}
+
+.bg-cian {
+  background-color: #008b8b;
+}
+
+.color-yellow,
+a.color-yellow {
+  color: #ffc134;
+}
+
+.bg-yellow {
+  background-color: #ffc134;
+}
+
 .color-green,
 a.color-green {
   color: #34a745;
@@ -2158,13 +2183,22 @@ a.color-red {
   background-color: #dc3540;
 }
 
-.color-yellow,
-a.color-yellow {
-  color: #ffc134;
+.color-pink,
+a.color-pink {
+  color: #ff5c77;
 }
 
-.bg-yellow {
-  background-color: #ffc134;
+.bg-pink {
+  background-color: #ff5c77;
+}
+
+.color-purple,
+a.color-purple {
+  color: #9d00ff;
+}
+
+.bg-purple {
+  background-color: #9d00ff;
 }
 
 .color-default,

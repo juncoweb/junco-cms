@@ -11,7 +11,6 @@ use Filter;
 
 class Model
 {
-    // vars
     protected array  $data         = [];
     protected array  $data_array   = [];
     private   ?array $__data       = null;

@@ -9,7 +9,7 @@ $zoom = Zoom::get();
 if ($user_id) {
     $zoom->columns(
         $zoom->group($contact_name)->setLabel(_t('Name')),
-        $zoom->group($fullname)
+        $zoom->group($user_name)
             ->setLabel(_t('User'))
             ->setLink($user_url)
     );

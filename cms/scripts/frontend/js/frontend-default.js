@@ -57,26 +57,21 @@ Frontend.attachAll({
         return function (el) {
             el.addEventListener('click', function (event) {
                 event.preventDefault();
+
                 if (!box) {
-                    box = document.body.appendChild(JsElement('DIV.tpl-search', {
-                        html: '<div><i class="fa-solid fa-xmark cursor-pointer"></i></div>'
-                            + '<form class="box-default p-8 rounded-large" action="' + el.href + '" method="GET">'
-                            + '<div class="input-group input-large">'
-                            + '<input type="input" name="q" placeholder="" class="input-field input-primary">'
-                            + '<button type="submit" class="btn btn-primary btn-solid"><i class="fa-solid fa-magnifying-glass"></i></button>'
-                            + '</div>'
-                            + '</form>'
-                    }));
-
-                    box.querySelector('div').addEventListener('click', function () { box.toggle(); });
-                    box.toggle = function () {
-                        if (document.body.classList.toggle('search-fixed')) {
-                            this.querySelector('input').focus();
+                    box = Lightbox({
+                        onShow: function () {
+                            this.getContainer().querySelector('input')?.focus();
                         }
-                    };
-
+                    }).setContent('<div style="width: 100%; max-width: 900px;">'
+                        + '<form class="box-default p-8 rounded-large" action="' + el.href + '" method="GET">'
+                        + '<div class="input-group input-large">'
+                        + '<input type="input" name="q" placeholder="" class="input-field input-primary">'
+                        + '<button type="submit" class="btn btn-primary btn-solid"><i class="fa-solid fa-magnifying-glass"></i></button>'
+                        + '</form>'
+                        + '</div>');
                 }
-                box.toggle();
+                box.show();
             });
         };
     })(),

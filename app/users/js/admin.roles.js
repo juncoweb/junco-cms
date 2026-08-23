@@ -18,14 +18,14 @@ var UsersRoles = (function () {
             }
 
             let target;
-            let mo = {
+            const mo = {
                 onLoad: function () {
                     target = this;
                     JsForm({ btn: this }).request($U('save'), callback);
                 },
             };
 
-            let _backlist = Backlist()
+            const _backlist = Backlist()
                 .url($U)
                 .controls({
                     create: {

@@ -5,11 +5,12 @@
  * @author: Junco CMS (tm)
  */
 
+use Junco\Archive\Adapter\AdapterInterface;
+
 class Archive
 {
-    // vars
-    protected $abspath = '';
-    protected $adapter = [];
+    protected string $abspath;
+    protected array  $adapter = [];
 
     /**
      * Constructor
@@ -61,9 +62,9 @@ class Archive
     /**
      * Get
      * 
-     * @param string $extension
+     * @param string $file
      */
-    protected function getAdapter(string $file): Junco\Archive\Adapter\AdapterInterface
+    protected function getAdapter(string $file): AdapterInterface
     {
         switch (pathinfo($file, PATHINFO_EXTENSION)) {
             case 'rar':
@@ -83,12 +84,15 @@ class Archive
     public function acceptsToExtract()
     {
         $accept = [];
+
         if (extension_loaded('zip')) {
             $accept[] = 'zip';
         }
+
         if (extension_loaded('rar')) {
             $accept[] = 'rar';
         }
+
         if (extension_loaded('phar')) {
             $accept[] = 'tar';
             if (extension_loaded('zlib')) {
@@ -128,6 +132,7 @@ class Archive
                 $accept[] = 'tar.gz';
                 /* $accept = array_merge($accept, ['tar.gz', 'tar.gzip', 'tgz', 'tgzip']); */
             }
+
             if (extension_loaded('bz2')) {
                 $accept[] = 'tar.bz2';
                 /* $accept = array_merge($accept, [

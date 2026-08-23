@@ -30,22 +30,19 @@
         }
     }
 
-    & > i {
+    & > button {
         color: #fff;
         font-size: $lightbox-cross-size;
         text-align: center;
         display: block;
-        line-height: $lightbox-cross-size;
+        line-height: $lightbox-cross-size * 1.5;
         padding: 0 ($lightbox-cross-size * 0.5) 0 ($lightbox-cross-size * 0.25);
+        background: $lightbox-bg-color;
         border-radius: var(--rounded-md) 0 0 var(--rounded-md);
         position: fixed;
         right: 0;
         top: 20px;
         cursor: pointer;
         z-index: 100;
-
-        &:hover {
-            background: #666;
-        }
     }
 }

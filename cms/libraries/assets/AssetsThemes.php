@@ -92,7 +92,7 @@ class AssetsThemes extends AssetsBasic
     /**
      * Delete
      *
-     * @param array|string $key
+     * @param array|string $keys
      * 
      * @return void
      */

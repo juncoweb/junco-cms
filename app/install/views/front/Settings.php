@@ -28,19 +28,19 @@ $form->input('site_email')
 $form->separate();
 //
 $form->header(_t('Data Manager'));
-$form->input('fullname')
+$form->input('user_name')
     ->setLabel(_t('Name'))
     ->setHelp(_t('a-z A-Z 0-9'));
 
-$form->input('username')
+$form->input('user_username')
     ->setLabel(_t('Username'))
     ->setHelp(_t('az AZ 0-9 and dash, between 6 and 24 characters'));
 
-$form->input('password', ['type' => 'password'])
+$form->input('user_password', ['type' => 'password'])
     ->setLabel(_t('Password'))
     ->setHelp(_t('az AZ 0-9,between 6 and 24 characters'));
 
-$form->input('email')
+$form->input('user_email')
     ->setLabel(_t('Email'))
     ->setHelp(_t('Your personal email'));
 

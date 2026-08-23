@@ -343,8 +343,6 @@ class AssetsBasic
     /**
      * Get minify pattern.
      *
-     * @param string $key
-     *
      * @return string
      */
     protected function getMinifyPattern(): string

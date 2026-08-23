@@ -32,18 +32,23 @@ class UserNotifiable extends Notifiable
     /**
      * Get
      */
-    public function getData(string $name)
+    public function getData(string $name): ?string
     {
-        if ($this->data === null) {
-            $this->data = db()->query("
-			SELECT
-			 id ,
-			 fullname ,
-			 email
-			FROM `#__users`
-			WHERE id = ?", $this->user_id)->fetch();
-        }
-        return $this->data[$name] ?? null;
+        return ($this->data ??= $this->queryData())[$name] ?? null;
+    }
+
+    /**
+     * Query
+     */
+    protected function queryData(): array
+    {
+        return db()->query("
+        SELECT
+         id ,
+         user_name ,
+         user_email
+        FROM `#__users`
+        WHERE id = ?", $this->user_id)->fetch() ?: [];
     }
 
     /**
@@ -59,7 +64,7 @@ class UserNotifiable extends Notifiable
      */
     public function getEmail(): string
     {
-        return $this->getData('email') ?? '';
+        return $this->getData('user_email') ?? '';
     }
 
     /**
@@ -67,7 +72,7 @@ class UserNotifiable extends Notifiable
      */
     public function getName(): string
     {
-        return $this->getData('fullname') ?? '';
+        return $this->getData('user_name') ?? '';
     }
 
     /**
@@ -82,8 +87,8 @@ class UserNotifiable extends Notifiable
         $users = db()->query("
 		SELECT
 		 u.id ,
-		 u.fullname ,
-		 u.email
+		 u.user_name ,
+		 u.user_email AS email
 		FROM `#__users_roles_labels_map` m1
 		LEFT JOIN `#__users_roles_map` m2 ON ( m1.role_id = m2.role_id )
 		LEFT JOIN `#__users` u ON ( m2.user_id = u.id )

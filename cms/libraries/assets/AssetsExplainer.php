@@ -8,7 +8,7 @@
 class AssetsExplainer extends AssetsBasic
 {
     // vars
-    protected $assets = [];
+    protected array $assets = [];
 
     /**
      * Obtains the source assets from the compiled assets.

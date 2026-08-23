@@ -117,57 +117,15 @@
                 {
                     "Name": "session_selector",
                     "Type": null,
-                    "IsUnique": true,
-                    "IsNull": false,
-                    "Comment": "",
-                    "Collation": "A",
-                    "Cardinality": 43,
-                    "IndexType": "BTREE",
-                    "Columns": [
-                        {
-                            "Name": "session_selector",
-                            "Sequence": 1,
-                            "Comment": "",
-                            "SubPart": null
-                        }
-                    ]
-                },
-                {
-                    "Name": "session_validator",
-                    "Type": null,
-                    "IsUnique": true,
-                    "IsNull": false,
-                    "Comment": "",
-                    "Collation": "A",
-                    "Cardinality": 43,
-                    "IndexType": "BTREE",
-                    "Columns": [
-                        {
-                            "Name": "session_validator",
-                            "Sequence": 1,
-                            "Comment": "",
-                            "SubPart": null
-                        },
-                        {
-                            "Name": "session_hash",
-                            "Sequence": 2,
-                            "Comment": "",
-                            "SubPart": null
-                        }
-                    ]
-                },
-                {
-                    "Name": "user_id",
-                    "Type": null,
                     "IsUnique": false,
                     "IsNull": false,
                     "Comment": "",
                     "Collation": "A",
-                    "Cardinality": 3,
+                    "Cardinality": 44,
                     "IndexType": "BTREE",
                     "Columns": [
                         {
-                            "Name": "user_id",
+                            "Name": "session_selector",
                             "Sequence": 1,
                             "Comment": "",
                             "SubPart": null

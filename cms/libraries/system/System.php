@@ -61,35 +61,4 @@ class System
             ? (bool)constant('IS_DEMO')
             : false;
     }
-
-    /**
-     * Create and return an object instance for the view
-     * 
-     * @param bool $severe    If the output is a template, it will return the system's template.
-     * 
-     * @return object
-     */
-    public static function getOutput(bool $severe = false)
-    {
-        $format = router()->getFormat();
-
-        switch ($format) {
-            case 'blank':
-                return Responder::asHttpBlank();
-
-            case 'text':
-                return Responder::asAjaxText();
-
-            case 'json':
-                return Responder::asAjaxJson();
-
-            case 'template':
-                return $severe
-                    ? snippet('template')
-                    : Template::get();
-
-            default:
-                return snippet($format);
-        }
-    }
 }

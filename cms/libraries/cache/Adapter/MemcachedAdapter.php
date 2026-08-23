@@ -11,7 +11,6 @@ use Memcached;
 
 class MemcachedAdapter implements AdapterInterface
 {
-    // vars
     protected object $memcached;
     protected string $prefix = 'cache.';
 

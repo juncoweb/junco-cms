@@ -7,44 +7,44 @@
 
 // vars
 $text = [
-    'delete'            => _t('Delete'),
-    'name'                => _t('Name'),
-    'history'            => _t('History'),
-    'help'                => _t('Help'),
-    'autoload'            => _t('Autoload'),
-    'translate'            => _t('Translate'),
-    'reload_on_change'    => _t('Reload on change'),
+    'delete'           => _t('Delete'),
+    'name'             => _t('Name'),
+    'history'          => _t('History'),
+    'help'             => _t('Help'),
+    'autoload'         => _t('Autoload'),
+    'translate'        => _t('Translate'),
+    'reload_on_change' => _t('Reload on change'),
 
 ];
 $header_tag = '%d. %s ' . _t('Group') . ' %s ' . _t('Order') . ' %s %s';
 $statuses = [_t('Only developer mode'), _t('Public')];
 $types = [
     _t('Integer') => [
-        'input-integer'                => _t('Input (Integer)'),
-        'input-range'                => _t('Range'),
-        'select-integer'            => _t('Selector (Integer)'),
-        'select-multiple-integer'    => _t('Selector multiple (Integer)'),
+        'input-integer'           => _t('Input (Integer)'),
+        'input-range'             => _t('Range'),
+        'select-integer'          => _t('Selector (Integer)'),
+        'select-multiple-integer' => _t('Selector multiple (Integer)'),
     ],
     _t('Text') => [
-        'input-text'                => _t('Input (Text)'),
-        'input-email'                => _t('Email'),
-        'input-password'            => _t('Password'),
-        'input-phone'                => _t('Phone'),
-        'input-url'                    => _t('Url'),
-        'input-color'                => _t('Color'),
-        'select-text'                => _t('Selector (Text)'),
-        'select-multiple-text'        => _t('Multiple selector (Text)'),
-        'textarea'                    => _t('Textarea'),
+        'input-text'              => _t('Input (Text)'),
+        'input-email'             => _t('Email'),
+        'input-password'          => _t('Password'),
+        'input-phone'             => _t('Phone'),
+        'input-url'               => _t('Url'),
+        'input-color'             => _t('Color'),
+        'select-text'             => _t('Selector (Text)'),
+        'select-multiple-text'    => _t('Multiple selector (Text)'),
+        'textarea'                => _t('Textarea'),
     ],
     _t('Others') => [
-        'boolean'                    => _t('Boolean'),
-        'list'                        => _t('List'),
-        'json'                        => _t('JSON'),
+        'boolean'                 => _t('Boolean'),
+        'list'                    => _t('List'),
+        'json'                    => _t('JSON'),
     ],
     _t('Framework') => [
-        'plugin'                    => _t('Plugin'),
-        'plugins'                    => _t('Plugins'),
-        'snippet'                    => _t('Snippet'),
+        'plugin'                  => _t('Plugin'),
+        'plugins'                 => _t('Plugins'),
+        'snippet'                 => _t('Snippet'),
     ],
 ];
 

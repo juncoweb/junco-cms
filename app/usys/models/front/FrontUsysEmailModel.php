@@ -38,7 +38,7 @@ class FrontUsysEmailModel extends Model
             }
 
             // query
-            db()->exec("UPDATE `#__users` SET email = ?, verified_email = 'yes' WHERE id = ?", $email, $token->getUserId());
+            db()->exec("UPDATE `#__users` SET user_email = ?, verified_email = 'yes' WHERE id = ?", $email, $token->getUserId());
         } catch (Exception $e) {
             $data['error'] = 1;
             $data['error_msg'] = $e->getMessage();

@@ -11,7 +11,6 @@ use \Redis;
 
 class RedisAdapter implements AdapterInterface
 {
-    // vars
     protected object $redis;
     protected string $prefix = 'cache.';
 

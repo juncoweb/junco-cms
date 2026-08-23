@@ -15,9 +15,12 @@ class InputSelect extends FilterElement
     /**
      * Constructor
      *
-     * @param string  $name
-     * @param ?string $label
-     * @param array	  $attr
+     * @param ?string $input_name
+     * @param mixed   $input_value
+     * @param string  $select_name
+     * @param array   $options
+     * @param ?string $default
+     * 
      */
     public function __construct(
         ?string $input_name = null,
@@ -33,7 +36,7 @@ class InputSelect extends FilterElement
         $html = '<div class="btn-group" control-felem="select">'
             .  '<input type="text" name="' . $input_name . '" value="' . $input_value . '" aria-label="' . _t('Search') . '" class="btn">'
             .  '<button type="submit" class="btn" data-select-label>' . $options[$default] . '</button>'
-            .  '<button type="button" class="btn dropdown-toggle"></button>'
+            .  '<button type="button" class="btn btn-caret"></button>'
             .  '<div class="dropdown-menu" style="display: none;">'
             .    '<input type="hidden" name="' . $select_name . '" value="' . $default . '">'
             .    $this->renderMenu($options, $default)

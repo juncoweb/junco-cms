@@ -19,6 +19,7 @@
  *
  * @requires
  * - JsElement
+ * - JsFocus
  * - JsMergeOptions
  * - JsMove
  * - JsRequest
@@ -26,7 +27,7 @@
  * - JsNotify
  */
 
-const Modal = function (options) {
+function Modal(options) {
 
     options = JsMergeOptions({
         target: undefined,
@@ -61,8 +62,7 @@ const Modal = function (options) {
         },
     });
 
-    let curFocus;
-    let that = {
+    const that = {
         isModal: 1,
         close: function () {
             if (element.parentNode) {
@@ -103,22 +103,18 @@ const Modal = function (options) {
         },
 
         focus: function () {
-            if (!getFocusableElements().includes(document.activeElement)) {
-                curFocus = document.activeElement;
-            }
-
+            _focus.add();
             options.target?.blur();
             element.querySelector('button[control-modal=close]')?.focus();
+
             if (options.overlay) {
                 element.scroll(0, 0);
             }
-            document.addEventListener('keydown', keyboardControls);
         },
 
         blur: function () {
             options.target?.focus();
-            curFocus?.focus();
-            document.removeEventListener('keydown', keyboardControls);
+            _focus.remove();
         },
 
         getSubmit: function () {
@@ -132,45 +128,6 @@ const Modal = function (options) {
             return _element;
         }
     };
-
-    function getFocusableElements() {
-        return [
-            ..._element.querySelectorAll('a[href],button,input,textarea,select,details,[tabindex]:not([tabindex="-1"])')
-        ].filter(
-            el => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden')
-        );
-    }
-
-    function keyboardControls(event) {
-        if (!element) {
-            that.blur();
-        }
-
-        if (event.key == 'Tab') {
-            let focusables = getFocusableElements();
-            let length = focusables.length;
-
-            if (!length) {
-                event.preventDefault();
-            } else if (!focusables.includes(document.activeElement)) {
-                event.preventDefault();
-                focusables[0].focus();
-            } else {
-                let isBack = event.shiftKey;
-                if (isBack) {
-                    if (document.activeElement == focusables[0]) {
-                        event.preventDefault();
-                        focusables[length - 1].focus();
-                    }
-                } else if (document.activeElement == focusables[length - 1]) {
-                    event.preventDefault();
-                    focusables[0].focus();
-                }
-            }
-        } else if (event.key == 'Escape') {
-            that.close();
-        }
-    }
 
     // functions
     function getButtonClass(button) {
@@ -279,14 +236,24 @@ const Modal = function (options) {
     }
 
     // element
-    let _element = element = JsElement('div.modal-' + options.size, {
+    const _element = JsElement('div.modal-' + options.size, {
         html: render(Modal.countFixed),
         'data-modal': 1,
+    });
+    let element = _element;
+    const _focus = JsFocus(_element, {
+        controls: !options.draggable,
+        onEscape: function () {
+            that.close();
+        },
+        onError: function () {
+            that.blur();
+        }
     });
 
     // draggable
     if (options.draggable) {
-        let handle = element.querySelector('.modal-header');
+        const $handle = element.querySelector('.modal-header');
         let initial;
 
         function startFn(event) {
@@ -306,11 +273,11 @@ const Modal = function (options) {
             element.style.margin = '0px'; // hack
         }
 
-        handle.style.cursor = 'move';
-        JsMove(handle, startFn, moveFn);
+        $handle.style.cursor = 'move';
+        JsMove($handle, startFn, moveFn);
 
     } else if (options.overlay) { // overlay
-        var element = JsElement('div.modal-overlay');
+        element = JsElement('div.modal-overlay');
 
         element.appendChild(_element);
         element.addEventListener('click', that.close);
@@ -353,7 +320,7 @@ Modal.countFixed = 0;
  */
 JsRequest.implement({
     modal: function (options) {
-        let mo = typeof options.modalOptions == 'object'
+        const mo = typeof options.modalOptions == 'object'
             ? options.modalOptions
             : null;
 

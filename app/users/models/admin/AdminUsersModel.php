@@ -52,7 +52,7 @@ class AdminUsersModel extends Model
             switch ($data['field']) {
                 default:
                 case 1:
-                    $this->db->where("u.fullname LIKE %?", $data['search']);
+                    $this->db->where("u.user_name LIKE %?", $data['search']);
                     $data['field'] = 1;
                     break;
 
@@ -60,24 +60,24 @@ class AdminUsersModel extends Model
                     if (is_numeric($data['search'])) {
                         $this->db->where("u.id = ?", (int)$data['search']);
                     } else {
-                        $this->db->where("u.username LIKE %?", $data['search']);
+                        $this->db->where("u.user_username LIKE %?", $data['search']);
                     }
                     break;
 
                 case 3:
-                    $this->db->where("u.email LIKE %?", $data['search']);
+                    $this->db->where("u.user_email LIKE %?", $data['search']);
                     break;
             }
         }
         $this->db->order($data['order'], [
-            1 => 'u.fullname',
+            1 => 'u.user_name',
             2 => 'u.created_at',
         ], 2);
         $this->db->sort($data['sort'], 'desc');
         $pagi = $this->db->paginate("
 		SELECT [
 		 u.id ,
-		 u.fullname ,
+		 u.user_name ,
 		 u.created_at ,
 		 u.status
 		]* FROM `#__users` u
@@ -122,9 +122,9 @@ class AdminUsersModel extends Model
         $data = $this->db->query("
 		SELECT
 		 id AS user_id,
-		 fullname ,
-		 username ,
-		 email
+		 user_name ,
+		 user_username ,
+		 user_email
 		FROM `#__users`
 		WHERE id = ?", $data['id'])->fetch() or abort();
 
@@ -152,10 +152,13 @@ class AdminUsersModel extends Model
 
         // query
         if ($data['q']) {
-            $this->db->where("fullname LIKE %?", $data['q']);
+            $this->db->where("user_name LIKE %?", $data['q']);
         }
         $rows = $this->db->query("
-		SELECT id, fullname, email
+		SELECT
+         id ,
+         user_name ,
+         user_email
 		FROM `#__users`
 		[WHERE]
 		LIMIT $limit")->fetchAll(Database::FETCH_NUM);

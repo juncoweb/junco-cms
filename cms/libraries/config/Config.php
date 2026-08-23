@@ -7,9 +7,8 @@
 
 class Config
 {
-    // vars
-    protected ?Settings $settings = null;
-    protected array     $data     = [];
+    protected Settings $settings;
+    protected array $data = [];
 
     /**
      * Constructor

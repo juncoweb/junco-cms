@@ -13,14 +13,8 @@
 
 .sample-row {
     margin-bottom: var(--spacing-8);
-}
 
-a.sample-btn {
-    color: var(--regular-font-color);
-    font-size: var(--font-size-sm);
-    padding: 0 var(--spacing-1);
-
-    & + & {
+    .btn-inline + .btn-inline {
         margin-left: var(--spacing-2);
     }
 }

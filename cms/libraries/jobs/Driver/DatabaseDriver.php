@@ -8,11 +8,12 @@
 namespace Junco\Jobs\Driver;
 
 use Junco\Jobs\JobInterface;
+use Database;
 
 class DatabaseDriver implements DriverInterface
 {
     // vars
-    protected $db;
+    protected Database $db;
     protected string $default_queue;
 
     /**

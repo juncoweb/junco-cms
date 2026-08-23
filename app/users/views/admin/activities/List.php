@@ -22,11 +22,11 @@ $filters->select('type', $types);
 if ($rows) {
     foreach ($rows as &$row) {
         if ($row['activity_context']) {
-            $row['fullname'] .= '<div class="color-subtle-default">' . $row['activity_context'] . '</div>';
+            $row['user_name'] .= '<div class="color-subtle-default">' . $row['activity_context'] . '</div>';
         }
 
         if ($row['token_selector']) {
-            $row['fullname'] .= '<div class="color-subtle-default">' . $row['token_selector'] . ' / ' . $row['status'] . '</div>';
+            $row['user_name'] .= '<div class="color-subtle-default">' . $row['token_selector'] . ' / ' . $row['status'] . '</div>';
         }
     }
 
@@ -49,7 +49,7 @@ $bls->column(':activity_code')
 $bls->column(':message')
     ->setLabel(_t('Description'));
 
-$bls->column(':fullname')
+$bls->column(':user_name')
     ->setLabel(_t('Name'))
     ->setSubtle();
 

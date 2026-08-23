@@ -1,23 +1,51 @@
-/* --- Tabs ----------------------------------------- */
+/* --- Tabs --- */
+.btn-tablist,
+.tablist {
+  margin: 0;
+  padding: 0;
+}
+.btn-tablist li,
+.tablist li {
+  list-style: none;
+  display: inline-block;
+  margin: 0;
+  cursor: default;
+}
+.btn-tablist li .on-small,
+.tablist li .on-small {
+  display: none;
+}
+
+.tabpanel-group > div,
+.btn-tabpanel-group > div {
+  display: none;
+}
+.tabpanel-group > div.selected,
+.btn-tabpanel-group > div.selected {
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .btn-tablist li:not(.selected) .on-small,
+  .tablist li:not(.selected) .on-small {
+    display: inline-block;
+  }
+  .btn-tablist li:not(.selected) .on-large,
+  .tablist li:not(.selected) .on-large {
+    display: none;
+  }
+}
 .tablist {
   margin: 0 var(--spacing-4);
-  padding: 0;
 }
 .tablist li {
   line-height: var(--line-height-base);
-  margin: 0;
   padding: 0.375rem 0.875rem;
-  list-style: none;
-  display: inline-block;
   background-color: var(--regular-bg-color);
   border-width: var(--border-width);
   border-style: var(--border-style);
   border-color: var(--regular-border-color);
   border-radius: var(--rounded-md) var(--rounded-md) 0 0;
-  cursor: default;
-}
-.tablist li .on-small {
-  display: none;
 }
 .tablist li:focus {
   border-color: var(--regular-active-border-color);
@@ -43,24 +71,43 @@
   border-top-style: var(--border-style);
   border-top-color: var(--regular-border-color);
 }
-.tabpanel-group > div {
-  display: none;
+
+.btn-tablist li {
+  line-height: var(--line-height-base);
+  padding: 0.375rem 0.875rem;
+  background-color: var(--regular-bg-color);
+  margin-bottom: var(--spacing-1);
+  border-radius: var(--rounded-md);
 }
-.tabpanel-group > div.selected {
-  display: block;
+.btn-tablist li:focus {
+  border-color: var(--regular-active-border-color);
+}
+.btn-tablist li ~ li {
+  margin-left: var(--spacing-1);
+}
+.btn-tablist li:hover,
+.btn-tablist li.selected {
+  background: var(--regular-active-bg-color);
 }
 
-.tab-large.tablist li {
+.btn-tabpanel-group {
+  background: var(--regular-surface-color);
+}
+
+.tab-small.btn-tablist li, .tab-small.tablist li {
+  font-size: var(--font-size-sm);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--rounded-sm);
+}
+
+.tab-large.btn-tablist li, .tab-large.tablist li {
   font-size: var(--font-size-lg);
   padding: 0.625rem 1.125rem;
-  border-radius: var(--rounded-lg) var(--rounded-lg) 0 0;
+  border-radius: var(--rounded-lg);
 }
 
-@media (max-width: 600px) {
-  .tablist li:not(.selected) .on-small {
-    display: inline-block;
-  }
-  .tablist li:not(.selected) .on-large {
-    display: none;
-  }
+.tab-small.tablist li,
+.tab-large.tablist li {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }

@@ -16,7 +16,7 @@ let Installer = (function () {
     }
 
     let _backlist, target;
-    let _controls = {
+    const _controls = {
         confirm_install: {
             modalOptions: {
                 size: 'large',

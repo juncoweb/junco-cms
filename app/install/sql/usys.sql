@@ -13,8 +13,6 @@ CREATE TABLE IF NOT EXISTS `#__usys_sessions` (
   `session_ua` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `accessed_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE `session_selector` (`session_selector`),
-  UNIQUE `session_validator` (`session_validator`, `session_hash`),
-  KEY `user_id` (`user_id`)
+  KEY `session_selector` (`session_selector`)
 ) ENGINE=InnoDB  DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 

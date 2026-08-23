@@ -17,49 +17,55 @@ use Junco\Language\Translators\TranslatorInterface;
  */
 class Language
 {
-    // vars
-    protected $translator;
-    protected $language;
-    //
-    protected $config         = null;
-    protected $availables     = [];
-    protected $num_availables = 0;
+    protected TranslatorInterface $translator;
+    protected array  $availables;
+    protected int    $num_availables = 0;
+    protected string $language;
+    protected string $key;
+    protected int    $type;
+    protected array  $normalize;
 
     /**
      * Constructor
      */
     public function __construct(string $domain = '', string $locale = '')
     {
-        $this->config = config('language');
+        $config = config('language');
 
-        if ($this->config['language.availables']) {
-            $this->availables     = $this->config['language.availables'];
-            $this->num_availables = count($this->availables);
+        $this->key        = $config['language.key'];
+        $this->type       = $config['language.type'];
+        $this->availables = $config['language.availables'] ?: [];
+        $this->normalize  = $config['language.normalize'] ?: [];
 
-            if ($this->num_availables == 1) {
-                $language = $this->availables[0];
-            } elseif ($this->config['language.type'] == 1) {
-                $language = $this->findInUrl();
-            } else {
-                $language = $this->findInCookie();
-            }
-            if (!$domain) {
-                $domain = $this->config['language.default_domain'];
-            }
-            if (!$locale) {
-                $locale = $this->config['language.locale'];
-            }
-
-            if ($this->config['language.use_gettext'] && function_exists('gettext')) {
-                $this->translator = new Gettext($language, $domain, $locale, $this->config['language.codeset']);
-            } else {
-                $this->translator = new Native($language, $domain, $locale);
-            }
-        } else {
-            // default
-            $language         = 'en_GB';
-            $this->availables = [$language];
+        if (!$this->availables) { // default
+            $this->language   = 'en_GB';
+            $this->availables = [$this->language];
             $this->translator = new None();
+            return;
+        }
+
+        $this->num_availables = count($this->availables);
+
+        if ($this->num_availables == 1) {
+            $language = $this->availables[0];
+        } elseif ($this->type == 1) {
+            $language = $this->findInUrl();
+        } else {
+            $language = $this->findInCookie();
+        }
+
+        if (!$domain) {
+            $domain = $config['language.default_domain'];
+        }
+
+        if (!$locale) {
+            $locale = $config['language.locale'];
+        }
+
+        if ($config['language.use_gettext'] && function_exists('gettext')) {
+            $this->translator = new Gettext($language, $domain, $locale, $config['language.codeset']);
+        } else {
+            $this->translator = new Native($language, $domain, $locale);
         }
 
         $this->language = $language;
@@ -92,12 +98,13 @@ class Language
      */
     public function getUrlLang(): ?array
     {
-        if ($this->config['language.type'] == 1 && $this->num_availables > 1) {
+        if ($this->type == 1 && $this->num_availables > 1) {
             return [
-                'key' => $this->config['language.key'],
+                'key' => $this->key,
                 'value' => $this->language
             ];
         }
+
         return null;
     }
 
@@ -124,7 +131,7 @@ class Language
     /**
      * Plural version of gettext
      * 
-     * @param string $message
+     * @param string $singular
      * @param string $plural
      * @param int    $n
      * 
@@ -140,13 +147,14 @@ class Language
      */
     protected function findInUrl(): string
     {
-        $language = Filter::input(GET, $this->config['language.key']);
+        $language = Filter::input(GET, $this->key);
 
         if (!$language) {
-            $language = $this->findInRoute();
+            $supported = $this->getSupportedLanguages();
+            $language = $this->findInRoute($supported);
 
-            if (!$language && $this->config['language.negotiate']) {
-                $language = $this->negotiate();
+            if (!$language) {
+                $language = $this->negotiate($supported);
             }
         }
 
@@ -156,15 +164,9 @@ class Language
     /**
      * Find in route.
      */
-    protected function findInRoute(): ?string
+    protected function findInRoute(array $supported): ?string
     {
-        $availables = $this->availables;
-
-        if ($this->config['language.normalize']) {
-            $availables = array_merge($availables, array_keys($this->config['language.normalize'] ?: []));
-        }
-
-        return router()->lookupLanguage($availables);
+        return router()->lookupLanguage($supported);
     }
 
     /**
@@ -172,14 +174,14 @@ class Language
      */
     protected function findInCookie(): string
     {
-        $cookieLanguage = cookie($this->config['language.key']);
+        $cookieLanguage = cookie($this->key);
+        $language = '';
 
         if ($cookieLanguage) {
             $language = $cookieLanguage;
-        } elseif ($this->config['language.negotiate']) {
-            $language = $this->negotiate();
         } else {
-            $language = '';
+            $supported = $this->getSupportedLanguages();
+            $language = $this->negotiate($supported);
         }
 
         $language = $this->normalize($language);
@@ -192,16 +194,20 @@ class Language
     }
 
     /**
-     * Option to modify (and normalize) the language.
+     * Normalize
+     * 
+     * @param $language
+     * 
+     * @return string
      */
     protected function normalize(?string $language): string
     {
         if (
             $language
-            && $this->config['language.normalize']
-            && isset($this->config['language.normalize'][$language])
+            && $this->normalize
+            && isset($this->normalize[$language])
         ) {
-            $language = $this->config['language.normalize'][$language];
+            $language = $this->normalize[$language];
         }
 
         if (!$language || !in_array($language, $this->availables)) {
@@ -218,22 +224,32 @@ class Language
     {
         $cookie_path = config('system.cookie_path');
 
-        return setcookie($this->config['language.key'], $language, 0x7fffffff, $cookie_path);
+        return setcookie($this->key, $language, 0x7fffffff, $cookie_path);
     }
 
     /**
-     * Determine which language out of an available set the user prefers most.
+     * Determine which language out of an available set the user prefers most
      *
      * @see: http://www.php.net/manual/en/function.http-negotiate-language.php
+     * 
+     * @param array  $supported
+     * 
+     * @return string
      */
-    protected function negotiate(): string
+    protected function negotiate(array $supported): string
     {
-        // vars
-        $server    = request()->getServerParams();
-        $accept    = $server['HTTP_ACCEPT_LANGUAGE'] ?? '';
-        $negotiate = $this->config['language.negotiate'] ?: [];
-        $bestlang  = '';
-        $bestqval  = 0;
+        if (!$supported) {
+            return '';
+        }
+
+        $header = $this->getHttpAcceptLanguage();
+
+        if (!$header) {
+            return '';
+        }
+
+        $bestlang = '';
+        $bestqval = 0;
 
         // standard  for HTTP_ACCEPT_LANGUAGE is defined under
         // http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
@@ -243,30 +259,28 @@ class Language
         //    language-range  = ( ( 1*8ALPHA *( "-" 1*8ALPHA ) ) | "*" )
         //    qvalue         = ( "0" [ "." 0*3DIGIT ] )
         //            | ( "1" [ "." 0*3("0") ] )
-        preg_match_all(
-            "/([[:alpha:]]{1,8})(-([[:alpha:]|-]{1,8}))?" .
-                "(\s*;\s*q\s*=\s*(1\.0{0,3}|0\.\d{0,3}))?\s*(,|$)/i",
-            $accept,
-            $hits,
-            PREG_SET_ORDER
-        );
+        $pattern = "/([[:alpha:]]{1,8})(-([[:alpha:]|-]{1,8}))?" .
+            "(\s*;\s*q\s*=\s*(1\.0{0,3}|0\.\d{0,3}))?\s*(,|$)/i";
+
+        preg_match_all($pattern, $header, $hits, PREG_SET_ORDER);
 
         foreach ($hits as $arr) {
             // read data from the array of this hit
             $langprefix = strtolower($arr[1]);
+
             if (!empty($arr[3])) {
                 $langrange = strtolower($arr[3]);
-                $language = $langprefix . '-' . $langrange;
+                $language  = $langprefix . '-' . $langrange;
             } else {
-                $language = $langprefix;
+                $language  = $langprefix;
             }
 
             $qvalue = !empty($arr[5]) ? floatval($arr[5]) : 1.0;
 
-            if (in_array($language, $negotiate) && ($qvalue > $bestqval)) { // find q-maximal language
+            if (in_array($language, $supported) && ($qvalue > $bestqval)) { // find q-maximal language
                 $bestlang = $language;
                 $bestqval = $qvalue;
-            } else if (in_array($langprefix, $negotiate) && (($qvalue * 0.9) > $bestqval)) {
+            } elseif (in_array($langprefix, $supported) && (($qvalue * 0.9) > $bestqval)) {
                 // if no direct hit, try the prefix only but decrease q-value by 10% (as http_negotiate_language does)
                 $bestlang = $langprefix;
                 $bestqval = $qvalue * 0.9;
@@ -274,5 +288,27 @@ class Language
         }
 
         return $bestlang;
+    }
+
+    /**
+     * Get
+     */
+    protected function getHttpAcceptLanguage(): string
+    {
+        return request()?->getServerParams()['HTTP_ACCEPT_LANGUAGE'] ?? '';
+    }
+
+    /**
+     * Get
+     */
+    protected function getSupportedLanguages(): array
+    {
+        $supported = $this->availables;
+
+        if ($this->normalize) {
+            $supported = array_merge($supported, array_keys($this->normalize));
+        }
+
+        return $supported;
     }
 }

@@ -12,8 +12,8 @@ class CustomElement extends FilterElement
     /**
      * Constructor
      *
-     * @param string  $name
-     * @param array	  $attr
+     * @param string $name
+     * @param string $content
      */
     public function __construct(
         protected string $name,

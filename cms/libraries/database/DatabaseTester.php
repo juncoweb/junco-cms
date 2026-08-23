@@ -5,10 +5,13 @@
  * @author: Junco CMS (tm)
  */
 
+use Junco\Database\Base\Schema\SchemaInterface;
+
+
 class DatabaseTester
 {
     // vars
-    protected $schema = null;
+    protected SchemaInterface $schema;
     protected string $orig_prefix = '';
     protected string $test_prefix = 'test_';
     protected array  $tables      = [];

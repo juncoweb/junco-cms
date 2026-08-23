@@ -1,5 +1,5 @@
 /* --- Upload Handle -------------------------------------------------- */
-const UploadHandle = function (el, form, data) {
+const UploadHandler = function (el, form, data) {
     var _data;
     var WH = ['width', 'height'];
     var options = {
@@ -457,6 +457,6 @@ const UploadHandle = function (el, form, data) {
 // implement
 JsFelem.implement({
     file: function (el, form, data) {
-        UploadHandle(el, form, data);
+        UploadHandler(el, form, data);
     }
 });

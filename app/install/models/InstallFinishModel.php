@@ -44,7 +44,7 @@ class InstallFinishModel extends Model
         $user = $this->getUserData(config('install.admininstrator_user_id')) or redirect();
 
         return [
-            'fullname' => $user['fullname'],
+            'user_name' => $user['user_name'],
             'site_name' => config('site.name'),
             'values' => [
                 'remove_r' => true,
@@ -92,7 +92,7 @@ class InstallFinishModel extends Model
         return $this->db->query("
         SELECT
          id ,
-         fullname
+         user_name
         FROM `#__users`
         WHERE id = ?", $user_id)->fetch();
     }

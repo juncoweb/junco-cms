@@ -169,7 +169,7 @@ var JsForm = function (form, options = {}) {
          *
          *   and execute!
          *
-         * @load (string) - optional - change the request load in object or string options.
+         * @load (string) - optional - change the request load in object or string options. @deprecated in v16
          *
          */
         request: function (options, callback, load) {

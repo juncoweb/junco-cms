@@ -36,8 +36,8 @@ class Database
     const FETCH_COLUMN = -1;
 
     //
-    protected $schema   = null;
-    protected $prefixer = null;
+    protected ?SchemaInterface $schema = null;
+    protected ?Prefixer $prefixer = null;
 
     /**
      * Constructor
@@ -62,24 +62,15 @@ class Database
      */
     protected function getAdapter(array $config): AdapterInterface
     {
-        switch ($config['database.adapter']) {
-            case 'pdo.mysql':
-            case 'pdo.pgsql':
-            case 'pdo.sqlite':
-                return new Junco\Database\Adapter\Pdo\Adapter($config);
-
-            case 'pgsql':
-                return new Junco\Database\Adapter\Pgsql\Adapter($config);
-
-            case 'sqlite':
-                return new Junco\Database\Adapter\Sqlite\Adapter($config);
-
-            case 'mock':
-                return new Junco\Database\Adapter\Mock\Adapter($config);
-
-            default:
-                return new Junco\Database\Adapter\Mysql\Adapter($config);
-        }
+        return match ($config['database.adapter']) {
+            'pdo.mysql',
+            'pdo.pgsql',
+            'pdo.sqlite' => new Junco\Database\Adapter\Pdo\Adapter($config),
+            'pgsql'      => new Junco\Database\Adapter\Pgsql\Adapter($config),
+            'sqlite'     => new Junco\Database\Adapter\Sqlite\Adapter($config),
+            'mock'       => new Junco\Database\Adapter\Mock\Adapter($config),
+            default      => new Junco\Database\Adapter\Mysql\Adapter($config),
+        };
     }
 
     /**
@@ -162,9 +153,9 @@ class Database
     /**
      * Order
      *
-     * @param int  $index
-     * @param int  $orders
-     * @param int  $default
+     * @param int   $index
+     * @param array $orders
+     * @param int   $default
      */
     public function order(int &$index, array $orders, int $default = 0): void
     {
@@ -305,30 +296,6 @@ class Database
         foreach ($_params as $params) {
             $stmt->execute($params);
         }
-    }
-
-    /**
-     * @deprecated
-     */
-    public function safeFind(StatementInterface|string $stmt, ...$params): ResultInterface
-    {
-        return $this->query($stmt, ...$params);
-    }
-
-    /**
-     * @deprecated
-     */
-    public function safeExec(StatementInterface|string $stmt, ...$params): int
-    {
-        return $this->exec($stmt, ...$params);
-    }
-
-    /**
-     * @deprecated
-     */
-    public function safeExecAll(StatementInterface|string $stmt, ...$_params): void
-    {
-        $this->execAll($stmt, ...$_params);
     }
 
     /**
@@ -763,10 +730,6 @@ class Database
      */
     public function getPrefixer(): Prefixer
     {
-        if ($this->prefixer === null) {
-            $this->prefixer = new Prefixer($this->prefix);
-        }
-
-        return $this->prefixer;
+        return $this->prefixer ??= new Prefixer($this->prefix);
     }
 }

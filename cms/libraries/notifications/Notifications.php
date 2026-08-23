@@ -16,7 +16,7 @@ class Notifications
 {
     // vars
     protected array $channels = [];
-    protected       $jobs = null;
+    protected ?Jobs $jobs = null;
 
     /**
      * Costruct

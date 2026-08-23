@@ -9,19 +9,19 @@ namespace Junco\Users\Service;
 
 use Junco\Users\Entity\User;
 use Junco\Users\Enum\ActivityType;
-use Junco\Users\Enum\UserStatus;
 use Junco\Users\Exception\UserNotActiveException;
 use Junco\Users\Exception\UserNotFoundException;
 use Junco\Users\UserActivity;
 use Junco\Users\UserActivityToken;
 use Junco\Users\UserHelper;
 use Junco\Usys\UsysToken;
+use Database;
 
 class Login
 {
     // vars
-    protected $db;
-    protected $activity;
+    protected Database $db;
+    protected UserActivity $activity;
     //
     protected int $user_id = 0;
 

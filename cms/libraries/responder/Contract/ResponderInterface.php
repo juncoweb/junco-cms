@@ -15,13 +15,22 @@ interface ResponderInterface
     /**
      * Creates a simplified response with a message.
      * 
-     * @param Result|string $message
-     * @param int $statusCode
-     * @param int $code
+     * @param Result $result
      * 
      * @return ResponseInterface
      */
-    public function responseWithMessage(Result|string $message = '', int $statusCode = 0, int $code = 0): ResponseInterface;
+    public function responseWithResult(Result $result): ResponseInterface;
+
+    /**
+     * Creates a simplified response with a message.
+     * 
+     * @param string $message
+     * @param int    $statusCode
+     * @param int    $code
+     * 
+     * @return ResponseInterface
+     */
+    public function responseWithMessage(string $message = '', int $statusCode = 0, int $code = 0): ResponseInterface;
 
     /**
      * Create a response.

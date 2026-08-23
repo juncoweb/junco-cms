@@ -16,22 +16,24 @@ class UploadedArchiveManager extends UploadedFileManager
      * Validate
      *
      * @param ?array $rules
+     * 
+     * @return static
      */
-    public function validate(?array $rules = null): self
+    public function validate(?array $rules = null): static
     {
-        parent::validate(
+        return parent::validate(
             array_merge([
                 'allow_extensions' => (new Archive)->acceptsToExtract()
             ], $rules ?: [])
         );
-
-        return $this;
     }
 
     /**
      * Extract
      * 
      * @param bool $delete
+     * 
+     * @return void
      */
     public function extract(bool $delete = false): void
     {

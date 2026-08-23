@@ -10,7 +10,6 @@ use Junco\Cache\Adapter\AdapterInterface;
 
 class Cache implements CacheInterface
 {
-    // vars
     protected AdapterInterface $adapter;
     protected string $lang;
 
@@ -187,25 +186,15 @@ class Cache implements CacheInterface
     /**
      * Get
      */
-    protected function getAdapter()
+    protected function getAdapter(): AdapterInterface
     {
-        switch (config('cache.adapter')) {
-            case 'apcu':
-                return new Junco\Cache\Adapter\ApcuAdapter();
-
-            case 'null':
-                return new Junco\Cache\Adapter\NullAdapter();
-
-            case 'memcached':
-                return new Junco\Cache\Adapter\MemcachedAdapter();
-
-            case 'redis':
-                return new Junco\Cache\Adapter\RedisAdapter();
-
-            default:
-            case 'file':
-                return new Junco\Cache\Adapter\FileAdapter();
-        }
+        return match (config('cache.adapter')) {
+            'apcu'      => new Junco\Cache\Adapter\ApcuAdapter(),
+            'null'      => new Junco\Cache\Adapter\NullAdapter(),
+            'memcached' => new Junco\Cache\Adapter\MemcachedAdapter(),
+            'redis'     => new Junco\Cache\Adapter\RedisAdapter(),
+            default     => new Junco\Cache\Adapter\FileAdapter(), // file
+        };
     }
 
     /**

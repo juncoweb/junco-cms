@@ -91,11 +91,13 @@ class ServerRequestFactory implements ServerRequestFactoryInterface
         if (isset($server['REQUEST_URI'])) {
             $partial = explode('?', $server['REQUEST_URI'], 2);
             $parts['path'] = $partial[0];
+
             if (isset($partial[1])) {
                 $parts['fragment'] = $partial[1];
             }
             $partial = explode('?', $parts['path'], 2);
             $parts['path'] = $partial[0];
+
             if (isset($partial[1])) {
                 $parts['query'] = $partial[1];
             }

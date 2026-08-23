@@ -20,7 +20,7 @@ use Psr\Http\Message\UriInterface;
 class Request extends Message implements RequestInterface
 {
     // vars
-    protected string $method         = 'GET';
+    protected string  $method        = 'GET';
     protected ?string $requestTarget = null;
     protected ?UriInterface $uri;
 

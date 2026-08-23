@@ -169,8 +169,7 @@ class Runner extends RequestHandler
     /**
      * Create response
      * 
-     * @param mixed  $content
-     * @param string $buffer
+     * @param mixed $content
      *
      * @return ResponseInterface
      */

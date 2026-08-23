@@ -196,7 +196,7 @@
                 {
                     "Name": "status",
                     "Type": "enum",
-                    "Length": "'public','private','deprecated'",
+                    "Length": "'prototype','private','public','deprecated'",
                     "Attribute": "",
                     "Collation": "utf8mb4_general_ci",
                     "IsNull": false,
@@ -213,7 +213,7 @@
                     "IsNull": false,
                     "Comment": "",
                     "Collation": "A",
-                    "Cardinality": 131,
+                    "Cardinality": 132,
                     "IndexType": "BTREE",
                     "Columns": [
                         {
@@ -231,7 +231,7 @@
                     "IsNull": false,
                     "Comment": "",
                     "Collation": "A",
-                    "Cardinality": 131,
+                    "Cardinality": 132,
                     "IndexType": "BTREE",
                     "Columns": [
                         {
@@ -254,6 +254,24 @@
                     "Columns": [
                         {
                             "Name": "developer_id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
+                },
+                {
+                    "Name": "package_id",
+                    "Type": null,
+                    "IsUnique": false,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 3,
+                    "IndexType": "BTREE",
+                    "Columns": [
+                        {
+                            "Name": "package_id",
                             "Sequence": 1,
                             "Comment": "",
                             "SubPart": null
@@ -349,6 +367,24 @@
                     "Columns": [
                         {
                             "Name": "id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
+                },
+                {
+                    "Name": "extension_id",
+                    "Type": null,
+                    "IsUnique": false,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 117,
+                    "IndexType": "BTREE",
+                    "Columns": [
+                        {
+                            "Name": "extension_id",
                             "Sequence": 1,
                             "Comment": "",
                             "SubPart": null
@@ -493,6 +529,24 @@
                             "SubPart": null
                         }
                     ]
+                },
+                {
+                    "Name": "developer_name",
+                    "Type": null,
+                    "IsUnique": false,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 1,
+                    "IndexType": "BTREE",
+                    "Columns": [
+                        {
+                            "Name": "developer_name",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
                 }
             ],
             "ForeignKeys": []
@@ -605,11 +659,11 @@
                 {
                     "Name": "status",
                     "Type": "enum",
-                    "Length": "'canceled','available','installed'",
+                    "Length": "'cancelled','available','installed'",
                     "Attribute": "",
                     "Collation": "utf8mb4_general_ci",
                     "IsNull": false,
-                    "Default": "canceled",
+                    "Default": "cancelled",
                     "Extra": "",
                     "Comment": ""
                 }
@@ -622,7 +676,7 @@
                     "IsNull": false,
                     "Comment": "",
                     "Collation": "A",
-                    "Cardinality": 1,
+                    "Cardinality": 2,
                     "IndexType": "BTREE",
                     "Columns": [
                         {

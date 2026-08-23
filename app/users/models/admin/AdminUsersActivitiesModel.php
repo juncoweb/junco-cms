@@ -38,17 +38,17 @@ class AdminUsersActivitiesModel extends Model
             switch ($data['field']) {
                 default:
                 case 1:
-                    $this->db->where("u.fullname LIKE %?", $data['search']);
+                    $this->db->where("u.user_name LIKE %?", $data['search']);
                     break;
                 case 2:
                     if (is_numeric($data['search'])) {
                         $this->db->where("u.id = ?", (int)$data['search']);
                     } else {
-                        $this->db->where("u.username LIKE %?", $data['search']);
+                        $this->db->where("u.user_username LIKE %?", $data['search']);
                     }
                     break;
                 case 3:
-                    $this->db->where("u.email LIKE %?", $data['search']);
+                    $this->db->where("u.user_email LIKE %?", $data['search']);
                     break;
             }
         }
@@ -66,7 +66,7 @@ class AdminUsersActivitiesModel extends Model
 		 t.token_selector ,
 		 t.modified_at ,
 		 t.status ,
-		 u.fullname
+		 u.user_name
 		]* FROM `#__users_activities` a
 		LEFT JOIN `#__users` u ON ( a.user_id = u.id )
 		[LEFT JOIN `#__users_activities_tokens` t ON ( t.activity_id = a.id )]
@@ -75,12 +75,12 @@ class AdminUsersActivitiesModel extends Model
 
         $rows = [];
         foreach ($pagi->fetchAll() as $row) {
-            if (!$row['fullname']) {
-                $row['fullname'] = inet_ntop($row['user_ip']);
+            if (!$row['user_name']) {
+                $row['user_name'] = inet_ntop($row['user_ip']);
             }
 
             $row['modified_at'] = $row['modified_at']
-                ? $row['created_at']->formatInterval($row['modified_at'])
+                ? (new Date($row['created_at']))->formatInterval($row['modified_at'])
                 : '';
             $row['message'] = $messages[$row['activity_code']] ??= UserActivity::getMessage($row['activity_code']);
             /* $row['activity_type'] = $row['activity_type']

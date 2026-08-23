@@ -12,7 +12,6 @@ use Utils;
 
 class ContactNotification extends Notification
 {
-    // vars
     protected string $name;
     protected string $email;
     protected string $message;
@@ -22,16 +21,16 @@ class ContactNotification extends Notification
      */
     public function __construct(array $data)
     {
-        $this->id        = $data['contact_id'];
-        $this->name        = $data['contact_name'];
-        $this->email    = $data['contact_email'];
-        $this->message    = $data['contact_message'];
+        $this->id      = $data['contact_id'];
+        $this->name    = $data['contact_name'];
+        $this->email   = $data['contact_email'];
+        $this->message = $data['contact_message'];
     }
 
     /**
      * Returns the necessary data for Database channel.
      */
-    public function toDatabase()
+    public function toDatabase(): string
     {
         return sprintf(
             _t('You have a message from %s: %s'),
@@ -43,7 +42,7 @@ class ContactNotification extends Notification
     /**
      * Returns the necessary data for Email channel.
      */
-    public function toEmail()
+    public function toEmail(): array
     {
         $from = '<a href="mailto:' . $this->email . '">' . $this->name . '</a>';
         $message = sprintf(_t('You have a message from %s: %s'), $from, $this->message);
@@ -51,7 +50,7 @@ class ContactNotification extends Notification
         return [
             'subject' => _t('Contact'),
             'message_html' => $message,
-            'message_plain'    => true,
+            'message_plain' => true,
         ];
     }
 }

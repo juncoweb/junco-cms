@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS `#__menus` (
   `is_distributed` tinyint(1) NOT NULL DEFAULT 0,
   `status` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
+  KEY `extension_id` (`extension_id`),
   KEY `menu_key` (`menu_key`)
 ) ENGINE=InnoDB  DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 

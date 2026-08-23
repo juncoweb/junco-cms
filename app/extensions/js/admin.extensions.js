@@ -27,7 +27,7 @@ let Extensions = (function () {
                             target = compile(this);
                         },
                     },
-                }, false, 'modal');
+                });
             } else {
                 f.request($U('compile'), callback);
             }
@@ -37,7 +37,7 @@ let Extensions = (function () {
     }
 
     let _backlist, target;
-    let mo = {
+    const mo = {
         size: 'large',
         onLoad: function () {
             target = this;
@@ -45,7 +45,7 @@ let Extensions = (function () {
         },
     };
 
-    let _controls = {
+    const _controls = {
         show: {
             numRows: '1',
             modalOptions: {

@@ -1,5 +1,5 @@
 
-/* --- Notifications ------------------------------------------ */
+/* --- Notifications --- */
 const JsNotifications = (function () {
     const key = 'notifications';
 

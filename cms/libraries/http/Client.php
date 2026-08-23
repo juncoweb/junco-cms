@@ -18,7 +18,7 @@ class Client implements ClientInterface
 {
     // vars
     protected AdapterInterface $adapter;
-    protected $factory = null;
+    protected Factory $factory;
 
     /**
      * Constructor

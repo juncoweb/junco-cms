@@ -26,7 +26,6 @@ use Junco\Form\FormElement\CustomElement;
 
 class form_master_default_elements implements FormElementsInterface
 {
-    // vars
     protected ?array $values    = null;
     protected string $deep_name = '';
     protected array  $rows      = [];
@@ -45,7 +44,7 @@ class form_master_default_elements implements FormElementsInterface
     /**
      * Set Deep
      *
-     * @param string $deep
+     * @param string $deep_name
      */
     public function setDeep(string $deep_name = ''): void
     {
@@ -70,7 +69,10 @@ class form_master_default_elements implements FormElementsInterface
             $attr['name'] .= $this->deep_name;
         }
 
-        return $this->addElement(Plugin::get('form-element', 'load', $plugin)?->run($attr));
+        return $this->addElement(
+            Plugin::get('form-element', 'load', $plugin)?->run($attr)
+                ?? new CustomElement('', 'Not Found')
+        );
     }
 
     /**
@@ -119,7 +121,6 @@ class form_master_default_elements implements FormElementsInterface
      * Checkbox
      *
      * @param string $name
-     * @param string $label
      * @param array  $attr
      * 
      * @return FormElementInterface
@@ -262,7 +263,7 @@ class form_master_default_elements implements FormElementsInterface
     /**
      * Group
      * 
-     * @param FormElementInterface[]
+     * @param FormElementInterface ...$elements
      * 
      * @return FormElementInterface
      */

@@ -27,7 +27,8 @@ $form->group(
     $form->button(['title' => _t('Cancel'), 'icon' => 'fa-solid fa-xmark'])
 );
 
-//$form->enter();
+$form->enter();
+
 $html = '<div class="panel mb-4 usys-wrapper usys-reset-act"><div class="panel-body">' . $form->render() . '</div></div>';
 $html .= '<p class="dialog dialog-warning">' . _t('At the end of the order, the previous activation messages will be deleted') . '</p>';
 

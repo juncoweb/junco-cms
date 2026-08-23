@@ -9,11 +9,8 @@ namespace Junco\Language\Translators;
 
 class Native implements TranslatorInterface
 {
-    // vars
-    protected $translates    = null;
-    protected $locale        = '';
-    protected $language        = '';
-    protected $domain        = '';
+    protected array  $translates;
+    protected string $basepath;
 
     /**
      * Constructor
@@ -24,14 +21,12 @@ class Native implements TranslatorInterface
         string $locale,
         string $codeset = ''
     ) {
-        $this->language = $language;
-        $this->domain    = $domain;
-        $this->locale    = $locale;
+        $this->basepath = SYSTEM_STORAGE . sprintf('%s/%s/LC_MESSAGES/%s', $locale, $language, $domain);
 
-        // set
+        //
         $this->translates = $this->include();
-        $this->translates['Messages']['Singulars'] ??= [];
-        $this->translates['Messages']['Plurals'] ??= [];
+        $this->translates['Singulars']    ??= [];
+        $this->translates['Plurals']      ??= [];
         $this->translates['Plural-Forms'] ??= null;
 
         if (!is_callable($this->translates['Plural-Forms'])) {
@@ -50,13 +45,13 @@ class Native implements TranslatorInterface
      */
     public function gettext(string $message): string
     {
-        return $this->translates['Messages']['Singulars'][$message] ?? $message;
+        return $this->translates['Singulars'][$message] ?? $message;
     }
 
     /**
      * Plural version of gettext
      * 
-     * @param string $message
+     * @param string $singular
      * @param string $plural
      * @param int    $n
      * 
@@ -67,8 +62,8 @@ class Native implements TranslatorInterface
         if (isset($this->translates['Plural-Forms'])) {
             $index = $this->translates['Plural-Forms']($n);
 
-            if (isset($this->translates['Messages']['Plurals'][$singular][$index])) {
-                return $this->translates['Messages']['Plurals'][$singular][$index];
+            if (isset($this->translates['Plurals'][$singular][$index])) {
+                return $this->translates['Plurals'][$singular][$index];
             }
         }
 
@@ -78,11 +73,12 @@ class Native implements TranslatorInterface
     /**
      * Include
      */
-    protected function include()
+    protected function include(): array
     {
-        $file = SYSTEM_STORAGE . sprintf('%s/%s/LC_MESSAGES/%s.mo.php', $this->locale, $this->language, $this->domain);
+        $file = sprintf('%s.mo.php', $this->basepath);
 
-        is_file($file) or $this->write($file);
+        is_file($file)
+            or $this->write($file);
 
         return include $file;
     }
@@ -90,7 +86,7 @@ class Native implements TranslatorInterface
     /**
      * Write
      */
-    protected function write(string $file)
+    protected function write(string $file): void
     {
         file_put_contents($file, '<?php return ' . var_export($this->read(), true) . '; ?>');
     }
@@ -98,61 +94,88 @@ class Native implements TranslatorInterface
     /**
      * Read
      */
-    protected function read()
+    protected function read(): array
     {
-        $file = SYSTEM_STORAGE . sprintf('%s/%s/LC_MESSAGES/%s.po', $this->locale, $this->language, $this->domain);
-        $contents = is_file($file) ? file_get_contents($file) : false;
+        $file = sprintf('%s.po', $this->basepath);
+        $content = is_readable($file)
+            ? file_get_contents($file)
+            : false;
 
-        if ($contents) {
-            $contents = str_replace(["\r\n", "\r", "\"\n\"", '\\"'], ["\n", "\n", '', '"'], $contents);
-            $translates = [
-                'Messages' => [
-                    'Singulars' => [],
-                    'Plurals' => [],
-                ]
-            ];
-
-            if (preg_match('%Plural-Forms: nplurals=\d; plural\s*=\s*(.*?);%', $contents, $match)) {
-                $eval = str_replace('n', '$n', $match[1]);
-                $translates['Plural-Forms'] = 'function(int $n) { $plural = ' . $eval . '; return is_bool($plural) ? (int)$plural : $plural; }';
-            }
-
-            // I remove the fuzzy translations
-            $contents = preg_replace(
-                '%'
-                    . '^#, (.*?)fuzzy'
-                    . '(?s:.*?)'
-                    . 'msgstr(?:\[\d\])? "(?:.+?)%m',
-                '',
-                $contents
-            );
-
-            // singulars
-            preg_match_all('%^'
-                . 'msgid "(.+?)"' . '\R'
-                . 'msgstr "(.+?)"' . '\R'
-                . '%m', $contents, $matches);
-
-            $translates['Messages']['Singulars'] = array_combine($matches[1], $matches[2]);
-
-            // plurals
-            preg_match_all('%^'
-                . 'msgid "(.+?)"' . '\R'
-                . 'msgid_plural "(.+?)"' . '\R'
-                . '((?:msgstr\[\d\] "(?:.+?)"\R){1,})'
-                . '%m', $contents, $matches, PREG_SET_ORDER);
-
-            $plurals = [];
-            foreach ($matches as $match) {
-                preg_match_all('%"(.+?)"%m', $match[3], $_matches);
-                $plurals[$match[1]] = $_matches[1];
-            }
-
-            $translates['Messages']['Plurals'] = $plurals;
-        } else {
-            $translates = [];
+        if (!$content) {
+            return [];
         }
 
-        return $translates;
+        $content = $this->sanitize($content);
+
+        return [
+            'Singulars'    => $this->getSingulars($content),
+            'Plurals'      => $this->getPlurals($content),
+            'Plural-Forms' => $this->getPluralForms($content)
+        ];
+    }
+
+    /**
+     * Sanitize
+     */
+    protected function sanitize(string $content): string
+    {
+        // normalize EOL
+        // joins long text strings
+        // double quotation marks are no longer escaped characters
+        $content = str_replace(["\r\n", "\r", "\"\n\"", '\\"'], ["\n", "\n", '', '"'], $content);
+
+        // I remove the fuzzy translations
+        return preg_replace('/^#, (.*?)fuzzy(?s:.*?)msgstr(?:\[\d\])? "(?:.+?)/m', '', $content);
+    }
+
+    /**
+     * Get
+     */
+    protected function getSingulars(string $content): array
+    {
+        preg_match_all('/^'
+            . 'msgid "(.+?)"' . '\R'
+            . 'msgstr "(.+?)"' . '\R'
+            . '/m', $content, $matches);
+
+        return array_combine($matches[1], $matches[2]);
+    }
+
+    /**
+     * Get
+     */
+    protected function getPlurals(string $content): array
+    {
+        preg_match_all('/^'
+            . 'msgid "(.+?)"' . '\R'
+            . 'msgid_plural "(.+?)"' . '\R'
+            . '((?:msgstr\[\d\] "(?:.+?)"\R){1,})'
+            . '/m', $content, $matches, PREG_SET_ORDER);
+
+        $plurals = [];
+
+        foreach ($matches as $match) {
+            preg_match_all('%"(.+?)"%m', $match[3], $_matches);
+            $plurals[$match[1]] = $_matches[1];
+        }
+
+        return $plurals;
+    }
+
+    /**
+     * Get
+     */
+    protected function getPluralForms(string $content): ?string
+    {
+        $pattern = '/Plural-Forms: nplurals=\d; plural\s*=\s*(.*?);/';
+
+        if (!preg_match($pattern, $content, $match)) {
+            return null;
+        }
+
+        return 'function(int $n) {'
+            .    ' $plural = ' . str_replace('n', '$n', $match[1]) . ';'
+            .    ' return is_bool($plural) ? (int)$plural : $plural;'
+            . ' }';
     }
 }

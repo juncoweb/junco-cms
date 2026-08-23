@@ -7,10 +7,10 @@
 
 namespace Junco\Container;
 
-use Closure;
 use Psr\Container\ContainerInterface;
 use Junco\Container\Exception\ContainerException;
 use Junco\Container\Exception\NotFoundException;
+use Closure;
 use ReflectionClass;
 use ReflectionFunction;
 use ReflectionMethod;
@@ -20,8 +20,7 @@ use ReflectionMethod;
  */
 class Container implements ContainerInterface
 {
-    // vars
-    static protected $instance;
+    static protected ?self $instance = null;
     //
     protected array $instances = [];
     protected array $registers = [];
@@ -99,6 +98,7 @@ class Container implements ContainerInterface
      *
      * @param string $id
      * @param object $class
+     * @param bool   $rewrite
      *
      * @return void
      */
@@ -114,7 +114,7 @@ class Container implements ContainerInterface
     /**
      * Unset an instance value from an id.
      *
-     * @param string	$id
+     * @param string $id
      * 
      * @return void
      */
@@ -129,7 +129,8 @@ class Container implements ContainerInterface
      * Set
      *
      * @param string $id
-     * @param string $value
+     * @param string $className
+     * @param bool   $shared
      *
      * @return void
      */
@@ -144,7 +145,7 @@ class Container implements ContainerInterface
     /**
      * New instance
      *
-     * @param string $className
+     * @param string $id
      *
      * @return object
      */
@@ -328,13 +329,13 @@ class Container implements ContainerInterface
      */
     protected function getClassName(string $className): string
     {
-        $namespace = '';
-
-        if (strpos($className, '.') !== false) {
-            $parts     = explode('.', $className);
-            $className = array_pop($parts);
-            $namespace = "Junco\\" . implode("\\", array_map('ucfirst', $parts)) . "\\";
+        if (strpos($className, '.') === false) {
+            return ucfirst($className);
         }
+
+        $parts     = explode('.', $className);
+        $className = array_pop($parts);
+        $namespace = "Junco\\" . implode("\\", array_map('ucfirst', $parts)) . "\\";
 
         return $namespace . implode(array_map('ucfirst', explode('_', $className)));
     }

@@ -62,10 +62,16 @@
                 border-color: var(--regular#{$class}-border-color);
             }
         }
+    }
+}
 
-        .btn-press.checked {
-            background-color: var(--solid#{$class}-active-bg-color);
-        }
+// press button
+.btn:has(> .input-hidden:checked) {
+    &,
+    &:hover {
+        color: var(--solid-primary-font-color);
+        background-color: var(--solid-primary-bg-color);
+        border-color: var(--solid-primary-border-color);
     }
 }
 

@@ -9,8 +9,9 @@ namespace Junco\Extensions\Enum;
 
 enum ExtensionStatus
 {
-    case public;
+    case prototype;
     case private;
+    case public;
     case deprecated;
 
     /**
@@ -19,8 +20,9 @@ enum ExtensionStatus
     public function title(): string
     {
         return match ($this) {
-            self::public     => _t('Public'),
+            self::prototype  => _t('Prototype'),
             self::private    => _t('Private'),
+            self::public     => _t('Public'),
             self::deprecated => _t('Deprecated'),
         };
     }
@@ -31,8 +33,9 @@ enum ExtensionStatus
     public function color(): string
     {
         return match ($this) {
-            self::public     => 'green',
+            self::prototype  => 'yellow',
             self::private    => 'orange',
+            self::public     => 'green',
             self::deprecated => 'red',
         };
     }
@@ -43,8 +46,9 @@ enum ExtensionStatus
     public function isActive(): bool
     {
         return match ($this) {
-            self::public     => true,
+            self::prototype  => false,
             self::private    => true,
+            self::public     => true,
             self::deprecated => false,
         };
     }
@@ -94,6 +98,6 @@ enum ExtensionStatus
      */
     public static function isValid(string $name): bool
     {
-        return in_array($name, ['public', 'private', 'deprecated']);
+        return in_array($name, ['prototype', 'private', 'public', 'deprecated']);
     }
 }

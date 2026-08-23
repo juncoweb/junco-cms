@@ -7,7 +7,6 @@
 
 use Junco\Filesystem\MimeHelper;
 use Junco\Http\Message\HttpFactory;
-use Junco\Mvc\Result;
 use Junco\Responder\ResponderBase;
 use Junco\Responder\Contract\HttpBlankInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -120,20 +119,14 @@ class responder_master_default_http_blank extends ResponderBase implements HttpB
     /**
      * Creates a simplified response with a message.
      * 
-     * @param Result|string $message
-     * @param int $statusCode
-     * @param int $code
+     * @param string $message
+     * @param int    $statusCode
+     * @param int    $code
      * 
      * @return ResponseInterface
      */
-    public function responseWithMessage(Result|string $message = '', int $statusCode = 0, int $code = 0): ResponseInterface
+    public function responseWithMessage(string $message = '', int $statusCode = 0, int $code = 0): ResponseInterface
     {
-        if ($message instanceof Result) {
-            $statusCode = $message->getStatusCode();
-            $code       = $message->getCode();
-            $message    = $message->getMessage();
-        }
-
         $factory = new HttpFactory;
         $stream = $factory->createStream(sprintf('%d - %s', $code, $message));
 

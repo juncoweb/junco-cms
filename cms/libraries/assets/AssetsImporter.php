@@ -63,6 +63,7 @@ class AssetsImporter extends AssetsBasic
             foreach ($srcKeys as $key) {
                 $compile  = $mustBeCompiled;
                 $isUpdate = $this->hasDataFile($key);
+                $newData  = null;
 
                 if ($compile || $isUpdate) {
                     $newData = $this->from->fetch($key);

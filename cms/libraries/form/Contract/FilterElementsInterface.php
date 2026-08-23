@@ -53,7 +53,7 @@ interface FilterElementsInterface
     /**
      * Search
      * 
-     * @return FilterElement
+     * @return FilterElementInterface
      */
     public function search(): SearchInput;
 
@@ -62,7 +62,7 @@ interface FilterElementsInterface
      * 
      * @param array   $options
      * 
-     * @return FilterElement
+     * @return FilterElementInterface
      */
     public function searchIn(array $options): InputSelect;
 
@@ -73,7 +73,7 @@ interface FilterElementsInterface
      * @param array   $options
      * @param ?string $input_name	if exists, creates an input
      * 
-     * @return CustomSearch
+     * @return FilterElementInterface
      */
     public function select(string $name = '', array $options = []): CustomSelect;
 
@@ -83,7 +83,7 @@ interface FilterElementsInterface
      * @param string       $name
      * @param array|string $attr
      * 
-     * @return FilterElement
+     * @return FilterElementInterface
      */
     public function checkbox(string $name = '', array|string $attr = []): Checkbox;
 

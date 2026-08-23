@@ -17,7 +17,7 @@ if ($error) {
 // template
 $tpl = Template::get();
 $tpl->options($options);
-$tpl->title($title, _t('Save Email'));
+$tpl->title($title, _t('Save email'));
 $tpl->content($html);
 
 return $tpl->response();

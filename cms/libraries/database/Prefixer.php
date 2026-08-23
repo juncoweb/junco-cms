@@ -9,7 +9,6 @@ namespace Junco\Database;
 
 class Prefixer
 {
-    // vars
     protected string $universal_prefix = '#__';
     protected array  $replaces         = [];
 
@@ -53,10 +52,9 @@ class Prefixer
     /**
      * Replace with universal prefix
      *
-     * @param string        $query      The sql query string
-     * @param string|array  $tbl_names  The tables to replace
+     * @param string $query  The sql query string
      * 
-     * @return string The string with replacements
+     * @return string  The string with replacements
      */
     public function replaceWithUniversal(string $query): string
     {
@@ -68,7 +66,7 @@ class Prefixer
      *
      * @param string $tbl_name
      * 
-     * @return string The string with replacements
+     * @return string   The string with replacements
      */
     public function putUniversalOnTableName(string $tbl_name): string
     {

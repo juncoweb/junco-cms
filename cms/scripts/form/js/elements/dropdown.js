@@ -1,77 +1,94 @@
 
-/* --- Dropdown and Select control ------------------------------------------------ */
+/* --- Dropdown and Select --- */
 (function () {
-    function dropdown(el) {
-        let isSelect = el.getAttribute('control-felem') == 'select';
-        let hasSubmit = el.getAttribute('data-on-change') == 'submit';
-        let isSimple = el.className != 'btn-group';
-        let box = isSimple ? el.parentNode : el;
-        let btn = isSimple ? el : (el.querySelector('[role=caret]') || el.querySelector('.dropdown-toggle'));
-        let menu = (box.querySelector('[role=drop-menu]') || box.querySelector('.dropdown-menu'));
+    function getMenu($el) {
+        $menu = $el.querySelector('[role=drop-menu]')
+            || $el.querySelector('.dropdown-menu');
 
+        return $menu || getMenu($el.parentNode);
+    }
+
+    function setDropdownEvents($menu, $caret, $el) {
         function fn(event) {
             event.stopPropagation();
-            JsDropdown(menu, {
+            JsDropdown($menu, {
                 onToggle: function (status) {
-                    el.classList.toggle('active', status);
-                    btn.setAttribute('aria-expanded', status);
+                    ($el || $caret).classList.toggle('active', status);
+                    $caret.setAttribute('aria-expanded', status);
+
                     if (status) {
-                        let rect = menu.getBoundingClientRect();
+                        const rect = $menu.getBoundingClientRect();
 
                         if (rect.right > window.innerWidth) {
-                            menu.style.right = '-1px';
-                            menu.style.left = 'auto';
+                            $menu.style.right = '-1px';
+                            $menu.style.left = 'auto';
                         } else if (rect.left < 0) {
-                            menu.style.right = 'auto';
-                            menu.style.left = '0px';
+                            $menu.style.right = 'auto';
+                            $menu.style.left = '0px';
                         }
                     }
                 },
             }).toggle();
         }
 
-        // drop
-        btn.addEventListener('click', fn);
-        btn.setAttribute('aria-expanded', false);
+        $caret.addEventListener('click', fn);
+        $caret.setAttribute('aria-expanded', false);
 
-        if (isSimple) {
-            menu.style.left = (el.getBoundingClientRect().left - el.parentNode.getBoundingClientRect().left) + 'px';
+        const isGroup = $el.className == 'btn-group';
+
+        if (isGroup) {
+            $menu.style.right = '-1px';
         } else {
-            menu.style.right = '-1px';
+            $menu.style.left = ($el.getBoundingClientRect().left - $el.parentNode.getBoundingClientRect().left) + 'px';
         }
+    }
 
-        // change
-        if (isSelect) {
-            let label = isSimple ? el : el.querySelector('[data-select-label]');
+    function setListEvents($menu, $caret, $label, $el) {
+        const $hidden = $menu.querySelector('input[type=hidden]');
+        const li = Array.from($menu.getElementsByTagName('LI'));
 
-            if (label) {
-                let hidden = menu.querySelector('input[type=hidden]');
-                let all = Array.from(menu.getElementsByTagName('LI'));
+        li.forEach(($li) => {
+            $li.option = /* $li.querySelector('a') || */ $li;
+            $li.option.setAttribute('role', 'option');
+            $li.addEventListener('click', function (event) {
+                event.stopPropagation();
+                JsDropdown.hide();
 
-                all.forEach(function (el) {
-                    el.addEventListener('click', function (event) {
-                        event.stopPropagation();
-
-                        all.forEach(function (el2) {
-                            el2.className = (el2 == el ? 'selected' : '');
-                        });
-
-                        JsDropdown.hide();
-                        label.innerHTML = el.textContent;
-                        hidden.value = el.getAttribute('data-select-value');
-
-                        if (hasSubmit) {
-                            JsFelem.submit(hidden.form);
-                        }
-                    });
+                li.forEach(($item) => {
+                    const selected = $item == this;
+                    $item.className = (selected ? 'selected' : '');
+                    $li.option.setAttribute('aria-selected', selected);
                 });
-            }
+
+                $hidden.value = this.getAttribute('data-select-value');
+                $label.innerHTML = this.firstChild.innerHTML;
+                $label.focus();
+                $el.dispatchEvent(new Event('change', { bubbles: true }));
+            })
+        });
+
+        $el.setAttribute('role', 'combobox');
+        $el.setAttribute('aria-haspopup', 'listbox');
+        $caret.setAttribute('aria-haspopup', 'listbox');
+    }
+
+    function select($el) {
+        const $menu = getMenu($el);
+        const $caret = $el.querySelector('[role=caret]') || $el.querySelector('.btn-caret') || $el;
+        const $label = $el.querySelector('[data-select-label]') || $el;
+
+        setDropdownEvents($menu, $caret, $el);
+        setListEvents($menu, $caret, $label, $el);
+
+        if ($el.getAttribute('on-change') == 'submit') {
+            $el.addEventListener('change', () => JsFelem.submit($el));
         }
-    };
+    }
+
+    function dropdown($el) {
+        setDropdownEvents(getMenu($el), $el, $el);
+    }
 
     // felem implement
-    JsFelem.implement({
-        'select': dropdown,
-        'dropdown': dropdown
-    });
+    JsFelem.implement({ select, dropdown });
 })();

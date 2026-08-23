@@ -10,14 +10,14 @@ defined('IS_TEST') or die;
 
 $options = ['Opción 1', 'Opción 2', 'Opción 3', 'Opción 4', 'Opción 5', 'Opción 6'];
 $values = [
-    'suite_1' => [0, 1, 2, 3, 4, 5],
+    'suite_1' => [0, 2, 3],
 ];
 
 
 // form
 $form = Form::get();
 $form->setValues($values);
-$form->suite('title', $options)->setLabel(_t('Title'));
+$form->suite('suite_1', $options)->setLabel(_t('Title'));
 $html = $form->render();
 
 // template

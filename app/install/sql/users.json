@@ -18,7 +18,18 @@
                     "Comment": ""
                 },
                 {
-                    "Name": "fullname",
+                    "Name": "user_slug",
+                    "Type": "varchar",
+                    "Length": "24",
+                    "Attribute": "",
+                    "Collation": "utf8mb4_general_ci",
+                    "IsNull": false,
+                    "Default": "",
+                    "Extra": "",
+                    "Comment": ""
+                },
+                {
+                    "Name": "user_name",
                     "Type": "varchar",
                     "Length": "48",
                     "Attribute": "",
@@ -29,7 +40,7 @@
                     "Comment": ""
                 },
                 {
-                    "Name": "username",
+                    "Name": "user_username",
                     "Type": "varchar",
                     "Length": "24",
                     "Attribute": "",
@@ -40,7 +51,7 @@
                     "Comment": ""
                 },
                 {
-                    "Name": "password",
+                    "Name": "user_password",
                     "Type": "varchar",
                     "Length": "255",
                     "Attribute": "",
@@ -51,7 +62,7 @@
                     "Comment": ""
                 },
                 {
-                    "Name": "email",
+                    "Name": "user_email",
                     "Type": "varchar",
                     "Length": "148",
                     "Attribute": "",
@@ -69,17 +80,6 @@
                     "Collation": "utf8mb4_general_ci",
                     "IsNull": false,
                     "Default": null,
-                    "Extra": "",
-                    "Comment": ""
-                },
-                {
-                    "Name": "user_slug",
-                    "Type": "varchar",
-                    "Length": "24",
-                    "Attribute": "",
-                    "Collation": "utf8mb4_general_ci",
-                    "IsNull": false,
-                    "Default": "",
                     "Extra": "",
                     "Comment": ""
                 },
@@ -118,13 +118,13 @@
                 },
                 {
                     "Name": "updated_at",
-                    "Type": "timestamp",
+                    "Type": "datetime",
                     "Length": "",
                     "Attribute": "",
                     "Collation": null,
-                    "IsNull": false,
-                    "Default": "CURRENT_TIMESTAMP",
-                    "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP",
+                    "IsNull": true,
+                    "Default": null,
+                    "Extra": "on update CURRENT_TIMESTAMP",
                     "Comment": ""
                 },
                 {
@@ -147,7 +147,7 @@
                     "IsNull": false,
                     "Comment": "",
                     "Collation": "A",
-                    "Cardinality": 2,
+                    "Cardinality": 6,
                     "IndexType": "BTREE",
                     "Columns": [
                         {
@@ -159,17 +159,17 @@
                     ]
                 },
                 {
-                    "Name": "email",
+                    "Name": "user_slug",
                     "Type": null,
-                    "IsUnique": true,
+                    "IsUnique": false,
                     "IsNull": false,
                     "Comment": "",
                     "Collation": "A",
-                    "Cardinality": 2,
+                    "Cardinality": 1,
                     "IndexType": "BTREE",
                     "Columns": [
                         {
-                            "Name": "email",
+                            "Name": "user_slug",
                             "Sequence": 1,
                             "Comment": "",
                             "SubPart": null
@@ -177,17 +177,35 @@
                     ]
                 },
                 {
-                    "Name": "username",
+                    "Name": "user_username",
                     "Type": null,
-                    "IsUnique": true,
+                    "IsUnique": false,
                     "IsNull": true,
                     "Comment": "",
                     "Collation": "A",
-                    "Cardinality": 2,
+                    "Cardinality": 6,
                     "IndexType": "BTREE",
                     "Columns": [
                         {
-                            "Name": "username",
+                            "Name": "user_username",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
+                },
+                {
+                    "Name": "user_email",
+                    "Type": null,
+                    "IsUnique": false,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 6,
+                    "IndexType": "BTREE",
+                    "Columns": [
+                        {
+                            "Name": "user_email",
                             "Sequence": 1,
                             "Comment": "",
                             "SubPart": null
@@ -299,6 +317,24 @@
                             "SubPart": null
                         }
                     ]
+                },
+                {
+                    "Name": "user_id",
+                    "Type": null,
+                    "IsUnique": false,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 14,
+                    "IndexType": "BTREE",
+                    "Columns": [
+                        {
+                            "Name": "user_id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
                 }
             ],
             "ForeignKeys": []
@@ -384,11 +420,47 @@
                     "IsNull": false,
                     "Comment": "",
                     "Collation": "A",
-                    "Cardinality": 0,
+                    "Cardinality": 2,
                     "IndexType": "BTREE",
                     "Columns": [
                         {
                             "Name": "id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
+                },
+                {
+                    "Name": "user_id",
+                    "Type": null,
+                    "IsUnique": false,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 1,
+                    "IndexType": "BTREE",
+                    "Columns": [
+                        {
+                            "Name": "user_id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
+                },
+                {
+                    "Name": "user_ip",
+                    "Type": null,
+                    "IsUnique": false,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 1,
+                    "IndexType": "BTREE",
+                    "Columns": [
+                        {
+                            "Name": "user_ip",
                             "Sequence": 1,
                             "Comment": "",
                             "SubPart": null
@@ -479,7 +551,7 @@
                     "IsNull": false,
                     "Comment": "",
                     "Collation": "A",
-                    "Cardinality": 43,
+                    "Cardinality": 50,
                     "IndexType": "BTREE",
                     "Columns": [
                         {
@@ -497,7 +569,7 @@
                     "IsNull": false,
                     "Comment": "",
                     "Collation": "A",
-                    "Cardinality": 43,
+                    "Cardinality": 50,
                     "IndexType": "BTREE",
                     "Columns": [
                         {
@@ -776,24 +848,6 @@
                     ]
                 },
                 {
-                    "Name": "label_id",
-                    "Type": null,
-                    "IsUnique": false,
-                    "IsNull": false,
-                    "Comment": "",
-                    "Collation": "A",
-                    "Cardinality": 35,
-                    "IndexType": "BTREE",
-                    "Columns": [
-                        {
-                            "Name": "label_id",
-                            "Sequence": 1,
-                            "Comment": "",
-                            "SubPart": null
-                        }
-                    ]
-                },
-                {
                     "Name": "role_id",
                     "Type": null,
                     "IsUnique": false,
@@ -805,6 +859,24 @@
                     "Columns": [
                         {
                             "Name": "role_id",
+                            "Sequence": 1,
+                            "Comment": "",
+                            "SubPart": null
+                        }
+                    ]
+                },
+                {
+                    "Name": "label_id",
+                    "Type": null,
+                    "IsUnique": false,
+                    "IsNull": false,
+                    "Comment": "",
+                    "Collation": "A",
+                    "Cardinality": 38,
+                    "IndexType": "BTREE",
+                    "Columns": [
+                        {
+                            "Name": "label_id",
                             "Sequence": 1,
                             "Comment": "",
                             "SubPart": null
@@ -873,6 +945,27 @@
         }
     },
     "HISTORY": {
+        "Columns": {
+            "#__users": {
+                "user_name": [
+                    "fullname"
+                ],
+                "user_username": [
+                    "username"
+                ],
+                "user_password": [
+                    "password"
+                ],
+                "user_email": [
+                    "email"
+                ]
+            },
+            "#__users_roles_labels_map": {
+                "role_id": [
+                    "class_id"
+                ]
+            }
+        },
         "Tables": {
             "#__users_activities": [
                 "usys_activities"
@@ -883,13 +976,6 @@
             "#__users_activities_tokens": [
                 "usys_activities_tokens"
             ]
-        },
-        "Columns": {
-            "#__users_roles_labels_map": {
-                "role_id": [
-                    "class_id"
-                ]
-            }
         }
     }
 }
