@@ -10,9 +10,10 @@ namespace Junco\Form\Enum;
 enum SelectColor
 {
     case blue;
-    case skyblue;
-    case cian;
+    case indigo;
+    case cyan;
     case green;
+    case teal;
     case yellow;
     case orange;
     case red;
@@ -26,9 +27,10 @@ enum SelectColor
     {
         return match ($this) {
             self::blue    => _t('Blue'),
-            self::skyblue => _t('Skyblue'),
-            self::cian    => _t('Cian'),
+            self::indigo  => _t('Indigo'),
+            self::cyan    => _t('Cyan'),
             self::green   => _t('Green'),
+            self::teal    => _t('Teal'),
             self::yellow  => _t('Yellow'),
             self::orange  => _t('Orange'),
             self::red     => _t('Red'),
@@ -44,9 +46,10 @@ enum SelectColor
     {
         return match ($this) {
             self::blue    => 'blue',
-            self::skyblue => 'skyblue',
-            self::cian    => 'cian',
+            self::indigo => 'indigo',
+            self::cyan    => 'cyan',
             self::green   => 'green',
+            self::teal    => 'teal',
             self::yellow  => 'yellow',
             self::orange  => 'orange',
             self::red     => 'red',
@@ -75,7 +78,7 @@ enum SelectColor
     }
 
     /**
-     * GetList
+     * Get
      */
     public static function getList(): array
     {

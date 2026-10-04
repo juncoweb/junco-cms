@@ -11,8 +11,11 @@ $bbx = Backlist::getBox();
 // actions
 $bac = $bbx->getActions();
 $bac->button('show', _t('Show'), 'fa-solid fa-eye');
-$bac->separate();
-$bac->button(url('admin/jobs.failures'), _t('Failures'), 'fa-solid fa-bug');
+$bac->dropdown([
+    ['control' => 'confirm_reset', 'label' => _t('Reset'), 'icon' => 'fa-solid fa-rotate-left'],
+    [],
+    ['href' => url('admin/jobs.failures'), 'label' => _t('Failures'), 'icon' => 'fa-solid fa-bug'],
+]);
 $bac->filters();
 $bac->refresh();
 

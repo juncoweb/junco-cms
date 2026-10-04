@@ -20,7 +20,7 @@ $filters->select('menu_key', $menu_keys);
 // table
 if ($rows) {
     foreach ($rows as &$row) {
-        $row['before'] = str_repeat('<span class="color-subtle-default">|—</span> ', $row['depth']);
+        $row['before'] = str_repeat('<span class="color-subtle">|—</span> ', $row['depth']);
     }
 
     $bls->setRows($rows);

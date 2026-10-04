@@ -10,23 +10,6 @@ use Junco\Mvc\Controller;
 class AdminExtensionsDevelopersController extends Controller
 {
     /**
-     * Confirm delete
-     */
-    public function confirmDelete()
-    {
-        return $this->view(null, (new AdminExtensionsDevelopersModel)->getDeleteData());
-    }
-
-    /**
-     * Delete
-     */
-    public function delete()
-    {
-        return $this->middleware('form.security')
-            ?: $this->wrapper(fn() => (new ExtensionsDevelopersModel)->delete());
-    }
-
-    /**
      * Index
      */
     public function index()
@@ -47,11 +30,7 @@ class AdminExtensionsDevelopersController extends Controller
      */
     public function create()
     {
-        return $this->view('SaveForm', [
-            'title' => _t('Create'),
-            'values' => null,
-            'is_protected' => false,
-        ]);
+        return $this->view('SaveForm', (new AdminExtensionsDevelopersModel)->getCreateData());
     }
 
     /**
@@ -69,5 +48,22 @@ class AdminExtensionsDevelopersController extends Controller
     {
         return $this->middleware('form.security')
             ?: $this->wrapper(fn() => (new ExtensionsDevelopersModel)->save());
+    }
+
+    /**
+     * Confirm delete
+     */
+    public function confirmDelete()
+    {
+        return $this->view(null, (new AdminExtensionsDevelopersModel)->getDeleteData());
+    }
+
+    /**
+     * Delete
+     */
+    public function delete()
+    {
+        return $this->middleware('form.security')
+            ?: $this->wrapper(fn() => (new ExtensionsDevelopersModel)->delete());
     }
 }

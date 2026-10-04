@@ -1,4 +1,4 @@
-/* --- colors ------------------------------------------- */
+/* --- colors --- */
 @each $name, $color in $theme-colors {
     $class: -#{$name};
 
@@ -50,6 +50,10 @@
     .panel#{$class}.panel-regular {
         color: var(--regular#{$class}-font-color);
         background-color: var(--regular#{$class}-bg-color);
+
+        .color-subtle {
+            color: var(--regular#{$class}-subtle-font-color);
+        }
     }
 
     // panel
@@ -71,6 +75,10 @@
         h6 {
             color: var(--solid#{$class}-heading-color);
         }
+
+        .color-subtle {
+            color: var(--solid#{$class}-subtle-font-color);
+        }
     }
 
     // toast
@@ -78,6 +86,11 @@
         color: var(--solid#{$class}-font-color);
         background-color: var(--solid#{$class}-bg-color);
     }
+}
+
+// panel
+.outline-none.panel {
+    border-color: transparent;
 }
 
 // helpers
@@ -105,7 +118,7 @@
         @if ($name == "default") {
             color: var(--regular-font-color);
         } @else {
-            color: var(--regular#{$class}-surface-color); // ?
+            color: var(--theme-#{$name}-color); // ?
         }
     }
 
@@ -117,23 +130,31 @@
         }
     }
 
-    .bg-#{$name} {
-        background-color: var(--regular#{$class}-surface-color);
-    }
-
     .box-#{$name} {
         color: var(--regular#{$class}-font-color);
         background-color: var(--regular#{$class}-bg-color);
         border-color: var(--regular#{$class}-border-color);
+
+        .color-subtle {
+            color: var(--regular#{$class}-subtle-font-color);
+        }
     }
 
     .box-#{$name}.box-solid {
         color: var(--solid#{$class}-font-color);
         background-color: var(--solid#{$class}-bg-color);
         border-color: var(--solid#{$class}-border-color);
+
+        .color-subtle {
+            color: var(--solid#{$class}-subtle-font-color);
+        }
     }
 }
 
-.outline-none.panel {
-    border-color: transparent;
+.color-subtle {
+    color: var(--regular-subtle-font-color);
+
+    &.color-solid {
+        color: var(--solid-subtle-font-color);
+    }
 }

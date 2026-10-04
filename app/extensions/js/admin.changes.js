@@ -1,5 +1,5 @@
 
-/* --- Changes --------------------------------------------------------- */
+/* --- Changes --- */
 (function () {
     function $U(task) {
         return JsUrl('admin/extensions.changes/' + task);

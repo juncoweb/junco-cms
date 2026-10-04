@@ -21,7 +21,7 @@ $zoom->group($num_attempts)->setLabel(_t('Attempts'));
 // modal
 $modal = Modal::get();
 $modal->close();
-$modal->title(_t('Failure'));
+$modal->title(_t('Job'), 'fa-solid fa-eye');
 $modal->content($zoom->render());
 
 return $modal->response();

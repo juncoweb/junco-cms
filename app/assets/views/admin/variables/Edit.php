@@ -33,7 +33,7 @@ foreach ($variables as $row) {
 
 // modal
 $modal = Modal::get();
-$modal->title([_t('Layouts'), _t('Edit')]);
+$modal->type('edit');
 $modal->content($form->render());
 
 return $modal->response();

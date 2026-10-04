@@ -28,9 +28,9 @@ return function (PortalInterface $portal) {
 
     $html = '<div class="input-large btn-large">'
         . '<form id="portal-contact">'
-        .   '<p>' . $felem->input('contact_name', ['placeholder' => _t('Name'), 'required' => '']) . '</p>'
-        .   '<p>' . $felem->input('contact_email', ['placeholder' => _t('Email'), 'required' => '']) . '</p>'
-        .   '<p>' . $felem->textarea('contact_message', ['placeholder' => _t('Message'), 'required' => '', 'auto-grow' => '', 'data-min-height' => '84px']) . '</p>'
+        .   '<p>' . $felem->input('contact_name', ['placeholder' => $t = _t('Name'), 'aria-label' => $t, 'required' => '']) . '</p>'
+        .   '<p>' . $felem->input('contact_email', ['placeholder' => $t = _t('Email'), 'aria-label' => $t, 'required' => '']) . '</p>'
+        .   '<p>' . $felem->textarea('contact_message', ['placeholder' => $t = _t('Message'), 'aria-label' => $t, 'required' => '', 'auto-grow' => '', 'data-min-height' => '84px']) . '</p>'
         .   '<p>' . $felem->enter(_t('Enter'), ['captcha' => config('contact.captcha')]) . '</p>'
         .   FormSecurity::getToken()
         . '</form>'

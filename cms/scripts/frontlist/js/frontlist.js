@@ -1,4 +1,4 @@
-/* --- Frontlist ---------------------------------------------- */
+/* --- Frontlist --- */
 var Frontlist = function (ID) {
     var box = document.getElementById((ID ? ID + '-' : '') + 'frontlist');
     if (!box) {

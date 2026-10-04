@@ -5,6 +5,7 @@
  * @author: Junco CMS (tm)
  */
 
+use Junco\Backlist\Enum\DefaultStatus;
 use Junco\Mvc\Model;
 
 class MenusModel extends Model
@@ -80,10 +81,18 @@ class MenusModel extends Model
      */
     public function status()
     {
-        $data = $this->filter(POST, ['id' => 'id|array|required:abort']);
+        $data = $this->filter(POST, [
+            'id'     => 'id|array|required:abort',
+            'status' => 'enum:backlist.default_status'
+        ]);
 
         // query
-        $this->db->exec("UPDATE `#__menus` SET status = IF(status > 0, 0, 1) WHERE id IN (?..)", $data['id']);
+        if ($data['status']) {
+            $this->db->exec("UPDATE `#__menus` SET status = ? WHERE id IN (?..)", $data['status'], $data['id']);
+        } else {
+            $sql = DefaultStatus::toggle();
+            $this->db->exec("UPDATE `#__menus` SET status = $sql WHERE id IN (?..)", $data['id']);
+        }
     }
 
     /**

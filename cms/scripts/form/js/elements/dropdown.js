@@ -67,14 +67,18 @@
             })
         });
 
-        $el.setAttribute('role', 'combobox');
-        $el.setAttribute('aria-haspopup', 'listbox');
-        $caret.setAttribute('aria-haspopup', 'listbox');
+        if ($caret == $el) {
+            $el.setAttribute('role', 'combobox');
+            $el.setAttribute('aria-haspopup', 'listbox');
+        } else {
+            $caret.setAttribute('role', 'combobox');
+            $caret.setAttribute('aria-haspopup', 'listbox');
+        }
     }
 
     function select($el) {
         const $menu = getMenu($el);
-        const $caret = $el.querySelector('[role=caret]') || $el.querySelector('.btn-caret') || $el;
+        const $caret = $el.querySelector('.btn-caret') || $el;
         const $label = $el.querySelector('[data-select-label]') || $el;
 
         setDropdownEvents($menu, $caret, $el);

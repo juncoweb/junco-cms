@@ -1,7 +1,7 @@
-/* --- modal ----------------------------------------- */
+/* --- modal --- */
 .modal {
   position: relative;
-  background-color: var(--regular-surface-color);
+  background-color: var(--theme-surface-color);
   border-width: var(--border-width);
   border-style: var(--border-style);
   border-color: var(--regular-border-color);
@@ -69,6 +69,12 @@
 }
 .modal-fixed {
   overflow: hidden;
+}
+.modal-draggable {
+  position: fixed;
+}
+.modal-draggable .modal-header {
+  cursor: move;
 }
 
 @keyframes modal {

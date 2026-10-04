@@ -1,4 +1,4 @@
-/* --- backList -------------------------------------------- */
+/* --- backList --- */
 .backlist-box {
     position: relative;
     //max-width: $screen-xl;
@@ -9,6 +9,7 @@
 .backlist-slot {
     overflow: hidden;
     position: relative;
+    border-radius: 0 0 var(--rounded-md) var(--rounded-md);
 }
 
 .backlist-wrapper {
@@ -73,7 +74,7 @@
     z-index: 1;
     position: sticky;
     border-radius: var(--rounded-md);
-    background-color: var(--regular-surface-color);
+    background-color: var(--theme-surface-color);
 
     &.active {
         border-width: var(--border-width);

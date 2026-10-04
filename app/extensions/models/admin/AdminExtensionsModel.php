@@ -33,7 +33,7 @@ class AdminExtensionsModel extends Model
     {
         return [
             'developer_mode' => SYSTEM_DEVELOPER_MODE,
-            'statuses' => ExtensionStatus::cases(),
+            'statuses' => ExtensionStatus::getList(),
         ];
     }
 
@@ -163,6 +163,9 @@ class AdminExtensionsModel extends Model
         WHERE e.id = ?", $input['id'])->fetch() or abort();
 
 
+        if ($data['extension_require']) {
+            $data['extension_require'] = $this->splitList($data['extension_require']);
+        }
         if ($data['components']) {
             $data['components'] = $this->getComponents($data['components']);
         }
@@ -186,12 +189,11 @@ class AdminExtensionsModel extends Model
         $developers = $this->getDevelopers();
 
         return [
-            'title' => _t('Create'),
+            'type' => 'create',
             'values' => [
                 'extension_require' => $this->getSince(),
                 'developer_id' => array_key_last($developers)
             ],
-            'is_edit' => false,
             'is_protected' => false,
             'developers' => $developers,
             'can_be_a_package' => true,
@@ -227,9 +229,8 @@ class AdminExtensionsModel extends Model
 		FROM `#__extensions` e WHERE id = ?", $input['id'])->fetch() or abort();
 
         return [
-            'title'            => _t('Edit'),
+            'type'             => 'edit',
             'values'           => $data,
-            'is_edit'          => true,
             'is_protected'     => $data['is_protected'],
             'developers'       => $this->getDevelopers(),
             'can_be_a_package' => !($data['package_id'] > 0),
@@ -247,11 +248,9 @@ class AdminExtensionsModel extends Model
             'status' => 'enum:extensions.extension_status|required:abort'
         ]);
 
-        return [
-            ...$data,
-            'status' => $data['status']->name,
-            'status_title' => $data['status']->title(),
-        ];
+        $data['status'] = $data['status']->fetch();
+
+        return $data;
     }
 
     /**

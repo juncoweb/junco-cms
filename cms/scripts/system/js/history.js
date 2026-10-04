@@ -1,5 +1,5 @@
 
-/* --- History ----------------------------------------------- */
+/* --- History --- */
 var JsHistory = function (stateKey, fn, stateValue) {
     var
         w = window.top,

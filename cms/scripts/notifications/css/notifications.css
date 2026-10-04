@@ -1,7 +1,7 @@
-/* --- notifications ----------------------------------------- */
+/* --- notifications --- */
 .notifications {
   max-width: 990px;
-  background-color: var(--regular-surface-color);
+  background-color: var(--theme-surface-color);
   padding: var(--spacing-4);
   border-radius: var(--rounded-md);
 }

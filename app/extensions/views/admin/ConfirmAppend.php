@@ -18,7 +18,7 @@ $form->hidden('id');
 $modal = Modal::get();
 $modal->enter();
 $modal->close();
-$modal->title([$title, _t('Append')]);
+$modal->title([_t('Append'), $title], 'fa-solid fa-share-nodes');
 $modal->content($form->render());
 
 return $modal->response();

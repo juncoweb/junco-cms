@@ -91,23 +91,19 @@ class template_frontend_default_snippet extends Template
      */
     protected function renderLogo()
     {
-        // logo
         $html = '';
+
         if (!empty($this->options->logo_img)) {
-            $html = '<img src="' . $this->options->logo_img . '" alt="' . $this->site->name . '"/>';
-        }
-        if (!empty($this->options->logo_text)) {
-            if ($html) {
-                $html = '<div><div>' . $html . '</div><div>' . $this->options->logo_text . '</div></div>';
-            } else {
-                $html .= $this->options->logo_text;
-            }
-        }
-        if (!$html) {
-            $html = $this->site->name;
+            $html = '<img src="' . $this->options->logo_img . '" alt="' . sprintf(_t('Logo of %s'), $this->site->name) . '"/>';
         }
 
-        return $html;
+        if (!empty($this->options->logo_text)) {
+            $html = $html
+                ? '<div><div>' . $html . '</div><div aria-hidden="true">' . $this->options->logo_text . '</div></div>'
+                : $this->options->logo_text;
+        }
+
+        return $html ?: $this->site->name;
     }
 
     /**
@@ -134,11 +130,11 @@ class template_frontend_default_snippet extends Template
                             $li .= '<li><a href="' . url('admin') . '">' . _t('Administration') . '</a></li>';
                         }
 
-                        $li .= '<li><a href="javascript:void(0)" control-tpl="logout">' . _t('Log out') . '</a></li>';
+                        $li .= '<li><a href="javascript:void(0)" role="button" control-tpl="logout">' . _t('Log out') . '</a></li>';
                         $name = $this->user->getName();
                         $html .= '<div class="btn-group">'
-                            . '<button type="button" control-felem="dropdown" role="caret" class="th-btn"><span data-select-label><i class="capital" aria-hidden="true">' . $name[0] . '</i>' . $name . '</span></button>'
-                            . '<div role="drop-menu" class="dropdown-menu" style="display: none;">'
+                            . '<button type="button" control-felem="dropdown" class="th-btn"><span data-select-label><i class="capital" aria-hidden="true">' . $name[0] . '</i>' . $name . '</span></button>'
+                            . '<div class="dropdown-menu" style="display: none;">'
                             .   '<ul>' . $li . '</ul>'
                             . '</div>'
                             . '</div>';
@@ -149,17 +145,17 @@ class template_frontend_default_snippet extends Template
 
                 case 'theme':
                     $html .= '<div class="btn-group">'
-                        . '<button type="button" control-felem="dropdown" control-tpl="theme" role="caret" class="th-btn">'
+                        . '<button type="button" control-felem="dropdown" control-tpl="theme" class="th-btn">'
                         .   '<span class="only-on-light"><i class="fa-solid fa-sun" aria-hidden="true"></i><div class="visually-hidden">' . ($t1 = _t('Light')) . '</div></span>'
                         .   '<span class="only-on-dark"><i class="fa-solid fa-moon" aria-hidden="true"></i><div class="visually-hidden">' . ($t2 = _t('Dark')) . '</div></span>'
                         .   '<span class="only-on-auto"><i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i><div class="visually-hidden">' . ($t3 = _t('Auto')) . '</div></span>'
-                        .   '<i class="fa-solid fa-caret-down ml-2"></i>'
+                        .   '<i class="fa-solid fa-caret-down ml-2" aria-hidden="true"></i>'
                         . '</button>'
-                        . '<div role="drop-menu" class="dropdown-menu" style="display: none;">'
+                        . '<div class="dropdown-menu" style="display: none;">'
                         .  '<ul>'
-                        .   '<li><a href="javascript:void(0)" data-value="light"><i class="fa-solid fa-sun"></i> <span>' . $t1 . '</span></a></li>'
-                        .   '<li><a href="javascript:void(0)" data-value="dark"><i class="fa-solid fa-moon"></i> <span>' . $t2 . '</span></a></li>'
-                        .   '<li><a href="javascript:void(0)" data-value="auto"><i class="fa-solid fa-circle-half-stroke"></i> <span>' . $t3  . '</span></a></li>'
+                        .   '<li><a href="javascript:void(0)" role="button" data-value="light"><i class="fa-solid fa-sun" aria-hidden="true"></i> <span>' . $t1 . '</span></a></li>'
+                        .   '<li><a href="javascript:void(0)" role="button" data-value="dark"><i class="fa-solid fa-moon" aria-hidden="true"></i> <span>' . $t2 . '</span></a></li>'
+                        .   '<li><a href="javascript:void(0)" role="button" data-value="auto"><i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i> <span>' . $t3  . '</span></a></li>'
                         .  '</ul>'
                         . '</div>'
                         . '</div>';
@@ -170,14 +166,14 @@ class template_frontend_default_snippet extends Template
                     if (count($languages) > 1) {
                         $li = '';
                         foreach ($languages as $value => $name) {
-                            $li .= '<li><a href="javascript:void(0)" data-value="' . $value . '">' . $name . '</a></li>';
+                            $li .= '<li><a href="javascript:void(0)" role="button" data-value="' . $value . '">' . $name . '</a></li>';
                         }
 
                         $html .= '<div class="btn-group">'
-                            . '<button type="button" control-felem="dropdown" control-tpl="language" role="caret" class="th-btn">'
-                            .   '<span data-select-label>' . $this->getLang() . '<i class="fa-solid fa-caret-down ml-2"></i></span>'
+                            . '<button type="button" control-felem="dropdown" title="' . _t('Language') . '" control-tpl="language" class="th-btn">'
+                            .   '<span data-select-label aria-hidden="true">' . $this->getLang() . '<i class="fa-solid fa-caret-down ml-2" aria-hidden="true"></i></span>'
                             . '</button>'
-                            . '<div role="drop-menu" class="dropdown-menu" style="display: none;">'
+                            . '<div class="dropdown-menu" style="display: none;">'
                             .  '<ul>' . $li . '</ul>'
                             . '</div>'
                             . '</div>';
@@ -186,18 +182,19 @@ class template_frontend_default_snippet extends Template
                     break;
 
                 case 'notifications':
-                    $html .= '<a href="javascript:void(0)" control-tpl="notifications" title="' . ($t = _t('Notifications')) . '" aria-label="' . $t . '" class="th-btn">'
+                    $html .= '<button type="button" control-tpl="notifications" title="' . _t('Notifications') . '" class="th-btn">'
                         . '<i class="fa-solid fa-bell" aria-hidden="true"></i>'
+                        . ''
                         . '<span class="badge badge-danger badge-small rounded-full" style="display: none;"></span>'
-                        . '</a>';
+                        . '</button>';
                     break;
 
                 case 'search':
-                    $html .= '<a href="' . url('/search') . '" control-tpl="search" title="' . ($t = _t('Search')) . '" class="th-btn"><i aria-label="' . $t . '" class="fa-solid fa-magnifying-glass"></i></a>';
+                    $html .= '<a href="' . url('/search') . '" control-tpl="search" title="' . _t('Search') . '" class="th-btn"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></a>';
                     break;
 
                 case 'contact':
-                    $html .= '<a href="' . url('/contact') . '" title="' . ($t = _t('Contact')) . '" class="th-btn"><i aria-label="' . $t . '" class="fa-solid fa-envelope"></i></a>';
+                    $html .= '<a href="' . url('/contact') . '" title="' . _t('Contact') . '" class="th-btn"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>';
                     break;
             }
         }

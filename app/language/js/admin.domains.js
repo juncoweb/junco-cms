@@ -1,5 +1,5 @@
 
-/* --- Domains -------------------------------------------- */
+/* --- Domains --- */
 (function () {
     function $U(task) {
         return JsUrl('admin/language.domains/' + task);

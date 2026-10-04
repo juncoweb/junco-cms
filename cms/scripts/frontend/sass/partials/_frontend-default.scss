@@ -1,4 +1,4 @@
-/* --- Layout ------------------------------------------------- */
+/* --- Layout --- */
 html,
 body {
     margin: 0;
@@ -149,7 +149,7 @@ body.full-body {
         z-index: 101;
 
         a {
-            background-color: rgba(var(--regular-surface-rgb-color), 0.9);
+            background-color: rgba(var(--theme-surface-rgb-color), 0.9);
             font-weight: bold;
             padding: 0.5rem;
             position: absolute;
@@ -172,7 +172,7 @@ body.full-body {
     }
 
     .th-btn {
-        margin-right: -var(--border-width);
+        margin-right: calc(-1 * var(--border-width));
         padding: 0 var(--spacing-4);
         background: none;
         border: var(--border-width) solid;
@@ -242,7 +242,7 @@ body.full-body {
     }
 }
 
-/* --- navbar ------------------------------------------------- */
+/* --- navbar --- */
 .navbar {
     float: right;
     @include navbar(
@@ -268,7 +268,7 @@ body.full-body {
 
     @include navbar(
         $color: var(--solid-font-color),
-        $hover-color: var(--solid-primary-surface-color),
+        $hover-color: var(--theme-primary-color),
         $bg-hover-color: var(--solid-disabled-bg-color),
         $padding: var(--spacing-2) var(--spacing-4)
     );
@@ -291,7 +291,7 @@ body.full-body {
     }
 }
 
-/* --- print ------------------------------------------------- */
+/* --- print --- */
 @media print {
     @page {
         size: auto;

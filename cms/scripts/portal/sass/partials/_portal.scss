@@ -1,4 +1,4 @@
-/* --- portal -------------------------------------- */
+/* --- portal --- */
 .portal-section {
     overflow: hidden;
 }
@@ -35,9 +35,9 @@
     .portal-section#{$class} {
         color: var(--regular#{$varName}-font-color);
 
-        a {
+        /* a {
             color: var(--regular#{$varName}-font-color);
-        }
+        } */
 
         h1,
         h2,
@@ -53,7 +53,7 @@
         }
 
         .portal-contrast {
-            color: var(--solid-#{$contrast}-surface-color);
+            color: var(--theme-#{$contrast}-color);
         }
 
         .portal-bg-contrast {
@@ -70,9 +70,9 @@
         color: var(--solid-#{$name}-font-color);
         background-color: var(--solid-#{$name}-bg-color);
 
-        a {
+        /* a {
             color: var(--solid-#{$name}-font-color);
-        }
+        } */
 
         h1,
         h2,
@@ -88,7 +88,7 @@
         }
 
         .portal-contrast {
-            color: var(--solid-#{$contrast}-surface-color);
+            color: var(--theme-#{$contrast}-color);
         }
 
         .portal-bg-contrast {

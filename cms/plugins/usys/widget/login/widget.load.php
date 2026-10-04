@@ -22,10 +22,10 @@ return function (WidgetInterface $widget) {
     } else {
         $title = _t('Log in');
         $html = '<form id="widget-usys-form">'
-            . '<p><div class="input-icon-group"><span class="input-icon"><i class="fa-solid fa-user"></i></span><input type="text" name="email_username" class="input-field" placeholder="' . _t('Username') . '"/></div></p>'
-            . '<p><div class="input-icon-group"><span class="input-icon"><i class="fa-solid fa-key"></i></span><input type="text" name="user_password" class="input-field" placeholder="' . _t('Password') . '"/></div></p>'
-            . '<p><label class="input-label"><input type="checkbox" name="remember" value="1"/> ' . _t('Stay logged in') . '</label></p>'
-            . '<p><button type="submit" class="btn btn-small">' . _t('Log in') . '</button></p>'
+            . '<p><div class="input-icon-group"><span class="input-icon"><i class="fa-solid fa-user" aria-hidden="true"></i></span><input type="text" name="email_username" class="input-field" placeholder="' . _t('Username') . '"/></div></p>'
+            . '<p><div class="input-icon-group"><span class="input-icon"><i class="fa-solid fa-key" aria-hidden="true"></i></span><input type="text" name="user_password" class="input-field" placeholder="' . _t('Password') . '"/></div></p>'
+            . '<p><label class="input-label"><input type="checkbox" name="remember" value="1" class="input-checkbox"/> ' . _t('Stay logged in') . '</label></p>'
+            . '<p><button type="submit" class="btn btn-primary btn-solid btn-small">' . _t('Log in') . '</button></p>'
             . FormSecurity::getToken()
             . '</form>';
     }

@@ -1,5 +1,5 @@
 
-/* --- users ------------------------------- */
+/* --- users --- */
 let UsersActivities = (function () {
     function $U(task) {
         return JsUrl('admin/users.activities/' + task);

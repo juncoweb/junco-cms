@@ -1,5 +1,5 @@
 
-/* --- Search ---------------------------------------------------------------------- */
+/* --- Search --- */
 var Search = (function () {
     var f = document.getElementById('search-form'),
         engines = f.querySelectorAll('input[type=radio]');

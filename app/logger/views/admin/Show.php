@@ -24,7 +24,7 @@ $zoom->group($backtrace ? '<div>' . implode('</div><div>', $backtrace) . '</div>
 // modal
 $modal = Modal::get();
 $modal->close();
-$modal->title(_t('Info'), 'fa-solid fa-circle-info');
+$modal->title(_t('Show'), 'fa-solid fa-eye');
 $modal->content($zoom->render());
 
 return $modal->response();

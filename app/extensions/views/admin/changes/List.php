@@ -12,7 +12,7 @@ $bls = Backlist::get();
 if ($rows) {
     foreach ($rows as &$row) {
         if ($row['status']) {
-            $row['change_description'] = '<span class="color-subtle-default">' . $row['change_description'] . '</span>';
+            $row['change_description'] = '<span class="color-subtle">' . $row['change_description'] . '</span>';
         }
     }
 

@@ -1,5 +1,5 @@
 
-/* --- UsersRoles ----------------------------------- */
+/* --- UsersRoles --- */
 var UsersRoles = (function () {
     function $U(task, output) {
         return JsUrl('admin/users.roles/' + task, false, output);

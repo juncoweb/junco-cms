@@ -4,6 +4,8 @@
     z-index: $notify-zindex;
 
     > span {
+        display: flex;
+        justify-content: center;
         position: fixed;
         left: 0;
         right: 0;
@@ -12,15 +14,11 @@
             color: $notify-color;
             position: absolute;
             top: $notify-top;
-            padding: 0.625rem 1rem;
+            margin: 0 var(--spacing-4);
+            padding: var(--spacing-2) var(--spacing-4);
             background: $notify-bg-color;
             border-radius: var(--rounded-md);
             box-shadow: var(--box-shadow-dropdown);
-            left: 50%;
-            -webkit-transform: translateX(-50%);
-            transform: translateX(-50%);
-            -webkit-animation-name: notify;
-            -webkit-animation-duration: 0.5s;
             animation-name: notify;
             animation-duration: 0.5s;
         }
@@ -36,5 +34,17 @@
     to {
         opacity: 1;
         top: $notify-top;
+    }
+}
+
+@media (min-width: $screen-md) {
+    .notify-box > span > span {
+        max-width: 80%;
+    }
+}
+
+@media (min-width: $screen-lg) {
+    .notify-box > span > span {
+        max-width: 60%;
     }
 }

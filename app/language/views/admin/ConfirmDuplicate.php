@@ -15,7 +15,7 @@ $form->input('language_to')->setLabel(_t('Key'))->setRequired();
 $modal = Modal::get();
 $modal->close();
 $modal->enter();
-$modal->title(_t('Duplicate'));
+$modal->title(_t('Duplicate'), 'fa-solid fa-copy');
 $modal->content($form->render());
 
 return $modal->response();

@@ -24,7 +24,7 @@ class Router
     protected string $deepcomponent           = '';
     protected string $fullcomponent           = '';
     protected string $task                    = '';
-    protected string $format                  = 'template';
+    protected string $format                  = '';
     protected Closure|array|false $controller = false;
     protected Routes $routes;
     // config
@@ -57,7 +57,8 @@ class Router
         $this->site_baseurl   = $config['site.baseurl'];
 
         //
-        $this->extractRouteAndFormat($method, $queryParams);
+        $this->route       = $this->extractRoute($queryParams);
+        $this->format      = $this->extractFormat($queryParams, $method);
         $this->queryParams = $queryParams;
 
         // Initialize routes
@@ -83,33 +84,43 @@ class Router
     /**
      * Extract
      * 
-     * @param string $method
-     * @param array  &$queryParams
+     * @param array &$queryParams
      * 
-     * @return void
+     * @return array
      */
-    protected function extractRouteAndFormat(string $method, array &$queryParams): void
+    protected function extractRoute(array &$queryParams): array
     {
-        $route = '';
-
-        if (array_key_exists($this->route_key, $queryParams)) {
-            $route = rtrim($queryParams[$this->route_key], '/');
-            unset($queryParams[$this->route_key]);
+        if (!array_key_exists($this->route_key, $queryParams)) {
+            return [];
         }
 
-        if ($route) {
-            $this->route = explode('/', $route);
-        }
+        $route = $queryParams[$this->route_key];
+        unset($queryParams[$this->route_key]);
 
+        return $route = rtrim($route, '/')
+            ? explode('/', $route)
+            : [];
+    }
+
+    /**
+     * Extract
+     * 
+     * @param array  &$queryParams
+     * @param string $method
+     * 
+     * @return string
+     */
+    protected function extractFormat(array &$queryParams, string $method): string
+    {
         if ($method == 'INPUT') {
-            $this->format = 'console';
-        } else {
-            $format = $queryParams[$this->format_key] ?? null;
-
-            if ($format && preg_match('/^[a-z]+$/', $format)) {
-                $this->format = $format;
-            }
+            return 'console';
         }
+
+        $format = $queryParams[$this->format_key] ?? null;
+
+        return $format && preg_match('/^[a-z]+$/', $format)
+            ? $format
+            : 'template';
     }
 
     /**
@@ -249,10 +260,7 @@ class Router
             }
             $component = strtolower($parts[1]);
         } else {
-            $roller = [$this->access_point, $this->component];
-            if ($this->deepcomponent) {
-                $roller = array_merge($roller, explode('.', $this->deepcomponent));
-            }
+            $roller    = [$this->access_point, ...explode('.', $this->fullcomponent)];
             $className = implode(array_map('ucfirst', $roller)) . 'Controller';
             $component = $this->component;
         }
@@ -327,13 +335,7 @@ class Router
     public function getRoute(): string
     {
         $route = [];
-
-        if ($this->access_point == 'front') {
-            $route[] = '';
-        } else {
-            $route[] = $this->access_point;
-        }
-
+        $route[] = ($this->access_point == 'front' ? '' : $this->access_point);
         $route[] = $this->fullcomponent;
 
         if ($this->task) {
@@ -600,6 +602,21 @@ class Router
     }
 
     /**
+     * To query string
+     * 
+     * @param array $args
+     * 
+     * @return string
+     */
+    protected function toQueryString(array $args): string
+    {
+        foreach ($args as $key => $value) {
+            $args[$key] = $key . '=' . $value;
+        }
+        return implode('&', $args);
+    }
+
+    /**
      * Get a url for a form
      * 
      * Returns an array with a key corresponding to the action of the form,
@@ -658,7 +675,8 @@ class Router
             $url = $this->getUrl('', [], $absolute);
         } elseif ($url == -1) {
             $url = $_SERVER['HTTP_REFERER'] ?? '';
-            if (substr($url, 0, strlen($this->site_url)) !== $this->site_url) {
+
+            if (!$url || !$this->isOurUrl($url)) {
                 $url = $this->site_url;
             }
         } elseif ($url == 401) {
@@ -666,10 +684,8 @@ class Router
         } elseif ($url == 404) {
             $url = $this->getUrl('/system/404', [], $absolute);
         } elseif (is_array($url)) {
-            $url[1] ??= [];
-            $url[2] = $absolute;
-            $url = call_user_func_array([$this, 'getUrl'], $url);
-        } elseif (substr($url, 0, 4) !== 'http') {
+            $url = $this->getUrl($url[0] ?? '', $url[1] ??= [], $absolute);
+        } elseif ($this->isRelativeUrl($url)) {
             $url = ($absolute ? $this->site_url : $this->site_baseurl) . $url;
         }
 
@@ -692,17 +708,26 @@ class Router
     }
 
     /**
-     * To query string
+     * Is
      * 
-     * @param array $args
+     * @param string $url
      * 
-     * @return string
+     * @return bool
      */
-    protected function toQueryString(array $args): string
+    protected function isOurUrl(string $url): bool
     {
-        foreach ($args as $key => $value) {
-            $args[$key] = $key . '=' . $value;
-        }
-        return implode('&', $args);
+        return substr($url, 0, strlen($this->site_url)) === $this->site_url;
+    }
+
+    /**
+     * Is
+     * 
+     * @param string $url
+     * 
+     * @return bool
+     */
+    protected function isRelativeUrl(string $url): bool
+    {
+        return substr($url, 0, 4) !== 'http';
     }
 }

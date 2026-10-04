@@ -14,7 +14,7 @@ $string = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac 
 // modal
 $modal = Modal::get();
 $modal->close();
-$modal->title('Hello!');
+$modal->title('Hello!', 'fa-regular fa-hand-spock');
 
 $html = '<div>time: ' . time() . '</div>';
 switch ($example) {

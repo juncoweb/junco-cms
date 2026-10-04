@@ -1,5 +1,5 @@
 
-/* --- Install ----------------------------------------------- */
+/* --- Install --- */
 var Install = (function () {
     function $U(task) {
         return JsUrl('/install/' + task);

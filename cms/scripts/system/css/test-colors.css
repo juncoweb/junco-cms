@@ -1,4 +1,33 @@
-/* --- colors ------------------------------------------- */
+/* --- colors --- */
+:root,
+[data-theme=light] {
+  --theme-default-color-50: rgb(234.3, 234.7, 235.1);
+  --theme-default-color-100: rgb(213.6, 214.4, 215.2);
+  --theme-default-color-200: rgb(172.2, 173.8, 175.4);
+  --theme-default-color-300: rgb(130.8, 133.2, 135.6);
+  --theme-default-color-400: rgb(89.4, 92.6, 95.8);
+  --theme-default-color-500: #303438;
+  --theme-default-color-600: rgb(38.4, 41.6, 44.8);
+  --theme-default-color-700: rgb(28.8, 31.2, 33.6);
+  --theme-default-color-800: rgb(19.2, 20.8, 22.4);
+  --theme-default-color-900: rgb(9.6, 10.4, 11.2);
+  --theme-default-color-950: rgb(4.8, 5.2, 5.6);
+}
+
+[data-theme=dark] {
+  --theme-default-color-50: rgb(234.3, 234.7, 235.1);
+  --theme-default-color-100: rgb(213.6, 214.4, 215.2);
+  --theme-default-color-200: rgb(172.2, 173.8, 175.4);
+  --theme-default-color-300: rgb(130.8, 133.2, 135.6);
+  --theme-default-color-400: rgb(89.4, 92.6, 95.8);
+  --theme-default-color-500: #303438;
+  --theme-default-color-600: rgb(38.4, 41.6, 44.8);
+  --theme-default-color-700: rgb(28.8, 31.2, 33.6);
+  --theme-default-color-800: rgb(19.2, 20.8, 22.4);
+  --theme-default-color-900: rgb(9.6, 10.4, 11.2);
+  --theme-default-color-950: rgb(4.8, 5.2, 5.6);
+}
+
 .box-default-active {
   color: var(--regular-active-font-color);
   background-color: var(--regular-active-bg-color);
@@ -21,6 +50,50 @@
   color: var(--solid-disabled-font-color);
   background-color: var(--solid-disabled-bg-color);
   border-color: var(--solid-disabled-border-color);
+}
+
+.box-default-active {
+  color: var(--regular-active-font-color);
+  background-color: var(--regular-active-bg-color);
+  border-color: var(--regular-active-border-color);
+}
+
+.box-default-active .color-subtle,
+.box-default-disabled .color-subtle {
+  color: var(--regular-subtle-font-color);
+}
+.box-default-active.box-solid .color-subtle,
+.box-default-disabled.box-solid .color-subtle {
+  color: var(--solid-subtle-font-color);
+}
+
+:root,
+[data-theme=light] {
+  --theme-primary-color-50: rgb(234.3, 239.4, 249.6);
+  --theme-primary-color-100: rgb(213.6, 223.8, 244.2);
+  --theme-primary-color-200: rgb(172.2, 192.6, 233.4);
+  --theme-primary-color-300: rgb(130.8, 161.4, 222.6);
+  --theme-primary-color-400: rgb(89.4, 130.2, 211.8);
+  --theme-primary-color-500: #3063c9;
+  --theme-primary-color-600: rgb(38.4, 79.2, 160.8);
+  --theme-primary-color-700: rgb(28.8, 59.4, 120.6);
+  --theme-primary-color-800: rgb(19.2, 39.6, 80.4);
+  --theme-primary-color-900: rgb(9.6, 19.8, 40.2);
+  --theme-primary-color-950: rgb(4.8, 9.9, 20.1);
+}
+
+[data-theme=dark] {
+  --theme-primary-color-50: rgb(234.3, 239.4, 249.6);
+  --theme-primary-color-100: rgb(213.6, 223.8, 244.2);
+  --theme-primary-color-200: rgb(172.2, 192.6, 233.4);
+  --theme-primary-color-300: rgb(130.8, 161.4, 222.6);
+  --theme-primary-color-400: rgb(89.4, 130.2, 211.8);
+  --theme-primary-color-500: #3063c9;
+  --theme-primary-color-600: rgb(38.4, 79.2, 160.8);
+  --theme-primary-color-700: rgb(28.8, 59.4, 120.6);
+  --theme-primary-color-800: rgb(19.2, 39.6, 80.4);
+  --theme-primary-color-900: rgb(9.6, 19.8, 40.2);
+  --theme-primary-color-950: rgb(4.8, 9.9, 20.1);
 }
 
 .box-primary-active {
@@ -47,6 +120,50 @@
   border-color: var(--solid-primary-disabled-border-color);
 }
 
+.box-primary-active {
+  color: var(--regular-primary-active-font-color);
+  background-color: var(--regular-primary-active-bg-color);
+  border-color: var(--regular-primary-active-border-color);
+}
+
+.box-primary-active .color-subtle,
+.box-primary-disabled .color-subtle {
+  color: var(--regular-primary-subtle-font-color);
+}
+.box-primary-active.box-solid .color-subtle,
+.box-primary-disabled.box-solid .color-subtle {
+  color: var(--solid-primary-subtle-font-color);
+}
+
+:root,
+[data-theme=light] {
+  --theme-secondary-color-50: rgb(249.3, 231.1, 241.7);
+  --theme-secondary-color-100: rgb(243.6, 207.2, 228.4);
+  --theme-secondary-color-200: rgb(232.2, 159.4, 201.8);
+  --theme-secondary-color-300: rgb(220.8, 111.6, 175.2);
+  --theme-secondary-color-400: rgb(209.4, 63.8, 148.6);
+  --theme-secondary-color-500: #c6107a;
+  --theme-secondary-color-600: rgb(158.4, 12.8, 97.6);
+  --theme-secondary-color-700: rgb(118.8, 9.6, 73.2);
+  --theme-secondary-color-800: rgb(79.2, 6.4, 48.8);
+  --theme-secondary-color-900: rgb(39.6, 3.2, 24.4);
+  --theme-secondary-color-950: rgb(19.8, 1.6, 12.2);
+}
+
+[data-theme=dark] {
+  --theme-secondary-color-50: rgb(249.3, 231.1, 241.7);
+  --theme-secondary-color-100: rgb(243.6, 207.2, 228.4);
+  --theme-secondary-color-200: rgb(232.2, 159.4, 201.8);
+  --theme-secondary-color-300: rgb(220.8, 111.6, 175.2);
+  --theme-secondary-color-400: rgb(209.4, 63.8, 148.6);
+  --theme-secondary-color-500: #c6107a;
+  --theme-secondary-color-600: rgb(158.4, 12.8, 97.6);
+  --theme-secondary-color-700: rgb(118.8, 9.6, 73.2);
+  --theme-secondary-color-800: rgb(79.2, 6.4, 48.8);
+  --theme-secondary-color-900: rgb(39.6, 3.2, 24.4);
+  --theme-secondary-color-950: rgb(19.8, 1.6, 12.2);
+}
+
 .box-secondary-active {
   color: var(--regular-secondary-active-font-color);
   background-color: var(--regular-secondary-active-bg-color);
@@ -69,6 +186,50 @@
   color: var(--solid-secondary-disabled-font-color);
   background-color: var(--solid-secondary-disabled-bg-color);
   border-color: var(--solid-secondary-disabled-border-color);
+}
+
+.box-secondary-active {
+  color: var(--regular-secondary-active-font-color);
+  background-color: var(--regular-secondary-active-bg-color);
+  border-color: var(--regular-secondary-active-border-color);
+}
+
+.box-secondary-active .color-subtle,
+.box-secondary-disabled .color-subtle {
+  color: var(--regular-secondary-subtle-font-color);
+}
+.box-secondary-active.box-solid .color-subtle,
+.box-secondary-disabled.box-solid .color-subtle {
+  color: var(--solid-secondary-subtle-font-color);
+}
+
+:root,
+[data-theme=light] {
+  --theme-success-color-50: rgb(230.7, 242.1, 233.5);
+  --theme-success-color-100: rgb(206.4, 229.2, 212);
+  --theme-success-color-200: rgb(157.8, 203.4, 169);
+  --theme-success-color-300: rgb(109.2, 177.6, 126);
+  --theme-success-color-400: rgb(60.6, 151.8, 83);
+  --theme-success-color-500: #0c7e28;
+  --theme-success-color-600: rgb(9.6, 100.8, 32);
+  --theme-success-color-700: rgb(7.2, 75.6, 24);
+  --theme-success-color-800: rgb(4.8, 50.4, 16);
+  --theme-success-color-900: rgb(2.4, 25.2, 8);
+  --theme-success-color-950: rgb(1.2, 12.6, 4);
+}
+
+[data-theme=dark] {
+  --theme-success-color-50: rgb(230.7, 242.1, 233.5);
+  --theme-success-color-100: rgb(206.4, 229.2, 212);
+  --theme-success-color-200: rgb(157.8, 203.4, 169);
+  --theme-success-color-300: rgb(109.2, 177.6, 126);
+  --theme-success-color-400: rgb(60.6, 151.8, 83);
+  --theme-success-color-500: #0c7e28;
+  --theme-success-color-600: rgb(9.6, 100.8, 32);
+  --theme-success-color-700: rgb(7.2, 75.6, 24);
+  --theme-success-color-800: rgb(4.8, 50.4, 16);
+  --theme-success-color-900: rgb(2.4, 25.2, 8);
+  --theme-success-color-950: rgb(1.2, 12.6, 4);
 }
 
 .box-success-active {
@@ -95,6 +256,50 @@
   border-color: var(--solid-success-disabled-border-color);
 }
 
+.box-success-active {
+  color: var(--regular-success-active-font-color);
+  background-color: var(--regular-success-active-bg-color);
+  border-color: var(--regular-success-active-border-color);
+}
+
+.box-success-active .color-subtle,
+.box-success-disabled .color-subtle {
+  color: var(--regular-success-subtle-font-color);
+}
+.box-success-active.box-solid .color-subtle,
+.box-success-disabled.box-solid .color-subtle {
+  color: var(--solid-success-subtle-font-color);
+}
+
+:root,
+[data-theme=light] {
+  --theme-info-color-50: rgb(232.2, 247.4, 247.4);
+  --theme-info-color-100: rgb(209.4, 239.8, 239.8);
+  --theme-info-color-200: rgb(163.8, 224.6, 224.6);
+  --theme-info-color-300: rgb(118.2, 209.4, 209.4);
+  --theme-info-color-400: rgb(72.6, 194.2, 194.2);
+  --theme-info-color-500: #1bb3b3;
+  --theme-info-color-600: rgb(21.6, 143.2, 143.2);
+  --theme-info-color-700: rgb(16.2, 107.4, 107.4);
+  --theme-info-color-800: rgb(10.8, 71.6, 71.6);
+  --theme-info-color-900: rgb(5.4, 35.8, 35.8);
+  --theme-info-color-950: rgb(2.7, 17.9, 17.9);
+}
+
+[data-theme=dark] {
+  --theme-info-color-50: rgb(232.2, 247.4, 247.4);
+  --theme-info-color-100: rgb(209.4, 239.8, 239.8);
+  --theme-info-color-200: rgb(163.8, 224.6, 224.6);
+  --theme-info-color-300: rgb(118.2, 209.4, 209.4);
+  --theme-info-color-400: rgb(72.6, 194.2, 194.2);
+  --theme-info-color-500: #1bb3b3;
+  --theme-info-color-600: rgb(21.6, 143.2, 143.2);
+  --theme-info-color-700: rgb(16.2, 107.4, 107.4);
+  --theme-info-color-800: rgb(10.8, 71.6, 71.6);
+  --theme-info-color-900: rgb(5.4, 35.8, 35.8);
+  --theme-info-color-950: rgb(2.7, 17.9, 17.9);
+}
+
 .box-info-active {
   color: var(--regular-info-active-font-color);
   background-color: var(--regular-info-active-bg-color);
@@ -117,6 +322,50 @@
   color: var(--solid-info-disabled-font-color);
   background-color: var(--solid-info-disabled-bg-color);
   border-color: var(--solid-info-disabled-border-color);
+}
+
+.box-info-active {
+  color: var(--regular-info-active-font-color);
+  background-color: var(--regular-info-active-bg-color);
+  border-color: var(--regular-info-active-border-color);
+}
+
+.box-info-active .color-subtle,
+.box-info-disabled .color-subtle {
+  color: var(--regular-info-subtle-font-color);
+}
+.box-info-active.box-solid .color-subtle,
+.box-info-disabled.box-solid .color-subtle {
+  color: var(--solid-info-subtle-font-color);
+}
+
+:root,
+[data-theme=light] {
+  --theme-warning-color-50: rgb(253.8, 247.7, 229.5);
+  --theme-warning-color-100: rgb(252.6, 240.4, 204);
+  --theme-warning-color-200: rgb(250.2, 225.8, 153);
+  --theme-warning-color-300: rgb(247.8, 211.2, 102);
+  --theme-warning-color-400: rgb(245.4, 196.6, 51);
+  --theme-warning-color-500: #f3b600;
+  --theme-warning-color-600: rgb(194.4, 145.6, 0);
+  --theme-warning-color-700: rgb(145.8, 109.2, 0);
+  --theme-warning-color-800: rgb(97.2, 72.8, 0);
+  --theme-warning-color-900: rgb(48.6, 36.4, 0);
+  --theme-warning-color-950: rgb(24.3, 18.2, 0);
+}
+
+[data-theme=dark] {
+  --theme-warning-color-50: rgb(253.8, 247.7, 229.5);
+  --theme-warning-color-100: rgb(252.6, 240.4, 204);
+  --theme-warning-color-200: rgb(250.2, 225.8, 153);
+  --theme-warning-color-300: rgb(247.8, 211.2, 102);
+  --theme-warning-color-400: rgb(245.4, 196.6, 51);
+  --theme-warning-color-500: #f3b600;
+  --theme-warning-color-600: rgb(194.4, 145.6, 0);
+  --theme-warning-color-700: rgb(145.8, 109.2, 0);
+  --theme-warning-color-800: rgb(97.2, 72.8, 0);
+  --theme-warning-color-900: rgb(48.6, 36.4, 0);
+  --theme-warning-color-950: rgb(24.3, 18.2, 0);
 }
 
 .box-warning-active {
@@ -143,6 +392,50 @@
   border-color: var(--solid-warning-disabled-border-color);
 }
 
+.box-warning-active {
+  color: var(--regular-warning-active-font-color);
+  background-color: var(--regular-warning-active-bg-color);
+  border-color: var(--regular-warning-active-border-color);
+}
+
+.box-warning-active .color-subtle,
+.box-warning-disabled .color-subtle {
+  color: var(--regular-warning-subtle-font-color);
+}
+.box-warning-active.box-solid .color-subtle,
+.box-warning-disabled.box-solid .color-subtle {
+  color: var(--solid-warning-subtle-font-color);
+}
+
+:root,
+[data-theme=light] {
+  --theme-danger-color-50: rgb(248.9, 233.4, 234.4);
+  --theme-danger-color-100: rgb(242.8, 211.8, 213.8);
+  --theme-danger-color-200: rgb(230.6, 168.6, 172.6);
+  --theme-danger-color-300: rgb(218.4, 125.4, 131.4);
+  --theme-danger-color-400: rgb(206.2, 82.2, 90.2);
+  --theme-danger-color-500: #c22731;
+  --theme-danger-color-600: rgb(155.2, 31.2, 39.2);
+  --theme-danger-color-700: rgb(116.4, 23.4, 29.4);
+  --theme-danger-color-800: rgb(77.6, 15.6, 19.6);
+  --theme-danger-color-900: rgb(38.8, 7.8, 9.8);
+  --theme-danger-color-950: rgb(19.4, 3.9, 4.9);
+}
+
+[data-theme=dark] {
+  --theme-danger-color-50: rgb(248.9, 233.4, 234.4);
+  --theme-danger-color-100: rgb(242.8, 211.8, 213.8);
+  --theme-danger-color-200: rgb(230.6, 168.6, 172.6);
+  --theme-danger-color-300: rgb(218.4, 125.4, 131.4);
+  --theme-danger-color-400: rgb(206.2, 82.2, 90.2);
+  --theme-danger-color-500: #c22731;
+  --theme-danger-color-600: rgb(155.2, 31.2, 39.2);
+  --theme-danger-color-700: rgb(116.4, 23.4, 29.4);
+  --theme-danger-color-800: rgb(77.6, 15.6, 19.6);
+  --theme-danger-color-900: rgb(38.8, 7.8, 9.8);
+  --theme-danger-color-950: rgb(19.4, 3.9, 4.9);
+}
+
 .box-danger-active {
   color: var(--regular-danger-active-font-color);
   background-color: var(--regular-danger-active-bg-color);
@@ -165,4 +458,19 @@
   color: var(--solid-danger-disabled-font-color);
   background-color: var(--solid-danger-disabled-bg-color);
   border-color: var(--solid-danger-disabled-border-color);
+}
+
+.box-danger-active {
+  color: var(--regular-danger-active-font-color);
+  background-color: var(--regular-danger-active-bg-color);
+  border-color: var(--regular-danger-active-border-color);
+}
+
+.box-danger-active .color-subtle,
+.box-danger-disabled .color-subtle {
+  color: var(--regular-danger-subtle-font-color);
+}
+.box-danger-active.box-solid .color-subtle,
+.box-danger-disabled.box-solid .color-subtle {
+  color: var(--solid-danger-subtle-font-color);
 }

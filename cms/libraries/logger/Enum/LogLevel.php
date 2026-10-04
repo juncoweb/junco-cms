@@ -46,7 +46,7 @@ enum LogLevel: int
     }
 
     /**
-     * GetList
+     * Get
      */
     public static function getList(array $list = []): array
     {

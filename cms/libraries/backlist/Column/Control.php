@@ -25,9 +25,7 @@ class Control extends Column implements ControlInterface
     }
 
     /**
-     * Set
-     * 
-     * @param string $icon
+     * TD
      * 
      * @return string
      */
@@ -37,8 +35,7 @@ class Control extends Column implements ControlInterface
         $this->attr['class'] ??= 'table-linked';
 
         $caption = $this->getCaption($this->text, $this->icon, $this->attr['title']);
-
-        $this->td = '<a' . $this->attr($this->attr) . '>' . $caption . '</a>';
+        $this->td = '<a' . $this->attr(array_merge(['href' => 'javascript:void(0)', 'role' => 'button'], $this->attr)) . '>' . $caption . '</a>';
 
         return parent::td();
     }

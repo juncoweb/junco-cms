@@ -9,8 +9,8 @@ return [
 	 * Template
 	 */
 	'options' => [
-		'css' => 'cms/scripts/contact/css/contact.css',
-		'js' => 'cms/scripts/contact/js/contact.js',
+		'css' => 'assets/contact.min.css',
+		'js' => 'assets/contact.min.js',
 		'domready' => 'Contact()'
 	],
 	'snippet' => 'default',

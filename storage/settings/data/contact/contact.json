@@ -1,12 +1,12 @@
 {
     "title": "Contact",
     "description": "",
+    "descriptions": [],
     "groups": [
         "Template",
         "Security",
         "Administration"
     ],
-    "descriptions": [],
     "rows": {
         "options": {
             "label": "Options",
@@ -14,8 +14,8 @@
             "group": 0,
             "ordering": 2,
             "default_value": {
-                "css": "cms\/scripts\/contact\/css\/contact.css",
-                "js": "cms\/scripts\/contact\/js\/contact.js",
+                "css": "assets\/contact.min.css",
+                "js": "assets\/contact.min.js",
                 "domready": "Contact()"
             },
             "help": "The options are used to add resources or modify aspects of the template.",

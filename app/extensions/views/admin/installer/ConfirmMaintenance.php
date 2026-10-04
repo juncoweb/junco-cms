@@ -9,13 +9,13 @@
 $form = Form::get();
 $form->setValues(['status' => $status]);
 $form->toggle('status')->setLabel(_t('Enable'));
-$form->element('<div class="color-subtle-default text-center">' . _t('Enables the maintenance mode of the website.') . '</div>');
+$form->element('<div class="color-subtle text-center">' . _t('Enables the maintenance mode of the website.') . '</div>');
 
 // modal
 $modal = Modal::get();
 $modal->enter();
 $modal->close();
-$modal->title(_t('Maintenance'));
+$modal->title(_t('Maintenance'), 'fa-solid fa-hammer');
 $modal->content($form->render());
 $modal->getForm();
 

@@ -51,8 +51,12 @@ class backlist_master_default_filters extends FilterElements implements FiltersI
     public function sort_h(string $label = ''): string
     {
         $this->idxOrder++;
-        $title = sprintf(_t('Order by %s, %s'), $label, $this->sortTitle);
-        $status = $this->order === $this->idxOrder;
+        $status = ($this->order === $this->idxOrder);
+        $title = false === strpos($label, '<')
+            ? $label
+            : $this->extractTitle($label);
+
+        $title = sprintf(_t('Order by %s, %s'), $title, $this->sortTitle);
 
         return '<a href="javascript:void(0)" role="button" control-filter="sort" data-value="' . $this->idxOrder . '" title="' . $title . '" class="kl-sort" aria-pressed="' . ($status ? 'true' : 'false') . '">'
             . '<span class="visually-hidden">' . $title . '</span>'
@@ -78,5 +82,15 @@ class backlist_master_default_filters extends FilterElements implements FiltersI
         $this->rows = [];
 
         return '<div class="backlist-filters" backlist-filters><form>' . $html . '</form></div>';
+    }
+
+    /**
+     * Extract
+     */
+    protected function extractTitle(string $html): string
+    {
+        return preg_match('/title="(.*?)"/', $html, $match)
+            ? $match[1]
+            : _t('Unknow');
     }
 }

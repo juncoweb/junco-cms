@@ -37,11 +37,10 @@ interface ActionsInterface extends ActionElementsInterface
     /**
      * Toggle
      * 
-     * @param array|string $control
-     * @param string       $title
-     * @param array|string $attr
+     * @param array $options
+     * @param array $attr
      */
-    public function toggle(string|array $control = '', string $title = '', array|string $attr = []);
+    public function toggle(array $options = [], array $attr = []);
 
     /**
      * Separate

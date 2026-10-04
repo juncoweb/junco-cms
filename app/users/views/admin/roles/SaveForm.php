@@ -15,9 +15,9 @@ $form->textarea('role_description', ['auto-grow' => ''])->setLabel(_t('Descripti
 
 // modal
 $modal = Modal::get();
+$modal->type($type);
 $modal->enter();
 $modal->close();
-$modal->title([_t('Roles'), $title]);
 $modal->content($form->render());
 
 return $modal->response();

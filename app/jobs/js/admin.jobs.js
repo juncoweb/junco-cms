@@ -1,6 +1,6 @@
 
 /* --- Jobs --- */
-let Jobs = (function () {
+const Jobs = (function () {
     function $U(task) {
         return JsUrl('admin/jobs/' + task);
     }
@@ -33,7 +33,6 @@ let Jobs = (function () {
                 },
             },
         },
-
         confirm_delete: {
             modalOptions: {
                 onLoad: function () {
@@ -42,6 +41,14 @@ let Jobs = (function () {
                 },
             },
         },
+        confirm_reset: {
+            modalOptions: {
+                onLoad: function () {
+                    target = this;
+                    JsForm({ btn: this }).request($U('reset'), callback);
+                },
+            },
+        }
     };
 
     return {

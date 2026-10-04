@@ -48,7 +48,7 @@ class AdminAssetsThemesController extends Controller
      */
     public function copy()
     {
-        return $this->view('Create', (new AdminAssetsThemesModel)->getCopyData());
+        return $this->view(null, (new AdminAssetsThemesModel)->getCopyData());
     }
 
     /**

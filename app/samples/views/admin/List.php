@@ -39,4 +39,7 @@ $bls->column(':extension')
     ->setLabel(_t('Extension'))
     ->setSubtle();
 
+$bls->link(':url')
+    ->setIcon('fa-solid fa-arrow-right');
+
 return $bls->render();

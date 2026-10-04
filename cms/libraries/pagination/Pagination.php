@@ -20,9 +20,7 @@ class Pagination
     protected array  $rows    = [];
 
     // navigation
-    public string $nav_href     = 'javascript:void(0)';
-    public string $nav_disabled = 'disabled';
-    public string $nav_active   = 'active';
+    public string $nav_href = 'javascript:void(0)';
 
     /**
      * Performs the paging of an array
@@ -98,7 +96,7 @@ class Pagination
         if ($args) {
             $args = array_filter($args);
         }
-        $args[PAGINATION_PAGE] = '{{page}}';
+        $args[PAGINATION_PAGE] = '{{ page }}';
         $this->nav_href = url($route, $args) . $hash;
     }
 
@@ -127,7 +125,7 @@ class Pagination
                 $data['prev']  = $this->cur_page - 1;
             } else {
                 $data['first'] =
-                    $data['prev'] = false;
+                    $data['prev'] = 0;
             }
 
             if ($this->cur_page < $this->num_pages) {
@@ -135,21 +133,27 @@ class Pagination
                 $data['last'] = $this->num_pages;
             } else {
                 $data['next'] =
-                    $data['last'] = false;
+                    $data['last'] = 0;
             }
 
             foreach ($arrows as $key => $arrow) {
+                $title = match ($key) {
+                    'prev'  => _t('Previous page'),
+                    'next'  => _t('Next page'),
+                    'first' => _t('First page'),
+                    'last'  => _t('Last page'),
+                };
+                $placeholder = '<span aria-hidden="true">' . $arrow . '</span><span class="visually-hidden">' . $title . '</span>';
                 if ($data[$key]) {
                     $data[$key] = strtr($tags[0], [
-                        '{{page}}'        => $data[$key],
-                        '{{placeholder}}' => $arrow,
-                        '{{key}}'         => $key
+                        '{{ page }}'        => $data[$key],
+                        '{{ placeholder }}' => $placeholder,
+                        '{{ title }}'       => $title
                     ]);
                 } else {
                     $data[$key] = strtr($tags[1], [
-                        '{{style}}'       => $this->nav_disabled,
-                        '{{placeholder}}' => $arrow,
-                        '{{key}}'         => $key
+                        '{{ placeholder }}' => $placeholder,
+                        '{{ title }}'       => $title
                     ]);
                 }
             }
@@ -159,11 +163,6 @@ class Pagination
             $from = $this->cur_page - $num_links;
             $to   = $this->cur_page + $num_links;
             $html = '';
-
-            if (count($tags) > 2) {
-                $tags[0] = $tags[2];
-                $tags[1] = $tags[3];
-            }
 
             if ($from < 1) {
                 $to  -= $from - 1;
@@ -180,15 +179,19 @@ class Pagination
             }
 
             for ($i = $from; $i <= $to; $i++) {
+                $title = sprintf($t ??= _t('Page %d'), $i);
+                $placeholder = '<span aria-hidden="true">' . $i . '</span><span class="visually-hidden">' . $title . '</span>';
+
                 if ($i != $this->cur_page) {
                     $html .= strtr($tags[0], [
-                        '{{page}}'        => $i,
-                        '{{placeholder}}' => $i
+                        '{{ page }}'        => $i,
+                        '{{ placeholder }}' => $placeholder,
+                        '{{ title }}'       => $title
                     ]);
                 } else {
-                    $html .= strtr($tags[1], [
-                        '{{style}}'       => $this->nav_active,
-                        '{{placeholder}}' => $i
+                    $html .= strtr($tags[2], [
+                        '{{ placeholder }}' => $placeholder,
+                        '{{ title }}'       => $title
                     ]);
                 }
             }
@@ -200,18 +203,28 @@ class Pagination
 
             if ($extremes !== null) { // build: 1 ...   ... 99
                 if ($from != 1) {
+                    $page = 1;
+                    $title = _t('First page');
+                    $placeholder = '<span aria-hidden="true">' . $page . '</span><span class="visually-hidden">' . $title . '</span>';
+
                     $data['first_number'] = strtr($tags[0], [
-                        '{{page}}'        => 1,
-                        '{{placeholder}}' => 1
+                        '{{ page }}'        => $page,
+                        '{{ placeholder }}' => $placeholder,
+                        '{{ title }}'       => $title
                     ]) . $extremes;
                 } else {
                     $data['first_number'] = '';
                 }
 
                 if ($to != $this->num_pages) {
+                    $page = $this->num_pages;
+                    $title = _t('Last page');
+                    $placeholder = '<span aria-hidden="true">' . $page . '</span><span class="visually-hidden">' . $title . '</span>';
+
                     $data['last_number'] = $extremes . strtr($tags[0], [
-                        '{{page}}'        => $this->num_pages,
-                        '{{placeholder}}' => $this->num_pages
+                        '{{ page }}'        => $page,
+                        '{{ placeholder }}' => $placeholder,
+                        '{{ title }}'       => $title
                     ]);
                 } else {
                     $data['last_number'] = '';

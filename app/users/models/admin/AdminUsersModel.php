@@ -10,8 +10,7 @@ use Junco\Users\Enum\UserStatus;
 
 class AdminUsersModel extends Model
 {
-    // vars
-    protected $db;
+    protected Database $db;
 
     /**
      * Constructor
@@ -26,7 +25,7 @@ class AdminUsersModel extends Model
      */
     public function getIndexData()
     {
-        return ['statuses' => UserStatus::getList(true)];
+        return ['statuses' => UserStatus::getList()];
     }
 
     /**
@@ -94,9 +93,9 @@ class AdminUsersModel extends Model
         }
 
         return $data + [
-            'rows' => $this->setRoles($rows),
-            'pagi' => $pagi,
             'roles' => $this->getRoles([_t('All roles')]),
+            'rows'  => $this->setRoles($rows),
+            'pagi'  => $pagi,
         ];
     }
 
@@ -106,7 +105,7 @@ class AdminUsersModel extends Model
     public function getCreateData()
     {
         return [
-            'title' => _t('Create'),
+            'type' => 'create',
             'values' => null,
         ];
     }
@@ -116,7 +115,7 @@ class AdminUsersModel extends Model
      */
     public function getEditData()
     {
-        $data = $this->filter(POST, ['id' => 'id|array:first']);
+        $input = $this->filter(POST, ['id' => 'id|array:first']);
 
         // query
         $data = $this->db->query("
@@ -126,11 +125,13 @@ class AdminUsersModel extends Model
 		 user_username ,
 		 user_email
 		FROM `#__users`
-		WHERE id = ?", $data['id'])->fetch() or abort();
+		WHERE id = ?", $input['id'])->fetch() or abort();
 
         return [
-            'title' => _t('Edit'),
-            'values' => $data + ['role_id' => (new UsersRolesMapper)->get($data['user_id'])],
+            'type' => 'edit',
+            'values' => $data + [
+                'role_id' => (new UsersRolesMapper)->get($data['user_id'])
+            ],
         ];
     }
 

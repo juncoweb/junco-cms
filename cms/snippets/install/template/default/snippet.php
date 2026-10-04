@@ -44,17 +44,17 @@ class template_install_default_snippet extends Template
         $html = '';
 
         if ($this->options->hash != $this->steps[0]['task']) {
-            $html .= '<button control-install="back" class="btn btn-primary btn-solid" title="' . ($t = _t('Back')) . '"><span aria-label="' . $t . '">&#60;</span></button>';
+            $html .= '<button type="button" control-install="back" class="btn btn-primary btn-solid" title="' . ($t = _t('Back')) . '"><span aria-label="' . $t . '">&#60;</span></button>';
         } else {
-            $html .= '<button class="btn" title="' . ($t = _t('Back')) . '" aria-disabled="true"><span aria-label="' . $t . '">&#60;</span></button>';
+            $html .= '<button type="button" class="btn" title="' . ($t = _t('Back')) . '" aria-disabled="true"><span aria-label="' . $t . '">&#60;</span></button>';
         }
 
-        $html .= '<button control-install="refresh" class="btn btn-primary btn-solid" title="' . ($t = _t('Refresh')) . '"><span aria-label="' . $t . '">&orarr;</span></button>';
+        $html .= '<button type="button" control-install="refresh" class="btn btn-primary btn-solid" title="' . ($t = _t('Refresh')) . '"><span aria-label="' . $t . '">&orarr;</span></button>';
 
         if ($this->options->hash != $this->steps[count($this->steps) - 1]['task']) {
-            $html .= '<button control-install="' . (empty($this->options->submit) ? 'next' : 'submit') . '" class="btn btn-primary btn-solid" title="' . ($t = _t('Next')) . '"><span aria-label="' . $t . '">&#62;</span></button>';
+            $html .= '<button type="button" control-install="' . (empty($this->options->submit) ? 'next' : 'submit') . '" class="btn btn-primary btn-solid" title="' . ($t = _t('Next')) . '"><span aria-label="' . $t . '">&#62;</span></button>';
         } else {
-            $html .= '<button class="btn" title="' . ($t = _t('Next')) . '" aria-disabled="true"><span aria-label="' . $t . '">&#62;</span></button>';
+            $html .= '<button type="button" class="btn" title="' . ($t = _t('Next')) . '" aria-disabled="true"><span aria-label="' . $t . '">&#62;</span></button>';
         }
 
         return '<nav class="btn-group btn-large">' . $html . '</nav>';

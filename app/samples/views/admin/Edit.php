@@ -16,9 +16,9 @@ $form->textarea('description')->setLabel(_t('Description'));
 
 // modal
 $modal = Modal::get();
+$modal->type('edit');
 $modal->close();
 $modal->enter();
-$modal->title('JSON Editor');
 $modal->content($form->render());
 
 return $modal->response();

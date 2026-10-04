@@ -37,9 +37,16 @@ class Button extends Column implements ButtonInterface
         $this->attr['class'] ??= 'btn-inline';
 
         $caption = $this->getCaption($this->text, $this->icon, $this->attr['title']);
-        $this->td = isset($this->attr['control-list'])
-            ? '<a' . $this->attr($this->attr) . '>' . $caption . '</a>'
-            : '<div' . $this->attr($this->attr) . '>' . $caption . '</div>';
+
+        if (isset($this->attr['control-list'])) {
+            if ($this->text) {
+                $this->td = '<a' . $this->attr(array_merge(['href' => 'javascript:void(0)', 'role' => 'button'], $this->attr)) . '>' . $caption . '</a>';
+            } else {
+                $this->td = '<button' . $this->attr(array_merge(['type' => 'button'], $this->attr)) . '>' . $caption . '</button>';
+            }
+        } else {
+            $this->td = '<div' . $this->attr($this->attr) . '>' . $caption . '</div>';
+        }
 
         return parent::td();
     }

@@ -18,6 +18,6 @@ return function (): string {
 
     return '<section id="cookieconsent" class="container cookie-consent visible" role="dialog" aria-live="polite" aria-describedby="cc-text cc-btn"><div>'
         .  '<p id="cc-text">' . $legend . '</p>'
-        .  '<button id="cc-btn" class="btn btn-small btn-primary btn-solid">' . _t('Understood') . '</button>'
+        .  '<button type="button" id="cc-btn" class="btn btn-small btn-primary btn-solid">' . _t('Understood') . '</button>'
         . '</div></section>' . "\n";
 };

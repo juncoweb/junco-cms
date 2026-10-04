@@ -1,9 +1,9 @@
-/* --- colors ------------------------------------------------- */
+/* --- colors --- */
 .tpl-header,
 .tpl-copyright,
 .tpl-footer {
   --font-color: var(--regular-font-color);
-  --active-font-color: var(--regular-primary-surface-color);
+  --active-font-color: var(--theme-primary-color);
   --bg-color: var(--regular-bg-color);
   --border-color: var(--regular-border-color);
   --contrast-font-color: var(--solid-primary-font-color);
@@ -13,7 +13,7 @@
 .tpl-copyright.tpl-solid,
 .tpl-footer.tpl-solid {
   --font-color: var(--solid-font-color);
-  --active-font-color: var(--solid-primary-bg-color);
+  --active-font-color: var(--solid-disabled-font-color);
   --bg-color: var(--solid-bg-color);
   --border-color: var(--solid-border-color);
   --contrast-font-color: var(--solid-primary-font-color);
@@ -24,7 +24,7 @@
 .tpl-copyright.tpl-primary,
 .tpl-footer.tpl-primary {
   --font-color: var(--regular-primary-font-color);
-  --active-font-color: var(--regular-secondary-surface-color);
+  --active-font-color: var(--theme-secondary-color);
   --bg-color: var(--regular-primary-bg-color);
   --border-color: var(--regular-primary-border-color);
   --contrast-font-color: var(--solid-secondary-font-color);
@@ -34,7 +34,7 @@
 .tpl-copyright.tpl-primary.tpl-solid,
 .tpl-footer.tpl-primary.tpl-solid {
   --font-color: var(--solid-primary-font-color);
-  --active-font-color: var(--solid-secondary-bg-color);
+  --active-font-color: var(--solid-primary-disabled-font-color);
   --bg-color: var(--solid-primary-bg-color);
   --border-color: var(--solid-primary-border-color);
   --contrast-font-color: var(--solid-secondary-font-color);
@@ -45,7 +45,7 @@
 .tpl-copyright.tpl-secondary,
 .tpl-footer.tpl-secondary {
   --font-color: var(--regular-secondary-font-color);
-  --active-font-color: var(--regular-primary-surface-color);
+  --active-font-color: var(--theme-primary-color);
   --bg-color: var(--regular-secondary-bg-color);
   --border-color: var(--regular-secondary-border-color);
   --contrast-font-color: var(--solid-primary-font-color);
@@ -55,7 +55,7 @@
 .tpl-copyright.tpl-secondary.tpl-solid,
 .tpl-footer.tpl-secondary.tpl-solid {
   --font-color: var(--solid-secondary-font-color);
-  --active-font-color: var(--solid-primary-bg-color);
+  --active-font-color: var(--solid-secondary-disabled-font-color);
   --bg-color: var(--solid-secondary-bg-color);
   --border-color: var(--solid-secondary-border-color);
   --contrast-font-color: var(--solid-primary-font-color);
@@ -66,7 +66,7 @@
 .tpl-copyright.tpl-success,
 .tpl-footer.tpl-success {
   --font-color: var(--regular-success-font-color);
-  --active-font-color: var(--regular-default-surface-color);
+  --active-font-color: var(--theme-default-color);
   --bg-color: var(--regular-success-bg-color);
   --border-color: var(--regular-success-border-color);
   --contrast-font-color: var(--solid-default-font-color);
@@ -76,7 +76,7 @@
 .tpl-copyright.tpl-success.tpl-solid,
 .tpl-footer.tpl-success.tpl-solid {
   --font-color: var(--solid-success-font-color);
-  --active-font-color: var(--solid-default-bg-color);
+  --active-font-color: var(--solid-success-disabled-font-color);
   --bg-color: var(--solid-success-bg-color);
   --border-color: var(--solid-success-border-color);
   --contrast-font-color: var(--solid-default-font-color);
@@ -87,7 +87,7 @@
 .tpl-copyright.tpl-info,
 .tpl-footer.tpl-info {
   --font-color: var(--regular-info-font-color);
-  --active-font-color: var(--regular-default-surface-color);
+  --active-font-color: var(--theme-default-color);
   --bg-color: var(--regular-info-bg-color);
   --border-color: var(--regular-info-border-color);
   --contrast-font-color: var(--solid-default-font-color);
@@ -97,7 +97,7 @@
 .tpl-copyright.tpl-info.tpl-solid,
 .tpl-footer.tpl-info.tpl-solid {
   --font-color: var(--solid-info-font-color);
-  --active-font-color: var(--solid-default-bg-color);
+  --active-font-color: var(--solid-info-disabled-font-color);
   --bg-color: var(--solid-info-bg-color);
   --border-color: var(--solid-info-border-color);
   --contrast-font-color: var(--solid-default-font-color);
@@ -108,7 +108,7 @@
 .tpl-copyright.tpl-warning,
 .tpl-footer.tpl-warning {
   --font-color: var(--regular-warning-font-color);
-  --active-font-color: var(--regular-default-surface-color);
+  --active-font-color: var(--theme-default-color);
   --bg-color: var(--regular-warning-bg-color);
   --border-color: var(--regular-warning-border-color);
   --contrast-font-color: var(--solid-default-font-color);
@@ -118,7 +118,7 @@
 .tpl-copyright.tpl-warning.tpl-solid,
 .tpl-footer.tpl-warning.tpl-solid {
   --font-color: var(--solid-warning-font-color);
-  --active-font-color: var(--solid-default-bg-color);
+  --active-font-color: var(--solid-warning-disabled-font-color);
   --bg-color: var(--solid-warning-bg-color);
   --border-color: var(--solid-warning-border-color);
   --contrast-font-color: var(--solid-default-font-color);
@@ -129,7 +129,7 @@
 .tpl-copyright.tpl-danger,
 .tpl-footer.tpl-danger {
   --font-color: var(--regular-danger-font-color);
-  --active-font-color: var(--regular-default-surface-color);
+  --active-font-color: var(--theme-default-color);
   --bg-color: var(--regular-danger-bg-color);
   --border-color: var(--regular-danger-border-color);
   --contrast-font-color: var(--solid-default-font-color);
@@ -139,7 +139,7 @@
 .tpl-copyright.tpl-danger.tpl-solid,
 .tpl-footer.tpl-danger.tpl-solid {
   --font-color: var(--solid-danger-font-color);
-  --active-font-color: var(--solid-default-bg-color);
+  --active-font-color: var(--solid-danger-disabled-font-color);
   --bg-color: var(--solid-danger-bg-color);
   --border-color: var(--solid-danger-border-color);
   --contrast-font-color: var(--solid-default-font-color);

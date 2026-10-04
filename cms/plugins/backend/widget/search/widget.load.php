@@ -8,11 +8,31 @@
 use Junco\Template\WidgetInterface;
 
 return function (WidgetInterface $widget) {
+    $t1 = _t('Search');
+    $t2 = $t1 . ' (Alt+z)';
+
     $html = '<div class="input-icon-group">'
-        .  '<input type="text" control-tpl="search" placeholder="' . ($t = _t('Search') . ' (Alt+z)') . '" title="' . $t . '" class="input-field" role="search" accesskey="z" autocomplete="off" autocorrect="off" spellcheck="false" />'
-        .  '<span title="' . $t . '" class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>'
+        .  '<input'
+        .  ' type="search"'
+        .  ' name="search"'
+        .  ' control-tpl="search"'
+        .  ' placeholder="' . $t1 . '"'
+        .  ' title="' . $t2 . '"'
+        .  ' aria-label="' . $t1 . '"'
+        .  ' class="input-field"'
+        .  ' role="combobox"'
+        .  ' accesskey="z"'
+        .  ' autocapitalize="none"'
+        .  ' autocomplete="off"'
+        .  ' aria-autocomplete="list"'
+        .  ' aria-expanded="false"'
+        .  ' autocorrect="off"'
+        .  ' spellcheck="false"'
+        .  ' />'
+        .  '<span class="input-icon" aria-hidden="true"><i class="fa-solid fa-magnifying-glass"></i></span>'
         . '</div>';
 
+    // aria-owns="v-0" size="1">
     $widget->section([
         'content' => $html,
         'css' => 'layout-search'

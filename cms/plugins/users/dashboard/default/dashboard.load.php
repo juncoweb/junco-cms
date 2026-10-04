@@ -21,7 +21,7 @@ return function (DashboardInterface $dashboard) {
     if (!$html) {
         $reports = new UsersReport();
         $chart = '<div class="panel">'
-            .   '<div class="panel-header"><h5>' . _t('Users') . '</h5></div>'
+            .   '<div class="panel-header"><h5>' . ($t = _t('Users')) . '</h5></div>'
             .   '<div class="panel-body">'
             .      '<div data-chart="line" style="display: none;">' . json_encode($reports->getChartData()) . '</div>'
             .   '</div>'
@@ -29,11 +29,14 @@ return function (DashboardInterface $dashboard) {
 
         $data = $reports->getData();
         $details = '<h4>'
-            . _t('Users')
+            . $t
             . ' (<span>' . $data['num_users'] . '</span>)'
-            . '<a href="' . url('admin/users') . '"><i class="fa-solid fa-external-link float-right"></i></a>'
+            . '<a href="' . url('admin/users') . '">'
+            .   '<i class="fa-solid fa-external-link float-right" aria-hidden="true"></i>'
+            .   '<span class="visually-hidden">' . sprintf(_t('Go to %s'), $t) . '</span>'
+            . '</a>'
             . '</h4>'
-            . '<span class="color-subtle-default">' . sprintf(_t('Last %s'), $data['created_at']->format(_t('Y-m-d'))) . '</span>';
+            . '<span class="color-subtle">' . sprintf(_t('Last %s'), $data['created_at']->format(_t('Y-m-d'))) . '</span>';
 
         //
         $html = '<div class="grid grid-21 grid-responsive mb-4">'

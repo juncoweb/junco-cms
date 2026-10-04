@@ -1,6 +1,6 @@
 // --- frontend ---------------------------------------------
 $frontend-border: 1px solid !default;
-$frontend-body-bg-color: var(--regular-surface-color) !default;
+$frontend-body-bg-color: var(--theme-surface-color) !default;
 $frontend-body-border-top: calc(2 * var(--font-size-base) * var(--line-height-base) + 2rem) !default;
 $frontend-accessibility-border-top: calc(-20rem - 2 * var(--font-size-base) * var(--line-height-base) + 2rem) !default;
 

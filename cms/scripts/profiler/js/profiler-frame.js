@@ -1,4 +1,4 @@
-/* --- Console ----------------------------------------------------- */
+/* --- Console --- */
 var ConsoleFrame = {
     init: function (_window) {
         document.querySelector('console h1 .toggle').addEventListener('click', function () {

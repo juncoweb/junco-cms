@@ -19,14 +19,8 @@
     }
 
     @each $name, $color in $theme-colors {
-        $class: -#{$name};
-
-        @if ($name == "default") {
-            $class: "";
-        }
-
         &.rating-#{$name} i {
-            color: var(--solid#{$class}-surface-color);
+            color: var(--theme-#{$name}-color);
         }
     }
 }

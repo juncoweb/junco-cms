@@ -7,9 +7,8 @@
 
 // modal
 $modal = Modal::get();
-$modal->type('alert');
-$modal->title($t = _t('Delete'), 'fa-solid fa-trash');
-$modal->enter($t);
+$modal->type('delete');
+$modal->enter();
 $modal->close();
 //
 $modal->getForm()

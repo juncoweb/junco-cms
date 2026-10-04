@@ -15,7 +15,7 @@ $samples
     ->setContext('<div id="notify_1" role="alert" class="notify-box"></div>');
 
 $samples
-    ->js('JsNotify({"message":"Hello world!","target":"#notify_2"})')
+    ->js('JsNotify({"message":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","target":"#notify_2"})')
     ->setLabel('Basic Notify 2')
     ->setContext('<div id="notify_2" role="alert" class="notify-box"></div>');
 

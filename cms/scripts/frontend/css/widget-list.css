@@ -8,7 +8,7 @@
   text-decoration: none;
 }
 .widget-list a:hover {
-  color: var(--regular-primary-surface-color);
+  color: var(--theme-primary-color);
 }
 .widget-list li {
   border-bottom-width: var(--border-width);

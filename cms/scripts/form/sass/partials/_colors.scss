@@ -1,4 +1,4 @@
-/* --- colors ---------------------------------------------------------- */
+/* --- colors --- */
 @each $name, $color in $theme-colors {
     $class: -#{$name};
 
@@ -27,8 +27,16 @@
         }
 
         &.btn-outline {
-            color: var(--regular#{$class}-disabled-font-color);
+            color: var(--solid#{$class}-bg-color);
             background-color: transparent;
+            border-color: var(--solid#{$class}-bg-color);
+
+            &:hover:not(.disabled),
+            &:focus:not(.disabled) {
+                color: var(--solid#{$class}-font-color);
+                background-color: var(--solid#{$class}-bg-color);
+                border-color: var(--solid#{$class}-bg-color);
+            }
         }
 
         .btn.btn-solid,
@@ -53,7 +61,7 @@
 
         &.btn.btn-solid.btn-outline {
             color: var(--solid#{$class}-font-color); // prevent link color
-            background-color: var(--solid#{$class}-active-bg-color);
+            background-color: var(--solid#{$class}-bg-color);
 
             &:hover:not(.disabled),
             &:focus:not(.disabled) {
@@ -81,7 +89,7 @@
         .input-field {
             color: var(--regular-font-color);
             border-color: var(--regular-border-color);
-            //background-color: var(--regular-surface-color);
+            //background-color: var(--theme-surface-color);
 
             &:hover {
                 border-color: var(--regular-active-border-color);
@@ -112,8 +120,8 @@
             border-color: var(--regular-border-color);
 
             &:checked {
-                border-color: var(--regular-primary-surface-color);
-                background-color: var(--regular-primary-surface-color);
+                border-color: var(--theme-primary-color);
+                background-color: var(--theme-primary-color);
             }
         }
 
@@ -136,7 +144,6 @@
             .input-field {
                 color: var(--regular-#{$name}-font-color);
                 border-color: var(--regular-#{$name}-border-color);
-                //background-color: var(--regular-#{$name}-surface-color);
                 background-color: transparent;
 
                 &:hover,
@@ -186,7 +193,6 @@
             &.input-solid .input-field {
                 color: var(--solid-#{$name}-font-color);
                 border-color: var(--solid-#{$name}-border-color);
-                //background-color: var(--solid-#{$name}-surface-color);
 
                 &:hover,
                 &:focus {

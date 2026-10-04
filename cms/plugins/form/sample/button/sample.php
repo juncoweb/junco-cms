@@ -12,7 +12,7 @@ $samples = Samples::get();
 
 // 1
 $samples
-    ->html('<button class="btn">Button</button>')
+    ->html('<button type="button" class="btn">Button</button>')
     ->setLabel('Example 1');
 
 $samples->separate();
@@ -22,19 +22,19 @@ $html = '<h2>Regular</h2>';
 
 // 2
 $samples
-    ->colors('<button class="btn btn-{{ color }}">{{ caption }}</button>')
+    ->colors('<button type="button" class="btn btn-{{ color }}">{{ caption }}</button>')
     ->setLabel('.btn')
     ->setInline();
 
 // 3
 $samples
-    ->colors('<button class="btn btn-{{ color }} disabled">{{ caption }}</button>')
+    ->colors('<button type="button" class="btn btn-{{ color }} disabled">{{ caption }}</button>')
     ->setLabel('.btn .disabled')
     ->setInline();
 
 // 4
 $samples
-    ->colors('<button class="btn btn-{{ color }} btn-outline">{{ caption }}</button>')
+    ->colors('<button type="button" class="btn btn-{{ color }} btn-outline">{{ caption }}</button>')
     ->setLabel('.btn .btn-outline')
     ->setInline();
 
@@ -42,19 +42,19 @@ $samples->separate('Regular');
 
 // 5
 $samples
-    ->colors('<button class="btn btn-solid btn-{{ color }}">{{ caption }}</button>')
+    ->colors('<button type="button" class="btn btn-solid btn-{{ color }}">{{ caption }}</button>')
     ->setLabel('.btn .btn-solid')
     ->setInline();
 
 // 6
 $samples
-    ->colors('<button class="btn btn-solid btn-{{ color }} disabled">{{ caption }}</button>')
+    ->colors('<button type="button" class="btn btn-solid btn-{{ color }} disabled">{{ caption }}</button>')
     ->setLabel('.btn .btn-solid .disabled')
     ->setInline();
 
 // 7
 $samples
-    ->colors('<button class="btn btn-solid btn-{{ color }} btn-outline">{{ caption }}</button>')
+    ->colors('<button type="button" class="btn btn-solid btn-{{ color }} btn-outline">{{ caption }}</button>')
     ->setLabel('.btn .btn-solid .btn-outline')
     ->setInline();
 

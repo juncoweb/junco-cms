@@ -73,7 +73,7 @@ abstract class ZoomBase implements ZoomInterface
                 : new Date($date);
 
             $content = '<time datetime="' . $date->format('Y-m-d H:i:s') . '" class="text-nowrap">'
-                .   $date->format(_t('Y-M-d')) . ' <span class="color-subtle-default">' . $date->format('H:i:s') . '</span>'
+                .   $date->format(_t('Y-M-d')) . ' <span class="color-subtle">' . $date->format('H:i:s') . '</span>'
                 . '</time>';
         }
 

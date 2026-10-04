@@ -1,5 +1,5 @@
 
-/* --- Cache ---- */
+/* --- Cache --- */
 let Cache = (function () {
     function $U(task) {
         return JsUrl('admin/cache/' + task);

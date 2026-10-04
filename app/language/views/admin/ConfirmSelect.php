@@ -9,7 +9,7 @@
 $modal = Modal::get();
 $modal->close();
 $modal->enter(_t('Confirm'));
-$modal->title(_t('Select'));
+$modal->title(_t('Select'), 'fa-solid fa-flag');
 $modal->content(_t('Please, confirm the action.'));
 $modal->getForm()
     ->hidden('lang', $id);

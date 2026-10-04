@@ -17,7 +17,7 @@ let JobsFailures = (function () {
 
     let _backlist, target;
     const _controls = {
-        show: {
+		show: {
             numRows: '1',
             modalOptions: {
                 size: 'large',
@@ -26,20 +26,15 @@ let JobsFailures = (function () {
                 },
             },
         },
-
-        status: {
-            onSuccess: callback,
-        },
-
-        confirm_delete: {
+		confirm_delete: {
             modalOptions: {
                 onLoad: function () {
                     target = this;
                     JsForm({ btn: this }).request($U('delete'), callback);
                 },
             },
-        },
-    };
+        }
+	};
 
     return {
         List: function () {

@@ -1,4 +1,4 @@
-/* --- Console ----------------------------------------------------- */
+/* --- Console --- */
 var JsConsole = (function () {
     var counter = 0;
 

@@ -1,5 +1,5 @@
 
-/* --- Logger ----------------------------------------- */
+/* --- Logger --- */
 let Logger = (function () {
     function $U(task) {
         return JsUrl('admin/logger/' + task);

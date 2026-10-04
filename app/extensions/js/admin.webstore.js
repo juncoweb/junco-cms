@@ -1,5 +1,5 @@
 
-/* --- Web Store ------------------------------------------------- */
+/* --- Web Store --- */
 let Webstore = (function () {
     function $U(task) {
         return JsUrl('admin/extensions.webstore/' + task);

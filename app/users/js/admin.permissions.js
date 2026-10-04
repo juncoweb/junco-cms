@@ -1,5 +1,5 @@
 
-/* --- Permissions ------------------------------------ */
+/* --- Permissions --- */
 var Permissions = (function () {
     function $U(task) {
         return JsUrl('admin/users.permissions/' + task);

@@ -39,7 +39,7 @@ foreach ($queries as $row) {
 
 // modal
 $modal = Modal::get();
-$modal->title([_t('DB history'), $title]);
+$modal->title([_t('DB history'), $title], 'fa-solid fa-clock-rotate-left');
 $modal->content($form->render());
 
 return $modal->response();

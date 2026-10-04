@@ -1,5 +1,5 @@
 
-/* --- Installer ---------------------------------------- */
+/* --- Installer --- */
 (function () {
     function $U(task) {
         return JsUrl('admin/system/' + task);

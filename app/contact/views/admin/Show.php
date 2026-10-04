@@ -26,7 +26,7 @@ $zoom->group($contact_message)->setLabel(_t('Message'));
 // modal
 $modal = Modal::get();
 $modal->close();
-$modal->title(_t('Contact'));
+$modal->title(_t('Contact'), 'fa-solid fa-eye');
 $modal->content($zoom->render());
 
 return $modal->response();

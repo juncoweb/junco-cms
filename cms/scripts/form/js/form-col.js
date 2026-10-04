@@ -1,4 +1,4 @@
-/* --- FormCol ---- */
+/* --- FormCol --- */
 const FormCol = function (el) {
     function getCol(el) {
         while (el.tagName !== 'BODY') {

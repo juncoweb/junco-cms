@@ -16,7 +16,7 @@ $bac->filters();
 // modal
 $modal = Modal::get();
 $modal->close();
-$modal->title(_t('Developers'));
+$modal->title(_t('Developers'), 'fa-solid fa-user-check');
 $modal->content($bbx->render($this->list()));
 
 return $modal->response();

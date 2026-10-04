@@ -1,4 +1,4 @@
-// --- background ------------------------------ */
+// --- background --- */
 JsScroll.addEvent('fx-bg-py20', function () {
     let viewTop = window.pageYOffset;
     let rect = this.getBoundingClientRect();

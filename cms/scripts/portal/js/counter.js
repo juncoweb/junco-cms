@@ -1,4 +1,4 @@
-// --- counter ------------------------------ */
+// --- counter --- */
 JsScroll.addEvent('counter', function () {
     let all = this.querySelectorAll('[data-counter]');
     if (all) {

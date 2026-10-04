@@ -154,40 +154,26 @@ class Date extends DateTime
                 return parent::format('d');
 
             case 'shortdayname':
-                switch (parent::format('w')) {
-                    case 1:
-                        return _t('Mon');
-                    case 2:
-                        return _t('Tue');
-                    case 3:
-                        return _t('Wed');
-                    case 4:
-                        return _t('Thu');
-                    case 5:
-                        return _t('Fri');
-                    case 6:
-                        return _t('Sat');
-                    case 0:
-                        return _t('Sun');
-                }
+                return match (parent::format('w')) {
+                    1 => _t('Mon'),
+                    2 => _t('Tue'),
+                    3 => _t('Wed'),
+                    4 => _t('Thu'),
+                    5 => _t('Fri'),
+                    6 => _t('Sat'),
+                    0 => _t('Sun'),
+                };
 
             case 'dayname':
-                switch (parent::format('w')) {
-                    case 1:
-                        return _t('Monday');
-                    case 2:
-                        return _t('Tuesday');
-                    case 3:
-                        return _t('Wednesday');
-                    case 4:
-                        return _t('Thursday');
-                    case 5:
-                        return _t('Friday');
-                    case 6:
-                        return _t('Saturday');
-                    case 0:
-                        return _t('Sunday');
-                }
+                return match (parent::format('w')) {
+                    1 => _t('Monday'),
+                    2 => _t('Tuesday'),
+                    3 => _t('Wednesday'),
+                    4 => _t('Thursday'),
+                    5 => _t('Friday'),
+                    6 => _t('Saturday'),
+                    0 => _t('Sunday'),
+                };
 
             case 'dayofweek':
                 return parent::format('N');
@@ -201,63 +187,39 @@ class Date extends DateTime
 
                 // Month
             case 'monthname':
-                switch (parent::format('n')) {
-                    case 1:
-                        return _t('January');
-                    case 2:
-                        return _t('February');
-                    case 3:
-                        return _t('March');
-                    case 4:
-                        return _t('April');
-                    case 5:
-                        return _t('May');
-                    case 6:
-                        return _t('June');
-                    case 7:
-                        return _t('July');
-                    case 8:
-                        return _t('August');
-                    case 9:
-                        return _t('September');
-                    case 10:
-                        return _t('October');
-                    case 11:
-                        return _t('November');
-                    case 12:
-                        return _t('December');
-                }
+                return match ((int)parent::format('n')) {
+                    1 => _t('January'),
+                    2 => _t('February'),
+                    3 => _t('March'),
+                    4 => _t('April'),
+                    5 => _t('May'),
+                    6 => _t('June'),
+                    7 => _t('July'),
+                    8 => _t('August'),
+                    9 => _t('September'),
+                    10 => _t('October'),
+                    11 => _t('November'),
+                    12 => _t('December'),
+                };
 
             case 'month':
                 return parent::format('m');
 
             case 'shortmonthname':
-                switch (parent::format('n')) {
-                    case 1:
-                        return _t('Jan');
-                    case 2:
-                        return _t('Feb');
-                    case 3:
-                        return _t('Mar');
-                    case 4:
-                        return _t('Apr');
-                    case 5:
-                        return _t('[short]:May');
-                    case 6:
-                        return _t('Jun');
-                    case 7:
-                        return _t('Jul');
-                    case 8:
-                        return _t('Aug');
-                    case 9:
-                        return _t('Sep');
-                    case 10:
-                        return _t('Oct');
-                    case 11:
-                        return _t('Nov');
-                    case 12:
-                        return _t('Dec');
-                }
+                return match (parent::format('n')) {
+                    1 => _t('Jan'),
+                    2 => _t('Feb'),
+                    3 => _t('Mar'),
+                    4 => _t('Apr'),
+                    5 => _t('[short]:May'),
+                    6 => _t('Jun'),
+                    7 => _t('Jul'),
+                    8 => _t('Aug'),
+                    9 => _t('Sep'),
+                    10 => _t('Oct'),
+                    11 => _t('Nov'),
+                    12 => _t('Dec'),
+                };
 
             case 'daysinmonth':
                 return parent::format('t');

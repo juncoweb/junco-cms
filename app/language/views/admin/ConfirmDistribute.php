@@ -13,7 +13,7 @@ $html .= '<div class="dialog dialog-warning">' . _t('This distribution will repl
 $modal = Modal::get();
 $modal->close();
 $modal->enter();
-$modal->title(_t('Distribute'));
+$modal->title(_t('Distribute'), 'fa-solid fa-upload');
 $modal->content($html);
 //
 $modal->getForm()

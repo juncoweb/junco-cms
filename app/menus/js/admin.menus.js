@@ -1,5 +1,5 @@
 
-/* --- Menus -------------------------------------- */
+/* --- Menus --- */
 let Menus = (function () {
     function $U(task) {
         return JsUrl('admin/menus/' + task);

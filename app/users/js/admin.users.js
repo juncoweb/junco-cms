@@ -1,5 +1,5 @@
 
-/* --- users ------------------------------- */
+/* --- users --- */
 var Users = (function () {
     function $U(task) {
         return JsUrl('admin/users/' + task);

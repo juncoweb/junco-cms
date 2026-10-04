@@ -76,7 +76,7 @@ class AdminExtensionsChangesModel extends Model
         $data = $this->filter(POST, ['extension_id' => 'id|required:abort']);
 
         return [
-            'title' => _t('Create'),
+            'type' => 'create',
             'values' => [
                 'is_compatible' => true,
                 'extension_id' => $data['extension_id']
@@ -102,7 +102,7 @@ class AdminExtensionsChangesModel extends Model
 		WHERE id = ?", $input['id'])->fetch() or abort();
 
         return [
-            'title' => _t('Edit'),
+            'type' => 'edit',
             'values' => $data,
         ];
     }

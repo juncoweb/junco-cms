@@ -12,12 +12,12 @@ $samples = Samples::get();
 
 // 1
 $samples
-    ->html('<button class="btn-inline">Button</button> | <a href="javascript:void(0)">Link</a>')
+    ->html('<button type="button" class="btn-inline">Button</button> | <a href="javascript:void(0)">Link</a>')
     ->setLabel('.btn-inline');
 
 // 1
 $samples
-    ->html('<div class="panel panel-info panel-solid p-4">Text | <button class="btn-inline">Button</button> | <a href="javascript:void(0)">Link</a></div>')
+    ->html('<div class="panel panel-info panel-solid p-4">Text | <button type="button" class="btn-inline">Button</button> | <a href="javascript:void(0)">Link</a></div>')
     ->setLabel('.btn-inline');
 
 $html = $samples->render();

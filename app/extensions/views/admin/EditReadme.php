@@ -22,7 +22,7 @@ $form->editor('readme');
 
 // modal
 $modal = Modal::get();
-$modal->title([$title, _t('Readme')]);
+$modal->title([_t('Readme'), $title], 'fa-solid fa-file-lines');
 $modal->content($form->render());
 
 return $modal->response();

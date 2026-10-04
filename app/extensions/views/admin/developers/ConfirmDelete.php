@@ -7,10 +7,9 @@
 
 // modal
 $modal = Modal::get();
-$modal->type('alert');
-$modal->title($t = _t('Delete'), 'fa-solid fa-trash');
+$modal->type('delete');
 if (!$warning) {
-    $modal->enter($t);
+    $modal->enter();
 }
 $modal->close();
 //

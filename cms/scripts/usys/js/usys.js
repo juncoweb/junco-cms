@@ -1,5 +1,5 @@
 
-// --- usys ------------------------------ */
+// --- usys --- */
 function UsysLogout() {
     JsDropdown.hide();
     JsRequest.modal({

@@ -1,4 +1,4 @@
-/* --- Backlist ---------------- */
+/* --- Backlist --- */
 function Backlist(ID) {
     /**
      * Manages the rows in the list.
@@ -325,17 +325,17 @@ function Backlist(ID) {
      * @returns {Object} 
      */
     function Filters(_controls, callback) {
-        let $box, $filters, $form;
+        let $box, $filters, $form, $btn;
 
         function Sticky(el) {
             if (typeof el == 'string') {
                 el = document.querySelector(el);
             }
+            const H = document.querySelector('header[data-sticky]');
             let v = 0;
-            let H = document.querySelector('header[data-sticky]');
 
             function fn() {
-                let top = H ? H.getBoundingClientRect().height : 0;
+                let top = H?.getBoundingClientRect().height ?? 0;
 
                 if (v != (document.documentElement.scrollTop > top)) {
                     v = el.classList.toggle('active');
@@ -348,10 +348,13 @@ function Backlist(ID) {
             window.addEventListener('scroll', fn);
         }
 
-        let that = {
-            toggle: function () {
-                let value = $filters.style.display == '' ? 'none' : '';
+        const that = {
+            toggle: function (value) {
+                if (typeof value == 'undefined') {
+                    value = $filters.style.display == '' ? 'none' : '';
+                }
 
+                $btn?.setAttribute('aria-expanded', value != 'none');
                 $filters.style.display = value;
                 JsCookie.set('ListFilters', value);
             },
@@ -369,6 +372,10 @@ function Backlist(ID) {
                 $box = el.firstChild.nextSibling;
 
                 Sticky(el);
+            },
+
+            btn: function (el) {
+                $btn = el;
             },
 
             load: function (el) {
@@ -391,11 +398,10 @@ function Backlist(ID) {
                     $box.appendChild($filters);
                 }
 
-                $filters.style.display = JsCookie.get('ListFilters');
+                this.toggle(JsCookie.get('ListFilters'));
 
                 // I create the form
                 $form = $filters.querySelector('form');
-
                 $form.addEventListener('submit', function (event) {
                     callback(event, $form)
                 });
@@ -664,6 +670,8 @@ function Backlist(ID) {
                         } else {
                             $form = false;
                         }
+                    } else if (cmd == 'filters') {
+                        _filters.btn(el);
                     }
 
                     el.addEventListener('click', fn2);
@@ -820,14 +828,14 @@ function Backlist(ID) {
      * Main
      */
     let $U, _initialized;
-    let $box = document.getElementById((ID ? ID + '-' : '') + 'backlist-box');
-    let $list = $box?.querySelector('div[backlist-slot]');
+    const $box = document.getElementById((ID ? ID + '-' : '') + 'backlist-box');
+    const $list = $box?.querySelector('div[backlist-slot]');
 
     if ($box) {
         JsNotify.creator($box);
     }
 
-    let _controls = JsControls({
+    const _controls = JsControls({
         list: {
             refresh: function () {
                 that.refresh();
@@ -843,9 +851,9 @@ function Backlist(ID) {
         }
     });
 
-    let _rows = Rows(_controls);
-    let _buttons = _rows.getButtons();
-    let _filters = Filters(_controls, function (event, data) {
+    const _rows = Rows(_controls);
+    const _buttons = _rows.getButtons();
+    const _filters = Filters(_controls, function (event, data) {
         if (event) {
             event.preventDefault();
         }
@@ -856,11 +864,11 @@ function Backlist(ID) {
         that.load();
     });
 
-    let _list = List($list, function () { that.async() });
-    let _hash = Hash(_list, function () { that.load() });
-    let _listOptions = Options($box, _controls, _buttons);
+    const _list = List($list, function () { that.async() });
+    const _hash = Hash(_list, function () { that.load() });
+    const _listOptions = Options($box, _controls, _buttons);
 
-    let that = {
+    const that = {
         url: function (fn) {
             if (typeof fn == 'function') {
                 $U = fn;

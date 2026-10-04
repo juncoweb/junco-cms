@@ -1,4 +1,4 @@
-/* --- upload handle --------------------------------- */
+/* --- upload handle --- */
 $felem-file-wh: 5rem;
 
 .input-file {
@@ -51,7 +51,7 @@ $felem-file-wh: 5rem;
         position: absolute;
         bottom: 0;
         height: 3px;
-        background-color: var(--solid-primary-surface-color);
+        background-color: var(--theme-primary-color);
     }
 
     &-title {

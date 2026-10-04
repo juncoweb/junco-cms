@@ -57,7 +57,7 @@
   width: calc(30% + 10px);
 }
 
-/* --- Layout ------------------------------------------------- */
+/* --- Layout --- */
 html,
 body {
   margin: 0;
@@ -114,9 +114,9 @@ body {
   z-index: var(--zindex-dropdown);
 }
 .accessibility-nav a {
-  margin: 0var --spacing-2;
+  margin: 0 var(--spacing-2);
   padding: var(--spacing-2) var(--spacing-8);
-  background-color: var(--regular-surface-color);
+  background-color: var(--theme-surface-color);
 }
 
 .layout-header > div {
@@ -210,6 +210,27 @@ body {
 .theme-color > a > i {
   margin: 0 !important;
 }
+.theme-color > a > i.color-default {
+  color: var(--solid-bg-color) !important;
+}
+.theme-color > a > i.color-primary {
+  color: var(--solid-"primary"-bg-color) !important;
+}
+.theme-color > a > i.color-secondary {
+  color: var(--solid-"secondary"-bg-color) !important;
+}
+.theme-color > a > i.color-success {
+  color: var(--solid-"success"-bg-color) !important;
+}
+.theme-color > a > i.color-info {
+  color: var(--solid-"info"-bg-color) !important;
+}
+.theme-color > a > i.color-warning {
+  color: var(--solid-"warning"-bg-color) !important;
+}
+.theme-color > a > i.color-danger {
+  color: var(--solid-"danger"-bg-color) !important;
+}
 
 .layout-title-group {
   display: flex;
@@ -232,10 +253,6 @@ body {
 }
 
 /* --- navbar --- */
-.navbar-mobile,
-.navbar {
-  padding-top: calc(var(--sizing) * 6);
-}
 .navbar-mobile ul,
 .navbar-mobile li,
 .navbar ul,
@@ -311,6 +328,10 @@ body {
 .navbar > ul > li ul li ul li {
   padding-left: 0;
   padding-right: 0;
+}
+.navbar-mobile,
+.navbar {
+  padding-top: calc(var(--sizing) * 6);
 }
 .navbar-mobile li,
 .navbar li {
@@ -488,9 +509,9 @@ body {
   color: var(--font-color);
 }
 
-/* --- thirdbar ------------------------------------------------------ */
+/* --- thirdbar --- */
 .layout-thirdbar {
-  background-color: var(--regular-surface-color);
+  background-color: var(--theme-surface-color);
   display: flex;
 }
 
@@ -529,7 +550,7 @@ body {
   position: relative;
 }
 .widget-thirdbar > ul > li > ul {
-  background: var(--regular-surface-color);
+  background: var(--theme-surface-color);
   box-shadow: var(--box-shadow-dropdown);
 }
 .widget-thirdbar > ul > li ul li a {

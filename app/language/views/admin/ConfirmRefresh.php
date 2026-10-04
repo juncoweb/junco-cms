@@ -9,7 +9,7 @@
 $modal = Modal::get();
 $modal->close();
 $modal->enter(_t('Confirm'));
-$modal->title(_t('Refresh'));
+$modal->title(_t('Refresh'), 'fa-solid fa-arrows-rotate');
 $modal->content(_t('Confirm to refresh the language cache.'));
 $modal->getForm();
 

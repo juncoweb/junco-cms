@@ -59,6 +59,7 @@ enum ExtensionStatus
     public function fetch(): array
     {
         return [
+            'name'  => $this->name,
             'color' => $this->color(),
             'title' => $this->title(),
             'is_active' => $this->isActive(),

@@ -1,5 +1,5 @@
 
-/* --- Coockie ----------------------------------------------------- */
+/* --- Coockie --- */
 var JsCookie = (function () {
     function set(key, value, attr) {
         let cookie = key + '=' + decodeURIComponent(value);

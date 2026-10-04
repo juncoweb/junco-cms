@@ -1,5 +1,5 @@
 
-/* --- Checkbox ----------------------------------------------------------- */
+/* --- Checkbox --- */
 JsFelem.implement({
     'check-all': function (checkall, form) {
         const name = checkall.getAttribute('data-checkall');

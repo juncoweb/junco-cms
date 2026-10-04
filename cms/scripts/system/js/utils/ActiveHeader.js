@@ -1,4 +1,4 @@
-/* --- active header ---------------------------- */
+/* --- active header --- */
 var ActiveHeader = function (el, css, top) {
     if (typeof el == 'string') {
         el = document.querySelector(el);

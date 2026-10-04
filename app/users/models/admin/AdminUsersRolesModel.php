@@ -9,8 +9,7 @@ use Junco\Mvc\Model;
 
 class AdminUsersRolesModel extends Model
 {
-    // vars
-    protected $db;
+    protected Database $db;
 
     /**
      * Constructor
@@ -56,7 +55,7 @@ class AdminUsersRolesModel extends Model
     public function getCreateData()
     {
         return [
-            'title' => _t('Create'),
+            'type' => 'create',
             'values' => ['autoload' => true]
         ];
     }
@@ -78,7 +77,7 @@ class AdminUsersRolesModel extends Model
 		WHERE id = ?", $data['id'])->fetch() or abort();
 
         return [
-            'title' => _t('Edit'),
+            'type' => 'edit',
             'values' => $data
         ];
     }

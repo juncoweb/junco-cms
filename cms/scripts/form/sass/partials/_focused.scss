@@ -21,7 +21,7 @@
         .input-checkbox:focus,
         .input-radio:focus,
         .input-toggle:focus {
-            box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-primary-surface-rgb-color), 0.35);
+            box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--theme-primary-rgb-color), 0.35);
         }
     } @else {
         .btn-#{$name} {
@@ -31,7 +31,7 @@
             &.btn-inline:has(> .input-hidden:focus),
             .btn:focus,
             .btn:has(> .input-hidden:focus) {
-                box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-#{$name}-surface-rgb-color), 0.35);
+                box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--theme-#{$name}-rgb-color), 0.35);
             }
         }
 
@@ -45,7 +45,7 @@
             &.input-toggle,
             .input-toggle {
                 &:focus {
-                    box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-#{$name}-surface-rgb-color), 0.35);
+                    box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--theme-#{$name}-rgb-color), 0.35);
                 }
             }
         }
@@ -60,7 +60,7 @@
             &.input-toggle,
             .input-toggle {
                 &:focus {
-                    box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--solid-#{$name}-surface-rgb-color), 0.35);
+                    box-shadow: 0 0 0 min(0.25rem, 5px) rgba(var(--theme-#{$name}-rgb-color), 0.35);
                 }
             }
         }

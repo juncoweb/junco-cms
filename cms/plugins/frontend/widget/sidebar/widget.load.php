@@ -35,7 +35,7 @@ return function (WidgetInterface $widget) {
 
     foreach ($rows as $row) {
         $html .= '<li' . ($uri == $row['uri'] ? ' class="selected"' : '') . '>'
-            . '<a href="' . $row['menu_url'] . '"' . ($row['color'] ? ' style="background: ' . $row['color'] . ';"' : '') . '><i class="fa-solid fa-caret-right"></i>' . $row['menu_name'] . '</a>'
+            . '<a href="' . $row['menu_url'] . '"' . ($row['color'] ? ' style="background: ' . $row['color'] . ';"' : '') . '><i class="fa-solid fa-caret-right" aria-hidden="true"></i>' . $row['menu_name'] . '</a>'
             . '</li>';
     }
 

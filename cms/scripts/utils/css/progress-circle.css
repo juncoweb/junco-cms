@@ -1,4 +1,4 @@
-/* --- Progress circle --------------------------------------- */
+/* --- Progress circle --- */
 .progress-circle {
   height: 100px;
   width: 100px;
@@ -10,7 +10,7 @@
 .progress-circle:before {
   font-size: 28px;
   align-items: center;
-  background-color: var(--regular-surface-color);
+  background-color: var(--theme-surface-color);
   border-radius: 50%;
   content: attr(data-progress) "%";
   display: flex;
@@ -356,46 +356,46 @@
   font-size: 19.6px;
 }
 .progress-circle.default:after {
-  background-image: linear-gradient(90deg, var(--regular-secondary-bg-color) 50%, var(--solid-surface-color) 50%);
+  background-image: linear-gradient(90deg, var(--regular-secondary-bg-color) 50%, var(--theme-default-color) 50%);
 }
 .progress-circle.default div {
-  background-image: linear-gradient(90deg, var(--solid-surface-color) 50%, transparent 50%);
+  background-image: linear-gradient(90deg, var(--theme-default-color) 50%, transparent 50%);
 }
 .progress-circle.primary:after {
-  background-image: linear-gradient(90deg, var(--regular-secondary-bg-color) 50%, var(--solid-primary-surface-color) 50%);
+  background-image: linear-gradient(90deg, var(--regular-secondary-bg-color) 50%, var(--theme-primary-color) 50%);
 }
 .progress-circle.primary div {
-  background-image: linear-gradient(90deg, var(--solid-primary-surface-color) 50%, transparent 50%);
+  background-image: linear-gradient(90deg, var(--theme-primary-color) 50%, transparent 50%);
 }
 .progress-circle.secondary:after {
-  background-image: linear-gradient(90deg, var(--regular-secondary-bg-color) 50%, var(--solid-secondary-surface-color) 50%);
+  background-image: linear-gradient(90deg, var(--regular-secondary-bg-color) 50%, var(--theme-secondary-color) 50%);
 }
 .progress-circle.secondary div {
-  background-image: linear-gradient(90deg, var(--solid-secondary-surface-color) 50%, transparent 50%);
+  background-image: linear-gradient(90deg, var(--theme-secondary-color) 50%, transparent 50%);
 }
 .progress-circle.success:after {
-  background-image: linear-gradient(90deg, var(--regular-secondary-bg-color) 50%, var(--solid-success-surface-color) 50%);
+  background-image: linear-gradient(90deg, var(--regular-secondary-bg-color) 50%, var(--theme-success-color) 50%);
 }
 .progress-circle.success div {
-  background-image: linear-gradient(90deg, var(--solid-success-surface-color) 50%, transparent 50%);
+  background-image: linear-gradient(90deg, var(--theme-success-color) 50%, transparent 50%);
 }
 .progress-circle.info:after {
-  background-image: linear-gradient(90deg, var(--regular-secondary-bg-color) 50%, var(--solid-info-surface-color) 50%);
+  background-image: linear-gradient(90deg, var(--regular-secondary-bg-color) 50%, var(--theme-info-color) 50%);
 }
 .progress-circle.info div {
-  background-image: linear-gradient(90deg, var(--solid-info-surface-color) 50%, transparent 50%);
+  background-image: linear-gradient(90deg, var(--theme-info-color) 50%, transparent 50%);
 }
 .progress-circle.warning:after {
-  background-image: linear-gradient(90deg, var(--regular-secondary-bg-color) 50%, var(--solid-warning-surface-color) 50%);
+  background-image: linear-gradient(90deg, var(--regular-secondary-bg-color) 50%, var(--theme-warning-color) 50%);
 }
 .progress-circle.warning div {
-  background-image: linear-gradient(90deg, var(--solid-warning-surface-color) 50%, transparent 50%);
+  background-image: linear-gradient(90deg, var(--theme-warning-color) 50%, transparent 50%);
 }
 .progress-circle.danger:after {
-  background-image: linear-gradient(90deg, var(--regular-secondary-bg-color) 50%, var(--solid-danger-surface-color) 50%);
+  background-image: linear-gradient(90deg, var(--regular-secondary-bg-color) 50%, var(--theme-danger-color) 50%);
 }
 .progress-circle.danger div {
-  background-image: linear-gradient(90deg, var(--solid-danger-surface-color) 50%, transparent 50%);
+  background-image: linear-gradient(90deg, var(--theme-danger-color) 50%, transparent 50%);
 }
 .progress-circle[data-progress='"0"'] div, .progress-circle[data-progress='"1"'] div, .progress-circle[data-progress='"2"'] div, .progress-circle[data-progress='"3"'] div, .progress-circle[data-progress='"4"'] div, .progress-circle[data-progress='"5"'] div, .progress-circle[data-progress='"6"'] div, .progress-circle[data-progress='"7"'] div, .progress-circle[data-progress='"8"'] div, .progress-circle[data-progress='"9"'] div, .progress-circle[data-progress='"10"'] div, .progress-circle[data-progress='"11"'] div, .progress-circle[data-progress='"12"'] div, .progress-circle[data-progress='"13"'] div, .progress-circle[data-progress='"14"'] div, .progress-circle[data-progress='"15"'] div, .progress-circle[data-progress='"16"'] div, .progress-circle[data-progress='"17"'] div, .progress-circle[data-progress='"18"'] div, .progress-circle[data-progress='"19"'] div, .progress-circle[data-progress='"20"'] div, .progress-circle[data-progress='"21"'] div, .progress-circle[data-progress='"22"'] div, .progress-circle[data-progress='"23"'] div, .progress-circle[data-progress='"24"'] div, .progress-circle[data-progress='"25"'] div, .progress-circle[data-progress='"26"'] div, .progress-circle[data-progress='"27"'] div, .progress-circle[data-progress='"28"'] div, .progress-circle[data-progress='"29"'] div, .progress-circle[data-progress='"30"'] div, .progress-circle[data-progress='"31"'] div, .progress-circle[data-progress='"32"'] div, .progress-circle[data-progress='"33"'] div, .progress-circle[data-progress='"34"'] div, .progress-circle[data-progress='"35"'] div, .progress-circle[data-progress='"36"'] div, .progress-circle[data-progress='"37"'] div, .progress-circle[data-progress='"38"'] div, .progress-circle[data-progress='"39"'] div, .progress-circle[data-progress='"40"'] div, .progress-circle[data-progress='"41"'] div, .progress-circle[data-progress='"42"'] div, .progress-circle[data-progress='"43"'] div, .progress-circle[data-progress='"44"'] div, .progress-circle[data-progress='"45"'] div, .progress-circle[data-progress='"46"'] div, .progress-circle[data-progress='"47"'] div, .progress-circle[data-progress='"48"'] div, .progress-circle[data-progress='"49"'] div, .progress-circle[data-progress='"50"'] div {
   background-image: linear-gradient(90deg, transparent 50%, var(--regular-secondary-bg-color) 50%);

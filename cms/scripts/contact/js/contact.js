@@ -1,10 +1,10 @@
 
-/* --- Contact ---------------------------------------- */
+/* --- Contact --- */
 function Contact() {
-    let $box = document.getElementById('contact');
-    let $form = $box.querySelector('form');
-    let _form = JsForm($form, { focusable: false });
-    let url = JsUrl('/contact/take');
+    const $box = document.getElementById('contact');
+    const $form = $box.querySelector('form');
+    const _form = JsForm($form, { focusable: false });
+    const url = JsUrl('/contact/take');
 
     function toggle(status) {
         $box.classList.toggle('contact-finish', status);

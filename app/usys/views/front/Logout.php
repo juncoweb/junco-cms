@@ -9,8 +9,8 @@
 $modal = Modal::get();
 $modal->type('alert');
 $modal->close();
-$modal->enter(_t('Log out'));
-$modal->title(_t('Confirm'));
+$modal->enter($t = _t('Log out'));
+$modal->title($t, 'fa-solid fa-right-from-bracket');
 $modal->content(_t('Are you sure you want to log out?'));
 $modal->getForm('logout-form');
 

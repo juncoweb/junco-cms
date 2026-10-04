@@ -15,7 +15,7 @@ $form->hidden('from');
 
 // modal
 $modal = Modal::get();
-$modal->title($title);
+$modal->type('create');
 $modal->enter();
 $modal->close();
 $modal->content($form->render());

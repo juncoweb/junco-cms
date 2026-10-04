@@ -79,12 +79,25 @@ enum UserStatus
     /**
      * Get
      */
-    public static function getList(bool $public = false): array
+    public static function getList(array $list = []): array
     {
-        if ($public) {
-            return array_values(array_filter(self::cases(), fn($e) => $e->isPublic()));
+        foreach (self::cases() as $case) {
+            if ($case->isPublic()) {
+                $list[$case->name] = $case->title();
+            }
         }
 
-        return self::cases();
+        return $list;
+    }
+
+    /**
+     * Toggle
+     */
+    public static function toggle(): string
+    {
+        $active   = self::active->name;
+        $inactive = self::inactive->name;
+
+        return "IF(status = '$active', '$inactive', '$active')";
     }
 }

@@ -1,4 +1,4 @@
-/* --- Frontlist ------------------------------- */
+/* --- Frontlist --- */
 .frontlist {
     article {
         grid-template-columns: min-content auto min-content;
@@ -20,7 +20,7 @@
         }
 
         .article-container {
-            h3 {
+            h2 {
                 font-size: var(--font-size-lg);
                 margin: 0;
 

@@ -54,7 +54,7 @@ abstract class EmailMessageBase implements EmailMessageInterface
                 . '<html xmlns="http://www.w3.org/1999/xhtml">'
                 . '<head>'
                 .    '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>'
-                .    '<meta name="viewport" content="width=device-width, initial-scale=1.0"/>'
+                .    '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
                 .    '<title>{{ title }}</title>'
                 . '</head>'
                 . '<body style="color: #333333; font-family: Arial, sans-serif; font-size: 14px; margin: 0; padding: 0;">'

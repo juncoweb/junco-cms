@@ -11,12 +11,14 @@ $bbx = Backlist::getBox();
 // actions
 $bac = $bbx->getActions();
 $bac->create();
-$bac->button('copy', _t('Copy'), 'fa-solid fa-copy');
 $bac->button('confirm_compile', _t('Compile'), 'fa-solid fa-gears');
 $bac->dropdown([
+    ['control' => 'copy', 'label' => _t('Copy'), 'icon' => 'fa-solid fa-copy'],
     ['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash'],
     [],
     ['control' => 'confirm_select', 'label' => _t('Select'), 'icon' => 'fa-solid fa-star'],
+    //[],
+    //['href' => 'confirm_select', 'label' => _t('colors'), 'icon' => 'fa-solid fa-circle'],
 ]);
 $bac->refresh();
 

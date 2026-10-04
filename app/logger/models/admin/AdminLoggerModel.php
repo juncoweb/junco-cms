@@ -18,7 +18,7 @@ class AdminLoggerModel extends Model
     public function getIndexData()
     {
         return [
-            'statuses' => LogStatus::getActives()
+            'statuses' => LogStatus::getList()
         ];
     }
 
@@ -64,7 +64,7 @@ class AdminLoggerModel extends Model
             'level'    => $data['level']?->name,
             'status'   => $data['status']?->name,
             'levels'   => LogLevel::getList(['' => _t('All levels')]),
-            'statuses' => LogStatus::getList(['' => _t('All statuses')]),
+            'statuses' => LogStatus::getList(['' => _t('All statuses')], false),
             'rows'     => $rows,
             'pagi'     => $pagi
         ];

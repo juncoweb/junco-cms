@@ -15,12 +15,13 @@ $fac->cancel();
 
 // elements
 $form->setValues($values);
-if ($is_edit) {
+if ($type == 'edit') {
     $form->hidden('to_verify');
     $form->hidden('key');
 }
 $form->textarea('assets', ['auto-grow' => '', 'data-min-height' => 120]);
 $html_1 = $form->getLastElement();
+
 $form->textarea('default_assets', ['auto-grow' => '', 'data-min-height' => 120, 'readonly' => '']);
 $html_2 = $form->getLastElement();
 
@@ -37,7 +38,7 @@ $form->element($tabs->render());
 
 // modal
 $modal = Modal::get();
-$modal->title($title);
+$modal->type($type);
 $modal->content($form->render());
 
 return $modal->response();

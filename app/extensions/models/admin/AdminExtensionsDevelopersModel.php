@@ -60,6 +60,18 @@ class AdminExtensionsDevelopersModel extends Model
     /**
      * Get
      */
+    public function getCreateData()
+    {
+        return [
+            'type' => 'create',
+            'values' => null,
+            'is_protected' => false,
+        ];
+    }
+
+    /**
+     * Get
+     */
     public function getEditData()
     {
         $input = $this->filter(POST, ['id' => 'id|array:first|required:abort']);
@@ -79,7 +91,7 @@ class AdminExtensionsDevelopersModel extends Model
 		WHERE id = ?", $input['id'])->fetch() or abort();
 
         return [
-            'title' => _t('Edit'),
+            'type' => 'edit',
             'values' => $data,
             'is_protected' => $data['is_protected'],
         ];

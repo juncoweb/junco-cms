@@ -1,5 +1,5 @@
 
-/* --- Password ------------------------------------------------ */
+/* --- Password --- */
 JsFelem.implement({
     password: function (el, box) {
         if (el.tagName == 'INPUT') {

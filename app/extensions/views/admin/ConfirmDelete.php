@@ -29,8 +29,8 @@ $html .= $form->render();
 
 // modal
 $modal = Modal::get();
-$modal->title($t = _t('Delete'), 'fa-solid fa-trash');
-$modal->enter($t);
+$modal->type('delete');
+$modal->enter();
 $modal->close();
 $modal->content($html);
 

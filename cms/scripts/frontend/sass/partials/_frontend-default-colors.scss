@@ -1,11 +1,10 @@
-/* --- colors ------------------------------------------------- */
+/* --- colors --- */
 @each $name, $color in $theme-colors {
     $class: ".tpl-#{$name}";
     $contrast: map-get($color, "contrast");
 
     @if ($name == "default") {
         $class: "";
-        $class2: "";
         $name: "";
     } @else {
         $name: -#{$name};
@@ -15,7 +14,7 @@
     .tpl-copyright#{$class},
     .tpl-footer#{$class} {
         --font-color: var(--regular#{$name}-font-color);
-        --active-font-color: var(--regular-#{$contrast}-surface-color);
+        --active-font-color: var(--theme-#{$contrast}-color);
         --bg-color: var(--regular#{$name}-bg-color);
         --border-color: var(--regular#{$name}-border-color);
         --contrast-font-color: var(--solid-#{$contrast}-font-color);
@@ -23,7 +22,7 @@
 
         &.tpl-solid {
             --font-color: var(--solid#{$name}-font-color);
-            --active-font-color: var(--solid-#{$contrast}-bg-color);
+            --active-font-color: var(--solid#{$name}-disabled-font-color);
             --bg-color: var(--solid#{$name}-bg-color);
             --border-color: var(--solid#{$name}-border-color);
             --contrast-font-color: var(--solid-#{$contrast}-font-color);

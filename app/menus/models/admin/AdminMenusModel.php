@@ -90,7 +90,7 @@ class AdminMenusModel extends Model
         $data = $this->filter(POST, ['num_rows' => 'int|min:1|default:1']);
 
         return [
-            'title'      => _t('Create'),
+            'type'       => 'create',
             'values'     => array_fill(0, $data['num_rows'], null),
             'extensions' => $this->getExtensions(),
             'is_edit'    => false,
@@ -123,7 +123,7 @@ class AdminMenusModel extends Model
 		ORDER BY menu_path, menu_order", $input['id'])->fetchAll() or abort();
 
         return [
-            'title'      => _t('Edit'),
+            'type'       => 'edit',
             'values'     => $data,
             'extensions' => $this->getExtensions(),
             'is_edit'    => true,

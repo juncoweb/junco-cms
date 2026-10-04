@@ -5,14 +5,12 @@
  * @author: Junco CMS (tm)
  */
 
-use Junco\Tabs\TabsInterface;
+namespace Junco\Tabs;
 
 abstract class TabsBase implements TabsInterface
 {
-    // vars
-    protected array $tablist    = [];
-    protected array $tabpanel    = [];
-    protected array $options    = [];
+    protected array $options = [];
+    protected array $tablist = [];
 
     /**
      * Constructor
@@ -36,14 +34,13 @@ abstract class TabsBase implements TabsInterface
     /**
      * Tab
      * 
-     * @param string $tab
-     * @param string $tabpanel
+     * @param string $label
+     * @param string $panel
      * 
-     * @return void
+     * @return Tab
      */
-    public function tab(string $tab, string $tabpanel = ''): void
+    public function tab(string $label, string $panel = ''): Tab
     {
-        $this->tablist[]  = $tab;
-        $this->tabpanel[] = $tabpanel;
+        return $this->tablist[] = new Tab($label, $panel);
     }
 }

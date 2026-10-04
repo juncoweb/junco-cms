@@ -22,7 +22,7 @@ if ($is_close) {
 $modal = Modal::get();
 $modal->enter();
 $modal->close();
-$modal->title(_t('Update'));
+$modal->title(_t('Update'), 'fa-solid fa-bolt');
 $modal->content($form->render());
 
 return $modal->response();

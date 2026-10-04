@@ -24,7 +24,7 @@ if ($explain_is_active) {
 
 // modal
 $modal = Modal::get();
-$modal->title(_t('Select'));
+$modal->title(_t('Select'), 'fa-solid fa-star');
 $modal->enter();
 $modal->close();
 $modal->content($form->render());

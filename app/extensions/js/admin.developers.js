@@ -1,5 +1,5 @@
 
-/* --- Developers --------------------------------------------------------- */
+/* --- Developers --- */
 (function () {
     function $U(task) {
         return JsUrl('admin/extensions.developers/' + task);

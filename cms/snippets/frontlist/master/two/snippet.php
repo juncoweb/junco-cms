@@ -25,14 +25,14 @@ class frontlist_master_two_snippet extends FrontlistBase
                 $title = $row['title'];
 
                 if ($row['image']) {
-                    $row['image_html'] = '<img src="' . $row['image'] . '" alt="' . $row['title'] . '" />';
+                    $row['image_html'] = '<img src="' . $row['image'] . '" alt="' . $row['title'] . '"/>';
                 }
                 if ($row['url']) {
                     if ($row['image_html']) {
-                        $row['image_html'] = '<a href="' . $row['url'] . '" title="' . $row['title'] . '">' . $row['image_html'] . '</a>';
+                        $row['image_html'] = '<a href="' . $row['url'] . '" tabindex="-1" aria-hidden="true">' . $row['image_html'] . '</a>';
                     }
 
-                    $title = '<a href="' . $row['url'] . '" title="' . $row['title'] . '">' . $title . '</a>';
+                    $title = '<a href="' . $row['url'] . '">' . $title . '</a>';
                 }
 
                 $html .= '<article control-row="' . $row['id'] . '">';
@@ -44,7 +44,7 @@ class frontlist_master_two_snippet extends FrontlistBase
                 }
 
                 $html .= '<div class="article-container">';
-                $html .= '<div><h3>' . $title . '</h3></div>';
+                $html .= '<div><h2>' . $title . '</h2></div>';
 
                 if ($row['date']) {
                     $html .= '<div class="article-date">' . $row['date'] . '</div>';

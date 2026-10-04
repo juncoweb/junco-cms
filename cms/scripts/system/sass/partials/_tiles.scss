@@ -1,4 +1,4 @@
-/* -------- tiles ------------------------------------------------- */
+/* -------- tiles --- */
 .tiles {
     display: flex;
     flex-wrap: wrap;
@@ -81,7 +81,7 @@
     &-fieldset {
         margin: 0;
         margin-bottom: var(--spacing-4);
-        background-color: var(--regular-surface-color);
+        background-color: var(--theme-surface-color);
         border-width: var(--border-width);
         border-style: var(--border-style);
         border-color: var(--regular-border-color);
@@ -90,6 +90,10 @@
 
         > legend {
             color: var(--regular-font-color);
+        }
+
+        .tiles {
+            margin-bottom: 0;
         }
     }
 }

@@ -9,25 +9,25 @@ use Junco\Mvc\Model;
 
 class MyNotificationsModel extends Model
 {
-    // vars
-    protected $db;
-    protected int $user_id;
+	// vars
+	protected $db;
+	protected int $user_id;
 
-    /**
+	/**
      * Constructor
      */
-    public function __construct()
-    {
-        $this->db = db();
+	public function __construct()
+	{
+		$this->db = db();
         $this->user_id = curuser()->getId();
-    }
+	}
 
-    /**
+	/**
      * Get
      */
-    public function getListData()
-    {
-        $data = $this->filter(POST, ['search' => 'text']);
+	public function getListData()
+	{
+		$data = $this->filter(POST, ['search' => 'text']);
 
         // query
         $this->db->where("user_id = ?", $this->user_id);
@@ -60,14 +60,14 @@ class MyNotificationsModel extends Model
             'rows' => $rows,
             'pagi' => $pagi
         ];
-    }
+	}
 
-    /**
+	/**
      * Get
      */
-    public function getShowData()
-    {
-        // query
+	public function getShowData()
+	{
+		// query
         $pagi = $this->db->paginate("
 		SELECT [
 		 id ,
@@ -95,14 +95,14 @@ class MyNotificationsModel extends Model
             'num_notifications' => $num_notifications,
             'rows' => $rows
         ];
-    }
+	}
 
-    /**
+	/**
      * 
      */
-    protected function setUrl(array &$rows): void
-    {
-        $url = [];
+	protected function setUrl(array &$rows): void
+	{
+		$url = [];
 
         foreach ($rows as $i => $row) {
             $type = $row['notification_type'];
@@ -112,13 +112,13 @@ class MyNotificationsModel extends Model
                 ? strtr($url[$type], ['{id}' => $row['notification_id']])
                 : '';
         }
-    }
+	}
 
-    /**
+	/**
      * 
      */
-    protected function markAsRead()
-    {
-        $this->db->exec("UPDATE `#__notifications` SET read_at = NOW() WHERE user_id = ? AND read_at IS NULL", $this->user_id);
-    }
+	protected function markAsRead()
+	{
+		$this->db->exec("UPDATE `#__notifications` SET read_at = NOW() WHERE user_id = ? AND read_at IS NULL", $this->user_id);
+	}
 }

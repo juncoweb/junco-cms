@@ -21,7 +21,7 @@ if ($num_updates) {
     $modal->enter(_t('Update'));
 }
 $modal->close();
-$modal->title(_t('Update all'));
+$modal->title(_t('Update all'), 'fa-solid fa-bolt');
 $modal->content($html);
 $modal->getForm();
 

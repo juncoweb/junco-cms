@@ -1,5 +1,21 @@
-/* --- colors ------------------------------------------- */
+/* --- colors --- */
 @each $name, $color in $theme-colors {
+    $theme-scale: (50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950);
+
+    :root,
+    [data-theme="light"] {
+        @each $weight in $theme-scale {
+            --theme-#{$name}-color-#{$weight}: #{scale-color(map-get($color, "color"), $weight)};
+        }
+    }
+
+    [data-theme="dark"] {
+        @each $weight in $theme-scale {
+            --theme-#{$name}-color-#{$weight}: #{scale-color(map-get($color, "color"), $weight)};
+        }
+    }
+
+    //
     $class: -#{$name};
 
     @if ($name == "default") {
@@ -28,5 +44,21 @@
         color: var(--solid#{$class}-disabled-font-color);
         background-color: var(--solid#{$class}-disabled-bg-color);
         border-color: var(--solid#{$class}-disabled-border-color);
+    }
+    .box-#{$name}-active {
+        color: var(--regular#{$class}-active-font-color);
+        background-color: var(--regular#{$class}-active-bg-color);
+        border-color: var(--regular#{$class}-active-border-color);
+    }
+
+    .box-#{$name}-active,
+    .box-#{$name}-disabled {
+        .color-subtle {
+            color: var(--regular#{$class}-subtle-font-color);
+        }
+
+        &.box-solid .color-subtle {
+            color: var(--solid#{$class}-subtle-font-color);
+        }
     }
 }

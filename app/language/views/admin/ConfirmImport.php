@@ -13,7 +13,7 @@ $form->file('file')->setLabel(_t('File'));
 $modal = Modal::get();
 $modal->enter();
 $modal->close();
-$modal->title([_t('Language'), _t('Upload')]);
+$modal->title(_t('Upload'), 'fa-solid fa-file-import');
 $modal->content($form->render());
 
 return $modal->response();

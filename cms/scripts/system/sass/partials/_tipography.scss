@@ -1,4 +1,4 @@
-/* --- tipography ------------------------------------------- */
+/* --- tipography --- */
 body {
     font-family: var(--font-family-base);
     font-size: var(--font-size-base);
@@ -9,16 +9,16 @@ body {
 
 // link
 a {
-    color: $link-color;
+    color: var(--link-color);
     text-decoration: $link-decoration;
 
     &:hover {
-        color: $link-hover-color;
+        color: var(--link-hover-color);
         text-decoration: $link-hover-decoration;
     }
 
     &:focus {
-        color: $link-hover-color;
+        color: var(--link-hover-color);
     }
 }
 
@@ -95,7 +95,7 @@ samp {
 
 code {
     font-size: $code-font-size;
-    color: $code-color;
+    color: $code-font-color;
     background-color: $code-bg-color;
     padding: $code-padding;
     border-radius: var(--rounded-md);

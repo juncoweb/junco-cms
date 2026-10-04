@@ -31,12 +31,20 @@ class CustomSelect extends FilterElement
             $default = array_key_first($options);
         }
 
-        $html = '<button type="button" control-felem="select" on-change="submit" class="btn btn-caret">'
-            .   $options[$default]
-            . '</button>'
+        $id = $name . '-menu';
+        $html = '<button'
+            . ' type="button"'
+            . ' control-felem="select"'
+            . ' on-change="submit"'
+            . ' role="combobox"'
+            . ' aria-label="' . _t('Filter selector') . '"'
+            . ' aria-haspopup="listbox"'
+            . ' aria-controls="' . $id . '"'
+            . ' class="btn btn-caret"'
+            . '>' . $options[$default] . '</button>'
             .  '<div class="dropdown-menu" style="display: none;">'
             .   '<input type="hidden" name="' . $name . '" value="' . $default . '">'
-            .   $this->renderMenu($options, $default)
+            .   $this->renderMenu($options, $default, $id)
             . '</div>';
 
         $this->html = '<div class="btn-group">' . $html . '</div>';
@@ -49,7 +57,7 @@ class CustomSelect extends FilterElement
      * 
      * @return string
      */
-    protected function renderMenu(array $options, string $default)
+    protected function renderMenu(array $options, string $default, string $id): string
     {
         $html = '';
         foreach ($options as $value => $label) {
@@ -58,6 +66,6 @@ class CustomSelect extends FilterElement
                 . '</li>';
         }
 
-        return '<ul>' .  $html . '</ul>';
+        return '<ul id="' . $id . '">' .  $html . '</ul>';
     }
 }

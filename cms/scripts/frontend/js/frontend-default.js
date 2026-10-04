@@ -1,5 +1,5 @@
 
-/* --- Frontend ---------------------------- */
+/* --- Frontend --- */
 const Frontend = (function () {
     const controls = JsControls({ tpl: {} });
 
@@ -55,6 +55,7 @@ Frontend.attachAll({
     search: (function () {
         let box;
         return function (el) {
+            el.setAttribute('role', 'button');
             el.addEventListener('click', function (event) {
                 event.preventDefault();
 

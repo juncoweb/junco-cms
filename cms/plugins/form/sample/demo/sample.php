@@ -33,8 +33,6 @@ $html = '<div class="panel"><div class="panel-body">' . $form->render() . '</div
 $tpl = Template::get();
 $tpl->options([
     'thirdbar' => 'form.thirdbar',
-    'css' => 'assets/system.min.css,cms/snippets/form/master/default/css/form.css',
-    //'js' => 'cms/scripts/form/js/elements.js,cms/scripts/system/js/controls.js,cms/scripts/system/js/form.js',
     'domready' => 'JsForm()'
 ]);
 $tpl->title('Form Group');

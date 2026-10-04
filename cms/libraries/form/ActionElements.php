@@ -112,7 +112,9 @@ abstract class ActionElements implements ActionElementsInterface
     {
         $icon    = $this->extract($attr, 'icon');
         $label   = $this->extract($attr, 'label', '{{ icon }}{{ caption }}');
-        $caption = $showCaption ? ($icon ? sprintf($this->label_tag, $attr['title']) : $attr['title']) : '';
+        $caption = $showCaption
+            ? ($icon ? sprintf($this->label_tag, $attr['title']) : $attr['title'])
+            : '<span class="visually-hidden">' . $attr['title'] . '</span>';
 
         if ($icon) {
             $icon = '<i class="' . $icon . '" aria-hidden="true"></i>' . ($caption ? ' ' : '');
@@ -167,12 +169,12 @@ abstract class ActionElements implements ActionElementsInterface
                         . (empty($row['name']) ? '' : ' data-name="' . $row['name'] . '"')
                         . '>';
                 } else {
-                    $html .= '<a href="' . $row['href'] . '">';
-                    $html .= '<span class="color-subtle-default float-right" aria-hidden="true"><i class="fa-solid fa-arrow-left fa-rotate-by" style="--fa-rotate-angle: 45deg;"></i></span>';
+                    $html .= '<a href="' . $row['href'] . '"' . (empty($row['target']) ? '' : ' target="' . $row['target'] . '"') . '>';
+                    $html .= '<span class="color-subtle float-right" aria-hidden="true"><i class="fa-solid fa-arrow-left fa-rotate-by" style="--fa-rotate-angle: 45deg;"></i></span>';
                 }
 
                 if (!empty($row['icon'])) {
-                    $html .= '<i class="' . $row['icon'] . '" aria-hidden="true"></i>';
+                    $html .= '<i class="' . $row['icon'] . (!empty($row['color']) ? ' color-' . $row['color'] : '') . '" aria-hidden="true"></i>';
                 }
 
                 $html .= $row['label'];

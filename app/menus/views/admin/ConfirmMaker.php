@@ -30,7 +30,7 @@ $form->checkboxList('menu_keys', $keys)->setLabel(_t('Keys'))->setRequired();
 $modal = Modal::get();
 $modal->enter();
 $modal->close();
-$modal->title(_t('Maker'));
+$modal->title(_t('Maker'), 'fa-solid fa-hammer');
 $modal->content($form->render());
 
 return $modal->response();

@@ -16,7 +16,7 @@ $form->input('name')->setLabel(_t('Name'))->setRequired();
 
 // modal
 $modal = Modal::get();
-$modal->title($title);
+$modal->type($type);
 $modal->enter();
 $modal->close();
 $modal->content($form->render());

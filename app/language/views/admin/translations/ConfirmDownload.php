@@ -7,9 +7,9 @@
 
 // modal
 $modal = Modal::get();
-$modal->enter($text = _t('Download'));
+$modal->enter($t = _t('Download'));
 $modal->close();
-$modal->title($text);
+$modal->title($t, 'fa-solid fa-download');
 $modal->content(_t('Are you sure you want to download the file selected?'));
 //
 $modal->getForm()

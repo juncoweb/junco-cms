@@ -14,7 +14,7 @@ $bac->refresh();
 // modal
 $modal = Modal::get();
 $modal->close();
-$modal->title([_t('Domains'), $title]);
+$modal->title([_t('Domains'), $title], 'fa-solid fa-globe');
 $modal->content($bbx->render($this->list($data)));
 
 return $modal->response();

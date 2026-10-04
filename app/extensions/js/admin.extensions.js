@@ -1,5 +1,5 @@
 
-/* --- Extensions ---------------------------------------- */
+/* --- Extensions --- */
 let Extensions = (function () {
     function $U(task) {
         return JsUrl('admin/extensions/' + task);
@@ -70,6 +70,7 @@ let Extensions = (function () {
         },
         confirm_delete: {
             modalOptions: {
+                //size: 'medium',
                 onLoad: function () {
                     target = this;
                     JsForm({ btn: this }).request($U('delete'), callback);

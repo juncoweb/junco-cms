@@ -10,10 +10,10 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="UTF-8">
     <meta name="robots" content="noindex, nofollow" />
     <meta name="author" content="<?php echo $this->site->author ?>" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $this->site->name ?></title>
     <style>
         body {

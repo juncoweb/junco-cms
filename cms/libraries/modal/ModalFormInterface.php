@@ -22,11 +22,12 @@ interface ModalFormInterface
     /**
      * Question
      * 
-     * @param int|array $total
+     * @param int|array       $total
+     * @param callable|string $callback
      * 
      * @return self
      */
-    public function question(int|array $total = 1, ?callable $callback = null): self;
+    public function question(int|array $total = 1, callable|string $callback = ''): self;
 
     /**
      * Merge

@@ -11,10 +11,7 @@ $bbx = Backlist::getBox();
 // actions
 $bac = $bbx->getActions();
 $bac->create(1);
-//$bac->edit();
-//$bac->button('copy', _t('Copy'), 'fa-solid fa-copy');
 $bac->toggle();
-//$bac->delete();
 $bac->dropdown([
     ['control' => 'edit', 'label' => _t('Edit'), 'icon' => 'fa-solid fa-pencil'],
     ['control' => 'copy', 'label' => _t('Copy'), 'icon' => 'fa-solid fa-copy'],

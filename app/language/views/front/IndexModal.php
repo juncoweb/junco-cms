@@ -8,7 +8,7 @@
 // modal
 $modal = Modal::get();
 $modal->close();
-$modal->title(_t('Language'));
+$modal->title(_t('Language'), 'fa-solid fa-flag');
 $modal->content($this->content());
 
 return $modal->response();

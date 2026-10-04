@@ -22,11 +22,11 @@ $filters->select('type', $types);
 if ($rows) {
     foreach ($rows as &$row) {
         if ($row['activity_context']) {
-            $row['user_name'] .= '<div class="color-subtle-default">' . $row['activity_context'] . '</div>';
+            $row['user_name'] .= '<div class="color-subtle">' . $row['activity_context'] . '</div>';
         }
 
         if ($row['token_selector']) {
-            $row['user_name'] .= '<div class="color-subtle-default">' . $row['token_selector'] . ' / ' . $row['status'] . '</div>';
+            $row['user_name'] .= '<div class="color-subtle">' . $row['token_selector'] . ' / ' . $row['status'] . '</div>';
         }
     }
 

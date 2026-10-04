@@ -6,6 +6,7 @@
  */
 
 use Junco\Mvc\Model;
+use Junco\Users\Enum\UserStatus;
 use Junco\Users\UserHelper;
 
 class UsersModel extends Model
@@ -101,10 +102,9 @@ class UsersModel extends Model
         if ($data['status']) {
             $this->db->exec("UPDATE `#__users` SET status = ? WHERE id IN (?..)", $data['status'], $data['id']);
         } else {
-            $this->db->exec("
-            UPDATE `#__users`
-            SET status = IF(status = 'active', 'inactive', 'active')
-            WHERE id IN (?..)", $data['id']);
+            $sql = UserStatus::toggle();
+
+            $this->db->exec("UPDATE `#__users` SET status = $sql WHERE id IN (?..)", $data['id']);
         }
     }
 

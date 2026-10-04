@@ -15,9 +15,9 @@ $form->checkbox('is_compatible')->setLabel(_t('Is compatible'));
 
 // modal
 $modal = Modal::get();
+$modal->type($type);
 $modal->enter();
 $modal->close();
-$modal->title([_t('Changes'), $title]);
 $modal->content($form->render());
 
 return $modal->response();

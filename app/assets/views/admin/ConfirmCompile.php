@@ -25,7 +25,7 @@ $html .= $form->render();
 
 // modal
 $modal = Modal::get();
-$modal->title($t = _t('Compile'));
+$modal->title($t = _t('Compile'), 'fa-solid fa-gears');
 $modal->enter($t);
 $modal->close();
 $modal->content($html);

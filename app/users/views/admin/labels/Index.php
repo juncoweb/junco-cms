@@ -11,8 +11,10 @@ $bbx = Backlist::getBox();
 // actions
 $bac = $bbx->getActions();
 $bac->create(1);
-$bac->edit();
-$bac->delete();
+$bac->dropdown([
+    ['control' => 'edit', 'label' => _t('Edit'), 'icon' => 'fa-solid fa-pencil'],
+    ['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash'],
+]);
 $bac->filters();
 $bac->refresh();
 

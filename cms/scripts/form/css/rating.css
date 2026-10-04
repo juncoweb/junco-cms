@@ -15,25 +15,25 @@
   font-size: var(--font-size-sm);
 }
 .rating.rating-default i {
-  color: var(--solid-surface-color);
+  color: var(--theme-default-color);
 }
 .rating.rating-primary i {
-  color: var(--solid-primary-surface-color);
+  color: var(--theme-primary-color);
 }
 .rating.rating-secondary i {
-  color: var(--solid-secondary-surface-color);
+  color: var(--theme-secondary-color);
 }
 .rating.rating-success i {
-  color: var(--solid-success-surface-color);
+  color: var(--theme-success-color);
 }
 .rating.rating-info i {
-  color: var(--solid-info-surface-color);
+  color: var(--theme-info-color);
 }
 .rating.rating-warning i {
-  color: var(--solid-warning-surface-color);
+  color: var(--theme-warning-color);
 }
 .rating.rating-danger i {
-  color: var(--solid-danger-surface-color);
+  color: var(--theme-danger-color);
 }
 
 .rating-detail {
@@ -72,6 +72,6 @@
   overflow: hidden;
 }
 .rating-detail .measuring-bar div {
-  background: #ffc134;
+  background: #f3b600;
   height: var(--bar-height);
 }

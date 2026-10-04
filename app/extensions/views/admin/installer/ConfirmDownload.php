@@ -24,7 +24,7 @@ $form->checkbox('decompress')->setLabel(_t('Unzip package'));
 $modal = Modal::get();
 $modal->enter();
 $modal->close();
-$modal->title(_t('Download'));
+$modal->title(_t('Download'), 'fa-solid fa-download');
 $modal->content($form->render());
 
 return $modal->response();

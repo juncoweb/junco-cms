@@ -15,7 +15,8 @@ return function (WidgetInterface $widget) {
             'edge' => [
                 'form.button',
                 'form.button-group',
-                'form.press-btn'
+                'form.press-btn',
+                'form.button-inline'
             ]
         ],
         [

@@ -9,23 +9,23 @@ use Junco\Mvc\Model;
 
 class AdminJobsModel extends Model
 {
-    // vars
-    protected Database $db;
+	// vars
+	protected Database $db;
 
-    /**
+	/**
      * Constructor
      */
-    public function __construct()
-    {
-        $this->db = db();
-    }
+	public function __construct()
+	{
+		$this->db = db();
+	}
 
-    /**
+	/**
      * Get
      */
-    public function getListData()
-    {
-        $data = $this->filter(POST, ['search' => 'text']);
+	public function getListData()
+	{
+		$data = $this->filter(POST, ['search' => 'text']);
 
         // query
         if ($data['search']) {
@@ -58,14 +58,14 @@ class AdminJobsModel extends Model
             'rows' => $rows,
             'pagi' => $pagi
         ];
-    }
+	}
 
-    /**
+	/**
      * Get
      */
-    public function getShowData()
-    {
-        $input = $this->filter(POST, ['id' => 'id|array:first|required:abort']);
+	public function getShowData()
+	{
+		$input = $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // query
         $data = $this->db->query("
@@ -81,5 +81,13 @@ class AdminJobsModel extends Model
 		WHERE id = ?", $input['id'])->fetch() or abort();
 
         return $data;
-    }
+	}
+
+	/**
+     * Get confirm reset data
+     */
+	public function getConfirmResetData()
+	{
+		return $this->filter(POST, ['id' => 'id|array|required:abort']);
+	}
 }

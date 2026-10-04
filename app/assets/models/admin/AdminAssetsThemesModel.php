@@ -57,7 +57,6 @@ class AdminAssetsThemesModel extends Model
     public function getCreateData()
     {
         return [
-            'title' => _t('Create'),
             'values' => null,
             'extensions' => $this->getExtensions(),
         ];

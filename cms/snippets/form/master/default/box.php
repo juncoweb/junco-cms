@@ -53,7 +53,7 @@ class form_master_default_box implements FormBoxInterface
     /**
      * Render
      * 
-     * @param string $css
+     * @return string
      */
     public function render(): string
     {

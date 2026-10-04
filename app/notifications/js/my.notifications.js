@@ -17,10 +17,8 @@ let MyNotifications = (function () {
 
     let _backlist, target;
     const _controls = {
-        status: {
-            onSuccess: callback,
-        },
-    };
+
+	};
 
     return {
         List: function () {

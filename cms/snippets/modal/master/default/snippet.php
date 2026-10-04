@@ -17,6 +17,7 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
     protected array  $buttons = [];
     protected array  $hidden  = [];
     protected string $content = '';
+    protected string $enter   = '';
     //
     protected ?ModalFormInterface $form = null;
 
@@ -24,12 +25,51 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
      * Type
      * 
      * @param string $type
+     * @param array  $attr
      * 
      * @return void
      */
-    public function type(string $type): void
+    public function type(string $type, array $attr = []): void
     {
-        $this->json['type'] = $type;
+        switch ($type) {
+            case 'delete':
+                $title = $this->enter = _t('Delete');
+                $icon = 'fa-solid fa-trash';
+
+                $this->json['type'] = 'alert';
+                break;
+
+            case 'trash':
+                $title = $this->enter = _t('Trash');
+                $icon = 'fa-solid fa-trash';
+
+                $this->json['type'] = 'alert';
+                break;
+
+            case 'create':
+                $title = _t('Create');
+                $icon = 'fa-solid fa-plus';
+                break;
+
+            case 'edit':
+                $title = _t('Edit');
+                $icon = 'fa-solid fa-pencil';
+                break;
+
+            case 'status':
+                $icon  = 'fa-solid fa-circle';
+                $title = $attr['title'];
+
+                $this->json['color'] = $attr['color'];
+                $this->enter = _t('Change');
+                break;
+
+            case 'alert':
+                $this->json['type'] = 'alert';
+                return;
+        }
+        $this->json['title'] = $title;
+        $this->json['icon'] = $icon;
     }
 
     /**
@@ -74,7 +114,7 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
     public function enter(string $title = '', string $caption = ''): void
     {
         if (!$title) {
-            $title = _t('Enter');
+            $title = $this->enter ?: _t('Enter');
         }
 
         $this->buttons[] = [
@@ -134,10 +174,11 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
      *
      * @param string|array $title
      * @param string       $icon
+     * @param string       $color
      * 
      * @return void
      */
-    public function title($title, string $icon = ''): void
+    public function title($title, string $icon = '', string $color = ''): void
     {
         $this->json['title'] = is_array($title)
             ? implode(' &gt; ', $title)
@@ -145,6 +186,9 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
 
         if ($icon) {
             $this->json['icon'] = $icon;
+        }
+        if ($color) {
+            $this->json['color'] = $color;
         }
     }
 

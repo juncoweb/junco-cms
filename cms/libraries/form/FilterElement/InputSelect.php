@@ -33,13 +33,16 @@ class InputSelect extends FilterElement
             $default = array_key_first($options);
         }
 
-        $html = '<div class="btn-group" control-felem="select">'
-            .  '<input type="text" name="' . $input_name . '" value="' . $input_value . '" aria-label="' . _t('Search') . '" class="btn">'
+        $id = $select_name . '-menu';
+        $html = '<div class="btn-group" control-felem="select" role="group" aria-label="' . _t('Search by field') . '">'
+            .  '<input type="text" name="' . $input_name . '" value="' . $input_value . '" aria-label="' . _t('Text') . '" class="btn">'
             .  '<button type="submit" class="btn" data-select-label>' . $options[$default] . '</button>'
-            .  '<button type="button" class="btn btn-caret"></button>'
+            .  '<button type="button" aria-label="' . ($t = _t('Expand menu')) . '" aria-expanded="false" aria-haspopup="listbox" aria-controls="' . $id . '" class="btn btn-caret">'
+            //.     '<span class="visually-hidden">' . $t . '</span>'
+            .  '</button>'
             .  '<div class="dropdown-menu" style="display: none;">'
             .    '<input type="hidden" name="' . $select_name . '" value="' . $default . '">'
-            .    $this->renderMenu($options, $default)
+            .    $this->renderMenu($options, $default, $id)
             .  '</div>'
             . '</div>';
 
@@ -53,7 +56,7 @@ class InputSelect extends FilterElement
      * 
      * @return string
      */
-    protected function renderMenu(array $options, string $default)
+    protected function renderMenu(array $options, string $default, string $id): string
     {
         $html = '';
         foreach ($options as $value => $label) {
@@ -62,6 +65,6 @@ class InputSelect extends FilterElement
                 . '</li>';
         }
 
-        return '<ul>' .  $html . '</ul>';
+        return '<ul id="' . $id . '">' .  $html . '</ul>';
     }
 }

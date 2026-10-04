@@ -1,4 +1,4 @@
-/* --- portal -------------------------------------- */
+/* --- portal --- */
 .portal-section {
   overflow: hidden;
 }
@@ -42,9 +42,9 @@ h6.portal-title {
 
 .portal-section {
   color: var(--regular-font-color);
-}
-.portal-section a {
-  color: var(--regular-font-color);
+  /* a {
+      color: var(--regular-font-color);
+  } */
 }
 .portal-section h1,
 .portal-section h2,
@@ -58,7 +58,7 @@ h6.portal-title {
   color: var(--regular-subtle-font-color);
 }
 .portal-section .portal-contrast {
-  color: var(--solid-primary-surface-color);
+  color: var(--theme-primary-color);
 }
 .portal-section .portal-bg-contrast {
   color: var(--solid-primary-font-color);
@@ -72,9 +72,9 @@ h6.portal-title {
 .portal-section.portal-solid {
   color: var(--solid-default-font-color);
   background-color: var(--solid-default-bg-color);
-}
-.portal-section.portal-solid a {
-  color: var(--solid-default-font-color);
+  /* a {
+      color: var(--solid-default-font-color);
+  } */
 }
 .portal-section.portal-solid h1,
 .portal-section.portal-solid h2,
@@ -88,7 +88,7 @@ h6.portal-title {
   color: var(--solid-default-subtle-font-color);
 }
 .portal-section.portal-solid .portal-contrast {
-  color: var(--solid-primary-surface-color);
+  color: var(--theme-primary-color);
 }
 .portal-section.portal-solid .portal-bg-contrast {
   color: var(--solid-primary-font-color);
@@ -97,9 +97,9 @@ h6.portal-title {
 
 .portal-section.portal-primary {
   color: var(--regular-primary-font-color);
-}
-.portal-section.portal-primary a {
-  color: var(--regular-primary-font-color);
+  /* a {
+      color: var(--regular-primary-font-color);
+  } */
 }
 .portal-section.portal-primary h1,
 .portal-section.portal-primary h2,
@@ -113,7 +113,7 @@ h6.portal-title {
   color: var(--regular-primary-subtle-font-color);
 }
 .portal-section.portal-primary .portal-contrast {
-  color: var(--solid-secondary-surface-color);
+  color: var(--theme-secondary-color);
 }
 .portal-section.portal-primary .portal-bg-contrast {
   color: var(--solid-secondary-font-color);
@@ -127,9 +127,9 @@ h6.portal-title {
 .portal-section.portal-solid.portal-primary {
   color: var(--solid-primary-font-color);
   background-color: var(--solid-primary-bg-color);
-}
-.portal-section.portal-solid.portal-primary a {
-  color: var(--solid-primary-font-color);
+  /* a {
+      color: var(--solid-primary-font-color);
+  } */
 }
 .portal-section.portal-solid.portal-primary h1,
 .portal-section.portal-solid.portal-primary h2,
@@ -143,7 +143,7 @@ h6.portal-title {
   color: var(--solid-primary-subtle-font-color);
 }
 .portal-section.portal-solid.portal-primary .portal-contrast {
-  color: var(--solid-secondary-surface-color);
+  color: var(--theme-secondary-color);
 }
 .portal-section.portal-solid.portal-primary .portal-bg-contrast {
   color: var(--solid-secondary-font-color);
@@ -152,9 +152,9 @@ h6.portal-title {
 
 .portal-section.portal-secondary {
   color: var(--regular-secondary-font-color);
-}
-.portal-section.portal-secondary a {
-  color: var(--regular-secondary-font-color);
+  /* a {
+      color: var(--regular-secondary-font-color);
+  } */
 }
 .portal-section.portal-secondary h1,
 .portal-section.portal-secondary h2,
@@ -168,7 +168,7 @@ h6.portal-title {
   color: var(--regular-secondary-subtle-font-color);
 }
 .portal-section.portal-secondary .portal-contrast {
-  color: var(--solid-default-surface-color);
+  color: var(--theme-default-color);
 }
 .portal-section.portal-secondary .portal-bg-contrast {
   color: var(--solid-default-font-color);
@@ -182,9 +182,9 @@ h6.portal-title {
 .portal-section.portal-solid.portal-secondary {
   color: var(--solid-secondary-font-color);
   background-color: var(--solid-secondary-bg-color);
-}
-.portal-section.portal-solid.portal-secondary a {
-  color: var(--solid-secondary-font-color);
+  /* a {
+      color: var(--solid-secondary-font-color);
+  } */
 }
 .portal-section.portal-solid.portal-secondary h1,
 .portal-section.portal-solid.portal-secondary h2,
@@ -198,7 +198,7 @@ h6.portal-title {
   color: var(--solid-secondary-subtle-font-color);
 }
 .portal-section.portal-solid.portal-secondary .portal-contrast {
-  color: var(--solid-default-surface-color);
+  color: var(--theme-default-color);
 }
 .portal-section.portal-solid.portal-secondary .portal-bg-contrast {
   color: var(--solid-default-font-color);

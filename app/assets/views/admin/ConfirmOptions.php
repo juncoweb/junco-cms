@@ -21,7 +21,7 @@ $html .= '<div class="dialog dialog-warning">' . _t('Edit the Javascript setting
 
 // modal
 $modal = Modal::get();
-$modal->title(_t('Options'));
+$modal->title(_t('Options'), 'fa-solid fa-gear');
 $modal->content($html);
 
 return $modal->response();

@@ -27,7 +27,7 @@ return [
 	/**
 	 * Mainbar
 	 */
-	'header_color' => 'info',
+	'header_color' => 'primary',
 	'mainbar' => [
 		0 => 'backend.search',
 		1 => 'backend.topbar'

@@ -1,4 +1,4 @@
-/* -------- table ------------------------------------------------- */
+/* -------- table --- */
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -74,8 +74,7 @@
         text-decoration: none !important;
 
         &:hover {
-            color: var(--regular-disabled-font-color) !important;
-            border-bottom: 1px dotted var(--regular-disabled-font-color) !important;
+            border-bottom: 1px dotted var(--regular-font-color) !important;
         }
     }
 

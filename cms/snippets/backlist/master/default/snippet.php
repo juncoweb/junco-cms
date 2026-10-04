@@ -13,6 +13,7 @@ use Junco\Backlist\Column\Link;
 use Junco\Backlist\Column\Search;
 use Junco\Backlist\Contract\BacklistInterface;
 use Junco\Backlist\Contract\FiltersInterface;
+use Junco\Backlist\Enum\DefaultStatus;
 
 class backlist_master_default_snippet implements BacklistInterface
 {
@@ -164,10 +165,7 @@ class backlist_master_default_snippet implements BacklistInterface
             $value = $row[$name];
 
             if (!is_array($value)) {
-                $options ??= [
-                    ['title' => _t('Private'), 'color' => 'red'],
-                    ['title' => _t('Public'), 'color' => 'green'],
-                ];
+                $options ??= DefaultStatus::fetchAll();
 
                 if (!isset($options[$value])) {
                     if ($value == 'yes') {
@@ -309,7 +307,7 @@ class backlist_master_default_snippet implements BacklistInterface
     public function up(string $control = '', string $name = ''): void
     {
         $this->columns[] = (new Button($control ?: 'up'))
-            ->setIcon('fa-solid fa-chevron-up', _('Up'))
+            ->setIcon('fa-solid fa-chevron-up', _t('Up'))
             ->setAttr(['data-value' => 'up'])
             ->keep($name ?: 'up');
     }
@@ -325,7 +323,7 @@ class backlist_master_default_snippet implements BacklistInterface
     public function down(string $control = '', string $name = ''): void
     {
         $this->columns[] = (new Button($control ?: 'down'))
-            ->setIcon('fa-solid fa-chevron-down', _('Down'))
+            ->setIcon('fa-solid fa-chevron-down', _t('Down'))
             ->setAttr(['data-value' => 'down'])
             ->keep($name ?: 'down');
     }

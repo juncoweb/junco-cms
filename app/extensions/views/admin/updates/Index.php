@@ -11,12 +11,6 @@ $bbx = Backlist::getBox();
 // actions
 $bac = $bbx->getActions();
 //$bac->create();
-//$bac->edit();
-//$bac->toggle();
-/* $bac->toggle([
-	['control' => 'status', 'value' => 1, 'label' => _t('Enabled')],
-	['control' => 'status', 'value' => 0, 'label' => _t('Disabled')],
-]); */
 //$bac->delete();
 //$bac->button('button', _t('Button'), 'fa-solid fa-tag');
 /* $bac->dropdown([

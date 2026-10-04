@@ -1,5 +1,5 @@
 
-/* --- Tools -------------------------------------------------- */
+/* --- Tools --- */
 let AdminTools = (function () {
     function $U(task) {
         return JsUrl('admin/samples/' + task);

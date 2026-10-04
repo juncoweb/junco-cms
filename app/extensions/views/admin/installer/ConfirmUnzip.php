@@ -9,7 +9,7 @@
 $modal = Modal::get();
 $modal->enter();
 $modal->close();
-$modal->title([_t('Unzip'), $id]);
+$modal->title([_t('Unzip'), $id], 'fa-solid fa-file-archive');
 $modal->content(_t('Are you sure you want to unzip the file selected?'));
 //
 $modal->getForm()

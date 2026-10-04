@@ -5,17 +5,15 @@
  * @author: Junco CMS (tm)
  */
 
-$html = sprintf(_t('Please, confirm change the status to «%s».'), $status_title);
-
 // modal
 $modal = Modal::get();
-$modal->title(_t('Status'));
+$modal->type('status', $status);
 $modal->enter();
 $modal->close();
-$modal->content($html);
 //
 $modal->getForm()
+    ->question($id, 'status')
     ->hidden('id', $id)
-    ->hidden('status', $status);
+    ->hidden('status', $status['name']);
 
 return $modal->response();

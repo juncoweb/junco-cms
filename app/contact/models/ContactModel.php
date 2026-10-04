@@ -5,6 +5,7 @@
  * @author: Junco CMS (tm)
  */
 
+use Junco\Backlist\Enum\DefaultStatus;
 use Junco\Mvc\Model;
 use Junco\Contact\Notification\ContactNotification;
 use Junco\Users\Notification\UserNotifiable;
@@ -20,17 +21,6 @@ class ContactModel extends Model
     public function __construct()
     {
         $this->db = db();
-    }
-
-    /**
-     * Status
-     */
-    public function status()
-    {
-        $data = $this->filter(POST, ['id' => 'id|array|required:abort']);
-
-        // query
-        $this->db->exec("UPDATE `#__contact` SET status = IF(status > 0, 0, 1) WHERE id IN (?..)", $data['id']);
     }
 
     /**
@@ -69,6 +59,25 @@ class ContactModel extends Model
 
         // notify
         UserNotifiable::notifyByLabel(L_SYSTEM_ADMIN, new ContactNotification($data));
+    }
+
+    /**
+     * Status
+     */
+    public function status()
+    {
+        $data = $this->filter(POST, [
+            'id'     => 'id|array|required:abort',
+            'status' => 'enum:backlist.default_status'
+        ]);
+
+        // query
+        if ($data['status']) {
+            $this->db->exec("UPDATE `#__contact` SET status = ? WHERE id IN (?..)", $data['status'], $data['id']);
+        } else {
+            $sql = DefaultStatus::toggle();
+            $this->db->exec("UPDATE `#__contact` SET status = $sql WHERE id IN (?..)", $data['id']);
+        }
     }
 
     /**

@@ -1,5 +1,5 @@
 
-/* --- Variables ------------------------------------------- */
+/* --- Variables --- */
 var AssetsVariables = (function () {
     function $U(task) {
         return JsUrl('admin/assets.variables/' + task);

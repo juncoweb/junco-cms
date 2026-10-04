@@ -20,12 +20,12 @@ interface TabsInterface
     /**
      * Tab
      * 
-     * @param string $tab
-     * @param string $tabpanel
+     * @param string $label
+     * @param string $panel
      * 
-     * @return void
+     * @return Tab
      */
-    public function tab(string $tab, string $tabpanel = ''): void;
+    public function tab(string $label, string $panel = ''): Tab;
 
     /**
      * Render

@@ -1,5 +1,5 @@
 
-/* --- Translations -------------------------------------------- */
+/* --- Translations --- */
 (function () {
     function $U(task) {
         return JsUrl('admin/language.translations/' + task);

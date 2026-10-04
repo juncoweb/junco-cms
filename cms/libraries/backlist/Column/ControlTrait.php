@@ -16,7 +16,6 @@ trait ControlTrait
      */
     protected function setControl(string $control = ''): static
     {
-        $this->attr['href']         = 'javascript:void(0)';
         $this->attr['control-list'] = $this->normalize($control);
 
         return $this;

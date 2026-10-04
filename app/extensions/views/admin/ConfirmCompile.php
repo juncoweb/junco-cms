@@ -59,7 +59,7 @@ if ($status) {
                     $html_1 .= '<div><b>' . $row['name'] . '</b></div>';
 
                     foreach ($row['set'] as $key => $value) {
-                        $html_1 .= '<div class="color-subtle-default"><b>' . $key . ':</b> ' . str_replace(',', ', ', $value) . '</div>';
+                        $html_1 .= '<div class="color-subtle"><b>' . $key . ':</b> ' . str_replace(',', ', ', $value) . '</div>';
                     }
                 }
 
@@ -87,7 +87,7 @@ if ($enter) {
     $modal->enter();
 }
 $modal->close();
-$modal->title([_t('Extensions'), _t('Compile')]);
+$modal->title(_t('Compile'), 'fa-solid fa-file-zipper');
 $modal->content($html);
 
 return $modal->response();

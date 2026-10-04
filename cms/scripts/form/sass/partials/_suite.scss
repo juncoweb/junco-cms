@@ -7,7 +7,7 @@
     }
 
     .btn-tabpanel-group {
-        padding: var(--separator);
+        padding: var(--separator) var(--separator) 0;
         border-width: var(--border-width);
         border-style: var(--border-style);
         border-color: var(--regular-border-color);

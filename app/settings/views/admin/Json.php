@@ -7,7 +7,6 @@
 
 // form
 $form = Form::get('', false);
-//
 
 // actions
 $fac = $form->getActions();
@@ -27,7 +26,7 @@ if ($options) {
         $form->header(
             $form->group(
                 $form->input('__id')->setLabel("{$count}."),
-                $form->button(['title' => _t('Delete'), 'control-form' => 'remove', 'icon' => 'fa-solid fa-xmark'])
+                $form->button(['title' => _t('Remove'), 'control-form' => 'remove', 'icon' => 'fa-solid fa-xmark'])
             ),
             !$is_edit
         );
@@ -43,7 +42,7 @@ if ($options) {
             $form->setValues($row['values']);
             $form->group(
                 $form->input($index)->setLabel($row['name']),
-                $form->button(['title' => _t('Delete'), 'control-form' => 'remove', 'icon' => 'fa-solid fa-xmark'])
+                $form->button(['title' => _t('Remove'), 'control-form' => 'remove', 'icon' => 'fa-solid fa-xmark'])
             );
         }
     } else {
@@ -57,8 +56,8 @@ $html = '<form id="js-form">' . $form->render() . '</form>';
 
 // modal
 $modal = Modal::get();
+$modal->type($is_edit ? 'edit' : 'create');
 $modal->close();
-$modal->title([_t('JSON'), $title]);
 $modal->content($html);
 
 return $modal->response();

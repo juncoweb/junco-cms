@@ -57,7 +57,10 @@ class Collection extends FormElement
             .   '/>';
 
         if (!$is_multiple) {
-            $html .= '<button type="button" aria-label="' . _t('Clean the input') . '" class="btn"><i class="fa-solid fa-xmark"></i></button>';
+            $html .= '<button type="button" class="btn">'
+                . '<i class="fa-solid fa-xmark" aria-hidden="true"></i>'
+                . '<span class="visually-hidden">' . _t('Clean the input') . '</span>'
+                . '</button>';
         }
 
         $html .= '</div>';

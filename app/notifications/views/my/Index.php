@@ -10,7 +10,6 @@ $bbx = Backlist::getBox();
 
 // actions
 $bac = $bbx->getActions();
-//$bac->toggle();
 $bac->filters();
 $bac->refresh();
 

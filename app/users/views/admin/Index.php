@@ -11,11 +11,7 @@ $bbx = Backlist::getBox();
 // actions
 $bac = $bbx->getActions();
 $bac->create();
-$bac->toggle(array_map(fn($case) => [
-    'control' => 'status',
-    'value' => $case->name,
-    'label' => $case->title()
-], $statuses));
+$bac->toggle($statuses);
 $bac->dropdown([
     ['control' => 'edit', 'label' => _t('Edit'), 'icon' => 'fa-solid fa-pencil'],
     ['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash'],

@@ -24,7 +24,7 @@ $samples
 $samples
     ->colors('<div class="toast toast-{{ color }}">'
         .   '<div class="toast-body">{{ caption }}</div>'
-        .   '<div class="toast-close"><i class="fa-solid fa-xmark"></i></div>'
+        .   '<div title="Close" class="toast-close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></div>'
         . '</div>')
     ->setLabel('Colors');
 

@@ -14,10 +14,6 @@
 function JsTabs(tablist, options) {
     options = Object.assign({}, options);
 
-    if (typeof options.onSelect !== 'function') {
-        options.onSelect = null;
-    }
-
     // tablist
     if (typeof tablist === 'string') {
         tablist = document.querySelector(tablist);
@@ -25,6 +21,10 @@ function JsTabs(tablist, options) {
 
     if (!(tablist instanceof Element)) {
         return null;
+    }
+
+    if (typeof options.onSelect !== 'function') {
+        options.onSelect = null;
     }
 
     // tabpanel
@@ -93,10 +93,7 @@ function JsTabs(tablist, options) {
                     tabs[i].setAttribute('tabindex', status ? 0 : -1);
                     tabs[i].classList.toggle('selected', status);
                     panels[i].classList.toggle('selected', status);
-
-                    if (options.onSelect) {
-                        options.onSelect.call(that, i, status);
-                    }
+                    options.onSelect?.call(that, i, status);
                 }
                 if (handle) {
                     clearTimeout(handle);

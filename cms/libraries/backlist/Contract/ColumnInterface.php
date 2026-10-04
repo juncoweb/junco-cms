@@ -29,7 +29,7 @@ interface ColumnInterface
     /**
      * Label
      */
-    public function setLabelIcon(string $icon, string $title = '', ?FiltersInterface $filters = null): static;
+    public function setLabelIcon(string $icon, string $title, ?FiltersInterface $filters = null): static;
 
     /**
      * Width

@@ -7,7 +7,7 @@
 
 // modal
 $modal = Modal::get();
-$modal->title(($extension_name ?: $extension_alias) . ' (' . $update_version . ')');
+$modal->title(($extension_name ?: $extension_alias) . ' (' . $update_version . ')', 'fa-solid fa-triangle-exclamation');
 $modal->close();
 $modal->content($failure_msg);
 

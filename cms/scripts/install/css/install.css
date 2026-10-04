@@ -1,4 +1,4 @@
-/* --- Global ------------------------- */
+/* --- Global --- */
 :root {
     --layout-padding: 15px;
     --layout-primary-color: #009eff;
@@ -16,7 +16,7 @@ body {
     overflow-y: scroll;
 }
 
-/* --- Layout ------------------------- */
+/* --- Layout --- */
 .minMax {
     min-width: 400px;
     max-width: 900px;
@@ -51,7 +51,7 @@ body {
     margin: -40px var(--layout-padding) 0;
 }
 
-/* --- Content ------------------------- */
+/* --- Content --- */
 .header span {
     font-weight: bold;
 }

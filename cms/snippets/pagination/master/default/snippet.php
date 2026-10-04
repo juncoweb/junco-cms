@@ -20,25 +20,21 @@ class pagination_master_default_snippet
             return '';
         }
 
-        $pagi->nav_active = 'btn-primary btn-solid';
-        $data = $pagi->build(
-            [
-                '<a href="' . $pagi->nav_href . '" control-page="{{page}}" class="btn">{{placeholder}}</a>',
-                '<span class="btn {{style}}">{{placeholder}}</span>'
-            ],
-            [
-                'prev'    => '&laquo;',
-                'next'    => '&raquo;',
-                'first'    => '&laquo;&laquo;',
-                'last'    => '&raquo;&raquo;'
-            ],
-            2
-        );
+        $data = $pagi->build([
+            '<a href="' . $pagi->nav_href . '" title="{{ title }}" control-page="{{ page }}" class="btn">{{ placeholder }}</a>',
+            '<span title="{{ title }}" class="btn disabled">{{ placeholder }}</span>',
+            '<span title="{{ title }}" class="btn btn-primary btn-solid" aria-current="page">{{ placeholder }}</span>'
+        ], [
+            'prev'  => '&laquo;',
+            'next'  => '&raquo;',
+            'first' => '&laquo;&laquo;',
+            'last'  => '&raquo;&raquo;'
+        ], 1);
 
-        return '<div class="gl-pagination">'
+        return '<nav class="gl-pagination" aria-label="' . _t('Pagination') . '">'
             .  '<div class="btn-group">' . $data['first'] . $data['prev'] . '</div>'
             .  '<div class="btn-group">' . $data['numeration'] . '</div>'
             .  '<div class="btn-group">' . $data['next'] . $data['last'] . '</div>'
-            . '</div>';
+            . '</nav>';
     }
 }

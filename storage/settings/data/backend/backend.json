@@ -52,7 +52,7 @@
             "type": "select-text",
             "group": 1,
             "ordering": 1,
-            "default_value": "info",
+            "default_value": "primary",
             "help": "",
             "history": [
                 "mainbar_color"

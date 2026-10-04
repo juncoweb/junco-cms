@@ -15,7 +15,7 @@ $form->checkbox('delete')->setLabel(_t('Delete original'));
 $modal = Modal::get();
 $modal->enter();
 $modal->close();
-$modal->title(_t('Upload package'));
+$modal->title(_t('Upload package'), 'fa-solid fa-upload');
 $modal->content($form->render());
 
 return $modal->response();

@@ -1,7 +1,7 @@
-/* --- reboot ------------------------------------------- */
+/* --- reboot --- */
 * {
     box-sizing: border-box;
-    scrollbar-color: var(--regular-active-bg-color) var(--regular-bg-color);
+    scrollbar-color: var(--regular-border-color) var(--regular-bg-color);
 }
 
 ::-webkit-scrollbar {
@@ -9,7 +9,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--regular-active-bg-color);
+    background-color: var(--regular-border-color);
 }
 
 [data-theme="dark"] {

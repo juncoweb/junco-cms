@@ -1,5 +1,5 @@
 
-/* --- Usys ------------------------------------------------------ */
+/* --- Usys --- */
 var UsysPassword = (function () {
     function form(route) {
         var $form = JsForm().request({

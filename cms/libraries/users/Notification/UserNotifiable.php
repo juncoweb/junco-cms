@@ -13,7 +13,6 @@ use Junco\Users\Enum\UserStatus;
 
 class UserNotifiable extends Notifiable
 {
-    // vars
     protected int   $user_id;
     protected array $data;
 
@@ -88,7 +87,7 @@ class UserNotifiable extends Notifiable
 		SELECT
 		 u.id ,
 		 u.user_name ,
-		 u.user_email AS email
+		 u.user_email
 		FROM `#__users_roles_labels_map` m1
 		LEFT JOIN `#__users_roles_map` m2 ON ( m1.role_id = m2.role_id )
 		LEFT JOIN `#__users` u ON ( m2.user_id = u.id )

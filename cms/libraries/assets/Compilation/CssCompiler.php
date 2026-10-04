@@ -176,7 +176,7 @@ class CssCompiler
     /**
      * Compile
      *
-     * @return bool
+     * @return void
      */
     protected function compileThemes(
         string $target,

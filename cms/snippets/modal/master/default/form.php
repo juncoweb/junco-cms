@@ -54,20 +54,26 @@ class modal_master_default_form implements ModalFormInterface
     /**
      * Question
      * 
-     * @param int|array $total
+     * @param int|array       $total
+     * @param callable|string $callback
      * 
      * @return self
      */
-    public function question(int|array $total = 1, ?callable $callback = null): self
+    public function question(int|array $total = 1, callable|string $callback = ''): self
     {
         $total = is_array($total)
             ? count($total)
             : (int)$total;
 
-        $question = $callback
-            ? call_user_func($callback, $total)
-            : _nt('Are you sure you want to delete the selected item?', 'Are you sure you want to delete the %d selected items?', $total);
-
+        if (is_string($callback)) {
+            $question = match ($callback) {
+                'status' => _nt('Are you sure to change the status of the selected item?', 'Are you sure to change the status of the %d selected item?', $total),
+                'trash' => _nt('Are you sure you want to trash the selected item?', 'Are you sure you want to trash the %d selected items?', $total),
+                default => _nt('Are you sure you want to delete the selected item?', 'Are you sure you want to delete the %d selected items?', $total)
+            };
+        } else {
+            $question = call_user_func($callback, $total);
+        }
 
         $this->content = '<p>' . sprintf($question, $total) . '</p>';
 

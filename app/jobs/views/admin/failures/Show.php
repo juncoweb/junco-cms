@@ -20,7 +20,7 @@ $zoom->group(nl2br($job_error))->setLabel(_t('Error'));
 // modal
 $modal = Modal::get();
 $modal->close();
-$modal->title(_t('Failure'));
+$modal->title(_t('Failure'), 'fa-solid fa-eye');
 $modal->content($zoom->render());
 
 return $modal->response();

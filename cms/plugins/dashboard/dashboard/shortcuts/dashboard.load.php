@@ -27,7 +27,7 @@ return function (DashboardInterface $dashboard) {
         $tiles = Tiles::get();
         $tiles->fromMenuKey($menu_key);
         $tiles->setOptions(['size' => 'small']);
-        $tiles->separate('');
+        $tiles->separate(_t('Shortcuts'));
         $html = $tiles->render();
 
         $allow_cache and $cache->set($cache_key, $html);

@@ -28,7 +28,7 @@ class Check extends ColumnBase implements CheckInterface
             : 'id';
 
 
-        $this->th = '<input type="checkbox" control-row="check-all" aria-label="' . _t('Select all') . '" class="input-checkbox"/>';
+        $this->th = '<input type="checkbox" control-row="check-all" title="' . _t('Select all') . '" class="input-checkbox"/>';
         $this->td = '<input'
             .  ' type="checkbox"'
             .  ' name="' . $index . '[]"'

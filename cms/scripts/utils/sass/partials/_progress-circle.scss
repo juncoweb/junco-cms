@@ -1,4 +1,4 @@
-/* --- Progress circle --------------------------------------- */
+/* --- Progress circle --- */
 .progress-circle {
     height: $progress-circle-size;
     width: $progress-circle-size;
@@ -75,13 +75,7 @@
 
     // colors
     @each $name, $color in $theme-colors {
-        $class: -#{$name};
-
-        @if ($name == "default") {
-            $class: "";
-        }
-
-        $value: var(--solid#{$class}-surface-color);
+        $value: var(--theme-#{$name}-color);
 
         &.#{$name}:after {
             background-image: linear-gradient(90deg, $progress-circle-secondary-color 50%, $value 50%);

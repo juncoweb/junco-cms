@@ -10,7 +10,7 @@ input::-webkit-datetime-edit-minute-field {
     padding: 0 1px;
 }
 
-/* -------- input ---------------------- */
+/* -------- input --- */
 .input-field {
     text-align: left;
     font-size: var(--font-size-base);
@@ -22,7 +22,7 @@ input::-webkit-datetime-edit-minute-field {
     border-style: var(--border-style);
     border-radius: var(--rounded-md);
     background-image: none;
-    background-color: var(--regular-surface-color);
+    background-color: var(--theme-surface-color);
     box-shadow: var(--box-shadow-input);
     box-sizing: border-box;
     position: relative;
@@ -45,7 +45,7 @@ input::-webkit-datetime-edit-minute-field {
     // File input buttons theming
     &::file-selector-button {
         color: inherit;
-        background-color: var(--regular-surface-color);
+        background-color: var(--theme-surface-color);
         pointer-events: none;
         border-color: inherit;
         border-style: solid;
@@ -57,7 +57,7 @@ input::-webkit-datetime-edit-minute-field {
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus,
     &:-webkit-autofill:active {
-        -webkit-box-shadow: 0 0 0 30px var(--regular-surface-color) inset !important;
+        -webkit-box-shadow: 0 0 0 30px var(--theme-surface-color) inset !important;
         -webkit-text-fill-color: var(--regular-font-color) !important;
     }
 }
@@ -176,7 +176,7 @@ textarea.input-field {
     }
 }
 
-/* --- input group --------------------- */
+/* --- input group --- */
 .input-group {
     width: 100%;
     margin: 0;
@@ -213,7 +213,7 @@ textarea.input-field {
     }
 }
 
-/* --- icon group ---------------------- */
+/* --- icon group --- */
 .input-icon-group {
     width: 100%;
     position: relative;
@@ -255,7 +255,7 @@ textarea.input-field {
     padding-left: $felem-input-icon-width-md;
 }
 
-/* --- checkbox & radio & toggle ------- */
+/* --- checkbox & radio & toggle --- */
 .input-checkbox,
 .input-radio,
 .input-toggle {
@@ -303,7 +303,7 @@ textarea.input-field {
     }
 }
 
-/* --- input sizes --------------------- */
+/* --- input sizes --- */
 .input-large {
     &.input-field,
     .input-field {
@@ -379,7 +379,7 @@ input:not(:checked) ~ .d-on-checked {
     display: none;
 }
 
-/* --- list group ---------------------- */
+/* --- list group --- */
 .list-group {
     list-style: none;
     margin: 0;

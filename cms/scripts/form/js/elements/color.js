@@ -1,25 +1,31 @@
 
-/* --- Color ------------------------------------------------ */
-function JsColor(el) {
-    if (el.tagName != 'INPUT') {
+/* --- Color --- */
+function JsColor($input) {
+    if ($input.tagName != 'INPUT') {
         return;
     }
-    let btn = JsElement('input', {
+    const $btn = JsElement('input', {
         type: 'color',
-        value: el.value,
+        value: $input.value,
         className: 'input-field input-color',
         events: {
             change: function () {
-                el.value = btn.value;
+                $input.value = $btn.value;
+                $input.dispatchEvent(new Event('input', { bubbles: true }));
+                $input.dispatchEvent(new Event('change', { bubbles: true }));
             }
         }
     });
 
-    el.type = 'text';
-    el.addEventListener('input', function () { btn.value = el.value; });
-    let group = el.parentNode.insertBefore(JsElement('div.input-group'), el);
-    group.appendChild(el)
-    group.appendChild(btn);
+    $input.type = 'text';
+    $input.addEventListener('input', function () {
+        if ($input.value.match(/^\#[0-9a-f]{6}$/i)) {
+            $btn.value = $input.value;
+        }
+    });
+    const $group = $input.parentNode.insertBefore(JsElement('div.input-group'), $input);
+    $group.appendChild($input)
+    $group.appendChild($btn);
 }
 
 JsFelem.implement({

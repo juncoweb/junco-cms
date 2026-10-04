@@ -32,7 +32,7 @@ if ($remember) {
 }
 
 $form->element($element . '<a href="' . url('/usys.password/reset') . '" class="reset-pwd">' . _t('I forgot my password') . '</a>');
-$form->element(sprintf(_t('Don\'t have any account? Sign up %shere%s'), '<a href="' . url('/usys/signup') . '">', '</a>'));
+$form->element(_t('Don\'t have an account?') . ' <a href="' . url('/usys/signup') . '">' . _t('Sign up') . '</a>');
 $form->enter(_t('Log in'));
 
 if ($redirect) {
@@ -55,7 +55,7 @@ if (router()->isFormat('modal')) {
 
     // modal
     $modal = Modal::get();
-    $modal->title(_t('Log in'));
+    $modal->title(_t('Log in'), 'fa-solid fa-right-to-bracket');
     $modal->content($html);
 
     return $modal->response();
@@ -66,7 +66,7 @@ if (router()->isFormat('modal')) {
     $tpl = Template::get();
     $tpl->options($options);
     $tpl->domready('Usys.load()');
-    $tpl->title(_t('Log in'));
+    $tpl->title(_t('Log in'), 'fa-solid fa-right-to-bracket');
     $tpl->content($html);
 
     return $tpl->response();

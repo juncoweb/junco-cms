@@ -40,11 +40,11 @@ $form->separate(_t('Package'));
 
 // modal
 $modal = Modal::get();
+$modal->type($type);
 if (!$is_protected) {
     $modal->enter();
 }
 $modal->close();
-$modal->title([_t('Extensions'), $title]);
 $modal->content($form->render());
 
 return $modal->response();

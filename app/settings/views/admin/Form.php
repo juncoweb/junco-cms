@@ -50,7 +50,7 @@ if ($keys) {
     foreach ($keys as $i => $row) {
         $keys[$i] = $row['selected']
             ? '<span class="btn btn-primary btn-solid">' . $row['label'] . '</span>'
-            : '<a href="' . $row['url'] . '" control-form="load" class="btn btn-outline">' . $row['label'] . '</a>';
+            : '<a href="' . $row['url'] . '" control-form="load" class="btn">' . $row['label'] . '</a>';
     }
 
     $form->addBlock('<div class="text-right"><div class="btn-group btn-small">' . implode($keys) . '</div></div>');
@@ -145,7 +145,7 @@ if ($groups) {
                     break;
 
                 case 'json':
-                    $element = $form->load('settings.json', [
+                    $element = $form->load('settings.json-editor', [
                         'name' => $row['name'],
                         'options' => $row['options']
                     ]);

@@ -1,8 +1,14 @@
 /* --- search --- */
-Backend.attach('search', function (el) {
+Backend.attach('search', function ($input) {
     let status = 0;
     let data = null;
-    const dd = el.parentNode.appendChild(JsElement('div'));
+    const $menu = $input.parentNode.appendChild(JsElement('div', {
+        html: '<div class="dropdown-menu"><ul id="search-result"></ul></div>',
+        hide: function (status) {
+            this.style.display = status ? 'none' : '';
+        }
+    }));
+    const $list = $menu.querySelector('ul');
     const QR = {
         'a': '[aáàâä]',
         'e': '[eéèêë]',
@@ -30,27 +36,26 @@ Backend.attach('search', function (el) {
                 }
             });
         }
-        if (html) {
-            html = '<div class="dropdown-menu"><ul>' + html + '</ul></div>';
-            dd.innerHTML = html;
-        } else {
-            dd.innerHTML = '';
-        }
+
+        $list.innerHTML = html;
+        $menu.hide(html == '');
     }
 
-    el.addEventListener('input', function () {
+    $menu.hide(true);
+    $input.setAttribute('aria-controls', 'search-result');
+    $input.addEventListener('input', function () {
         if (status === 0) {
             status = 1;
             JsRequest.json({
                 url: JsUrl('admin/backend/menus'),
                 onSuccess: function (json) {
                     data = json;
-                    _print(el.value);
+                    _print($input.value);
                     status = 2;
                 }
             });
         } else if (status == 2) {
-            _print(el.value);
+            _print($input.value);
         }
     });
 });

@@ -140,7 +140,7 @@ if (!$error_fatal) {
     //
     if ($executables) {
         foreach ($executables as $action => $content) {
-            $form->checkbox("execute_{$action}")->setLabel($action . ' <span class="color-subtle-default">(' . implode(', ', $content) . ')</span>');
+            $form->checkbox("execute_{$action}")->setLabel($action . ' <span class="color-subtle">(' . implode(', ', $content) . ')</span>');
         }
 
         $form->separate(_t('Executables'));
@@ -151,12 +151,12 @@ if (!$error_fatal) {
         ->setHelp(_t('The package will be removed from the installer.'));
     $form->separate(_t('Package'));
     //
-    $tabs->tab('<i class="fa-solid fa-gear"></i>', $form->render());
+    $tabs->tab(_t('Settings'), $form->render())->setIcon('fa-solid fa-gear');
 }
 
 // Changelog
 if ($changelog) {
-    $tabs->tab('<i class="fa-solid fa-file-lines" title="' . _t('Changelog') . '"></i>', $changelog);
+    $tabs->tab(_t('Changelog'), $changelog)->setIcon('fa-solid fa-file-lines');
 }
 
 $html = '<form id="js-form">'
@@ -172,7 +172,7 @@ if (!$error_fatal) {
     $modal->enter(_t('Install'));
 }
 $modal->close();
-$modal->title([_t('Installer'), $id]);
+$modal->title([_t('Installer'), $id], 'fa-solid fa-bolt');
 $modal->content($html);
 
 return $modal->response();

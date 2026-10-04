@@ -1,4 +1,4 @@
-/* --- Frontlist Comments -------------------------------- */
+/* --- Frontlist Comments --- */
 .comments-list .list-row {
   margin-bottom: var(--spacing-4);
 }
@@ -31,7 +31,7 @@
   padding: 0 3px;
 }
 .comments-list .actions a:hover {
-  color: var(--regular-primary-surface-color);
+  color: var(--theme-primary-color);
 }
 .comments-list .actions .votes {
   font-weight: bold;

@@ -1,5 +1,5 @@
 
-/* --- UsersLabels ----------------------------------- */
+/* --- UsersLabels --- */
 let UsersLabels = (function () {
     function $U(task, output) {
         return JsUrl('admin/users.labels/' + task, false, output);

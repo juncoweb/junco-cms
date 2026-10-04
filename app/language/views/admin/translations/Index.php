@@ -15,7 +15,7 @@ $bac->refresh();
 // modal
 $modal = Modal::get();
 $modal->close();
-$modal->title(_t('Translations'));
+$modal->title(_t('Translations'), 'fa-solid fa-language');
 $modal->content($bbx->render($this->list($data)));
 
 return $modal->response();

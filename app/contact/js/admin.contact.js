@@ -1,5 +1,5 @@
 
-/* --- Contact ------------------------------------------- */
+/* --- Contact --- */
 var Contact = (function () {
     function $U(task) {
         return JsUrl('admin/contact/' + task);

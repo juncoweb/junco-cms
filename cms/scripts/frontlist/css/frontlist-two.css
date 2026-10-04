@@ -1,4 +1,4 @@
-/* --- Frontlist Two -------------------------------- */
+/* --- Frontlist Two --- */
 .frontlist-two article .article-wrapper {
   grid-template-columns: 140px auto;
   background-color: var(--regular-bg-color);
@@ -12,11 +12,11 @@
 .frontlist-two article .article-wrapper > div ~ div {
   padding-left: 0;
 }
-.frontlist-two article .article-wrapper h3 {
+.frontlist-two article .article-wrapper h2 {
   font-size: var(--font-size-lg);
   margin: 0;
 }
-.frontlist-two article .article-wrapper h3 a {
+.frontlist-two article .article-wrapper h2 a {
   color: var(--regular-font-color);
   text-decoration: none;
 }

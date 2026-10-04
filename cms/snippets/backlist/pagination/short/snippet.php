@@ -20,19 +20,17 @@ class pagination_backlist_short_snippet
             return '';
         }
 
-        $data = $pagi->build(
-            [
-                '<a href="' . $pagi->nav_href . '" control-page="{{page}}" class="btn">{{placeholder}}</a>',
-                '<span class="btn {{style}}">{{placeholder}}</span>'
-            ],
-            [
-                'prev'    => '<i class="fa-solid fa-angle-left"></i>',
-                'next'    => '<i class="fa-solid fa-angle-right"></i>'
-            ]
-        );
+        $data = $pagi->build([
+            '<a href="' . $pagi->nav_href . '" title="{{ title }}" control-page="{{ page }}" class="btn">{{ placeholder }}</a>',
+            '<span title="{{ title }}" class="btn disabled">{{ placeholder }}</span>',
+            '<span title="{{ title }}" class="btn active" aria-current="page">{{ placeholder }}</span>'
+        ], [
+            'prev' => '<i class="fa-solid fa-angle-left"></i>',
+            'next' => '<i class="fa-solid fa-angle-right"></i>'
+        ]);
 
-        return '<div class="backlist-pagination">'
+        return '<nav class="backlist-pagination" aria-label="' . _t('Pagination') . '">'
             .  '<div class="btn-group">' . $data['prev'] . $data['next'] . '</div>'
-            . '</div>';
+            . '</nav>';
     }
 }

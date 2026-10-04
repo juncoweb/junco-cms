@@ -7,7 +7,7 @@
 
 // form
 $form = Form::get();
-$form->hidden('is_edit', $is_edit);
+$form->hidden('is_edit', $is_edit = ($type == 'edit'));
 
 foreach ($values as $count => $_values) {
     $form->setDeep('[' . $count . ']');
@@ -27,9 +27,9 @@ foreach ($values as $count => $_values) {
 
 // modal
 $modal = Modal::get();
+$modal->type($type);
 $modal->enter();
 $modal->close();
-$modal->title([_t('Labels'), $title]);
 $modal->content($form->render());
 
 return $modal->response();

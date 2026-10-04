@@ -1,5 +1,5 @@
 
-/* --- ToPrint -------------------------------------------- */
+/* --- ToPrint --- */
 function ToPrint(el) {
     let html = '';
     switch (typeof el) {

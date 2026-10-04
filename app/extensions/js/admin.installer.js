@@ -1,5 +1,5 @@
 
-/* --- Installer ---------------------------------------- */
+/* --- Installer --- */
 let Installer = (function () {
     function $U(task) {
         return JsUrl('admin/extensions.installer/' + task);
@@ -127,7 +127,7 @@ let Installer = (function () {
 })();
 
 
-/* --- I set up the extension controls ------------------- */
+/* --- I set up the extension controls --- */
 (function () {
     let _backlist, target;
 

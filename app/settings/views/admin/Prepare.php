@@ -17,9 +17,9 @@ $form->input('add_rows', ['type' => 'number'])->setLabel(_t('Total'));
 
 // modal
 $modal = Modal::get();
+$modal->type('create');
 $modal->enter();
 $modal->close();
-$modal->title([_t('Manager'), _t('Create')]);
 $modal->content($form->render());
 
 return $modal->response();

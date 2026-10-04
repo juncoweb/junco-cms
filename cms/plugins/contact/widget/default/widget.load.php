@@ -24,13 +24,13 @@ return function (WidgetInterface $widget) {
                         $title = ($config['contact-widget.show_title'] ? _t('Contact') : '');
                         $html .= '<div class="ci-basic">';
                         if ($config['contact-widget.address']) {
-                            $html .= '<p><i class="fa-solid fa-location-pin ci-icon" title="' . ($t = _t('Address')) . '"><span class="visually-hidden">' . $t . '</span></i> ' . $config['contact-widget.address'] . '</p>';
+                            $html .= '<p><i class="fa-solid fa-location-pin ci-icon" title="' . ($t = _t('Address')) . '" aria-hidden="true"></i><span class="visually-hidden">' . $t . '</span> ' . $config['contact-widget.address'] . '</p>';
                         }
                         if ($config['contact-widget.phone']) {
-                            $html .= '<p><i class="fa-solid fa-phone ci-icon" title="' . ($t = _t('Phone')) . '"><span class="visually-hidden">' . $t . '</span></i> ' . $config['contact-widget.phone'] . '</p>';
+                            $html .= '<p><i class="fa-solid fa-phone ci-icon" title="' . ($t = _t('Phone')) . '" aria-hidden="true"></i><span class="visually-hidden">' . $t . '</span> ' . $config['contact-widget.phone'] . '</p>';
                         }
                         if ($config['contact-widget.email']) {
-                            $html .= '<p><i class="fa-solid fa-envelope ci-icon" title="' . ($t = _t('Email')) . '"><span class="visually-hidden">' . $t . '</span></i> <a href="' . url('/contact') . '">' . $config['contact-widget.email'] . '</a></p>';
+                            $html .= '<p><i class="fa-solid fa-envelope ci-icon" title="' . ($t = _t('Email')) . '" aria-hidden="true"></i><span class="visually-hidden">' . $t . '</span> <a href="' . url('/contact') . '">' . $config['contact-widget.email'] . '</a></p>';
                         }
                         $html .= '</div>';
                         break;

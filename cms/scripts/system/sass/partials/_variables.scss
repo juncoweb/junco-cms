@@ -1,38 +1,86 @@
+// functions
+// -----------------------------------------------
+@function scale-color($color, $weight) {
+    @if ($weight == 50) {
+        @return mix(white, $color, 90%);
+    }
+    @if ($weight == 100) {
+        @return mix(white, $color, 80%);
+    }
+    @if ($weight == 200) {
+        @return mix(white, $color, 60%);
+    }
+    @if ($weight == 300) {
+        @return mix(white, $color, 40%);
+    }
+    @if ($weight == 400) {
+        @return mix(white, $color, 20%);
+    }
+    @if ($weight == 500) {
+        @return $color;
+    }
+    @if ($weight == 600) {
+        @return mix(black, $color, 20%);
+    }
+    @if ($weight == 700) {
+        @return mix(black, $color, 40%);
+    }
+    @if ($weight == 800) {
+        @return mix(black, $color, 60%);
+    }
+    @if ($weight == 900) {
+        @return mix(black, $color, 80%);
+    }
+    @if ($weight == 950) {
+        @return mix(black, $color, 90%);
+    }
+
+    @return "";
+}
+
+@function is-bright($color) {
+    $r: red($color) / 255;
+    $g: green($color) / 255;
+    $b: blue($color) / 255;
+
+    $lightness: (0.2126 * $r) + (0.7152 * $g) + (0.0722 * $b);
+    @return $lightness > 0.4;
+}
+
+@function to-rgb($color) {
+    @return red($color) "," green($color) "," blue($color);
+}
+
 // General
 // -----------------------------------------------
-// light
-$default-light-surface-color: #ffffff !default;
-$default-light-color: #d1d4d8 !default;
-$default-light-font-color: #202428 !default;
-// dark
-$default-dark-surface-color: #202428 !default;
-$default-dark-color: #34383c !default;
-$default-dark-font-color: #e5e9ec !default;
-
 //
-$primary-color: #009eff !default; // #009eff #3366cc #ff6633 #EDAE49
-$secondary-color: #eb51aa !default;
-
+$default-color: #303438 !default;
+$primary-color: #3063c9 !default; // #009eff #3366cc 0369a6
+$secondary-color: #c6107a !default;
 //
-$blue: #067bcc !default; // #305cde
-$skyblue: #82c8e5 !default;
-$cian: #008b8b !default;
-$green: #34a745 !default;
-$yellow: #ffc134 !default;
+$surface-color-light: #ffffff !default;
+$surface-color-dark: #202428 !default;
+//
+$blue: #305cde !default; // #305cde
+$indigo: #560591 !default;
+$cyan: #1bb3b3 !default;
+$green: #0c7e28 !default;
+$teal: #00897b !default;
+$yellow: #f3b600 !default;
 $orange: #fd7e24 !default;
-$red: #dc3540 !default;
+$red: #c22731 !default;
 $pink: #ff5c77 !default;
 $purple: #9d00ff !default;
-$black: #000000 !default;
 
 $colors: () !default;
 $colors: map-merge(
     (
         "blue": $blue,
-        "skyblue": $skyblue,
-        "cian": $cian,
+        "indigo": $indigo,
+        "cyan": $cyan,
         "yellow": $yellow,
         "green": $green,
+        "teal": $teal,
         "orange": $orange,
         "red": $red,
         "pink": $pink,
@@ -45,126 +93,89 @@ $theme-colors: () !default;
 $theme-colors: map-merge(
     (
         "default": (
-            "light": $default-light-color,
-            "dark": $default-dark-color,
+            "color": $default-color,
             "contrast": "primary"
         ),
         "primary": (
-            "light": $primary-color,
-            "dark": $primary-color,
+            "color": $primary-color,
             "contrast": "secondary"
         ),
         "secondary": (
-            "light": $secondary-color,
-            "dark": $secondary-color,
+            "color": $secondary-color,
             "contrast": "primary"
         ),
         "success": (
-            "light": $green,
-            "dark": $green,
+            "color": $green,
             "contrast": "default"
         ),
         "info": (
-            "light": $blue,
-            "dark": $blue,
+            "color": $cyan,
             "contrast": "default"
         ),
         "warning": (
-            "light": $yellow,
-            "dark": $yellow,
+            "color": $yellow,
             "contrast": "default"
         ),
         "danger": (
-            "light": $red,
-            "dark": $red,
+            "color": $red,
             "contrast": "default"
         )
     ),
     $theme-colors
 );
 
-@function to-rgb($color) {
-    @return red($color) "," green($color) "," blue($color);
-}
-
 // regular-colors
 @function create-regular-light-color-map($key, $color) {
-    $surface-color: null;
-    $font-color: null;
-    $subtle-font-color: null;
-    $border-color: $color;
-    $bg-color: mix(white, $color, 66%);
-
     @if ($key == "default") {
-        $surface-color: $default-light-surface-color;
-        $font-color: $default-light-font-color;
-        $subtle-font-color: mix(white, $font-color, 55%); // 58%
-    } @else {
-        $surface-color: $color;
-        $font-color: mix(black, $color, 60%);
-        $subtle-font-color: mix(white, $font-color, 80%);
+        $color: mix(white, $color, 75%);
     }
 
+    $font-color: scale-color($color, 950);
     $map: (
-        "surface": $surface-color,
-        "surface-rgb": to-rgb($surface-color),
-        //
+        "subtle-font": scale-color($color, 800),
+        "disabled-font": scale-color($color, 700),
         "font": $font-color,
-        "active-font": darken($font-color, 30%),
-        "disabled-font": lighten($font-color, 30%),
         "heading": $font-color,
-        "subtle-font": $subtle-font-color,
+        "active-font": scale-color($color, 900),
         //
-        "border": $border-color,
-        "active-border": darken($border-color, 5%),
-        "disabled-border": lighten($border-color, 5%),
+        "disabled-bg": scale-color($color, 100),
+        "bg": scale-color($color, 200),
+        "active-bg": scale-color($color, 300),
+        // 400?
         //
-        "bg": $bg-color,
-        "active-bg": darken($bg-color, 10%),
-        "disabled-bg": lighten($bg-color, 10%)
+        "disabled-border": scale-color($color, 400),
+        "border": scale-color($color, 500),
+        "active-border": scale-color($color, 600)
     );
+
     @return $map;
 }
 
 // regular-colors
 @function create-regular-dark-color-map($key, $color) {
-    $surface-color: null;
-    $font-color: null;
-    $subtle-font-color: null;
-    $bg-color: null;
-
     @if ($key == "default") {
-        $surface-color: $default-dark-surface-color;
-        //$color: $default-dark-color;
-        $font-color: $default-dark-font-color;
-        $bg-color: mix(black, $color, 20%);
+        //$color: mix(black, $color, 80%);
     } @else {
-        $surface-color: $color;
-        $color: mix(black, $color, 40%);
-        $font-color: mix(white, $color, 80%);
-        $bg-color: mix(white, $color, 25%);
+        $color: mix(black, $color, 60%);
     }
 
-    $subtle-font-color: mix(black, $font-color, 40%);
-    $border-color: $color;
+    $font-color: scale-color($color, 50);
     $map: (
-        "surface": $surface-color,
-        "surface-rgb": to-rgb($surface-color),
-        //
+        "subtle-font": scale-color($color, 200),
+        "disabled-font": scale-color($color, 300),
         "font": $font-color,
-        "active-font": darken($font-color, 30%),
-        "disabled-font": darken($font-color, 50%),
         "heading": $font-color,
-        "subtle-font": $subtle-font-color,
+        "active-font": scale-color($color, 100),
         //
-        "border": $border-color,
-        "active-border": lighten($border-color, 5%),
-        "disabled-border": darken($border-color, 30%),
+        "bg": scale-color($color, 600),
+        "active-bg": scale-color($color, 800),
+        "disabled-bg": scale-color($color, 900),
         //
-        "bg": $bg-color,
-        "active-bg": darken($bg-color, 10%),
-        "disabled-bg": darken($bg-color, 20%)
+        "border": scale-color($color, 400),
+        "active-border": scale-color($color, 500),
+        "disabled-border": scale-color($color, 600)
     );
+
     @return $map;
 }
 
@@ -176,7 +187,7 @@ $regular-dark-colors: () !default;
     $map: map-merge(
         $map,
         (
-            $key: create-regular-light-color-map($key, map-get($color, "light"))
+            $key: create-regular-light-color-map($key, map-get($color, "color"))
         )
     );
     $regular-light-colors: map-merge($regular-light-colors, $map);
@@ -184,7 +195,7 @@ $regular-dark-colors: () !default;
     $map: map-merge(
         $map,
         (
-            $key: create-regular-dark-color-map($key, map-get($color, "dark"))
+            $key: create-regular-dark-color-map($key, map-get($color, "color"))
         )
     );
     $regular-dark-colors: map-merge($regular-dark-colors, $map);
@@ -193,63 +204,63 @@ $regular-dark-colors: () !default;
 // solid-colors
 @function create-solid-light-color-map($key, $color) {
     @if ($key == "default") {
-        $color: $default-light-font-color;
+        $color: mix(black, $color, 60%);
+    } @else {
+        //$color: mix(black, $color, 20%);
     }
 
-    $font-color: mix(white, $color, 94%);
-    $subtle-font-color: mix(white, $color, 60%);
-    $border-color: mix(white, $color, 25%);
-    $bg-color: $color;
+    $bg-color: scale-color($color, 500);
+    $is-bright: is-bright($bg-color);
+    //
+    $font-color: scale-color($color, if($is-bright, 950, 50));
+    $subtle-font-color: scale-color($color, if($is-bright, 900, 100));
     $map: (
-        "surface": $color,
-        "surface-rgb": to-rgb($color),
-        //
-        "font": $font-color,
-        "active-font": darken($font-color, 15%),
-        "disabled-font": lighten($font-color, 15%),
-        "heading": $font-color,
         "subtle-font": $subtle-font-color,
+        "disabled-font": $subtle-font-color,
+        "font": $font-color,
+        "heading": $font-color,
+        "active-font": $font-color,
         //
-        "border": $border-color,
-        "active-border": darken($border-color, 20%),
-        "disabled-border": lighten($border-color, 15%),
-        //
+        "disabled-bg": scale-color($color, 400),
         "bg": $bg-color,
-        "active-bg": darken($bg-color, 15%),
-        "disabled-bg": lighten($bg-color, 15%)
+        "active-bg": scale-color($color, 600),
+        //
+        "disabled-border": scale-color($color, 200),
+        "border": scale-color($color, 300),
+        "active-border": scale-color($color, 400)
     );
+
     @return $map;
 }
 
 @function create-solid-dark-color-map($key, $color) {
     @if ($key == "default") {
-        $color: mix(black, $color, 20%);
+        $color: mix(black, $color, 60%);
     } @else {
-        $color: mix(black, $color, 30%);
+        $color: mix(black, $color, 20%);
     }
 
-    $font-color: mix(white, $color, 94%);
-    $subtle-font-color: mix(white, $color, 70%);
-    $border-color: mix(white, $color, 25%);
-    $bg-color: $color;
+    $bg-color: scale-color($color, 500);
+    $is-bright: is-bright($bg-color);
+    //
+    $font-color: scale-color($color, if($is-bright, 950, 50));
+    $subtle-font-color: scale-color($color, if($is-bright, 900, 200));
     $map: (
-        "surface": $color,
-        "surface-rgb": to-rgb($color),
-        //
-        "font": $font-color,
-        "active-font": darken($font-color, 15%),
-        "disabled-font": darken($font-color, 40%),
-        "heading": $font-color,
         "subtle-font": $subtle-font-color,
-        //
-        "border": $border-color,
-        "active-border": darken($border-color, 20%),
-        "disabled-border": darken($border-color, 40%),
+        "disabled-font": $subtle-font-color,
+        "font": $font-color,
+        "heading": $font-color,
+        "active-font": scale-color($color, if($is-bright, 800, 100)),
         //
         "bg": $bg-color,
-        "active-bg": darken($bg-color, 10%),
-        "disabled-bg": darken($bg-color, 20%)
+        "active-bg": scale-color($color, 600),
+        "disabled-bg": scale-color($color, 700),
+        //
+        "border": scale-color($color, 300),
+        "active-border": scale-color($color, 400),
+        "disabled-border": scale-color($color, 500)
     );
+
     @return $map;
 }
 
@@ -262,7 +273,7 @@ $solid-dark-colors: () !default;
     $map: map-merge(
         $map,
         (
-            $key: create-solid-light-color-map($key, map-get($color, "light"))
+            $key: create-solid-light-color-map($key, map-get($color, "color"))
         )
     );
     $solid-light-colors: map-merge($solid-light-colors, $map);
@@ -271,7 +282,7 @@ $solid-dark-colors: () !default;
     $map: map-merge(
         $map,
         (
-            $key: create-solid-dark-color-map($key, map-get($color, "dark"))
+            $key: create-solid-dark-color-map($key, map-get($color, "color"))
         )
     );
     $solid-dark-colors: map-merge($solid-dark-colors, $map);
@@ -311,16 +322,19 @@ $heading-sizes: map-merge(
 $font-selection-color: var(--solid-primary-font-color) !default;
 $font-selection-bg: var(--solid-primary-bg-color) !default;
 
-// link // ?
-$link-color: $primary-color !default;
-$link-decoration: null !default;
+// link
+$link-color-light: mix(black, $primary-color, 20%) !default;
+$link-hover-color-light: mix(black, $primary-color, 40%) !default;
 
-$link-hover-color: $primary-color !default;
-$link-hover-decoration: null !default;
+$link-color-dark: mix(white, $primary-color, 30%) !default;
+$link-hover-color-dark: mix(white, $primary-color, 10%) !default;
+
+$link-decoration: none !default;
+$link-hover-decoration: underline !default;
 
 // code
 $code-font-size: $font-size-sm !default;
-$code-color: $link-color !default;
+$code-font-color: var(--link-color) !default;
 $code-padding: 0.25rem 0.375rem !default;
 $code-bg-color: var(--regular-bg-color) !default;
 
@@ -341,7 +355,7 @@ $zindex-toast: 1080 !default;
 $zindex-pullnav: 2000 !default;
 
 // shadows
-$shadow-color: rgba(var(--solid-surface-rgb-color), 0.1) !default;
+$shadow-color: rgba(0, 0, 0, 0.1) !default;
 
 $box-shadow-sm:
     0 1px 3px 0 $shadow-color,
@@ -414,7 +428,7 @@ $dialog-border-width: 0 0 0 5px !default;
 // notify
 // -----------------------------------------------
 $notify-color: var(--solid-primary-font-color) !default;
-$notify-bg-color: rgba(var(--solid-primary-surface-rgb-color), 0.75) !default;
+$notify-bg-color: rgba(var(--theme-primary-rgb-color), 0.9) !default;
 $notify-zindex: var(--zindex-toast);
 $notify-top: -30px;
 
@@ -443,5 +457,5 @@ $toast-max-width: 350px !default;
 // tooltip
 // -----------------------------------------------
 $tooltip-color: var(--solid-font-color);
-$tooltip-bg-color: rgba(var(--solid-surface-rgb-color), 0.8);
+$tooltip-bg-color: var(--solid-active-bg-color);
 $tooltip-border-radius: var(--rounded-md);

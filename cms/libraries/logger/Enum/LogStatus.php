@@ -81,9 +81,13 @@ enum LogStatus: int
     /**
      * Get
      */
-    public static function getList(array $list = []): array
+    public static function getList(array $list = [], bool $actives = true): array
     {
-        foreach (self::cases() as $case) {
+        $cases = $actives
+            ? self::getActives()
+            : self::cases();
+
+        foreach ($cases as $case) {
             $list[$case->name] = $case->title();
         }
 

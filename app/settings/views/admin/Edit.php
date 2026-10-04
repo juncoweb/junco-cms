@@ -100,7 +100,7 @@ foreach ($data['rows'] as $row) {
 
 // modal
 $modal = Modal::get();
-$modal->title([_t('Settings'), _t('Manager')]);
+$modal->type('edit');
 $modal->content($form->render());
 
 return $modal->response();

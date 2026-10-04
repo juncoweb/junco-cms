@@ -21,7 +21,10 @@ if ($this->title) {
     $html_title = '<div class="layout-title"><h1>' . $this->getTitle() . '</h1></div>';
 
     if ($this->help_url) {
-        $html_title .= '<div><a href="' . $this->help_url . '" target="_blank" title="' . _t('Help') . '"><i class="fa-solid fa-circle-question"></i></a></div>';
+        $html_title .= '<div><a href="' . $this->help_url . '" target="_blank" title="' . ($t = _t('Help')) . '">'
+            . '<i class="fa-solid fa-circle-question" aria-hidden="true"></i>'
+            . '<span class="visually-hidden">' . $t . '</span>'
+            . '</a></div>';
     }
 
     $html_title = '<div class="layout-title-group">'
@@ -47,7 +50,9 @@ if (!empty($this->options->sidebar)) {
             $this->options->sidebar,
             $this->options->sidebar_widget ?? 'backend'
         )
-        . '<div class="navbar-minimizer"><a href="javascript:void(0)" role="button" aria-label="' . _t('Expand menu') . '"><i class="fa-solid fa-chevron-left"></i></a></div>'
+        . '<div class="navbar-minimizer"><a href="javascript:void(0)" role="button" title="' . _t('Expand menu') . '">'
+        .   '<i class="fa-solid fa-chevron-left" aria-hidden="true"></i>'
+        .  '</a></div>'
         . '</div></aside><!-- end aside -->';
 }
 
@@ -63,18 +68,18 @@ if (!empty($this->options->thirdbar)) {
 }
 
 //
-$minimized    = $this->isMinimized ? ' class="navbar-minimized"' : '';
-$footer        = sprintf(_t('© %d by %s - All rights reserved'), date('Y'), '<a href="' . $this->site->url . '" class="site">' . $this->site->name . '</a>');
+$minimized = $this->isMinimized ? ' class="navbar-minimized"' : '';
+$footer    = sprintf(_t('© %d by %s - All rights reserved'), date('Y'), '<a href="' . $this->site->url . '" class="site">' . $this->site->name . '</a>');
 
 ?>
 <!DOCTYPE html>
 <html lang="<?= $this->getLang() ?>">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="robots" content="noindex, nofollow" />
-    <meta name="author" content="<?= $this->site->author ?>" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="author" content="<?= $this->site->author ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- link -->
     <link rel="shortcut icon" type="image/x-icon" href="<?= $this->site->baseurl ?>favicon.ico" />
     <!-- css -->
@@ -98,9 +103,10 @@ $footer        = sprintf(_t('© %d by %s - All rights reserved'), date('Y'), '<a
     <header class="layout-header<?= ($this->themeColor === 'default' ? '' : ' header-' . $this->themeColor) ?>" data-tck="<?= $this->themeColorKey ?>" data-sticky>
         <div>
             <div class="layout-logo">
-                <a href="<?= url('admin/') ?>" aria-label="<?= _t('Homepage') ?>">
-                    <div class="layout-capital"><?= $this->getCapital() ?></div>
-                    <div class="layout-sitename"><span><?= $this->site->name ?></span><span> | <?= _t('Administration') ?></span></div>
+                <a href="<?= url('admin/') ?>">
+                    <div class="layout-capital" aria-hidden="true"><?= $this->getCapital() ?></div>
+                    <div class="layout-sitename" aria-hidden="true"><span><?= $this->site->name ?></span><span> | <?= _t('Administration') ?></span></div>
+                    <span class="visually-hidden"><?= $this->site->name ?></span><span>
                 </a>
             </div>
             <?= $mainbar ?>

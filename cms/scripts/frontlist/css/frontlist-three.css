@@ -1,4 +1,4 @@
-/* --- Frontlist - three -------------------------------- */
+/* --- Frontlist - three --- */
 .frontlist-three article {
   border-radius: var(--rounded-md);
   box-shadow: var(--box-shadow-sm);
@@ -16,11 +16,11 @@
 .frontlist-three article .article-container {
   padding: var(--spacing-3);
 }
-.frontlist-three article h3 {
+.frontlist-three article h2 {
   font-size: var(--font-size-lg);
   margin: 0;
 }
-.frontlist-three article h3 a {
+.frontlist-three article h2 a {
   color: var(--regular-font-color);
   text-decoration: none;
 }

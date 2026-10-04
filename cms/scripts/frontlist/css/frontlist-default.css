@@ -1,4 +1,4 @@
-/* --- Frontlist ------------------------------- */
+/* --- Frontlist --- */
 .frontlist article {
   grid-template-columns: min-content auto min-content;
   border-bottom-width: var(--border-width);
@@ -15,11 +15,11 @@
   display: block;
   width: 100%;
 }
-.frontlist article .article-container h3 {
+.frontlist article .article-container h2 {
   font-size: var(--font-size-lg);
   margin: 0;
 }
-.frontlist article .article-container h3 a {
+.frontlist article .article-container h2 a {
   color: var(--regular-font-color);
   text-decoration: none;
 }

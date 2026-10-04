@@ -30,9 +30,9 @@ class frontlist_master_three_snippet extends FrontlistBase
 
                 if ($row['url']) {
                     if ($row['image_html']) {
-                        $row['image_html'] = '<a href="' . $row['url'] . '" title="' . $row['title'] . '">' . $row['image_html'] . '</a>';
+                        $row['image_html'] = '<a href="' . $row['url'] . '" tabindex="-1" aria-hidden="true">' . $row['image_html'] . '</a>';
                     }
-                    $title = '<a href="' . $row['url'] . '" title="' . $row['title'] . '">' . $title . '</a>';
+                    $title = '<a href="' . $row['url'] . '">' . $title . '</a>';
                 }
                 $html .= '<article control-row="' . $row['id'] . '">';
 
@@ -45,7 +45,7 @@ class frontlist_master_three_snippet extends FrontlistBase
                 }
 
                 $html .= '<div class="article-container">';
-                $html .= '<h3>' . $title . '</h3>';
+                $html .= '<h2>' . $title . '</h2>';
 
                 if ($row['author']) {
                     $html .= '<div class="article-author">' . $row['author'] . '</div>';

@@ -15,8 +15,7 @@ use Junco\Extensions\Enum\ExtensionStatus;
 
 class ExtensionsModel extends Model
 {
-    // vars
-    protected $db;
+    protected Database $db;
 
     /**
      * Constructor

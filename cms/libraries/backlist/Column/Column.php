@@ -67,18 +67,15 @@ class Column extends ColumnBase implements ColumnInterface
     /**
      * Label
      */
-    public function setLabelIcon(string $icon, string $title = '', ?FiltersInterface $filters = null): static
+    public function setLabelIcon(string $icon, string $title, ?FiltersInterface $filters = null): static
     {
         $this->th_class .= ' text-center';
         $this->td_class .= ' text-center';
         $this->width = 20;
 
-        if ($title) {
-            $label = '<span class="visually-hidden">' . $title . '</span>';
-            $label .= '<i class="' . $icon . '" title="' . $title . '" aria-hidden="true"></i>';
-        } else {
-            $label = '<i class="' . $icon . '" aria-hidden="true"></i>';
-        }
+        $label = '<span class="visually-hidden">' . $title . '</span>';
+        $label .= '<i class="' . $icon . '" title="' . $title . '" aria-hidden="true"></i>';
+
         $this->setLabel($label, $filters);
 
         return $this;

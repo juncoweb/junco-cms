@@ -23,9 +23,10 @@ class SearchInput extends FilterElement
     ) {
         $this->html = '<div class="btn-group">'
             . '<input type="text" name="' . $name . '" value="' . $value . '" aria-label="' . _t('Search') . '" class="btn"/>'
-            //. ($clear_url && $value ? '<a href="'. $clear_url .'"><i class="fa-solid fa-xmark"></i></a>' : '')
+            //. ($clear_url && $value ? '<a href="'. $clear_url .'"><i class="fa-solid fa-xmark" aria-hidden="true"></i></a>' : '')
             .  '<button type="submit" class="btn">'
-            .     '<i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><div class="visually-hidden">' . _t('Enter') . '</div>'
+            .     '<i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>'
+            .     '<span class="visually-hidden">' . _t('Enter') . '</span>'
             .  '</button>'
             . '</div>';
     }

@@ -1,4 +1,4 @@
-/* --- Console ----------------------------------------------------- */
+/* --- Console --- */
 var JsConsole = (function () {
     function $U(args) {
         return JsUrl('/system.console', args, 'blank');

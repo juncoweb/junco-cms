@@ -10,9 +10,9 @@
 <html lang="<?php echo $this->getLang() ?>">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="robots" content="index, follow" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="<?php echo $this->site->author ?>" />
     <meta name="description" content="<?php echo $this->site->description ?>" />
 

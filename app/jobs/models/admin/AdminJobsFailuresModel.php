@@ -9,32 +9,31 @@ use Junco\Mvc\Model;
 
 class AdminJobsFailuresModel extends Model
 {
-    // vars
-    protected Database $db;
+	// vars
+	protected Database $db;
 
-    /**
+	/**
      * Constructor
      */
-    public function __construct()
-    {
-        $this->db = db();
-    }
+	public function __construct()
+	{
+		$this->db = db();
+	}
 
-    /**
+	/**
      * Get
      */
-    public function getIndexData()
-    {
-        return ['back_url' => url('admin/jobs')];
-    }
+	public function getIndexData()
+	{
+		return ['back_url' => url('admin/jobs')];
+	}
 
-
-    /**
+	/**
      * Get
      */
-    public function getListData()
-    {
-        $data = $this->filter(POST, ['search' => 'text']);
+	public function getListData()
+	{
+		$data = $this->filter(POST, ['search' => 'text']);
 
         // query
         if ($data['search']) {
@@ -65,14 +64,14 @@ class AdminJobsFailuresModel extends Model
             'rows' => $rows,
             'pagi' => $pagi
         ];
-    }
+	}
 
-    /**
+	/**
      * Get
      */
-    public function getShowData()
-    {
-        $input = $this->filter(POST, ['id' => 'id|array:first|required:abort']);
+	public function getShowData()
+	{
+		$input = $this->filter(POST, ['id' => 'id|array:first|required:abort']);
 
         // query
         $data = $this->db->query("
@@ -88,13 +87,13 @@ class AdminJobsFailuresModel extends Model
 		WHERE id = ?", $input['id'])->fetch() or abort();
 
         return $data;
-    }
+	}
 
-    /**
+	/**
      * Get
      */
-    public function getConfirmDeleteData()
-    {
-        return $this->filter(POST, ['id' => 'id|array|required:abort']);
-    }
+	public function getConfirmDeleteData()
+	{
+		return $this->filter(POST, ['id' => 'id|array|required:abort']);
+	}
 }

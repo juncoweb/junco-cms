@@ -16,7 +16,7 @@ $bac->refresh();
 // modal
 $modal = Modal::get();
 $modal->close();
-$modal->title([$title, _t('Changes')]);
+$modal->title([_t('Changes'), $title], 'fa-regular fa-file-lines');
 $modal->content($bbx->render($this->list($data)));
 
 return $modal->response();

@@ -1,5 +1,5 @@
 
-/* --- Themes ------------------------------------------- */
+/* --- Themes --- */
 let AssetsThemes = (function () {
     function $U(task) {
         return JsUrl('admin/assets.themes/' + task);

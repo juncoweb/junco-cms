@@ -10,14 +10,10 @@ $bbx = Backlist::getBox();
 
 // actions
 $bac = $bbx->getActions();
-$bac->toggle(array_map(fn($case) => [
-    'control' => 'status',
-    'value' => $case->name,
-    'label' => $case->title()
-], $statuses));
+$bac->toggle($statuses);
 $bac->delete();
 $bac->dropdown([
-    ['control' => 'show', 'label' => _t('Info'), 'icon' => 'fa-solid fa-circle-info'],
+    ['control' => 'show', 'label' => _t('Show'), 'icon' => 'fa-solid fa-eye'],
     [],
     ['control' => 'confirm_thin', 'label' => _t('Check repeated'), 'icon' => 'fa-solid fa-check'],
     ['control' => 'confirm_clean', 'label' => _t('Clean log file'), 'icon' => 'fa-solid fa-broom'],

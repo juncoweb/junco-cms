@@ -1,4 +1,4 @@
-/* --- nav -------------------------------------------- */
+/* --- nav --- */
 const Navbar = function (nav, btn, options) {
     if (typeof nav == 'string') {
         nav = document.querySelector(nav);

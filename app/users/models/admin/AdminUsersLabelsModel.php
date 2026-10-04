@@ -9,8 +9,7 @@ use Junco\Mvc\Model;
 
 class AdminUsersLabelsModel extends Model
 {
-    // vars
-    protected $db;
+    protected Database $db;
 
     /**
      * Constructor
@@ -78,10 +77,9 @@ class AdminUsersLabelsModel extends Model
         $data = $this->filter(POST, ['num_rows' => 'int|min:1|default:1']);
 
         return [
-            'title'      => _t('Create'),
-            'values'     => array_fill(0, $data['num_rows'], null),
+            'type' => 'create',
+            'values' => array_fill(0, $data['num_rows'], null),
             'extensions' => $this->getExtensions(),
-            'is_edit'    => false,
         ];
     }
 
@@ -108,10 +106,9 @@ class AdminUsersLabelsModel extends Model
         }
 
         return [
-            'title'      => _t('Edit'),
-            'values'     => $rows,
+            'type' => 'edit',
+            'values' => $rows,
             'extensions' => $this->getExtensions(),
-            'is_edit'    => true,
         ];
     }
 

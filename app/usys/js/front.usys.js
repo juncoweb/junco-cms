@@ -1,5 +1,5 @@
 
-/* --- Usys ------------------------------------------------------ */
+/* --- Usys --- */
 var UsysLock = (function () {
     var btnText;
     return function ($form, expires) {

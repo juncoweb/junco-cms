@@ -1,4 +1,4 @@
-/* --- Upload Handle -------------------------------------------------- */
+/* --- Upload Handle --- */
 const UploadHandler = function (el, form, data) {
     var _data;
     var WH = ['width', 'height'];

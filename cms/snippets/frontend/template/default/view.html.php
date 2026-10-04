@@ -17,7 +17,8 @@ if (!empty($this->title) && ($this->options->show_title ?? true)) {
     if ($this->help_url) {
         $title_html .= '<div class="tpl-help">'
             .  '<a href="' . $this->help_url . '" target="blank" title="' . ($t = _t('Help')) . '">'
-            .    '<i aria-label="' . $t . '" class="fa-solid fa-circle-question"></i>'
+            .    '<i class="fa-solid fa-circle-question" aria-hidden="true"></i>'
+            .    '<span class="visually-hidden">' . $t . '</span>'
             .  '</a>'
             . '</div>';
     }
@@ -30,12 +31,19 @@ if (!empty($this->title) && ($this->options->show_title ?? true)) {
 }
 
 // navbar
+$navbar_btn = '';
 $navbar_html = !empty($this->options->navbar)
     ? $this->getWidget(
         $this->options->navbar,
         $this->options->navbar_widget ?? 'frontend.navbar'
     )
     : '';
+
+if ($navbar_html) {
+    $navbar_btn = '<a href="javascript:void(0)" role="button" title="' . _t('Expand menu') . '" class="pull-btn">'
+        .   '<i class="fa-solid fa-bars" aria-hidden="true"></i>'
+        .  '</a>';
+}
 
 // after
 if (!empty($this->options->after)) {
@@ -46,6 +54,7 @@ if (!empty($this->options->after)) {
 }
 
 // content
+$sidebar_html = null;
 $content_html = $this->content;
 $this->content = ''; // freeing memory
 
@@ -99,9 +108,9 @@ $footer_html = !empty($this->options->footer)
 <html lang="<?= $this->getLang() ?>">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
     <meta name="robots" content="index, follow" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="<?= $this->site->author ?>" />
     <meta name="description" content="<?= $this->site->description ?>" />
     <?= $this->renderMeta() ?>
@@ -123,8 +132,7 @@ $footer_html = !empty($this->options->footer)
 </head>
 <body<?= $this->getBodyClass() ?>>
     <ul class="accessibility-nav">
-        <li><a href="#content"><?= _t('Skip to main content') ?></a></li>
-        <li><a href="#sidebar"><?= _t('Skip to sidebar') ?></a></li>
+        <li><a href="#content"><?= _t('Skip to main content') ?></a></li><?= ($sidebar_html ? '<li><a href="#sidebar">' . _t('Skip to sidebar') . '</a></li>' : '') ?>
     </ul>
     <header class="tpl-header <?= $this->options->header_style ?>" data-sticky>
         <div class="top-header">
@@ -133,11 +141,11 @@ $footer_html = !empty($this->options->footer)
         <div class="container">
             <div class="main-header">
                 <div class="logo">
-                    <a href="<?= url() ?>" aria-label="<?= _t('Homepage') ?>"><?= $this->renderLogo() ?></a>
+                    <a href="<?= url() ?>"><?= $this->renderLogo() ?></a>
                 </div>
                 <div class="main-navbar">
                     <?= $navbar_html ?>
-                    <?= $navbar_html ? '<a href="javascript:void(0)" role="button" class="pull-btn"><i class="fa-solid fa-bars"></i></a>' : '' ?>
+                    <?= $navbar_btn ?>
                 </div>
             </div>
         </div>

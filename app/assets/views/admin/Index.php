@@ -11,9 +11,9 @@ $bbx = Backlist::getBox();
 // actions
 $bac = $bbx->getActions();
 $bac->create();
-$bac->edit();
 $bac->button('confirm_compile', _t('Compile'), 'fa-solid fa-gears');
 $bac->dropdown([
+    ['control' => 'edit', 'label' => _t('Edit'), 'icon' => 'fa-solid fa-pencil'],
     ['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash'],
     ['control' => 'inspect', 'label' => _t('Inspect'), 'icon' => 'fa-solid fa-code'],
     [],

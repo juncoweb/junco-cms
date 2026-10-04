@@ -18,7 +18,7 @@ class Suite extends FormElement
      * @param array	       $attr
      */
     public function __construct(
-        protected string $name,
+        string $name,
         array|string $default = [],
         array $options = [],
         array $attr = []
@@ -38,8 +38,8 @@ class Suite extends FormElement
                 . '</label>';
         }
 
-        $this->content = '<div control-felem="suite" data-name="' . $name . '" data-selected="' . implode(',', $default) . '" class="fe-suite">'
-            . '<ul class="btn-tablist tab-small">'
+        $this->content = '<div control-felem="suite" data-name="' . $name . '" data-selected="' . implode(',', $default) . '" aria-label="' . _t('Advanced multiple selector') . '" class="fe-suite">'
+            . '<ul role="tablist" class="btn-tablist tab-small">'
             .   '<li role="tab" aria-controls="' . $name . '-panel-0"><i class="fa-solid fa-check" aria-hidden="true"></i> ' . _t('Select') . '</li>'
             .   '<li role="tab" aria-controls="' . $name . '-panel-1"><i class="fa-solid fa-arrows-turn-to-dots" aria-hidden="true"></i> ' . _t('Sort') . '</li>'
             . '</ul>'
@@ -48,8 +48,8 @@ class Suite extends FormElement
             .     '<div class="box-group">'
             .       '<div class="box box-0">' . $html . '</div>'
             .       '<div class="actions">'
-            .         '<div><label title="' . ($t = _t('Check all')) . '"><input type="checkbox" class="input-checkbox"><span class="visually-hidden">' . $t . '</span></label></div>'
-            .         '<div><button type="button" class="btn-inline" title="' . ($t = _t('Reset')) . '" aria-label="' . $t . '"><i class="fa-solid fa-rotate-left"></i></button></div>'
+            .         '<div><label><input type="checkbox" title="' . ($t = _t('Check all')) . '" class="input-checkbox"><span class="visually-hidden">' . $t . '</span></label></div>'
+            .         '<div><button type="button" class="btn-inline" title="' . _t('Reset') . '"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i></div>'
             .       '</div>'
             .      '</div>'
             .     '</div>'

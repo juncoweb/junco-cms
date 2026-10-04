@@ -1,5 +1,5 @@
 
-/* --- Email ----------------------------------------- */
+/* --- Email --- */
 var Email = (function () {
     function $U(task) {
         return JsUrl('admin/email/' + task);

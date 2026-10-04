@@ -10,12 +10,19 @@ $html = '<p class="text-right">'
     . '</p>';
 
 if ($rows) {
+    $tag = '<div class="flex">'
+        . '<div class="flex-auto">%s</div>'
+        . '<div class="text-center">'
+        .    '<a href="%s" title="' . ($t = _t('Show')) . '">'
+        .      '<i class="fa-solid fa-chevron-right color-default font-large" aria-hidden="true"></i>'
+        .      '<span class="visually-hidden">' . $t . '</span>'
+        .    '</a>'
+        . '</div>'
+        . '</div>';
+
     foreach ($rows as $row) {
         if ($row['url']) {
-            $row['notification_message'] = '<div class="flex">'
-                . '<div class="flex-auto">' . $row['notification_message'] . '</div>'
-                . '<div class="text-center"><a href="' . $row['url'] . '"><i class="fa-solid fa-chevron-right color-default font-large"></i></a></div>'
-                . '</div>';
+            $row['notification_message'] = sprintf($tag, $row['notification_message'], $row['url']);
         }
 
         $html .= '<div class="dialog">' . $row['notification_message'] . '</div>';

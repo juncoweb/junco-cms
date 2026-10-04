@@ -1,4 +1,4 @@
-/* --- Settings -------------------------------------------- */
+/* --- Settings --- */
 let Settings = (function () {
     function $U(task, data) {
         return JsUrl('admin/settings/' + task, data);
@@ -258,7 +258,7 @@ let Settings = (function () {
 /**
  * Tools
  */
-function JsonFormElement($btn) {
+function JsonEditor($btn) {
     function findForm(el) {
         for (; el.tagName != 'FORM'; el = el.parentNode);
         return el;
@@ -280,7 +280,9 @@ function JsonFormElement($btn) {
 
     return {
         toggle: function () {
-            $element.style.display = $element.style.display == '' ? 'none' : '';
+            const status = $element.style.display == 'none';
+            $element.style.display = status ? '' : 'none';
+            $btn.setAttribute('aria-expanded', status);
         },
         getValue: function () {
             _rows = JSON.parse($element.value || 'false');
@@ -348,14 +350,14 @@ function JsonFormElement($btn) {
     // controls
     Settings.setControls({
         toggle: function (el) {
-            JsonFormElement(el).toggle();
+            JsonEditor(el).toggle();
         },
 
         json: {
             url: $U('json'),
             onSubmit: function (el) {
                 try {
-                    current = JsonFormElement(el);
+                    current = JsonEditor(el);
                     const json = current.getValue();
                     this.data = {};
 

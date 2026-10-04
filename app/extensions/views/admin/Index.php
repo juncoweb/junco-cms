@@ -12,15 +12,11 @@ $bbx = Backlist::getBox();
 $bac = $bbx->getActions();
 if ($developer_mode) {
     $bac->create();
-    $bac->edit();
-    $bac->toggle(array_map(fn($case) => [
-        'control' => 'confirm_status',
-        'name' => 'status',
-        'value' => $case->name,
-        'label' => $case->title()
-    ], $statuses));
+    //$bac->edit();
+    $bac->toggle($statuses, ['control' => 'confirm_status', 'name' => 'status']);
     $bac->dropdown([
-        //['control' => 'show', 'label' => _t('Show'), 'icon' => 'fa-solid fa-eye'],
+        ['control' => 'show', 'label' => _t('Show'), 'icon' => 'fa-solid fa-eye'],
+        ['control' => 'edit', 'label' => _t('Edit'), 'icon' => 'fa-solid fa-pencil'],
         ['control' => 'confirm_delete', 'label' => _t('Delete'), 'icon' => 'fa-solid fa-trash'],
         ['control' => 'changes', 'label' => _t('Changes'), 'icon' => 'fa-regular fa-file-lines'],
         ['control' => 'confirm_dbhistory', 'label' => _t('DB history'), 'icon' => 'fa-solid fa-clock-rotate-left'],
@@ -28,12 +24,15 @@ if ($developer_mode) {
         [],
         ['control' => 'confirm_append', 'label' => _t('Append'), 'icon' => 'fa-solid fa-share-nodes'],
         ['control' => 'confirm_compile', 'label' => _t('Compile'), 'icon' => 'fa-solid fa-file-zipper'],
-        [],
+    ]);
+    $bac->separate();
+    //
+    $bac->dropdown([
         ['control' => 'confirm_find_updates', 'label' => _t('Find updates'), 'icon' => 'fa-solid fa-arrows-rotate'],
         ['control' => 'confirm_update_all', 'label' => _t('Update all'), 'icon' => 'fa-solid fa-bolt'],
         [],
         ['control' => 'developers', 'label' => _t('Developers'), 'icon' => 'fa-solid fa-user-check'],
-    ]);
+    ], _t('Maintenance'), 'fa-solid fa-wrench');
 } else {
     $bac->dropdown([
         ['control' => 'confirm_find_updates', 'label' => _t('Find updates'), 'icon' => 'fa-solid fa-arrows-rotate'],

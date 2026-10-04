@@ -82,7 +82,7 @@ class AdminLanguageModel extends Model
         $json['language'] = $data['id'];
 
         return [
-            'title' => _t('Edit'),
+            'type' => 'edit',
             'values' => $json,
         ];
     }

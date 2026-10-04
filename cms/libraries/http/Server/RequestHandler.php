@@ -12,7 +12,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Junco\Debugger\ThrowableHandler;
 
 /**
  * Handles a server request and produces a response.

@@ -36,7 +36,7 @@ function Modal(options) {
         destroy: true,
         //
         type: 'default',
-        size: 'medium',
+        size: '',
         title: '',
         icon: '',
         help_url: null,
@@ -150,6 +150,9 @@ function Modal(options) {
 
         if (options.title) {
             if (options.icon) {
+                if (options.color) {
+                    options.icon += ' color-' + options.color;
+                }
                 header += '<div><i class="' + options.icon + '" aria-hidden="true"></i></div>';
             }
             header += '<div id="modal-' + number + '-title" class="modal-title"><h3>' + options.title + '<h3></div>';
@@ -231,8 +234,8 @@ function Modal(options) {
     }*/
 
     // ini options
-    if (options.type == 'alert') {
-        options.size = 'small';
+    if (!options.size) {
+        options.size = (options.type == 'alert' ? 'small' : 'medium');
     }
 
     // element
@@ -273,7 +276,7 @@ function Modal(options) {
             element.style.margin = '0px'; // hack
         }
 
-        $handle.style.cursor = 'move';
+        element.classList.add('modal-draggable');
         JsMove($handle, startFn, moveFn);
 
     } else if (options.overlay) { // overlay

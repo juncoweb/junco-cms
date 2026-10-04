@@ -24,7 +24,7 @@ $html .= '<div class="dialog dialog-warning">' . _t('If you choose not to instal
 
 // modal
 $modal = Modal::get();
-$modal->title($title);
+$modal->title($title, 'fa-solid fa-puzzle-piece');
 $modal->enter(_t('Download'));
 $modal->close();
 $modal->content($html);

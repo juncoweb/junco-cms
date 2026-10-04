@@ -88,10 +88,9 @@ class AdminAssetsModel extends Model
     public function getCreateData()
     {
         return [
-            'title'      => _t('Create'),
+            'type'       => 'create',
             'values'     => ['status' => true],
             'extensions' => $this->getExtensions(),
-            'is_edit'    => false,
         ];
     }
 
@@ -110,10 +109,9 @@ class AdminAssetsModel extends Model
         }
 
         return [
-            'title'      => _t('Edit'),
+            'type'       => 'edit',
             'values'     => $data,
             'extensions' => $this->getExtensions(),
-            'is_edit'    => true,
         ];
     }
 

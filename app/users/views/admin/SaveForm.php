@@ -19,9 +19,9 @@ $form->collection('roles', 'role_id')->setLabel(_t('Rol'));
 
 // modal
 $modal = Modal::get();
+$modal->type($type);
 $modal->close();
 $modal->enter();
-$modal->title([_t('Users'), $title]);
 $modal->content($form->render());
 
 return $modal->response();

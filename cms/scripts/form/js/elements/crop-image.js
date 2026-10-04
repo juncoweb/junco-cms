@@ -1,4 +1,4 @@
-/* --- Crop Image ------------------------------------------------ */
+/* --- Crop Image --- */
 var cropImage = function (src, callback, options, LastPosition) {
     let image = new Image();
     image.src = src;

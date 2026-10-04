@@ -11,7 +11,7 @@ $url = router()->getUrlForm('/search');
 // html
 $input = '<div class="input-icon-group input-large">'
     . '<input type="text" id="search" name="q" value="' . $search . '" autocomplete="off" class="input-field"/>'
-    . '<button type="submit" class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></button>'
+    . '<button type="submit" class="input-icon"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>'
     . '</div>';
 
 $html = '<form id="search-form" action="' . $url['action'] . '">' . "\n"

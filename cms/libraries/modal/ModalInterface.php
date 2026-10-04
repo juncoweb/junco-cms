@@ -15,10 +15,11 @@ interface ModalInterface extends ResponderInterface
      * Type
      * 
      * @param string $type
+     * @param array  $attr
      * 
      * @return void
      */
-    public function type(string $type): void;
+    public function type(string $type, array $attr = []): void;
 
     /**
      * Size
@@ -83,10 +84,11 @@ interface ModalInterface extends ResponderInterface
      *
      * @param string|array $title
      * @param string       $icon
+     * @param string       $color
      * 
      * @return void
      */
-    public function title($title, string $icon = ''): void;
+    public function title($title, string $icon = '', string $color = ''): void;
 
     /**
      * Help link
