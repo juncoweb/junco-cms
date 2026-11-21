@@ -6,10 +6,10 @@
  */
 
 use Junco\Mvc\Model;
+use Junco\Settings\SettingType;
 
 class AdminSettingsFormModel extends Model
 {
-    // vars
     protected array $snippets = [];
     protected array $plugins  = [];
 
@@ -32,42 +32,20 @@ class AdminSettingsFormModel extends Model
         }
 
         //
-        $data           = $settings->getData(true);
         $developer_mode = SYSTEM_DEVELOPER_MODE;
-        $input['__key'] = $input['key'];
-        $input += [
+        $stm = new SettingType;
+        $data = $settings->getData(true);
+        $output = [
             'developer_mode' => $developer_mode,
             'title'          => $data['title'] ? _t($data['title']) : ucfirst($input['key']),
             'description'    => $data['description'],
             'warning'        => $data['warning'],
             'keys'           => $this->getKeys($settings, $input['key']),
-            'values'         => $input,
+            'values'         => ['__key' => $input['key']],
             'groups'         => [],
+            'restore'        => '',
         ];
         $restore = [];
-        $restore_types_1 = [
-            'input-integer',
-            'input-range',
-            'input-text',
-            'input-email',
-            'input-password',
-            'input-phone',
-            'input-url',
-            'input-color',
-            'textarea',
-            'boolean',
-            'list',
-            'json'
-        ];
-        $restore_types_2 = [
-            'select-integer',
-            'select-text',
-            'snippet',
-            'plugin',
-            'select-multiple-integer',
-            'select-multiple-text',
-            'plugins'
-        ];
 
         // prepare groups
         foreach ($data['rows'] as $name => $row) {
@@ -146,34 +124,36 @@ class AdminSettingsFormModel extends Model
                     $row['min'] ??= 0;
                     $row['max'] ??= 100;
                     break;
+
+                case 'image-resizes':
+                    if (!$row['help']) {
+                        $row['help'] = _t('An object that stores the data of the resizes.');
+                    }
+                    break;
             }
 
             // restore
-            if (
-                ($row['value'] != $row['default_value'])
-                && (
-                    in_array($row['type'], $restore_types_1)
-                    || (in_array($row['type'], $restore_types_2) && $row['options'] !== null)
-                )
-            ) {
+            if (($row['value'] != $row['default_value']) && $stm->isRestorable($row['type'], $row['options'] ?? null)) {
                 $restore[$row['name']] = $row['default_value'];
                 $row['restore'] = true;
             } else {
                 $row['restore'] = false;
             }
 
-            $input['groups'][$row['group']] ??= [
+            $output['groups'][$row['group']] ??= [
                 'legend'      => !empty($data['groups'][$row['group']]) ? _t($data['groups'][$row['group']]) : '',
                 'description' => !empty($data['descriptions'][$row['group']]) ? _t($data['descriptions'][$row['group']]) : '',
                 'rows'        => []
             ];
-            $input['groups'][$row['group']]['rows'][] = $row;
-            $input['values'][$row['name']] = $row['value'];
+            $output['groups'][$row['group']]['rows'][] = $row;
+            $output['values'][$row['name']] = $row['value'];
         }
 
-        return $input + [
-            'restore' => $restore ? json_encode($restore) : ''
-        ];
+        if ($restore) {
+            $output['restore'] = json_encode($restore);
+        }
+
+        return $output;
     }
 
     /**

@@ -18,29 +18,37 @@ class frontlist_master_default_snippet extends FrontlistBase
      */
     public function render(string $pagi = ''): string
     {
+        // assets
+        $this->assets(['css' => 'assets/frontlist.min.css']);
+
         $html = '';
 
         if ($this->rows) {
             $col3 = $this->hasCol3();
+            $image_url = $this->imageset?->getImage(150);
 
             foreach ($this->rows as $row) {
                 $html .= "\n\t" . '<article class="grid grid-2 grid-responsive" control-row="' . $row['id'] . '">';
                 $title = $row['title'];
 
                 if ($row['image']) {
-                    $row['image_html'] = '<img src="' . $row['image'] . '" alt="' . $row['title'] . '"/>';
+                    if ($image_url) {
+                        $row['image'] = $image_url . $row['image'];
+                    }
+
+                    $row['media_html'] = '<img src="' . $row['image'] . '" alt="' . $row['title'] . '"/>';
                 }
 
                 if ($row['url']) {
-                    if ($row['image_html']) {
-                        $row['image_html'] = '<a href="' . $row['url'] . '" tabindex="-1" aria-hidden="true">' . $row['image_html'] . '</a>';
+                    if ($row['media_html']) {
+                        $row['media_html'] = '<a href="' . $row['url'] . '" tabindex="-1" aria-hidden="true">' . $row['media_html'] . '</a>';
                     }
 
                     $title = '<a href="' . $row['url'] . '">' . $title . '</a>';
                 }
 
-                if ($row['image_html']) {
-                    $html .= '<div class="article-media">' . $row['image_html'] . '</div>';
+                if ($row['media_html']) {
+                    $html .= '<div class="article-media">' . $row['media_html'] . '</div>';
                 }
 
                 $html .= '<div class="article-container">';

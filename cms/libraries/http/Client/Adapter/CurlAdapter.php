@@ -34,15 +34,15 @@ class CurlAdapter extends AdapterAbstract
      */
     public function sendRequest(RequestInterface $request): ClientResponseInterface
     {
-        $uri        = $request->getUri();
-        $protocol    = $request->getProtocolVersion();
-        $method        = $request->getMethod();
+        $uri      = $request->getUri();
+        $protocol = $request->getProtocolVersion();
+        $method   = $request->getMethod();
 
         $ch = curl_init();
-        $options[CURLOPT_URL] = $uri;
-        $options[CURLOPT_PROTOCOLS] = CURLPROTO_HTTP | CURLPROTO_HTTPS;
+        $options[CURLOPT_URL]          = $uri;
+        $options[CURLOPT_PROTOCOLS]    = CURLPROTO_HTTP | CURLPROTO_HTTPS;
         $options[CURLOPT_HTTP_VERSION] = $this->getProtocolVersion($protocol);
-        $options[CURLOPT_HTTPHEADER] = [];
+        $options[CURLOPT_HTTPHEADER]   = [];
 
         // callback
         $builder = $this->createResponseBuilder();
@@ -62,7 +62,6 @@ class CurlAdapter extends AdapterAbstract
         $options[CURLOPT_WRITEFUNCTION] = function ($ch, $data) use ($builder) {
             return $builder->getResponse()->getBody()->write($data);
         };
-
 
         /*if (parse_url($url, PHP_URL_SCHEME) =='https') {
 			$options[CURLOPT_SSL_VERIFYPEER] = true;

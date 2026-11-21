@@ -9,8 +9,7 @@ use Junco\Mvc\Model;
 
 class SettingsModel extends Model
 {
-    // vars
-    protected $db;
+    protected Database $db;
 
     /**
      * Constructor
@@ -73,9 +72,7 @@ class SettingsModel extends Model
                     break;
 
                 case 'select-multiple-integer':
-                    $value = array_map(function ($value) {
-                        return (int)$value;
-                    }, $this->parseArray($value));
+                    $value = array_map(fn($value) => (int)$value, $this->parseArray($value));
                     break;
 
                 // text

@@ -5,9 +5,9 @@
  * @author: Junco CMS (tm)
  */
 
+use Junco\Archive\UploadedArchiveManager;
 use Junco\Mvc\Model;
 use Junco\Http\Client;
-use Junco\Filesystem\UploadedFileManager;
 
 class LanguageModel extends Model
 {
@@ -67,12 +67,9 @@ class LanguageModel extends Model
     public function import()
     {
         $data = $this->filter(POST, ['file' => 'archive|required']);
-
         $locale = (new LanguageHelper)->getLocale();
-        $data['file']
-            ->setBasedir()
-            ->moveTo($locale, UploadedFileManager::DEFAULT_NAME, true)
-            ->extract(true);
+
+        $this->uploadFile($data['file'], $locale)->extract(true);
 
         (new LanguageHelper)->refresh();
     }
@@ -210,5 +207,15 @@ class LanguageModel extends Model
             'file' => $file,
             'filename' => $filename
         ];
+    }
+
+    /**
+     * Upload
+     */
+    protected function uploadFile(UploadedArchiveManager $manager, string $target): UploadedArchiveManager
+    {
+        return $manager
+            ->setBasePath()
+            ->moveTo($target, UploadedArchiveManager::DEFAULT_NAME, true);
     }
 }

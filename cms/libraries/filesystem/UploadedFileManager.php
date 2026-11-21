@@ -13,7 +13,7 @@ use Exception;
 class UploadedFileManager
 {
     // vars
-    protected string  $basedir       = '';
+    protected string  $basepath      = '';
     protected string  $dirpath       = '';
     protected bool    $mkdir         = true;
     protected array   $uploadedFiles = [];
@@ -40,7 +40,7 @@ class UploadedFileManager
     public function __construct(UploadedFileInterface|array|null $UploadedFile = null, bool $isMultiple = false)
     {
         $this->isMultiple = $isMultiple;
-        $this->basedir    = SYSTEM_ABSPATH . SYSTEM_MEDIA_PATH;
+        $this->basepath   = SYSTEM_ABSPATH . SYSTEM_MEDIA_PATH;
 
         if ($UploadedFile !== null) {
             $isArray = is_array($UploadedFile);
@@ -118,13 +118,13 @@ class UploadedFileManager
     /**
      * Set
      * 
-     * @param string $basedir
+     * @param string $basepath
      * 
      * @return static
      */
-    public function setBasedir(string $basedir = ''): static
+    public function setBasePath(string $basepath = ''): static
     {
-        $this->basedir = $basedir;
+        $this->basepath = $basepath;
         return $this;
     }
 
@@ -192,14 +192,14 @@ class UploadedFileManager
      * 
      * @return static
      */
-    public function moveTo(string $targetPath, int $rename = 0, bool $rewrite = false): static
+    public function moveTo(string $targetPath = '', int $rename = 0, bool $rewrite = false): static
     {
-        $this->dirpath = $this->basedir . $targetPath;
+        $this->dirpath = $this->basepath . $targetPath;
 
         is_dir($this->dirpath)
             or $this->makeDir($this->dirpath);
 
-        if ($rename == self::DEFAULT_RENAME || !in_array($rename, [
+        if (!in_array($rename, [
             self::DEFAULT_NAME,
             self::CURUSER_NAME,
             self::CLEAN_NAME,
@@ -214,7 +214,7 @@ class UploadedFileManager
 
             switch ($rename) {
                 case self::CURUSER_NAME:
-                    $this->userToken ??= \curuser()->getId() . '-' . date('YmdHis');
+                    $this->userToken ??= curuser()->getId() . '-' . date('YmdHis');
                     $basename = $this->userToken . ($i ? '-' . $i : '');
                     break;
 

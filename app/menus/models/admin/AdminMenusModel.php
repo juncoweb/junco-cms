@@ -9,8 +9,7 @@ use Junco\Mvc\Model;
 
 class AdminMenusModel extends Model
 {
-    // vars
-    protected $db;
+    protected Database $db;
 
     /**
      * Constructor
@@ -155,7 +154,7 @@ class AdminMenusModel extends Model
 		ORDER BY menu_path, menu_order", $input['id'])->fetchAll() or abort();
 
         return [
-            'title'      => _t('Copy'),
+            'type'       => 'copy',
             'values'     => $data,
             'extensions' => $this->getExtensions(),
             'is_edit'    => false,

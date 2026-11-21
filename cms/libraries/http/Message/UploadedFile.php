@@ -16,13 +16,13 @@ use Psr\Http\Message\StreamInterface;
 class UploadedFile implements UploadedFileInterface
 {
     // vars
-    protected ?string            $file                = null;
-    protected ?StreamInterface    $stream                = null;
-    protected ?string            $clientFilename     = null;
-    protected ?string            $clientMediaType    = null;
-    protected ?int                $size;
-    protected int                 $error                = 0;
-    protected bool                 $moved                = false;
+    protected ?string          $file            = null;
+    protected ?StreamInterface $stream          = null;
+    protected ?string          $clientFilename  = null;
+    protected ?string          $clientMediaType = null;
+    protected ?int             $size;
+    protected int              $error           = 0;
+    protected bool             $moved           = false;
 
     // const
     protected const UPLOAD_ERRORS = [
@@ -49,8 +49,8 @@ class UploadedFile implements UploadedFileInterface
      */
     public function __construct(
         $input,
-        ?int $size,
-        int $errorStatus,
+        ?int    $size,
+        int     $errorStatus,
         ?string $clientFilename = null,
         ?string $clientMediaType = null
     ) {
@@ -58,10 +58,10 @@ class UploadedFile implements UploadedFileInterface
             throw new \InvalidArgumentException('Invalid error status for UploadedFile');
         }
 
-        $this->error            = $errorStatus;
-        $this->size                = $size;
-        $this->clientFilename    = $clientFilename;
-        $this->clientMediaType    = $clientMediaType;
+        $this->error           = $errorStatus;
+        $this->size            = $size;
+        $this->clientFilename  = $clientFilename;
+        $this->clientMediaType = $clientMediaType;
 
         if ($this->error === UPLOAD_ERR_OK) {
             if (is_string($input)) {
@@ -186,6 +186,7 @@ class UploadedFile implements UploadedFileInterface
         if ($this->error !== UPLOAD_ERR_OK) {
             throw new \RuntimeException('Cannot retrieve stream due to upload error');
         }
+
         if ($this->moved) {
             throw new \RuntimeException('Cannot retrieve stream after it has already been status');
         }

@@ -7,17 +7,10 @@
 
 namespace Junco\Filesystem;
 
-use Junco\Filesystem\ImageResizer;
-
 class UploadedImageManager extends UploadedFileManager
 {
-    // vars
-    protected $resizes_path = '';
-    protected $resizes      = [];
-    protected $save_orig    = true;
-
-    // see later
-    protected $orderOfImages = [];
+    protected ?ImageResizes $resizes = null;
+    protected array $orderOfImages   = []; // see later
 
     /**
      * Validate
@@ -34,80 +27,34 @@ class UploadedImageManager extends UploadedFileManager
     }
 
     /**
-     * Resize
-     * 
-     * @param string $resizes_path
-     * @param mixed  $resizes			The new size value.
-     * @param int    $resize_mode
-     * @param bool   $save_orig
-     * 
+     * Set resizes
+     *
+     * @param ImageResizes $resizes
+     *
      * @return self
      */
-    public function resize(
-        string $resizes_path,
-        mixed  $resizes,
-        int    $resize_mode = 0,
-        bool   $save_orig = true
-    ): self {
-        $this->setResize($resizes_path, $resizes, $resize_mode, $save_orig);
-
-        if ($this->resizes) {
-            $resizer = new ImageResizer();
-
-            foreach ($this->files as $info) {
-                $src_file = $this->dirpath . $info['filename'];
-
-                foreach ($this->resizes as $sizename => $data) {
-                    $rsz_file = $this->basedir . strtr($this->resizes_path, [
-                        '{sizename}' => $sizename,
-                        '{filename}' => $info['filename']
-                    ]);
-
-                    $resizer->resize($src_file, $rsz_file, $data['size'], $data['mode']);
-                }
-
-                $this->save_orig or unlink($src_file);
-            }
-        }
-
+    public function setResizes(ImageResizes $resizes): self
+    {
+        $this->resizes = $resizes->setBasePath($this->basepath);
         return $this;
     }
 
     /**
-     * Set resize
-     *
-     * @param string $resizes_path
-     * @param mixed  $resizes			The new size value.
-     * @param int    $resize_mode
-     * @param bool   $save_orig
-     *
-     * @return self
+     * Move
      */
-    public function setResize(string $resizes_path, mixed $resizes, int $resize_mode = 0, bool $save_orig = true): self
+    public function moveTo(string $target = '', int $rename = 0, bool $rewrite = false): static
     {
-        // prepare resizes
-        if (is_array($resizes)) {
-            foreach ($resizes as $i => $data) {
-                if (is_array($data)) {
-                    $data['size'] ??= 0;
-                    $data['mode'] ??= $resize_mode;
-                } else {
-                    $resizes[$i] = [
-                        'size' => $data,
-                        'mode' => $resize_mode
-                    ];
-                }
-            }
+        if ($target) {
+            $this->resizes?->setOrigPath($target);
         } else {
-            $resizes = [[
-                'size' => $resizes,
-                'mode' => $resize_mode
-            ]];
+            $target = $this->resizes?->getOrigPath();
         }
 
-        $this->resizes_path = $resizes_path;
-        $this->resizes      = $resizes;
-        $this->save_orig    = $save_orig;
+        parent::moveTo($target, $rename, $rewrite);
+
+        if ($this->resizes && $this->files) {
+            $this->resizes->resize(array_column($this->files, 'filename'));
+        }
 
         return $this;
     }
@@ -167,8 +114,10 @@ class UploadedImageManager extends UploadedFileManager
                 $filenames = explode($separator, $filenames);
             }
 
-            // delete files
-            $this->delete(array_diff($filenames, array_column($files, 'filename')));
+            // delete
+            $this->deleteMultiple(
+                array_diff($filenames, array_column($this->files, 'filename'))
+            );
         }
 
         return $this;
@@ -176,67 +125,27 @@ class UploadedImageManager extends UploadedFileManager
 
     /**
      * Delete
-     * 
-     * @param array|string|null $files
-     * 
-     * @return void
      */
-    public function delete(array|string|null $files = null): void
+    protected function delete(string $filename): void
     {
-        if ($files === null) {
-            $files = $this->files;
-        } elseif (!is_array($files)) {
-            $files = [$files];
-        }
-
-        $sizenames = array_keys($this->resizes);
-
-        foreach ($files as $filename) {
-            foreach ($sizenames as $sizename) {
-                $f = $this->basepath . strtr($this->resizes_path, [
-                    '{sizename}'    => $sizename,
-                    '{filename}'    => $filename
-                ]);
-
-                is_file($f) and unlink($f);
-            }
-
-            if ($this->save_orig) {
-                $f = $this->dirpath . $filename;
-
-                is_file($f) and unlink($f);
-            }
+        if ($this->resizes) {
+            $this->resizes->remove([$filename]);
+        } else {
+            parent::delete($filename);
         }
     }
 
     /**
-     * Validate
-     *
-     * @param mixed  $resizes
-     * @param int    $resize_mode
-     *
-     * @return void
+     * Delete
      */
-    public static function validateResize(mixed &$resizes, int $resize_mode = 0): void
+    protected function deleteMultiple(array $filenames): void
     {
-        // prepare resizes
-        if (is_array($resizes)) {
-            foreach ($resizes as $i => $data) {
-                if (is_array($data)) {
-                    $data['size'] ??= 0;
-                    $data['mode'] ??= $resize_mode;
-                } else {
-                    $resizes[$i] = [
-                        'size' => $data,
-                        'mode' => $resize_mode
-                    ];
-                }
-            }
+        if ($this->resizes) {
+            $this->resizes->remove($filenames);
         } else {
-            $resizes = [[
-                'size' => $resizes,
-                'mode' => $resize_mode
-            ]];
+            foreach ($this->files as $file) {
+                parent::delete($file['filename']);
+            }
         }
     }
 }

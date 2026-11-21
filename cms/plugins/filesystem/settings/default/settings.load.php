@@ -32,6 +32,7 @@ return function (PluginLoader $loader) {
         'png'  => 'png',
         'webp' => 'webp',
     ]);
+    //$loader->setOptions('image_resizes', ImageResizes::contract());
     $loader->setOptions('jpeg_quality', $quality);
     $loader->setOptions('webp_quality', $quality);
     $loader->setOptions('png_quality', [

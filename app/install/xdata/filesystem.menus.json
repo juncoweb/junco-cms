@@ -1,0 +1,14 @@
+{
+    "filesystem": [
+        {
+            "menu_key": "settings-Default",
+            "menu_path": "System|Filesystem",
+            "menu_order": 2,
+            "menu_url": "admin\/settings,key=filesystem",
+            "menu_image": "",
+            "menu_hash": "",
+            "menu_params": "",
+            "status": 1
+        }
+    ]
+}

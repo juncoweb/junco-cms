@@ -5,6 +5,7 @@
  * @author: Junco CMS (tm)
  */
 
+use Junco\Archive\UploadedArchiveManager;
 use Junco\Extensions\Enum\UpdateStatus;
 use Junco\Mvc\Model;
 use Junco\Extensions\Updater\Carrier;
@@ -37,9 +38,7 @@ class ExtensionsInstallerModel extends Model
         ]);
 
         // file
-        $data['file']
-            ->setBasedir('')
-            ->moveTo((new Carrier)->getTargetPath(), UploadedFileManager::DEFAULT_NAME, true)
+        $this->uploadFile($data['file'], (new Carrier)->getTargetPath())
             ->extract($data['delete']);
     }
 
@@ -226,6 +225,16 @@ class ExtensionsInstallerModel extends Model
         if ($data['status'] !== $maintenance->getStatus()) {
             $maintenance->toggleStatus($data['status']);
         }
+    }
+
+    /**
+     * Upload
+     */
+    protected function uploadFile(UploadedArchiveManager $manager, string $target): UploadedArchiveManager
+    {
+        return $manager
+            ->setBasePath('')
+            ->moveTo($target, UploadedArchiveManager::DEFAULT_NAME, true);
     }
 
     /**

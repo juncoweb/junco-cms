@@ -20,7 +20,7 @@ abstract class FilterAbstract implements FilterInterface
     public bool   $onlyIfValue = false;
     public mixed  $required    = false;
     //
-    public array  $argument = ['filter' => FILTER_DEFAULT];
+    public array  $argument = ['filter' => FILTER_UNSAFE_RAW];
 
     //
     protected string $type          = 'int';
@@ -110,7 +110,11 @@ abstract class FilterAbstract implements FilterInterface
             $value = $value[0] ?? null;
         }
 
-        if (null === $value || $this->isArray != is_array($value)) {
+        if (
+            ($value === '' && $this->type == 'string')
+            || $value === null
+            || $this->isArray != is_array($value)
+        ) {
             return $this->isArray ? [] : $this->default;
         }
 

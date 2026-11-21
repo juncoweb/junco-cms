@@ -14,10 +14,10 @@ class Text extends FilterAbstract
      */
     public function __construct()
     {
-        $this->type = 'string';
+        $this->type     = 'string';
         $this->default  = '';
         $this->argument = [
-            'filter' => FILTER_DEFAULT,
+            'filter' => FILTER_UNSAFE_RAW,
             'flags' => FILTER_FLAG_STRIP_LOW
         ];
         //

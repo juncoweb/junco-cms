@@ -16,7 +16,7 @@ class showcase_master_default_snippet extends ShowcaseBase
         'edit_url'     => '',
         'title'        => '',
         'image'        => '',
-        'image_html'   => '',
+        'media_html'   => '',
         'date'         => null,
         'summary'      => '',
         'description'  => '',
@@ -37,13 +37,6 @@ class showcase_master_default_snippet extends ShowcaseBase
         $data = $this->data;
         $this->data = []; // free memory
         $this->assets(['css' => 'assets/showcase.min.css']);
-        $this->getOption('plugins')?->run(
-            $data['description'],
-            $data['url'],
-            $data['title'],
-            $data['summary'] ?: $data['description'],
-            $data['image']
-        );
 
         // info
         $info = [];
@@ -108,11 +101,14 @@ class showcase_master_default_snippet extends ShowcaseBase
 
         // html
         $html = "\t" . '<div class="article-wrapper">' . "\n";
-        if ($data['image']) {
-            $data['image_html'] = '<img src="' . $data['image'] . '" alt="' . $data['title'] . '" class="responsive">';
+        if ($this->imageset) {
+            $data['image'] = $this->imageset->getImage(600);
         }
-        if ($data['image_html']) {
-            $html .= "\t\t" . '<div class="article-media">' . $data['image_html'] . '</div>' . "\n";
+        if ($data['image']) {
+            $data['media_html'] = '<img src="' . $data['image'] . '" alt="' . $data['title'] . '" class="responsive">';
+        }
+        if ($data['media_html']) {
+            $html .= "\t\t" . '<div class="article-media">' . $data['media_html'] . '</div>' . "\n";
         }
         $html .= "\t\t" . '<div class="article-content">' . $content . '</div>' . "\n";
         $html .= "\t" . '</div>' . "\n";

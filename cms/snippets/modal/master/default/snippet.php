@@ -56,6 +56,11 @@ class modal_master_default_snippet extends ResponderBase implements ModalInterfa
                 $icon = 'fa-solid fa-pencil';
                 break;
 
+            case 'copy':
+                $title = _t('Copy');
+                $icon = 'fa-solid fa-copy';
+                break;
+
             case 'status':
                 $icon  = 'fa-solid fa-circle';
                 $title = $attr['title'];

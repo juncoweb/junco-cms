@@ -1,11 +1,11 @@
 <?php
 
-use Junco\Menus\PluginCollector;
-
 /**
  * @copyright (c) 2009-2026 by Junco CMS
  * @author: Junco CMS (tm)
  */
+
+use Junco\Menus\PluginCollector;
 
 class Menus
 {

@@ -6,11 +6,11 @@
  */
 
 use Junco\Mvc\Model;
+use Junco\Settings\SettingType;
 
 class AdminSettingsModel extends Model
 {
-    // vars
-    protected $db;
+    protected Database $db;
 
     /**
      * Constructor
@@ -69,9 +69,7 @@ class AdminSettingsModel extends Model
 
         // vars
         $settings = new Settings($input['key']);
-
-        // security
-        $settings->security() or abort();
+        $settings->security() or abort(); // security
 
         //
         $data = $settings->getData();
@@ -85,12 +83,15 @@ class AdminSettingsModel extends Model
         $data['description'] = $this->getDescription($data['descriptions'], $data['description']);
 
         foreach (array_keys($data['rows']) as $name) {
-            $data['rows'][$name]['id'] = $name;
-            $data['rows'][$name]['name'] = $name;
+            $data['rows'][$name]['id']      = $name;
+            $data['rows'][$name]['name']    = $name;
             $data['rows'][$name]['history'] = implode(',', $data['rows'][$name]['history']);
         }
 
-        return ['data' => $data];
+        return [
+            'data' => $data,
+            'types' => $this->getTypes()
+        ];
     }
 
     /**
@@ -142,7 +143,6 @@ class AdminSettingsModel extends Model
         }
 
         return [
-            'title'   => $is_edit ? _t('Edit') : _t('Create'),
             'is_edit' => $is_edit,
             'json'    => $json,
             'options' => $input['options'],
@@ -175,6 +175,14 @@ class AdminSettingsModel extends Model
 		SELECT
 		 extension_alias
 		FROM `#__extensions`")->fetchAll(Database::FETCH_COLUMN, [0 => 0]);
+    }
+
+    /**
+     * Get
+     */
+    protected function getTypes(): array
+    {
+        return (new SettingType)->getList();
     }
 
     /**

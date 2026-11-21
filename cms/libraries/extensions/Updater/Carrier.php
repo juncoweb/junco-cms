@@ -13,7 +13,6 @@ use Exception;
 
 class Carrier
 {
-    // vars
     protected string   $target;
     protected ?Archive $archive = null;
 
@@ -83,7 +82,6 @@ class Carrier
      * Get
      * 
      * @param array|int $data
-     * @param int       $extension_id
      * 
      * @return array
      */
@@ -92,8 +90,8 @@ class Carrier
         $extension_id = 0;
 
         if (is_int($data)) {
-            $extension_id    = $data;
-            $data            = $this->getDefaultWebstoreUrlData();
+            $extension_id = $data;
+            $data         = $this->getDefaultWebstoreUrlData();
         }
 
         //
@@ -107,12 +105,12 @@ class Carrier
             ->getJson(true);
 
         $data = array_merge([
-            'extension_alias'    => '',
-            'extension_name'    => '',
-            'is_close'            => false,
-            'extension_key'        => $data['extension_key'] ?? '',
-            'download_url'        => '',
-            'status'            => ''
+            'extension_alias' => '',
+            'extension_name'  => '',
+            'is_close'        => false,
+            'extension_key'   => $data['extension_key'] ?? '',
+            'download_url'    => '',
+            'status'          => ''
         ], $json);
 
         if (!$data['status']) {
@@ -151,9 +149,7 @@ class Carrier
         }
 
         (new Client)->get($data['download_url'], [
-            'headers' => [
-                'Referer' => config('site.url')
-            ]
+            'headers' => ['Referer' => config('site.url')]
         ])->moveTo($this->target, $filename);
 
         return $filename;
@@ -187,9 +183,9 @@ class Carrier
     {
         $webstore_url = $this->getUrl($webstore_url, 'status', ['format' => 'blank']);
         $data = [
-            'token'            => $token,
-            'extensions'    => implode(',', $extensions),
-            'status'        => $status,
+            'token'      => $token,
+            'extensions' => implode(',', $extensions),
+            'status'     => $status,
         ];
 
         return (string)(new Client)
@@ -206,7 +202,7 @@ class Carrier
         $url = $this->getUrl($url, 'distribute', ['format' => 'blank']);
         $response = (new Client)
             ->post($url, [
-                'multipart'  => [
+                'multipart' => [
                     ['name' => 'token', 'contents' => $token],
                     ['name' => 'file', 'file' => $this->target . $file],
                 ]

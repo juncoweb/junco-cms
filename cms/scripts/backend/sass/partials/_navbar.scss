@@ -70,5 +70,5 @@
 }
 
 .pull-btn {
-    @include navbar-btn($color: var(--solid-font-color) !important, $hover-color: var(--solid-active-font-color));
+    @include navbar-btn();
 }

@@ -872,7 +872,7 @@
                     "IsNull": false,
                     "Comment": "",
                     "Collation": "A",
-                    "Cardinality": 38,
+                    "Cardinality": 42,
                     "IndexType": "BTREE",
                     "Columns": [
                         {

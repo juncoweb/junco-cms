@@ -38,9 +38,13 @@ class ExtensionsWebstoreModel extends Model
             return ['error' => $e->getMessage() ?: 'Error!'];
         }
 
+        if (!$json) {
+            return ['error' => 'Error! Access denied.'];
+        }
+
         // query
         $pagi = new Pagination();
-        $pagi->num_rows = $json['num_rows'];
+        $pagi->num_rows      = $json['num_rows'];
         $pagi->rows_per_page = $json['rows_per_page'];
         $pagi->calculate();
 

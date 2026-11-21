@@ -1,4 +1,4 @@
 
-System v15.8
+Filesystem v0.1
 =======================================================
-- The color system has been improved.
+- The imageset was created to manage image resizing.

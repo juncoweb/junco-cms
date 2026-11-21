@@ -150,6 +150,10 @@ if ($groups) {
                         'options' => $row['options']
                     ]);
                     break;
+
+                case 'image-resizes':
+                    $element = $form->load('filesystem.image-resizes', ['name' => $row['name']]);
+                    break;
             }
 
             $element

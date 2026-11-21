@@ -7,15 +7,16 @@
 
 namespace Junco\Showcase;
 
-use Date;
+use Junco\Filesystem\ImageSet;
 use Junco\Form\FormElement\Button;
 use Junco\Showcase\Contract\ShowcaseInterface;
 use Junco\Tabs\TabsInterface;
+use Date;
 
 abstract class ShowcaseBase implements ShowcaseInterface
 {
-    // vars
     protected ?TabsInterface $tabs = null;
+    protected ?ImageSet $imageset  = null;
     protected string $tabs_snippet = '';
     protected array  $data         = [];
     //
@@ -74,15 +75,14 @@ abstract class ShowcaseBase implements ShowcaseInterface
     }
 
     /**
-     * Main
+     * Imageset
      * 
-     * @deprecated
-     * 
-     * @param array $data
+     * @param array  $sizes
+     * @param string $image
      */
-    public function main(array $data): void
+    public function imageset(array $sizes, string $image = ''): void
     {
-        $this->data = array_merge($this->data, $data);
+        $this->imageset = new ImageSet($sizes, $image);
     }
 
     /**
@@ -90,13 +90,9 @@ abstract class ShowcaseBase implements ShowcaseInterface
      * 
      * @param string $image
      */
-    public function image(string $image, bool $is_html = false): void
+    public function image(string $image): void
     {
-        if ($is_html) {
-            $this->data['image_html'] = $image;
-        } else {
-            $this->data['image'] = $image;
-        }
+        $this->data['image'] = $image;
     }
 
     /**

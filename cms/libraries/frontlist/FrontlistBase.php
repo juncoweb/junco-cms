@@ -7,6 +7,7 @@
 
 namespace Junco\Frontlist;
 
+use Junco\Filesystem\ImageSet;
 use Junco\Frontlist\Contract\FiltersInterface;
 use Junco\Frontlist\Contract\FrontlistInterface;
 
@@ -14,16 +15,19 @@ abstract class FrontlistBase implements FrontlistInterface
 {
     // vars
     protected FiltersInterface $filters;
-    protected bool   $assets = false;
+    protected bool   $assets          = false;
     protected string $filters_snippet = '';
-    private   array  $options = [];
+    private   array  $options         = [];
     //
+    protected ?ImageSet $imageset = null;
     protected array $rows = [];
     protected array $row = [
         'id'          => '',
         'url'         => '',
+        'imageset'    => null,
+        '__image'     => '',
         'image'       => '',
-        'image_html'  => '',
+        'media_html'  => '',
         'title'       => '',
         'description' => '',
         'footer'      => '',
@@ -97,6 +101,18 @@ abstract class FrontlistBase implements FrontlistInterface
         if ($this->assets && $options) {
             app('assets')->options($options);
         };
+    }
+
+    /**
+     * Image set
+     * 
+     * @param array $imageset
+     * 
+     * @return void
+     */
+    public function imageset(array $imageset, string $image = ''): void
+    {
+        $this->imageset = new ImageSet($imageset, $image);
     }
 
     /**

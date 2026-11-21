@@ -41,7 +41,6 @@ class AdminAssetsThemesModel extends Model
         $part = explode('-', $data['id']);
 
         return [
-            'title' => _t('Copy'),
             'values' => [
                 'extension_alias' => $part[0],
                 'name'            => $part[1] ?? '',

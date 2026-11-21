@@ -49,6 +49,15 @@ interface FrontlistInterface
     public function setAssets(bool $status = true): void;
 
     /**
+     * Image set
+     * 
+     * @param array $imageset
+     * 
+     * @return void
+     */
+    public function imageset(array $imageset, string $image = ''): void;
+
+    /**
      * Row
      * 
      * @param array $row

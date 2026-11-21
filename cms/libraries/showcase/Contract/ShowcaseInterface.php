@@ -40,20 +40,19 @@ interface ShowcaseInterface
     public function setAssets(bool $status = true): void;
 
     /**
-     * Main
+     * Imageset
      * 
-     * @deprecated
-     * 
-     * @param array $data
+     * @param array  $sizes
+     * @param string $image
      */
-    public function main(array $data): void;
+    public function imageset(array $sizes, string $image = ''): void;
 
     /**
      * Image
      * 
      * @param string $image
      */
-    public function image(string $image, bool $is_html = false): void;
+    public function image(string $image): void;
 
     /**
      * Title

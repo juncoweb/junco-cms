@@ -15,9 +15,9 @@ $form->hidden('from');
 
 // modal
 $modal = Modal::get();
+$modal->type('copy');
 $modal->enter();
 $modal->close();
-$modal->title(_t('Copy'), 'fa-solid fa-copy');
 $modal->content($form->render());
 
 return $modal->response();
